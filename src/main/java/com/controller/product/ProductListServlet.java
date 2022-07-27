@@ -29,7 +29,7 @@ public class ProductListServlet extends HttpServlet {
 		List<ProductDTO> list = service.productList(p_category);
 		
 		request.setAttribute("productList", list);
-		RequestDispatcher dis = request.getRequestDispatcher("main.jsp");
+		RequestDispatcher dis = request.getRequestDispatcher("product.jsp");
 		dis.forward(request, response);
 		
 	}
