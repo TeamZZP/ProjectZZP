@@ -12,7 +12,8 @@
 <title>ZZP</title>
 </head>
 <body>
-<jsp:include page="css/header.jsp" flush="true"></jsp:include><br>
+<jsp:include page="common/header.jsp" flush="true"></jsp:include><br>
 <jsp:include page="member/loginForm3.jsp" flush="true"></jsp:include>
+<jsp:include page="common/footer.jsp" flush="true"></jsp:include><br>
 </body>
 </html>
