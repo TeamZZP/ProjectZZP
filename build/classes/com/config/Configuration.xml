@@ -9,6 +9,7 @@
 <typeAliases>
    <typeAlias type="com.dto.MemberDTO" alias="MemberDTO"/> 
    <typeAlias type="com.dto.ChallengeDTO" alias="ChallengeDTO"/> 
+   <typeAlias type="com.dto.ProductDTO" alias="ProductDTO"/> 
 </typeAliases>
   <environments default="development">
     <environment id="development">
@@ -25,6 +26,7 @@
   <mappers>
     <mapper resource="com/config/MemberMapper.xml"/> 
     <mapper resource="com/config/ChallengeMapper.xml"/> 
+    <mapper resource="com/config/ProductMapper.xml"/> 
   </mappers> 
 </configuration>
   
