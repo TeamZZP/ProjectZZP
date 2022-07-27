@@ -10,21 +10,10 @@
 <head>
 <meta charset="UTF-8">
 <title>ZZP</title>
-<% 
-String mesg = (String)session.getAttribute("memberAdd");
-if(mesg!=null){
-%>
-<script type="text/javascript">
-	alert("<%= mesg %>");
-</script>
-<%
-session.removeAttribute("memberAdd");
-}
-%>
 </head>
 <body>
-<jsp:include page="common/header.jsp" flush="true"></jsp:include><br>
-<jsp:include page="main/banner.jsp" flush="true"></jsp:include><br>
-<jsp:include page="common/footer.jsp" flush="true"></jsp:include><br>
+
+<h1>what is zzp?</h1>
+zzp란 지구 지키기 프로젝트를 뜻합니다 :)
 </body>
 </html>
