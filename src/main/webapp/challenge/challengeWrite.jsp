@@ -2,13 +2,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
+/* 
+	request에 저장된 dto가 있을 경우: 글 수정 페이지
+	저장된 dto가 없을 경우: 글쓰기 페이지
+ */
 	ChallengeDTO dto = (ChallengeDTO) request.getAttribute("dto");
 	int chall_id = 0;
 	String chall_category = null;
 	String chall_title = null;
 	String chall_img = null;
 	String chall_content = null;
-	String formAction = "ChallengeAddServlet";
+	
+	//dto의 존재 유무에 따라 form의 전송 페이지를 달리 한다.
+	String formAction = "ChallengeAddServlet"; 
+	
 	if (dto != null) {
 		chall_id = dto.getChall_id();
 		chall_category = dto.getChall_category();
@@ -50,7 +57,7 @@
 	  <%} else { %>
 	 	<td colspan="2">
 	 		<img src="images/<%= chall_img %>" width="500" height="500"><br>
-	 		수정하기<input type="text" name="chall_img" value="<%= chall_img %>">
+	 		이미지수정하기<input type="text" name="chall_img" value="<%= chall_img %>">
 	 	</td>
 	  <%} %>
 	</tr>

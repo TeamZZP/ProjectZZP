@@ -13,16 +13,16 @@ import com.dto.ChallengeDTO;
 import com.service.ChallengeService;
 
 /**
- * Servlet implementation class ChallengeUpdateUIServlet
+ * Servlet implementation class ChallengeUIServlet
  */
-@WebServlet("/ChallengeUpdateUIServlet")
-public class ChallengeUpdateUIServlet extends HttpServlet {
+@WebServlet("/ChallengeUIServlet")
+public class ChallengeUIServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ChallengeUpdateUIServlet() {
+    public ChallengeUIServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,12 +31,15 @@ public class ChallengeUpdateUIServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int chall_id = Integer.parseInt(request.getParameter("chall_id"));
+		String chall_id = request.getParameter("chall_id");
 		
-		ChallengeService service = new ChallengeService();
-		ChallengeDTO dto = service.selectOneChallenge(chall_id);
+		if (chall_id != null) {
+			ChallengeService service = new ChallengeService();
+			ChallengeDTO dto = service.selectOneChallenge(chall_id);
+			
+			request.setAttribute("dto", dto);
+		}
 		
-		request.setAttribute("dto", dto);
 		RequestDispatcher dis = request.getRequestDispatcher("challengeWrite.jsp");
 		dis.forward(request, response);
 	}

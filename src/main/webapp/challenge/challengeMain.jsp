@@ -13,7 +13,7 @@
 	<option>최근 좋아요순</option>
 	<option>최근 댓글 많은순</option>
 </select>
-<a href="challengeWrite.jsp">글쓰기</a>
+<a href="ChallengeUIServlet">글쓰기</a>
 
 <table border="1">
 	<% for (ChallengeDTO dto : list) { 

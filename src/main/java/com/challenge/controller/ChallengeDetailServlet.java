@@ -31,7 +31,7 @@ public class ChallengeDetailServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int chall_id = Integer.parseInt(request.getParameter("chall_id"));
+		String chall_id = request.getParameter("chall_id");
 		
 		ChallengeService service = new ChallengeService();
 		ChallengeDTO dto = service.selectOneChallenge(chall_id);

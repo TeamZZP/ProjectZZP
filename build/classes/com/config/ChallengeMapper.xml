@@ -28,4 +28,9 @@
 	where chall_id=#{chall_id}
 </update>
 
+<delete id="deleteChallenge">
+	delete from challenge
+	where chall_id=#{chall_id}
+</delete>
+
 </mapper>

@@ -19,13 +19,18 @@ public class ChallengeDAO {
 		return list;
 	}
 
-	public ChallengeDTO selectOneChallenge(SqlSession session, int chall_id) {
+	public ChallengeDTO selectOneChallenge(SqlSession session, String chall_id) {
 		ChallengeDTO dto = session.selectOne("selectOneChallenge", chall_id);
 		return dto;
 	}
 
 	public int updateChallenge(SqlSession session, HashMap<String, String> map) {
 		int n = session.update("updateChallenge", map);
+		return n;
+	}
+
+	public int deleteChallenge(SqlSession session, String chall_id) {
+		int n = session.delete("deleteChallenge", chall_id);
 		return n;
 	}
 

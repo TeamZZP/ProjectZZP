@@ -13,10 +13,17 @@
 	String chall_created = dto.getChall_created();
 	String chall_img = dto.getChall_img();
 %>
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
-function back() {
-	history.back(); //이전페이지로 이동
-}
+	$(document).ready(function () {
+		$("#deleteChallenge").on("click", function () {
+			var mesg = "정말 삭제하시겠습니까? 한번 삭제한 글은 되돌릴 수 없습니다.";
+			if (!confirm(mesg)) {
+				event.preventDefault();
+			}
+		});
+	});
 </script>
 </head>
 <body>
@@ -26,8 +33,10 @@ function back() {
 	  <td><%= chall_category %></td>
 	  <td><%= chall_title %></td>
 	  <td>
-	  	<a href="ChallengeUpdateUIServlet?chall_id=<%= chall_id %>">수정 </a>
-	  	<a href="">삭제</a>
+	  <!-- 해당 게시글의 글쓴이인 경우 -->
+	  	<a href="ChallengeUIServlet?chall_id=<%= chall_id %>">수정 </a>
+	  	<a href="ChallengeDeleteServlet?chall_id=<%= chall_id %>" id="deleteChallenge">삭제</a>
+	  <!-- 그외의 경우 -->
 	  </td>
 	</tr>
 	<tr>

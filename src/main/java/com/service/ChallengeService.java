@@ -36,7 +36,7 @@ public class ChallengeService {
 		return list;
 	}
 
-	public ChallengeDTO selectOneChallenge(int chall_id) {
+	public ChallengeDTO selectOneChallenge(String chall_id) {
 		ChallengeDTO dto = null;
 		SqlSession session = MySqlSessionFactory.getSqlSession();
 		try {
@@ -52,6 +52,18 @@ public class ChallengeService {
 		SqlSession session = MySqlSessionFactory.getSqlSession();
 		try {
 			n = dao.updateChallenge(session, map);
+			session.commit();
+		} finally {
+			session.close();
+		}
+		return n;
+	}
+
+	public int deleteChallenge(String chall_id) {
+		int n = 0;
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		try {
+			n = dao.deleteChallenge(session, chall_id);
 			session.commit();
 		} finally {
 			session.close();
