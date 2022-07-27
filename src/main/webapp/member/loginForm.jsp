@@ -4,7 +4,23 @@
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script type="text/javascript">
 
-window.onload
+window.kakao.init("6967e0449063c04f2ba9d396e18a25a6");
+
+function kakaoLogin() {
+	window.Kakao.Auth.login({
+		scope: 'profile_nickname, account_email', //정보받아오기
+		success: function(authObj) {
+			console.log(authObj);
+			window.Kakao.API.request({
+				url:'/v2/user/me',
+				success: res => {
+					const Kakao_account res.Kakao_account;
+					console.log(Kakao_account);
+				}
+			});
+		}
+	});
+}
 
 $(document).ready(function(){
 	
@@ -23,9 +39,9 @@ $("form").submit(function() {
 
 });
 
-
+/* 
 Kakao.init('6967e0449063c04f2ba9d396e18a25a6');
-console.log( Kakao.isInitialized() ); 
+console.log( Kakao.isInitialized() );  */
 
 </script>
 
@@ -51,7 +67,7 @@ console.log( Kakao.isInitialized() );
 <input type="submit" value="로그인">
 <input type="reset" value="취소"><br>
 </form>
- <a id="custom-login-btn" href="javascript:loginWithKakao()">
+ <a id="custom-login-btn" href="javascript:kakaoLogin()">
   <img
     src="//k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg"
     width="222"
