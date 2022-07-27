@@ -1,5 +1,6 @@
 package com.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -22,5 +23,12 @@ public class ChallengeDAO {
 		ChallengeDTO dto = session.selectOne("selectOneChallenge", chall_id);
 		return dto;
 	}
+
+	public int updateChallenge(SqlSession session, HashMap<String, String> map) {
+		int n = session.update("updateChallenge", map);
+		return n;
+	}
+
+
 
 }

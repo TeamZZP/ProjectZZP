@@ -34,7 +34,7 @@
 	<tr>
 	  <td colspan="2">
 	  	<a href="ChallengeDetailServlet?chall_id=<%= chall_id %>">
-	  	<img src="img/<%= chall_img %>" width="250" height="250">
+	  	<img src="images/<%= chall_img %>" width="250" height="250">
 	  	</a></td>
 	</tr>
 	<tr>

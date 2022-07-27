@@ -1,5 +1,6 @@
 package com.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -45,5 +46,19 @@ public class ChallengeService {
 		}
 		return dto;
 	}
+
+	public int updateChallenge(HashMap<String, String> map) {
+		int n = 0;
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		try {
+			n = dao.updateChallenge(session, map);
+			session.commit();
+		} finally {
+			session.close();
+		}
+		return n;
+	}
+
+
 
 }
