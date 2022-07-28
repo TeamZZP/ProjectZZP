@@ -22,15 +22,17 @@ public class ProductListServlet extends HttpServlet {
 		String p_category = request.getParameter("p_category");
 		System.out.println(p_category);
 		if(p_category == null) {
-			p_category = "main";
+			response.sendRedirect("StoreUIServlet");
+		}else {
+			ProductService service = new ProductService();
+			List<ProductDTO> list = service.productList(p_category);
+			
+			request.setAttribute("productList", list);
+			RequestDispatcher dis = request.getRequestDispatcher("product.jsp");
+			dis.forward(request, response);
 		}
 		
-		ProductService service = new ProductService();
-		List<ProductDTO> list = service.productList(p_category);
 		
-		request.setAttribute("productList", list);
-		RequestDispatcher dis = request.getRequestDispatcher("product.jsp");
-		dis.forward(request, response);
 		
 	}
 
