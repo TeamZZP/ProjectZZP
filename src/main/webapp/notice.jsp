@@ -9,8 +9,8 @@
 <body>
 	<h1>공지사항 :></h1>
 	<jsp:include page="common/header.jsp" flush="true"></jsp:include><br>
-	<jsp:include page="common/footer.jsp" flush="true"></jsp:include><br>
 	<hr>
-	<jsp:include page="notice/noticeList.jsp" flush="true"></jsp:include>
+	<jsp:include page="notice/noticeList.jsp" flush="true"></jsp:include> <br>
+	<jsp:include page="common/footer.jsp" flush="true"></jsp:include><br>
 </body>
 </html>
