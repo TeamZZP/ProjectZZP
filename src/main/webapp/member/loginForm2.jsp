@@ -60,7 +60,7 @@
             <button id="login" class="account">login</button>
             <p id="alert" class="account"> </p>
         </div>
-    </div>   
+    </div>
     <script src="script.js">
     const id = document.getElementById('id')
     const password = document.getElementById('password')

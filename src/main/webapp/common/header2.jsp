@@ -30,6 +30,8 @@
       <div class="col-md-3 text-end" id="header_login_bar">
 		<button type="button" onclick="location.href='LoginUIServlet';"  class="btn btn-success" id="button_login">로그인</button>
       	<button type="button" onclick="location.href='MemberUIServlet';"  class="btn btn-success" id="button_signin">회원가입</button>
+		<button type="button" onclick="location.href='LogoutUIServlet';"  class="btn btn-success" id="button_logout">로그아웃</button>
+		<button type="button" onclick="location.href='MemberUpdateUIServlet';"  class="btn btn-success" id="button_myInfo">내 정보</button>
       	<button type="button" class="btn btn-success">장바구니</button>
       </div>
     </header>
