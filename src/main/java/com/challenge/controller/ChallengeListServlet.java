@@ -34,14 +34,21 @@ public class ChallengeListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		ChallengeService service = new ChallengeService();
+		ChallengeService service = new ChallengeService(); 
 		
 		//페이징 처리
 		String curPage = request.getParameter("curPage"); //현재페이지
 		if (curPage == null) curPage = "1"; //시작시 현재페이지 1
 		
-		PageDTO pDTO = service.selectAllChallenge(Integer.parseInt(curPage));
+		//검색기준, 검색어
+		String searchName = request.getParameter("searchName");
+		String searchValue = request.getParameter("searchValue");
+		
+		PageDTO pDTO = service.selectAllChallenge(searchName, searchValue, Integer.parseInt(curPage));
+		
 		request.setAttribute("pDTO", pDTO);
+		request.setAttribute("searchName", searchName);
+		request.setAttribute("searchValue", searchValue);
 		
 		RequestDispatcher dis = request.getRequestDispatcher("challengeMain.jsp");
 		dis.forward(request, response);

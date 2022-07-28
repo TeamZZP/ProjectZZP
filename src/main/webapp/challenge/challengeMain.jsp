@@ -5,8 +5,9 @@
     pageEncoding="UTF-8"%>
 <%
 	PageDTO pDTO = (PageDTO) request.getAttribute("pDTO");
-	System.out.println(pDTO);
 	List<ChallengeDTO> list = pDTO.getList();
+	String searchName = (String) request.getAttribute("searchName");
+	String searchValue = (String) request.getAttribute("searchValue");
 %>
 <a href="">이 달의 챌린지 [ 용기내! 챌린지 ] 참여하러 가기</a>
 <select name="sortChallenge">
@@ -101,31 +102,52 @@
 				<%
  	} //end for
 %>
+
+	  	<!-- 검색기능 -->
+	  	<tr>
+	  		<td colspan="4" align="center" height="10">
+		  	<form action="ChallengeListServlet">
+			    <select name="searchName">
+			      <option value="userid">아이디</option>
+			      <option value="chall_title">제목</option>
+			      <option value="chall_content">내용</option>
+			    </select>
+			    <input type="text" name="searchValue">
+			    <button>검색</button>
+		    </form>
+		    </td>
+	    </tr>
 		
+		<!-- 페이징 -->
+		<tr>
+			<td colspan="4" align="center" height="10"><% 
+		    int curPage = pDTO.getCurPage(); 
+		    int perPage = pDTO.getPerPage(); 
+		    int totalCount = pDTO.getTotalCount();
+		    int totalPage = totalCount/perPage;
+		    if (totalCount%perPage!=0) totalPage++;
+		    for (int i=1; i<=totalPage; i++) {
+		    	if (i==curPage) {
+		    		out.print(i+"&nbsp;");
+		    	} else {
+		    		out.print("<a href='ChallengeListServlet?curPage="+i+
+		    				"&searchName="+searchName+"&searchValue="+searchValue+"'>"+i+"</a>&nbsp;"); 
+		    	} 
+		    }
+		    %></td>
+		</tr>
+	
 			</table>
 		</td>
 	</tr>
 	<tr>
 		<td height="10">
 	</tr>
-
+	
 </table>
 
 
- <% 
-	    int curPage = pDTO.getCurPage(); 
-	    int perPage = pDTO.getPerPage(); 
-	    int totalCount = pDTO.getTotalCount();
-	    int totalPage = totalCount/perPage;
-	    if (totalCount%perPage!=0) totalPage++;
-	    for (int i=1; i<=totalPage; i++) {
-	    	if (i==curPage) {
-	    		out.print(i+"&nbsp;");
-	    	} else {
-	    		out.print("<a href='ChallengeListServlet?curPage="+i+"'>"+i+"</a>&nbsp;"); 
-	    	} 
-	    }
-	    %>
+ 	
 
 
 
