@@ -18,7 +18,8 @@ public class ChallengeDAO {
 
 	public PageDTO selectAllChallenge(SqlSession session, int curPage) {
 		PageDTO pDTO = new PageDTO();
-		int perPage = 8;
+		pDTO.setPerPage(8);
+		int perPage = pDTO.getPerPage();
 		int offset = (curPage - 1)*perPage;
 		List<ChallengeDTO> list = session.selectList("selectAllChallenge","",new RowBounds(offset, perPage));
 		
