@@ -158,3 +158,29 @@ CREATE SEQUENCE 테이블명_컬럼명_seq
   NOCYCLE
   NOCACHE;
 
+
+  
+  
+-------------- insert --------------
+-- 상품
+insert into product VALUES('toothBrush01','칫솔','부드러운 대나무소재 칫솔','bath',2500,2500,0,sysdate,50,'bath01');
+insert into product VALUES('soap01','비누','뽀득뽀득 친환경 비누','bath',4000,4000,0,sysdate,50,'bath02');
+insert into product VALUES('cottonSwap01','면봉','나무소재 면봉','bath',3000,3000,0,sysdate,50,'bath03');
+insert into product VALUES('bodyBrush01','롱바디브러쉬','나무소재 부드러운 롱타입 바디브러쉬','bath',25000,25000,0,sysdate,50,'bath04');
+insert into product VALUES('boduBrush02','숏바디브러쉬','나무소재 부드러운 숏타입 바디브러쉬','bath',2000,2000,0,sysdate,50,'bath05');
+insert into product VALUES('fruitsBag01','리유저블백W','식품 보관에 용이한 재사용가능 봉투','life',3000,3000,0,sysdate,50,'life01');
+insert into product VALUES('ecoBag01','네트에코백','간단한 장보기에 용이한 가방','life',8000,8000,0,sysdate,50,'life02');
+insert into product VALUES('fruitsBag02','리유저블백Gn','식품 보관에 용이한 재사용가능 봉투','life',3000,3000,0,sysdate,50,'life03');
+insert into product VALUES('ecoBag02','라탄에코백','간단한 장보기에 용이한 가방','life',13000,13000,0,sysdate,50,'life04');
+insert into product VALUES('strawPocket01','빨대파우치','빨대 휴대에 용이한 빨대파우치','life',3500,3500,0,sysdate,50,'life05');
+insert into product VALUES('paperString01','종이노끈','선물포장에 용이한 종이소재 노끈','firstEvent',100,100,0,sysdate,50,'firstEvent01');
+insert into product VALUES('tumbler01','실리콘 텀블러','휴대성이 좋은 텀블러','firstEvent',100,100,0,sysdate,50,'firstEvent02');
+insert into product VALUES('tumbler02','스테인리스 텀블러','보온이 뛰어난 텀블러','firstEvent',100,100,0,sysdate,50,'firstEvent03');
+insert into product VALUES('soapSet','천연비누세트','잔여감이없는 천연비누','firstEvent',100,100,0,sysdate,50,'firstEvent04');
+insert into product VALUES('straw01','빨대세트','세척으로 간편하게 재사용하는 친환경빨대','firstEvent',100,100,0,sysdate,50,'firstEvent05');
+insert into product VALUES('solidToothpaste','고체치약','씹어서 양치하는 고체형치약','firstEvent',100,100,0,sysdate,50,'firstEvent06');
+insert into product VALUES('bathSet01','샤워세트1','바디워시 비누와 브러쉬 세트','timeEvent',30000,15000,15000,sysdate,50,'timeEvent01');
+insert into product VALUES('strawSet01','빨래파우치세트','빨대세트와 파우치 세트','timeEvent',11000,5500,5500,sysdate,50,'timeEvent02');
+insert into product VALUES('bathSet02','샤워세트2','샤워도구 세트','timeEvent',30000,15000,15000,sysdate,50,'timeEvent03');
+insert into product VALUES('cutlerySet01','다회용수저세트','일회용품을 대신하는 휴대용 다회용 수저세트','timeEvent',10000,5000,5000,sysdate,50,'timeEvent04');
+commit;

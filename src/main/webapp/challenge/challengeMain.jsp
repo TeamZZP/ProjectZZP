@@ -8,15 +8,27 @@
 	List<ChallengeDTO> list = pDTO.getList();
 	String searchName = (String) request.getAttribute("searchName");
 	String searchValue = (String) request.getAttribute("searchValue");
+	String sortBy = (String) request.getAttribute("sortBy");
 %>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function () {
+		$("#sortBy").on("change", function () {
+			location.href = "ChallengeListServlet?sortBy="+$(this).val();
+		});
+	});
+</script>
+
 <a href="">이 달의 챌린지 [ 용기내! 챌린지 ] 참여하러 가기</a>
-<select name="sortChallenge">
-	<option value="" selected disabled hidden>정렬</option>
-	<option>최신순</option>
-	<option>이 달의 챌린지</option>
-	<option>최근 좋아요순</option>
-	<option>최근 댓글 많은순</option>
-</select>
+
+	<select name="sortBy" id="sortBy">
+		<option value="" selected disabled hidden>정렬</option>
+		<option value="newest">최신순</option>
+		<option value="thisMonthChall">이 달의 챌린지</option>
+		<option value="mostLiked">최근 좋아요순</option>
+		<option value="mostCommented">최근 댓글 많은순</option>
+	</select>
+	
 <a href="ChallengeUIServlet">글쓰기</a>
 
 
@@ -131,7 +143,7 @@
 		    		out.print(i+"&nbsp;");
 		    	} else {
 		    		out.print("<a href='ChallengeListServlet?curPage="+i+
-		    				"&searchName="+searchName+"&searchValue="+searchValue+"'>"+i+"</a>&nbsp;"); 
+		    				"&searchName="+searchName+"&searchValue="+searchValue+"&sortBy="+sortBy+"'>"+i+"</a>&nbsp;"); 
 		    	} 
 		    }
 		    %></td>
