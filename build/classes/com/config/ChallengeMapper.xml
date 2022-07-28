@@ -4,6 +4,33 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ChallengeMapper">
 
+<insert id="insertChallenge" parameterType="ChallengeDTO">
+	insert into challenge (chall_id, userid, chall_title, chall_content, chall_category, chall_hits, chall_liked, chall_created, chall_img) 
+	values (challenge_chall_id_seq.NEXTVAL, #{userid}, #{chall_title}, #{chall_content}, #{chall_category}, 0, 0, sysdate, #{chall_img})
+</insert>
 
+<select id="selectAllChallenge" resultType="ChallengeDTO">
+	select * from challenge
+	order by chall_id desc
+</select>
+
+<select id="selectOneChallenge" resultType="ChallengeDTO">
+	select * from challenge 
+	where chall_id = #{chall_id}
+</select>
+
+<update id="updateChallenge" parameterType="hashmap">
+	update challenge
+	set chall_category=#{chall_category},
+		chall_title=#{chall_title},
+		chall_img=#{chall_img},
+		chall_content=#{chall_content}
+	where chall_id=#{chall_id}
+</update>
+
+<delete id="deleteChallenge">
+	delete from challenge
+	where chall_id=#{chall_id}
+</delete>
 
 </mapper>

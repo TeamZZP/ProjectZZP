@@ -8,8 +8,8 @@
 </head>
 <body>
 	<h1>공지사항 :></h1>
-	상단바 - 로그인 회원가입 <br>
-	상단바 - 소개, 스토어, 챌린지, 게시판
+	<jsp:include page="common/header.jsp" flush="true"></jsp:include><br>
+	<jsp:include page="common/footer.jsp" flush="true"></jsp:include><br>
 	<hr>
 	<jsp:include page="notice/noticeList.jsp" flush="true"></jsp:include>
 </body>

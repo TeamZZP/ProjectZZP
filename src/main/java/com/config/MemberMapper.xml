@@ -4,6 +4,13 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="MemberMapper">
 
-
-
+		<insert id="addMember" parameterType="MemberDTO">
+			insert into member (userid, passwd, username, email1, email2, phone, created_at)
+			values (#{userid}, #{passwd}, #{username}, #{email1}, #{email2}, #{phone}, sysdate)
+		</insert>
+		
+		<select id="checkId" parameterType="String" resultType="int">
+			select count(*) from member where userid=#{userid}
+		</select>
+	
 </mapper>
