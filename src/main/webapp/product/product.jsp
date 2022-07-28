@@ -48,7 +48,7 @@
 								<tr>
 									<td>
 										<a href="ProductListServlet?p_category=<%=p_category%>"> <!-- 이미지링크 -->
-											<img src="images/p_image/<%=p_img %>.jpg" border="0" align="center" width="200">											
+											<img src="images/p_image/<%=p_img %>.jpg" border="0" align="center" width="200" height="300">											
 										</a>
 									</td>
 								</tr>
@@ -69,6 +69,7 @@
 									<%=p_cost_price %>	</strong></font></td>
 								</tr>
 								<tr>
+									<td><img src="images/keeping.jpg" width="30" height="30"></td>
 									<td><img src="images/cart.jpg" width="30" height="30"></td>
 								</tr>
 							</table>
