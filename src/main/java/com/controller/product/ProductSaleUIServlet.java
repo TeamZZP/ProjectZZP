@@ -11,13 +11,11 @@ import javax.servlet.http.HttpServletResponse;
  * Servlet implementation class ProductSaleServlet
  */
 @WebServlet("/ProductSaleServlet")
-public class ProductSaleServlet extends HttpServlet {
+public class ProductSaleUIServlet extends HttpServlet {
 	
-    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		
-		
+		response.sendRedirect("productSaleCategory.jsp");
 		
 	}
 
