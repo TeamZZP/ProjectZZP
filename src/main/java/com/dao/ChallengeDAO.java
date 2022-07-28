@@ -3,9 +3,11 @@ package com.dao;
 import java.util.HashMap;
 import java.util.List;
 
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 
 import com.dto.ChallengeDTO;
+import com.dto.PageDTO;
 
 public class ChallengeDAO {
 
@@ -14,9 +16,17 @@ public class ChallengeDAO {
 		return n;
 	}
 
-	public List<ChallengeDTO> selectAllChallenge(SqlSession session) {
-		List<ChallengeDTO> list = session.selectList("selectAllChallenge");
-		return list;
+	public PageDTO selectAllChallenge(SqlSession session, int curPage) {
+		PageDTO pDTO = new PageDTO();
+		int perPage = 8;
+		int offset = (curPage - 1)*perPage;
+		List<ChallengeDTO> list = session.selectList("selectAllChallenge","",new RowBounds(offset, perPage));
+		
+		pDTO.setCurPage(curPage);
+		pDTO.setList(list);
+		pDTO.setTotalCount(12);
+		
+		return pDTO;
 	}
 
 	public ChallengeDTO selectOneChallenge(SqlSession session, String chall_id) {

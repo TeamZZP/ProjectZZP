@@ -5,8 +5,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+</head>
+<body>
+<jsp:include page="common/header.jsp" flush="true"></jsp:include><br>
 
 <jsp:include page="challenge/challengeDetail.jsp" flush="true"></jsp:include>
 
+<jsp:include page="common/footer.jsp" flush="true"></jsp:include><br>
 </body>
 </html>

@@ -1,13 +1,13 @@
 package com.service;
 
 import java.util.HashMap;
-import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
 import com.config.MySqlSessionFactory;
 import com.dao.ChallengeDAO;
 import com.dto.ChallengeDTO;
+import com.dto.PageDTO;
 
 public class ChallengeService {
 	
@@ -25,15 +25,15 @@ public class ChallengeService {
 		return n;
 	}
 
-	public List<ChallengeDTO> selectAllChallenge() {
-		List<ChallengeDTO> list = null;
+	public PageDTO selectAllChallenge(int curPage) {
+		PageDTO pDTO = null;
 		SqlSession session = MySqlSessionFactory.getSqlSession();
 		try {
-			list = dao.selectAllChallenge(session);
+			pDTO = dao.selectAllChallenge(session, curPage);
 		} finally {
 			session.close();
 		}
-		return list;
+		return pDTO;
 	}
 
 	public ChallengeDTO selectOneChallenge(String chall_id) {

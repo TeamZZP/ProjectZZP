@@ -1,9 +1,12 @@
+<%@page import="com.dto.PageDTO"%>
 <%@page import="com.dto.ChallengeDTO"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	List<ChallengeDTO> list = (List<ChallengeDTO>) request.getAttribute("list");
+	PageDTO pDTO = (PageDTO) request.getAttribute("pDTO");
+	System.out.println(pDTO);
+	List<ChallengeDTO> list = pDTO.getList();
 %>
 <a href="">이 달의 챌린지 [ 용기내! 챌린지 ] 참여하러 가기</a>
 <select name="sortChallenge">
@@ -53,8 +56,9 @@
 						<table style='padding: 15px'>
 
 							<tr>
-								<td align="center">프로필사진</td>
-								<td align="center"><%=userid%></td>
+								<td align="center"><a href="">프로필사진</a></td>
+								<td align="center"><a href=""><%=userid%></a></td>
+								
 							</tr>
 							<tr>
 								<td height="10">
@@ -97,14 +101,31 @@
 				<%
  	} //end for
 %>
+		
 			</table>
 		</td>
 	</tr>
 	<tr>
 		<td height="10">
 	</tr>
+
 </table>
 
+
+ <% 
+	    int curPage = pDTO.getCurPage(); 
+	    int perPage = pDTO.getPerPage(); 
+	    int totalCount = pDTO.getTotalCount();
+	    int totalPage = totalCount/perPage;
+	    if (totalCount%perPage!=0) totalPage++;
+	    for (int i=1; i<=totalPage; i++) {
+	    	if (i==curPage) {
+	    		out.print(i+"&nbsp;");
+	    	} else {
+	    		out.print("<a href='ChallengeListServlet?curPage="+i+"'>"+i+"</a>&nbsp;"); 
+	    	} 
+	    }
+	    %>
 
 
 
