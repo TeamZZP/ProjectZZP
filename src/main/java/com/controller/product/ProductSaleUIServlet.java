@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 public class ProductSaleUIServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		System.out.println("ProductSaleUIServlet 실행=====");
 		response.sendRedirect("productSaleCategory.jsp");
 		
 	}

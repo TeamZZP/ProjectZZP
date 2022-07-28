@@ -25,7 +25,10 @@
 				
 
  <%
- 	
+     /* **상단*** 
+     if(p_category가 timeEvent 또는 firstEvent)일떄 <include productSaleCategory.jsp>
+     if (p_category가 timeEvent일떄 타이머, firstEvent일때 첫구매할인 배너) */
+ 
 	 List <ProductDTO> list = (List<ProductDTO>)request.getAttribute("productList");
 	 for (int i = 1; i <= list.size(); i++){
 	
