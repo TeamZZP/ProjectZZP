@@ -15,12 +15,6 @@ public class MainServlet extends HttpServlet {
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		/*
-		 * GoodsService service = new GoodsService(); List<GoodsDTO> list =
-		 * service.goodsList("top"); System.out.println(list);
-		 * 
-		 * request.setAttribute("goodsList", list);
-		 */
 		RequestDispatcher dis = request.getRequestDispatcher("main.jsp");		
 		dis.forward(request, response);
 		
@@ -29,5 +23,4 @@ public class MainServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}
-
 }

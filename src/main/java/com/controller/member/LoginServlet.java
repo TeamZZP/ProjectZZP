@@ -10,49 +10,33 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.dto.MemberDTO;
 import com.service.MemberService;
 
-@WebServlet("/MemberAddServlet")
-public class MemberAddServlet extends HttpServlet {
+@WebServlet("/LoginServlet")
+public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String userid = request.getParameter("userid");
 		String passwd = request.getParameter("passwd");
-		String username = request.getParameter("username");
-		String email1 = request.getParameter("email1");
-		String email2 = request.getParameter("email2");
-		String phone = request.getParameter("phone");
-		String post_num = request.getParameter("post_num");
-		String addr1 = request.getParameter("addr1");
-		String addr2 = request.getParameter("addr2");
-		
-		//addMember+Address
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("userid", userid);
 		map.put("passwd", passwd);
-		map.put("username", username);
-		map.put("email1", email1);
-		map.put("email2", email2);
-		map.put("phone", phone);
-		map.put("post_num", post_num);
-		map.put("addr1", addr1);
-		map.put("addr2", addr2);
 		
 		MemberService service = new MemberService();
-		int num = service.addMember(map);
-		System.out.println(num);
+		MemberDTO dto = service.loginMember(map);
+		System.out.println(dto);
 		
-		if (num>0) {
+		if (dto!=null) {
 			HttpSession session = request.getSession();
-			session.setAttribute("memberAdd", userid+"님 회원가입 회원가입을 축하합니다 :)");
-			session.setMaxInactiveInterval(60*30);
-			
-			response.sendRedirect("main.jsp");
+			//login 인증정보 저장
+			session.setAttribute("login", dto); 
+			session.setMaxInactiveInterval(60*60);
+			response.sendRedirect("MainServlet");
 		} else {
-			response.sendRedirect("LoginUIServlet");
+			response.sendRedirect("LoginServlet");
 		}
-		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

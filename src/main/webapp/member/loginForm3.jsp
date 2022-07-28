@@ -13,9 +13,6 @@
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/sign-in/">
 
-    
-
-    
 
 <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
 

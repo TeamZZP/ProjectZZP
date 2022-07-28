@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<<<<<<< HEAD
         <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page import="com.dto.ProductDTO"%>
 <%@page import="java.util.List"%>
@@ -9,7 +10,18 @@
 <script src="<c:url value='/bootstrap/js/bootstrap.min.js'/>" type="text/javascript"></script>
 
 
+=======
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ZZP</title>
+</head>
+<body>
+>>>>>>> 79f91e4 (Update member)
 <jsp:include page="common/header.jsp" flush="true"></jsp:include><br>
 <jsp:include page="category.jsp" flush="true"></jsp:include><br>
 <jsp:include page="product/product.jsp" flush="true"></jsp:include><br>
 <jsp:include page="common/footer.jsp" flush="true"></jsp:include><br>
+</body>
+</html>

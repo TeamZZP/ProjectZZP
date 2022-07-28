@@ -8,8 +8,7 @@
 </head>
 <body>
 <jsp:include page="common/header.jsp" flush="true"></jsp:include><br>
-<jsp:include page="store/storeMain.jsp" flush="true"></jsp:include><br>
-<jsp:include page="category.jsp" flush="true"></jsp:include><br>
+<jsp:include page="cart/cartList.jsp" flush="true"></jsp:include><br>
 <jsp:include page="common/footer.jsp" flush="true"></jsp:include><br>
 </body>
 </html>

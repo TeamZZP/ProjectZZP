@@ -4,13 +4,20 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="MemberMapper">
 
-		<insert id="addMember" parameterType="MemberDTO">
-			insert into member (userid, passwd, username, email1, email2, phone, created_at)
-			values (#{userid}, #{passwd}, #{username}, #{email1}, #{email2}, #{phone}, sysdate)
+		<insert id="addMember" parameterType="hashMap">
+			insert all
+			into member values (#{userid}, #{passwd}, #{username}, #{email1}, #{email2}, #{phone}, sysdate)
+			into address (userid,post_num,addr1,addr2) values (#{userid}, #{post_num}, #{addr1}, #{addr2})
+			select * from dual
 		</insert>
 		
 		<select id="checkId" parameterType="String" resultType="int">
 			select count(*) from member where userid=#{userid}
+		</select>
+		
+		<select id="loginMember" parameterType="hashMap" resultType="MemberDTO">
+			select userid, passwd, username, email1, email2, phone, created_at
+			from member where userid=#{userid} and passwd=#{passwd}
 		</select>
 	
 </mapper>
