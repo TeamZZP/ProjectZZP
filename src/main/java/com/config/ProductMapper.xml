@@ -6,8 +6,7 @@
 
 <!-- <select id="productList" resultType="ProductDTO" parameterType="String"> -->
 <select id="productList" resultType="ProductDTO">
-<!-- select * from product where p_category = #{p_category} -->
-select * from product
+ select * from product where p_category = #{p_category} 
 </select>
 	
 </mapper>

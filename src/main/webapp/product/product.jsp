@@ -69,8 +69,9 @@
 									<%=p_cost_price %>	</strong></font></td>
 								</tr>
 								<tr>
-									<td><img src="images/keeping.jpg" width="30" height="30"></td>
-									<td><img src="images/cart.jpg" width="30" height="30"></td>
+									<td><img src="images/keeping.jpg" width="30" height="30">
+									<img src="images/cart.jpg" width="30" height="30"></td>
+									
 								</tr>
 							</table>
 						</td>
