@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>ZZP</title>
 </head>
 <body>
 	<h1>공지사항 수정 :></h1>
