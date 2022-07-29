@@ -21,9 +21,8 @@ public class ProductListServlet extends HttpServlet {
 		
 		String p_category = request.getParameter("p_category");
 
-		if(p_category == null) {
-			response.sendRedirect("StoreUIServlet");
-		} 
+		if(p_category != null) {
+			
 			ProductService service = new ProductService();
 			List<ProductDTO> list = service.productList(p_category);
 			System.out.println(list);
@@ -31,6 +30,11 @@ public class ProductListServlet extends HttpServlet {
 			request.setAttribute("productList", list);
 			RequestDispatcher dis = request.getRequestDispatcher("product.jsp");
 			dis.forward(request, response);
+			
+		} else {
+			response.sendRedirect("StoreUIServlet");
+		}
+			
 		}
 		
 		

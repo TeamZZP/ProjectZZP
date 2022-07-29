@@ -7,6 +7,5 @@
 <title>ZZP</title>
 </head>
 <body>
-storeMain
 </body>
 </html>
