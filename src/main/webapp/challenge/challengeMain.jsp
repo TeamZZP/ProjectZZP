@@ -8,21 +8,23 @@
 	List<ChallengeDTO> list = pDTO.getList();
 	String searchName = (String) request.getAttribute("searchName");
 	String searchValue = (String) request.getAttribute("searchValue");
-	String sortBy = (String) request.getAttribute("sortBy");
+//	String sortBy = (String) request.getAttribute("sortBy");
+	
+	System.out.println(pDTO);
 %>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
-	$(document).ready(function () {
+/* 	$(document).ready(function () {
 		$("#sortBy").on("change", function () {
 			location.href = "ChallengeListServlet?sortBy="+$(this).val();
 		});
-	});
+	}); */
 </script>
 
 <a href="">이 달의 챌린지 [ 용기내! 챌린지 ] 참여하러 가기</a>
 
 	<select name="sortBy" id="sortBy">
-		<option value="" selected disabled hidden>정렬</option>
+		<option value="none" selected disabled hidden>정렬</option>
 		<option value="newest">최신순</option>
 		<option value="thisMonthChall">이 달의 챌린지</option>
 		<option value="mostLiked">최근 좋아요순</option>
@@ -142,10 +144,13 @@
 		    	if (i==curPage) {
 		    		out.print(i+"&nbsp;");
 		    	} else {
-		    		out.print("<a href='ChallengeListServlet?curPage="+i+
-		    				"&searchName="+searchName+"&searchValue="+searchValue+"&sortBy="+sortBy+"'>"+i+"</a>&nbsp;"); 
+		    		out.print("<a href='ChallengeListServlet?curPage="+i+"&searchName="+searchName+"&searchValue="+searchValue+"'>"+i+"</a>&nbsp;"); 
+		    		/* out.print("<a href='ChallengeListServlet?curPage="+i+
+		    				"&searchName="+searchName+"&searchValue="+searchValue+"&sortBy="+sortBy+"'>"+i+"</a>&nbsp;");  */
 		    	} 
 		    }
+		    
+		//    System.out.println(curPage+" "+searchName+" "+searchValue+" "+sortBy);
 		    %></td>
 		</tr>
 	

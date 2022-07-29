@@ -43,14 +43,17 @@ public class ChallengeListServlet extends HttpServlet {
 		//검색기준, 검색어
 		String searchName = request.getParameter("searchName");
 		String searchValue = request.getParameter("searchValue");
-		String sortBy = request.getParameter("sortBy");
+	//	String sortBy = request.getParameter("sortBy");
 		
-		PageDTO pDTO = service.selectAllChallenge(searchName, searchValue, sortBy, Integer.parseInt(curPage));
+	//	System.out.println(curPage+" "+searchName+" "+searchValue+" "+sortBy);
+		
+		PageDTO pDTO = service.selectAllChallenge(searchName, searchValue, Integer.parseInt(curPage));
+		System.out.println("servlet>>"+pDTO.getList());
 		
 		request.setAttribute("pDTO", pDTO);
 		request.setAttribute("searchName", searchName);
 		request.setAttribute("searchValue", searchValue);
-		request.setAttribute("sortBy", sortBy);
+	//	request.setAttribute("sortBy", sortBy);
 		
 		RequestDispatcher dis = request.getRequestDispatcher("challengeMain.jsp");
 		dis.forward(request, response);

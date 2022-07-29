@@ -19,14 +19,16 @@ public class ChallengeDAO {
 	public PageDTO selectAllChallenge(SqlSession session, HashMap<String, String> map, int curPage) {
 		PageDTO pDTO = new PageDTO();
 		pDTO.setPerPage(8);
-		int perPage = pDTO.getPerPage();
+		int perPage = 8;
 		int offset = (curPage - 1)*perPage;
 		
 		List<ChallengeDTO> list = session.selectList("selectAllChallenge", map, new RowBounds(offset, perPage));
 		
+		System.out.println("dao>>"+list);
+		
 		pDTO.setCurPage(curPage);
 		pDTO.setList(list);
-		pDTO.setTotalCount(countTotal(session, map));
+		pDTO.setTotalCount(12);
 		
 		return pDTO;
 	}
