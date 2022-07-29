@@ -25,16 +25,11 @@ public class ChallengeService {
 		return n;
 	}
 
-	public PageDTO selectAllChallenge(String searchName, String searchValue, int curPage) {
+	public PageDTO selectAllChallenge(HashMap<String, String> map, int curPage) {
 		PageDTO pDTO = null;
-		HashMap<String, String> map = new HashMap<String, String>();
-		map.put("searchName", searchName);
-		map.put("searchValue", searchValue);
-	//	map.put("sortBy", sortBy);
 		SqlSession session = MySqlSessionFactory.getSqlSession();
 		try {
 			pDTO = dao.selectAllChallenge(session, map, curPage);
-			System.out.println("service>>"+pDTO.getList());
 		} finally {
 			session.close();
 		}
