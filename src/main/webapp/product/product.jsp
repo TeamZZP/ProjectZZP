@@ -6,14 +6,9 @@
  <script type="text/javascript"
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
-	$(function() {
-		//장바구니 팝업
-		$("#cart").on("click",function(){
-			
-		});
-	});
+
 </script>
- 
+
 
 <table width="100%" cellspacing="0" cellpadding="0">
 
@@ -36,10 +31,6 @@
 				
 
  <%
-     /* **상단*** 
-     if(p_category가 timeEvent 또는 firstEvent)일떄 <include productSaleCategory.jsp>
-     if (p_category가 timeEvent일떄 타이머, firstEvent일때 첫구매할인 배너) */
-    
      
    	List <ProductDTO> list = (List<ProductDTO>)request.getAttribute("productList"); 
 		if(list.get(1).getP_category().equals("timeEvent")||list.get(1).getP_category().equals("firstEvent")){
@@ -75,7 +66,7 @@
 							<table style='padding:15px'>
 								<tr>
 									<td>
-										<a href="ProductListServlet?p_category=<%=p_category%>"> <!-- 이미지링크 -->
+										<a href="productRetrieveServlet?p_category=<%=p_category%>"> <!-- 이미지링크 -->
 											<img src="images/p_image/<%=p_img %>.jpg" border="0" align="center" width="200" height="300">											
 										</a>
 									</td>
@@ -86,7 +77,7 @@
 								</tr>
 								<tr>
 									<td class= "td_default" align ="left">
-										<a class= "a_black" href="ProductListServlet?p_category=<%=p_category%>"> 
+										<a class= "a_black" href="productRetrieveServlet?p_category=<%=p_category%>"> 
 										<%= p_name %>
 										<br>
 										</a>
@@ -98,9 +89,10 @@
 								</tr>
 								<tr>
 									<td>
-									<img src="images/keeping.png" width="35" height="35" >
-									<img src="images/bubble.png" width="32" height="32"  >
-									<img src="images/cart.jpg" width="35" height="35" id="cart">
+									
+									<span><img src="images/keeping.png" width="35" height="35" ></span>
+									<span><img src="images/bubble.png" width="32" height="32"  ></span>
+									<span><img src="images/cart.jpg" width="35" height="35"  ></span>
 									
 									</td>	
 									
@@ -129,4 +121,5 @@
 		<td height="10">
 	</tr>
 </table>
+	
     

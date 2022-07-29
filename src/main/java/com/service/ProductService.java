@@ -23,11 +23,11 @@ public class ProductService {
 		return list;
 	}
 
-	public ProductDTO productRetrieve(String p_id) {
+	public ProductDTO productRetrieve(String p_category) {
 		ProductDTO dto = null;
 		SqlSession session = MySqlSessionFactory.getSqlSession();
 		try {
-			dto = dao.productRetrieve(session,p_id);
+			dto = dao.productRetrieve(session,p_category);
 		} finally {
 			session.close();
 		}

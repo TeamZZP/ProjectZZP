@@ -10,6 +10,6 @@
 </select>
 
 <select id="productRetrieve" parameterType="String" resultType="ProductDTO">
-	select * from product where p_id = #{p_id}
+	select * from product where p_category = #{p_category}
 </select>	
 </mapper>
