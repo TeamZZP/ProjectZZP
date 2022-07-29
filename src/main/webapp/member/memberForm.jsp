@@ -66,6 +66,7 @@ $("#userid").keyup(function() {
 이메일:<input type="text" name="email1" >@
        <input type="text" name="email2"  placeholder="직접입력" id="email2">
        <select id="emailSel">
+        <option value="" selected disabled hidden>이메일선택</option>
         <option value="daum.net">daum.net</option>
         <option value="naver.com">naver.com</option>
         <option value="google.com">google.com</option>
