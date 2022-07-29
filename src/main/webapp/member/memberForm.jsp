@@ -57,8 +57,8 @@ $("#userid").keyup(function() {
 *아이디:<input type="text" name="userid" id="userid">
 <span id="result"></span>
 <br> 
-*비밀번호:<input type="text" name="passwd" id="passwd"><br> 
-비빌번호확인:<input type="text" name="passwd2" id="passwd2">
+*비밀번호:<input type="password" name="passwd" id="passwd"><br> 
+비빌번호확인:<input type="password" name="passwd2" id="passwd2">
 <span id="result2"></span>
 <br> 
 이름:<input type="text" name="username">

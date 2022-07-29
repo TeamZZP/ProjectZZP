@@ -7,7 +7,7 @@
 <title>ZZP</title>
 </head>
 <body>
-	<h1>공지사항 수정 :></h1>
+<!-- 공지사항 수정 -->
 	<jsp:include page="common/header.jsp" flush="true"></jsp:include><br>
 	<jsp:include page="notice/noticeUpdate.jsp" flush="true"></jsp:include><br>
 	<jsp:include page="common/footer.jsp" flush="true"></jsp:include>

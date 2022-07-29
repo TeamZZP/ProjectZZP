@@ -6,8 +6,10 @@
 
 		<insert id="addMember" parameterType="hashMap">
 			insert all
-			into member values (#{userid}, #{passwd}, #{username}, #{email1}, #{email2}, #{phone}, sysdate)
-			into address (userid,post_num,addr1,addr2) values (#{userid}, #{post_num}, #{addr1}, #{addr2})
+			into member
+			values (#{userid}, #{passwd}, #{username}, #{email1}, #{email2}, #{phone}, sysdate)
+			into address (userid, post_num, addr1, addr2, address_id)
+			values (#{userid}, #{post_num}, #{addr1}, #{addr2}, address_address_id_seq.nextval)
 			select * from dual
 		</insert>
 		

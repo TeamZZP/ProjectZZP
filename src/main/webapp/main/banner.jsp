@@ -10,11 +10,11 @@
     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
   	</div>
   <div class="carousel-inner">
-    <div class="carousel-item active" data-bs-interval="10000">
-      <img src="main/banner.png" class="d-block w-100" alt="..." onclick="java">
+    <div class="carousel-item active" data-bs-interval="10000" onclick="javascrip:location.href='IntroductionUIServlet';">
+      <img src="main/banner_zzp.png" class="d-block w-100" alt="...">
     </div>
-    <div class="carousel-item" data-bs-interval="2000">
-      <img src="main/banner.png" class="d-block w-100" alt="...">
+    <div class="carousel-item" data-bs-interval="2000" onclick="javascrip:location.href='ProductSaleServlet?p_category=timeEvent';">
+      <img src="main/banner_time.png" class="d-block w-100" alt="...">
     </div>
     <div class="carousel-item">
       <img src="main/banner.png" class="d-block w-100" alt="...">
