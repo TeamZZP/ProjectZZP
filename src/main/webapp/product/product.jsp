@@ -69,7 +69,7 @@
 							<table style='padding:15px'>
 								<tr>
 									<td>
-										<a href="productRetrieveServlet?p_category=<%=p_category%>"> <!-- 이미지링크 -->
+										<a href="productRetrieveServlet?p_id=<%=p_id%>"> <!-- 이미지링크 -->
 											<img src="images/p_image/<%=p_img %>.jpg" border="0" align="center" width="200" height="300">											
 										</a>
 									</td>

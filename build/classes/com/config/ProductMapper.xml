@@ -10,7 +10,7 @@
 </select>
 
 <select id="productRetrieve" parameterType="String" resultType="ProductDTO">
-	select * from product where p_category = #{p_category}
+	select * from product where p_id = #{p_id}
 </select>	
 
 <select id="bestProduct" resultType="productDTO">

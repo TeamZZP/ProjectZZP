@@ -14,8 +14,8 @@ public class ProductDAO {
 		return list;
 	}
 
-	public ProductDTO productRetrieve(SqlSession session, String p_category) {
-		ProductDTO dto = session.selectOne("productRetrieve",p_category);
+	public ProductDTO productRetrieve(SqlSession session, String p_id) {
+		ProductDTO dto = session.selectOne("productRetrieve",p_id);
 		return dto;
 	}
 

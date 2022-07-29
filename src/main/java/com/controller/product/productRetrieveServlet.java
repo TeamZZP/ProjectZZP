@@ -22,11 +22,11 @@ public class productRetrieveServlet extends HttpServlet {
        
   
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String p_category = request.getParameter("p_category"); 
-		System.out.println(p_category);
+		String p_id = request.getParameter("p_id"); 
+		System.out.println(p_id);
 		
 		ProductService service = new ProductService();
-		ProductDTO dto = service.productRetrieve(p_category);
+		ProductDTO dto = service.productRetrieve(p_id);
 		
 		HttpSession session = request.getSession();
 		session.setAttribute("Retrieve", dto);
