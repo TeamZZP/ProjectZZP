@@ -5,7 +5,6 @@
 <link type="text/css" rel="stylesheet" href="<c:url value='/bootstrap/css/bootstrap.min.css'/>"/>    
 <script src="<c:url value='/bootstrap/js/bootstrap.js'/>" type="text/javascript"></script>
 <script src="<c:url value='/bootstrap/js/bootstrap.min.js'/>" type="text/javascript"></script>
-
 <%      System.out.println("productSaleCategory.jsp 실행=====");
  %>
 <jsp:include page="common/header.jsp" flush="true"></jsp:include><br>
