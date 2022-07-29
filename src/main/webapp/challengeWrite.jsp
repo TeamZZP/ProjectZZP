@@ -8,13 +8,9 @@
 </head>
 <body>
 <jsp:include page="common/header.jsp" flush="true"></jsp:include><br>
-<<<<<<< HEAD
-<jsp:include page="challenge/challengeWrite.jsp" flush="true"></jsp:include>
-=======
 
 <jsp:include page="challenge/challengeWrite.jsp" flush="true"></jsp:include>
 
->>>>>>> origin/main
 <jsp:include page="common/footer.jsp" flush="true"></jsp:include><br>
 </body>
 </html>
