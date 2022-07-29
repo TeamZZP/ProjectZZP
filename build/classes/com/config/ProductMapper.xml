@@ -12,4 +12,9 @@
 <select id="productRetrieve" parameterType="String" resultType="ProductDTO">
 	select * from product where p_category = #{p_category}
 </select>	
+
+<select id="bestProduct" resultType="productDTO">
+select * from product
+</select>
+
 </mapper>

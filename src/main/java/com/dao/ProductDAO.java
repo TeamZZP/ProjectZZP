@@ -19,4 +19,11 @@ public class ProductDAO {
 		return dto;
 	}
 
+	public List<ProductDTO> bestProduct(SqlSession session) {
+		List<ProductDTO> list = session.selectList("ProductMapper.bestProduct");
+		return list;
+	}
+
+
+
 }

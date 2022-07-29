@@ -33,6 +33,8 @@
  <%
      
    	List <ProductDTO> list = (List<ProductDTO>)request.getAttribute("productList"); 
+     
+     
 		if(list.get(1).getP_category().equals("timeEvent")||list.get(1).getP_category().equals("firstEvent")){
 			%>
 		<jsp:include page="productSaleCategory.jsp" flush="true" ></jsp:include><br>
@@ -47,6 +49,7 @@
      <% }
 	 for (int i = 1; i <= list.size(); i++){
 	
+		
 		 ProductDTO dto = list.get(i-1);
 		 String p_id = dto.getP_id();
 	     String p_name = dto.getP_name();
@@ -58,7 +61,7 @@
 	     String p_created = dto.getP_created();
 	     int p_stock = dto.getP_stock();
 	     String p_img = dto.getP_img();
-	 
+		 
 	 	
  %>
 
@@ -111,6 +114,7 @@
 				   %>		
 						
 <%
+	 
 	 }
 %>
 				</tr>
