@@ -3,7 +3,7 @@
 
 <html>
 <body>
-<a href ="ProductListServlet?p_category=best" >베스트</a><br>
+<a href ="ProductBestListServlet">베스트</a><br>
 <a href="ProductZZPServlet">이달의 ZZP</a> <br> 
 <a href ="ProductListServlet?p_category=kitchen" >주방용품</a><br>
 <a href ="ProductListServlet?p_category=bath" >욕실용품</a><br>
