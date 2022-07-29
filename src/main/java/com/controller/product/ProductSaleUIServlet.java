@@ -17,11 +17,10 @@ public class ProductSaleUIServlet extends HttpServlet {
 		System.out.println("ProductSaleUIServlet 실행=====");
 		response.sendRedirect("productSaleCategory.jsp");
 		
+		
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
