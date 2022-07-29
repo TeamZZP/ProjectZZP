@@ -26,6 +26,17 @@ public class NoticeService {
 		}
 		return list;
 	}
+	
+	public List<NoticeDTO> noticeList() {
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		List<NoticeDTO> list = null;
+		try {
+			list = dao.noticeList(session);
+		} finally {
+			session.close();
+		}
+		return list;
+	}
 
 	public NoticeDTO noticeOneSelect(String noticeID) {
 		SqlSession session = MySqlSessionFactory.getSqlSession();
@@ -61,6 +72,5 @@ public class NoticeService {
 		}
 		return num;
 	}
-
 
 }

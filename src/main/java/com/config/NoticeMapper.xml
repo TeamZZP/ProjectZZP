@@ -7,12 +7,17 @@
 		select NOTICE_ID, NOTICE_TITTLE, NOTICE_CONTENT, to_char(NOTICE_CREATED, 'YYYY/MM/DD') NOTICE_CREATED, 
 			ADMIN_ID, NOTICE_CATEGORY, NOTICE_HITS from notice where NOTICE_CATEGORY = 'main'
 	</select>
+	<select id="noticeList" resultType="NoticeDTO">
+		select NOTICE_ID, NOTICE_TITTLE, NOTICE_CONTENT, to_char(NOTICE_CREATED, 'YYYY/MM/DD') NOTICE_CREATED, 
+			ADMIN_ID, NOTICE_CATEGORY, NOTICE_HITS from notice where NOT NOTICE_CATEGORY = 'main'
+	</select>
 	<select id="noticeOneSelect" resultType="NoticeDTO" parameterType="string">
 		select NOTICE_ID, NOTICE_TITTLE, NOTICE_CONTENT, to_char(NOTICE_CREATED, 'YYYY/MM/DD') NOTICE_CREATED, 
 			ADMIN_ID, NOTICE_CATEGORY, NOTICE_HITS from notice where NOTICE_ID = #{noticeID}
 	</select>
 	<update id="noticeUpdate" parameterType="NoticeDTO">
-		update notice set NOTICE_TITTLE = #{NOTICE_TITTLE}, NOTICE_CONTENT = #{NOTICE_CONTENT} where NOTICE_ID = #{NOTICE_ID}
+		update notice set NOTICE_TITTLE = #{NOTICE_TITTLE}, NOTICE_CONTENT = #{NOTICE_CONTENT}
+			where NOTICE_ID = #{NOTICE_ID}
 	</update>
 	<delete id="NoticeDelete" parameterType="string">
 		delete from notice where NOTICE_ID = #{NOTICE_ID}
