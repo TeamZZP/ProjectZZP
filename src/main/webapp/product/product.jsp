@@ -28,8 +28,21 @@
      /* **상단*** 
      if(p_category가 timeEvent 또는 firstEvent)일떄 <include productSaleCategory.jsp>
      if (p_category가 timeEvent일떄 타이머, firstEvent일때 첫구매할인 배너) */
- 
-	 List <ProductDTO> list = (List<ProductDTO>)request.getAttribute("productList");
+    
+     
+   	List <ProductDTO> list = (List<ProductDTO>)request.getAttribute("productList"); 
+		if(list.get(1).getP_category().equals("timeEvent")||list.get(1).getP_category().equals("firstEvent")){
+			%>
+		<jsp:include page="productSaleCategory.jsp" flush="true"></jsp:include><br>
+			<%}
+     	if(list.get(1).getP_category().equals("timeEvent")){
+     	%>
+     	<jsp:include page="../countdown.jsp"></jsp:include>
+    <% }
+     	if(list.get(1).getP_category().equals("firstEvent")){
+     		%>
+     	<jsp:include page="../firstEventbanner.jsp"></jsp:include>
+     <% }
 	 for (int i = 1; i <= list.size(); i++){
 	
 		 ProductDTO dto = list.get(i-1);
@@ -46,6 +59,7 @@
 	 
 	 	
  %>
+
 						<td>
 							<table style='padding:15px'>
 								<tr>
@@ -72,8 +86,8 @@
 									<%=p_cost_price %>	</strong></font></td>
 								</tr>
 								<tr>
-									<td><img src="images/keeping.jpg" width="30" height="30" >
-									<img src="images/bubble.jpg" width="30" height="30"  >
+									<td><img src="images/keeping.png" width="35" height="35" >
+									<img src="images/bubble.png" width="32" height="32"  >
 									<img src="images/cart.jpg" width="35" height="35" ></td>
 									
 								</tr>

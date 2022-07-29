@@ -46,7 +46,7 @@ var dateObj = new Date();
 dateObj.setDate(dateObj.getDate() + 1);
 
 /* countDownTimer('sample01', dateObj); // 내일까지 */
-countDownTimer('sample02', '04/01/2024 00:00 AM'); // 2024년 4월 1일까지, 시간을 표시하려면 01:00 AM과 같은 형식을 사용한다.
+countDownTimer('sample02', '08/03/2022 00:00 AM'); // 2024년 4월 1일까지, 시간을 표시하려면 01:00 AM과 같은 형식을 사용한다.
 /* countDownTimer('sample03', '04/01/2024'); // 2024년 4월 1일까지
 countDownTimer('sample04', '07/28/2022'); // 2024년 4월 1일까지 */
 
@@ -56,7 +56,7 @@ countDownTimer('sample04', '07/28/2022'); // 2024년 4월 1일까지 */
   <!-- <h1>Sample01 : 내일까지</h1>
   <h2 id="sample01"></h2>
   <br/> -->
-  <h1>Sample02 : 2024년 4월 1일까지 </h1>
+  <h1>2022년 8월 3일까지 </h1>
   <h2 id="sample02"></h2>
  <!--  <h2 id="sample03"></h2> 
   <br/>
