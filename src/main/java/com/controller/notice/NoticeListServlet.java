@@ -26,11 +26,15 @@ public class NoticeListServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		NoticeService service = new NoticeService();
-		List<NoticeDTO> list = service.pointNotice();
-		System.out.println("noticeListServlet " + list);
+		List<NoticeDTO> mainNoticeList = service.pointNotice();
+		System.out.println("mainNoticeList " + mainNoticeList); //고정공지
+		
+		List<NoticeDTO> noticeList = service.noticeList();
+		System.out.println("noticeList " + noticeList); //나머지
 		
 		HttpSession session = request.getSession();
-		session.setAttribute("pointNotice", list);
+		session.setAttribute("mainNoticeList", mainNoticeList);
+		session.setAttribute("noticeList", noticeList);
 		
 		response.sendRedirect("notice.jsp");
 	}

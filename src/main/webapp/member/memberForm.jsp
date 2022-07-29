@@ -57,8 +57,8 @@ $("#userid").keyup(function() {
 *아이디:<input type="text" name="userid" id="userid">
 <span id="result"></span>
 <br> 
-*비밀번호:<input type="text" name="passwd" id="passwd"><br> 
-비빌번호확인:<input type="text" name="passwd2" id="passwd2">
+*비밀번호:<input type="password" name="passwd" id="passwd"><br> 
+비빌번호확인:<input type="password" name="passwd2" id="passwd2">
 <span id="result2"></span>
 <br> 
 이름:<input type="text" name="username">
@@ -66,6 +66,7 @@ $("#userid").keyup(function() {
 이메일:<input type="text" name="email1" >@
        <input type="text" name="email2"  placeholder="직접입력" id="email2">
        <select id="emailSel">
+        <option value="" selected disabled hidden>이메일선택</option>
         <option value="daum.net">daum.net</option>
         <option value="naver.com">naver.com</option>
         <option value="google.com">google.com</option>
@@ -73,7 +74,7 @@ $("#userid").keyup(function() {
 <br>
 전화번호:<input type="text" name="phone" placeholder="-없이 11자리 입력해주세요">
 <br>
-주소:<input type="text" name="post" id="sample4_postcode" placeholder="우편번호">
+주소:<input type="text" name="post_num" id="sample4_postcode" placeholder="우편번호">
 <input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
 <input type="text" name="addr1" id="sample4_roadAddress" placeholder="도로명주소">
 <input type="text" name="addr2" id="sample4_jibunAddress" placeholder="지번주소">

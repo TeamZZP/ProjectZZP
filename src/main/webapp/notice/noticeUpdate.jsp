@@ -32,7 +32,7 @@
 				<td colspan="2">제목 <input type="text" name="nTittle" value="<%=nDTO.getNOTICE_TITTLE()%>"> </td>
 			</tr>
 			<tr>
-				<td> 수정일 </td>
+				<td>작성일 <%=nDTO.getNOTICE_CREATED() %></td>
 				<td>조회 <%=nDTO.getNOTICE_HITS()%></td>
 			</tr>
 			<tr>
@@ -44,9 +44,6 @@
 					<button type="submit">수정 완료</button>
 					<button onclick="NoticeDelete()">글 삭제</button>
 				</td>
-			</tr>
-			<tr>
-				<td colspan="2"><a href="NoticeOneSelectServlet?NOTICE_ID=<%=nDTO.getNOTICE_ID() + 1%>">다음 글  </a></td>
 			</tr>
 		</table>
 	</form>

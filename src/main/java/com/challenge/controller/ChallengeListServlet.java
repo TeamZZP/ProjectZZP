@@ -1,6 +1,7 @@
 package com.challenge.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -34,6 +35,8 @@ public class ChallengeListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		request.setCharacterEncoding("utf-8");
+		
 		ChallengeService service = new ChallengeService(); 
 		
 		//페이징 처리
@@ -43,14 +46,22 @@ public class ChallengeListServlet extends HttpServlet {
 		//검색기준, 검색어
 		String searchName = request.getParameter("searchName");
 		String searchValue = request.getParameter("searchValue");
-		String sortBy = request.getParameter("sortBy");
+	//	String sortBy = request.getParameter("sortBy");
 		
-		PageDTO pDTO = service.selectAllChallenge(searchName, searchValue, sortBy, Integer.parseInt(curPage));
+		System.out.println(curPage+" "+searchName+" "+searchValue);
+		
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("searchName", searchName);
+		map.put("searchValue", searchValue);
+		System.out.println(">>>>>>>"+map);
+	//	map.put("sortBy", sortBy);
+		
+		PageDTO pDTO = service.selectAllChallenge(map, Integer.parseInt(curPage));
 		
 		request.setAttribute("pDTO", pDTO);
 		request.setAttribute("searchName", searchName);
 		request.setAttribute("searchValue", searchValue);
-		request.setAttribute("sortBy", sortBy);
+	//	request.setAttribute("sortBy", sortBy);
 		
 		RequestDispatcher dis = request.getRequestDispatcher("challengeMain.jsp");
 		dis.forward(request, response);
