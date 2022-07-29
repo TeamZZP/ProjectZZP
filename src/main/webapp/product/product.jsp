@@ -3,6 +3,17 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+ <script type="text/javascript"
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+	$(function() {
+		//장바구니 팝업
+		$("#cart").on("click",function(){
+			
+		});
+	});
+</script>
+ 
 
 <table width="100%" cellspacing="0" cellpadding="0">
 
@@ -86,9 +97,12 @@
 									<%=p_cost_price %>	</strong></font></td>
 								</tr>
 								<tr>
-									<td><img src="images/keeping.png" width="35" height="35" >
+									<td>
+									<img src="images/keeping.png" width="35" height="35" >
 									<img src="images/bubble.png" width="32" height="32"  >
-									<img src="images/cart.jpg" width="35" height="35" ></td>
+									<img src="images/cart.jpg" width="35" height="35" id="cart">
+									
+									</td>	
 									
 								</tr>
 							</table>
