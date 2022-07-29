@@ -27,8 +27,8 @@
     					<td colspan="4"> &nbsp; &nbsp; &nbsp; &nbsp; zzp 메인 공지 게시판 &nbsp; &nbsp; &nbsp; &nbsp; </td>
     				</tr>
     				<%
-			    		List<NoticeDTO> list = (List<NoticeDTO>)session.getAttribute("pointNotice");
-			    		for(NoticeDTO dto : list){
+			    		List<NoticeDTO> mainNoticeList = (List<NoticeDTO>)session.getAttribute("pointNotice");
+			    		for(NoticeDTO dto : mainNoticeList){
 			    	%>
     				<tr>
     					<td> <%= dto.getNOTICE_ID() %> </td>
@@ -42,10 +42,17 @@
     			</table>
     		</td>
     	</tr>
+    	<%
+			List<NoticeDTO> noticeList = (List<NoticeDTO>)session.getAttribute("noticeList");
+			for(NoticeDTO dto : noticeList){
+		%>
     	<tr>
-    		<td> 1 </td>
-    		<td> 배송안내 </td>
-    		<td> 2020-7-22 </td>
-    		<td> 1 </td>
+    		<td> <%= dto.getNOTICE_ID() %> </td>
+    		<td> <%= dto.getNOTICE_TITTLE() %> </td>
+    		<td> <%= dto.getNOTICE_CREATED() %> </td>
+    		<td> <%= dto.getNOTICE_HITS() %> </td>
     	</tr>
+    	<%
+			}
+		%>
     </table>
