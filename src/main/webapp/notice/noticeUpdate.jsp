@@ -32,7 +32,7 @@
 				<td colspan="2">제목 <input type="text" name="nTittle" value="<%=nDTO.getNOTICE_TITTLE()%>"> </td>
 			</tr>
 			<tr>
-				<td> 수정일 </td>
+				<td>작성일 <%=nDTO.getNOTICE_CREATED() %></td>
 				<td>조회 <%=nDTO.getNOTICE_HITS()%></td>
 			</tr>
 			<tr>
