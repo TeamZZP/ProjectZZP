@@ -12,26 +12,39 @@
 <select id="selectAllChallenge" parameterType="hashmap" resultType="ChallengeDTO">
 	select * from challenge
 	<where>
-	  <if test="searchValue != null">
-		${searchName} like '%${searchValue}%'
+	  <!-- <if test='!"".equals(searchValue) and searchValue!=null'> -->
+<!--  	  <if test='searchName!=null and searchValue!=null'>  -->
+ 	  <if test='searchName=="userid"'> 
+ 	  	userid like '%${searchValue}%'
+		<!-- ${searchName} like '%${searchValue}%' -->
 	  </if>
-	  <if test="sortBy == 'thisMonthChall'">
-	    and chall_category = '이 달의 챌린지'
+	  <if test='searchName=="chall_title"'> 
+ 	  	chall_title like '%${searchValue}%'
 	  </if>
-	</where>
+	  <if test='searchName=="chall_content"'> 
+ 	  	chall_content like '%${searchValue}%'
+	  </if>
+	</where> 
 	order by chall_id desc
 </select>
 
 <select id="countTotal" parameterType="hashmap" resultType="int">
 	select count(*) from challenge
-	<where>
-	  <if test="searchValue != null">
+ 	<where>
+ 	 <!--  <if test='!"".equals(searchValue) and searchValue!=null'> -->
+<!--  	  <if test='searchName!=null and searchValue!=null'> 
 		${searchName} like '%${searchValue}%'
+	  </if> -->
+	  <if test='searchName=="userid"'> 
+ 	  	userid like '%${searchValue}%'
 	  </if>
-	  <if test="sortBy == 'thisMonthChall'">
-	    and chall_category = '이 달의 챌린지'
+	  <if test='searchName=="chall_title"'> 
+ 	  	chall_title like '%${searchValue}%'
 	  </if>
-	</where>
+	  <if test='searchName=="chall_content"'> 
+ 	  	chall_content like '%${searchValue}%'
+	  </if>
+	</where> 
 </select>
 
 <select id="selectOneChallenge" resultType="ChallengeDTO">

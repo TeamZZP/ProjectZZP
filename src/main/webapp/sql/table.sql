@@ -87,6 +87,7 @@ CREATE TABLE notice (
   	 notice_tittle VARCHAR2(50) NOT NULL,
    	 notice_content VARCHAR2(1000) NOT NULL,
   	 notice_created DATE DEFAULT sysdate,
+  	 notice_hits NUMBER NOT NULL,
   	 admin_id VARCHAR2(30) references admin(admin_id) ON DELETE CASCADE,
   	 notice_category VARCHAR2(30) NOT NULL
 );
