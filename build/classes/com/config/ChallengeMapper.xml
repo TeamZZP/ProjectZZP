@@ -9,9 +9,29 @@
 	values (challenge_chall_id_seq.NEXTVAL, #{userid}, #{chall_title}, #{chall_content}, #{chall_category}, 0, 0, sysdate, #{chall_img})
 </insert>
 
-<select id="selectAllChallenge" resultType="ChallengeDTO">
+<select id="selectAllChallenge" parameterType="hashmap" resultType="ChallengeDTO">
 	select * from challenge
+	<where>
+	  <if test="searchValue != null">
+		${searchName} like '%${searchValue}%'
+	  </if>
+	  <if test="sortBy == 'thisMonthChall'">
+	    and chall_category = '이 달의 챌린지'
+	  </if>
+	</where>
 	order by chall_id desc
+</select>
+
+<select id="getTotalCount" parameterType="hashmap" resultType="int">
+	select count(*) from challenge
+	<where>
+	  <if test="searchValue != null">
+		${searchName} like '%${searchValue}%'
+	  </if>
+	  <if test="sortBy == 'thisMonthChall'">
+	    and chall_category = '이 달의 챌린지'
+	  </if>
+	</where>
 </select>
 
 <select id="selectOneChallenge" resultType="ChallengeDTO">

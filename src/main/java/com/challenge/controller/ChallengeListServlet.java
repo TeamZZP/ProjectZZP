@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.dto.ChallengeDTO;
+import com.dto.PageDTO;
 import com.service.ChallengeService;
 
 /**
@@ -33,9 +34,24 @@ public class ChallengeListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		ChallengeService service = new ChallengeService();
-		List<ChallengeDTO> list = service.selectAllChallenge();
-		request.setAttribute("list", list);
+		ChallengeService service = new ChallengeService(); 
+		
+		//페이징 처리
+		String curPage = request.getParameter("curPage"); //현재페이지
+		if (curPage == null) curPage = "1"; //시작시 현재페이지 1
+		
+		//검색기준, 검색어
+		String searchName = request.getParameter("searchName");
+		String searchValue = request.getParameter("searchValue");
+		String sortBy = request.getParameter("sortBy");
+		
+		PageDTO pDTO = service.selectAllChallenge(searchName, searchValue, sortBy, Integer.parseInt(curPage));
+		
+		request.setAttribute("pDTO", pDTO);
+		request.setAttribute("searchName", searchName);
+		request.setAttribute("searchValue", searchValue);
+		request.setAttribute("sortBy", sortBy);
+		
 		RequestDispatcher dis = request.getRequestDispatcher("challengeMain.jsp");
 		dis.forward(request, response);
 	

@@ -4,17 +4,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>ZZP</title>
+<title>Insert title here</title>
 </head>
 <body>
 <jsp:include page="common/header.jsp" flush="true"></jsp:include><br>
-<<<<<<< HEAD
-<jsp:include page="challenge/challengeWrite.jsp" flush="true"></jsp:include>
-=======
-
-<jsp:include page="challenge/challengeWrite.jsp" flush="true"></jsp:include>
-
->>>>>>> origin/main
+<jsp:include page="mypage/accountForm.jsp" flush="true"></jsp:include><br>
 <jsp:include page="common/footer.jsp" flush="true"></jsp:include><br>
 </body>
 </html>

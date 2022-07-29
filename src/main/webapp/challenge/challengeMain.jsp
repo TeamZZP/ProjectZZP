@@ -1,18 +1,34 @@
+<%@page import="com.dto.PageDTO"%>
 <%@page import="com.dto.ChallengeDTO"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	List<ChallengeDTO> list = (List<ChallengeDTO>) request.getAttribute("list");
+	PageDTO pDTO = (PageDTO) request.getAttribute("pDTO");
+	List<ChallengeDTO> list = pDTO.getList();
+	String searchName = (String) request.getAttribute("searchName");
+	String searchValue = (String) request.getAttribute("searchValue");
+	String sortBy = (String) request.getAttribute("sortBy");
 %>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function () {
+		$("#sortBy").on("change", function () {
+			location.href = "ChallengeListServlet?sortBy="+$(this).val();
+		});
+	});
+</script>
+
 <a href="">이 달의 챌린지 [ 용기내! 챌린지 ] 참여하러 가기</a>
-<select name="sortChallenge">
-	<option value="" selected disabled hidden>정렬</option>
-	<option>최신순</option>
-	<option>이 달의 챌린지</option>
-	<option>최근 좋아요순</option>
-	<option>최근 댓글 많은순</option>
-</select>
+
+	<select name="sortBy" id="sortBy">
+		<option value="" selected disabled hidden>정렬</option>
+		<option value="newest">최신순</option>
+		<option value="thisMonthChall">이 달의 챌린지</option>
+		<option value="mostLiked">최근 좋아요순</option>
+		<option value="mostCommented">최근 댓글 많은순</option>
+	</select>
+	
 <a href="ChallengeUIServlet">글쓰기</a>
 
 
@@ -53,8 +69,9 @@
 						<table style='padding: 15px'>
 
 							<tr>
-								<td align="center">프로필사진</td>
-								<td align="center"><%=userid%></td>
+								<td align="center"><a href="">프로필사진</a></td>
+								<td align="center"><a href=""><%=userid%></a></td>
+								
 							</tr>
 							<tr>
 								<td height="10">
@@ -97,14 +114,52 @@
 				<%
  	} //end for
 %>
+
+	  	<!-- 검색기능 -->
+	  	<tr>
+	  		<td colspan="4" align="center" height="10">
+		  	<form action="ChallengeListServlet">
+			    <select name="searchName">
+			      <option value="userid">아이디</option>
+			      <option value="chall_title">제목</option>
+			      <option value="chall_content">내용</option>
+			    </select>
+			    <input type="text" name="searchValue">
+			    <button>검색</button>
+		    </form>
+		    </td>
+	    </tr>
+		
+		<!-- 페이징 -->
+		<tr>
+			<td colspan="4" align="center" height="10"><% 
+		    int curPage = pDTO.getCurPage(); 
+		    int perPage = pDTO.getPerPage(); 
+		    int totalCount = pDTO.getTotalCount();
+		    int totalPage = totalCount/perPage;
+		    if (totalCount%perPage!=0) totalPage++;
+		    for (int i=1; i<=totalPage; i++) {
+		    	if (i==curPage) {
+		    		out.print(i+"&nbsp;");
+		    	} else {
+		    		out.print("<a href='ChallengeListServlet?curPage="+i+
+		    				"&searchName="+searchName+"&searchValue="+searchValue+"&sortBy="+sortBy+"'>"+i+"</a>&nbsp;"); 
+		    	} 
+		    }
+		    %></td>
+		</tr>
+	
 			</table>
 		</td>
 	</tr>
 	<tr>
 		<td height="10">
 	</tr>
+	
 </table>
 
+
+ 	
 
 
 
