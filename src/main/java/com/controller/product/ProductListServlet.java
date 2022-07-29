@@ -21,7 +21,13 @@ public class ProductListServlet extends HttpServlet {
 		
 		String p_category = request.getParameter("p_category");
 
-		if(p_category != null) {
+		
+		  if(p_category == null ){
+		  
+			  p_category = "timeEvent";  //스토어 메인 페이지 설정시 p_category만 수정하면됨
+		  
+		  }
+		 
 			
 			ProductService service = new ProductService();
 			List<ProductDTO> list = service.productList(p_category);
@@ -31,9 +37,7 @@ public class ProductListServlet extends HttpServlet {
 			RequestDispatcher dis = request.getRequestDispatcher("product.jsp");
 			dis.forward(request, response);
 			
-		} else {
-			response.sendRedirect("StoreUIServlet");
-		}
+			 
 			
 		}
 		
