@@ -27,14 +27,14 @@
     					<td colspan="4"> &nbsp; &nbsp; &nbsp; &nbsp; zzp 메인 공지 게시판 &nbsp; &nbsp; &nbsp; &nbsp; </td>
     				</tr>
     				<%
-			    		List<NoticeDTO> mainNoticeList = (List<NoticeDTO>)session.getAttribute("pointNotice");
-			    		for(NoticeDTO dto : mainNoticeList){
+			    		List<NoticeDTO> mainNoticeList = (List<NoticeDTO>)session.getAttribute("mainNoticeList");
+			    		for(NoticeDTO MainListDTO : mainNoticeList){
 			    	%>
     				<tr>
-    					<td> <%= dto.getNOTICE_ID() %> </td>
-    					<td> <a href="NoticeOneSelectServlet?NOTICE_ID=<%= dto.getNOTICE_ID() %>"> <%= dto.getNOTICE_TITTLE() %> </a> </td>
-    					<td> <%= dto.getNOTICE_CREATED() %> </td>
-    					<td> <%= dto.getNOTICE_HITS() %> </td>
+    					<td> <%= MainListDTO.getNOTICE_ID() %> </td>
+    					<td> <a href="NoticeOneSelectServlet?NOTICE_ID=<%= MainListDTO.getNOTICE_ID() %>"> <%= MainListDTO.getNOTICE_TITTLE() %> </a> </td>
+    					<td> <%= MainListDTO.getNOTICE_CREATED() %> </td>
+    					<td> <%= MainListDTO.getNOTICE_HITS() %> </td>
     				</tr>
     				<%
 			    		}
@@ -44,13 +44,13 @@
     	</tr>
     	<%
 			List<NoticeDTO> noticeList = (List<NoticeDTO>)session.getAttribute("noticeList");
-			for(NoticeDTO dto : noticeList){
+			for(NoticeDTO noticeDTO : noticeList){
 		%>
     	<tr>
-    		<td> <%= dto.getNOTICE_ID() %> </td>
-    		<td> <%= dto.getNOTICE_TITTLE() %> </td>
-    		<td> <%= dto.getNOTICE_CREATED() %> </td>
-    		<td> <%= dto.getNOTICE_HITS() %> </td>
+    		<td> <%= noticeDTO.getNOTICE_ID() %> </td>
+    		<td><a href="NoticeOneSelectServlet?NOTICE_ID=<%= noticeDTO.getNOTICE_ID() %>"> <%= noticeDTO.getNOTICE_TITTLE() %> </a> </td>
+    		<td> <%= noticeDTO.getNOTICE_CREATED() %> </td>
+    		<td> <%= noticeDTO.getNOTICE_HITS() %> </td>
     	</tr>
     	<%
 			}
