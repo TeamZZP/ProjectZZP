@@ -140,11 +140,11 @@
 		    int totalCount = pDTO.getTotalCount();
 		    int totalPage = totalCount/perPage;
 		    if (totalCount%perPage!=0) totalPage++;
-		    for (int i=1; i<=totalPage; i++) {
-		    	if (i==curPage) {
-		    		out.print(i+"&nbsp;");
+		    for (int p=1; p<=totalPage; p++) {
+		    	if (p==curPage) {
+		    		out.print(p+"&nbsp;");
 		    	} else {
-		    		out.print("<a href='ChallengeListServlet?curPage="+i+"&searchName="+searchName+"&searchValue="+searchValue+"'>"+i+"</a>&nbsp;"); 
+		    		out.print("<a href='ChallengeListServlet?curPage="+p+"&searchName="+searchName+"&searchValue="+searchValue+"'>"+p+"</a>&nbsp;");
 		    		/* out.print("<a href='ChallengeListServlet?curPage="+i+
 		    				"&searchName="+searchName+"&searchValue="+searchValue+"&sortBy="+sortBy+"'>"+i+"</a>&nbsp;");  */
 		    	} 
