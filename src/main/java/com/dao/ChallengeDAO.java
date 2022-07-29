@@ -26,13 +26,13 @@ public class ChallengeDAO {
 		
 		pDTO.setCurPage(curPage);
 		pDTO.setList(list);
-		pDTO.setTotalCount(getTotalCount(session, map));
+		pDTO.setTotalCount(countTotal(session, map));
 		
 		return pDTO;
 	}
 
-	private int getTotalCount(SqlSession session, HashMap<String, String> map) {
-		int n = session.selectOne("getTotalCount", map);
+	private int countTotal(SqlSession session, HashMap<String, String> map) {
+		int n = session.selectOne("countTotal", map);
 		return n;
 	}
 

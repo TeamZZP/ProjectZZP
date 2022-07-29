@@ -22,7 +22,7 @@
 	order by chall_id desc
 </select>
 
-<select id="getTotalCount" parameterType="hashmap" resultType="int">
+<select id="countTotal" parameterType="hashmap" resultType="int">
 	select count(*) from challenge
 	<where>
 	  <if test="searchValue != null">
