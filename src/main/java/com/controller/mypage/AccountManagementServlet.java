@@ -22,6 +22,7 @@ public class AccountManagementServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//데이터 베이스에서 회원 정보 가져옴
+		System.out.println("서블릿 실행");
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
 		
