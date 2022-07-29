@@ -45,8 +45,5 @@
 					<button onclick="NoticeDelete()">글 삭제</button>
 				</td>
 			</tr>
-			<tr>
-				<td colspan="2"><a href="NoticeOneSelectServlet?NOTICE_ID=<%=nDTO.getNOTICE_ID() + 1%>">다음 글  </a></td>
-			</tr>
 		</table>
 	</form>
