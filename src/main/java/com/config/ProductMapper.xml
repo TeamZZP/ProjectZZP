@@ -13,5 +13,8 @@
 	select * from product where p_id = #{p_id}
 </select>	
 
+<select id="bestProduct" resultType="productDTO">
+select * from product
+</select>
 
 </mapper>

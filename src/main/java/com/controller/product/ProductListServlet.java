@@ -24,21 +24,36 @@ public class ProductListServlet extends HttpServlet {
 		
 		  if(p_category == null ){
 		  
-			  p_category = "timeEvent";  //스토어 메인 페이지 설정시 p_category만 수정하면됨
+			  p_category = "best";  //스토어 메인 페이지 설정시 p_category만 수정하면됨
 		  
 		  }
-		 
+		  
+		  if(p_category.equals("best")) {
+				
+				ProductService service = new ProductService();
+				List<ProductDTO> list = service.bestProduct();
+				System.out.println(list);
+				
+				request.setAttribute("productList", list);
+				RequestDispatcher dis = request.getRequestDispatcher("product.jsp");
+				dis.forward(request, response);
+				
+			  
+		  }else {
+
+				
+				ProductService service = new ProductService();
+				List<ProductDTO> list = service.productList(p_category);
+				System.out.println(list);
+				
+				request.setAttribute("productList", list);
+				RequestDispatcher dis = request.getRequestDispatcher("product.jsp");
+				dis.forward(request, response);
+				
 			
-			ProductService service = new ProductService();
-			List<ProductDTO> list = service.productList(p_category);
-			System.out.println(list);
-			
-			request.setAttribute("productList", list);
-			RequestDispatcher dis = request.getRequestDispatcher("product.jsp");
-			dis.forward(request, response);
-			
-			 
-			
+		  }
+			  
+
 		}
 		
 		
