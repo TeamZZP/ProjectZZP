@@ -3,6 +3,11 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<style>
+	#challMainContent {
+		margin: 0 auto;
+	}
+</style>
 <%
 	PageDTO pDTO = (PageDTO) request.getAttribute("pDTO");
 	List<ChallengeDTO> list = pDTO.getList();
@@ -31,7 +36,8 @@
 	}); */
 </script>
 
-<a href="">이 달의 챌린지 [ 용기내! 챌린지 ] 참여하러 가기</a>
+<div id="challMainContent">
+<a href="" >이 달의 챌린지 [ 용기내! 챌린지 ] 참여하러 가기</a>
 
 	<select name="sortBy" id="sortBy">
 		<option value="none" selected disabled hidden>정렬</option>
@@ -173,7 +179,7 @@
 	
 </table>
 
-
+</div>
  	
 
 

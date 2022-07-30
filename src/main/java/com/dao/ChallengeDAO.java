@@ -7,6 +7,7 @@ import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 
 import com.dto.ChallengeDTO;
+import com.dto.CommentsDTO;
 import com.dto.PageDTO;
 
 public class ChallengeDAO {
@@ -48,6 +49,21 @@ public class ChallengeDAO {
 
 	public int deleteChallenge(SqlSession session, String chall_id) {
 		int n = session.delete("deleteChallenge", chall_id);
+		return n;
+	}
+	
+	public int insertComment(SqlSession session, CommentsDTO dto) {
+		int n = session.insert("insertComment", dto);
+		return n;
+	}
+
+	public List<CommentsDTO> selectAllComments(SqlSession session, String chall_id) {
+		List<CommentsDTO> list = session.selectList("selectAllComments", chall_id);
+		return list;
+	}
+
+	public int deleteComment(SqlSession session, String comment_id) {
+		int n = session.delete("deleteComment", comment_id);
 		return n;
 	}
 

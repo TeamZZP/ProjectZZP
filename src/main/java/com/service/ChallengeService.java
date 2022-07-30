@@ -1,12 +1,14 @@
 package com.service;
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
 import com.config.MySqlSessionFactory;
 import com.dao.ChallengeDAO;
 import com.dto.ChallengeDTO;
+import com.dto.CommentsDTO;
 import com.dto.PageDTO;
 
 public class ChallengeService {
@@ -64,6 +66,41 @@ public class ChallengeService {
 		SqlSession session = MySqlSessionFactory.getSqlSession();
 		try {
 			n = dao.deleteChallenge(session, chall_id);
+			session.commit();
+		} finally {
+			session.close();
+		}
+		return n;
+	}
+	
+	public int insertComment(CommentsDTO dto) {
+		int n = 0;
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		try {
+			n = dao.insertComment(session, dto);
+			session.commit();
+		} finally {
+			session.close();
+		}
+		return n;
+	}
+
+	public List<CommentsDTO> selectAllComments(String chall_id) {
+		List<CommentsDTO> list = null;
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		try {
+			list = dao.selectAllComments(session, chall_id);
+		} finally {
+			session.close();
+		}
+		return list;
+	}
+
+	public int deleteComment(String comment_id) {
+		int n = 0;
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		try {
+			n = dao.deleteComment(session, comment_id);
 			session.commit();
 		} finally {
 			session.close();

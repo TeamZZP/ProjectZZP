@@ -66,4 +66,22 @@
 	where chall_id=#{chall_id}
 </delete>
 
+
+
+<insert id="insertComment" parameterType="com.dto.CommentsDTO">
+	insert into comments
+	values (comments_comment_id_seq.NEXTVAL, #{chall_id}, #{comment_content}, sysdate, #{userid})
+</insert>
+
+<select id="selectAllComments" resultType="com.dto.CommentsDTO">
+	select * from comments
+	where chall_id=#{chall_id}
+	order by comment_id
+</select>
+
+<delete id="deleteComment">
+	delete from comments
+	where comment_id=#{comment_id}
+</delete>
+
 </mapper>

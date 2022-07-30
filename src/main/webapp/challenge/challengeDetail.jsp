@@ -1,7 +1,17 @@
+<%@page import="com.dto.CommentsDTO"%>
+<%@page import="java.util.List"%>
 <%@page import="com.dto.MemberDTO"%>
 <%@page import="com.dto.ChallengeDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<style>
+	#challDetailContent {
+		margin: 0 auto;
+	}
+
+    input { width: 80%; padding: 10px 20px; margin: 5px 0; box-sizing: border-box; }
+
+</style>
 <% 
 	ChallengeDTO dto = (ChallengeDTO) request.getAttribute("dto");
 	int chall_id = dto.getChall_id();
@@ -20,22 +30,59 @@
 	if (member != null) {
 		currUserid = member.getUserid();
 	}
+	
+	//이 글에 속한 댓글 list 얻어오기
+	List<CommentsDTO> commentsList = (List<CommentsDTO>) request.getAttribute("commentsList");
 %>
 
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function () {
+		//글 삭제시 컨펌창 띄우기 
 		$("#deleteChallenge").on("click", function () {
-			var mesg = "정말 삭제하시겠습니까? 한번 삭제한 글은 되돌릴 수 없습니다.";
+			let mesg = "정말 삭제하시겠습니까? 한번 삭제한 글은 되돌릴 수 없습니다.";
 			if (!confirm(mesg)) {
 				event.preventDefault();
 			}
 		});
+		//댓글 입력 
+		$("#commentAddBtn").on("click", function () {
+			if ("<%= currUserid %>" == "null") {
+				alert("로그인이 필요합니다.");
+			} else {
+				let comment_content = $("#comment_content").val();
+				$.ajax({
+					type:"post",
+					url:"CommentsAddServlet",
+					data: {
+						"chall_id":"<%= chall_id %>",
+						"comment_content":comment_content,
+						"userid":"<%= currUserid %>"
+					},
+					dataType:"html",
+					success: function (data) {
+						$("#comment_content").val("");
+						$("#comment_area").html(data);
+					},
+					error: function () {
+						
+					}
+				});
+			}
+		});
+		//댓글 삭제 
+		$(".commentDelBtn").on("click", function () { 
+			let mesg = "정말 삭제하시겠습니까?";
+			if (!confirm(mesg)) {
+				event.preventDefault();
+			}
+		});
+		
 	});
 </script>
-</head>
-<body>
 
+
+<div id="challDetailContent">
 <table border="1">
 	<tr>
 	  <td><%= chall_category %></td>
@@ -69,13 +116,41 @@
 	  <td>◇댓글수</td>
 	</tr>
 	<tr>
-	  <td colspan="4"><%= chall_content %></td>
+	  <td colspan="3" height="100"><%= chall_content %></td>
 	</tr>
 	<tr>
-	  <td colspan="4">댓글목록</td>
+	  <td colspan="3">댓글목록</td>
 	</tr>
 	<tr>
-	  <td colspan="4">댓글작성하기</td>
+	  <td colspan="3">
+	    <table id="comment_area" style="width: 100%">
+	    <% for (CommentsDTO comment : commentsList) {
+	    	int comment_id = comment.getComment_id();
+	    	String comment_content = comment.getComment_content();
+	    	String comment_created = comment.getComment_created();
+	    	String commentUserid = comment.getUserid();
+	    %>
+	        <tr>
+		    	<td><%= commentUserid %></td>
+		    	<td><%= comment_content %></td>
+		    	<!-- 해당 댓글의 작성자인 경우 -->
+		    	<td><% if (commentUserid!=null && commentUserid.equals(currUserid)) { %>
+		    		<a href="CommentsDeleteServlet?chall_id=<%= chall_id %>&comment_id=<%= comment_id %>&userid=<%= currUserid %>" class="commentDelBtn">삭제</a>
+		    		<% } else { %>
+		    		<!-- 그외의 경우 -->
+		    		<a href="">신고</a> 
+		    		<% } %>
+		    	</td>
+	    	</tr>
+	    <%} %>
+	    </table>
+	  </td>
+	</tr>
+	<tr>
+	  <td colspan="3">
+	    <input type="text" name="comment_content" id="comment_content" placeholder="칭찬과 격려의 댓글은 작성자에게 큰 힘이 됩니다 :)">
+	    <button id="commentAddBtn">입력</button>
+	  </td>
 	</tr>
 	<tr>
 	  <td><a href="ChallengeListServlet">목록</a></td>
@@ -83,3 +158,4 @@
 	  <td><a href="challengeWrite.jsp">글쓰기</a></td>
 	</tr>
 </table>
+</div>

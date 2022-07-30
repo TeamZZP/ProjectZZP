@@ -149,6 +149,7 @@ CREATE TABLE comments (
 	comment_id	NUMBER		PRIMARY KEY,
 	chall_id	NUMBER		NOT NULL REFERENCES challenge(chall_id) ON DELETE CASCADE,
 	comment_content	VARCHAR2(800)		NOT NULL,
+	comment_created 		DATE 	DEFAULT sysdate		NOT NULL,
 	userid	VARCHAR2(30)		NOT NULL REFERENCES member(userid) ON DELETE CASCADE
 );
 

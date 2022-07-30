@@ -1,6 +1,7 @@
 package com.challenge.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.dto.ChallengeDTO;
+import com.dto.CommentsDTO;
 import com.service.ChallengeService;
 
 /**
@@ -36,7 +38,11 @@ public class ChallengeDetailServlet extends HttpServlet {
 		ChallengeService service = new ChallengeService();
 		ChallengeDTO dto = service.selectOneChallenge(chall_id);
 		
+		List<CommentsDTO> commentsList = service.selectAllComments(chall_id);
+		
 		request.setAttribute("dto", dto);
+		request.setAttribute("commentsList", commentsList);
+		
 		RequestDispatcher dis = request.getRequestDispatcher("challengeDetail.jsp");
 		dis.forward(request, response);
 	}

@@ -2,6 +2,11 @@
 <%@page import="com.dto.ChallengeDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<style>
+	#challWriteContent {
+		margin: 0 auto;
+	}
+</style>
 <%
 /* 
 	request에 저장된 dto가 있을 경우: 글 수정 페이지
@@ -41,6 +46,7 @@
 	});
 </script>
 
+<div id="challWriteContent">
 <form action="<%= formAction %>" method="post">
 <input type="hidden" name="chall_id" value="<%= chall_id %>">
 <input type="hidden" name="userid" value="<%= currUserid %>">
@@ -71,7 +77,9 @@
 	  <%} %>
 	</tr>
 	<tr>
-	  <td colspan="2">본문 작성<input type="text" name="chall_content" <% if(chall_content!=null) {%>value="<%=chall_content%>"<%} %>></td>
+	  <td colspan="2">
+	  본문 작성<input type="text" name="chall_content" 
+	  		<% if(chall_content!=null) {%>value="<%=chall_content%>"<%} %>></td>
 	</tr>
 	<tr>
 	  <td><a>취소</a></td>
@@ -83,3 +91,4 @@
 	</tr>
 </table>
 </form>
+</div>
