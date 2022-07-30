@@ -4,7 +4,9 @@
     pageEncoding="UTF-8"%>
 <style>
 	#challWriteContent {
+		width: 800px;
 		margin: 0 auto;
+		align-items: center;
 	}
 </style>
 <%

@@ -6,11 +6,15 @@
     pageEncoding="UTF-8"%>
 <style>
 	#challDetailContent {
+		width: 800px;
 		margin: 0 auto;
+		align-items: center;
 	}
 
     input { width: 80%; padding: 10px 20px; margin: 5px 0; box-sizing: border-box; }
-
+	td {
+		align-items: center;
+	}
 </style>
 <% 
 	ChallengeDTO dto = (ChallengeDTO) request.getAttribute("dto");
@@ -85,7 +89,7 @@
 
 
 <div id="challDetailContent">
-<table border="1">
+<table align="center" width="600" cellspacing="0" cellpadding="0" border="0">
 	<tr>
 	  <td><%= chall_category %></td>
 	  <td><%= chall_title %></td>
@@ -110,12 +114,15 @@
 	  <td colspan="2"><%= userid %></td>
 	</tr>
 	<tr>
-	  <td colspan="3"><img src="images/<%= chall_img %>" width="500" height="500"></td>
+	  <td colspan="3"><div style="text-align: center"><img src="images/<%= chall_img %>" width="500" height="500"></div></td>
 	</tr>
 	<tr>
-	  <td>♥ <%= chall_liked %></td>
+	  <td height="10">
+	</tr>
+	<tr>
+	  <td><img src="images/keeping.png" width="20" height="20"> <%= chall_liked %></td>
 	  <td></td>
-	  <td>◇ <span id="commentsNum"><%= commentsList.size() %></span></td>
+	  <td><img src="images/bubble.png" width="20" height="17"> <span id="commentsNum"><%= commentsList.size() %></span></td>
 	</tr>
 	<tr>
 	  <td colspan="3" height="100"><%= chall_content %></td>

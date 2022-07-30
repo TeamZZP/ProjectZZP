@@ -136,12 +136,12 @@ CREATE TABLE challenge (
 	chall_id 	NUMBER PRIMARY KEY,
  	userid 	VARCHAR2(30) NOT NULL REFERENCES member(userid) ON DELETE CASCADE,
  	chall_title 	VARCHAR2(50) NOT NULL,
- 	chall_content 	VARCHAR2(1000),
- 	chall_category 	VARCHAR2(30),
- 	chall_hits 		NUMBER,
- 	chall_liked 	NUMBER,
- 	chall_created 	DATE,
- 	chall_img 		VARCHAR2(300)
+ 	chall_content 	VARCHAR2(1000) NOT NULL,
+ 	chall_category 	VARCHAR2(30) NOT NULL,
+ 	chall_hits 		NUMBER	 DEFAULT 0 	  NOT NULL,
+ 	chall_liked 	NUMBER   DEFAULT 0	  NOT NULL,
+ 	chall_created 	DATE 	 DEFAULT sysdate NOT NULL,
+ 	chall_img 		VARCHAR2(300) NULL
 );
 
 -- 챌린지 댓글
@@ -160,6 +160,34 @@ CREATE SEQUENCE 테이블명_컬럼명_seq
   NOCYCLE
   NOCACHE;
 
+-- 배송지 주소 시퀀스
+CREATE SEQUENCE address_address_id_seq
+  START WITH 1
+  INCREMENT BY 1
+  NOCYCLE
+  NOCACHE;
+
+-- 장바구니 번호 시퀀스
+CREATE SEQUENCE cart_cart_id_seq
+  START WITH 1
+  INCREMENT BY 1
+  NOCYCLE
+  NOCACHE;
+  
+-- 주문 번호 시퀀스
+CREATE SEQUENCE orders_order_id_seq
+  START WITH 1
+  INCREMENT BY 1
+  NOCYCLE
+  NOCACHE;
+  
+-- 리뷰 글 번호 시퀀스
+CREATE SEQUENCE review_review_id_seq
+  START WITH 1
+  INCREMENT BY 1
+  NOCYCLE
+  NOCACHE;
+  
 -- 챌린지 시퀀스 
 CREATE SEQUENCE challenge_chall_id_seq
   START WITH 1
@@ -172,8 +200,22 @@ CREATE SEQUENCE comments_comment_id_seq
   START WITH 1
   INCREMENT BY 1
   NOCYCLE
+  NOCACHE;  
+
+-- 공지 글 번호 시퀀스
+CREATE SEQUENCE notice_notice_id_seq
+  START WITH 1
+  INCREMENT BY 1
+  NOCYCLE
   NOCACHE;
   
+-- 문의 글 번호 시퀀스
+CREATE SEQUENCE question_q_id_seq
+  START WITH 1
+  INCREMENT BY 1
+  NOCYCLE
+  NOCACHE;
+
   
   
 -------------- insert --------------
@@ -199,3 +241,14 @@ insert into product VALUES('strawSet01','빨래파우치세트','빨대세트와
 insert into product VALUES('bathSet02','샤워세트2','샤워도구 세트','timeEvent',30000,15000,15000,sysdate,50,'timeEvent03');
 insert into product VALUES('cutlerySet01','다회용수저세트','일회용품을 대신하는 휴대용 다회용 수저세트','timeEvent',10000,5000,5000,sysdate,50,'timeEvent04');
 commit;
+
+
+-- 챌린지
+INSERT INTO member VALUES ('test', 1, 1, 1, 1, 1, sysdate);
+INSERT INTO challenge VALUES (CHALLENGE_CHALL_ID_SEQ.nextval, 'test', '용기내 떡볶이', '오늘 떡볶이 용기내 봤어요~ 너무 맛있었습니다.', '이 달의 챌린지', 0, 0, sysdate, 'chall01.jpg');
+INSERT INTO challenge VALUES (CHALLENGE_CHALL_ID_SEQ.nextval, 'test', '옷장 정리하고 기부했어요', '열심히 하겠습니다~', '기부하기', 0, 0, sysdate, 'chall02.jpg');
+INSERT INTO challenge VALUES (CHALLENGE_CHALL_ID_SEQ.nextval, 'test', '아껴써야죠', '제로웨이스트 실천해보아요', '아껴쓰기', 0, 0, sysdate, 'chall03.jpg');
+INSERT INTO challenge VALUES (CHALLENGE_CHALL_ID_SEQ.nextval, 'test', '재활용 열심히 했어요', '하루종일 했습니다.^^', '쓰레기 줄이기', 0, 0, sysdate, 'chall04.jpg');
+INSERT INTO challenge VALUES (CHALLENGE_CHALL_ID_SEQ.nextval, 'test', '옷장 정리하고 기부했어요', '열심히 하겠습니다~', '기부하기', 0, 0, sysdate, 'chall02.jpg');
+INSERT INTO challenge VALUES (CHALLENGE_CHALL_ID_SEQ.nextval, 'test', '아껴써야죠', '제로웨이스트 실천해보아요', '아껴쓰기', 0, 0, sysdate, 'chall03.jpg');
+COMMIT;
