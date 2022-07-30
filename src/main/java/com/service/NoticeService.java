@@ -1,6 +1,7 @@
 package com.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -38,7 +39,7 @@ public class NoticeService {
 		return list;
 	}
 
-	public NoticeDTO noticeOneSelect(String noticeID) {
+	public NoticeDTO noticeOneSelect(int noticeID) {
 		SqlSession session = MySqlSessionFactory.getSqlSession();
 		NoticeDTO nDTO = null;
 		try {
@@ -66,6 +67,18 @@ public class NoticeService {
 		SqlSession session = MySqlSessionFactory.getSqlSession();
 		try {
 			num = dao.NoticeDelete(session, NOTICE_ID);
+			session.commit();
+		} finally {
+			session.close();
+		}
+		return num;
+	}
+
+	public int noticeHite(Map<String, Integer> map) {
+		int num = 0;
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		try {
+			num = dao.noticeHite(session, map);
 			session.commit();
 		} finally {
 			session.close();
