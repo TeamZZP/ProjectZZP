@@ -46,7 +46,7 @@
 						</td>
 						
 					<tr>
-						<td class="td_title">상품명</td>
+						<td class="td_title" >상품명</td>
 						<td class="td_default" colspan="2" style='padding-left: 30px'><%=p_name %></td>
 					</tr>
 					<tr>
