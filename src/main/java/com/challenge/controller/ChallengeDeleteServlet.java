@@ -6,7 +6,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import com.dto.MemberDTO;
 import com.service.ChallengeService;
 
 /**
@@ -28,12 +30,25 @@ public class ChallengeDeleteServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String chall_id = request.getParameter("chall_id");
-		ChallengeService service = new ChallengeService();
-		int n = service.deleteChallenge(chall_id);
-		System.out.println(n+"개의 레코드 삭제");
 		
-		response.sendRedirect("ChallengeListServlet");
+		String userid = request.getParameter("userid");
+		
+		//회원전용처리
+		HttpSession session = request.getSession();
+		MemberDTO member = (MemberDTO) session.getAttribute("login");
+		
+		if (member!=null && member.getUserid().equals(userid)) {
+			String chall_id = request.getParameter("chall_id");
+			ChallengeService service = new ChallengeService();
+			int n = service.deleteChallenge(chall_id);
+			System.out.println(n+"개의 레코드 삭제");
+			
+			response.sendRedirect("ChallengeListServlet");
+			
+		} else {
+			session.setAttribute("mesg", "잘못된 접근입니다.");
+			response.sendRedirect("ChallengeListServlet");
+		}
 		
 	}
 

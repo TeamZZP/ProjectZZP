@@ -80,7 +80,7 @@
 								</tr>
 								<tr>
 									<td class= "td_default" align ="left">
-										<a class= "a_black" href="productRetrieveServlet?p_category=<%=p_category%>"> 
+										<a class= "a_black" href="productRetrieveServlet?p_id=<%=p_id%>"> 
 										<%= p_name %>
 										<br>
 										</a>

@@ -159,7 +159,12 @@ CREATE SEQUENCE 테이블명_컬럼명_seq
   NOCYCLE
   NOCACHE;
 
-
+-- 챌린지 시퀀스 
+CREATE SEQUENCE challenge_chall_id_seq
+  START WITH 1
+  INCREMENT BY 1
+  NOCYCLE
+  NOCACHE;
   
   
 -------------- insert --------------

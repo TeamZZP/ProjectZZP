@@ -11,6 +11,16 @@
 //	String sortBy = (String) request.getAttribute("sortBy");
 	
 	System.out.println(pDTO);
+	
+	//session에 저장된 메시지가 있는 경우 경고창 띄워주고 삭제하기
+	String mesg = (String) session.getAttribute("mesg");
+	if (mesg != null) {
+%>
+	<script type="text/javascript">
+		alert("<%= mesg %>");
+	</script>
+<% } 
+	session.removeAttribute("mesg");
 %>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
