@@ -23,8 +23,8 @@ public class AccountChangeServlet extends HttpServlet {
 		System.out.println("마이페이지 수정 서블릿 실행");
 		//회원 전용 처리도 해야함
 		//자식창에서 넘어온 데이터 파싱
-		String newPasswd=(String) session.getAttribute("newPasswd");
-		System.out.println(newPasswd);
+		//String newPasswd=(String) session.getAttribute("newPasswd");
+		//System.out.println(newPasswd);
 		//기존에 보던 마이페이지로 고고
 		//response.sendRedirect("accountForm.jsp");
 	}

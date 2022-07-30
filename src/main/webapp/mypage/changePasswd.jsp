@@ -15,75 +15,96 @@
 	}
 </style>
 <title>비밀번호 변경</title>
-
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
+		//1. 기존 비밀번호 입력--일치 여부 확인
 		$("#passwd").on("keyup", function() {
-			if ($(this).val()=="<%= passwd %>") {//비밀번호 일치 확인
+			if ($(this).val() == "<%= passwd %>") {
 				$("#result").text("비밀번호 일치");
 				$(".pw").removeAttr("readonly");//일치하면 변경 가능
 			} else {
 				$("#result").text("비밀번호 불일치");
 				$(".pw").attr("readonly", "readonly");//불일치하면 변경 불가//readonly 상태로
-/* 				$(".pw").on("click", function() {//err check
-					alert("기존 비밀번호를 확인해주세요.");
-					$(".pw").removeAttr("alert");//경고창 한번만 출력--keyup 때문에 입력 문자 길이만큼 출력 err
-					$("#passwd").focus();//기존 비밀번호 입련란으로 focus
-				}); */
 			}
 		});//end fn
-		$(".pw").on("click", function() {//alert 출력
-			if ($(".pw").attr("readonly", "readonly")) {
-				console.log("불일치");//console에 안 찍힘... 작은 창 console은 별개임..
+		
+		//2. 기존 비밀번호와 불일치--경고창 출력//??? 기존 비번 값과 db 값이 일치하면 true--일치하면 수정 가능해지고 클릭시 경고창이 출력됨..
+		$(".pw").on("click", function() {
+			if ($(".pw").attr("readonly", "readonly")) {//#Fail_기존 설정이 readonly여서 항상 경고창이 출력됨
+				console.log("불일치");
 				alert("기존 비밀번호를 확인해주세요.");
 				$(".pw").removeAttr("alert");//경고창 한번만 출력
 				$("#passwd").focus();//기존 비밀번호 입련란으로 focus
 			}
-		});
+		});//end fn
+		
+		//3. 새로운 비밀번호 일치 여부 확인
 		$("#checkPasswd").on("keyup", function() {
-			if ($(this).val()==$("#chagnePasswd").val()) {//비밀번호 일치 확인
+			if ($("#chagnePasswd").val().length == 0) {
+				$("#result2").text("변경할 비밀번호를 입력하세요.");
+				$("#chagnePasswd").focus();
+			} else if ($("#chagnePasswd").val().length != 0
+					&& $(this).val() == $("#chagnePasswd").val()) {
 				$("#result2").text("비밀번호 일치");
 			} else {
 				$("#result2").text("비밀번호 불일치");
 			}
 		});//end fn
-		$("form").on("submit", function() {
-			//데이터 입력 후 submin
-			if ($("#passwd").val().length==0) {
+		//3+. 비밀번호 재확인 후 다시 변경할 비밀번호 입력시 처리 추가
+		
+		$("button").on("click", function() {
+			//4-1. 데이터 입력 후 submit
+			if ($("#passwd").val().length == 0) {
 				alert("기존 비밀번호를 입력하세요.");
 				event.preventDefault();
 				$("#passwd").focus();
-			} else if ($("#chagnePasswd").val().length==0) {
+			} else if ($("#chagnePasswd").val().length == 0) {
 				alert("변경할 비밀번호를 입력하세요.");
 				event.preventDefault();
 				$("#chagnePasswd").focus();
-			} else if ($("#checkPasswd").val().length==0) {
+			} else if ($("#checkPasswd").val().length == 0) {
 				alert("변경할 비밀번호를 확인하세요.");
 				event.preventDefault();
 				$("#checkPasswd").focus();
-			} else {
-				//새로운 비밀번호 확인 불일치시
+			} 
+ 			else {//3가지 다 입력 완료
+				//4-2. 변경된 비밀번호 데이터 베이스에 업데이트//#Fail_action 실행 안 됨, 데이터 전달 못 함--if문에서 문제가 생긴 듯
+				//새로운 비밀번호 확인 불일치
 				if ($("#chagnePasswd").val() != $("#checkPasswd").val()) {
-					console.log("비번 체크");
+					//console.log("비번 체크");
 					event.preventDefault();
+					alert("변경할 비밀번호를 확인하세요.");
 					$("#checkPasswd").focus();
-				} else {
-					var pw=$("#chagnePasswd").val();
-					console.log(pw);
+					$("#checkPasswd").val("");
+				} else if ($("#result").text() == "비밀번호 불일치") {//기존 비밀번호를 뒤늦게 바꾸는 경우--입력 데이터 다 삭제--처음부터 재설정
+					//console.log("기존 비번 체크");
 					event.preventDefault();
-					//창 닫기, 기존 마이페이지 화면 유지
-					//window.close("mypage/changePasswd.jsp");
-					sesesion.setAttribute("newPasswd", pw);//세션, 리퀘스트 not defined 콘솔 err...
-					//response.sendRedirect("AccountChangeServlet");
+					alert("기존 비밀번호를 확인하세요.");
+					$("#passwd").val("");
+					$("#chagnePasswd").val("");
+					$("#checkPasswd").val("");
+					$("#result").text("");
+					$("#result2").text("");
+					$("#passwd").focus();
+				} else {//새로운 비밀번호 확인 일치 && 기존 비번 일치 상태
+					var pw=$("#chagnePasswd").val();
+					console.log(pw);//이 데이터를 어떻게 넘기지?
+					//변경 완료 alert, 창 닫기, 기존 마이페이지 화면 유지
+					alert("비밀번호가 변경되었습니다.");
+					window.close("mypage/changePasswd.jsp");
+					changePasswdForm.submit();
+					//return true;//??? 이후로 action 실행이 안 됨
+					//sesesion.setAttribute("newPasswd", pw);//세션, 리퀘스트 not defined 콘솔 err...
 				}
-			}
+ 			//return true;//action 실행이 안 됨
+			}//end if
 		});//end fn
 	});//end ready
 </script>
 </head>
 <body>
-<form action="../AccountChangeServlet" method="get">
+<form action="../AccountChangeServlet" name="changePasswdForm" method="post">
 <h2>변경할 비밀번호를 입력해 주십시오</h2>
 기존 비밀번호 입력: <input type="text" name="passwd" id="passwd">
 	<b><span id="result"></span></b><br>
