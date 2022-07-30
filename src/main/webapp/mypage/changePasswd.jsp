@@ -5,6 +5,7 @@
 <%
 	MemberDTO dto=(MemberDTO) session.getAttribute("login");
 	String passwd=dto.getPasswd();
+	String userid=dto.getUserid();
 %>
 <html>
 <head>
@@ -104,6 +105,7 @@
 </head>
 <body>
 <form action="../AccountChangeServlet" method="post">
+<input type="hidden" name="userid" id="userid" value="<%= userid %>">
 <h2>변경할 비밀번호를 입력해 주십시오</h2>
 기존 비밀번호 입력: <input type="text" name="passwd" id="passwd">
 	<b><span id="result"></span></b><br>
