@@ -22,7 +22,7 @@ public class AccountManagementServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//데이터 베이스에서 회원 정보 가져옴
-		System.out.println("서블릿 실행");
+		System.out.println("마이페이지 서블릿 실행");
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
 		
@@ -46,6 +46,9 @@ public class AccountManagementServlet extends HttpServlet {
 			response.sendRedirect("accountForm.jsp");//로그인 된 계정 정보 session 저장-마이페이지 오픈//mypage로 이름 바꿀까?
 		} else {
 			//alert로 로그인 후 이용하세요 출력
+			String mesg="로그인 후 이용하세요.";
+			session.setAttribute("notMypage", mesg);
+			session.setMaxInactiveInterval(60*30);
 			
 			response.sendRedirect("LoginUIServlet");
 		}
