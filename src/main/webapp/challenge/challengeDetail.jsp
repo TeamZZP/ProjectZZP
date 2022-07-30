@@ -1,3 +1,4 @@
+<%@page import="com.dto.MemberDTO"%>
 <%@page import="com.dto.ChallengeDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -12,6 +13,13 @@
 	int chall_liked = dto.getChall_liked();
 	String chall_created = dto.getChall_created();
 	String chall_img = dto.getChall_img();
+	
+	//session에 저장된 userid 읽어오기 
+	MemberDTO member = (MemberDTO) session.getAttribute("login"); 
+	String currUserid = null;
+	if (member != null) {
+		currUserid = member.getUserid();
+	}
 %>
 
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -34,9 +42,13 @@
 	  <td><%= chall_title %></td>
 	  <td>
 	  <!-- 해당 게시글의 글쓴이인 경우 -->
-	  	<a href="ChallengeUIServlet?chall_id=<%= chall_id %>">수정 </a>
-	  	<a href="ChallengeDeleteServlet?chall_id=<%= chall_id %>" id="deleteChallenge">삭제</a>
+	  <% if (userid.equals(currUserid)) { %>
+	  	<a href="ChallengeUIServlet?chall_id=<%= chall_id %>&userid=<%= currUserid %>">수정 </a>
+	  	<a href="ChallengeDeleteServlet?chall_id=<%= chall_id %>&userid=<%= currUserid %>" id="deleteChallenge">삭제</a>
+	  <% } else { %>
 	  <!-- 그외의 경우 -->
+	    <a href="">신고</a>
+	  <% } %>
 	  </td>
 	</tr>
 	<tr>

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.dto.ChallengeDTO;
+import com.dto.MemberDTO;
 import com.service.ChallengeService;
 
 /**
@@ -31,30 +32,38 @@ public class ChallengeAddServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		String chall_category = request.getParameter("chall_category");
-		String chall_title = request.getParameter("chall_title");
-		String chall_img = request.getParameter("chall_img");
-		String chall_content = request.getParameter("chall_content");
 		
-		//세션에 저장된 userid 읽어와서 set 
+		//회원전용처리
 		HttpSession session = request.getSession();
-		//session.getAttribute("user"); 
-		String userid = "abcd123";
+		MemberDTO member = (MemberDTO) session.getAttribute("login"); 
+		String userid = request.getParameter("userid");
 		
-		ChallengeDTO dto = new ChallengeDTO();
-		dto.setUserid(userid);
-		dto.setChall_category(chall_category);
-		dto.setChall_title(chall_title);
-		dto.setChall_img(chall_img);
-		dto.setChall_content(chall_content);
+		if (member!=null && member.getUserid().equals(userid)) {
+			String chall_category = request.getParameter("chall_category");
+			String chall_title = request.getParameter("chall_title");
+			String chall_img = request.getParameter("chall_img");
+			String chall_content = request.getParameter("chall_content");
+			
+			ChallengeDTO dto = new ChallengeDTO();
+			dto.setUserid(userid);
+			dto.setChall_category(chall_category);
+			dto.setChall_title(chall_title);
+			dto.setChall_img(chall_img);
+			dto.setChall_content(chall_content);
+			
+			ChallengeService service = new ChallengeService();
+			int n = service.insertChallenge(dto);
+			System.out.println(n+"개의 레코드 추가");
+			System.out.println(dto.getChall_id());
+			
+			//자기가 올린 게시글로 이동??? 
+			response.sendRedirect("ChallengeListServlet");
+			
+		} else {
+			session.setAttribute("mesg", "잘못된 접근입니다.");
+			response.sendRedirect("ChallengeListServlet");
+		}
 		
-		ChallengeService service = new ChallengeService();
-		int n = service.insertChallenge(dto);
-		System.out.println(n+"개의 레코드 추가");
-		System.out.println(dto.getChall_id());
-		
-		//자기가 올린 게시글로 이동??? 
-		response.sendRedirect("ChallengeListServlet");
 		
 	}
 

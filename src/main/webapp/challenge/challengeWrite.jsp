@@ -1,3 +1,4 @@
+<%@page import="com.dto.MemberDTO"%>
 <%@page import="com.dto.ChallengeDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -24,6 +25,13 @@
 		chall_content = dto.getChall_content();
 		formAction = "ChallengeUpdateServlet";
 	}
+	
+	//session에 저장된 userid 읽어오기 
+	MemberDTO member = (MemberDTO) session.getAttribute("login"); 
+	String currUserid = null;
+	if (member != null) {
+		currUserid = member.getUserid();
+	}
 %>
 
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -35,6 +43,7 @@
 
 <form action="<%= formAction %>" method="post">
 <input type="hidden" name="chall_id" value="<%= chall_id %>">
+<input type="hidden" name="userid" value="<%= currUserid %>">
 <table border="1">
 	<tr>
 	  <td>
