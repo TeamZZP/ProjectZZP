@@ -61,6 +61,12 @@
 	where chall_id=#{chall_id}
 </update>
 
+<update id="updateChall_hits">
+	update challenge
+	set chall_hits=chall_hits+1
+	where chall_id=#{chall_id}
+</update>
+
 <delete id="deleteChallenge">
 	delete from challenge
 	where chall_id=#{chall_id}
@@ -83,5 +89,10 @@
 	delete from comments
 	where comment_id=#{comment_id}
 </delete>
+
+<select id="countComments" resultType="int">
+	select count(*) from comments
+	where chall_id=#{chall_id}
+</select>
 
 </mapper>

@@ -167,6 +167,14 @@ CREATE SEQUENCE challenge_chall_id_seq
   NOCYCLE
   NOCACHE;
   
+-- 챌린지 댓글 시퀀스
+CREATE SEQUENCE comments_comment_id_seq
+  START WITH 1
+  INCREMENT BY 1
+  NOCYCLE
+  NOCACHE;
+  
+  
   
 -------------- insert --------------
 -- 상품

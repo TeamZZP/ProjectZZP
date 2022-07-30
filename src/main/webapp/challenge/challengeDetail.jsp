@@ -33,6 +33,7 @@
 	
 	//이 글에 속한 댓글 list 얻어오기
 	List<CommentsDTO> commentsList = (List<CommentsDTO>) request.getAttribute("commentsList");
+	
 %>
 
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -63,6 +64,7 @@
 					success: function (data) {
 						$("#comment_content").val("");
 						$("#comment_area").html(data);
+						$("#commentsNum").text(parseInt($("#commentsNum").text())+1);
 					},
 					error: function () {
 						
@@ -113,7 +115,7 @@
 	<tr>
 	  <td>♥ <%= chall_liked %></td>
 	  <td></td>
-	  <td>◇댓글수</td>
+	  <td>◇ <span id="commentsNum"><%= commentsList.size() %></span></td>
 	</tr>
 	<tr>
 	  <td colspan="3" height="100"><%= chall_content %></td>

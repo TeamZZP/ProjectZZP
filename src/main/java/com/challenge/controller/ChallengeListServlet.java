@@ -2,6 +2,7 @@ package com.challenge.controller;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -58,10 +59,19 @@ public class ChallengeListServlet extends HttpServlet {
 		
 		PageDTO pDTO = service.selectAllChallenge(map, Integer.parseInt(curPage));
 		
+		//각 게시글마다 댓글수 가져오기
+		List<ChallengeDTO> list = pDTO.getList();
+		HashMap<Integer, Integer> commentsMap = new HashMap<Integer, Integer>();
+		for (ChallengeDTO c : list) {
+			int commentsNum = service.countComments(c.getChall_id());
+			commentsMap.put(c.getChall_id(), commentsNum);
+		}
+		
 		request.setAttribute("pDTO", pDTO);
 		request.setAttribute("searchName", searchName);
 		request.setAttribute("searchValue", searchValue);
 	//	request.setAttribute("sortBy", sortBy);
+		request.setAttribute("commentsMap", commentsMap);
 		
 		RequestDispatcher dis = request.getRequestDispatcher("challengeMain.jsp");
 		dis.forward(request, response);

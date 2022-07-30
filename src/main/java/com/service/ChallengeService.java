@@ -108,6 +108,27 @@ public class ChallengeService {
 		return n;
 	}
 
+	public void updateChall_hits(String chall_id) {
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		try {
+			dao.updateChall_hits(session, chall_id);
+			session.commit();
+		} finally {
+			session.close();
+		}
+	}
+
+	public int countComments(int chall_id) {
+		int n = 0;
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		try {
+			n = dao.countComments(session, chall_id);
+		} finally {
+			session.close();
+		}
+		return n;
+	}
+
 
 
 }

@@ -67,6 +67,15 @@ public class ChallengeDAO {
 		return n;
 	}
 
+	public void updateChall_hits(SqlSession session, String chall_id) {
+		session.update("updateChall_hits", chall_id);
+	}
+
+	public int countComments(SqlSession session, int chall_id) {
+		int n = session.selectOne("countComments", chall_id);
+		return n;
+	}
+
 
 
 }

@@ -1,3 +1,4 @@
+<%@page import="java.util.HashMap"%>
 <%@page import="com.dto.PageDTO"%>
 <%@page import="com.dto.ChallengeDTO"%>
 <%@page import="java.util.List"%>
@@ -14,6 +15,7 @@
 	String searchName = (String) request.getAttribute("searchName");
 	String searchValue = (String) request.getAttribute("searchValue");
 //	String sortBy = (String) request.getAttribute("sortBy");
+	HashMap<Integer, Integer> commentsMap = (HashMap<Integer, Integer>) request.getAttribute("commentsMap");
 	
 	System.out.println(pDTO);
 	
@@ -106,7 +108,7 @@
 							</tr>
 							<tr>
 								<td align="center">♥ <%=chall_liked%></td>
-								<td align="center">◇</td>
+								<td align="center">◇ <%= commentsMap.get(chall_id) %></td>
 							</tr>
 							<tr>
 								<td height="10">

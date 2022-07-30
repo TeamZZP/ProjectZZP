@@ -36,6 +36,9 @@ public class ChallengeDetailServlet extends HttpServlet {
 		String chall_id = request.getParameter("chall_id");
 		
 		ChallengeService service = new ChallengeService();
+		
+		//조회수 +1 한 후 dto 가져오기
+		service.updateChall_hits(chall_id); 
 		ChallengeDTO dto = service.selectOneChallenge(chall_id);
 		
 		List<CommentsDTO> commentsList = service.selectAllComments(chall_id);
