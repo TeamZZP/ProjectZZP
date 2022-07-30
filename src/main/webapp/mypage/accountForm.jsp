@@ -47,26 +47,26 @@
 	String addr2=address.getAddr2();
 	int default_chk=address.getDefault_chk();
 %>
-<form>
+<form method="post">
 <img alt="" src="mypage/user.png" width="30px" height="30px">
 	<input type="text" name="username" value="<%= username %>" readonly="readonly"/><br><!-- 수정 불가 or 퍼센트로 데이터 가져옴 -->
-<img alt="" src="mypage/password.png" width="30px" height="30px">
+<img alt="" src="mypage/passwd.png" width="30px" height="30px">
 	<input type="text" name="passwd" value="********" readonly="readonly">
 	<button id="changePasswd">변경</button><br>
 <br>
-<img alt="" src="mypage/email.png" width="30px" height="30px">
+<img alt="" src="mypage/mail.png" width="30px" height="30px">
 	<input type="text" name="email1" readonly="readonly" value="<%= email1 %>">@
 	<input type="text" name="email2" placeholder="직접입력" id="email2" readonly="readonly" value="<%= email2 %>">
 	<button id="changeEmail">변경</button><br>
-<img alt="" src="mypage/address.png" width="30px" height="30px">
+<img alt="" src="mypage/location.png" width="30px" height="30px">
 	<input type="text" name="post" id="sample4_postcode" placeholder="우편번호" readonly="readonly" value="<%= post_num %>"><br><!-- script 긁어서 자식창에 넣기 -->
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	<input type="text" name="addr1" id="sample4_roadAddress" placeholder="도로명주소" readonly="readonly" value="<%= addr1 %>" style="width: 450px">
-	<input type="text" name="addr2" id="sample4_jibunAddress" placeholder="지번주소" readonly="readonly" value="<%= addr2 %>">
+	<input type="text" name="addr2" id="sample4_jibunAddress" placeholder="지번주소" readonly="readonly" value="<%= addr2 %>" style="width: 300px">
 	<span id="guide" style="color:#999"></span>
 	<button id="changeAddress">주소 관리</button><br>
 <br>
-<img alt="" src="mypage/membership.png" width="30px" height="30px">
+<img alt="" src="mypage/member.png" width="30px" height="30px">
 	<input type="text" name="membership" value="멤버쉽" readonly="readonly"/><br>
 <img alt="" src="mypage/userprofile.png" width="30px" height="30px">
 	<input type="text" name="changeProfile" value="프로필 변경" readonly="readonly"/>
