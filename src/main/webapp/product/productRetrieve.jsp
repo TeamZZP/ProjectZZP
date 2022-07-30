@@ -1,6 +1,8 @@
 <%@page import="com.dto.ProductDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+    
 <%
 	ProductDTO dto = (ProductDTO)session.getAttribute("Retrieve");
 	String p_id = dto.getP_id();
@@ -15,6 +17,7 @@
 	String p_img = dto.getP_img();
 
 %>    
+
 <form name="productRetrieveForm" method="GET" action="#">
 	   
 
@@ -34,7 +37,7 @@
 						<td height="5"></td>
 					</tr>
 					<tr>
-						<td height="1" colspan="8" bgcolor="CECECE"></td>
+						<td height="1" colspan="40" bgcolor="green"></td>
 					</tr>
 					<tr>
 						<td height="10"></td>
@@ -60,20 +63,31 @@
 					</tr>
 					<tr>
 						<td class="td_title">배송비</td>
-						<td colspan="2"><font color="#2e56a9" size="2"
-							style='padding-left: 30px'><b> 무료배송</b> </font> <font size="2">(도서
+						<td colspan="2">
+						<%if(p_selling_price<10000){ %>
+						
+						<font color="#2e56a9" size="2"
+							style='padding-left: 30px'><b>배송비 3000원</b> </font>
+							
+							<%}else{ %>
+							
+							<font color="#2e56a9" size="2"
+							style='padding-left: 30px'><b>무료배송</b> </font>
+							
+							<%} %>
+							 <font size="2">(도서
 								산간지역 별도 배송비 추가)</font></td>
 					</tr>
-					<tr>
+					<!--<tr>
 						<td class="td_title" rowspan="2">상품옵션</td>
-						<td colspan="2" style='padding-left: 30px'><select
-							class="select_change" size="1" name="gSize" id="gSize">
+						 <td colspan="2" style='padding-left: 30px'>
+						<select  class="select_change" size="1" name="gSize" id="gSize">
 								<option selected value="사이즈선택">사이즈선택</option>
 								<option value="L">L</option>
 								<option value="M">M</option>
 								<option value="S">S</option>
-						</select></td>
-					</tr>
+						</select></td> 
+					</tr>-->
 					<tr>
 						<td colspan="2" style='padding-left: 30px'><select
 							class="select_change" size="1" name="gColor"
@@ -92,8 +106,8 @@
 						<td style="padding-left: 30px"><input type="text"
 							name="gAmount" value="1" id="gAmount"
 							style="text-align: right; height: 18px"> <img
-							src="images/up.PNG" id="up"> <img src="images/down.PNG"
-							id="down"></td>
+							src="images/up.PNG" id="up"> 
+							<img src="images/down.PNG" id="down"></td>
 					</tr>
 				</table>
 
@@ -101,8 +115,8 @@
 		</tr>
 	</table>
 
-	<br> <button onclick="reqCheck('order')">구매</button>
+	<br> <button onclick="reqCheck('order')" style="background-color: green"><font color = #ffffff>구매</font></button>
 	&nbsp;&nbsp;
-	<button onclick="reqCheck('cart')">장바구니</button>
+	<button onclick="reqCheck('cart')" style="background-color: green"><font color = #ffffff>장바구니</font></button>
 </form>
     
