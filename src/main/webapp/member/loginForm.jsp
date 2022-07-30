@@ -22,6 +22,9 @@ $(document).ready(function() {
 	비밀번호:<input type="password" name="passwd" id="passwd"><br> <input
 		type="submit" value="로그인"> <input type="reset" value="취소"><br>
 </form>
+<a>회원가입</a>
+<a>아이디</a>
+<a>회원가입</a><br>
 <a id="custom-login-btn" href="javascript:loginWithKakao();">
 <img src="//k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg"
 	width="222" alt="카카오 로그인 버튼" />

@@ -14,4 +14,16 @@ public class ProductDAO {
 		return list;
 	}
 
+	public ProductDTO productRetrieve(SqlSession session, String p_id) {
+		ProductDTO dto = session.selectOne("productRetrieve",p_id);
+		return dto;
+	}
+
+	public List<ProductDTO> bestProduct(SqlSession session) {
+		List<ProductDTO> list = session.selectList("ProductMapper.bestProduct");
+		return list;
+	}
+
+
+
 }

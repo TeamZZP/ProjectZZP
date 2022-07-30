@@ -23,4 +23,31 @@ public class ProductService {
 		return list;
 	}
 
+	public ProductDTO productRetrieve(String p_id) {
+		ProductDTO dto = null;
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		try {
+			dto = dao.productRetrieve(session,p_id);
+		} finally {
+			session.close();
+		}
+		return dto;
+	}
+
+	public List<ProductDTO> bestProduct() {
+		List<ProductDTO> list = null;
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		try {
+			list = dao.bestProduct(session);
+		}finally {
+			session.close();
+		}
+		return list;
+		
+	}
+
+	
+
+
+
 }

@@ -19,5 +19,10 @@ public class MemberDAO {
 	public MemberDTO loginMember(SqlSession session, HashMap<String, String> map) {
 		return session.selectOne("loginMember", map);
 	}
+
+	public MemberDTO mypage(SqlSession session, String userid) {
+		MemberDTO member=session.selectOne("MemberMapper.mypage", userid);
+		return member;
+	}
 	
 }
