@@ -1,6 +1,8 @@
 <%@page import="com.dto.ProductDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+ <link rel="stylesheet" href="css/default.css">
+ <link rel="stylesheet" href="css/sytle.css">
 <%
 	ProductDTO dto = (ProductDTO)session.getAttribute("Retrieve");
 	String p_id = dto.getP_id();
@@ -41,14 +43,8 @@
 					</tr>
 
 					<tr>
-						<td rowspan="7">
-							<div>
-								<img src="images/p_image/<%=p_img %>.jpg"
+						<td rowspan="7"><img src="images/p_image/<%=p_img %>.jpg"
 							border="0" align="center" width="300" />
-							<ul>
-								<li><a href="#a"><img src="images/p_image/<%=p_img %>.jpg" height="50" width="50"></a></li>
-							</ul>
-							</div>
 						</td>
 						
 					<tr>
@@ -96,16 +92,10 @@
 		</tr>
 	</table>
 
-	<br> <button >구매</button>
+	<br> <button onclick="reqCheck('order')" >구매</button>
 	&nbsp;&nbsp;
-	<button >장바구니</button><br>
-	<a href="#info">상세정보</a>&nbsp;<a href="#review">구매평</a>&nbsp;<a href="#Q&A">Q&A</a><br>
+	<button onclick="reqCheck('cart')" >장바구니</button><br>
+	<a id="info">상세정보</a> &nbsp; <a id="review">구매평</a> &nbsp; <a id="Q&A">Q&A</a> 
 	
-	<a id="info">상세정보</a><br> 
-	<a id="review">구매평</a><br> 
-	
-	<a id="Q&A">Q&A</a> <br>
-	
-
 </form>
     
