@@ -23,4 +23,14 @@ public class QuestionDAO {
 		return num;
 	}
 
+	public int questionUpdate(SqlSession session, QuestionDTO qDTO) {
+		int num = session.update("QuestionMapper.questionUpdate", qDTO);
+		return num;
+	}
+
+	public int questionDelete(SqlSession session, String qID) {
+		int num = session.delete("QuestionMapper.questionDelete", qID);
+		return num;
+	}
+
 }

@@ -13,13 +13,13 @@ import com.dto.QuestionDTO;
 import com.service.QuestionService;
 
 /**
- * Servlet implementation class insertQuestionServlet
+ * Servlet implementation class QuestionUpdateServlet
  */
-@WebServlet("/QuestionInsertServlet")
-public class QuestionInsertServlet extends HttpServlet {
+@WebServlet("/QuestionUpdateServlet")
+public class QuestionUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public QuestionInsertServlet() {
+    public QuestionUpdateServlet() {
         super();
     }
 
@@ -28,8 +28,12 @@ public class QuestionInsertServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		MemberDTO mDTO = (MemberDTO) session.getAttribute("login");
 		
+		QuestionDTO OneSelectDTO = (QuestionDTO)session.getAttribute("questionOneSelect");
+		System.out.print("questionUpdate " + OneSelectDTO);
+		
 		if (mDTO != null) {
 			String USERID = mDTO.getUserid();
+			int Q_ID = OneSelectDTO.getQ_ID();
 			String Q_TITLE = request.getParameter("qTittle");
 			String P_ID = request.getParameter("pId");
 			String Q_CONTENT = request.getParameter("qContent");
@@ -38,25 +42,26 @@ public class QuestionInsertServlet extends HttpServlet {
 			String Q_IMG = request.getParameter("qFile");
 			
 			QuestionDTO qDTO = new QuestionDTO();
-			qDTO.setUSERID(USERID);
-			qDTO.setQ_TITLE(Q_TITLE);
 			qDTO.setP_ID(P_ID);
-			qDTO.setQ_CONTENT(Q_CONTENT);
 			qDTO.setQ_BOARD_CATEGORY(Q_BOARD_CATEGORY);
 			qDTO.setQ_CATEGORY(Q_CATEGORY);
+			qDTO.setQ_CONTENT(Q_CONTENT);
+			qDTO.setQ_ID(Q_ID);
 			qDTO.setQ_IMG(Q_IMG);
-			
+			qDTO.setQ_TITLE(Q_TITLE);
+			qDTO.setUSERID(USERID);
 			System.out.println("qDTO " + qDTO);
 			
 			QuestionService service = new QuestionService();
-			int num = service.questionInsert(qDTO);
+			int num = service.questionUpdate(qDTO);
+			System.out.println(num);
 			
 			if (num == 1) {
-				session.setAttribute("mesg", "게시물이 등록되었습니다");
-				response.sendRedirect("QuestionListServlet");
+				session.setAttribute("mesg", "게시물이 변경되었습니다");
+				response.sendRedirect("QuestionOneSelect");
 			} else {
-				session.setAttribute("mesg", "게시물이 등록 실패");
-				response.sendRedirect("QuestionListServlet");
+				session.setAttribute("mesg", "게시물이 변경 실패");
+				response.sendRedirect("QuestionOneSelect");
 			}
 			
 		} else {
