@@ -37,7 +37,7 @@
 		$("#emailSel").on("change", function () {
 			$("#email2").val($("#emailSel").val());
 		});//end fn
-		$("form").on("submit", function() {
+		$("#submit").on("click", function() {
 			if ($("#email1").val().length == 0 || $("#email2").val().length == 0) {//두 가지 데이터 중 공백이 있을 경우
 				event.preventDefault();
 				alert("새로운 이메일 주소를 입력해주세요.");
@@ -64,11 +64,14 @@
 				}
 			}
 		});//end fn
+		$("#close").on("click", function() {
+			close();
+		});//end fn
 	});//end ready
 </script>
 </head>
 <body>
-<form action="../AccountChangeServlet" method="post">
+<form action=" " method="post">
 <h2>변경할 이메일을 입력해 주십시오</h2>
 기존 비밀번호 입력: <input type="text" name="passwd" id="passwd">
 	<b><span id="result"></span></b><br>
@@ -79,7 +82,7 @@
 		<option value="naver.com">naver.com</option>
 		<option value="google.com">google.com</option>
 	</select>
-<button>확인</button>
+<button id="submit">확인</button>&nbsp;&nbsp;<button id="close">창 닫기</button>
 </form>
 </body>
 </html>
