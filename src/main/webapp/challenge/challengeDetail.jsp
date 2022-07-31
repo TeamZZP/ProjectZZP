@@ -1,3 +1,4 @@
+<%@page import="java.util.HashMap"%>
 <%@page import="com.dto.CommentsDTO"%>
 <%@page import="java.util.List"%>
 <%@page import="com.dto.MemberDTO"%>
@@ -37,6 +38,8 @@
 	
 	//이 글에 속한 댓글 list 얻어오기
 	List<CommentsDTO> commentsList = (List<CommentsDTO>) request.getAttribute("commentsList");
+	//이 글 작성자의 프로필 이미지 얻어오기
+	String profile_img = (String) request.getAttribute("profile_img");
 	
 %>
 
@@ -110,8 +113,11 @@
 	  <td>조회수 <%= chall_hits %></td>
 	</tr>
 	<tr>
-	  <td>프로필사진</td>
-	  <td colspan="2"><%= userid %></td>
+	  <td><a href="ProfileMainServlet?userid=<%= userid %>"><img src="images/<%= profile_img %>" width="50" height="50"></a></td>
+	  <td colspan="2"><a href="ProfileMainServlet?userid=<%= userid %>"><%= userid %></a></td>
+	</tr>
+	<tr>
+	  <td height="10">
 	</tr>
 	<tr>
 	  <td colspan="3"><div style="text-align: center"><img src="images/<%= chall_img %>" width="500" height="500"></div></td>
@@ -120,9 +126,9 @@
 	  <td height="10">
 	</tr>
 	<tr>
-	  <td><img src="images/keeping.png" width="20" height="20"> <%= chall_liked %></td>
+	  <td><img src="images/keeping.png" width="30" height="30"> <%= chall_liked %></td>
 	  <td></td>
-	  <td><img src="images/bubble.png" width="20" height="17"> <span id="commentsNum"><%= commentsList.size() %></span></td>
+	  <td><img src="images/bubble.png" width="30" height="27"> <span id="commentsNum"><%= commentsList.size() %></span></td>
 	</tr>
 	<tr>
 	  <td colspan="3" height="100"><%= chall_content %></td>

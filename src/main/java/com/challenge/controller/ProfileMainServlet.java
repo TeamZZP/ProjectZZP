@@ -2,7 +2,6 @@ package com.challenge.controller;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,21 +10,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.dto.ChallengeDTO;
-import com.dto.CommentsDTO;
+import com.dto.PageDTO;
 import com.service.ChallengeService;
 
 /**
- * Servlet implementation class ChallengeDetailServlet
+ * Servlet implementation class ProfileMainServlet
  */
-@WebServlet("/ChallengeDetailServlet")
-public class ChallengeDetailServlet extends HttpServlet {
+@WebServlet("/ProfileMainServlet")
+public class ProfileMainServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ChallengeDetailServlet() {
+    public ProfileMainServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,25 +32,21 @@ public class ChallengeDetailServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String chall_id = request.getParameter("chall_id");
+
+		String userid = request.getParameter("userid");
 		
 		ChallengeService service = new ChallengeService();
+		HashMap<String, String> profileMap = service.selectProfile(userid);
 		
-		//조회수 +1 한 후 dto 가져오기
-		service.updateChall_hits(chall_id); 
-		ChallengeDTO dto = service.selectOneChallenge(chall_id);
+		HashMap<String, String> challengMap = new HashMap<String, String>();
+		challengMap.put("searchName", "userid");
+		challengMap.put("searchValue", userid);
+		PageDTO pDTO = service.selectAllChallenge(challengMap, 1);
 		
-		//해당 게시글의 댓글 목록 가져오기
-		List<CommentsDTO> commentsList = service.selectAllComments(chall_id);
+		request.setAttribute("profileMap", profileMap);
+		request.setAttribute("pDTO", pDTO);
 		
-		//해당 게시글의 프로필 정보 가져와서 프로필 이미지만 전달
-		HashMap<String, String> profileMap = service.selectProfile(dto.getUserid());
-		
-		request.setAttribute("dto", dto);
-		request.setAttribute("commentsList", commentsList);
-		request.setAttribute("profile_img", profileMap.get("PROFILE_IMG"));
-		
-		RequestDispatcher dis = request.getRequestDispatcher("challengeDetail.jsp");
+		RequestDispatcher dis = request.getRequestDispatcher("profileMain.jsp");
 		dis.forward(request, response);
 	}
 

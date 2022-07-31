@@ -52,7 +52,7 @@
 <form action="<%= formAction %>" method="post">
 <input type="hidden" name="chall_id" value="<%= chall_id %>">
 <input type="hidden" name="userid" value="<%= currUserid %>">
-<table border="1">
+<table border="1" align="center" width="600" cellspacing="0" cellpadding="0">
 	<tr>
 	  <td>
 		<select name="chall_category">

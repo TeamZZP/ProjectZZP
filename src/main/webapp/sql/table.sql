@@ -72,6 +72,13 @@ CREATE TABLE address (
 	default_chk	NUMBER		NULL
 );
 
+-- 프로필
+CREATE TABLE profile (
+	userid  VARCHAR2(30)		NOT NULL REFERENCES member(userid) ON DELETE CASCADE,
+	profile_img  VARCHAR2(300)	NULL,
+	profile_txt  VARCHAR2(500)	NULL
+);
+
 -- 관리자
 CREATE TABLE admin (
     	admin_id VARCHAR2(30) PRIMARY KEY,

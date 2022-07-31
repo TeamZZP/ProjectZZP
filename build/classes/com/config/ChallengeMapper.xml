@@ -95,4 +95,11 @@
 	where chall_id=#{chall_id}
 </select>
 
+
+
+<select id="selectProfile" resultType="hashmap">
+	select * from profile
+	where userid=#{userid}
+</select>
+
 </mapper>

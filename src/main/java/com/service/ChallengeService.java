@@ -129,6 +129,17 @@ public class ChallengeService {
 		return n;
 	}
 
+	public HashMap<String, String> selectProfile(String userid) {
+		HashMap<String, String> map = null;
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		try {
+			map = dao.selectProfile(session, userid);
+		} finally {
+			session.close();
+		}
+		return map;
+	}
+
 
 
 }
