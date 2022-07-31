@@ -62,7 +62,7 @@
 	<button id="changePasswd">변경</button><br>
 <br>
 <img alt="" src="mypage/email.png" width="30px" height="30px">
-	<input type="text" name="email1" readonly="readonly" value="<%= email1 %>">@
+	<input type="text" name="email1" id="email1" readonly="readonly" value="<%= email1 %>">@
 	<input type="text" name="email2" placeholder="직접입력" id="email2" readonly="readonly" value="<%= email2 %>">
 	<button id="changeEmail">변경</button><br>
 <img alt="" src="mypage/address.png" width="30px" height="30px">

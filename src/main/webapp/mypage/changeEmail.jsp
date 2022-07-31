@@ -5,6 +5,7 @@
 <%
 	MemberDTO dto=(MemberDTO) session.getAttribute("login");
 	String passwd=dto.getPasswd();
+	String userid=dto.getUserid();
 %>
 <html>
 <head>
@@ -57,6 +58,9 @@
 					var email1=$("#email1").val();
 					var email2=$("#email2").val();
 					//console.log(email1+"@"+email2);
+					opener.$("#email1").val(email1);//부모창에 업데이트
+					opener.$("#email2").val(email2);//부모창에 업데이트
+					$("form").attr("action", "../AccountChangeServlet");
 					//변경 완료 alert//창 닫기, 기존 마이페이지 화면 유지--창을 닫으면 action이 안되는 듯
 					alert("이메일이 변경되었습니다.");
 					//window.close("mypage/changeEmail.jsp");
@@ -72,6 +76,7 @@
 </head>
 <body>
 <form action=" " method="post">
+<input type="hidden" name="userid" id="userid" value="<%= userid %>">
 <h2>변경할 이메일을 입력해 주십시오</h2>
 기존 비밀번호 입력: <input type="text" name="passwd" id="passwd">
 	<b><span id="result"></span></b><br>

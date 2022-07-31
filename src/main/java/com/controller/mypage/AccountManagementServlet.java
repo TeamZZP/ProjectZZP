@@ -46,7 +46,7 @@ public class AccountManagementServlet extends HttpServlet {
 			response.sendRedirect("accountForm.jsp");//로그인 된 계정 정보 session 저장-마이페이지 오픈//mypage로 이름 바꿀까?
 		} else {
 			//alert로 로그인 후 이용하세요 출력
-			String mesg="로그인 후 이용하세요.";
+			String mesg="로그인이 필요합니다.";
 			session.setAttribute("mesg", mesg);
 			session.setMaxInactiveInterval(60*30);
 			

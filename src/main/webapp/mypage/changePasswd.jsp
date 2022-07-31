@@ -91,8 +91,8 @@
 				} else {//새로운 비밀번호 확인 일치 && 기존 비번 일치 상태
 					var pw=$("#chagnePasswd").val();
 					console.log(pw);//이 데이터를 어떻게 넘기지?
-					opener.$("#passwd").val($("#chagnePasswd").val());
-					opener.$("#userid").val($("#userid").val());
+					opener.$("#passwd").val($("#chagnePasswd").val());//부모창에 업데이트
+					opener.$("#userid").val($("#userid").val());//부모창에 업데이트
 					$("form").attr("action", "../AccountChangeServlet");
 					//변경 완료 alert, 창 닫기, 기존 마이페이지 화면 유지
 					alert("비밀번호가 변경되었습니다.");
