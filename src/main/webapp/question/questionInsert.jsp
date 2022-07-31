@@ -61,7 +61,7 @@
 				<td> <button id="QuestionList">목록</button> </td>
 				<td>
 					<button id="QuestionInsert">등록</button>
-					<button type="reset"">취소</button>
+					<button type="reset">취소</button>
 				</td>
 			</tr>
 		</table>
