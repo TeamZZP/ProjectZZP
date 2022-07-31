@@ -1,6 +1,7 @@
 package com.controller.member;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 
 import javax.servlet.ServletException;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 
 import com.dto.MemberDTO;
 import com.service.MemberService;
@@ -26,16 +28,17 @@ public class LoginServlet extends HttpServlet {
 		
 		MemberService service = new MemberService();
 		MemberDTO dto = service.loginMember(map);
-		System.out.println(dto);
 		
 		if (dto!=null) {
-			HttpSession session = request.getSession();
 			//login 인증정보 저장
+			HttpSession session = request.getSession();
 			session.setAttribute("login", dto); 
 			session.setMaxInactiveInterval(60*60);
 			response.sendRedirect("MainServlet");
 		} else {
-			response.sendRedirect("LoginServlet");
+			PrintWriter out = response.getWriter();
+			out.print("alert('로그인');");
+			response.sendRedirect("LoginUIServlet");
 		}
 	}
 
