@@ -29,7 +29,8 @@
         <li><a href="IntroductionUIServlet" class="nav-link px-2 link-secondary">소개</a></li>
         <li><a href="StoreUIServlet" class="nav-link px-2 link-dark">스토어</a></li>
         <li><a href="ChallengeListServlet" class="nav-link px-2 link-dark">챌린지</a></li>
-        <li><a href="NoticeListServlet" class="nav-link px-2 link-dark">게시판</a></li>
+        <li><a href="NoticeListServlet" class="nav-link px-2 link-dark">공지사항</a></li>
+        <li><a href="QuestionListServlet" class="nav-link px-2 link-dark">문의</a></li>
       </ul>
 		
       <div class="col-md-3 text-end" id="header_login_bar">
