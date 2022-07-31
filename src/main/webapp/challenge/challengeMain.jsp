@@ -1,3 +1,4 @@
+<%@page import="java.util.ArrayList"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="com.dto.PageDTO"%>
 <%@page import="com.dto.ChallengeDTO"%>
@@ -16,8 +17,8 @@
 	String searchValue = (String) request.getAttribute("searchValue");
 //	String sortBy = (String) request.getAttribute("sortBy");
 	HashMap<Integer, Integer> commentsMap = (HashMap<Integer, Integer>) request.getAttribute("commentsMap");
+	ArrayList<HashMap<String, String>> profileList = (ArrayList<HashMap<String, String>>) request.getAttribute("profileList");
 	
-	System.out.println(pDTO);
 	
 	//session에 저장된 메시지가 있는 경우 경고창 띄워주고 삭제하기
 	String mesg = (String) session.getAttribute("mesg");
@@ -82,6 +83,9 @@
 						int chall_liked = dto.getChall_liked();
 						String chall_created = dto.getChall_created();
 						String chall_img = dto.getChall_img();
+						
+						HashMap<String, String> map = profileList.get(i-1);
+						String profile_img = map.get("PROFILE_IMG");
 					%>
 
 					<td>
@@ -89,8 +93,8 @@
 						<table style='padding: 15px'>
 
 							<tr>
-								<td align="center"><a href="">프로필사진</a></td>
-								<td align="center"><a href=""><%=userid%></a></td>
+								<td align="center"><a href="ProfileMainServlet?userid=<%= userid %>"><img src="images/<%= profile_img %>" width="30" height="30"></a></td>
+								<td align="center"><a href="ProfileMainServlet?userid=<%= userid %>"><%= userid %></a></td>
 								
 							</tr>
 							<tr>

@@ -76,6 +76,11 @@ public class ChallengeDAO {
 		return n;
 	}
 
+	public HashMap<String, String> selectProfile(SqlSession session, String userid) {
+		HashMap<String, String> map = session.selectOne("selectProfile", userid);
+		return map;
+	}
+
 
 
 }
