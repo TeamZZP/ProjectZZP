@@ -30,31 +30,46 @@ public class AccountChangeServlet extends HttpServlet {
 		//회원 전용
 		if (dto != null) {
 			//자식창에서 넘어온 데이터 파싱
-			//1. 비밀번호 update--userid 데이터도 필요함--현재 changePasswd.jsp에는 userid 값이 없음->hidden으로 설정
 			String chagnePasswd=request.getParameter("chagnePasswd");
 			String userid=request.getParameter("userid");
 			System.out.println(chagnePasswd);
 			System.out.println(userid);
-			HashMap<String, String> map=new HashMap<String, String>();
-			map.put("userid", userid);
-			map.put("chagnePasswd", chagnePasswd);
-			System.out.println(map);
-			AccountService service=new AccountService();
-			int num=service.changePasswd(map);
-			System.out.println("수정된 비밀번호 갯수 : "+num);//--비밀번호 수정 완료
 			
-			//2. 이메일 update
 			String email1=request.getParameter("email1");
 			String email2=request.getParameter("email2");
 			System.out.println(email1);
 			System.out.println(email2);
 			
-			//기존에 보던 마이페이지로
-			response.sendRedirect("accountForm.jsp");
+			if (chagnePasswd != null) {
+				//1. 비밀번호 update--userid 데이터도 필요함--현재 changePasswd.jsp에는 userid 값이 없음->hidden으로 설정
+				HashMap<String, String> passwdmap=new HashMap<String, String>();
+				passwdmap.put("userid", userid);
+				passwdmap.put("chagnePasswd", chagnePasswd);
+				System.out.println(passwdmap);
+				AccountService service=new AccountService();
+				int num=service.changePasswd(passwdmap);
+				System.out.println("수정된 비밀번호 갯수 : "+num);//--비밀번호 수정 완료
+				//기존에 보던 수정 페이지로
+				response.sendRedirect("mypage/changePasswd.jsp");
+			} else if (email1 != null && email2 != null ) {
+				//2. 이메일 update
+				HashMap<String, String> emailmap=new HashMap<String, String>();
+				emailmap.put("userid", userid);
+				emailmap.put("email1", email1);
+				emailmap.put("email2", email2);
+				System.out.println(emailmap);
+				AccountService service=new AccountService();
+				int num=service.changeEmail(emailmap);
+				System.out.println("수정된 이메일 갯수 : "+num);//--이메일 수정 완료
+				//기존에 보던 수정 페이지로
+				response.sendRedirect("mypage/changeEmail.jsp");
+			} else {
+				System.out.println("수정 추가");
+			}
 		} else {
 			//alert로 로그인 후 이용하세요 출력
-			String mesg="로그인 후 이용하세요.";
-			session.setAttribute("notMypage", mesg);
+			String mesg="로그인이 필요합니다.";
+			session.setAttribute("mesg", mesg);
 			session.setMaxInactiveInterval(60*30);
 			
 			response.sendRedirect("LoginUIServlet");

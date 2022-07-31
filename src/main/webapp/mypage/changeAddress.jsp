@@ -5,9 +5,15 @@
 <head>
 <meta charset="UTF-8">
 <title>주소 수정</title>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		
+	});
+</script>
 </head>
 <body>
-<form action="AccountChangeServlet" method="get">
+<form action="../AccountChangeServlet" method="get">
 이름: 데이터 출력<br>
 주소:
 	<input type="text" name="post" id="sample4_postcode" placeholder="우편번호"><!-- script 긁어서 자식창에 넣기 -->

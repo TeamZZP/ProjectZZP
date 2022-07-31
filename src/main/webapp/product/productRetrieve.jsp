@@ -107,5 +107,9 @@
 
    
    
+
+   <br> <button onclick="reqCheck('order')" style="background-color: green"><font color = #ffffff>구매</font></button>
+   &nbsp;&nbsp;
+   <button onclick="reqCheck('cart')" style="background-color: green"><font color = #ffffff>장바구니</font></button>
 </form>
     
