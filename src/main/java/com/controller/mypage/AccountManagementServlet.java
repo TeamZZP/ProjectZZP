@@ -25,8 +25,8 @@ public class AccountManagementServlet extends HttpServlet {
 		System.out.println("마이페이지 서블릿 실행");
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
-		
 		HttpSession session=request.getSession();
+		
 		MemberDTO dto=(MemberDTO) session.getAttribute("login");
 		//회원 전용
 		if (dto != null) {

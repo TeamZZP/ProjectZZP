@@ -13,7 +13,7 @@
 		$("#changeEmail").on("click", function() {
 			var popupX = (window.screen.width / 2) - (200 / 2);
 			var popupY= (window.screen.height / 5) - (300 / 2);
-			window.open("mypage/changeEmail.jsp","",'status=no, height=300, width=400, left='+ popupX + ', top='+ popupY);
+			window.open("mypage/changeEmail.jsp","",'status=no, height=200, width=600, left='+ popupX + ', top='+ popupY);
 		});
 		$("#changeAddress").on("click", function() {
 			var popupX = (window.screen.width / 2) - (200 / 2);
@@ -47,6 +47,7 @@
 	String addr2=address.getAddr2();
 	int default_chk=address.getDefault_chk();
 %>
+<div style = "padding: 5px 5px 5px 20px;">
 <form method="post">
 <img alt="" src="mypage/user.png" width="30px" height="30px">
 	<input type="text" name="username" value="<%= username %>" readonly="readonly"/><br><!-- 수정 불가 or 퍼센트로 데이터 가져옴 -->
@@ -72,3 +73,4 @@
 	<input type="text" name="changeProfile" value="프로필 변경" readonly="readonly"/>
 	<button id="changeProfile">변경</button><br>
 </form>
+</div>

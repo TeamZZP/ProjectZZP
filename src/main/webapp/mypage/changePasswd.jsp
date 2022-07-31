@@ -5,6 +5,7 @@
 <%
 	MemberDTO dto=(MemberDTO) session.getAttribute("login");
 	String passwd=dto.getPasswd();
+	String userid=dto.getUserid();
 %>
 <html>
 <head>
@@ -31,10 +32,10 @@
 		
 		//2. 기존 비밀번호와 불일치--경고창 출력//??? 기존 비번 값과 db 값이 일치하면 true--일치하면 수정 가능해지고 클릭시 경고창이 출력됨..
 		$(".pw").on("click", function() {
-			if ($(".pw").attr("readonly", "readonly")) {//#Fail_기존 설정이 readonly여서 항상 경고창이 출력됨
-				console.log("불일치");
+			//if ($(".pw").attr("readonly", "readonly")) {//#Fail_기존 설정이 readonly여서 항상 경고창이 출력됨
+			if ($("#result").text() == "비밀번호 불일치" || $("#result").text().length == 0) {//완료
 				alert("기존 비밀번호를 확인해주세요.");
-				$(".pw").removeAttr("alert");//경고창 한번만 출력
+				//$(".pw").removeAttr("alert");//경고창 한번만 출력
 				$("#passwd").focus();//기존 비밀번호 입련란으로 focus
 			}
 		});//end fn
@@ -92,19 +93,19 @@
 					console.log(pw);//이 데이터를 어떻게 넘기지?
 					//변경 완료 alert, 창 닫기, 기존 마이페이지 화면 유지
 					alert("비밀번호가 변경되었습니다.");
-					window.close("mypage/changePasswd.jsp");
-					changePasswdForm.submit();
-					//return true;//??? 이후로 action 실행이 안 됨
-					//sesesion.setAttribute("newPasswd", pw);//세션, 리퀘스트 not defined 콘솔 err...
+/* 					setTimeout(function() {//창 안 닫힘
+						window.close();
+					}, 100); */
+					//window.close("mypage/changePasswd.jsp");//창 닫으면 action 실행 안되고 데이터 전송이 불가
 				}
- 			//return true;//action 실행이 안 됨
 			}//end if
 		});//end fn
 	});//end ready
 </script>
 </head>
 <body>
-<form action="../AccountChangeServlet" name="changePasswdForm" method="post">
+<form action="../AccountChangeServlet" method="post">
+<input type="hidden" name="userid" id="userid" value="<%= userid %>">
 <h2>변경할 비밀번호를 입력해 주십시오</h2>
 기존 비밀번호 입력: <input type="text" name="passwd" id="passwd">
 	<b><span id="result"></span></b><br>
