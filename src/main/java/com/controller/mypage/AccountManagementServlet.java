@@ -38,18 +38,18 @@ public class AccountManagementServlet extends HttpServlet {
 			System.out.println(userid);
 			
 			MemberService m_service=new MemberService();
-			MemberDTO member=m_service.mypage(userid);
+			MemberDTO member=m_service.selectMember(userid);
 			System.out.println(member);
 			
 			AddressService a_service=new AddressService();
-			AddressDTO address=a_service.address(userid);
+			AddressDTO address=a_service.selectAddress(userid);
 			System.out.println(address);
 			
 			OrderService o_service=new OrderService();
 			OrderDTO orders=o_service.selectOrders(userid);
 			System.out.println(orders);
 			
-			HashMap<String, String> profilemap=new HashMap<String, String>();
+			//HashMap<String, String> profilemap=new HashMap<String, String>();
 			//profilemap.put("userid", userid);
 			
 			session.setAttribute("login", member);
