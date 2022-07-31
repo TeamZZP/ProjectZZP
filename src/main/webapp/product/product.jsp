@@ -32,15 +32,6 @@
      
       List <ProductDTO> list = (List<ProductDTO>)request.getAttribute("productList"); 
      
-<<<<<<< HEAD
-		if(list.get(1).getP_category().equals("timeEvent")||list.get(1).getP_category().equals("firstEvent")){
-			%>
-		<jsp:include page="productSaleCategory.jsp" flush="true" ></jsp:include><br>
-			<%}
-     	if(list.get(1).getP_category().equals("timeEvent")){
-     	%>
-     	<jsp:include page="../countdown.jsp"></jsp:include>
-=======
      
       if(list.get(1).getP_category().equals("timeEvent")||list.get(1).getP_category().equals("firstEvent")){
          %>
@@ -49,28 +40,11 @@
         if(list.get(1).getP_category().equals("timeEvent")){
         %>
         <jsp:include page="../countdown.jsp"></jsp:include>
->>>>>>> 74d5a5bff0b06c1c3552cd9509a544101308957c
     <% }
         if(list.get(1).getP_category().equals("firstEvent")){
            %>
         <jsp:include page="../firstEventbanner.jsp"></jsp:include>
      <% }
-<<<<<<< HEAD
-	 for (int i = 1; i <= list.size(); i++){
-	
-		 ProductDTO dto = list.get(i-1);
-		 String p_id = dto.getP_id();
-	     String p_name = dto.getP_name();
-	     String p_content = dto.getP_content();
-	     String p_category = dto.getP_category();
-	     int p_cost_price =dto.getP_cost_price();
-	     int p_selling_price = dto.getP_selling_price();
-	     int p_discount = dto.getP_discount();
-	     String p_created = dto.getP_created();
-	     int p_stock = dto.getP_stock();
-	     String p_img = dto.getP_img();
-	 	
-=======
     for (int i = 1; i <= list.size(); i++){
    
       
@@ -87,7 +61,6 @@
         String p_img = dto.getP_img();
        
        
->>>>>>> 74d5a5bff0b06c1c3552cd9509a544101308957c
  %>
 
                   <td>
