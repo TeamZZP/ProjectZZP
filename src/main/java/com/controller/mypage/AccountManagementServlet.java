@@ -1,6 +1,8 @@
 package com.controller.mypage;
 
 import java.io.IOException;
+import java.util.HashMap;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,8 +12,10 @@ import javax.servlet.http.HttpSession;
 
 import com.dto.AddressDTO;
 import com.dto.MemberDTO;
+import com.dto.OrderDTO;
 import com.service.AddressService;
 import com.service.MemberService;
+import com.service.OrderService;
 
 /**
  * Servlet implementation class AccountManagementServlet
@@ -41,8 +45,16 @@ public class AccountManagementServlet extends HttpServlet {
 			AddressDTO address=a_service.address(userid);
 			System.out.println(address);
 			
+			OrderService o_service=new OrderService();
+			OrderDTO orders=o_service.orders(userid);
+			System.out.println(orders);
+			
+			HashMap<String, String> profilemap=new HashMap<String, String>();
+			//profilemap.put("userid", userid);
+			
 			session.setAttribute("login", member);
 			session.setAttribute("address", address);
+			session.setAttribute("orders", orders);
 			response.sendRedirect("accountForm.jsp");//로그인 된 계정 정보 session 저장-마이페이지 오픈//mypage로 이름 바꿀까?
 		} else {
 			//alert로 로그인 후 이용하세요 출력

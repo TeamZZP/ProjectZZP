@@ -120,6 +120,7 @@
 변경할 비밀번호: <input type="text" class="pw" name="chagnePasswd" id="chagnePasswd" readonly="readonly"><br>
 비밀번호 재확인: <input type="text" class="pw" name="checkPasswd" id="checkPasswd" readonly="readonly">
 	<b><span id="result2"></span></b><br>
+	<br>
 <button id="submit">확인</button>&nbsp;&nbsp;<button id="close">창 닫기</button>
 </form>
 </body>
