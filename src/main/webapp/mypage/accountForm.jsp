@@ -55,11 +55,11 @@
 	<input type="text" name="passwd" value="********" readonly="readonly">
 	<button id="changePasswd">변경</button><br>
 <br>
-<img alt="" src="mypage/mail.png" width="30px" height="30px">
+<img alt="" src="mypage/email.png" width="30px" height="30px">
 	<input type="text" name="email1" readonly="readonly" value="<%= email1 %>">@
 	<input type="text" name="email2" placeholder="직접입력" id="email2" readonly="readonly" value="<%= email2 %>">
 	<button id="changeEmail">변경</button><br>
-<img alt="" src="mypage/location.png" width="30px" height="30px">
+<img alt="" src="mypage/address.png" width="30px" height="30px">
 	<input type="text" name="post" id="sample4_postcode" placeholder="우편번호" readonly="readonly" value="<%= post_num %>"><br><!-- script 긁어서 자식창에 넣기 -->
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	<input type="text" name="addr1" id="sample4_roadAddress" placeholder="도로명주소" readonly="readonly" value="<%= addr1 %>" style="width: 450px">
@@ -67,7 +67,7 @@
 	<span id="guide" style="color:#999"></span>
 	<button id="changeAddress">주소 관리</button><br>
 <br>
-<img alt="" src="mypage/member.png" width="30px" height="30px">
+<img alt="" src="mypage/membership.png" width="30px" height="30px">
 	<input type="text" name="membership" value="멤버쉽" readonly="readonly"/><br>
 <img alt="" src="mypage/userprofile.png" width="30px" height="30px">
 	<input type="text" name="changeProfile" value="프로필 변경" readonly="readonly"/>

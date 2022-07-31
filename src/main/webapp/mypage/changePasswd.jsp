@@ -54,7 +54,7 @@
 		});//end fn
 		//3+. 비밀번호 재확인 후 다시 변경할 비밀번호 입력시 처리 추가
 		
-		$("button").on("click", function() {
+		$("#submit").on("click", function() {
 			//4-1. 데이터 입력 후 submit
 			if ($("#passwd").val().length == 0) {
 				alert("기존 비밀번호를 입력하세요.");
@@ -100,11 +100,15 @@
 				}
 			}//end if
 		});//end fn
+		
+		$("#close").on("click", function() {
+			close();
+		});//end fn
 	});//end ready
 </script>
 </head>
 <body>
-<form action="../AccountChangeServlet" method="post">
+<form action=" " method="post">
 <input type="hidden" name="userid" id="userid" value="<%= userid %>">
 <h2>변경할 비밀번호를 입력해 주십시오</h2>
 기존 비밀번호 입력: <input type="text" name="passwd" id="passwd">
@@ -112,7 +116,7 @@
 변경할 비밀번호: <input type="text" class="pw" name="chagnePasswd" id="chagnePasswd" readonly="readonly"><br>
 비밀번호 재확인: <input type="text" class="pw" name="checkPasswd" id="checkPasswd" readonly="readonly">
 	<b><span id="result2"></span></b><br>
-<button>확인</button>
+<button id="submit">확인</button>&nbsp;&nbsp;<button id="close">창 닫기</button>
 </form>
 </body>
 </html>
