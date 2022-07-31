@@ -7,12 +7,8 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
 
-	
 </script> 
-	
-
-
-<table width="100%" cellspacing="0" cellpadding="0">
+<table cellspacing="0" cellpadding="0">
 
 	<tr>
 		<td>
