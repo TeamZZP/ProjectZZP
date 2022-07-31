@@ -61,9 +61,45 @@
 	where chall_id=#{chall_id}
 </update>
 
+<update id="updateChall_hits">
+	update challenge
+	set chall_hits=chall_hits+1
+	where chall_id=#{chall_id}
+</update>
+
 <delete id="deleteChallenge">
 	delete from challenge
 	where chall_id=#{chall_id}
 </delete>
+
+
+
+<insert id="insertComment" parameterType="com.dto.CommentsDTO">
+	insert into comments
+	values (comments_comment_id_seq.NEXTVAL, #{chall_id}, #{comment_content}, sysdate, #{userid})
+</insert>
+
+<select id="selectAllComments" resultType="com.dto.CommentsDTO">
+	select * from comments
+	where chall_id=#{chall_id}
+	order by comment_id
+</select>
+
+<delete id="deleteComment">
+	delete from comments
+	where comment_id=#{comment_id}
+</delete>
+
+<select id="countComments" resultType="int">
+	select count(*) from comments
+	where chall_id=#{chall_id}
+</select>
+
+
+
+<select id="selectProfile" resultType="hashmap">
+	select * from profile
+	where userid=#{userid}
+</select>
 
 </mapper>
