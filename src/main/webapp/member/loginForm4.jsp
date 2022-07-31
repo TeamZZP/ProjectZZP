@@ -131,6 +131,9 @@ $(document).ready(function() {
 			event.preventDefault();
 		}
 	});
+	
+	//아이디, 비밀번호 값
+	
 });
 </script>
 <div class="login-page">

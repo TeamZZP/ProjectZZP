@@ -25,7 +25,12 @@
 			var popupY= (window.screen.height / 5) - (300 / 2);
 			window.open("mypage/changeProfile.jsp","",'status=no, height=450, width=400, left='+ popupX + ', top='+ popupY);
 		});
-	});
+		
+/* 		$("#changeSubmit").on("click", function() {
+			$("form").attr("action", "AccountChangeServlet");
+			System.out.println("수정 버튼 클릭");
+		}); */
+	});//end ready
 </script>
 <%
 	MemberDTO member=(MemberDTO) session.getAttribute("login");
@@ -48,15 +53,16 @@
 	int default_chk=address.getDefault_chk();
 %>
 <div style = "padding: 5px 5px 5px 20px;">
-<form method="post">
+<form action=" " method="post">
+<input type="hidden" name="userid" id="userid" value="<%= userid %>"/>
 <img alt="" src="mypage/user.png" width="30px" height="30px">
 	<input type="text" name="username" value="<%= username %>" readonly="readonly"/><br><!-- 수정 불가 or 퍼센트로 데이터 가져옴 -->
 <img alt="" src="mypage/passwd.png" width="30px" height="30px">
-	<input type="text" name="passwd" value="********" readonly="readonly">
+	<input type="text" name="passwd" value="<%= passwd %>" id="passwd" readonly="readonly">
 	<button id="changePasswd">변경</button><br>
 <br>
 <img alt="" src="mypage/email.png" width="30px" height="30px">
-	<input type="text" name="email1" readonly="readonly" value="<%= email1 %>">@
+	<input type="text" name="email1" id="email1" readonly="readonly" value="<%= email1 %>">@
 	<input type="text" name="email2" placeholder="직접입력" id="email2" readonly="readonly" value="<%= email2 %>">
 	<button id="changeEmail">변경</button><br>
 <img alt="" src="mypage/address.png" width="30px" height="30px">
@@ -72,5 +78,8 @@
 <img alt="" src="mypage/userprofile.png" width="30px" height="30px">
 	<input type="text" name="changeProfile" value="프로필 변경" readonly="readonly"/>
 	<button id="changeProfile">변경</button><br>
+<br>
+<!-- <hr>
+<button id="changeSubmit">수정</button> -->
 </form>
 </div>
