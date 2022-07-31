@@ -42,6 +42,9 @@ public class QuestionOneSelect extends HttpServlet {
 				
 				session.setAttribute("questionOneSelect", dto);
 				response.sendRedirect("questionDetail.jsp");
+			} else {
+				session.setAttribute("mesg", "다른 사용자의 글입니다");
+				response.sendRedirect("QuestionListServlet");
 			}
 		} else {
 			session.setAttribute("mesg", "권한이 없습니다");
