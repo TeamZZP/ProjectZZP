@@ -259,3 +259,12 @@ INSERT INTO challenge VALUES (CHALLENGE_CHALL_ID_SEQ.nextval, 'test', '재활용
 INSERT INTO challenge VALUES (CHALLENGE_CHALL_ID_SEQ.nextval, 'test', '옷장 정리하고 기부했어요', '열심히 하겠습니다~', '기부하기', 0, 0, sysdate, 'chall02.jpg');
 INSERT INTO challenge VALUES (CHALLENGE_CHALL_ID_SEQ.nextval, 'test', '아껴써야죠', '제로웨이스트 실천해보아요', '아껴쓰기', 0, 0, sysdate, 'chall03.jpg');
 COMMIT;
+
+
+-- 관리자, 공지
+INSERT into admin values ('admin1', 'zzp1', 'zzp1234', 'zzp1234@naver.com', '01012341234');
+insert into notice values (NOTICE_NOTICE_ID_SEQ.nextval, 'zzp공지', 'zzp에 오신 여러분 환영합니다',
+    sysdate, 0, 'admin1', 'main');
+insert into notice values (NOTICE_NOTICE_ID_SEQ.nextval, 'hi', 'zzp에 오신 여러분 환영합니다',
+    sysdate, 0, 'admin1', 'notice');
+commit;
