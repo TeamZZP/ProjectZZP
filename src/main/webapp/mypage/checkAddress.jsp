@@ -18,7 +18,9 @@
 <title>주소 관리</title>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
-	
+	$(document).ready(function() {
+		
+	});//end ready
 </script>
 </head>
 <body>
