@@ -6,8 +6,9 @@ import com.dto.OrderDTO;
 
 public class OrderDAO {
 
-	public OrderDTO orders(SqlSession session, String userid) {
-		OrderDTO dto=session.selectOne("OrderMapper.orders", userid);
+	public OrderDTO selectOrders(SqlSession session, String userid) {
+		OrderDTO dto=session.selectOne("OrderMapper.selectOrders", userid);
+		System.out.println(dto);
 		return dto;
 	}
 

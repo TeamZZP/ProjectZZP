@@ -46,7 +46,7 @@ public class AccountManagementServlet extends HttpServlet {
 			System.out.println(address);
 			
 			OrderService o_service=new OrderService();
-			OrderDTO orders=o_service.orders(userid);
+			OrderDTO orders=o_service.selectOrders(userid);
 			System.out.println(orders);
 			
 			HashMap<String, String> profilemap=new HashMap<String, String>();

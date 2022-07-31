@@ -13,14 +13,15 @@ public class OrderService {
 		super();
 		dao = new OrderDAO();
 	}
-	public OrderDTO orders(String userid) {
+	public OrderDTO selectOrders(String userid) {
 		SqlSession session=MySqlSessionFactory.getSqlSession();
 		OrderDTO dto=null;
 		try {
-			dto=dao.orders(session, userid);
+			dto=dao.selectOrders(session, userid);
 		} finally {
 			session.close();
 		}
+		System.out.println(dto);
 		return dto;
 	}
 
