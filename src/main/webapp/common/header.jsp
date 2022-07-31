@@ -57,9 +57,9 @@ MemberDTO dto = (MemberDTO)session.getAttribute("login");
       </div>
       <!-- 검색창 -->
 		<div class="container-fluid" style="margin-top: 5px;">
-			<form class="d-flex" style="float: right; display: inline-block;">
-				<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"  style="width:200px;">
-				<button class="btn btn-outline-success" type="submit">Search</button>
+			<form class="d-flex" style="float: right; display: inline-block;" action="ProductSearchServlet">
+				<input class="form-control me-2" type="search" placeholder="상품 검색" aria-label="Search"  style="width:200px;" name="searchValue">
+				<button class="btn btn-outline-success" type="submit">검색</button>
 			</form>
 		</div>
     </header>

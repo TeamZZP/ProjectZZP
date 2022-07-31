@@ -31,7 +31,6 @@ public class MemberIdCheckServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		out.print(mesg);
 		
-		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
