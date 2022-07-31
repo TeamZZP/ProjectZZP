@@ -47,7 +47,7 @@ public class AccountManagementServlet extends HttpServlet {
 		} else {
 			//alert로 로그인 후 이용하세요 출력
 			String mesg="로그인 후 이용하세요.";
-			session.setAttribute("notMypage", mesg);
+			session.setAttribute("mesg", mesg);
 			session.setMaxInactiveInterval(60*30);
 			
 			response.sendRedirect("LoginUIServlet");

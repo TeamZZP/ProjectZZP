@@ -70,7 +70,7 @@
 				$("#checkPasswd").focus();
 			} 
  			else {//3가지 다 입력 완료
-				//4-2. 변경된 비밀번호 데이터 베이스에 업데이트//#Fail_action 실행 안 됨, 데이터 전달 못 함--if문에서 문제가 생긴 듯->window close 문제였음
+				//4-2. 변경된 비밀번호 데이터 베이스에 업데이트//#Fail_action 실행 안 됨, 데이터 전달 못 함--if문에서 문제가 생긴 듯
 				//새로운 비밀번호 확인 불일치
 				if ($("#chagnePasswd").val() != $("#checkPasswd").val()) {
 					//console.log("비번 체크");
@@ -96,7 +96,7 @@
 					$("form").attr("action", "../AccountChangeServlet");
 					//변경 완료 alert, 창 닫기, 기존 마이페이지 화면 유지
 					alert("비밀번호가 변경되었습니다.");
-					//window.close();
+					window.close();
 /* 					setTimeout(function() {//창 안 닫힘
 						window.close();
 					}, 100); */

@@ -49,12 +49,12 @@ public class AccountChangeServlet extends HttpServlet {
 			System.out.println(email1);
 			System.out.println(email2);
 			
-			//기존에 보던 마이페이지로
-			response.sendRedirect("accountForm.jsp");
+			//기존에 보던 수정 페이지로
+			response.sendRedirect("mypage/changePasswd.jsp");
 		} else {
 			//alert로 로그인 후 이용하세요 출력
 			String mesg="로그인 후 이용하세요.";
-			session.setAttribute("notMypage", mesg);
+			session.setAttribute("mesg", mesg);
 			session.setMaxInactiveInterval(60*30);
 			
 			response.sendRedirect("LoginUIServlet");

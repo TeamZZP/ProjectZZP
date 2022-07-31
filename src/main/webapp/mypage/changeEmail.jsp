@@ -78,6 +78,7 @@
 이메일: <input type="text" class="email" name="email1" id="email1" readonly="readonly">@
 	<input type="text" class="email" name="email2" placeholder="직접입력" id="email2" readonly="readonly">
 	<select id="emailSel">
+		<option value="" selected disabled hidden>이메일선택</option>
 		<option value="daum.net">daum.net</option>
 		<option value="naver.com">naver.com</option>
 		<option value="google.com">google.com</option>
