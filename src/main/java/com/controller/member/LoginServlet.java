@@ -29,15 +29,16 @@ public class LoginServlet extends HttpServlet {
 		MemberService service = new MemberService();
 		MemberDTO dto = service.loginMember(map);
 		
+		HttpSession session = request.getSession();
 		if (dto!=null) {
 			//login 인증정보 저장
-			HttpSession session = request.getSession();
 			session.setAttribute("login", dto); 
 			session.setMaxInactiveInterval(60*60);
 			response.sendRedirect("MainServlet");
 		} else {
-			PrintWriter out = response.getWriter();
-			out.print("alert('로그인');");
+			//DB정보 없을 시 mesg 출력
+			session.setAttribute("mesg", "로그인 정보가 올바르지 않습니다:("); 
+			session.setMaxInactiveInterval(60*60);
 			response.sendRedirect("LoginUIServlet");
 		}
 	}

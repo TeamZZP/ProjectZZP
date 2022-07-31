@@ -3,10 +3,18 @@
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
 <script type="text/javascript">
     $(document).ready(function(){
-//form 서브밋//id. 비번이 0인 경우 에러창 띄우고 전송금지
+//form 서브밋//전체 값 미입력 시 submit X
  $("form").submit(function() {
  	var userid = $("#userid").val();
  	var passwd = $("#passwd").val();
+ 	var passwd2 = $("#result2").text();
+	var username = $("#username").val();
+	var email1 = $("#email1").val();
+	var email2 = $("#email2").val();
+	var phone = $("#phone").val();
+	var sample4_postcode = $("#sample4_postcode").val();
+	var sample4_roadAddress = $("#sample4_roadAddress").val();
+	var sample4_jibunAddress = $("#sample4_jibunAddress").val();
  	if (userid.length==0) {
 		alert("아이디를 입력해주세요 :)");
 		$("#userid").focus();
@@ -14,6 +22,26 @@
 	} else if (passwd.length==0) {
 		alert("비밀번호를 입력해주세요 :)");
 		$("#passwd").focus();
+		event.preventDefault();
+	} else if (passwd2.length==0) {
+		alert("비밀번호를 확인해주세요 :)");
+		$("#passwd2").focus();
+		event.preventDefault();
+	} else if (username.length==0) {
+		alert("이름을 입력해주세요 :)");
+		$("#username").focus();
+		event.preventDefault();
+	} else if (email1.length==0 || email2.length==0) {
+		alert("이메일을 입력해주세요 :)");
+		$("#email1").focus();
+		event.preventDefault();
+	} else if (phone.length==0) {
+		alert("전화번호를 입력해주세요 :)");
+		$("#phone").focus();
+		event.preventDefault();
+	} else if (sample4_postcode.length==0||sample4_roadAddress.length==0||sample4_jibunAddress.length==0) {
+		alert("주소를 입력해주세요 :)");
+		$("#sample4_postcode").focus();
 		event.preventDefault();
 	}
  });
@@ -49,21 +77,35 @@ $("#userid").keyup(function() {
 		}
 	})
 }); 
+
+$("#addMember").click(function() {
+	var mesg = $("#result").text();
+	var mesg2 = $("#result2").text();
+	if (mesg=="중복된 아이디입니다 :(") {
+		alert("아이디를 확인해주세요")
+		event.preventDefault();
+	}
+	if (mesg2=="비밀번호 불일치") {
+		alert("비밀번호를 확인해주세요 :(")
+		event.preventDefault();
+	};
+});
 	
 });
 
 </script>    
 <form action="MemberAddServlet" method="get">
 *아이디:<input type="text" name="userid" id="userid">
-<span id="result"></span>
+<input type="submit" value="중복확인" id="idCheck">
+<span id="result" style="color: red;"></span>
 <br> 
 *비밀번호:<input type="password" name="passwd" id="passwd"><br> 
 비밀번호확인:<input type="password" name="passwd2" id="passwd2">
-<span id="result2"></span>
+<span id="result2" style="color: red;"></span>
 <br> 
-이름:<input type="text" name="username">
+이름:<input type="text" name="username" id="username">
 <br>
-이메일:<input type="text" name="email1" >@
+이메일:<input type="text" name="email1" id="email1">@
        <input type="text" name="email2"  placeholder="직접입력" id="email2">
        <select id="emailSel">
         <option value="" selected disabled hidden>이메일선택</option>
@@ -72,7 +114,7 @@ $("#userid").keyup(function() {
         <option value="google.com">google.com</option>
        </select>
 <br>
-전화번호:<input type="text" name="phone" placeholder="-없이 11자리 입력해주세요">
+전화번호:<input type="text" name="phone" placeholder="-없이 11자리 입력해주세요" id="phone">
 <br>
 주소:<input type="text" name="post_num" id="sample4_postcode" placeholder="우편번호">
 <input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
@@ -80,7 +122,7 @@ $("#userid").keyup(function() {
 <input type="text" name="addr2" id="sample4_jibunAddress" placeholder="지번주소">
 <span id="guide" style="color:#999"></span>
 <br>
-<input type="submit" value="회원가입">
+<input type="submit" value="회원가입" id="addMember">
 <input type="reset" value="취소">
 </form>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>

@@ -45,12 +45,12 @@ public class MemberAddServlet extends HttpServlet {
 		
 		if (num>0) {
 			HttpSession session = request.getSession();
-			session.setAttribute("memberAdd", userid+"님 회원가입 회원가입을 축하합니다 :)");
+			session.setAttribute("mesg", userid+"님 회원가입 회원가입을 축하합니다 :)");
 			session.setMaxInactiveInterval(60*30);
 			
-			response.sendRedirect("main.jsp");
-		} else {
 			response.sendRedirect("LoginUIServlet");
+		} else {
+			response.sendRedirect("MemberUIServlet");
 		}
 		
 	}

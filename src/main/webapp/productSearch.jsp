@@ -8,8 +8,8 @@
 </head>
 <body>
 	<jsp:include page="common/header.jsp" flush="true"></jsp:include><br>
-	<h1>게시판 :></h1>
-	<jsp:include page="question/questionList.jsp" flush="true"></jsp:include> <br>
+	<jsp:include page="category.jsp" flush="true"></jsp:include><br>
+	<jsp:include page="product/productSearch.jsp" flush="true"></jsp:include><br>
 	<jsp:include page="common/footer.jsp" flush="true"></jsp:include><br>
 </body>
 </html>

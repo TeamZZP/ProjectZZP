@@ -1,9 +1,10 @@
-
+<%@page import="java.io.Console"%>
+<%@page import="org.apache.ibatis.reflection.SystemMetaObject"%>
 <%@page import="com.dto.ProductDTO"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
- <script type="text/javascript"
+<script type="text/javascript"
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
 
@@ -35,19 +36,6 @@
  <%
      
    	List <ProductDTO> list = (List<ProductDTO>)request.getAttribute("productList"); 
-     
-		if(list.get(1).getP_category().equals("timeEvent")||list.get(1).getP_category().equals("firstEvent")){
-			%>
-		<jsp:include page="productSaleCategory.jsp" flush="true" ></jsp:include><br>
-			<%}
-     	if(list.get(1).getP_category().equals("timeEvent")){
-     	%>
-     	<jsp:include page="../countdown.jsp"></jsp:include>
-    <% }
-     	if(list.get(1).getP_category().equals("firstEvent")){
-     		%>
-     	<jsp:include page="../firstEventbanner.jsp"></jsp:include>
-     <% }
 	 for (int i = 1; i <= list.size(); i++){
 	
 		 ProductDTO dto = list.get(i-1);
@@ -127,5 +115,3 @@
 		<td height="10">
 	</tr>
 </table>
-	
-    
