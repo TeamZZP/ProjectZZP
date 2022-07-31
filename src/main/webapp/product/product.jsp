@@ -7,7 +7,9 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
 
-</script>
+	
+</script> 
+	
 
 
 <table width="100%" cellspacing="0" cellpadding="0">
@@ -95,7 +97,10 @@
 									
 									<span><img src="images/keeping.png" width="35" height="35" ></span>
 									<span><img src="images/bubble.png" width="32" height="32"  ></span>
-									<span><img src="images/cart.jpg" width="35" height="35"  ></span>
+								
+
+									<img src="images/cart.jpg" width="35" height="35"  >
+									
 									
 									</td>	
 									

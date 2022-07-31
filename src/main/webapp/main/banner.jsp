@@ -13,7 +13,7 @@
     <div class="carousel-item active" data-bs-interval="10000" onclick="javascrip:location.href='IntroductionUIServlet';">
       <img src="images/main/banner_zzp.png" class="d-block w-100" alt="...">
     </div>
-    <div class="carousel-item" data-bs-interval="2000" onclick="javascrip:location.href='ProductSaleServlet?p_category=timeEvent';">
+    <div class="carousel-item" data-bs-interval="2000" onclick="javascrip:location.href='ProductListServlet?p_category=timeEvent';">
       <img src="images/main/banner_time.png" class="d-block w-100" alt="...">
     </div>
     <div class="carousel-item" onclick="javascrip:location.href='ChallengeListServlet';">
