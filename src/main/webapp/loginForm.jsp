@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>ZZP</title>
 <%
-	String mesg=(String) session.getAttribute("notMypage");
+	String mesg=(String) session.getAttribute("mesg");
 	if (mesg != null){
 %>
 <script type="text/javascript">

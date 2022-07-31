@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="QuestionMapper">
+	<select id="questionList" resultType="QuestionDTO">
+		select * from QUESTION order by Q_ID asc
+	</select>
+	<select id="questionOneSelect" resultType="QuestionDTO" parameterType="string">
+		select * from QUESTION where Q_ID = #{qID}
+	</select>
+	<insert id="questionInsert" parameterType="QuestionDTO">
+		insert into Q_BOARD_CATEGORY = #{Q_BOARD_CATEGORY}, Q_CATEGORY = #{Q_CATEGORY}, Q_TITLE = #{Q_TITLE}, Q_CONTENT = #{Q_CONTENT},
+			Q_CREATED = sysdate, Q_IMG = #{Q_IMG}, Q_STATUS = '답변대기', Q_ID = QUESTION_Q_ID_SEQ.nextval, P_ID = #{P_ID}
+			where USERID = #{userid}
+	</insert>
+</mapper>
