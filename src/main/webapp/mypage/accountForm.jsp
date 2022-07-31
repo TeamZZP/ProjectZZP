@@ -18,7 +18,7 @@
 		$("#changeAddress").on("click", function() {
 			var popupX = (window.screen.width / 2) - (200 / 2);
 			var popupY= (window.screen.height / 5) - (300 / 2);
-			window.open("mypage/checkAddress.jsp","",'status=no, height=300, width=400, left='+ popupX + ', top='+ popupY);
+			window.open("mypage/checkAddress.jsp","",'status=no, height=300, width=600, left='+ popupX + ', top='+ popupY);
 		});
 		$("#changeProfile").on("click", function() {
 			var popupX = (window.screen.width / 2) - (200 / 2);

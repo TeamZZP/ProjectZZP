@@ -87,7 +87,8 @@
 		<option value="daum.net">daum.net</option>
 		<option value="naver.com">naver.com</option>
 		<option value="google.com">google.com</option>
-	</select>
+	</select><br>
+	<br>
 <button id="submit">확인</button>&nbsp;&nbsp;<button id="close">창 닫기</button>
 </form>
 </body>
