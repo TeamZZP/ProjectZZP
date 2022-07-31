@@ -1,6 +1,11 @@
 <%@page import="com.dto.ProductDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<style>
+
+
+
+</style>
 <%
    ProductDTO dto = (ProductDTO)session.getAttribute("Retrieve");
    String p_id = dto.getP_id();
@@ -15,10 +20,10 @@
    String p_img = dto.getP_img();
 
 %>    
-<form name="productRetrieveForm" method="GET" action="#">
+<form name="OrderServlet" method="GET" action="#">
       
 
-   <table width="100%" cellspacing="0" cellpadding="0">
+   <table cellspacing="0" cellpadding="0">
       <tr>
          <td height="30">
       </tr>
@@ -54,6 +59,7 @@
                   <td class="td_red" colspan="2" style='padding-left: 30px'>
                   <%=p_selling_price %>
                   </td>
+                
                </tr>
                <tr>
                   <td class="td_title">제품소개</td>
@@ -66,8 +72,8 @@
                <tr>
                   <td class="td_title">배송비</td>
                   <td colspan="2"><font color="#2e56a9" size="2"
-                     style='padding-left: 30px'><b> 무료배송</b> </font> <font size="2">(도서
-                        산간지역 별도 배송비 추가)</font></td>
+                     style='padding-left: 30px'><b> 3000원</b> </font><br>
+                      <font size="2">(50000원 이상 무료배송/도서산간지역 별도 배송비 추가)</font></td>
                </tr>
                
 
@@ -86,11 +92,22 @@
             </table>
                
          </td>
+         
       </tr>
+      <tr>
+      <td></td>
+      <td>
+      <button  style="background-color: green"><font color = #ffffff>구매</font></button>
+   &nbsp;&nbsp;
+   <button style="background-color: green"><font color = #ffffff>장바구니</font></button>
+      </td>
+      </tr>
+      
    </table>
 
-   <br> <button onclick="reqCheck('order')" style="background-color: green"><font color = #ffffff>구매</font></button>
-   &nbsp;&nbsp;
-   <button onclick="reqCheck('cart')" style="background-color: green"><font color = #ffffff>장바구니</font></button>
+   
+   
+
+ 
 </form>
     

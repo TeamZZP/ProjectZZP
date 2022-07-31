@@ -7,9 +7,9 @@
 <link type="text/css" rel="stylesheet" href="<c:url value='/bootstrap/css/bootstrap.min.css'/>"/>    
 <script src="<c:url value='/bootstrap/js/bootstrap.js'/>" type="text/javascript"></script>
 <script src="<c:url value='/bootstrap/js/bootstrap.min.js'/>" type="text/javascript"></script>
-
-
 <jsp:include page="common/header.jsp" flush="true"></jsp:include><br>
-<jsp:include page="category.jsp" flush="true"></jsp:include><br>
+<jsp:include page="category.jsp" flush="true"></jsp:include>
+<div id="center">
 <jsp:include page="product/product.jsp" flush="true"></jsp:include><br>
+</div>
 <jsp:include page="common/footer.jsp" flush="true"></jsp:include><br>

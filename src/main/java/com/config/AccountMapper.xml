@@ -8,4 +8,10 @@
 		set passwd = #{chagnePasswd}
 		where userid = #{userid}
 	</update>
+	<update id="changeEmail" parameterType="hashmap">
+		update member
+		set email1 = #{email1}, 
+			email2 = #{email2}
+		where userid = #{userid}
+	</update>
 </mapper>
