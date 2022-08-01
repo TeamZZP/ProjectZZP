@@ -14,18 +14,13 @@
 		}
 		session.removeAttribute("mesg");
 	%>
-    <table  style="text-align: center;" class="table table-hover">
-    	<tr>
-    		<td>번호</td>
-    		<td>제목</td>
-    		<td>작성일</td>
-    		<td>조회</td>
-    	</tr>
-    	<tr>
-    		<td colspan="4">
-    			<table border="1" style="border-collapse: collapse;" class="table table-hover">
+	<table border="1" style="border-collapse: collapse; text-align: center;" class="table table-hover">
+    				<colgroup style="caption-side: top;" >zzp메인 공지 게시판</colgroup>
     				<tr>
-    					<td colspan="4"> &nbsp; &nbsp; &nbsp; &nbsp; zzp 메인 공지 게시판 &nbsp; &nbsp; &nbsp; &nbsp; </td>
+				    	<td>번호</td>
+				    	<td>제목</td>
+				    	<td>작성일</td>
+				    	<td>조회</td>
     				</tr>
     				<%
 			    		List<NoticeDTO> mainNoticeList = (List<NoticeDTO>)session.getAttribute("mainNoticeList");
@@ -40,8 +35,14 @@
     				<%
 			    		}
 			    	%>
-    			</table>
-    		</td>
+    </table>
+    <table border="1" style="text-align: center; border-collapse: collapse;" class="table table-hover">
+    	<tr>
+    		<td>번호</td>
+    		<td>제목</td>
+    		<td>작성일</td>
+    		<td>조회</td>
+    	</tr>
     	</tr>
     	<%
 			List<NoticeDTO> noticeList = (List<NoticeDTO>)session.getAttribute("noticeList");
