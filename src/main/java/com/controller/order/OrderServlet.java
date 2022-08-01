@@ -24,7 +24,7 @@ public class OrderServlet extends HttpServlet {
 		
 		
 		if(dto != null) {
-			
+			System.out.println("OrderServlet실행됨");
 			response.sendRedirect("order.jsp");
 			
 		}else {
