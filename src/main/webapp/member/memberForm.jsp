@@ -61,6 +61,12 @@ $("#emailSel").change(function() {
 });
 
 //아이디 중복 검사
+$("#idCheck").click(function() {
+	var popupX = (window.screen.width / 2) - (200 / 2);
+	var popupY= (window.screen.height / 5) - (300 / 2);
+	window.open("member/idCheckForm.jsp","",'status=no, height=200, width=600, left='+ popupX + ', top='+ popupY);
+});
+
 $("#userid").keyup(function() {
 	$.ajax({
 		type: "get",
@@ -78,6 +84,7 @@ $("#userid").keyup(function() {
 	})
 }); 
 
+//아이디 중복 or 비밀번호 불일치 시 로그인 불가
 $("#addMember").click(function() {
 	var mesg = $("#result").text();
 	var mesg2 = $("#result2").text();
