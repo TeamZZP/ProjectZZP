@@ -1,11 +1,24 @@
 <%@page import="com.dto.ProductDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<style>
 
+  
 
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
 
-</style>
+$(function() {
+	
+	$("#order").click(function() {
+	
+		var openWin = window.open("orderLoginCheck.jsp","","width=570, height=350");
+	});
+	
+
+});//end ready
+
+</script> 
+
 <%
    ProductDTO dto = (ProductDTO)session.getAttribute("Retrieve");
    String p_id = dto.getP_id();
@@ -19,9 +32,8 @@
    int p_stock =dto.getP_stock();
    String p_img = dto.getP_img();
 
-%>    
-<form name="OrderServlet" method="GET" action="#">
-      
+%>  
+
 
    <table cellspacing="0" cellpadding="0">
       <tr>
@@ -97,7 +109,7 @@
       <tr>
       <td></td>
       <td>
-      <button  style="background-color: green"><font color = #ffffff>구매</font></button>
+      <button  style="background-color: green" id="order"><font color = #ffffff>구매</font></button>
    &nbsp;&nbsp;
    <button style="background-color: green"><font color = #ffffff>장바구니</font></button>
       </td>
@@ -106,8 +118,5 @@
    </table>
 
    
-   
 
- 
-</form>
     

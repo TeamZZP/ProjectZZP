@@ -22,6 +22,9 @@
 			$("#QuestionInsert").click(function () {
 				$("#questionForm").attr("action", "QuestionInsertServlet");
 			})
+			$("#pID").click(function () {
+				window.open("productSelect.jsp","상품검색","width=400px height=500px");
+			});
 		});//end ready
 	</script>
 <form action="" id="questionForm">
@@ -30,7 +33,7 @@
 				<td colspan="2"> 제목 <input type="text" name="qTittle" id="qTittle"> </td>
 			</tr>
 			<tr>
-				<td colspan="2"> 상품정보 <input type="text" name="pId" id="pId"> </td>
+				<td colspan="2"> <button id="pID">상품 정보</button> </td>
 			</tr>
 			<tr>
 				<td colspan="2"> 문의 글 카테고리
