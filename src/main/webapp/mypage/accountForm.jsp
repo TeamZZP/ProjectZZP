@@ -23,7 +23,7 @@
 		$("#changeProfile").on("click", function() {
 			var popupX = (window.screen.width / 2) - (200 / 2);
 			var popupY= (window.screen.height / 5) - (300 / 2);
-			window.open("mypage/changeProfile.jsp","",'status=no, height=450, width=400, left='+ popupX + ', top='+ popupY);
+			window.open("mypage/changeProfile.jsp","",'status=no, height=500, width=400, left='+ popupX + ', top='+ popupY);
 		});
 		
 /* 		$("#changeSubmit").on("click", function() {

@@ -15,5 +15,10 @@ public class AccountDAO {
 		int num=session.update("AccountMapper.changeEmail", emailMap);
 		return num;
 	}
+
+	public int changeProfile(SqlSession session, HashMap<String, String> profileMap) {
+		int num=session.update("AccountMapper.changeProfile", profileMap);
+		return num;
+	}
 	
 }
