@@ -20,7 +20,7 @@
 <body>
 <jsp:include page="common/header.jsp" flush="true"></jsp:include><br>
 <div>
-<jsp:include page="member/loginForm4.jsp" flush="true"></jsp:include> 
+<jsp:include page="member/loginForm.jsp" flush="true"></jsp:include> 
 </div>
 <jsp:include page="common/footer.jsp" flush="true"></jsp:include><br>
 </body>
