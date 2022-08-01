@@ -62,9 +62,11 @@ $("#emailSel").change(function() {
 
 //아이디 중복 검사
 $("#idCheck").click(function() {
+	event.preventDefault();
 	var popupX = (window.screen.width / 2) - (200 / 2);
 	var popupY= (window.screen.height / 4) - (300 / 2);
 	window.open("member/idCheckForm.jsp","",'status=no, height=200, width=600, left='+ popupX + ', top='+ popupY);
+	
 });
 
 /* $("#userid").keyup(function() {
