@@ -70,17 +70,17 @@
 	</tr>
 	<tr>
 	  <% if(chall_img==null) {%>
-	  	<td colspan="2">사진 올리기<input type="text" name="chall_img"></td>
+	  	<td colspan="2">사진 올리기<input type="text" name="chall_img" style="width: 600px;"></td>
 	  <%} else { %>
 	 	<td colspan="2">
-	 		<img src="images/<%= chall_img %>" width="500" height="500"><br>
+	 		<img src="images/<%= chall_img %>" width="500" height="500" border="0" align="middle"><br>
 	 		이미지수정하기<input type="text" name="chall_img" value="<%= chall_img %>">
 	 	</td>
 	  <%} %>
 	</tr>
 	<tr>
 	  <td colspan="2">
-	  본문 작성<input type="text" name="chall_content" 
+	  본문 작성<input type="text" name="chall_content" style="width: 600px; height: 200px;"
 	  		<% if(chall_content!=null) {%>value="<%=chall_content%>"<%} %>></td>
 	</tr>
 	<tr>
@@ -88,7 +88,7 @@
 	  <% if(dto==null) {%>
 	 	<td><input type="submit" value="글쓰기"></td>
 	  <%} else { %>
-	  	<td><input type="submit" value="수정하기"></td>
+	  	<td align="right"><input type="submit" value="수정하기"></td>
 	  <%} %>
 	</tr>
 </table>
