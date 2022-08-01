@@ -57,10 +57,10 @@
 					<td>
 							<select name="sortBy" id="sortBy">
 								<option value="none" selected disabled hidden>정렬</option>
-								<option value="newest">최신순</option>
-								<option value="thisMonthChall">이 달의 챌린지</option>
-								<option value="mostLiked">최근 좋아요순</option>
-								<option value="mostCommented">최근 댓글 많은순</option>
+								<option value="chall_id">최신순</option>
+								<!-- <option value="thisMonthChall">이 달의 챌린지</option> -->
+								<option value="chall_liked">인기순</option>
+								<option value="mostCommented">댓글 많은순</option>
 							</select>
 							
 						<a href="ChallengeUIServlet">글쓰기</a>
