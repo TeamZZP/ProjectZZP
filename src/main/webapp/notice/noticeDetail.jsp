@@ -38,8 +38,8 @@
 				<td colspan="2"><%=nDTO.getNOTICE_CONTENT()%></td>
 			</tr>
 			<tr>
-				<td><button onclick="NoticeList()">목록</button></td>
-				<td><button type="submit" id="NoticeUpdate">수정</button></td>
+				<td><button onclick="NoticeList()" class="btn btn-outline-success" >목록</button></td>
+				<td><button type="submit" id="NoticeUpdate" class="btn btn-outline-success" >수정</button></td>
 			</tr>
 			<tr>
 				<td colspan="2">다음글 <a href="NoticeOneSelectServlet?NOTICE_ID=<%=nDTO.getNOTICE_ID() + 1%>"> <%= nextDTO.getNOTICE_TITTLE() %>  </a></td>

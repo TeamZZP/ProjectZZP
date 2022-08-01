@@ -52,10 +52,10 @@
 				<td colspan="2">첨부파일 <input type="file" name="qFile" value="<%=qDTO.getQ_IMG()%>"> </td>
 			</tr>
 			<tr>
-				<td> <button id="QuestionList">목록</button> </td>
+				<td> <button id="QuestionList" class="btn btn-outline-success" >목록</button> </td>
 				<td>
-					<button type="submit" id="questionUpdate">등록</button>
-					<button type="reset">취소</button>
+					<button type="submit" id="questionUpdate" class="btn btn-outline-success" >등록</button>
+					<button type="reset" class="btn btn-outline-success" >취소</button>
 				</td>
 			</tr>
 		</table>

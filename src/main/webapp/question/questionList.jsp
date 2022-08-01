@@ -63,7 +63,7 @@
     <tr>
     	<td colspan="5"></td>
     	<td>  
-    		<button class="table table-hover" onclick="location.href='questionInsert.jsp'">글쓰기</button>
+    		<button class="btn btn-outline-success" onclick="location.href='questionInsert.jsp'">글쓰기</button>
     	</td>
     </tr>
     </table>

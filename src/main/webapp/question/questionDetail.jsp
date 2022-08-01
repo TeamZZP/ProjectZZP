@@ -38,11 +38,11 @@
 			</tr>
 			<tr>
 				<td>
-				 	<button id="questionList">목록</button> 
+				 	<button id="questionList" class="btn btn-outline-success" >목록</button> 
 				</td>
 				<td>
-					<button id="questionUpdate">수정</button> 
-				 	<button id="questionDelete">삭제</button>
+					<button id="questionUpdate" class="btn btn-outline-success" >수정</button> 
+				 	<button id="questionDelete" class="btn btn-outline-success" >삭제</button>
 				</td>
 			</tr>
 		</table>
