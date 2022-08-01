@@ -9,13 +9,13 @@
     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
      </div>
   <div class="carousel-inner">
-    <div class="carousel-item active" data-bs-interval="10000" onclick="javascrip:location.href='IntroductionUIServlet';">
+    <div class="carousel-item active" data-bs-interval="3000" onclick="javascrip:location.href='IntroductionUIServlet';">
       <img src="images/main/banner_zzp.png" class="d-block w-100" alt="...">
     </div>
-    <div class="carousel-item" data-bs-interval="2000" onclick="javascrip:location.href='ProductListServlet?p_category=timeEvent';">
+    <div class="carousel-item" data-bs-interval="3000" onclick="javascrip:location.href='ProductListServlet?p_category=timeEvent';">
       <img src="images/main/banner_time.png" class="d-block w-100" alt="...">
     </div>
-    <div class="carousel-item" onclick="javascrip:location.href='ChallengeListServlet';">
+    <div class="carousel-item" data-bs-interval="3000" onclick="javascrip:location.href='ChallengeListServlet';">
       <img src="images/main/banner_monthchall.png" class="d-block w-100" alt="...">
     </div>
   </div>

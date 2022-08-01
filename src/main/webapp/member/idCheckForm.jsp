@@ -47,5 +47,7 @@ $(function() {
   	 </div>
   </div>
 <span id="result"></span>
+<button class="btn btn-success" id="useId">사용하기</button>
+<button class="btn btn-success" id="">취소</button>
 </body>
 </html>
