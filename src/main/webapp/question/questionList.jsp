@@ -14,7 +14,7 @@
 	}
 	session.removeAttribute("mesg");
 %>
-     <table  style="text-align: center;">
+     <table  style="text-align: center;" class="table table-hover">
     	<tr>
     		<td>번호</td>
     		<td>상품</td>

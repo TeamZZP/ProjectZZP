@@ -16,7 +16,7 @@
 			}
 	</script>
 	<form action="NoticeUpdate.jsp" method="post">
-		<table border="1" style="border-collapse: collapse;">
+		<table border="1" style="border-collapse: collapse;" >
 			<tr>
 				<td colspan="2">제목 <%=nDTO.getNOTICE_TITTLE()%></td>
 			</tr>

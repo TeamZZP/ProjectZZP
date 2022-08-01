@@ -14,7 +14,7 @@
 		}
 		session.removeAttribute("mesg");
 	%>
-    <table  style="text-align: center;">
+    <table  style="text-align: center;" class="table table-hover">
     	<tr>
     		<td>번호</td>
     		<td>제목</td>
@@ -23,7 +23,7 @@
     	</tr>
     	<tr>
     		<td colspan="4">
-    			<table border="1" style="border-collapse: collapse;">
+    			<table border="1" style="border-collapse: collapse;" class="table table-hover">
     				<tr>
     					<td colspan="4"> &nbsp; &nbsp; &nbsp; &nbsp; zzp 메인 공지 게시판 &nbsp; &nbsp; &nbsp; &nbsp; </td>
     				</tr>

@@ -7,11 +7,18 @@
 		select * from QUESTION order by Q_ID asc
 	</select>
 	<select id="questionOneSelect" resultType="QuestionDTO" parameterType="string">
-		select * from QUESTION where Q_ID = #{qID}
+		select * from QUESTION where Q_ID = #{Q_ID}
 	</select>
 	<insert id="questionInsert" parameterType="QuestionDTO">
-		insert into Q_BOARD_CATEGORY = #{Q_BOARD_CATEGORY}, Q_CATEGORY = #{Q_CATEGORY}, Q_TITLE = #{Q_TITLE}, Q_CONTENT = #{Q_CONTENT},
-			Q_CREATED = sysdate, Q_IMG = #{Q_IMG}, Q_STATUS = '답변대기', Q_ID = QUESTION_Q_ID_SEQ.nextval, P_ID = #{P_ID}
-			where USERID = #{userid}
+		insert into QUESTION (Q_BOARD_CATEGORY, Q_CATEGORY, Q_TITLE, Q_CONTENT, Q_CREATED, Q_IMG, Q_STATUS, Q_ID, P_ID, USERID)
+			values (#{Q_BOARD_CATEGORY}, #{Q_CATEGORY}, #{Q_TITLE}, #{Q_CONTENT}, sysdate, #{Q_IMG}, '답변대기', QUESTION_Q_ID_SEQ.nextval, 
+			#{P_ID}, #{USERID})
 	</insert>
+	<update id="questionUpdate" parameterType="QuestionDTO">
+		update QUESTION set Q_BOARD_CATEGORY = #{Q_BOARD_CATEGORY}, Q_CATEGORY = #{Q_CATEGORY}, Q_TITLE = #{Q_TITLE}, Q_CONTENT = #{Q_CONTENT},
+			Q_IMG = #{Q_IMG}, P_ID = #{P_ID}  where Q_ID = #{Q_ID} 
+	</update>
+	<delete id="questionDelete" parameterType="string">
+		delete from QUESTION where Q_ID = #{qID} 
+	</delete>
 </mapper>
