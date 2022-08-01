@@ -1,12 +1,14 @@
 package com.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 
 import com.dto.NoticeDTO;
 import com.dto.PageDTO;
+import com.dto.ProductDTO;
 import com.dto.QuestionDTO;
 
 public class QuestionDAO {
@@ -52,6 +54,16 @@ public class QuestionDAO {
 	}
 	private int totalCount(SqlSession session) {
 		return session.selectOne("QuestionMapper.totalCount");
+	}
+
+	public List<ProductDTO> prodSelect(SqlSession session, Map<String, String> map) {
+		List<ProductDTO> list = session.selectList("QuestionMapper.prodSelect", map);
+		return list;
+	}
+
+	public int count(SqlSession session, Map<String, String> map) {
+		int num = session.selectOne("QuestionMapper.count", map);
+		return num;
 	}
 
 }
