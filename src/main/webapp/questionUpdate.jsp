@@ -3,13 +3,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<title>Insert title here</title>
+<meta charset="UTF-8">
+<title>Insert title here</title>
 </head>
 <body>
 	<jsp:include page="common/header.jsp" flush="true"></jsp:include><br>
-	<h1>게시물 작성 :></h1>
-	<jsp:include page="question/questionInsert.jsp" flush="true"></jsp:include> <br>
+	<h1>게시물 수정 :></h1>
+	<jsp:include page="question/questionUpdate.jsp" flush="true"></jsp:include> <br>
 	<jsp:include page="common/footer.jsp" flush="true"></jsp:include>
 </body>
 </html>

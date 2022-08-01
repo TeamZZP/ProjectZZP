@@ -51,11 +51,11 @@ public class MemberService {
 		return dto;
 	}
 
-	public MemberDTO mypage(String userid) {
+	public MemberDTO selectMember(String userid) {
 		SqlSession session=MySqlSessionFactory.getSqlSession();
 		MemberDTO member=null;
 		try {
-			member=dao.mypage(session, userid);
+			member=dao.selectMember(session, userid);
 		} finally {
 			session.close();
 		}

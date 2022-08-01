@@ -3,9 +3,11 @@ package com.service;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
+import org.omg.PortableServer.REQUEST_PROCESSING_POLICY_ID;
 
 import com.config.MySqlSessionFactory;
 import com.dao.QuestionDAO;
+import com.dto.PageDTO;
 import com.dto.QuestionDTO;
 
 public class QuestionService {
@@ -49,6 +51,41 @@ public class QuestionService {
 			session.close();
 		}
 		return num;
+	}
+
+	public int questionUpdate(QuestionDTO qDTO) {
+		int num = 0;
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		try {
+			num = dao.questionUpdate(session, qDTO);
+			session.commit();
+		} finally {
+			session.close();
+		}
+		return num;
+	}
+
+	public int questionDelete(String qID) {
+		int num = 0;
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		try {
+			num = dao.questionDelete(session, qID);
+			session.commit();
+		} finally {
+			session.close();
+		}
+		return num;
+	}
+
+	public PageDTO page(int curPage) {
+		PageDTO pDTO = null;
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		try {
+			pDTO = dao.page(session, curPage);
+		} finally {
+			session.close();
+		}
+		return pDTO;
 	}
 
 }

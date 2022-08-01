@@ -9,6 +9,10 @@
 	#challMainContent {
 		margin: 0 auto;
 	}
+	a {
+		text-decoration: none;
+		color: black;
+	}
 </style>
 <%
 	PageDTO pDTO = (PageDTO) request.getAttribute("pDTO");
@@ -40,24 +44,28 @@
 </script>
 
 <div id="challMainContent">
-<a href="" >이 달의 챌린지 [ 용기내! 챌린지 ] 참여하러 가기</a>
-
-	<select name="sortBy" id="sortBy">
-		<option value="none" selected disabled hidden>정렬</option>
-		<option value="newest">최신순</option>
-		<option value="thisMonthChall">이 달의 챌린지</option>
-		<option value="mostLiked">최근 좋아요순</option>
-		<option value="mostCommented">최근 댓글 많은순</option>
-	</select>
-	
-<a href="ChallengeUIServlet">글쓰기</a>
-
 
 <table width="100%" cellspacing="0" cellpadding="0">
 
 	<tr>
 		<td>
 			<table align="center" width="710" cellspacing="0" cellpadding="0" border="0">
+				<tr>
+					<td colspan="3">
+						<a href="">이 달의 챌린지 [ 용기내! 챌린지 ] 참여하러 가기</a>
+					</td>
+					<td>
+							<select name="sortBy" id="sortBy">
+								<option value="none" selected disabled hidden>정렬</option>
+								<option value="newest">최신순</option>
+								<option value="thisMonthChall">이 달의 챌린지</option>
+								<option value="mostLiked">최근 좋아요순</option>
+								<option value="mostCommented">최근 댓글 많은순</option>
+							</select>
+							
+						<a href="ChallengeUIServlet">글쓰기</a>
+					</td>
+				</tr>
 
 				<tr>
 					<td height="5"></td>
@@ -118,7 +126,9 @@
 								<td height="10">
 							</tr>
 							<tr>
-								<td colspan="2" align="center"><%=chall_title%></td>
+								<td colspan="2" align="center">
+								<a href="ChallengeDetailServlet?chall_id=<%=chall_id%>">
+								<%=chall_title%></a></td>
 							</tr>
 						</table>
 
@@ -164,9 +174,9 @@
 		    if (totalCount%perPage!=0) totalPage++;
 		    for (int p=1; p<=totalPage; p++) {
 		    	if (p==curPage) {
-		    		out.print(p+"&nbsp;");
+		    		out.print("<b>"+p+"</b>&nbsp;&nbsp;");
 		    	} else {
-		    		out.print("<a href='ChallengeListServlet?curPage="+p+"&searchName="+searchName+"&searchValue="+searchValue+"'>"+p+"</a>&nbsp;");
+		    		out.print("<a href='ChallengeListServlet?curPage="+p+"&searchName="+searchName+"&searchValue="+searchValue+"'>"+p+"</a>&nbsp;&nbsp;");
 		    		/* out.print("<a href='ChallengeListServlet?curPage="+i+
 		    				"&searchName="+searchName+"&searchValue="+searchValue+"&sortBy="+sortBy+"'>"+i+"</a>&nbsp;");  */
 		    	} 

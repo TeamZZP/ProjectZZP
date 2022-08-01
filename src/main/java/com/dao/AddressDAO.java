@@ -6,8 +6,8 @@ import com.dto.AddressDTO;
 
 public class AddressDAO {
 
-	public AddressDTO address(SqlSession session, String userid) {
-		AddressDTO address=session.selectOne("address", userid);
+	public AddressDTO selectAddress(SqlSession session, String userid) {
+		AddressDTO address=session.selectOne("selectAddress", userid);
 		return address;
 	}
 

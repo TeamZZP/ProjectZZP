@@ -42,24 +42,24 @@ public class AccountChangeServlet extends HttpServlet {
 			
 			if (chagnePasswd != null) {
 				//1. 비밀번호 update--userid 데이터도 필요함--현재 changePasswd.jsp에는 userid 값이 없음->hidden으로 설정
-				HashMap<String, String> passwdmap=new HashMap<String, String>();
-				passwdmap.put("userid", userid);
-				passwdmap.put("chagnePasswd", chagnePasswd);
-				System.out.println(passwdmap);
+				HashMap<String, String> passwdMap=new HashMap<String, String>();
+				passwdMap.put("userid", userid);
+				passwdMap.put("chagnePasswd", chagnePasswd);
+				System.out.println(passwdMap);
 				AccountService service=new AccountService();
-				int num=service.changePasswd(passwdmap);
+				int num=service.changePasswd(passwdMap);
 				System.out.println("수정된 비밀번호 갯수 : "+num);//--비밀번호 수정 완료
 				//기존에 보던 수정 페이지로
 				response.sendRedirect("mypage/changePasswd.jsp");
 			} else if (email1 != null && email2 != null ) {
 				//2. 이메일 update
-				HashMap<String, String> emailmap=new HashMap<String, String>();
-				emailmap.put("userid", userid);
-				emailmap.put("email1", email1);
-				emailmap.put("email2", email2);
-				System.out.println(emailmap);
+				HashMap<String, String> emailMap=new HashMap<String, String>();
+				emailMap.put("userid", userid);
+				emailMap.put("email1", email1);
+				emailMap.put("email2", email2);
+				System.out.println(emailMap);
 				AccountService service=new AccountService();
-				int num=service.changeEmail(emailmap);
+				int num=service.changeEmail(emailMap);
 				System.out.println("수정된 이메일 갯수 : "+num);//--이메일 수정 완료
 				//기존에 보던 수정 페이지로
 				response.sendRedirect("mypage/changeEmail.jsp");

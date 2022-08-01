@@ -14,11 +14,11 @@ public class AccountService {
 		dao=new AccountDAO();
 	}
 
-	public int changePasswd(HashMap<String, String> passwdmap) {
+	public int changePasswd(HashMap<String, String> passwdMap) {
 		SqlSession session=MySqlSessionFactory.getSqlSession();
 		int num=0;
 		try {
-			num=dao.changePasswd(session, passwdmap);
+			num=dao.changePasswd(session, passwdMap);
 			session.commit();
 		} finally {
 			session.close();
@@ -26,11 +26,11 @@ public class AccountService {
 		return num;
 	}
 
-	public int changeEmail(HashMap<String, String> emailmap) {
+	public int changeEmail(HashMap<String, String> emailMap) {
 		SqlSession session=MySqlSessionFactory.getSqlSession();
 		int num=0;
 		try {
-			num=dao.changeEmail(session, emailmap);
+			num=dao.changeEmail(session, emailMap);
 			session.commit();
 		} finally {
 			session.close();

@@ -16,6 +16,10 @@
 	td {
 		align-items: center;
 	}
+	a {
+		text-decoration: none;
+		color: black;
+	}
 </style>
 <% 
 	ChallengeDTO dto = (ChallengeDTO) request.getAttribute("dto");
