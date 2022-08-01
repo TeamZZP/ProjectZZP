@@ -58,10 +58,10 @@ public class QuestionUpdateServlet extends HttpServlet {
 			
 			if (num == 1) {
 				session.setAttribute("mesg", "게시물이 변경되었습니다");
-				response.sendRedirect("QuestionOneSelect");
+				response.sendRedirect("QuestionListServlet");
 			} else {
 				session.setAttribute("mesg", "게시물이 변경 실패");
-				response.sendRedirect("QuestionOneSelect");
+				response.sendRedirect("QuestionListServlet");
 			}
 			
 		} else {
