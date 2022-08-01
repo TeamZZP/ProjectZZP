@@ -3,9 +3,11 @@ package com.dao;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 
 import com.dto.NoticeDTO;
+import com.dto.PageDTO;
 
 public class NoticeDAO {
 
@@ -36,5 +38,39 @@ public class NoticeDAO {
 		int num = session.update("NoticeMapper.noticeHite", map);
 		return num;
 	}
-
+	public PageDTO page(SqlSession session, int curPage) {
+		PageDTO pDTO = new PageDTO();
+		pDTO.setPerPage(10);
+		int perPage = pDTO.getPerPage();
+		int offset = (curPage - 1) * perPage;
+		
+		List<NoticeDTO> list = session.selectList("NoticeMapper.noticeList", null, new RowBounds(offset, perPage));
+		
+		pDTO.setCurPage(curPage);
+		pDTO.setList(list);
+		pDTO.setTotalCount(totalCount(session));
+		
+		return pDTO;
+	}
+	private int totalCount(SqlSession session) {
+		return session.selectOne("NoticeMapper.totalCount");
+	}
+	
+	public PageDTO MainPage(SqlSession session, int mainCurPage) {
+		PageDTO pDTO = new PageDTO();
+		pDTO.setPerPage(5);
+		int perPage = pDTO.getPerPage();
+		int offset = (mainCurPage - 1) * perPage;
+		
+		List<NoticeDTO> list = session.selectList("NoticeMapper.pointNotice", null, new RowBounds(offset, perPage));
+		
+		pDTO.setCurPage(mainCurPage);
+		pDTO.setList(list);
+		pDTO.setTotalCount(MaintotalCount(session));
+		
+		return pDTO;
+	}
+	private int MaintotalCount(SqlSession session) {
+		return session.selectOne("NoticeMapper.MainCount");
+	}
 }

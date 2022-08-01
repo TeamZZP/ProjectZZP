@@ -21,4 +21,7 @@
 	<delete id="questionDelete" parameterType="string">
 		delete from QUESTION where Q_ID = #{qID} 
 	</delete>
+	<select id="totalCount" resultType="int">
+		select count(*) from QUESTION
+	</select>
 </mapper>

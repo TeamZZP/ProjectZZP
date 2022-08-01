@@ -7,10 +7,11 @@ public class PageDTO {
 	private int curPage;    //현재 볼 페이지 번호 
 	private int perPage;  //한페이지에 보여질 목록 수 
 	private int totalCount; //전체 레코드 갯수
+	
 	public PageDTO() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
+	
 	public PageDTO(List list, int curPage, int perPage, int totalCount) {
 		super();
 		this.list = list;
@@ -18,6 +19,7 @@ public class PageDTO {
 		this.perPage = perPage;
 		this.totalCount = totalCount;
 	}
+	
 	public List getList() {
 		return list;
 	}
