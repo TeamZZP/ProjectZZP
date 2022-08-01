@@ -33,7 +33,7 @@
 				<td colspan="2"> 제목 <input type="text" name="qTittle" id="qTittle"> </td>
 			</tr>
 			<tr>
-				<td colspan="2"> <button id="pID">상품 정보</button> </td>
+				<td colspan="2"> <button id="pID" class="btn btn-outline-success">상품 정보</button> </td>
 			</tr>
 			<tr>
 				<td colspan="2"> 문의 글 카테고리
@@ -61,10 +61,10 @@
 				<td colspan="2">첨부파일 <input type="file" name="qFile"> </td>
 			</tr>
 			<tr>
-				<td> <button id="QuestionList">목록</button> </td>
+				<td> <button id="QuestionList" class="btn btn-success">목록</button> </td>
 				<td>
-					<button id="QuestionInsert">등록</button>
-					<button type="reset">취소</button>
+					<button id="QuestionInsert" class="btn btn-success">등록</button>
+					<button type="reset" class="btn btn-success">취소</button>
 				</td>
 			</tr>
 		</table>
