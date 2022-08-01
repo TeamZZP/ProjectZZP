@@ -1,4 +1,5 @@
 <%@page import="com.dto.ProductDTO"%>
+<%@page import="com.dto.MemberDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
@@ -8,6 +9,13 @@
 <script type="text/javascript">
 
 $(function() {
+	
+	<%MemberDTO dtoM = new MemberDTO();
+	dtoM = (MemberDTO)session.getAttribute("login");
+	if(dtoM != null){
+		
+	}
+	%>
 	
 	$("#order").click(function() {
 	
