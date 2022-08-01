@@ -1,25 +1,9 @@
 <%@page import="com.dto.ProductDTO"%>
+<%@page import="com.dto.MemberDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-  
-
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script type="text/javascript">
-
-$(function() {
-	
-	$("#order").click(function() {
-	
-		var openWin = window.open("orderLoginCheck.jsp","","width=570, height=350");
-	});
-	
-
-});//end ready
-
-</script> 
-
-<%
+  <%
    ProductDTO dto = (ProductDTO)session.getAttribute("Retrieve");
    String p_id = dto.getP_id();
    String p_name = dto.getP_name();
@@ -32,7 +16,37 @@ $(function() {
    int p_stock =dto.getP_stock();
    String p_img = dto.getP_img();
 
-%>  
+%>    
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+
+$(function() {
+	
+	<%MemberDTO dtoM = new MemberDTO();
+	dtoM = (MemberDTO)session.getAttribute("login");%>
+	
+
+	$("#order").click(function() {
+		
+
+		<%if(dtoM != null){
+			/*  RequestDispatcher dis = request.getRequestDispatcher("OrderServlet");
+			dis.forward(request, response);  */
+		}else{%>
+		var openWin = window.open("orderLoginCheck.jsp","","width=570, height=350");
+		<%}%>
+	
+		
+	});
+	
+	
+	
+	
+
+});//end ready
+
+</script> 
 
 
    <table cellspacing="0" cellpadding="0">

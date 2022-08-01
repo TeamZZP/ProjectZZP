@@ -37,4 +37,16 @@ public class AccountService {
 		}
 		return num;
 	}
+
+	public int changeProfile(HashMap<String, String> profileMap) {
+		SqlSession session=MySqlSessionFactory.getSqlSession();
+		int num=0;
+		try {
+			num=dao.changeProfile(session, profileMap);
+			session.commit();
+		} finally {
+			session.close();
+		}
+		return num;
+	}
 }
