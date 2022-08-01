@@ -14,9 +14,11 @@
 <script type="text/javascript">
 $(function() {
 	$("#useridBtn").click(function() {
+		console.log("button");
+		console.log($("#userid").val());
 		$.ajax({
 			type: "get",
-			url: "MemberIdCheckServlet",
+			url: "../MemberIdCheckServlet",
 			dataType: "text",
 			data: {
 				userid: $("#userid").val()
@@ -24,26 +26,26 @@ $(function() {
 			success: function(responseData, status, xhr) {
 				$("#result").text(responseData);
 			},
-			error: function (xhr, status, error) {
+			error: function(xhr, status, error) {
 				console.log(error);
 			}
-		});
+		}); 
 	});
 });
 </script>
 </head>
 <body>
-<form class="row g-3">
-  <div class="col-auto">
-    <input type="text" readonly class="form-control-plaintext" id="staticEmail2" value="[ 아이디 중복 확인 ]">
+<input type="text" readonly class="form-control-plaintext" id="staticEmail2" value="[ 아이디 중복 확인 ]">
+  <div class="row gx-3 gy-2 align-items-cente">
+  	<div class="col-sm-3">
+   	 	<label class="visually-hidden" for="specificSizeInputName">ID</label>
+    	<input type="text" class="form-control" id="userid" placeholder="아이디 입력" >
+ 	 </div>
+  
+ 	 <div class="col-auto">
+    	<button type="submit" class="btn btn-outline-success" id="useridBtn">중복확인</button>
+  	 </div>
   </div>
-  <div class="col-auto">
-    <input type="text" class="form-control" id="userid" name="userid" placeholder="아이디 입력">
-  </div>
-  <div class="col-auto">
-    <button type="submit" class="btn btn-outline-success" id="useridBtn">중복확인</button>
-  </div>
-</form>
 <span id="result"></span>
 </body>
 </html>

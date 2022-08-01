@@ -63,11 +63,11 @@ $("#emailSel").change(function() {
 //아이디 중복 검사
 $("#idCheck").click(function() {
 	var popupX = (window.screen.width / 2) - (200 / 2);
-	var popupY= (window.screen.height / 5) - (300 / 2);
+	var popupY= (window.screen.height / 4) - (300 / 2);
 	window.open("member/idCheckForm.jsp","",'status=no, height=200, width=600, left='+ popupX + ', top='+ popupY);
 });
 
-$("#userid").keyup(function() {
+/* $("#userid").keyup(function() {
 	$.ajax({
 		type: "get",
 		url: "MemberIdCheckServlet",
@@ -82,7 +82,7 @@ $("#userid").keyup(function() {
 			console.log(error);
 		}
 	})
-}); 
+});  */
 
 //아이디 중복 or 비밀번호 불일치 시 로그인 불가
 $("#addMember").click(function() {
@@ -103,7 +103,8 @@ $("#addMember").click(function() {
 </script>    
 <form action="MemberAddServlet" method="get">
 *아이디:<input type="text" name="userid" id="userid">
-<input type="submit" value="중복확인" id="idCheck">
+<button id="idCheck" class="btn btn-outline-success">중복확인</button>
+<!-- <input type="submit" value="중복확인" id="idCheck"> -->
 <span id="result" style="color: red;"></span>
 <br> 
 *비밀번호:<input type="password" name="passwd" id="passwd"><br> 
@@ -123,14 +124,14 @@ $("#addMember").click(function() {
 <br>
 전화번호:<input type="text" name="phone" placeholder="-없이 11자리 입력해주세요" id="phone">
 <br>
-주소:<input type="text" name="post_num" id="sample4_postcode" placeholder="우편번호">
-<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
+주소:<input type="text" name="post_num" id="sample4_postcode" placeholder="우편번호" >
+<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기" class="btn btn-outline-success"><br>
 <input type="text" name="addr1" id="sample4_roadAddress" placeholder="도로명주소">
 <input type="text" name="addr2" id="sample4_jibunAddress" placeholder="지번주소">
 <span id="guide" style="color:#999"></span>
 <br>
-<input type="submit" value="회원가입" id="addMember">
-<input type="reset" value="취소">
+<input type="submit" value="회원가입" id="addMember" class="btn btn-success">
+<input type="reset" value="취소" class="btn btn-success">
 </form>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
