@@ -16,7 +16,7 @@
       <img src="images/main/banner_time.png" class="d-block w-100" alt="...">
     </div>
     <div class="carousel-item" onclick="javascrip:location.href='ChallengeListServlet';">
-      <img src="images/main/banner_chall.png" class="d-block w-100" alt="...">
+      <img src="images/main/banner_monthchall.png" class="d-block w-100" alt="...">
     </div>
   </div>
   <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">

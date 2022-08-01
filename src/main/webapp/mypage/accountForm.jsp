@@ -58,7 +58,7 @@
 <img alt="" src="mypage/user.png" width="30px" height="30px">
 	<input type="text" name="username" value="<%= username %>" readonly="readonly"/><br><!-- 수정 불가 or 퍼센트로 데이터 가져옴 -->
 <img alt="" src="mypage/passwd.png" width="30px" height="30px">
-	<input type="text" name="passwd" value="<%= passwd %>" id="passwd" readonly="readonly">
+	<input type="password" name="passwd" value="<%= passwd %>" id="passwd" readonly="readonly">
 	<button id="changePasswd">변경</button><br>
 <br>
 <img alt="" src="mypage/email.png" width="30px" height="30px">

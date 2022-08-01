@@ -6,13 +6,13 @@ import org.apache.ibatis.session.SqlSession;
 
 public class AccountDAO {
 
-	public int changePasswd(SqlSession session, HashMap<String, String> passwdmap) {
-		int num=session.update("AccountMapper.changePasswd", passwdmap);
+	public int changePasswd(SqlSession session, HashMap<String, String> passwdMap) {
+		int num=session.update("AccountMapper.changePasswd", passwdMap);
 		return num;
 	}
 
-	public int changeEmail(SqlSession session, HashMap<String, String> emailmap) {
-		int num=session.update("AccountMapper.changeEmail", emailmap);
+	public int changeEmail(SqlSession session, HashMap<String, String> emailMap) {
+		int num=session.update("AccountMapper.changeEmail", emailMap);
 		return num;
 	}
 	
