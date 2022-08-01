@@ -2,3 +2,8 @@
     pageEncoding="UTF-8"%>
 
 <title>Order</title>
+<html>
+<body>
+<h1>OrderPage</h1>
+</body>
+</html>

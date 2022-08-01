@@ -35,8 +35,8 @@ public class ProductListServlet extends HttpServlet {
 				List<ProductDTO> list = service.bestProduct();
 				System.out.println(list);
 				
-				HttpSession session = request.getSession();
-				session.setAttribute("productList", list);
+				
+				request.setAttribute("productList", list);
 				RequestDispatcher dis = request.getRequestDispatcher("product.jsp");
 				dis.forward(request, response);
 				
@@ -48,8 +48,8 @@ public class ProductListServlet extends HttpServlet {
 				List<ProductDTO> list = service.productList(p_category);
 				System.out.println(list);
 				
-				HttpSession session = request.getSession();
-				session.setAttribute("productList", list);
+				
+				request.setAttribute("productList", list);
 				RequestDispatcher dis = request.getRequestDispatcher("product.jsp");
 				dis.forward(request, response);
 				

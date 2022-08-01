@@ -29,7 +29,7 @@
 
  <%
      
-      List <ProductDTO> list = (List<ProductDTO>)session.getAttribute("productList"); 
+      List <ProductDTO> list = (List<ProductDTO>)request.getAttribute("productList"); 
      
      
       if(list.get(1).getP_category().equals("timeEvent")||list.get(1).getP_category().equals("firstEvent")){

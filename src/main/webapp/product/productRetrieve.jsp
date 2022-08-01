@@ -13,14 +13,17 @@ $(function() {
 	<%MemberDTO dtoM = new MemberDTO();
 	dtoM = (MemberDTO)session.getAttribute("login");
 	if(dtoM != null){
-		
-	}
-	%>
+		response.sendRedirect("OrderServlet");
+	}else{%>
 	
+
 	$("#order").click(function() {
 	
 		var openWin = window.open("orderLoginCheck.jsp","","width=570, height=350");
 	});
+	
+	<%}%>
+	
 	
 
 });//end ready
