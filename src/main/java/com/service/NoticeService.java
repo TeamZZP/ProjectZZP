@@ -99,15 +99,4 @@ public class NoticeService {
 		return pDTO;
 	}
 
-	public PageDTO MainPage(int MainCurPage) {
-		PageDTO pDTO = null;
-		SqlSession session = MySqlSessionFactory.getSqlSession();
-		try {
-			pDTO = dao.MainPage(session, MainCurPage);
-		} finally {
-			session.close();
-		}
-		return pDTO;
-	}
-
 }

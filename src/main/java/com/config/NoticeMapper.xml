@@ -28,7 +28,4 @@
 	<select id="totalCount" resultType="int">
 		select count(*) from notice where NOT NOTICE_CATEGORY = 'main'
 	</select>
-	<select id="MainCount" resultType="int">
-		select count(*) from notice where NOTICE_CATEGORY = 'main'
-	</select>
 </mapper>

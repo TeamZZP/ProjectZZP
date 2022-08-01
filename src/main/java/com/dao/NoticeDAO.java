@@ -56,21 +56,4 @@ public class NoticeDAO {
 		return session.selectOne("NoticeMapper.totalCount");
 	}
 	
-	public PageDTO MainPage(SqlSession session, int mainCurPage) {
-		PageDTO pDTO = new PageDTO();
-		pDTO.setPerPage(5);
-		int perPage = pDTO.getPerPage();
-		int offset = (mainCurPage - 1) * perPage;
-		
-		List<NoticeDTO> list = session.selectList("NoticeMapper.pointNotice", null, new RowBounds(offset, perPage));
-		
-		pDTO.setCurPage(mainCurPage);
-		pDTO.setList(list);
-		pDTO.setTotalCount(MaintotalCount(session));
-		
-		return pDTO;
-	}
-	private int MaintotalCount(SqlSession session) {
-		return session.selectOne("NoticeMapper.MainCount");
-	}
 }
