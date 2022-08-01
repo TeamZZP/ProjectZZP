@@ -21,6 +21,7 @@
     		<td>카테고리</td>
     		<td>제목</td>
     		<td>작성일</td>
+    		<td>작성자</td>
     	</tr>
     <%
     	List<QuestionDTO> list = (List<QuestionDTO>)session.getAttribute("questionList");
@@ -32,11 +33,13 @@
     		<td> <%= dto.getQ_CATEGORY() %> </td>
     		<td> <a href="QuestionOneSelect?Q_ID=<%= dto.getQ_ID() %>&USERID=<%=dto.getUSERID()%>"> <%= dto.getQ_TITLE() %> </a> </td>
     		<td> <%= dto.getQ_CREATED() %> </td>
+    		<td> <%= dto.getUSERID() %> </td>
     	</tr>
     <%
     	}
     %>
     <tr>
+    	<td></td>
     	<td></td>
     	<td></td>
     	<td></td>
