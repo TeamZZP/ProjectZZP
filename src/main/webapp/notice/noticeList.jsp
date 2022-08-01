@@ -52,7 +52,7 @@
 					          	if(i== NcurPage){
 					          		out.print(i+"&nbsp;"); //현재페이지
 					          	}else{
-					          		out.print("<a class='page-link' style='color: green;' href = 'NoticeListServlet?MainCurPage="+i+"'>" + i + " </a>");  
+					          		out.print("<a style='color: green;' href = 'NoticeListServlet?MainCurPage="+i+"'>" + i + " </a>");  
 					          	} //다른 페이지 선택시 링크로 이동
 					        }//end for
 					  	 %>
@@ -93,7 +93,7 @@
 		          	if(i== curPage){
 		          		out.print(i+"&nbsp;"); //현재페이지
 		          	}else{
-		          		out.print("<a class='page-link' style='color: green;' href = 'NoticeListServlet?curPage="+i+"'>" + i + " </a>");  
+		          		out.print("<a style='color: green;' href = 'NoticeListServlet?curPage="+i+"'>" + i + " </a>");  
 		          	} //다른 페이지 선택시 링크로 이동
 		        }//end for
 		  	 %>

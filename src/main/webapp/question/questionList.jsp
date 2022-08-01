@@ -53,7 +53,7 @@
 		          	if(i== curPage){
 		          		out.print(i+"&nbsp;"); //현재페이지
 		          	}else{
-		          		out.print("<a class='page-link' style='color: green;' href = 'QuestionListServlet?curPage="+i+"'>" + i + " </a>");  
+		          		out.print("<a style='color: green;' href = 'QuestionListServlet?curPage="+i+"'>" + i + " </a>");  
 		          	} //다른 페이지 선택시 링크로 이동
 		        }//end for
 		  	 %>
