@@ -47,6 +47,7 @@
 		});//end fn
 		
 		$("#close").on("click", function() {
+			opener.location.reload();//여기선 새로고침 됨
 			close();
 		});//end fn
 	});//end ready
