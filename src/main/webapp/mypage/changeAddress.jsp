@@ -58,6 +58,7 @@
 </script>
 </head>
 <body>
+<div style = "padding: 15px 5px 5px 20px;">
 <form action=" " method="get">
 <input type="hidden" name="userid" id="userid" value="<%= userid %>">
 <b>이름</b><br>
@@ -75,6 +76,7 @@
 <button id="submit" class="btn btn-success">저장</button>&nbsp;&nbsp;<button id="close" class="btn btn-success">창 닫기</button>
 <button class="btn btn-success">삭제</button><br>
 </form>
+</div>
 </body>
 </html>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
