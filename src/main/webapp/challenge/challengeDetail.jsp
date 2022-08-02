@@ -61,6 +61,8 @@
 		$("#commentAddBtn").on("click", function () {
 			if ("<%= currUserid %>" == "null") {
 				alert("로그인이 필요합니다.");
+			} else if ($("#comment_content").val().length == 0) {
+				$("#comment_content").focus();
 			} else {
 				let comment_content = $("#comment_content").val();
 				$.ajax({
@@ -174,7 +176,7 @@
 	<tr>
 	  <td><a href="ChallengeListServlet">목록</a></td>
 	  <td></td>
-	  <td><a href="challengeWrite.jsp">글쓰기</a></td>
+	  <td><a href="ChallengeUIServlet">글쓰기</a></td>
 	</tr>
 </table>
 </div>
