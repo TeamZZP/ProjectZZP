@@ -3,6 +3,7 @@
 <%@page import="com.dto.MemberDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <%
 	MemberDTO dto=(MemberDTO) session.getAttribute("login");
@@ -22,6 +23,10 @@
 <head>
 <meta charset="UTF-8">
 <title>주소 수정</title>
+<link type="text/css" rel="stylesheet" href="<c:url value='/bootstrap/css/bootstrap.css'/>"/>    
+<link type="text/css" rel="stylesheet" href="<c:url value='/bootstrap/css/bootstrap.min.css'/>"/>    
+<script src="<c:url value='/bootstrap/js/bootstrap.js'/>" type="text/javascript"></script>
+<script src="<c:url value='/bootstrap/js/bootstrap.min.js'/>" type="text/javascript"></script>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -43,8 +48,8 @@
 연락처: <input type="text" name="phone" id="phone" placeholder="<%= phone %>"/><br>
 <input type="text" name="deliveryReq" value="<%= order_request %>"><br>
 <input type="checkbox" value="기본 배송지로 선택"><br>
-<button>저장</button>
-<button>삭제</button><br>
+<button class="btn btn-success">저장</button>
+<button class="btn btn-success">삭제</button><br>
 </form>
 </body>
 </html>
