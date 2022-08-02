@@ -56,9 +56,22 @@ public class QuestionDAO {
 		return session.selectOne("QuestionMapper.totalCount");
 	}
 
-	public List<ProductDTO> prodSelect(SqlSession session, Map<String, String> map) {
-		List<ProductDTO> list = session.selectList("QuestionMapper.prodSelect", map);
-		return list;
+	public PageDTO prodSelect(SqlSession session, Map<String, String> map, int curPage, int prodNum) {
+		PageDTO pDTO = new PageDTO();
+		int perPage = prodNum;
+		int offset = (curPage - 1) * perPage;
+		
+		List<ProductDTO> list = session.selectList("QuestionMapper.prodSelect", map, new RowBounds(offset,perPage));
+		
+		pDTO.setCurPage(curPage);
+		pDTO.setList(list);
+		pDTO.setTotalCount(totalCount2(session, map));
+		
+		return pDTO;
+	}
+
+	private int totalCount2(SqlSession session, Map<String, String> map) {
+		return session.selectOne("QuestionMapper.totalCount2", map);
 	}
 
 	public int count(SqlSession session, Map<String, String> map) {

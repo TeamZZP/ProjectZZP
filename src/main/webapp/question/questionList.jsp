@@ -39,7 +39,7 @@
     		<td> <%= qDTO.getQ_ID() %> </td>
     		<td> <span id="pId<%=qDTO.getP_ID()%>"><%=qDTO.getP_ID()%></span> </td>
     		<td> <%= qDTO.getQ_CATEGORY() %> </td>
-    		<td> <a href="QuestionOneSelect?Q_ID=<%= qDTO.getQ_ID() %>&USERID=<%=qDTO.getUSERID()%>"> <%= qDTO.getQ_TITLE() %> </a> </td>
+    		<td> <a style="text-decoration: none; color: black;" href="QuestionOneSelect?Q_ID=<%= qDTO.getQ_ID() %>&USERID=<%=qDTO.getUSERID()%>"> <%= qDTO.getQ_TITLE() %> </a> </td>
     		<td> <%= crete %> </td>
     		<td> <%= qDTO.getUSERID() %> </td>
     	</tr>

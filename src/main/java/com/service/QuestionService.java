@@ -90,11 +90,11 @@ public class QuestionService {
 		return pDTO;
 	}
 
-	public List<ProductDTO> prodSelect(Map<String, String> map) {
-		List<ProductDTO> list = null;
+	public PageDTO prodSelect(Map<String, String> map, int curPage, int prodNum) {
+		PageDTO list = null;
 		SqlSession session = MySqlSessionFactory.getSqlSession();
 		try {
-			list = dao.prodSelect(session, map);
+			list = dao.prodSelect(session, map, curPage, prodNum);
 		} finally {
 			session.close();
 		}

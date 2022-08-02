@@ -1,3 +1,4 @@
+<%@page import="com.dto.PageDTO"%>
 <%@page import="org.apache.ibatis.reflection.SystemMetaObject"%>
 <%@page import="com.dto.ProductDTO"%>
 <%@page import="java.util.List"%>
@@ -34,7 +35,6 @@
 				</td>
 			</tr>
 	 	</table>
-	</form>
 	<%
 		Integer SelectNum = (Integer)request.getAttribute("SelectNum");
 		if(SelectNum == null){SelectNum = 0;}
@@ -43,8 +43,8 @@
 		<tr>
 			<td style="color: blue;" colspan="2">총 <%=SelectNum%> 개의 상품이 검색되었습니다.</td>
 			<td> 
-				<select name="pNum">
-					<option value="5">5개씩보기</option>
+				<select name="prodNum" id="prodNum">
+					<option value="5" selected="selected">5개씩보기</option>
 					<option value="10">10개씩보기</option>
 				</select> 
 			</td>
@@ -55,9 +55,12 @@
 			<td>선택</td>
 		</tr>
 		<%
-			List<ProductDTO> list = (List<ProductDTO>)request.getAttribute("SelectList");
+			PageDTO list = (PageDTO)request.getAttribute("SelectList");
+			System.out.print(list);
 			if(list != null){
-				for(ProductDTO pDTO : list){
+				List<ProductDTO> pList = list.getList();
+				for (int i = 0; i < pList.size(); i++) {
+					ProductDTO pDTO = pList.get(i);
 					String img = pDTO.getP_img();
 					String pName = pDTO.getP_name();
 					String pContent = pDTO.getP_content();
@@ -70,8 +73,28 @@
 		</tr>
 		<%
 				}//for
-			}//if
 		%>
+		<tr>
+			<td>
+				<%
+			        int curPage = list.getCurPage();
+			        String p = (String)request.getAttribute("perPage");
+					int perPage = Integer.parseInt(p);
+					int totalCount = list.getTotalCount();
+					int totalPage = totalCount/perPage; //페이지수 구하기
+					if(totalCount%perPage!=0) totalPage++; //페이지수 구하기 나머지가 있으면 +1
+			        for(int i=1; i<= totalPage; i++){//1페이지부터 시작함으로 i=1
+			          	if(i== curPage){
+			          		out.print(i+"&nbsp;"); //현재페이지
+			          	}else{
+			          		out.print("<a href='QuestionProdSelet?curPage="+i+"'>"+i+"</a>&nbsp;");
+			          	} //다른 페이지 선택시 링크로 이동
+			        }//end for
+			}//end if
+			 	 %>
+			</td>
+		</tr>
 	</table>
+	</form>
 </body>
 </html>
