@@ -98,6 +98,7 @@
 					console.log(pw);//이 데이터를 어떻게 넘기지?
 					opener.$("#passwd").val($("#chagnePasswd").val());//부모창에 업데이트
 					opener.$("#userid").val($("#userid").val());//부모창에 업데이트
+					opener.location.reload();//새로고침 안 됨--기존 비밀번호로 인식
 					$("form").attr("action", "../AccountChangeServlet");
 					//변경 완료 alert, 창 닫기, 기존 마이페이지 화면 유지
 					alert("비밀번호가 변경되었습니다.");
@@ -111,7 +112,7 @@
 		});//end fn
 		
 		$("#close").on("click", function() {
-			opener.parent.location.reload();//새로고침 안 됨--기존 비밀번호로 인식
+			opener.location.reload();//새로고침 안 됨--기존 비밀번호로 인식
 			//window.opener.document.location.href = window.opener.document.URL;
 			window.close();
 		});//end fn
