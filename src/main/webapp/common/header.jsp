@@ -29,7 +29,7 @@
       </a>
 
       <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-        <li><a href="IntroductionUIServlet" class="nav-link px-2 link-secondary">소개</a></li>
+        <li><a href="IntroductionUIServlet" class="nav-link px-2 link-dark">소개</a></li>
         <li><a href="StoreUIServlet" class="nav-link px-2 link-dark">스토어</a></li>
         <li><a href="ChallengeListServlet" class="nav-link px-2 link-dark">챌린지</a></li>
         <li><a href="NoticeListServlet" class="nav-link px-2 link-dark">공지사항</a></li>
