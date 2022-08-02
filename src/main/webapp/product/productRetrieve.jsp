@@ -23,6 +23,24 @@
 
 $(function() {
 	
+	$("#up").on("click",function(){
+		var count =parseInt($("#gAmount").val());
+		$("#gAmount").val(parseInt(count)+1);
+		
+		 var total = ( (count+1)* $(".price").text());
+		$("#total").text(total); 
+		
+	})//
+	
+	$("#down").on("click",function(){
+		var count = parseInt($("#gAmount").val());
+		if(count > 1){
+			$("#gAmount").val(parseInt(count)-1);
+			var total = ((count-1) * $(".price").text());
+			$("#total").text(total);
+		}
+	});
+	
 	<%MemberDTO dtoM = new MemberDTO();
 	dtoM = (MemberDTO)session.getAttribute("login");%>
 	
@@ -109,12 +127,11 @@ $(function() {
                   <input type="text"
                      name="gAmount" value="1" id="gAmount"
                      style="text-align: right; height: 18px">
-                     <img src="images/up.png" id="up" width="20" height="20"> 
-                     <img src="images/down.png" id="down" width="23" height="23">
+                     <button  id="up">+</button>
+                     <button  id="down">-</button><br>
                      </td>
                </tr>
-               <tr>
-               </tr>
+              
             </table>
                
          </td>
