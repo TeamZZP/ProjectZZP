@@ -36,7 +36,8 @@
 	 	</table>
 	</form>
 	<%
-		int SelectNum = (int)session.getAttribute("SelectNum");
+		Integer SelectNum = (Integer)session.getAttribute("SelectNum");
+		if(SelectNum == null){SelectNum = 0;}
 	%>
 	<table border="1" style="border-collapse: collapse;">
 		<tr>
