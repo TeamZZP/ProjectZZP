@@ -27,7 +27,7 @@
             <tr>
             
 
- <%
+<%
      
       List <ProductDTO> list = (List<ProductDTO>)request.getAttribute("productList"); 
      
@@ -39,16 +39,6 @@
         if(list.get(1).getP_category().equals("timeEvent")){
         %>
         <jsp:include page="../countdown.jsp"></jsp:include>
-
-   	List <ProductDTO> list = (List<ProductDTO>)request.getAttribute("productList"); 
-		if(list.get(1).getP_category().equals("timeEvent")||list.get(1).getP_category().equals("firstEvent")){
-			%>
-		<jsp:include page="productSaleCategory.jsp" flush="true" ></jsp:include><br>
-			<%}
-     	if(list.get(1).getP_category().equals("timeEvent")){
-     	%>
-     	<jsp:include page="../countdown.jsp"></jsp:include>
-
     <% }
         if(list.get(1).getP_category().equals("firstEvent")){
            %>
