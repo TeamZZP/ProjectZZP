@@ -4,7 +4,12 @@
 <%@page import="com.dto.NoticeDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+<style>
+a{
+	text-decoration: none;
+	color: black;
+}
+</style>
 	<%
 	String mesg = (String)session.getAttribute("mesg");
 		if(mesg != null){

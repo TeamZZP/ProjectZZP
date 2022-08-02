@@ -18,6 +18,10 @@
 	String addr1=address.getAddr1();
 	String addr2=address.getAddr2();
 	
+	if (addr2 == null) {
+		addr2="상세 주소를 입력하세요.";
+	}
+	
 	//String order_request=orders.getOrder_request();
 %>
 <html>
@@ -41,6 +45,12 @@
 			$("form").attr("action", "../AccountChangeServlet");
 			alert("주소가 변경되었습니다.");
 		});//end fn
+		$("#sample4_jibunAddress").on("click", function() {
+			if ($(this).val()=="상세 주소를 입력하세요.") {
+				$(this).val("");
+				$(this).removeAttr("readonly");
+			}
+		});
 		$("#close").on("click", function() {
 			close();
 		});//end fn
