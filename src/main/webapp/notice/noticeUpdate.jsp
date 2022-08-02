@@ -42,10 +42,10 @@
 				<td colspan="2"> <textarea rows="10" cols="50" name="nContent"><%=nDTO.getNOTICE_CONTENT()%></textarea> </td>
 			</tr>
 			<tr>
-				<td><button onclick="NoticeList()">목록보기</button></td>
+				<td><button onclick="NoticeList()" class="btn btn-success">목록보기</button></td>
 				<td>
-					<button type="submit">수정 완료</button>
-					<button onclick="NoticeDelete()">글 삭제</button>
+					<button type="submit" class="btn btn-success">수정 완료</button>
+					<button onclick="NoticeDelete()" class="btn btn-success">글 삭제</button>
 				</td>
 			</tr>
 		</table>
