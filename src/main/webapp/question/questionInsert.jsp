@@ -37,7 +37,8 @@
 				$("#questionForm").attr("action", "QuestionInsertServlet");
 			})
 			$("#pID").click(function () {
-				window.open("questionproductSelect.jsp","상품검색","width=400px height=500px");
+				window.open("questionproductSelect.jsp","","width=400px height=500px");
+				history.back();
 			});
 		});//end ready
 	</script>
@@ -45,6 +46,7 @@
 		<img src="images/question.png" alt="..." style="width: auto;">
 </div>
 <form action="" id="questionForm">
+	<input type="hidden" id="qt" value=""><span id="pp"></span>
 		<table>
 			<tr>
 				<td colspan="2"> 제목 <input type="text" name="qTittle" id="qTittle"> </td>

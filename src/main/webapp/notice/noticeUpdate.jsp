@@ -21,9 +21,6 @@
 			function NoticeList() {
 				$("form").attr("action", "NoticeListServlet");
 			}
-			function NoticeDelete() {
-				$("form").attr("action", "NoticeDeleteServlet");
-			}
 	</script>
 <div style="text-align: center; display: flex; justify-content:center; height: 100px; margin-bottom: 10px;" >
 		<img src="images/notice3.png" alt="..." style="width: auto;">
@@ -45,7 +42,6 @@
 				<td><button onclick="NoticeList()" class="btn btn-success">목록보기</button></td>
 				<td>
 					<button type="submit" class="btn btn-success">수정 완료</button>
-					<button onclick="NoticeDelete()" class="btn btn-success">글 삭제</button>
 				</td>
 			</tr>
 		</table>

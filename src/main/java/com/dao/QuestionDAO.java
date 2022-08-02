@@ -58,7 +58,8 @@ public class QuestionDAO {
 
 	public PageDTO prodSelect(SqlSession session, Map<String, String> map, int curPage, int prodNum) {
 		PageDTO pDTO = new PageDTO();
-		int perPage = prodNum;
+		pDTO.setPerPage(prodNum);
+		int perPage = pDTO.getPerPage();
 		int offset = (curPage - 1) * perPage;
 		
 		List<ProductDTO> list = session.selectList("QuestionMapper.prodSelect", map, new RowBounds(offset,perPage));

@@ -22,24 +22,27 @@
 	</script>
 </head>
 <body>
-	<form action="QuestionProdSelet" method="get">
+<%
+	String category = request.getParameter("category");
+	String searchValue = request.getParameter("searchValue");
+	if(searchValue == null){searchValue = "";}
+%>
+	<form action="QuestionProdSelet" method="post">
 		<table border="1" style="border-collapse: collapse;">
 			<tr>
 				<td colspan="3">
 					<select name="category" id="category">
-						<option value="P_NAME">상품명</option>
-						<option value="P_ID">상품코드</option>
+						<option value="P_NAME" <%if("P_NAME".equals(category)){ %> selected="selected" <%} %>>상품명</option>
+						<option value="P_ID" <%if("P_ID".equals(category)){ %> selected="selected" <%} %>>상품코드</option>
 					</select>
-					<input type="text" name="searchValue" id="searchValue">
+					<input type="text" name="searchValue" id="searchValue" value="<%=searchValue%>">
 					<button id="search">검색하기</button>
 				</td>
 			</tr>
-	 	</table>
 	<%
 		Integer SelectNum = (Integer)request.getAttribute("SelectNum");
 		if(SelectNum == null){SelectNum = 0;}
 	%>
-	<table border="1" style="border-collapse: collapse;">
 		<tr>
 			<td style="color: blue;" colspan="2">총 <%=SelectNum%> 개의 상품이 검색되었습니다.</td>
 			<td> 
@@ -72,11 +75,11 @@
 			<td> <button class="check" data-pID="<%=pDTO.getP_id()%>">선택</button> </td>
 		</tr>
 		<%
-				}//for
+				}//end for
 		%>
 		<tr>
 			<td>
-				<%
+		<%
 			        int curPage = list.getCurPage();
 			        String p = (String)request.getAttribute("perPage");
 					int perPage = Integer.parseInt(p);
@@ -87,14 +90,14 @@
 			          	if(i== curPage){
 			          		out.print(i+"&nbsp;"); //현재페이지
 			          	}else{
-			          		out.print("<a href='QuestionProdSelet?curPage="+i+"'>"+i+"</a>&nbsp;");
+			          		out.print("<a href = 'QuestionProdSelet?curPage="+i+"'>" + i + " </a>");
 			          	} //다른 페이지 선택시 링크로 이동
 			        }//end for
 			}//end if
-			 	 %>
+		 %>
 			</td>
 		</tr>
 	</table>
-	</form>
+</form>
 </body>
 </html>

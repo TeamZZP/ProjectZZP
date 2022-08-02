@@ -27,10 +27,10 @@
 	<select id="prodSelect" parameterType="map" resultType="ProductDTO">
 		select * from PRODUCT 
 		<choose> 
-			<when test="category == 'P_NAME'"> 
+			<when test="category == 'P_NAME' and searchValue != null"> 
 				where p_name like '%${searchValue}%' or p_content like '%${searchValue}%'
 			</when>
-			<when test="category == 'P_ID'"> 
+			<when test="category == 'P_ID' and  searchValue != null"> 
 				where p_id like '%${searchValue}%' or p_content like '%${searchValue}%'
 			</when>
 			<otherwise>
