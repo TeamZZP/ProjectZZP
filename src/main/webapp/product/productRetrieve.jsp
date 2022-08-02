@@ -27,7 +27,7 @@ $(function() {
 		var count =parseInt($("#gAmount").val());
 		$("#gAmount").val(parseInt(count)+1);
 		
-		 var total = ( (count+1)* $("#price").text());
+		 var total = ((count+1)* $("#price").text());
 		$("#total").text(total); 
 		
 	})//
@@ -98,7 +98,7 @@ $(function() {
                </tr>
                <tr>
                   <td class="td_title">가격</td>   
-                  <td class="td_red"  colspan="2" style='padding-left: 30px' id="price">
+                  <td class="td_red"  colspan="2" style='padding-left: 30px' id="price" >
                   <%=p_selling_price %>
                   </td>
                 
@@ -113,7 +113,7 @@ $(function() {
                   </tr>
                <tr>
                   <td class="td_title">배송비</td>
-                  <td colspan="2"><font color="#2e56a9" size="2"
+                  <td colspan="2"><font 
                      style='padding-left: 30px'><b> 3000원</b> </font><br>
                       <font size="2">(50000원 이상 무료배송/도서산간지역 별도 배송비 추가)</font></td>
                </tr>
@@ -125,15 +125,15 @@ $(function() {
                   <input type="text"
                      name="gAmount" value="1" id="gAmount"
                      style="text-align: right; height: 18px">
-                     <button  id="up" class="btn btn-success">+</button>
-                     <button  id="down" class="btn btn-success "> - </button><br>
+                     <button  id="up" class="btn btn-success" style="width: 30px; height: 30px; ">+</button>
+                     <button  id="down" class="btn btn-success" style="width: 30px; height: 30px; " >-</button><br>
                      </td>
                </tr>
               	<tr >
               	<td></td>
               	<td class="td_title" >결제금액</td>
-				<td colspan="2">
-				<span id="total"><%=p_selling_price%></span>
+              	<td style="padding-left: 30px">
+				<span id="total" style="text-align: right;"> <%=p_selling_price%></span>
 				</tr>
             </table>
                

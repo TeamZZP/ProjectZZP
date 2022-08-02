@@ -18,6 +18,10 @@
 	String addr1=address.getAddr1();
 	String addr2=address.getAddr2();
 	
+	if (addr2 == null) {
+		addr2="상세 주소를 입력하세요.";
+	}
+	
 	//String order_request=orders.getOrder_request();
 %>
 <html>
@@ -41,6 +45,12 @@
 			$("form").attr("action", "../AccountChangeServlet");
 			alert("주소가 변경되었습니다.");
 		});//end fn
+		$("#sample4_jibunAddress").on("click", function() {
+			if ($(this).val()=="상세 주소를 입력하세요.") {
+				$(this).val("");
+				$(this).removeAttr("readonly");
+			}
+		});
 		$("#close").on("click", function() {
 			close();
 		});//end fn
@@ -48,6 +58,7 @@
 </script>
 </head>
 <body>
+<div style = "padding: 15px 5px 5px 20px;">
 <form action=" " method="get">
 <input type="hidden" name="userid" id="userid" value="<%= userid %>">
 <b>이름</b><br>
@@ -65,6 +76,7 @@
 <button id="submit" class="btn btn-success">저장</button>&nbsp;&nbsp;<button id="close" class="btn btn-success">창 닫기</button>
 <button class="btn btn-success">삭제</button><br>
 </form>
+</div>
 </body>
 </html>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>

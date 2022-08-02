@@ -15,6 +15,10 @@
 	String addr1=address.getAddr1();
 	String addr2=address.getAddr2();
 	
+	if (addr2 == null) {
+		addr2="상세 주소를 입력하세요.";
+	}
+	
 	//String order_request=orders.getOrder_request();
 %>
 <html>
@@ -33,6 +37,7 @@
 </script>
 </head>
 <body>
+<div style = "padding: 15px 5px 5px 20px;">
 <form action="changeAddress.jsp">
 <b>이름</b><br>
 <%= username %><br>
@@ -47,5 +52,6 @@
 <br>
 <button class="btn btn-success">수정</button>
 </form>
+</div>
 </body>
 </html>

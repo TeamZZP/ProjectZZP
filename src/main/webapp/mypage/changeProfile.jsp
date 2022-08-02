@@ -54,6 +54,7 @@
 </script>
 </head>
 <body>
+<div style = "padding: 15px 5px 5px 20px;">
 <form action=" " method="post" enctype="multipart/form-data">
 <input type="hidden" name="userid" id="userid" value="<%= userid %>">
 <img alt="none" src="peng.jpg" width="250px" height="250px"><br><!-- 이쁘게 동그랗게 보이면 좋겠다 -->
@@ -65,5 +66,6 @@
 <br>
 <button id="submit" class="btn btn-success">확인</button>&nbsp;&nbsp;<button id="close" class="btn btn-success">창 닫기</button>
 </form>
+</div>
 </body>
 </html>
