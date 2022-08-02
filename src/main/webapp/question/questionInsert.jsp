@@ -1,7 +1,21 @@
+<%@page import="com.dto.MemberDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+ <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <%
+    	MemberDTO mDTO = (MemberDTO)session.getAttribute("login");
+    	if(mDTO == null){
+    %>
+    <script>
+    $(function() {
+    	alert("로그인이 필요합니다");
+    	$("#questionForm").attr("action", "LoginUIServlet");
+    	$("#questionForm").submit();
+	});//
+    </script>
+    <%
+    	}
+    %>
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$("#ok").click(function() {

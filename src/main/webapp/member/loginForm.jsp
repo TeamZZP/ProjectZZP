@@ -146,8 +146,8 @@ $(document).ready(function() {
       <button type="reset" id="resetBtn">취소</button>
       <p class="message">Not registered? <a href="MemberUIServlet">Create an account</a></p>
       <p class="message">
-     	<a href="#">아이디찾기</a>
-      	<a href="#">비밀번호찾기</a>
+     	<a href="member/findIdForm.jsp">아이디찾기</a>
+      	<a href="member/findIdForm.jsp">비밀번호찾기</a>
       </p>
     </form>
     <a id="custom-login-btn" href="javascript:loginWithKakao();">
