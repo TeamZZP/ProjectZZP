@@ -116,13 +116,14 @@ public class AccountChangeServlet extends HttpServlet {
 				System.out.println("프로필 수정");
 //				request.setAttribute("path", originName);
 				
-				HashMap<String, String> profileMap=new HashMap<String, String>();
+/*				HashMap<String, String> profileMap=new HashMap<String, String>();
 				profileMap.put("userid", userid);
 				profileMap.put("profile_txt", profile_txt);
 				System.out.println(profileMap);
+				session.setAttribute("profileMap", profileMap);
 				AccountService service=new AccountService();
 				int num=service.changeProfile(profileMap);
-				System.out.println("수정된 프로필 : "+num);
+				System.out.println("수정된 프로필 : "+num);	*/
 				
 //				request.getRequestDispatcher("mypage/changeProfile.jsp").forward(request, response);//이미지 업로드 실패
 				//기존에 보던 수정 페이지로

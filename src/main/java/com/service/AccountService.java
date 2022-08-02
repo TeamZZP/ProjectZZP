@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import com.config.MySqlSessionFactory;
 import com.dao.AccountDAO;
+import com.dto.ProfileDTO;
 
 public class AccountService {
 	AccountDAO dao;
@@ -48,5 +49,16 @@ public class AccountService {
 			session.close();
 		}
 		return num;
+	}
+
+	public ProfileDTO selectProfile(String userid) {
+		SqlSession session=MySqlSessionFactory.getSqlSession();
+		ProfileDTO profile=null;
+		try {
+			profile=dao.selectProfile(session, userid);
+		} finally {
+			session.close();
+		}
+		return profile;
 	}
 }

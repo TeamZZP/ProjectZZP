@@ -111,6 +111,8 @@
 		});//end fn
 		
 		$("#close").on("click", function() {
+			opener.parent.location.reload();//새로고침 안 됨--기존 비밀번호로 인식
+			//window.opener.document.location.href = window.opener.document.URL;
 			window.close();
 		});//end fn
 	});//end ready

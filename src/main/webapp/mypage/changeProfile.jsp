@@ -1,11 +1,21 @@
+<%@page import="com.dto.ProfileDTO"%>
+<%@page import="java.util.HashMap"%>
 <%@ page import="com.dto.MemberDTO" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <%
-	MemberDTO dto=(MemberDTO) session.getAttribute("login");
-	String userid=dto.getUserid();
+	MemberDTO member=(MemberDTO) session.getAttribute("login");
+	String userid=member.getUserid();
+	
+	ProfileDTO profile=(ProfileDTO) session.getAttribute("profile");
+	String getProfile_img=profile.getProfile_img();
+	String getProfile_txt=profile.getProfile_txt();
+	if (getProfile_txt == " ") {//서블릿에서 데이터 가져오면서부터 null 발생
+		getProfile_txt="프로필 메세지를 입력하세요.";
+	//HashMap<String, String> profileMap=(HashMap<String, String>) session.getAttribute("profileMap");
+	//String profile_txt=profileMap.get("profile_txt");
 %>
 <html>
 <head>
@@ -18,6 +28,8 @@
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
+		
+		
 		$("img").on("click", function() {
 			console.log("click");
 			//프로필 이미지 변경
@@ -45,9 +57,12 @@
 <input type="file" name="profile_img" ><br>
 <br>
 <b>프로필 소개</b><br>
-<input type="text" name="profile_txt" id="profile_txt" style="width: 300px; height: 150px" value="프로필 메세지를 작성하세요 *-*"><br><!-- DB에 없음 -->
+<input type="text" name="profile_txt" id="profile_txt" style="width: 300px; height: 150px" value="<%= getProfile_txt %>"><br><!-- DB에 없음 -->
 <br>
 <button id="submit" class="btn btn-success">확인</button>&nbsp;&nbsp;<button id="close" class="btn btn-success">창 닫기</button>
 </form>
 </body>
 </html>
+<%
+	}
+%>
