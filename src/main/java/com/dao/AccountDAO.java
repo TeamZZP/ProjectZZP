@@ -27,5 +27,10 @@ public class AccountDAO {
 		ProfileDTO profile=session.selectOne("AccountMapper.selectProfile", userid);
 		return profile;
 	}
+
+	public int changeAddress(SqlSession session, HashMap<String, String> addressMap) {
+		int num=session.update("AccountMapper.changeAddress", addressMap);
+		return num;
+	}
 	
 }
