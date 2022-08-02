@@ -13,7 +13,11 @@
    <typeAlias type="com.dto.ProductDTO" alias="ProductDTO"/> 
    <typeAlias type="com.dto.AddressDTO" alias="AddressDTO"/> 
    <typeAlias type="com.dto.QuestionDTO" alias="QuestionDTO"/> 
+<<<<<<< HEAD
+   <typeAlias type="com.dto.ReviewDTO" alias="ReviewDTO"/> 
+=======
    <typeAlias type="com.dto.OrderDTO" alias="OrderDTO"/> 
+>>>>>>> f2f989d066a62751d8f3a9f18479ac9ff3786368
 </typeAliases>
   <environments default="development">
     <environment id="development">
@@ -35,7 +39,11 @@
     <mapper resource="com/config/AddressMapper.xml"/> 
     <mapper resource="com/config/AccountMapper.xml"/>
     <mapper resource="com/config/QuestionMapper.xml"/>
+<<<<<<< HEAD
+    <mapper resource="com/config/ReviewMapper.xml"/>
+=======
     <mapper resource="com/config/OrderMapper.xml"/>
+>>>>>>> f2f989d066a62751d8f3a9f18479ac9ff3786368
   </mappers> 
 </configuration>
   

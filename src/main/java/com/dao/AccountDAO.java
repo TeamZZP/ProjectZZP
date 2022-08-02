@@ -4,6 +4,8 @@ import java.util.HashMap;
 
 import org.apache.ibatis.session.SqlSession;
 
+import com.dto.ProfileDTO;
+
 public class AccountDAO {
 
 	public int changePasswd(SqlSession session, HashMap<String, String> passwdMap) {
@@ -19,6 +21,11 @@ public class AccountDAO {
 	public int changeProfile(SqlSession session, HashMap<String, String> profileMap) {
 		int num=session.update("AccountMapper.changeProfile", profileMap);
 		return num;
+	}
+
+	public ProfileDTO selectProfile(SqlSession session, String userid) {
+		ProfileDTO profile=session.selectOne("AccountMapper.selectProfile", userid);
+		return profile;
 	}
 	
 }
