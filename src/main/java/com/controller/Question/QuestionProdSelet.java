@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.dto.ProductDTO;
 import com.service.QuestionService;
@@ -42,9 +43,11 @@ public class QuestionProdSelet extends HttpServlet {
 		int num = service.count(map);
 		System.out.println("검색된 갯수 " + num);
 		
-		response.setContentType("text/html;charset=utf-8");
-		PrintWriter out = response.getWriter();
+		HttpSession session = request.getSession();
+		session.setAttribute("SelectList", list);
+		session.setAttribute("SelectNum", num);
 		
+		response.sendRedirect("questionproductSelect.jsp");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

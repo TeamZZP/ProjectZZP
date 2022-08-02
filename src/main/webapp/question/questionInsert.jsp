@@ -23,7 +23,7 @@
 				$("#questionForm").attr("action", "QuestionInsertServlet");
 			})
 			$("#pID").click(function () {
-				window.open("productSelect.jsp","상품검색","width=400px height=500px");
+				window.open("questionproductSelect.jsp","상품검색","width=400px height=500px");
 			});
 		});//end ready
 	</script>
@@ -33,7 +33,10 @@
 				<td colspan="2"> 제목 <input type="text" name="qTittle" id="qTittle"> </td>
 			</tr>
 			<tr>
-				<td colspan="2"> <button id="pID" class="btn btn-outline-success">상품 정보</button> </td>
+				<td colspan="2"> 
+					<button id="pID" class="btn btn-outline-success">상품 정보</button>
+					<input type="text" name="pId" id="pId">
+				</td>
 			</tr>
 			<tr>
 				<td colspan="2"> 문의 글 카테고리
