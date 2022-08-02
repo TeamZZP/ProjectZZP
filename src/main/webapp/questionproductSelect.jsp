@@ -36,7 +36,7 @@
 	 	</table>
 	</form>
 	<%
-		Integer SelectNum = (Integer)session.getAttribute("SelectNum");
+		Integer SelectNum = (Integer)request.getAttribute("SelectNum");
 		if(SelectNum == null){SelectNum = 0;}
 	%>
 	<table border="1" style="border-collapse: collapse;">
@@ -55,7 +55,7 @@
 			<td>선택</td>
 		</tr>
 		<%
-			List<ProductDTO> list = (List<ProductDTO>)session.getAttribute("SelectList");
+			List<ProductDTO> list = (List<ProductDTO>)request.getAttribute("SelectList");
 			if(list != null){
 				for(ProductDTO pDTO : list){
 					String img = pDTO.getP_img();
