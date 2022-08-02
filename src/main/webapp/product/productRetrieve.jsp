@@ -27,7 +27,7 @@ $(function() {
 		var count =parseInt($("#gAmount").val());
 		$("#gAmount").val(parseInt(count)+1);
 		
-		 var total = ( (count+1)* $(".price").text());
+		 var total = ( (count+1)* $("#price").text());
 		$("#total").text(total); 
 		
 	})//
@@ -36,11 +36,11 @@ $(function() {
 		var count = parseInt($("#gAmount").val());
 		if(count > 1){
 			$("#gAmount").val(parseInt(count)-1);
-			var total = ((count-1) * $(".price").text());
+			var total = ((count-1) * $("#price").text());
 			$("#total").text(total);
 		}
 	});
-	
+	 
 	<%MemberDTO dtoM = new MemberDTO();
 	dtoM = (MemberDTO)session.getAttribute("login");%>
 	
@@ -57,29 +57,7 @@ $(function() {
 	
 		
 	});
-	
-	
-	$("#up").on("click",function(){
-	      var count =parseInt($("#gAmount").val());
-	      $("#gAmount").val(parseInt(count)+1);
-	      
-	       var total = ( (count+1)* $("#price").text());
-	      $("#total").text(total); 
-	      
-	   })//
-	   
-	   $("#down").on("click",function(){
-	      var count = parseInt($("#gAmount").val());
-	      if(count > 1){
-	         $("#gAmount").val(parseInt(count)-1);
-	         var total = ((count-1) * $("#price").text());
-	         $("#total").text(total);
-	      }
-	   });
-	   
-	
-	
-	
+
 	
 
 });//end ready
@@ -120,7 +98,7 @@ $(function() {
                </tr>
                <tr>
                   <td class="td_title">가격</td>   
-                  <td class="td_red" colspan="2" style='padding-left: 30px' id="price">
+                  <td class="td_red"  colspan="2" style='padding-left: 30px' id="price">
                   <%=p_selling_price %>
                   </td>
                 
@@ -147,8 +125,8 @@ $(function() {
                   <input type="text"
                      name="gAmount" value="1" id="gAmount"
                      style="text-align: right; height: 18px">
-                     <button  id="up" class="btn btn-success disabled">+</button>
-                     <button  id="down" class="btn btn-success disabled"> - </button><br>
+                     <button  id="up" class="btn btn-success">+</button>
+                     <button  id="down" class="btn btn-success "> - </button><br>
                      </td>
                </tr>
               	<tr >
