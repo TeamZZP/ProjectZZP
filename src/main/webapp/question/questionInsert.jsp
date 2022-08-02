@@ -38,7 +38,6 @@
 			})
 			$("#pID").click(function () {
 				window.open("questionproductSelect.jsp","","width=400px height=500px");
-				history.back();
 			});
 		});//end ready
 	</script>
@@ -53,7 +52,7 @@
 			</tr>
 			<tr>
 				<td colspan="2"> 
-					<button id="pID" class="btn btn-outline-success">상품 정보</button>
+					<button id="pID" type="button" class="btn btn-outline-success">상품 정보</button>
 					<input type="text" name="pId" id="pId">
 				</td>
 			</tr>

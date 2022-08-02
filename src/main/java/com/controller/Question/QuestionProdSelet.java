@@ -45,12 +45,13 @@ public class QuestionProdSelet extends HttpServlet {
 		
 		QuestionService service = new QuestionService();
 		String curPage = request.getParameter("curPage");
+		System.out.println("현재 페이지 " + curPage);
 		if (curPage == null) {
 			curPage = "1";
 		}
 		
 		PageDTO page = service.prodSelect(map, Integer.parseInt(curPage), Integer.parseInt(prodNum));
-		System.out.println(page);
+			System.out.println(page);
 		
 		//List<ProductDTO> list = service.prodSelect(map);
 		//System.out.println("검색한내용 " + list);
@@ -59,6 +60,7 @@ public class QuestionProdSelet extends HttpServlet {
 
 		request.setAttribute("category", category);
 		request.setAttribute("searchValue", searchValue);
+		request.setAttribute("prodNum", prodNum);
 		request.setAttribute("SelectList", page);
 		request.setAttribute("SelectNum", num);
 		request.setAttribute("perPage", prodNum); //검색갯수
