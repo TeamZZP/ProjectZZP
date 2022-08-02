@@ -5,10 +5,8 @@
 <head>
 <style type="text/css">
 li{
-
 display: block;
 list-style: none;
-
 }
 #category{
 float: left;
@@ -16,6 +14,10 @@ padding-right: 11%;
 }
 #clear{
 	clear: left;
+}
+a{
+	text-decoration: none;
+	color: black;
 }
 </style>
 </head>
