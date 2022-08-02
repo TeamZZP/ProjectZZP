@@ -5,6 +5,10 @@
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 	$(document).ready(function() {
+/* 		$("button").on("click", function() {
+			location.reload();
+		}); */
+		
 		$("#changePasswd").on("click", function() {
 			var popupX = (window.screen.width / 2) - (200 / 2);
 			var popupY= (window.screen.height / 5) - (200 / 2);
