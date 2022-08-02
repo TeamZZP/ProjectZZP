@@ -36,7 +36,8 @@
 	 	</table>
 	</form>
 	<%
-		int SelectNum = (int)session.getAttribute("SelectNum");
+		Integer SelectNum = (Integer)session.getAttribute("SelectNum");
+		if(SelectNum == null){SelectNum = 0;}
 	%>
 	<table border="1" style="border-collapse: collapse;">
 		<tr>
@@ -63,7 +64,7 @@
 					int pPrice = pDTO.getP_cost_price();
 		%>
 		<tr>
-			<td> <img alt="상품사진" src="images/p_image/<%=img%>.jsp"></td>
+			<td> <img alt="상품사진" src="images/p_image/<%=img%>.jpg" width="100px" height="100px"></td>
 			<td> <%=pName %> <br> <%=pContent %> <br> <%=pPrice %> </td>
 			<td> <button class="check" data-pID="<%=pDTO.getP_id()%>">선택</button> </td>
 		</tr>
