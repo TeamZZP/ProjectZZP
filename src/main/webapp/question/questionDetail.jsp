@@ -23,6 +23,9 @@
 		}
 	});//end ready
 </script>
+<div style="text-align: center; display: flex; justify-content:center; height: 100px; margin-bottom: 10px;" >
+		<img src="images/question.png" alt="..." style="width: auto;">
+</div>
 	<form method="post" id="detailForm">
 		<table>
 			<caption style="caption-side: top;">문의 내용</caption>
