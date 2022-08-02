@@ -2,13 +2,16 @@
     pageEncoding="UTF-8"%>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
-	var childWidTermsOfUse;
 	function termsOfUse() {
-		childWidTermsOfUse = window.open('common/termsOfUse.jsp','new','scrollbars=yes,resizable=no width=300 height=250, left=0,top=0');
+		var popupX = (window.screen.width / 3) - (200 / 2);
+		var popupY= (window.screen.height / 3) - (300 / 2);
+		window.open("common/termsOfUse.jsp","new",'status=no, height=300, width=600, left='+ popupX + ', top='+ popupY);
 	};
 	var childWidpersonalInfo;
 	function personalInfo() {
-		childWidpersonalInfo = window.open('common/personalInfo.jsp','new','scrollbars=yes,resizable=no width=300 height=250, left=0,top=0');
+		var popupX = (window.screen.width / 3) - (200 / 2);
+		var popupY= (window.screen.height / 3) - (300 / 2);
+		window.open("common/personalInfo.jsp","new",'status=no, height=300, width=600, left='+ popupX + ', top='+ popupY);
 	}
 </script>
 <div class="container">
