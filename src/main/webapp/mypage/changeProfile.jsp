@@ -12,6 +12,9 @@
 	ProfileDTO profile=(ProfileDTO) session.getAttribute("profile");
 	String getProfile_img=profile.getProfile_img();
 	String getProfile_txt=profile.getProfile_txt();
+	if (getProfile_txt.equals(" ")) {
+		getProfile_txt = "프로필 메세지를 입력하세요 :>";
+	}
 	//if (getProfile_txt == " ") {//서블릿에서 데이터 가져오면서부터 null 발생
 	//	getProfile_txt="프로필 메세지를 입력하세요.";
 	//HashMap<String, String> profileMap=(HashMap<String, String>) session.getAttribute("profileMap");
