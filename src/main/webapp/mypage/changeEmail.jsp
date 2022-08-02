@@ -1,6 +1,7 @@
 <%@page import="com.dto.MemberDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <%
 	MemberDTO dto=(MemberDTO) session.getAttribute("login");
@@ -16,6 +17,10 @@
 	}
 </style>
 <title>이메일 변경</title>
+<link type="text/css" rel="stylesheet" href="<c:url value='/bootstrap/css/bootstrap.css'/>"/>    
+<link type="text/css" rel="stylesheet" href="<c:url value='/bootstrap/css/bootstrap.min.css'/>"/>    
+<script src="<c:url value='/bootstrap/js/bootstrap.js'/>" type="text/javascript"></script>
+<script src="<c:url value='/bootstrap/js/bootstrap.min.js'/>" type="text/javascript"></script>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -87,8 +92,9 @@
 		<option value="daum.net">daum.net</option>
 		<option value="naver.com">naver.com</option>
 		<option value="google.com">google.com</option>
-	</select>
-<button id="submit">확인</button>&nbsp;&nbsp;<button id="close">창 닫기</button>
+	</select><br>
+	<br>
+<button id="submit" class="btn btn-success">확인</button>&nbsp;&nbsp;<button id="close" class="btn btn-success">창 닫기</button>
 </form>
 </body>
 </html>

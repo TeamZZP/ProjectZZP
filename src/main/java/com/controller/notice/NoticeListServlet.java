@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.dto.NoticeDTO;
+import com.dto.PageDTO;
 import com.service.NoticeService;
 
 /**
@@ -25,16 +26,22 @@ public class NoticeListServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		NoticeService service = new NoticeService();
-		List<NoticeDTO> mainNoticeList = service.pointNotice();
-		System.out.println("mainNoticeList " + mainNoticeList); //고정공지
+		PageDTO pDTO = new PageDTO();
+		String curPage = request.getParameter("curPage"); //현재 페이지
+		if (curPage == null) { //선택된 페이지가 없으면 null -> 1페이지 출력
+			curPage = "1";
+		}
 		
-		List<NoticeDTO> noticeList = service.noticeList();
-		System.out.println("noticeList " + noticeList); //나머지
+		NoticeService service = new NoticeService();
+		List<NoticeDTO> list = service.pointNotice();
+		
+		pDTO = service.page(Integer.parseInt(curPage));
+		System.out.println("pDTO " + pDTO);//나머지
+		
 		
 		HttpSession session = request.getSession();
-		session.setAttribute("mainNoticeList", mainNoticeList);
-		session.setAttribute("noticeList", noticeList);
+		session.setAttribute("pointNotice", list);
+		session.setAttribute("pDTO", pDTO);
 		
 		response.sendRedirect("notice.jsp");
 	}

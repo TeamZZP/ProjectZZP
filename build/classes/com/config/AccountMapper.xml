@@ -14,4 +14,13 @@
 			email2 = #{email2}
 		where userid = #{userid}
 	</update>
+		<update id="changeProfile" parameterType="hashmap">
+		update profile
+		set profile_txt = #{profile_txt}
+		where userid = #{userid}
+	</update>
+	<select id="selectProfile" resultType="com.dto.ProfileDTO">
+		select * from profile
+		where userid = #{userid}
+	</select>
 </mapper>

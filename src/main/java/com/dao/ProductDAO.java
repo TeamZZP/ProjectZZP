@@ -24,6 +24,11 @@ public class ProductDAO {
 		return list;
 	}
 
+	public List<ProductDTO> searchProduct(SqlSession session, String searchValue) {
+		List<ProductDTO> list = session.selectList("ProductMapper.searchProduct",searchValue);
+		return list;
+	}
+
 
 
 }

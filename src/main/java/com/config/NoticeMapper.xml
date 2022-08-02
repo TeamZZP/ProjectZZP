@@ -25,4 +25,7 @@
 	<update id="noticeHite" parameterType="map">
 		update notice set NOTICE_HITS = #{noticeHite} where NOTICE_ID = #{noticeID}
 	</update>
+	<select id="totalCount" resultType="int">
+		select count(*) from notice where NOT NOTICE_CATEGORY = 'main'
+	</select>
 </mapper>

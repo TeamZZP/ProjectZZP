@@ -1,12 +1,9 @@
 <%@page import="com.dto.ProductDTO"%>
+<%@page import="com.dto.MemberDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<style>
 
-
-
-</style>
-<%
+  <%
    ProductDTO dto = (ProductDTO)session.getAttribute("Retrieve");
    String p_id = dto.getP_id();
    String p_name = dto.getP_name();
@@ -20,8 +17,37 @@
    String p_img = dto.getP_img();
 
 %>    
-<form name="OrderServlet" method="GET" action="#">
-      
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+
+$(function() {
+	
+	<%MemberDTO dtoM = new MemberDTO();
+	dtoM = (MemberDTO)session.getAttribute("login");%>
+	
+
+	$("#order").click(function() {
+		
+
+		<%if(dtoM != null){
+			/*  RequestDispatcher dis = request.getRequestDispatcher("OrderServlet");
+			dis.forward(request, response);  */
+		}else{%>
+		var openWin = window.open("orderLoginCheck.jsp","","width=570, height=350");
+		<%}%>
+	
+		
+	});
+	
+	
+	
+	
+
+});//end ready
+
+</script> 
+
 
    <table cellspacing="0" cellpadding="0">
       <tr>
@@ -97,17 +123,14 @@
       <tr>
       <td></td>
       <td>
-      <button  style="background-color: green"><font color = #ffffff>구매</font></button>
+      <button  class="btn btn-success" id="order">구매</button>
    &nbsp;&nbsp;
-   <button style="background-color: green"><font color = #ffffff>장바구니</font></button>
+  	 <button class="btn btn-success">장바구니</button>
       </td>
       </tr>
       
    </table>
 
    
-   
 
- 
-</form>
     

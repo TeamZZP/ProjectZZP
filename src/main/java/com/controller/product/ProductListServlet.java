@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.dto.ProductDTO;
 import com.service.ProductService;
@@ -34,6 +35,7 @@ public class ProductListServlet extends HttpServlet {
 				List<ProductDTO> list = service.bestProduct();
 				System.out.println(list);
 				
+				
 				request.setAttribute("productList", list);
 				RequestDispatcher dis = request.getRequestDispatcher("product.jsp");
 				dis.forward(request, response);
@@ -45,6 +47,7 @@ public class ProductListServlet extends HttpServlet {
 				ProductService service = new ProductService();
 				List<ProductDTO> list = service.productList(p_category);
 				System.out.println(list);
+				
 				
 				request.setAttribute("productList", list);
 				RequestDispatcher dis = request.getRequestDispatcher("product.jsp");

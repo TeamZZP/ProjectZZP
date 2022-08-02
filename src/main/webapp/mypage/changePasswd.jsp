@@ -1,6 +1,7 @@
 <%@page import="com.dto.MemberDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <%
 	MemberDTO dto=(MemberDTO) session.getAttribute("login");
@@ -16,6 +17,10 @@
 	}
 </style>
 <title>비밀번호 변경</title>
+<link type="text/css" rel="stylesheet" href="<c:url value='/bootstrap/css/bootstrap.css'/>"/>    
+<link type="text/css" rel="stylesheet" href="<c:url value='/bootstrap/css/bootstrap.min.css'/>"/>    
+<script src="<c:url value='/bootstrap/js/bootstrap.js'/>" type="text/javascript"></script>
+<script src="<c:url value='/bootstrap/js/bootstrap.min.js'/>" type="text/javascript"></script>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -106,6 +111,8 @@
 		});//end fn
 		
 		$("#close").on("click", function() {
+			opener.parent.location.reload();//새로고침 안 됨--기존 비밀번호로 인식
+			//window.opener.document.location.href = window.opener.document.URL;
 			window.close();
 		});//end fn
 	});//end ready
@@ -120,6 +127,7 @@
 변경할 비밀번호: <input type="text" class="pw" name="chagnePasswd" id="chagnePasswd" readonly="readonly"><br>
 비밀번호 재확인: <input type="text" class="pw" name="checkPasswd" id="checkPasswd" readonly="readonly">
 	<b><span id="result2"></span></b><br>
+	<br>
 <button id="submit">확인</button>&nbsp;&nbsp;<button id="close">창 닫기</button>
 </form>
 </body>

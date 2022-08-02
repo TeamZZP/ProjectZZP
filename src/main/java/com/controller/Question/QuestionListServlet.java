@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.dto.NoticeDTO;
+import com.dto.PageDTO;
 import com.dto.QuestionDTO;
 import com.service.NoticeService;
 import com.service.QuestionService;
@@ -27,12 +28,18 @@ public class QuestionListServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		QuestionService service = new QuestionService();
-		List<QuestionDTO> list = service.questionList();
-		System.out.println("questionList" + list);
+		PageDTO pDTO = new PageDTO();
+		String curPage = request.getParameter("curPage"); //현재 페이지
+		if (curPage == null) { //선택된 페이지가 없으면 null -> 1페이지 출력
+			curPage = "1";
+		}
 		
-		HttpSession session = request.getSession();
-		session.setAttribute("questionList", list);
+		QuestionService service = new QuestionService();
+		pDTO = service.page(Integer.parseInt(curPage));
+		System.out.println("pDTO " + pDTO);//나머지
+		
+		HttpSession session = request.getSession(); 
+		session.setAttribute("pDTO", pDTO);
 		
 		response.sendRedirect("question.jsp");
 	}

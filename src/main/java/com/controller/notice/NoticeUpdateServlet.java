@@ -40,10 +40,10 @@ public class NoticeUpdateServlet extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		if (num == 1) {
-			response.sendRedirect("noticeDetail.jsp");
+			response.sendRedirect("NoticeListServlet");
 			session.setAttribute("mesg", "공지 수정 성공");
 		} else {
-			response.sendRedirect("NoticeUpdate.jsp");
+			response.sendRedirect("NoticeListServlet");
 			session.setAttribute("mesg", "공지 수정 실패");
 		}
 		

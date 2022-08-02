@@ -1,31 +1,55 @@
+<%@page import="com.dto.OrderDTO"%>
+<%@page import="com.dto.AddressDTO"%>
+<%@page import="com.dto.MemberDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
+<%
+	MemberDTO dto=(MemberDTO) session.getAttribute("login");
+	AddressDTO address=(AddressDTO) session.getAttribute("address");
+	OrderDTO orders=(OrderDTO) session.getAttribute("orders");
+	
+	String username=dto.getUsername();
+	String phone=dto.getPhone();
+	
+	String post_num=address.getPost_num();
+	String addr1=address.getAddr1();
+	String addr2=address.getAddr2();
+	
+	String order_request=orders.getOrder_request();
+%>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>주소 수정</title>
+<link type="text/css" rel="stylesheet" href="<c:url value='/bootstrap/css/bootstrap.css'/>"/>    
+<link type="text/css" rel="stylesheet" href="<c:url value='/bootstrap/css/bootstrap.min.css'/>"/>    
+<script src="<c:url value='/bootstrap/js/bootstrap.js'/>" type="text/javascript"></script>
+<script src="<c:url value='/bootstrap/js/bootstrap.min.js'/>" type="text/javascript"></script>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
 		
-	});
+	});//end ready
 </script>
 </head>
 <body>
 <form action="../AccountChangeServlet" method="get">
-이름: 데이터 출력<br>
-주소:
-	<input type="text" name="post" id="sample4_postcode" placeholder="우편번호"><!-- script 긁어서 자식창에 넣기 -->
+<b>이름</b><br>
+<%= username %><br>
+<br>
+<b>주소</b><br>
+우편번호: <input type="text" name="post" id="sample4_postcode" placeholder="우편번호" readonly="readonly" value="<%= post_num %>">
 	<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
-	<input type="text" name="addr1" id="sample4_roadAddress" placeholder="도로명주소">
-	<input type="text" name="addr2" id="sample4_jibunAddress" placeholder="지번주소"><br>
+도로명 주소: <input type="text" name="addr1" id="sample4_roadAddress" placeholder="도로명주소" readonly="readonly" value="<%= addr1 %>" style="width: 450px"><br>
+상세 주소: <input type="text" name="addr2" id="sample4_jibunAddress" placeholder="지번주소" readonly="readonly" value="<%= addr2 %>" style="width: 300px"><br>
 	<span id="guide" style="color:#999"></span><br>
-연락처: 데이터 출력<br>
-<input type="text" name="deliveryReq" value="배송 요청사항"><br>
+연락처: <input type="text" name="phone" id="phone" placeholder="<%= phone %>"/><br>
+<input type="text" name="deliveryReq" value="<%= order_request %>"><br>
 <input type="checkbox" value="기본 배송지로 선택"><br>
-<button>저장</button>
-<button>삭제</button><br>
+<button class="btn btn-success">저장</button>
+<button class="btn btn-success">삭제</button><br>
 </form>
 </body>
 </html>

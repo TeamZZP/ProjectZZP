@@ -18,6 +18,7 @@ public class MemberIdCheckServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		String userid = request.getParameter("userid");
+		System.out.println(userid);
 		
 		MemberService service = new MemberService();
 		int num = service.checkId(userid);
@@ -30,7 +31,6 @@ public class MemberIdCheckServlet extends HttpServlet {
 		response.setContentType("text/html;charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		out.print(mesg);
-		
 		
 	}
 

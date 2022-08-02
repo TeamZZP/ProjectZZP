@@ -4,10 +4,12 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
+import org.omg.PortableServer.REQUEST_PROCESSING_POLICY_ID;
 
 import com.config.MySqlSessionFactory;
 import com.dao.NoticeDAO;
 import com.dto.NoticeDTO;
+import com.dto.PageDTO;
 
 public class NoticeService {
 
@@ -84,6 +86,17 @@ public class NoticeService {
 			session.close();
 		}
 		return num;
+	}
+
+	public PageDTO page(int curPage) {
+		PageDTO pDTO = null;
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		try {
+			pDTO = dao.page(session, curPage);
+		} finally {
+			session.close();
+		}
+		return pDTO;
 	}
 
 }

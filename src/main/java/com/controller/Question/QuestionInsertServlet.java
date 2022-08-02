@@ -29,27 +29,35 @@ public class QuestionInsertServlet extends HttpServlet {
 		MemberDTO mDTO = (MemberDTO) session.getAttribute("login");
 		
 		if (mDTO != null) {
-			String userid = mDTO.getUserid();
-			String qTittle = request.getParameter("qTittle");
-			String pId = request.getParameter("pId");
-			String qContent = request.getParameter("qContent");
-			int qboard_category = Integer.parseInt(request.getParameter("qboard_category"));
-			String qcategory = request.getParameter("qcategory");
-			String qFile = request.getParameter("qFile");
+			String USERID = mDTO.getUserid();
+			String Q_TITLE = request.getParameter("qTittle");
+			String P_ID = request.getParameter("pId");
+			String Q_CONTENT = request.getParameter("qContent");
+			int Q_BOARD_CATEGORY = Integer.parseInt(request.getParameter("qboard_category"));
+			String Q_CATEGORY = request.getParameter("qcategory");
+			String Q_IMG = request.getParameter("qFile");
 			
 			QuestionDTO qDTO = new QuestionDTO();
-			qDTO.setUSERID(userid);
-			qDTO.setQ_TITLE(qTittle);
-			qDTO.setP_ID(pId);
-			qDTO.setQ_CONTENT(qContent);
-			qDTO.setQ_BOARD_CATEGORY(qboard_category);
-			qDTO.setQ_CATEGORY(qcategory);
-			qDTO.setQ_IMG(qFile);
+			qDTO.setUSERID(USERID);
+			qDTO.setQ_TITLE(Q_TITLE);
+			qDTO.setP_ID(P_ID);
+			qDTO.setQ_CONTENT(Q_CONTENT);
+			qDTO.setQ_BOARD_CATEGORY(Q_BOARD_CATEGORY);
+			qDTO.setQ_CATEGORY(Q_CATEGORY);
+			qDTO.setQ_IMG(Q_IMG);
 			
 			System.out.println("qDTO " + qDTO);
 			
 			QuestionService service = new QuestionService();
 			int num = service.questionInsert(qDTO);
+			
+			if (num == 1) {
+				session.setAttribute("mesg", "게시물이 등록되었습니다");
+				response.sendRedirect("QuestionListServlet");
+			} else {
+				session.setAttribute("mesg", "게시물이 등록 실패");
+				response.sendRedirect("QuestionListServlet");
+			}
 			
 		} else {
 			session.setAttribute("mesg", "로그인이 필요합니다");

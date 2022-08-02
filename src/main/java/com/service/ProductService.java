@@ -43,7 +43,17 @@ public class ProductService {
 			session.close();
 		}
 		return list;
-		
+	}
+
+	public List<ProductDTO> searchProduct(String searchValue) {
+		List<ProductDTO> list = null;
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		try {
+			list = dao.searchProduct(session,searchValue);
+		}finally {
+			session.close();
+		}
+		return list;
 	}
 
 	
