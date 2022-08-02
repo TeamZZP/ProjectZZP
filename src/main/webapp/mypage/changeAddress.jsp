@@ -32,6 +32,10 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		$("#submit").on("click", function () {
+			//$("#sample4_postcode").val();
+			opener.$("#sample4_postcode").val($("#sample4_postcode"));//부모창에 업데이트
+			opener.$("#sample4_roadAddress").val($("#sample4_roadAddress"));//부모창에 업데이트
+			opener.$("#sample4_jibunAddress").val($("#sample4_jibunAddress"));//부모창에 업데이트
 			$("form").attr("action", "../AccountChangeServlet");
 			alert("주소가 변경되었습니다.");
 		});//end fn
