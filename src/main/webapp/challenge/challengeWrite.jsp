@@ -102,7 +102,7 @@
 	<tr>
 	  <td><a>취소</a></td>
 	  <% if(dto==null) {%>
-	 	<td><input type="submit" value="글쓰기"></td>
+	 	<td><input type="submit" class="btn btn-success" value="글쓰기"></td>
 	  <%} else { %>
 	  	<td align="right"><input type="submit" value="수정하기"></td>
 	  <%} %>

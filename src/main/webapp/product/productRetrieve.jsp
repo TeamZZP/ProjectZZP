@@ -147,8 +147,8 @@ $(function() {
                   <input type="text"
                      name="gAmount" value="1" id="gAmount"
                      style="text-align: right; height: 18px">
-                      <button  id="up">+</button>
-                     <button  id="down">-</button><br>
+                     <button  id="up" class="btn btn-success disabled">+</button>
+                     <button  id="down" class="btn btn-success disabled"> - </button><br>
                      </td>
                </tr>
               	<tr >
