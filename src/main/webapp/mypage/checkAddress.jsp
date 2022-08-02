@@ -8,14 +8,14 @@
 <%
 	MemberDTO dto=(MemberDTO) session.getAttribute("login");
 	AddressDTO address=(AddressDTO) session.getAttribute("address");
-	OrderDTO orders=(OrderDTO) session.getAttribute("orders");
+	//OrderDTO orders=(OrderDTO) session.getAttribute("orders");
 	
 	String username=dto.getUsername();
 	String post_num=address.getPost_num();
 	String addr1=address.getAddr1();
 	String addr2=address.getAddr2();
 	
-	String order_request=orders.getOrder_request();
+	//String order_request=orders.getOrder_request();
 %>
 <html>
 <head>
@@ -42,8 +42,8 @@
 도로명 주소: <input type="text" name="addr1" id="sample4_roadAddress" placeholder="도로명주소" readonly="readonly" value="<%= addr1 %>" style="width: 450px"><br>
 상세 주소: <input type="text" name="addr2" id="sample4_jibunAddress" placeholder="지번주소" readonly="readonly" value="<%= addr2 %>" style="width: 300px"><br>
 <span id="guide" style="color:#999"></span><br>
-<b>배송 요청사항</b><br>
-<input type="text" name="orderrequest" placeholder="<%= order_request %>" readonly="readonly" style="width: 450px"/><br>
+<%-- <b>배송 요청사항</b><br>
+<input type="text" name="orderrequest" placeholder="<%= order_request %>" readonly="readonly" style="width: 450px"/><br> --%>
 <br>
 <button class="btn btn-success">수정</button>
 </form>

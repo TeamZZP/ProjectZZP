@@ -8,7 +8,7 @@
 <%
 	MemberDTO dto=(MemberDTO) session.getAttribute("login");
 	AddressDTO address=(AddressDTO) session.getAttribute("address");
-	OrderDTO orders=(OrderDTO) session.getAttribute("orders");
+	//OrderDTO orders=(OrderDTO) session.getAttribute("orders");
 	
 	String userid=dto.getUserid();
 	String username=dto.getUsername();
@@ -18,7 +18,7 @@
 	String addr1=address.getAddr1();
 	String addr2=address.getAddr2();
 	
-	String order_request=orders.getOrder_request();
+	//String order_request=orders.getOrder_request();
 %>
 <html>
 <head>
@@ -60,7 +60,7 @@
 상세 주소: <input type="text" name="addr2" id="sample4_jibunAddress" placeholder="지번주소" readonly="readonly" value="<%= addr2 %>" style="width: 300px"><br>
 	<span id="guide" style="color:#999"></span><br>
 연락처: <input type="text" name="phone" id="phone" placeholder="<%= phone %>"/><br>
-<input type="text" name="deliveryReq" value="<%= order_request %>"><br>
+<%-- <input type="text" name="deliveryReq" value="<%= order_request %>"><br> --%>
 <input type="checkbox" value="기본 배송지로 선택"><br>
 <button id="submit" class="btn btn-success">저장</button>&nbsp;&nbsp;<button id="close" class="btn btn-success">창 닫기</button>
 <button class="btn btn-success">삭제</button><br>
