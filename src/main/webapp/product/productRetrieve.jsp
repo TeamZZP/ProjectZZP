@@ -143,9 +143,9 @@ $(function() {
       <tr>
       <td></td>
       <td>
-      <button  style="background-color: green" id="order"><font color = #ffffff>구매</font></button>
+      <button  class="btn btn-success" id="order">구매</button>
    &nbsp;&nbsp;
-   <button style="background-color: green"><font color = #ffffff>장바구니</font></button>
+  	 <button class="btn btn-success">장바구니</button>
       </td>
       </tr>
       

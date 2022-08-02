@@ -13,6 +13,8 @@ import javax.servlet.http.HttpSession;
 import com.dto.AddressDTO;
 import com.dto.MemberDTO;
 import com.dto.OrderDTO;
+import com.dto.ProfileDTO;
+import com.service.AccountService;
 import com.service.AddressService;
 import com.service.MemberService;
 import com.service.OrderService;
@@ -39,11 +41,11 @@ public class AccountManagementServlet extends HttpServlet {
 			
 			MemberService m_service=new MemberService();
 			MemberDTO member=m_service.selectMember(userid);
-			System.out.println(member);
+			//System.out.println(member);
 			
 			AddressService a_service=new AddressService();
 			AddressDTO address=a_service.selectAddress(userid);
-			System.out.println(address);
+			//System.out.println(address);
 			
 			OrderService o_service=new OrderService();
 			OrderDTO orders=o_service.selectOrders(userid);
@@ -52,9 +54,22 @@ public class AccountManagementServlet extends HttpServlet {
 			//HashMap<String, String> profilemap=new HashMap<String, String>();
 			//profilemap.put("userid", userid);
 			
+/*			HashMap<String, String> profileMap=new HashMap<String, String>();//dto 생성해서 이용함
+			AccountService service=new AccountService();
+			service.selectProfile_txt(userid);	*/
+			
+			AccountService service=new AccountService();
+			ProfileDTO profile=service.selectProfile(userid);
+			System.out.println(profile);
+/*			String profile_txt=profile.getProfile_txt();//프로필 이미지나 메세지가 null 일 경우 처리 방법?
+			if (profile_txt == null) {
+				profile_txt="프로필 메세지를 입력하세요.";
+			}	*/
+			
 			session.setAttribute("login", member);
 			session.setAttribute("address", address);
 			session.setAttribute("orders", orders);
+			session.setAttribute("profile", profile);
 			response.sendRedirect("accountForm.jsp");//로그인 된 계정 정보 session 저장-마이페이지 오픈//mypage로 이름 바꿀까?
 		} else {
 			//alert로 로그인 후 이용하세요 출력

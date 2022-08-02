@@ -15,7 +15,9 @@
 	}
 	session.removeAttribute("mesg");
 %>
-	
+	<div style="text-align: center; display: flex; justify-content:center; height: 100px; margin-bottom: 10px;" >
+		<img src="images/question.png" alt="..." style="width: auto;">
+	</div>
     <table  style="text-align: center;" class="table table-hover">
     	<tr>
     		<td>번호</td>
@@ -30,13 +32,15 @@
 	 		List<QuestionDTO> list = pDTO.getList();
 	 		for(int i = 0; i < list.size(); i++){
 	 			QuestionDTO qDTO = list.get(i);
+	 			String created = qDTO.getQ_CREATED();
+	 			String crete = created.substring(0, 10);
 	%>
     	<tr>
     		<td> <%= qDTO.getQ_ID() %> </td>
     		<td> <span id="pId<%=qDTO.getP_ID()%>"><%=qDTO.getP_ID()%></span> </td>
     		<td> <%= qDTO.getQ_CATEGORY() %> </td>
     		<td> <a href="QuestionOneSelect?Q_ID=<%= qDTO.getQ_ID() %>&USERID=<%=qDTO.getUSERID()%>"> <%= qDTO.getQ_TITLE() %> </a> </td>
-    		<td> <%= qDTO.getQ_CREATED() %> </td>
+    		<td> <%= crete %> </td>
     		<td> <%= qDTO.getUSERID() %> </td>
     	</tr>
     <%
@@ -63,7 +67,7 @@
     <tr>
     	<td colspan="5"></td>
     	<td>  
-    		<button class="table table-hover" onclick="location.href='questionInsert.jsp'">글쓰기</button>
+    		<button class="btn btn-outline-success" onclick="location.href='questionInsert.jsp'">글쓰기</button>
     	</td>
     </tr>
     </table>

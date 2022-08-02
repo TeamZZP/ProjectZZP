@@ -19,6 +19,7 @@ public class MemberAddServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
 		String userid = request.getParameter("userid");
 		String passwd = request.getParameter("passwd");
 		String username = request.getParameter("username");
@@ -28,6 +29,7 @@ public class MemberAddServlet extends HttpServlet {
 		String post_num = request.getParameter("post_num");
 		String addr1 = request.getParameter("addr1");
 		String addr2 = request.getParameter("addr2");
+		System.out.println(userid+" "+passwd+" "+username);
 		
 		//영문(대소문자 구분), 숫자, 특수문자 조합, 9~12자리
 //		Pattern pattern = Pattern.compile("^(?=.*\\\\\\\\d)(?=.*[~`!@#$%\\\\\\\\^&*()-])(?=.*[a-z])(?=.*[A-Z]).{9,12}$"); 

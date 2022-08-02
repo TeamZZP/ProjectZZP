@@ -1,7 +1,21 @@
+<%@page import="com.dto.MemberDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+ <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <%
+    	MemberDTO mDTO = (MemberDTO)session.getAttribute("login");
+    	if(mDTO == null){
+    %>
+    <script>
+    $(function() {
+    	alert("로그인이 필요합니다");
+    	$("#questionForm").attr("action", "LoginUIServlet");
+    	$("#questionForm").submit();
+	});//
+    </script>
+    <%
+    	}
+    %>
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$("#ok").click(function() {
@@ -23,17 +37,23 @@
 				$("#questionForm").attr("action", "QuestionInsertServlet");
 			})
 			$("#pID").click(function () {
-				window.open("productSelect.jsp","상품검색","width=400px height=500px");
+				window.open("questionproductSelect.jsp","상품검색","width=400px height=500px");
 			});
 		});//end ready
 	</script>
+<div style="text-align: center; display: flex; justify-content:center; height: 100px; margin-bottom: 10px;" >
+		<img src="images/question.png" alt="..." style="width: auto;">
+</div>
 <form action="" id="questionForm">
 		<table>
 			<tr>
 				<td colspan="2"> 제목 <input type="text" name="qTittle" id="qTittle"> </td>
 			</tr>
 			<tr>
-				<td colspan="2"> <button id="pID">상품 정보</button> </td>
+				<td colspan="2"> 
+					<button id="pID" class="btn btn-outline-success">상품 정보</button>
+					<input type="text" name="pId" id="pId">
+				</td>
 			</tr>
 			<tr>
 				<td colspan="2"> 문의 글 카테고리
@@ -61,10 +81,10 @@
 				<td colspan="2">첨부파일 <input type="file" name="qFile"> </td>
 			</tr>
 			<tr>
-				<td> <button id="QuestionList">목록</button> </td>
+				<td> <button id="QuestionList" class="btn btn-success">목록</button> </td>
 				<td>
-					<button id="QuestionInsert">등록</button>
-					<button type="reset">취소</button>
+					<button id="QuestionInsert" class="btn btn-success">등록</button>
+					<button type="reset" class="btn btn-success">취소</button>
 				</td>
 			</tr>
 		</table>

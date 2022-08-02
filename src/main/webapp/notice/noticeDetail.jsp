@@ -25,6 +25,9 @@
 				$("form").attr("action", "NoticeListServlet");
 			}
 	</script>
+	<div style="text-align: center; display: flex; justify-content:center; height: 100px; margin-bottom: 10px;" >
+		<img src="images/notice3.png" alt="..." style="width: auto;">
+	</div>
 	<form action="NoticeUpdate.jsp" method="post">
 		<table border="1" style="border-collapse: collapse;" >
 			<tr>
@@ -38,8 +41,8 @@
 				<td colspan="2"><%=nDTO.getNOTICE_CONTENT()%></td>
 			</tr>
 			<tr>
-				<td><button onclick="NoticeList()">목록</button></td>
-				<td><button type="submit" id="NoticeUpdate">수정</button></td>
+				<td><button onclick="NoticeList()" class="btn btn-outline-success" >목록</button></td>
+				<td><button type="submit" id="NoticeUpdate" class="btn btn-outline-success" >수정</button></td>
 			</tr>
 			<tr>
 				<td colspan="2">다음글 <a href="NoticeOneSelectServlet?NOTICE_ID=<%=nDTO.getNOTICE_ID() + 1%>"> <%= nextDTO.getNOTICE_TITTLE() %>  </a></td>

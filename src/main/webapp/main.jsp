@@ -18,9 +18,9 @@
 %>
 </head>
 <body>
-<jsp:include page="common/header3.jsp" flush="true"></jsp:include><br>
+<jsp:include page="common/header.jsp" flush="true"></jsp:include><br>
 <jsp:include page="main/banner.jsp" flush="true"></jsp:include><br> 
-<jsp:include page="main/bestproduct.jsp" flush="true"></jsp:include><br>  
+<jsp:include page="main/maintest.jsp" flush="true"></jsp:include><br>  
 <jsp:include page="common/footer.jsp" flush="true"></jsp:include><br>
 </body>
 </html>

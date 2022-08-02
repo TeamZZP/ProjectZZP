@@ -61,6 +61,8 @@
 		$("#commentAddBtn").on("click", function () {
 			if ("<%= currUserid %>" == "null") {
 				alert("로그인이 필요합니다.");
+			} else if ($("#comment_content").val().length == 0) {
+				$("#comment_content").focus();
 			} else {
 				let comment_content = $("#comment_content").val();
 				$.ajax({
@@ -168,13 +170,13 @@
 	<tr>
 	  <td colspan="3">
 	    <input type="text" name="comment_content" id="comment_content" placeholder="칭찬과 격려의 댓글은 작성자에게 큰 힘이 됩니다 :)">
-	    <button id="commentAddBtn">입력</button>
+	    <button id="commentAddBtn" class="btn btn-outline-success">입력</button>
 	  </td>
 	</tr>
 	<tr>
 	  <td><a href="ChallengeListServlet">목록</a></td>
 	  <td></td>
-	  <td><a href="challengeWrite.jsp">글쓰기</a></td>
+	  <td><a href="ChallengeUIServlet">글쓰기</a></td>
 	</tr>
 </table>
 </div>

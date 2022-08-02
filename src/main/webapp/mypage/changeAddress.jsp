@@ -3,12 +3,14 @@
 <%@page import="com.dto.MemberDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <%
 	MemberDTO dto=(MemberDTO) session.getAttribute("login");
 	AddressDTO address=(AddressDTO) session.getAttribute("address");
-	OrderDTO orders=(OrderDTO) session.getAttribute("orders");
+	//OrderDTO orders=(OrderDTO) session.getAttribute("orders");
 	
+	String userid=dto.getUserid();
 	String username=dto.getUsername();
 	String phone=dto.getPhone();
 	
@@ -16,35 +18,52 @@
 	String addr1=address.getAddr1();
 	String addr2=address.getAddr2();
 	
-	String order_request=orders.getOrder_request();
+	//String order_request=orders.getOrder_request();
 %>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>주소 수정</title>
+<link type="text/css" rel="stylesheet" href="<c:url value='/bootstrap/css/bootstrap.css'/>"/>    
+<link type="text/css" rel="stylesheet" href="<c:url value='/bootstrap/css/bootstrap.min.css'/>"/>    
+<script src="<c:url value='/bootstrap/js/bootstrap.js'/>" type="text/javascript"></script>
+<script src="<c:url value='/bootstrap/js/bootstrap.min.js'/>" type="text/javascript"></script>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
-		
+		$("#submit").on("click", function () {
+			var post=$("#sample4_postcode").val();
+			var addr1=$("#sample4_roadAddress").val();
+			var addr2=$("#sample4_jibunAddress").val();
+			opener.$("#sample4_postcode").val(post);//부모창에 업데이트
+			opener.$("#sample4_roadAddress").val(addr1);//부모창에 업데이트
+			opener.$("#sample4_jibunAddress").val(addr2);//부모창에 업데이트
+			$("form").attr("action", "../AccountChangeServlet");
+			alert("주소가 변경되었습니다.");
+		});//end fn
+		$("#close").on("click", function() {
+			close();
+		});//end fn
 	});//end ready
 </script>
 </head>
 <body>
-<form action="../AccountChangeServlet" method="get">
+<form action=" " method="get">
+<input type="hidden" name="userid" id="userid" value="<%= userid %>">
 <b>이름</b><br>
 <%= username %><br>
 <br>
 <b>주소</b><br>
 우편번호: <input type="text" name="post" id="sample4_postcode" placeholder="우편번호" readonly="readonly" value="<%= post_num %>">
-	<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
+	<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기" class="btn btn-outline-success"><br>
 도로명 주소: <input type="text" name="addr1" id="sample4_roadAddress" placeholder="도로명주소" readonly="readonly" value="<%= addr1 %>" style="width: 450px"><br>
 상세 주소: <input type="text" name="addr2" id="sample4_jibunAddress" placeholder="지번주소" readonly="readonly" value="<%= addr2 %>" style="width: 300px"><br>
 	<span id="guide" style="color:#999"></span><br>
 연락처: <input type="text" name="phone" id="phone" placeholder="<%= phone %>"/><br>
-<input type="text" name="deliveryReq" value="<%= order_request %>"><br>
+<%-- <input type="text" name="deliveryReq" value="<%= order_request %>"><br> --%>
 <input type="checkbox" value="기본 배송지로 선택"><br>
-<button>저장</button>
-<button>삭제</button><br>
+<button id="submit" class="btn btn-success">저장</button>&nbsp;&nbsp;<button id="close" class="btn btn-success">창 닫기</button>
+<button class="btn btn-success">삭제</button><br>
 </form>
 </body>
 </html>
