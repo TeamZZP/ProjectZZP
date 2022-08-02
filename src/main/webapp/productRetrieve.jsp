@@ -13,4 +13,5 @@
 <jsp:include page="common/header.jsp" flush="true"></jsp:include><br>
 <jsp:include page="category.jsp" flush="true"></jsp:include><br>
 <jsp:include page="product/productRetrieve.jsp" flush="true"></jsp:include><br>
+<jsp:include page="product/review.jsp" flush="true"></jsp:include>
 <jsp:include page="common/footer.jsp" flush="true"></jsp:include><br>

@@ -4,9 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>ZZP</title>
+<title>Insert title here</title>
 </head>
 <body>
-<img src="images/firsteventbanner.jpg" width="1000"  height="300">
+
 </body>
 </html>
