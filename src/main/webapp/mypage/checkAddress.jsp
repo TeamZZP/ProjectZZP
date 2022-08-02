@@ -15,6 +15,10 @@
 	String addr1=address.getAddr1();
 	String addr2=address.getAddr2();
 	
+	if (addr2 == null) {
+		addr2="상세 주소를 입력하세요.";
+	}
+	
 	//String order_request=orders.getOrder_request();
 %>
 <html>

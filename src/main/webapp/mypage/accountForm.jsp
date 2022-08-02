@@ -55,6 +55,10 @@
 	String addr1=address.getAddr1();
 	String addr2=address.getAddr2();
 	int default_chk=address.getDefault_chk();
+	
+	if (addr2 == null) {
+		addr2="상세 주소를 입력하세요.";
+	}
 %>
 <div style = "padding: 5px 5px 5px 20px;">
 <form action=" " method="post">
