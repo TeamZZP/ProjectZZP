@@ -9,7 +9,6 @@
 <body>
 <!-- 공지사항 게시글 하나 -->
 	<jsp:include page="common/header.jsp" flush="true"></jsp:include><br>
-	<h1>공지사항 :></h1>
 	<jsp:include page="notice/noticeDetail.jsp" flush="true"></jsp:include> <br>
 	<jsp:include page="common/footer.jsp" flush="true"></jsp:include>
 </body>

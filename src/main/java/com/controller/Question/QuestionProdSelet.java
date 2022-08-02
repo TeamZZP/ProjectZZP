@@ -6,11 +6,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.dto.ProductDTO;
 import com.service.QuestionService;
@@ -42,9 +44,11 @@ public class QuestionProdSelet extends HttpServlet {
 		int num = service.count(map);
 		System.out.println("검색된 갯수 " + num);
 		
-		response.setContentType("text/html;charset=utf-8");
-		PrintWriter out = response.getWriter();
+		request.setAttribute("SelectList", list);
+		request.setAttribute("SelectNum", num);
 		
+		RequestDispatcher dis = request.getRequestDispatcher("questionproductSelect.jsp");
+		dis.forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

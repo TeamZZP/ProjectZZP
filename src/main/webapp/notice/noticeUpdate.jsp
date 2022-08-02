@@ -25,6 +25,9 @@
 				$("form").attr("action", "NoticeDeleteServlet");
 			}
 	</script>
+<div style="text-align: center; display: flex; justify-content:center; height: 100px; margin-bottom: 10px;" >
+		<img src="images/notice3.png" alt="..." style="width: auto;">
+</div>
 	<form action="NoticeUpdateServlet" method="post">
 		<input type="hidden" name="nId" value="<%=nDTO.getNOTICE_ID()%>">
 		<table border="1" style="border-collapse: collapse;">

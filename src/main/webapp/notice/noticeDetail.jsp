@@ -25,6 +25,9 @@
 				$("form").attr("action", "NoticeListServlet");
 			}
 	</script>
+	<div style="text-align: center; display: flex; justify-content:center; height: 100px; margin-bottom: 10px;" >
+		<img src="images/notice3.png" alt="..." style="width: auto;">
+	</div>
 	<form action="NoticeUpdate.jsp" method="post">
 		<table border="1" style="border-collapse: collapse;" >
 			<tr>

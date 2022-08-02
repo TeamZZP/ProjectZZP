@@ -41,11 +41,11 @@ public class AccountManagementServlet extends HttpServlet {
 			
 			MemberService m_service=new MemberService();
 			MemberDTO member=m_service.selectMember(userid);
-			System.out.println(member);
+			//System.out.println(member);
 			
 			AddressService a_service=new AddressService();
 			AddressDTO address=a_service.selectAddress(userid);
-			System.out.println(address);
+			//System.out.println(address);
 			
 			OrderService o_service=new OrderService();
 			OrderDTO orders=o_service.selectOrders(userid);

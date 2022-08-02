@@ -59,6 +59,26 @@ $(function() {
 	});
 	
 	
+	$("#up").on("click",function(){
+	      var count =parseInt($("#gAmount").val());
+	      $("#gAmount").val(parseInt(count)+1);
+	      
+	       var total = ( (count+1)* $("#price").text());
+	      $("#total").text(total); 
+	      
+	   })//
+	   
+	   $("#down").on("click",function(){
+	      var count = parseInt($("#gAmount").val());
+	      if(count > 1){
+	         $("#gAmount").val(parseInt(count)-1);
+	         var total = ((count-1) * $("#price").text());
+	         $("#total").text(total);
+	      }
+	   });
+	   
+	
+	
 	
 	
 
@@ -100,7 +120,7 @@ $(function() {
                </tr>
                <tr>
                   <td class="td_title">가격</td>   
-                  <td class="td_red" colspan="2" style='padding-left: 30px'>
+                  <td class="td_red" colspan="2" style='padding-left: 30px' id="price">
                   <%=p_selling_price %>
                   </td>
                 
@@ -127,15 +147,19 @@ $(function() {
                   <input type="text"
                      name="gAmount" value="1" id="gAmount"
                      style="text-align: right; height: 18px">
-                     <button  id="up">+</button>
+                      <button  id="up">+</button>
                      <button  id="down">-</button><br>
                      </td>
                </tr>
-              
+              	<tr >
+              	<td></td>
+              	<td class="td_title" >결제금액</td>
+				<td colspan="2">
+				<span id="total"><%=p_selling_price%></span>
+				</tr>
             </table>
                
-         </td>
-         
+         </td> 
       </tr>
       <tr>
       <td></td>

@@ -13,7 +13,7 @@ import com.dto.PageDTO;
 public class ChallengeDAO {
 
 	public int insertChallenge(SqlSession session, ChallengeDTO dto) {
-		int n = session.insert("insertChallenge", dto);
+		int n = session.insert("ChallengeMapper.insertChallenge", dto);
 		return n;
 	}
 
@@ -23,7 +23,7 @@ public class ChallengeDAO {
 		int perPage = pDTO.getPerPage();
 		int offset = (curPage - 1)*perPage;
 		
-		List<ChallengeDTO> list = session.selectList("selectAllChallenge", map, new RowBounds(offset, perPage));
+		List<ChallengeDTO> list = session.selectList("ChallengeMapper.selectAllChallenge", map, new RowBounds(offset, perPage));
 		
 		pDTO.setCurPage(curPage);
 		pDTO.setList(list);
@@ -33,51 +33,51 @@ public class ChallengeDAO {
 	}
 
 	private int countTotal(SqlSession session, HashMap<String, String> map) {
-		int n = session.selectOne("countTotal", map);
+		int n = session.selectOne("ChallengeMapper.countTotal", map);
 		return n;
 	}
 
 	public ChallengeDTO selectOneChallenge(SqlSession session, String chall_id) {
-		ChallengeDTO dto = session.selectOne("selectOneChallenge", chall_id);
+		ChallengeDTO dto = session.selectOne("ChallengeMapper.selectOneChallenge", chall_id);
 		return dto;
 	}
 
 	public int updateChallenge(SqlSession session, HashMap<String, String> map) {
-		int n = session.update("updateChallenge", map);
+		int n = session.update("ChallengeMapper.updateChallenge", map);
 		return n;
 	}
 
 	public int deleteChallenge(SqlSession session, String chall_id) {
-		int n = session.delete("deleteChallenge", chall_id);
+		int n = session.delete("ChallengeMapper.deleteChallenge", chall_id);
 		return n;
 	}
 	
 	public int insertComment(SqlSession session, CommentsDTO dto) {
-		int n = session.insert("insertComment", dto);
+		int n = session.insert("ChallengeMapper.insertComment", dto);
 		return n;
 	}
 
 	public List<CommentsDTO> selectAllComments(SqlSession session, String chall_id) {
-		List<CommentsDTO> list = session.selectList("selectAllComments", chall_id);
+		List<CommentsDTO> list = session.selectList("ChallengeMapper.selectAllComments", chall_id);
 		return list;
 	}
 
 	public int deleteComment(SqlSession session, String comment_id) {
-		int n = session.delete("deleteComment", comment_id);
+		int n = session.delete("ChallengeMapper.deleteComment", comment_id);
 		return n;
 	}
 
 	public void updateChall_hits(SqlSession session, String chall_id) {
-		session.update("updateChall_hits", chall_id);
+		session.update("ChallengeMapper.updateChall_hits", chall_id);
 	}
 
 	public int countComments(SqlSession session, int chall_id) {
-		int n = session.selectOne("countComments", chall_id);
+		int n = session.selectOne("ChallengeMapper.countComments", chall_id);
 		return n;
 	}
 
 	public HashMap<String, String> selectProfile(SqlSession session, String userid) {
-		HashMap<String, String> map = session.selectOne("selectProfile", userid);
+		HashMap<String, String> map = session.selectOne("ChallengeMapper.selectProfile", userid);
 		return map;
 	}
 

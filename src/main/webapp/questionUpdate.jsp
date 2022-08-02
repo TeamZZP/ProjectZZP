@@ -8,7 +8,6 @@
 </head>
 <body>
 	<jsp:include page="common/header.jsp" flush="true"></jsp:include><br>
-	<h1>게시물 수정 :></h1>
 	<jsp:include page="question/questionUpdate.jsp" flush="true"></jsp:include> <br>
 	<jsp:include page="common/footer.jsp" flush="true"></jsp:include>
 </body>

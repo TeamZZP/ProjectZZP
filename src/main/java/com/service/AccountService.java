@@ -61,4 +61,16 @@ public class AccountService {
 		}
 		return profile;
 	}
+
+	public int changeAddress(HashMap<String, String> addressMap) {
+		SqlSession session=MySqlSessionFactory.getSqlSession();
+		int num=0;
+		try {
+			num=dao.changeAddress(session, addressMap);
+			session.commit();
+		} finally {
+			session.close();
+		}
+		return num;
+	}
 }

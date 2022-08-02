@@ -5,11 +5,11 @@
 <mapper namespace="NoticeMapper">
 	<select id="pointNotice" resultType="NoticeDTO">
 		select NOTICE_ID, NOTICE_TITTLE, NOTICE_CONTENT, to_char(NOTICE_CREATED, 'YYYY/MM/DD') NOTICE_CREATED, 
-			ADMIN_ID, NOTICE_CATEGORY, NOTICE_HITS from notice where NOTICE_CATEGORY = 'main' order by notice_id asc
+			ADMIN_ID, NOTICE_CATEGORY, NOTICE_HITS from notice where NOTICE_CATEGORY = 'main' order by notice_id desc
 	</select>
 	<select id="noticeList" resultType="NoticeDTO">
 		select NOTICE_ID, NOTICE_TITTLE, NOTICE_CONTENT, to_char(NOTICE_CREATED, 'YYYY/MM/DD') NOTICE_CREATED, 
-			ADMIN_ID, NOTICE_CATEGORY, NOTICE_HITS from notice where NOT NOTICE_CATEGORY = 'main' order by notice_id asc
+			ADMIN_ID, NOTICE_CATEGORY, NOTICE_HITS from notice where NOT NOTICE_CATEGORY = 'main' order by notice_id desc
 	</select>
 	<select id="noticeOneSelect" resultType="NoticeDTO" parameterType="int">
 		select NOTICE_ID, NOTICE_TITTLE, NOTICE_CONTENT, to_char(NOTICE_CREATED, 'YYYY/MM/DD') NOTICE_CREATED, 
