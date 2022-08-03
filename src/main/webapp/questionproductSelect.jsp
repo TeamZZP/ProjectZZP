@@ -92,7 +92,7 @@
 			          	if(i== curPage){
 			          		out.print(i+"&nbsp;"); //현재페이지
 			          	}else{
-			          		out.print("<a href ='QuestionProdSelet?curPage="+i+"&category="+category+"&searchValue="+searchValue
+			          		out.print("<a style='color: green;' href ='QuestionProdSelet?curPage="+i+"&category="+category+"&searchValue="+searchValue
 			          				+"&prodNum="+prodNum+"'>" + i + "</a>");  
 			          	} //다른 페이지 선택시 링크로 이동
 			        }//end for
