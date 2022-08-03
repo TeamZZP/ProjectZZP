@@ -6,9 +6,16 @@ import org.apache.ibatis.session.SqlSession;
 
 public class CategoryDAO {
 
-	public List<String> allCategoryId(SqlSession session) {
-		List<String> list = session.selectList("allCategoryId");
-		return list;
+	
+
+	public int getCount(SqlSession session) {
+		int count = session.selectOne("getCount");
+		return count;
+	}
+
+	public String categoryName(SqlSession session, int i) {
+		String c_name = session.selectOne("categoryName",i);
+		return c_name;
 	}
 
 }
