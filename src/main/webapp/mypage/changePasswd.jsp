@@ -26,16 +26,33 @@
 	$(document).ready(function() {
 		//1. 기존 비밀번호 입력--일치 여부 확인
 		$("#passwd").on("keyup", function() {
-			if ($(this).val() == "<%= passwd %>") {
-				$("#result").text("비밀번호 일치");
-				$(".pw").removeAttr("readonly");//일치하면 변경 가능
-			} else {
-				$("#result").text("비밀번호 불일치");
-				$(".pw").attr("readonly", "readonly");//불일치하면 변경 불가//readonly 상태로
-			}
+			console.log($("#userid").val());
+			console.log($("#passwd").val());
+			$.ajax({
+				type : "get",
+				url : "../PasswdCheckServlet",//페이지 이동 없이 해당 url에서 작업 완료 후 데이터만 가져옴
+				dataType : "text",
+				data : {//서버에 전송할 데이터
+					userid : $("#userid").val(),
+					passwd : $("#passwd").val()
+				},
+ 				success : function(data, status, xhr) {//data=mesg : 같을 경우, 다를 경우 저장된 메세지 데이터 출력
+ 					console.log(data);
+ 					$("#result").text(data);
+ 					if (data == "비밀번호 일치") {
+ 						$(".pw").removeAttr("readonly");//일치하면 변경 가능
+ 					} else {
+ 						$(".pw").attr("readonly", "readonly");//불일치하면 변경 불가//readonly 상태로
+					}
+				},
+				error: function(xhr, status, error) {
+					console.log(error);
+				}				
+			});//end ajax
 		});//end fn
 		
 		//2. 기존 비밀번호와 불일치--경고창 출력//??? 기존 비번 값과 db 값이 일치하면 true--일치하면 수정 가능해지고 클릭시 경고창이 출력됨..
+			//ajax 수정 불필요
 		$(".pw").on("click", function() {
 			//if ($(".pw").attr("readonly", "readonly")) {//#Fail_기존 설정이 readonly여서 항상 경고창이 출력됨
 			if ($("#result").text() == "비밀번호 불일치" || $("#result").text().length == 0) {//완료
@@ -46,18 +63,19 @@
 		});//end fn
 		
 		//3. 새로운 비밀번호 일치 여부 확인
+			//ajax 수정 불필요
 		$("#checkPasswd").on("keyup", function() {
-			if ($("#chagnePasswd").val().length == 0) {
+			if ($("#changedPasswd").val().length == 0) {
 				$("#result2").text("변경할 비밀번호를 입력하세요.");
-				$("#chagnePasswd").focus();
-			} else if ($("#chagnePasswd").val().length != 0
-					&& $(this).val() == $("#chagnePasswd").val()) {
+				$("#checkPasswd").val("");
+				$("#changedPasswd").focus();
+			} else if ($("#changedPasswd").val().length != 0
+					&& $(this).val() == $("#changedPasswd").val()) {
 				$("#result2").text("비밀번호 일치");
 			} else {
 				$("#result2").text("비밀번호 불일치");
 			}
 		});//end fn
-		//3+. 비밀번호 재확인 후 다시 변경할 비밀번호 입력시 처리 추가
 		
 		$("#submit").on("click", function() {
 			//4-1. 데이터 입력 후 submit
@@ -65,19 +83,19 @@
 				alert("기존 비밀번호를 입력하세요.");
 				event.preventDefault();
 				$("#passwd").focus();
-			} else if ($("#chagnePasswd").val().length == 0) {
+			} else if ($("#changedPasswd").val().length == 0) {
 				alert("변경할 비밀번호를 입력하세요.");
 				event.preventDefault();
-				$("#chagnePasswd").focus();
+				$("#changedPasswd").focus();
 			} else if ($("#checkPasswd").val().length == 0) {
 				alert("변경할 비밀번호를 확인하세요.");
 				event.preventDefault();
 				$("#checkPasswd").focus();
 			} 
  			else {//3가지 다 입력 완료
-				//4-2. 변경된 비밀번호 데이터 베이스에 업데이트//#Fail_action 실행 안 됨, 데이터 전달 못 함--if문에서 문제가 생긴 듯->window close 문제였음
+				//4-2. 변경된 비밀번호 데이터 베이스에 업데이트
 				//새로운 비밀번호 확인 불일치
-				if ($("#chagnePasswd").val() != $("#checkPasswd").val()) {
+				if ($("#changedPasswd").val() != $("#checkPasswd").val()) {
 					//console.log("비번 체크");
 					event.preventDefault();
 					alert("변경할 비밀번호를 확인하세요.");
@@ -88,33 +106,34 @@
 					event.preventDefault();
 					alert("기존 비밀번호를 확인하세요.");
 					$("#passwd").val("");
-					$("#chagnePasswd").val("");
+					$("#changedPasswd").val("");
 					$("#checkPasswd").val("");
 					$("#result").text("");
 					$("#result2").text("");
 					$("#passwd").focus();
 				} else {//새로운 비밀번호 확인 일치 && 기존 비번 일치 상태
-					var pw=$("#chagnePasswd").val();
-					console.log(pw);//이 데이터를 어떻게 넘기지?
-					opener.$("#passwd").val($("#chagnePasswd").val());//부모창에 업데이트
-					opener.$("#userid").val($("#userid").val());//부모창에 업데이트
-					opener.location.reload();//새로고침 안 됨--기존 비밀번호로 인식
-					$("form").attr("action", "../AccountChangeServlet");
-					//변경 완료 alert, 창 닫기, 기존 마이페이지 화면 유지
-					alert("비밀번호가 변경되었습니다.");
-					//window.close();
-/* 					setTimeout(function() {//창 안 닫힘
-						window.close();
-					}, 100); */
-					//window.close("mypage/changePasswd.jsp");//창 닫으면 action 실행 안되고 데이터 전송이 불가
+					//*****ajax
+					event.preventDefault();
+					$.ajax({
+						type : "get",
+						url : "../PasswdChangeServlet",//페이지 이동 없이 해당 url에서 작업 완료 후 데이터만 가져옴
+						dataType : "text",
+						data : {//서버에 전송할 데이터
+							userid : $("#userid").val(),
+							passwd : $("#passwd").val(),
+							changedPasswd : $("#changedPasswd").val()
+						},
+		 				success : function(data, status, xhr) {//data : 
+							alert(data);
+							opener.$("#passwd").val($("#changedPasswd").val());//부모창에 업데이트
+							window.close();
+						},
+						error: function(xhr, status, error) {
+							console.log(error);
+						}						
+					});//end ajax
 				}
 			}//end if
-		});//end fn
-		
-		$("#close").on("click", function() {
-			opener.location.reload();//새로고침 안 됨--기존 비밀번호로 인식
-			//window.opener.document.location.href = window.opener.document.URL;
-			window.close();
 		});//end fn
 	});//end ready
 </script>
@@ -126,11 +145,11 @@
 <h2>변경할 비밀번호를 입력해 주십시오</h2>
 기존 비밀번호 입력: <input type="text" name="passwd" id="passwd">
 	<b><span id="result"></span></b><br>
-변경할 비밀번호: <input type="text" class="pw" name="chagnePasswd" id="chagnePasswd" readonly="readonly"><br>
+변경할 비밀번호: <input type="text" class="pw" name="changedPasswd" id="changedPasswd" readonly="readonly"><br>
 비밀번호 재확인: <input type="text" class="pw" name="checkPasswd" id="checkPasswd" readonly="readonly">
 	<b><span id="result2"></span></b><br>
 	<br>
-<button id="submit" class="btn btn-success">확인</button>&nbsp;&nbsp;<button id="close" class="btn btn-success">창 닫기</button>
+<button id="submit" class="btn btn-success">확인</button>
 </form>
 </div>
 </body>
