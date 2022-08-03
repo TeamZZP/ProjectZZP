@@ -28,9 +28,5 @@ public class LogoutServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}
-<<<<<<< HEAD
-}
-=======
 
 }
->>>>>>> 1f0aebe3d9e5fe8c7bae5f12745a49275f755357

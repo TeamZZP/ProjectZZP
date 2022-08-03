@@ -1,3 +1,4 @@
+<%@page import="com.dto.MemberDTO"%>
 <%@page import="org.apache.ibatis.reflection.SystemMetaObject"%>
 <%@page import="com.dto.PageDTO"%>
 <%@page import="java.util.List"%>
@@ -24,6 +25,17 @@ a{
 	<div style="text-align: center; display: flex; justify-content:center; height: 100px; margin-bottom: 10px;" >
 		<img src="images/notice3.png" alt="..." style="width: auto;">
 	</div>
+	<%
+		MemberDTO mDTO = (MemberDTO)session.getAttribute("login");
+		//int admin = mDTO.get
+	%>
+	<form method="post" action="NoticeInsert">
+	<table border="1" style="border-collapse: collapse;">
+		<tr>
+			<td> <button type="submit">글쓰기</button> </td>
+		</tr>
+	</table>
+	</form>
 	<table border="1" style="border-collapse: collapse; text-align: center;" class="table table-hover">
     				<colgroup style="caption-side: top;" >zzp 고정 공지</colgroup> 
     				<tr>
