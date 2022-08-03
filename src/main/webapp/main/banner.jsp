@@ -15,7 +15,7 @@
     <div class="carousel-item" data-bs-interval="3000" onclick="javascrip:location.href='ProductListServlet?p_category=timeEvent';">
       <img src="images/main/banner_time.png" class="d-block w-100" alt="...">
     </div>
-    <div class="carousel-item" data-bs-interval="3000" onclick="javascrip:location.href='ChallengeListServlet';">
+    <div class="carousel-item" data-bs-interval="3000" onclick="javascrip:location.href='ChallengeDetailServlet?chall_id=1';">
       <img src="images/main/banner_monthchall.png" class="d-block w-100" alt="...">
     </div>
   </div>

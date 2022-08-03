@@ -47,10 +47,6 @@ public class AccountManagementServlet extends HttpServlet {
 			AddressDTO address=a_service.selectAddress(userid);
 			//System.out.println(address);
 			
-			OrderService o_service=new OrderService();
-			OrderDTO orders=o_service.selectOrders(userid);
-			System.out.println(orders);
-			
 			//HashMap<String, String> profilemap=new HashMap<String, String>();
 			//profilemap.put("userid", userid);
 			
@@ -68,7 +64,6 @@ public class AccountManagementServlet extends HttpServlet {
 			
 			session.setAttribute("login", member);
 			session.setAttribute("address", address);
-			session.setAttribute("orders", orders);
 			session.setAttribute("profile", profile);
 			response.sendRedirect("accountForm.jsp");//로그인 된 계정 정보 session 저장-마이페이지 오픈//mypage로 이름 바꿀까?
 		} else {

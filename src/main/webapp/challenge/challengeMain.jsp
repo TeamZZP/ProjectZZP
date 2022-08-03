@@ -52,7 +52,7 @@
 			<table align="center" width="710" cellspacing="0" cellpadding="0" border="0">
 				<tr>
 					<td colspan="3">
-						<a href="">이 달의 챌린지 [ 용기내! 챌린지 ] 참여하러 가기</a>
+						<a href="ChallengeDetailServlet?chall_id=1">[이 달의 챌린지] 용기내! 챌린지</a>
 					</td>
 					<td>
 							<select name="sortBy" id="sortBy">

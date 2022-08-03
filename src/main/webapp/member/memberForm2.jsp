@@ -34,6 +34,24 @@
 		event.preventDefault();
 	}
 	
+	//이름 유효성 검사
+	var nameChk = /^(?=.*[가-힣a-zA-Z]).{2,30}$/;
+	if (!nameChk.test(username)) {
+		alert("이름을 확인해주세요 :)");
+		$("#username").val("");
+		$("#username").focus();
+		event.preventDefault();
+	}
+	
+	//전화번호 유효성 검사
+	var numChk = /^[0-9]*.{11}$/; 
+	if (!numChk.test(phone)) {
+		alert("전화번호를 형식에 맞게 입력해주세요 :)");
+		$("#phone").val("");
+		$("#phone").focus();
+		event.preventDefault();
+	}
+	
 	else if (userid.length==0) {
 		alert("아이디를 입력해주세요 :)");
 		$("#userid").focus();
@@ -120,7 +138,7 @@ $("#addMember").click(function() {
                                         <div class="cols-sm-10">
                                             <div class="input-group">
                                                 <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-                                                <input type="text" class="form-control" name="userid" id="userid" placeholder="아이디를 입력하세요" />
+                                                <input type="text" class="form-control" name="userid" id="userid" placeholder="영문자와 숫자로 이루어진 4~12자리를 입력하세요" />
                                                 <button id="idCheck" class="btn btn-outline-success">중복확인</button>
                                             </div>
                                         </div>
