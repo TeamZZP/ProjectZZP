@@ -28,6 +28,9 @@ public class MemberIdCheckServlet extends HttpServlet {
 		if (num==1) {
 			mesg = "중복된 아이디입니다 :(";
 		}
+		if (userid=="") {
+			mesg = "사용할 수 없는 아이디입니다 :(";
+		}
 		response.setContentType("text/html;charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		out.print(mesg);

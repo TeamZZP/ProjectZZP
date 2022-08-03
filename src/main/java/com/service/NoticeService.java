@@ -99,4 +99,16 @@ public class NoticeService {
 		return pDTO;
 	}
 
+	public int NoticeInsert(NoticeDTO nDTO) {
+		int num = 0;
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		try {
+			num = dao.NoticeInsert(session, nDTO);
+			session.commit();
+		} finally {
+			session.close();
+		}
+		return num;
+	}
+
 }

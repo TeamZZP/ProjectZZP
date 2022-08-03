@@ -28,6 +28,7 @@ public class LoginServlet extends HttpServlet {
 		
 		MemberService service = new MemberService();
 		MemberDTO dto = service.loginMember(map);
+		System.out.println(dto);
 		
 		HttpSession session = request.getSession();
 		if (dto!=null) {

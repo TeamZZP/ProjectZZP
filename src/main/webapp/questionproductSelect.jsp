@@ -1,14 +1,19 @@
 <%@page import="com.dto.PageDTO"%>
-<%@page import="org.apache.ibatis.reflection.SystemMetaObject"%>
+
 <%@page import="com.dto.ProductDTO"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<title>Insert title here</title>
+<meta charset="UTF-8">
+<title>ZZP</title>
+<link type="text/css" rel="stylesheet" href="<c:url value='/bootstrap/css/bootstrap.css'/>"/>    
+<link type="text/css" rel="stylesheet" href="<c:url value='/bootstrap/css/bootstrap.min.css'/>"/>    
+<script src="<c:url value='/bootstrap/js/bootstrap.js'/>" type="text/javascript"></script>
+<script src="<c:url value='/bootstrap/js/bootstrap.min.js'/>" type="text/javascript"></script>
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function () {
@@ -36,7 +41,7 @@
 						<option value="P_ID" <%if("P_ID".equals(category)){ %> selected="selected" <%} %>>상품코드</option>
 					</select>
 					<input type="text" name="searchValue" id="searchValue" value="<%=searchValue%>">
-					<button id="search">검색하기</button>
+					<button id="search" class="btn btn-success">검색하기</button>
 				</td>
 			</tr>
 	<%
@@ -74,7 +79,7 @@
 		<tr>
 			<td> <img alt="상품사진" src="images/p_image/<%=img%>.jpg" width="100px" height="100px"></td>
 			<td> <%=pName %> <br> <%=pContent %> <br> <%=pPrice %> </td>
-			<td> <button class="check" data-pID="<%=pDTO.getP_id()%>">선택</button> </td>
+			<td> <button class="btn btn-outline-success check" data-pID="<%=pDTO.getP_id()%>" >선택</button> </td>
 		</tr>
 		<%
 				}//end for
@@ -92,7 +97,7 @@
 			          	if(i== curPage){
 			          		out.print(i+"&nbsp;"); //현재페이지
 			          	}else{
-			          		out.print("<a href ='QuestionProdSelet?curPage="+i+"&category="+category+"&searchValue="+searchValue
+			          		out.print("<a style='color: green;' href ='QuestionProdSelet?curPage="+i+"&category="+category+"&searchValue="+searchValue
 			          				+"&prodNum="+prodNum+"'>" + i + "</a>");  
 			          	} //다른 페이지 선택시 링크로 이동
 			        }//end for

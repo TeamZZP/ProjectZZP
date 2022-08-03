@@ -7,7 +7,7 @@
  $("form").submit(function() {
  	var userid = $("#userid").val();
  	var passwd = $("#passwd").val();
- 	var passwd2 = $("#result2").text();
+ 	var passwd2 = $("#passwd2").val();
 	var username = $("#username").val();
 	var email1 = $("#email1").val();
 	var email2 = $("#email2").val();
@@ -15,7 +15,44 @@
 	var sample4_postcode = $("#sample4_postcode").val();
 	var sample4_roadAddress = $("#sample4_roadAddress").val();
 	var sample4_jibunAddress = $("#sample4_jibunAddress").val();
- 	if (userid.length==0) {
+	
+	//아이디 유효성 검사
+	var idChk = /^(?=.*[a-zA-Z])(?=.*[0-9]).{4,12}$/; 
+	if (!idChk.test(userid)) {
+		alert("아이디를 형식에 맞게 입력해주세요 :)");
+		$("#userid").val("");
+		$("#userid").focus();
+		event.preventDefault();
+	}
+	
+	//비밀번호 유효성 검사
+	var pwChk = /^(?=.*[a-zA-Z])(?=.*[!@#$%^&*+=-_])(?=.*[0-9]).{8,25}$/;
+	if (!pwChk.test(passwd)) {
+		alert("비밀번호를 형식에 맞게 입력해주세요 :)");
+		$("#passwd").val("");
+		$("#passwd").focus();
+		event.preventDefault();
+	}
+	
+	//이름 유효성 검사
+	var nameChk = /^(?=.*[가-힣a-zA-Z]).{2,30}$/;
+	if (!nameChk.test(username)) {
+		alert("이름을 확인해주세요 :)");
+		$("#username").val("");
+		$("#username").focus();
+		event.preventDefault();
+	}
+	
+	//전화번호 유효성 검사
+	var numChk = /^[0-9]*.{11}$/; 
+	if (!numChk.test(phone)) {
+		alert("전화번호를 형식에 맞게 입력해주세요 :)");
+		$("#phone").val("");
+		$("#phone").focus();
+		event.preventDefault();
+	}
+	
+	else if (userid.length==0) {
 		alert("아이디를 입력해주세요 :)");
 		$("#userid").focus();
 		event.preventDefault();
@@ -27,7 +64,7 @@
 		alert("비밀번호를 확인해주세요 :)");
 		$("#passwd2").focus();
 		event.preventDefault();
-	} else if (username.length==0) {
+	}  else if (username.length==0) {
 		alert("이름을 입력해주세요 :)");
 		$("#username").focus();
 		event.preventDefault();
@@ -44,6 +81,8 @@
 		$("#sample4_postcode").focus();
 		event.preventDefault();
 	}
+ 	
+ 	
  });
 	
 //비번확인//키 이벤트 발생시 패스워드 일치여부 검사 
@@ -52,7 +91,7 @@
 	 if ($("#passwd").val()==this.value) {
 		mesg = "비밀번호 일치";
 	}
-	 $("#result2").text(mesg);
+	 $("#result3").text(mesg);
  });
 
 //이메일 선택 시 값 입력
@@ -78,7 +117,7 @@ $("#addMember").click(function() {
 		event.preventDefault();
 	}
 	if (mesg2=="비밀번호 불일치") {
-		alert("비밀번호를 확인해주세요 :(")
+		alert("비밀번호가 일치하지 않습니다 :(")
 		event.preventDefault();
 	};
 });
@@ -99,7 +138,7 @@ $("#addMember").click(function() {
                                         <div class="cols-sm-10">
                                             <div class="input-group">
                                                 <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-                                                <input type="text" class="form-control" name="userid" id="userid" placeholder="아이디를 입력하세요" />
+                                                <input type="text" class="form-control" name="userid" id="userid" placeholder="영문자와 숫자로 이루어진 4~12자리를 입력하세요" />
                                                 <button id="idCheck" class="btn btn-outline-success">중복확인</button>
                                             </div>
                                         </div>
@@ -110,7 +149,8 @@ $("#addMember").click(function() {
                                         <div class="cols-sm-10">
                                             <div class="input-group">
                                                 <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-                                                <input type="password" class="form-control" name="passwd" id="passwd" placeholder="비밀번호를 입력하세요" />
+                                                <input type="password" class="form-control" name="passwd" id="passwd" placeholder="영문자,숫자,특수문자를 포함하여 8~25자리를 입력하세요" />
+                                                <span id="result2" style="color: red;"></span>
                                             </div>
                                         </div>
                                     </div>
@@ -120,7 +160,7 @@ $("#addMember").click(function() {
                                             <div class="input-group">
                                                 <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
                                                 <input type="password" class="form-control" name="passwd2" id="passwd2" placeholder="다시 한번 입력하세요" />
-                                                <span id="result2" style="color: red;"></span>
+                                                <span id="result3" style="color: red;"></span>
                                             </div>
                                         </div>
                                     </div>

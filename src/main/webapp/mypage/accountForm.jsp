@@ -13,11 +13,13 @@
 			var popupX = (window.screen.width / 2) - (200 / 2);
 			var popupY= (window.screen.height / 5) - (200 / 2);
 			window.open("mypage/changePasswd.jsp","",'status=no, height=200, width=500, left='+ popupX + ', top='+ popupY);
+			reload();
 		});
 		$("#changeEmail").on("click", function() {
 			var popupX = (window.screen.width / 2) - (200 / 2);
 			var popupY= (window.screen.height / 5) - (300 / 2);
 			window.open("mypage/changeEmail.jsp","",'status=no, height=200, width=600, left='+ popupX + ', top='+ popupY);
+			reload();
 		});
 		$("#changeAddress").on("click", function() {
 			var popupX = (window.screen.width / 2) - (200 / 2);
@@ -35,6 +37,9 @@
 			System.out.println("수정 버튼 클릭");
 		}); */
 	});//end ready
+	function reload() {
+		location.reload();
+	}
 </script>
 <%
 	MemberDTO member=(MemberDTO) session.getAttribute("login");
@@ -67,7 +72,7 @@
 	<input type="text" name="username" value="<%= username %>" readonly="readonly"/><br><!-- 수정 불가 or 퍼센트로 데이터 가져옴 -->
 <img alt="" src="mypage/passwd.png" width="30px" height="30px">
 	<input type="password" name="passwd" value="<%= passwd %>" id="passwd" readonly="readonly">
-	<button id="changePasswd" class="btn btn-outline-success">변경</button><br>
+	<button type="button" id="changePasswd" class="btn btn-outline-success">변경</button><br>
 <br>
 <img alt="" src="mypage/email.png" width="30px" height="30px">
 	<input type="text" name="email1" id="email1" readonly="readonly" value="<%= email1 %>">@

@@ -7,7 +7,7 @@
 		<insert id="addMember" parameterType="hashMap">
 			insert all
 			into member
-			values (#{userid}, #{passwd}, #{username}, #{email1}, #{email2}, #{phone}, sysdate)
+			values (#{userid}, #{passwd}, #{username}, #{email1}, #{email2}, #{phone}, sysdate, 0)
 			into address (userid, post_num, addr1, addr2, address_id)
 			values (#{userid}, #{post_num}, #{addr1}, #{addr2}, address_address_id_seq.nextval)
 			into profile 
@@ -20,7 +20,7 @@
 		</select>
 		
 		<select id="loginMember" parameterType="hashMap" resultType="MemberDTO">
-			select userid, passwd, username, email1, email2, phone, created_at
+			select userid, passwd, username, email1, email2, phone, created_at, role
 			from member where userid=#{userid} and passwd=#{passwd}
 		</select>
 		<select id="selectMember" parameterType="String" resultType="MemberDTO">
