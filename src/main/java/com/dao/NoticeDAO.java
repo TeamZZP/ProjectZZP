@@ -55,5 +55,9 @@ public class NoticeDAO {
 	private int totalCount(SqlSession session) {
 		return session.selectOne("NoticeMapper.totalCount");
 	}
+	public int NoticeInsert(SqlSession session, NoticeDTO nDTO) {
+		int num = session.insert("NoticeMapper.NoticeInsert", nDTO);
+		return num;
+	}
 	
 }

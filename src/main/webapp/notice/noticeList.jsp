@@ -25,17 +25,31 @@ a{
 	<div style="text-align: center; display: flex; justify-content:center; height: 100px; margin-bottom: 10px;" >
 		<img src="images/notice3.png" alt="..." style="width: auto;">
 	</div>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script>
+		$(function () {
+			$("#NoticeInsert").click(function () {
+				$("#NoticeInsertFrom").attr("action", "noticeInsert.jsp");
+			});
+		});
+	</script>
 	<%
 		MemberDTO mDTO = (MemberDTO)session.getAttribute("login");
-		//int admin = mDTO.get
+		if(mDTO != null){
+			int admin = mDTO.getRole();
+			if (admin == 1){
 	%>
-	<form method="post" action="NoticeInsert">
+	<form method="post" action="noticeInsert.jsp" id="NoticeInsertFrom">
 	<table border="1" style="border-collapse: collapse;">
 		<tr>
-			<td> <button type="submit">글쓰기</button> </td>
+			<td> <button id="NoticeInsert" type="submit">글쓰기</button> </td>
 		</tr>
 	</table>
 	</form>
+	<%
+			}
+		}
+	%>
 	<table border="1" style="border-collapse: collapse; text-align: center;" class="table table-hover">
     				<colgroup style="caption-side: top;" >zzp 고정 공지</colgroup> 
     				<tr>
