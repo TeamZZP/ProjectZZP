@@ -43,7 +43,7 @@ public class NoticeUpdateServlet extends HttpServlet {
 			response.sendRedirect("NoticeListServlet");
 			session.setAttribute("mesg", "공지 수정 성공");
 		} else {
-			response.sendRedirect("NoticeUpdate.jsp");
+			response.sendRedirect("NoticeListServlet");
 			session.setAttribute("mesg", "공지 수정 실패");
 		}
 		

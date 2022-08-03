@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="QuestionMapper">
+	<select id="questionList" resultType="QuestionDTO">
+		select * from QUESTION order by Q_ID desc
+	</select>
+	<select id="questionOneSelect" resultType="QuestionDTO" parameterType="string">
+		select * from QUESTION where Q_ID = #{Q_ID}
+	</select>
+	<insert id="questionInsert" parameterType="QuestionDTO">
+		insert into QUESTION (Q_BOARD_CATEGORY, Q_CATEGORY, Q_TITLE, Q_CONTENT, Q_CREATED, Q_IMG, Q_STATUS, Q_ID, P_ID, USERID)
+			values (#{Q_BOARD_CATEGORY}, #{Q_CATEGORY}, #{Q_TITLE}, #{Q_CONTENT}, sysdate, #{Q_IMG}, '답변대기', QUESTION_Q_ID_SEQ.nextval, 
+			#{P_ID}, #{USERID})
+	</insert>
+	<update id="questionUpdate" parameterType="QuestionDTO">
+		update QUESTION set Q_BOARD_CATEGORY = #{Q_BOARD_CATEGORY}, Q_CATEGORY = #{Q_CATEGORY}, Q_TITLE = #{Q_TITLE}, Q_CONTENT = #{Q_CONTENT},
+			Q_IMG = #{Q_IMG}, P_ID = #{P_ID}  where Q_ID = #{Q_ID} 
+	</update>
+	<delete id="questionDelete" parameterType="string">
+		delete from QUESTION where Q_ID = #{qID} 
+	</delete>
+	<select id="totalCount" resultType="int">
+		select count(*) from QUESTION
+	</select>
+	<select id="prodSelect" parameterType="map" resultType="ProductDTO">
+		select * from PRODUCT 
+		<choose> 
+			<when test="category == 'P_NAME' and searchValue != null"> 
+				where p_name like '%${searchValue}%' or p_content like '%${searchValue}%'
+			</when>
+			<when test="category == 'P_ID' and  searchValue != null"> 
+				where p_id like '%${searchValue}%' or p_content like '%${searchValue}%'
+			</when>
+			<otherwise>
+			</otherwise> 
+		</choose>
+	</select>
+	<select id="count" parameterType="map" resultType="int">
+		select count(*) from PRODUCT 
+		<choose> 
+			<when test="category == 'P_NAME'"> 
+				where p_name like '%${searchValue}%' or p_content like '%${searchValue}%'
+			</when>
+			<when test="category == 'P_ID'"> 
+				where p_id like '%${searchValue}%' or p_content like '%${searchValue}%'
+			</when>
+			<otherwise>
+			</otherwise> 
+		</choose>
+	</select>
+	<select id="totalCount2" resultType="int" parameterType="map">
+		select count(*) from PRODUCT
+			<choose> 
+			<when test="category == 'P_NAME'"> 
+				where p_name like '%${searchValue}%' or p_content like '%${searchValue}%'
+			</when>
+			<when test="category == 'P_ID'"> 
+				where p_id like '%${searchValue}%' or p_content like '%${searchValue}%'
+			</when>
+			<otherwise>
+			</otherwise> 
+		</choose>
+	</select>
+</mapper>

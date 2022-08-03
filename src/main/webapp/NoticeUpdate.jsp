@@ -7,12 +7,8 @@
 <title>ZZP</title>
 </head>
 <body>
-<<<<<<< HEAD
-=======
 <!-- 공지사항 수정 -->
->>>>>>> 444cebd1c82bc7c39f0644097395cfb3e6d941a4
 	<jsp:include page="common/header.jsp" flush="true"></jsp:include><br>
-	<h1>공지사항 수정 :></h1>
 	<jsp:include page="notice/noticeUpdate.jsp" flush="true"></jsp:include><br>
 	<jsp:include page="common/footer.jsp" flush="true"></jsp:include>
 </body>

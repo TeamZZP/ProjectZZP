@@ -10,6 +10,8 @@
 			values (#{userid}, #{passwd}, #{username}, #{email1}, #{email2}, #{phone}, sysdate)
 			into address (userid, post_num, addr1, addr2, address_id)
 			values (#{userid}, #{post_num}, #{addr1}, #{addr2}, address_address_id_seq.nextval)
+			into profile 
+			values (#{userid}, 'user.png', ' ')
 			select * from dual
 		</insert>
 		
@@ -21,7 +23,7 @@
 			select userid, passwd, username, email1, email2, phone, created_at
 			from member where userid=#{userid} and passwd=#{passwd}
 		</select>
-		<select id="mypage" parameterType="String" resultType="MemberDTO">
+		<select id="selectMember" parameterType="String" resultType="MemberDTO">
 			select * from member
 			where userid = #{userid}
 		</select>

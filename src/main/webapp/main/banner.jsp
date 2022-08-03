@@ -1,23 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-
 <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
-	<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
+   <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
   <div class="carousel-indicators">
     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-  	</div>
+     </div>
   <div class="carousel-inner">
-    <div class="carousel-item active" data-bs-interval="10000" onclick="javascrip:location.href='IntroductionUIServlet';">
+    <div class="carousel-item active" data-bs-interval="3000" onclick="javascrip:location.href='IntroductionUIServlet';">
       <img src="images/main/banner_zzp.png" class="d-block w-100" alt="...">
     </div>
-    <div class="carousel-item" data-bs-interval="2000" onclick="javascrip:location.href='ProductSaleServlet?p_category=timeEvent';">
+    <div class="carousel-item" data-bs-interval="3000" onclick="javascrip:location.href='ProductListServlet?p_category=timeEvent';">
       <img src="images/main/banner_time.png" class="d-block w-100" alt="...">
     </div>
-    <div class="carousel-item" onclick="javascrip:location.href='ChallengeListServlet';">
-      <img src="images/main/banner_chall.png" class="d-block w-100" alt="...">
+    <div class="carousel-item" data-bs-interval="3000" onclick="javascrip:location.href='ChallengeListServlet';">
+      <img src="images/main/banner_monthchall.png" class="d-block w-100" alt="...">
     </div>
   </div>
   <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
@@ -28,4 +27,5 @@
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
     <span class="visually-hidden">Next</span>
   </button>
+</div>
 </div>

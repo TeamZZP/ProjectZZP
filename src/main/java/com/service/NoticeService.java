@@ -1,12 +1,15 @@
 package com.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
+import org.omg.PortableServer.REQUEST_PROCESSING_POLICY_ID;
 
 import com.config.MySqlSessionFactory;
 import com.dao.NoticeDAO;
 import com.dto.NoticeDTO;
+import com.dto.PageDTO;
 
 public class NoticeService {
 
@@ -38,7 +41,7 @@ public class NoticeService {
 		return list;
 	}
 
-	public NoticeDTO noticeOneSelect(String noticeID) {
+	public NoticeDTO noticeOneSelect(int noticeID) {
 		SqlSession session = MySqlSessionFactory.getSqlSession();
 		NoticeDTO nDTO = null;
 		try {
@@ -71,6 +74,29 @@ public class NoticeService {
 			session.close();
 		}
 		return num;
+	}
+
+	public int noticeHite(Map<String, Integer> map) {
+		int num = 0;
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		try {
+			num = dao.noticeHite(session, map);
+			session.commit();
+		} finally {
+			session.close();
+		}
+		return num;
+	}
+
+	public PageDTO page(int curPage) {
+		PageDTO pDTO = null;
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		try {
+			pDTO = dao.page(session, curPage);
+		} finally {
+			session.close();
+		}
+		return pDTO;
 	}
 
 }

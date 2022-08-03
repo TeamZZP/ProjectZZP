@@ -9,12 +9,9 @@
 <script src="<c:url value='/bootstrap/js/bootstrap.js'/>" type="text/javascript"></script>
 <script src="<c:url value='/bootstrap/js/bootstrap.min.js'/>" type="text/javascript"></script>
 
-<%-- <%
-	ProductDTO dto = (ProductDTO)session.getAttribute("Retrieve");
-	System.out.println(dto);
-%>
- --%>
+<title>ZZP</title>
 <jsp:include page="common/header.jsp" flush="true"></jsp:include><br>
 <jsp:include page="category.jsp" flush="true"></jsp:include><br>
 <jsp:include page="product/productRetrieve.jsp" flush="true"></jsp:include><br>
+<jsp:include page="product/review.jsp" flush="true"></jsp:include>
 <jsp:include page="common/footer.jsp" flush="true"></jsp:include><br>

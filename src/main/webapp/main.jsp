@@ -5,21 +5,22 @@
 <head>
 <meta charset="UTF-8">
 <title>ZZP</title>
-<% 
-String mesg = (String)session.getAttribute("memberAdd");
-if(mesg!=null){
+<%
+	String mesg=(String) session.getAttribute("mesg");
+	if (mesg != null){
 %>
 <script type="text/javascript">
 	alert("<%= mesg %>");
 </script>
 <%
-session.removeAttribute("memberAdd");
-}
+	session.removeAttribute("mesg");
+	}
 %>
 </head>
 <body>
 <jsp:include page="common/header.jsp" flush="true"></jsp:include><br>
-<jsp:include page="main/banner.jsp" flush="true"></jsp:include><br>
+<jsp:include page="main/banner.jsp" flush="true"></jsp:include><br> 
+<jsp:include page="main/maintest.jsp" flush="true"></jsp:include><br>  
 <jsp:include page="common/footer.jsp" flush="true"></jsp:include><br>
 </body>
 </html>

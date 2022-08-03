@@ -20,8 +20,8 @@ public class MemberDAO {
 		return session.selectOne("loginMember", map);
 	}
 
-	public MemberDTO mypage(SqlSession session, String userid) {
-		MemberDTO member=session.selectOne("MemberMapper.mypage", userid);
+	public MemberDTO selectMember(SqlSession session, String userid) {
+		MemberDTO member=session.selectOne("MemberMapper.selectMember", userid);
 		return member;
 	}
 	

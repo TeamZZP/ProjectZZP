@@ -1,5 +1,7 @@
 package com.service;
 
+import java.util.HashMap;
+
 import org.apache.ibatis.session.SqlSession;
 
 import com.config.MySqlSessionFactory;
@@ -14,16 +16,18 @@ public class AddressService {
 		dao = new AddressDAO();
 	}
 
-	public AddressDTO address(String userid) {
+	public AddressDTO selectAddress(String userid) {
 		SqlSession session=MySqlSessionFactory.getSqlSession();
 		AddressDTO address=null;
 		try {
-			address=dao.address(session, userid);
+			address=dao.selectAddress(session, userid);
 		} finally {
 			session.close();
 		}
 		return address;
 	}
+
+
 
 	
 	
