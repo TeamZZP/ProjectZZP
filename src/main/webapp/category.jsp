@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+    
 
-<html>
+<!-- <html>
 <head>
 <style type="text/css">
 li{
@@ -44,4 +46,5 @@ a{
 	</ul>
 </div>
 </body>
-</html>
+</html> -->
+

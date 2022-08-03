@@ -15,6 +15,7 @@
    <typeAlias type="com.dto.QuestionDTO" alias="QuestionDTO"/> 
    <typeAlias type="com.dto.ReviewDTO" alias="ReviewDTO"/> 
    <typeAlias type="com.dto.OrderDTO" alias="OrderDTO"/> 
+   <typeAlias type="com.dto.CategoryDTO" alias="CategoryDTO"/> 
 </typeAliases>
   <environments default="development">
     <environment id="development">
@@ -37,7 +38,8 @@
     <mapper resource="com/config/AccountMapper.xml"/>
     <mapper resource="com/config/QuestionMapper.xml"/>
     <mapper resource="com/config/ReviewMapper.xml"/>
-    <mapper resource="com/config/OrderMapper.xml"/>
+    <mapper resource="com/config/CategoryMapper.xml"/>
+    
   </mappers> 
 </configuration>
   
