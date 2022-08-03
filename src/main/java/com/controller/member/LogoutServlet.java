@@ -29,7 +29,11 @@ public class LogoutServlet extends HttpServlet {
 		doGet(request, response);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 }
 =======
 }
 >>>>>>> 91757ec (Add logout)
+=======
+}
+>>>>>>> 5fe2503 (﻿Update member)
