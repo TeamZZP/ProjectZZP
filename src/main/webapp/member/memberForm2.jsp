@@ -44,6 +44,8 @@
 		$("#sample4_postcode").focus();
 		event.preventDefault();
 	}
+ 	
+ 	
  });
 
 //이름 유효성 검사
