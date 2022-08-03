@@ -80,6 +80,7 @@
 </script>
 </head>
 <body>
+<div style = "padding: 15px 5px 5px 20px;">
 <form action=" " method="post">
 <input type="hidden" name="userid" id="userid" value="<%= userid %>">
 <h2>변경할 이메일을 입력해 주십시오</h2>
@@ -96,5 +97,6 @@
 	<br>
 <button id="submit" class="btn btn-success">확인</button>&nbsp;&nbsp;<button id="close" class="btn btn-success">창 닫기</button>
 </form>
+</div>
 </body>
 </html>

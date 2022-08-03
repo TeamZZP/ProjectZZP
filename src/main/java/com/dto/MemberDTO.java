@@ -9,13 +9,14 @@ public class MemberDTO {
 	private String email2; 
 	private String phone; 
 	private String created_at;
+	private int role;
 	
 	public MemberDTO() {
 		super();
 	}
 
 	public MemberDTO(String userid, String passwd, String username, String email1, String email2, String phone,
-			String created_at) {
+			String created_at, int role) {
 		super();
 		this.userid = userid;
 		this.passwd = passwd;
@@ -24,6 +25,7 @@ public class MemberDTO {
 		this.email2 = email2;
 		this.phone = phone;
 		this.created_at = created_at;
+		this.role = role;
 	}
 
 	public String getUserid() {
@@ -82,10 +84,18 @@ public class MemberDTO {
 		this.created_at = created_at;
 	}
 
+	public int getRole() {
+		return role;
+	}
+
+	public void setRole(int role) {
+		this.role = role;
+	}
+
 	@Override
 	public String toString() {
 		return "MemberDTO [userid=" + userid + ", passwd=" + passwd + ", username=" + username + ", email1=" + email1
-				+ ", email2=" + email2 + ", phone=" + phone + ", created_at=" + created_at + "]";
+				+ ", email2=" + email2 + ", phone=" + phone + ", created_at=" + created_at + ", role=" + role + "]";
 	}
 
 }

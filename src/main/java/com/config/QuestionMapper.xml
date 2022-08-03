@@ -27,6 +27,19 @@
 	<select id="prodSelect" parameterType="map" resultType="ProductDTO">
 		select * from PRODUCT 
 		<choose> 
+			<when test="category == 'P_NAME' and searchValue != null"> 
+				where p_name like '%${searchValue}%' or p_content like '%${searchValue}%'
+			</when>
+			<when test="category == 'P_ID' and  searchValue != null"> 
+				where p_id like '%${searchValue}%' or p_content like '%${searchValue}%'
+			</when>
+			<otherwise>
+			</otherwise> 
+		</choose>
+	</select>
+	<select id="count" parameterType="map" resultType="int">
+		select count(*) from PRODUCT 
+		<choose> 
 			<when test="category == 'P_NAME'"> 
 				where p_name like '%${searchValue}%' or p_content like '%${searchValue}%'
 			</when>
@@ -37,9 +50,9 @@
 			</otherwise> 
 		</choose>
 	</select>
-	<select id="count" parameterType="map" resultType="int">
-		select count(*) from PRODUCT 
-		<choose> 
+	<select id="totalCount2" resultType="int" parameterType="map">
+		select count(*) from PRODUCT
+			<choose> 
 			<when test="category == 'P_NAME'"> 
 				where p_name like '%${searchValue}%' or p_content like '%${searchValue}%'
 			</when>

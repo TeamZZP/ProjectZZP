@@ -37,6 +37,7 @@
 </script>
 </head>
 <body>
+<div style = "padding: 15px 5px 5px 20px;">
 <form action="changeAddress.jsp">
 <b>이름</b><br>
 <%= username %><br>
@@ -51,5 +52,6 @@
 <br>
 <button class="btn btn-success">수정</button>
 </form>
+</div>
 </body>
 </html>

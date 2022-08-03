@@ -15,6 +15,9 @@
 		$("#questionUpdate").click(function () {
 			$("#questionForm").attr("action", "QuestionUpdateServlet");
 		})
+		$("#pID").click(function () {
+			window.open("questionproductSelect.jsp","","width=400px height=500px");
+		});
 	});//end ready
 </script>
 <div style="text-align: center; display: flex; justify-content:center; height: 100px; margin-bottom: 10px;" >
@@ -27,7 +30,10 @@
 				<td colspan="2"> 제목 <input type="text" name="qTittle" id="qTittle" value="<%=qDTO.getQ_TITLE()%>"> </td>
 			</tr>
 			<tr>
-				<td colspan="2"> 상품정보 <input type="text" name="pId" id="pId" value="<%=qDTO.getP_ID()%>"> </td>
+				<td colspan="2"> 
+					<button id="pID" type="button" class="btn btn-outline-success">상품 정보</button> 
+					<input type="text" name="pId" id="pId" value="<%=qDTO.getP_ID()%>"> 
+				</td>
 			</tr>
 			<tr>
 				<td colspan="2"> 문의 글 카테고리

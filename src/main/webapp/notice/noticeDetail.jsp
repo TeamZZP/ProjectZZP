@@ -21,14 +21,18 @@
 	%>
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script type="text/javascript">
-			function NoticeList() {
-				$("form").attr("action", "NoticeListServlet");
-			}
+				function NoticeList() {
+					$("#DetailForm").attr("action", "NoticeListServlet");
+				}
+				function NoticeDelete() {
+					$("#DetailForm").attr("action", "NoticeDeleteServlet");
+				}
 	</script>
 	<div style="text-align: center; display: flex; justify-content:center; height: 100px; margin-bottom: 10px;" >
 		<img src="images/notice3.png" alt="..." style="width: auto;">
 	</div>
-	<form action="NoticeUpdate.jsp" method="post">
+	<form action="NoticeUpdate.jsp" method="post" id="DetailForm">
+		<input type="hidden" name="nId" value="<%=nDTO.getNOTICE_ID()%>">
 		<table border="1" style="border-collapse: collapse;" >
 			<tr>
 				<td colspan="2">제목 <%=nDTO.getNOTICE_TITTLE()%></td>
@@ -42,10 +46,14 @@
 			</tr>
 			<tr>
 				<td><button onclick="NoticeList()" class="btn btn-outline-success" >목록</button></td>
-				<td><button type="submit" id="NoticeUpdate" class="btn btn-outline-success" >수정</button></td>
+				<td><button type="submit" id="NoticeUpdate" class="btn btn-outline-success" >수정</button>
+					<button onclick="NoticeDelete()" class="btn btn-outline-success" >글 삭제</button>				
+				</td>
 			</tr>
 			<tr>
-				<td colspan="2">다음글 <a href="NoticeOneSelectServlet?NOTICE_ID=<%=nDTO.getNOTICE_ID() + 1%>"> <%= nextDTO.getNOTICE_TITTLE() %>  </a></td>
+				<td colspan="2">
+					다음글 <a href="NoticeOneSelectServlet?NOTICE_ID=<%=nextDTO.getNOTICE_ID()%>"> <%= nextDTO.getNOTICE_TITTLE() %>  </a>
+				</td>
 			</tr>
 		</table>
 	</form>

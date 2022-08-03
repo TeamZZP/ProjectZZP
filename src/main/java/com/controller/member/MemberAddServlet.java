@@ -29,34 +29,10 @@ public class MemberAddServlet extends HttpServlet {
 		String post_num = request.getParameter("post_num");
 		String addr1 = request.getParameter("addr1");
 		String addr2 = request.getParameter("addr2");
-		System.out.println(userid+" "+passwd+" "+username);
-		
-		//영문(대소문자 구분), 숫자, 특수문자 조합, 9~12자리
-//		Pattern pattern = Pattern.compile("^(?=.*\\\\\\\\d)(?=.*[~`!@#$%\\\\\\\\^&*()-])(?=.*[a-z])(?=.*[A-Z]).{9,12}$"); 
-//		Matcher matcher = pattern.matcher(passwd);
-//		System.out.println(matcher.find());
-		
-		//이름 : 한글
-//		boolean username_check = Pattern.matches("^[가-힣a-zA-Z]*$", username);
-//		 // "^[a-zA-Z]*$"
-//		System.out.println("이름 : " + username_check);
-//		//비밀번호 : 영문(대소문자 구분), 숫자, 특수문자 조합, 9~12자리
-//		boolean passwd_check = 
-//				Pattern.matches("^(?=.*\\\\\\\\\\\\\\\\d)(?=.*[~`!@#$%\\\\\\\\\\\\\\\\^&*()-])(?=.*[a-z])(?=.*[A-Z]).{9,12}$", passwd);
-//		System.out.println("비밀번호 : " + passwd_check);
-		
 		
 		
 		//addMember+Address+profile
 		HashMap<String, String> map = new HashMap<String, String>();
-	//	if (username_check==true) {
-			//map.put("username",username);
-	//	} else {
-	//		HttpSession session = request.getSession();
-	//		session.setAttribute("mesg", "이름확인");
-	//		session.setMaxInactiveInterval(60*60);
-	//		response.sendRedirect("MemberUIServlet");
-	//	}
 		map.put("userid", userid);
 		map.put("passwd", passwd);
 		map.put("username", username);
