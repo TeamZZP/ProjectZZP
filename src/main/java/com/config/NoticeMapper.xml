@@ -28,4 +28,8 @@
 	<select id="totalCount" resultType="int">
 		select count(*) from notice where NOT NOTICE_CATEGORY = 'main'
 	</select>
+	<insert id="NoticeInsert" parameterType="NoticeDTO">
+		insert into notice (NOTICE_ID,NOTICE_TITTLE,NOTICE_CONTENT,NOTICE_CREATED,NOTICE_HITS,NOTICE_CATEGORY,USERID)
+			values (NOTICE_NOTICE_ID_SEQ.nextval, #{NOTICE_TITTLE}, #{NOTICE_CONTENT}, sysdate, 0, #{NOTICE_CATEGORY}, #{USERID})
+	</insert>
 </mapper>

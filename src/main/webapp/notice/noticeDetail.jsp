@@ -46,9 +46,19 @@
 			</tr>
 			<tr>
 				<td><button onclick="NoticeList()" class="btn btn-outline-success" >목록</button></td>
+				<%
+					MemberDTO mDTO = (MemberDTO)session.getAttribute("login");
+					if(mDTO != null){
+						int admin = mDTO.getRole();
+						if (admin == 1){
+				%>
 				<td><button type="submit" id="NoticeUpdate" class="btn btn-outline-success" >수정</button>
 					<button onclick="NoticeDelete()" class="btn btn-outline-success" >글 삭제</button>				
 				</td>
+				<%
+						}
+					}
+				%>
 			</tr>
 			<tr>
 				<td colspan="2">
