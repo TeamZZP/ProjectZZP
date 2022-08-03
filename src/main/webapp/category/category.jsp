@@ -10,7 +10,7 @@
 		String cName = c_nameMap.get(key);
 		%>
 		
-		<a href="aa.jsp?"+<%=cName %>><%=cName %></a> 
+		<%-- <a href="aa.jsp?"+<%=cName %>><%=cName %></a>  --%>
 		
 		<% 
 	      }
