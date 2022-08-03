@@ -4,8 +4,17 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="CategoryMapper">
 
-<select id="allCategoryId" resultType="list">
-	select c_id from category 
+
+<select id="getCount" resultType="int">
+select  count(*) from category
+</select>
+
+<select id="categoryName" resultType="String" parameterType="int">
+select c_name from category where c_rnk = #{i}
+</select>
+
+<select id="allCategory" parameterType="CategoryDTO">
+select * from category
 </select>
 
 </mapper>

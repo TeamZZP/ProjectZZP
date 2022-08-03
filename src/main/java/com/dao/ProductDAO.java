@@ -8,9 +8,9 @@ import com.dto.ProductDTO;
 
 public class ProductDAO {
 
-	public List<ProductDTO> productList(SqlSession session, String p_category) {
+	public List<ProductDTO> productList(SqlSession session, String c_name) {
 		
-		List<ProductDTO> list = session.selectList("ProductMapper.productList", p_category);
+		List<ProductDTO> list = session.selectList("ProductMapper.productList", c_name);
 		return list;
 	}
 

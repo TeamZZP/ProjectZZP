@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-    
+<jsp:include page="category/category.jsp"></jsp:include>
+<%System.out.println("webapp 안 category.jsp 실행"); %>
 
 <!-- <html>
 <head>
