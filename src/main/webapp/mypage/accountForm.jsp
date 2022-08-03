@@ -86,13 +86,9 @@
 	<span id="guide" style="color:#999"></span>
 	<button id="changeAddress" class="btn btn-outline-success">주소 관리</button><br>
 <br>
-<img alt="" src="mypage/membership.png" width="30px" height="30px">
-	<input type="text" name="membership" value="멤버쉽" readonly="readonly"/><br>
 <img alt="" src="mypage/userprofile.png" width="30px" height="30px">
 	<input type="text" name="changeProfile" value="프로필 변경" readonly="readonly"/>
 	<button id="changeProfile" class="btn btn-outline-success">변경</button><br>
 <br>
-<!-- <hr>
-<button id="changeSubmit">수정</button> -->
 </form>
 </div>
