@@ -1,14 +1,5 @@
 <%@page import="com.dto.MemberDTO"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>
-	$(document).ready(function() {
-		$("#accountChange").on("click", function() {
-			$("form").attr("action", "mypage/checkPasswd.jsp");
-		});//end fn
-	});//end ready
-</script>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 	MemberDTO member=(MemberDTO) session.getAttribute("login");
 	
@@ -20,6 +11,14 @@
 	String phone=member.getPhone();
 	String created_at=member.getCreated_at();
 %>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+	$(document).ready(function() {
+		$("#accountChange").on("click", function() {
+			$("form").attr("action", "checkPasswd.jsp");
+		});//end fn
+	});//end ready
+</script>
 <div style = "padding: 5px 5px 5px 20px;">
 <form action=" " method="post">
 <input type="hidden" name="userid" id="userid" value="<%= userid %>"/>

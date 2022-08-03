@@ -1,59 +1,6 @@
 <%@page import="com.dto.AddressDTO"%>
 <%@page import="com.dto.MemberDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<style type="text/css">
-	span {
-		color: red;
-	}
-</style>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>
-	$(document).ready(function() {
-		
-		$("#changeEmail").on("click", function() {
-			var popupX = (window.screen.width / 2) - (200 / 2);
-			var popupY= (window.screen.height / 5) - (300 / 2);
-			window.open("mypage/changeEmail.jsp","",'status=no, height=200, width=600, left='+ popupX + ', top='+ popupY);
-			reload();
-		});
-		$("#changeAddress").on("click", function() {
-			var popupX = (window.screen.width / 2) - (200 / 2);
-			var popupY= (window.screen.height / 5) - (300 / 2);
-			window.open("mypage/checkAddress.jsp","",'status=no, height=300, width=600, left='+ popupX + ', top='+ popupY);
-		});
-		$("#changeProfile").on("click", function() {
-			var popupX = (window.screen.width / 2) - (200 / 2);
-			var popupY= (window.screen.height / 5) - (300 / 2);
-			window.open("mypage/changeProfile.jsp","",'status=no, height=500, width=400, left='+ popupX + ', top='+ popupY);
-		});
-		$("#checkPasswd").on("keyup", function() {
-			if ($("#changedPasswd").val().length == 0) {
-				$("#result").text("변경할 비밀번호를 입력하세요.");
-				$("#checkPasswd").val("");
-				$("#changedPasswd").focus();
-			} else if ($("#changedPasswd").val().length != 0
-					&& $(this).val() == $("#changedPasswd").val()) {
-				$("#result").text("비밀번호 일치");
-			} else {
-				$("#result").text("비밀번호 불일치");
-			}
-		});//end fn
-		
-		$("form").on("submit", function() {
-			//비밀번호 유효성 검사
-			var pwChk = /^(?=.*[a-zA-Z])(?=.*[!@#$%^&*+=-_])(?=.*[0-9]).{8,25}$/;
-			if (!pwChk.test(changedPasswd)) {
-				alert("비밀번호를 형식에 맞게 입력해주세요 :)");
-				$("#changedPasswd").val("");
-				$("#changedPasswd").focus();
-				event.preventDefault();
-			}
-		});//end submit
-	});//end ready
-	function reload() {
-		location.reload();
-	}
-</script>
 <%
 	MemberDTO member=(MemberDTO) session.getAttribute("login");
 	AddressDTO address=(AddressDTO) session.getAttribute("address");
@@ -78,6 +25,34 @@
 		addr2="상세 주소를 입력하세요.";
 	}
 %>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+	$(document).ready(function() {
+		$("#result1").css({"font-size":"13.5px", "background-color":"lightgreen", "font-weight":"bold"});
+		
+		//비밀번호 일치 확인
+		$("#checkPasswd").on("click", function () {
+			if ($("#changedPasswd").val().length == 0) {
+				$("#result2").css({"font-size":"13.5px", "background-color":"lightgreen", "font":"bold"});
+				$("#result2").text("변경할 비밀번호를 입력하세요.");
+				$("#checkPasswd").val("");
+				$("#changedPasswd").focus();
+			}
+		});//end fn
+		$("#checkPasswd").on("keyup", function() {
+			if ($("#changedPasswd").val().length != 0
+					&& $(this).val() == $("#changedPasswd").val()) {
+				$("#result").text("비밀번호 일치");
+			} else {
+				$("#result").text("비밀번호 불일치");
+			}
+		});//end fn
+		
+		$("form").on("submit", function() {
+			
+		});//end submit
+	});//end ready
+</script>
 <div style = "padding: 5px 5px 5px 20px;">
 <form action=" " method="post">
 <input type="hidden" name="userid" id="userid" value="<%= userid %>"/>
@@ -90,9 +65,9 @@
 <br>
 <img alt="" src="mypage/passwd.png" width="30px" height="30px">
 	<input type="text" class="pw" name="changedPasswd" id="changedPasswd" placeholder="변경할 비밀번호를 입력하세요." style="width: 250px">
+	&nbsp;<span id="result1">영문자, 숫자, 특수문자를 포함하여 8~25자리를 입력하세요 :></span><br>
 	<input type="text" class="pw" name="checkPasswd" id="checkPasswd" placeholder="비밀번호를 한번 더 입력하세요." style="width: 250px">
-	&nbsp;<b><span id="result">재확인</span></b>
-	<br>
+	&nbsp;<span id="result2"></span><br>
 <br>
 <img alt="" src="mypage/email.png" width="30px" height="30px">
 	<input type="text" name="email1" id="email1" readonly="readonly" value="<%= email1 %>"> @
