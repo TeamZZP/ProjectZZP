@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import com.config.MySqlSessionFactory;
 import com.dao.CategoryDAO;
+import com.dto.CategoryDTO;
 
 public class CategoryService {
 	
@@ -37,6 +38,19 @@ public class CategoryService {
 		}
 
 		return c_name;
+	}
+
+
+
+	public List<CategoryDTO> allCategory() {
+		List<CategoryDTO> list = null;
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+        try {
+        	list = dao.allCategory(session);
+        }finally {
+        	session.close();
+        }
+		return list;
 	}
 
 	

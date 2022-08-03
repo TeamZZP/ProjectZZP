@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.dto.CategoryDTO;
 import com.service.CategoryService;
 
 /**
@@ -29,7 +30,7 @@ public class CategoryServlet extends HttpServlet {
 		
 		for (int i = 0; i < count; i++) {
 			
-			 String c_name = service.categoryName(i); 
+			 String c_name = service.categoryName(i); //카테고리 이름만 가져오기
 		     map.put(i, c_name); 
 			 System.out.println(c_name);
 			 System.out.println(i);
@@ -39,6 +40,8 @@ public class CategoryServlet extends HttpServlet {
 			String cName = map.get(key);
 			System.out.println(cName);
 		}
+		
+		List<CategoryDTO> list  = service.allCategory(); //카테고리 전체 데이터
 		
 		request.setAttribute("category_nameMap", map);
 		RequestDispatcher dis = request.getRequestDispatcher("category.jsp");
