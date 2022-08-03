@@ -25,6 +25,7 @@ public class PasswdChangeServlet extends HttpServlet {
 		System.out.println("비밀번호 수정 서블릿 실행");
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
 		HttpSession session=request.getSession();
 		MemberDTO dto=(MemberDTO) session.getAttribute("login");
 		String mesg="";
@@ -38,20 +39,24 @@ public class PasswdChangeServlet extends HttpServlet {
 			System.out.println(passwd);
 			System.out.println(changedPasswd);
 			
-			//비밀번호 update
-			HashMap<String, String> passwdMap=new HashMap<String, String>();
-			passwdMap.put("userid", userid);
-			passwdMap.put("changedPasswd", changedPasswd);
-			System.out.println(passwdMap);
-			AccountService service=new AccountService();
-			int num=service.changePasswd(passwdMap);
-			System.out.println("수정된 비밀번호 갯수 : "+num);//--비밀번호 수정 완료
-			
-			mesg="비밀번호가 변경되었습니다.";
-			
-			PrintWriter out = response.getWriter();
-			out.print(mesg);
-			//ajax--redirectX
+			if (changedPasswd != null) {
+				//비밀번호 update
+				HashMap<String, String> passwdMap=new HashMap<String, String>();
+				passwdMap.put("userid", userid);
+				passwdMap.put("changedPasswd", changedPasswd);
+				System.out.println(passwdMap);
+				AccountService service=new AccountService();
+				int num=service.changePasswd(passwdMap);
+				System.out.println("수정된 비밀번호 갯수 : "+num);//--비밀번호 수정 완료
+				
+				mesg="비밀번호가 변경되었습니다.";
+				
+				out.print(mesg);
+				//ajax--redirectX
+			} else {//비번 데이터 없으면 event.preventDefault(), alert 처리했음
+				mesg="비번 데이터 없음";//찍힐 일이 없음
+			}
+
 		} else {
 			//alert로 로그인 후 이용하세요 출력
 			mesg="로그인이 필요합니다.";
