@@ -5,7 +5,9 @@
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 	$(document).ready(function() {
-		
+		$("#accountChange").on("click", function() {
+			$("form").attr("action", "mypage/checkPasswd.jsp");
+		});//end fn
 	});//end ready
 </script>
 <%
@@ -46,7 +48,7 @@
 <br>
 <button type="button" class="btn btn-outline-success">4. 내 문의 내역</button><br>
 <br>
-<button type="button" id="accountChange" class="btn btn-outline-success">5. 계정 관리</button><br>
+<button id="accountChange" class="btn btn-outline-success">5. 계정 관리</button><br>
 <br>
 </form>
 </div>
