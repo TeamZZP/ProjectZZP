@@ -45,6 +45,18 @@
 		event.preventDefault();
 	}
  });
+
+//이름 유효성 검사
+
+
+//비밀번호 유효성 검사
+var pwCheck = /^(?=.*[a-zA-Z])(?=.*[!@#$%^&*+=-])(?=.*[0-9]).{8,25}$/;
+var pwCheck = RegExp(/^[a-zA-Z0-9]{4,12}$/);
+$("#passwd").keyup(function() {
+	if (!pwCheck.test(this.value)) {
+		$("#result2").text("비밀번호를 확인해주세요");
+	};
+});
 	
 //비번확인//키 이벤트 발생시 패스워드 일치여부 검사 
  $("#passwd2").keyup(function() {
@@ -52,7 +64,7 @@
 	 if ($("#passwd").val()==this.value) {
 		mesg = "비밀번호 일치";
 	}
-	 $("#result2").text(mesg);
+	 $("#result3").text(mesg);
  });
 
 //이메일 선택 시 값 입력
@@ -111,6 +123,7 @@ $("#addMember").click(function() {
                                             <div class="input-group">
                                                 <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
                                                 <input type="password" class="form-control" name="passwd" id="passwd" placeholder="비밀번호를 입력하세요" />
+                                                <span id="result2" style="color: red;"></span>
                                             </div>
                                         </div>
                                     </div>
@@ -120,7 +133,7 @@ $("#addMember").click(function() {
                                             <div class="input-group">
                                                 <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
                                                 <input type="password" class="form-control" name="passwd2" id="passwd2" placeholder="다시 한번 입력하세요" />
-                                                <span id="result2" style="color: red;"></span>
+                                                <span id="result3" style="color: red;"></span>
                                             </div>
                                         </div>
                                     </div>
