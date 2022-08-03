@@ -5,7 +5,7 @@
 <mapper namespace="CategoryMapper">
 
 <select id="allCategoryId" resultType="list">
-select c_id from category
+	select c_id from category 
 </select>
 
 </mapper>

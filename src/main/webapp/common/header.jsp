@@ -40,7 +40,7 @@ MemberDTO dto = (MemberDTO)session.getAttribute("login");
 	if(dto!=null){	
 %>	
       	<button type="button" onclick="location.href='LogoutServlet';"  class="btn btn-success" id="button_logout">로그아웃</button>
-		<button type="button" onclick="location.href='AccountManagementServlet';"  class="btn btn-success" id="button_mypage">마이페이지</button>
+		<button type="button" onclick="location.href='MypageServlet';"  class="btn btn-success" id="button_mypage">마이페이지</button>
 <%
 	} else {
 %>
