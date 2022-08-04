@@ -223,6 +223,20 @@
 			<img src="https://image.shutterstock.com/image-photo/energy-saving-eco-lamp-made-260nw-1272714919.jpg" width="250" height="250" class=" mx-auto d-block" alt="...">
 		</div>
 	</div>
+	<div class="row">
+		<div class="col-lg-3 col-md-6">
+			<img src="https://image.shutterstock.com/image-photo/unrecognizable-woman-holding-eco-friendly-260nw-1655538373.jpg" width="250" height="250" class=" mx-auto d-block" alt="...">
+		</div>
+		<div class="col-lg-3 col-md-6">
+			<img src="https://image.shutterstock.com/image-photo/zero-waste-beauty-body-care-260nw-1553146538.jpg" width="250" height="250" class=" mx-auto d-block" alt="...">
+		</div>
+		<div class="col-lg-3 col-md-6">
+			<img src="https://image.shutterstock.com/image-photo/wooden-soap-dish-eucalyptus-over-260nw-1470882224.jpg" width="250" height="250" class=" mx-auto d-block" alt="...">
+		</div>
+		<div class="col-lg-3 col-md-6">
+			<img src="https://image.shutterstock.com/image-photo/natural-eco-bamboo-toothbrush-coconut-260nw-1168585570.jpg" width="250" height="250" class=" mx-auto d-block" alt="...">
+		</div>
+	</div>
 </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
