@@ -67,9 +67,9 @@
 		$("form").on("submit", function() {
 			if ($("#changedPasswd").val().length != 0) {//4-1. 비밀번호 변경 데이터가 있을 때
 				var pwChk = /^(?=.*[a-zA-Z])(?=.*[!@#$%^&*+=-_])(?=.*[0-9]).{8,25}$/;
-//				if (!pwChk.test(changedPasswd))//비밀번호 유효성 검사
-				if (false) {//비밀번호 유효성 검사--맞게 입력해도 alert 출력
-					alert("비밀번호를 형식에 맞게 입력해주세요 :)");
+				if (!pwChk.test($("#changedPasswd").val())){//비밀번호 유효성 검사
+//				if (false) {//비밀번호 유효성 검사--맞게 입력해도 alert 출력
+					alert("비밀번호를 형식에 맞게 입력해주세요 :<");
 					$("#changedPasswd").val("");
 					$("#checkPasswd").val("");
 					$("#result2").text("");
@@ -94,7 +94,7 @@
 					//*****ajax
 					$.ajax({
 						type : "post",
-						url : "AccountChangeServletTest",//페이지 이동 없이 해당 url에서 작업 완료 후 데이터만 가져옴
+						url : "AccountChangeServlet",//페이지 이동 없이 해당 url에서 작업 완료 후 데이터만 가져옴
 						dataType : "text",
 						data : {//서버에 전송할 데이터
 							userid : $("#userid").val(),
@@ -124,7 +124,7 @@
 				//*****ajax
 				$.ajax({
 					type : "post",
-					url : "AccountChangeServletTest",//페이지 이동 없이 해당 url에서 작업 완료 후 데이터만 가져옴
+					url : "AccountChangeServlet",//페이지 이동 없이 해당 url에서 작업 완료 후 데이터만 가져옴
 					dataType : "text",
 					data : {//서버에 전송할 데이터
 						userid : $("#userid").val(),
@@ -144,6 +144,9 @@
 				});//end ajax
 			};//end if
 		});//end fn
+		
+		//5. 회원 탈퇴
+		
 	});//end ready
 </script>
 <div style = "padding: 5px 5px 5px 20px;">
@@ -154,9 +157,9 @@
 	<input type="text" name="username" value="<%= username %>" readonly="readonly"/><br><!-- 수정 불가 -->
 <br>
 <img alt="" src="mypage/passwd.png" width="30px" height="30px">
-	<input type="text" class="pw" name="changedPasswd" id="changedPasswd" placeholder="변경할 비밀번호를 입력하세요." style="width: 250px">
+	<input type="password" name="changedPasswd" id="changedPasswd" placeholder="변경할 비밀번호를 입력하세요." style="width: 250px">
 	&nbsp;<span id="result1">영문자, 숫자, 특수문자를 포함하여 8~25자리를 입력하세요 :></span><br>
-	<input type="text" class="pw" name="checkPasswd" id="checkPasswd" placeholder="비밀번호를 한번 더 입력하세요." style="width: 250px">
+	<input type="password" name="checkPasswd" id="checkPasswd" placeholder="비밀번호를 한번 더 입력하세요." style="width: 250px">
 	&nbsp;<span id="result2"></span><br>
 <br>
 <img alt="" src="mypage/email.png" width="30px" height="30px">
@@ -177,6 +180,8 @@
 	<span id="guide" style="color:#999"></span><br>
 <br>
 <button class="btn btn-outline-success">변경</button><br>
+<br><br>
+<button type="button" id="delAccount">회원 탈퇴</button>
 </form>
 </div>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
