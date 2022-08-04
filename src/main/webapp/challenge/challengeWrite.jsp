@@ -22,7 +22,7 @@
 	String chall_content = null;
 	
 	//dto의 존재 유무에 따라 form의 전송 페이지를 달리 한다.
-	String formAction = "ChallengeAddServlet"; 
+//	String formAction = "ChallengeAddServlet"; 
 	
 	if (dto != null) {
 		chall_id = dto.getChall_id();
@@ -30,7 +30,7 @@
 		chall_title = dto.getChall_title();
 		chall_img = dto.getChall_img();
 		chall_content = dto.getChall_content();
-		formAction = "ChallengeUpdateServlet";
+	//	formAction = "ChallengeUpdateServlet";
 	}
 	
 	//session에 저장된 userid 읽어오기 
@@ -60,11 +60,34 @@
 				alert("본문을 입력해 주세요.");
 			}
 		});
+		//이미지 미리보기
+		$("#chall_img").on("change", function (e) {
+			if (checkFileExtension()) {
+				let preview = document.querySelector('.thumb');
+				preview.src = URL.createObjectURL(e.target.files[0]); //파일 객체에서 이미지 데이터 가져옴.
+
+			    preview.onload = function() {
+			        URL.revokeObjectURL(preview.src); //URL 객체 해제
+			    }
+			}
+		});
+		
 	});
+	//이미지 확장자 검사
+	function checkFileExtension(){ 
+		let fileValue = $("#chall_img").val(); 
+		let reg = /(.*?)\.(jpg|jpeg|png|gif)$/;
+		if (fileValue.match(reg)) {
+			return true;
+		} else {
+			alert("jpg, jpeg, png, gif 파일만 업로드 가능합니다.");
+			return false;
+		}
+	}
 </script>
 
 <div id="challWriteContent">
-<form action="<%= formAction %>" method="post">
+<form action="UploadServlet?userid=<%= currUserid %>" method="post" enctype="multipart/form-data">
 <input type="hidden" name="chall_id" value="<%= chall_id %>">
 <input type="hidden" name="userid" value="<%= currUserid %>">
 <table border="1" align="center" width="600" cellspacing="0" cellpadding="0">
@@ -86,7 +109,9 @@
 	</tr>
 	<tr>
 	  <% if(chall_img==null) {%>
-	  	<td colspan="2">사진 올리기<input type="text" name="chall_img" id="chall_img" style="width: 600px;"></td>
+	  	<td colspan="2">
+	  		<img src="" class="thumb" width="500" height="500" />
+	  	사진 올리기<input type="file" accept="image/*" name="chall_img" id="chall_img"></td>
 	  <%} else { %>
 	 	<td colspan="2">
 	 		<img src="images/<%= chall_img %>" width="500" height="500" border="0" align="middle"><br>
