@@ -13,7 +13,7 @@ select  count(*) from category
 select c_name from category where c_rnk = #{i}
 </select>
 
-<select id="allCategory" parameterType="CategoryDTO">
+<select id="allCategory" resultType="CategoryDTO">
 select * from category
 </select>
 
