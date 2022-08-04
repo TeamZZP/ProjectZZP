@@ -20,16 +20,16 @@ public class ProductListServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String c_name = request.getParameter("");
+		int c_id = Integer.parseInt( request.getParameter("c_id"));
 
 		
-		  if(c_name == null ){
+		  if(c_id == 0 ){
 		  
-			  c_name = "best";  //스토어 메인 페이지 설정시 p_category만 수정하면됨
+			  c_id = 8;  //스토어 메인 페이지 설정시 p_category만 수정하면됨
 		  
 		  }
 		  
-		  if(c_name.equals("best")) {
+		  if(c_id==13) {
 				
 				ProductService service = new ProductService();
 				List<ProductDTO> list = service.bestProduct();
@@ -37,7 +37,7 @@ public class ProductListServlet extends HttpServlet {
 				
 				
 				request.setAttribute("productList", list);
-				RequestDispatcher dis = request.getRequestDispatcher("product.jsp");
+				RequestDispatcher dis = request.getRequestDispatcher("ImagesServlet");
 				dis.forward(request, response);
 				
 			  
@@ -45,7 +45,7 @@ public class ProductListServlet extends HttpServlet {
 
 				
 				ProductService service = new ProductService();
-				List<ProductDTO> list = service.productList(c_name);
+				List<ProductDTO> list = service.productList(c_id);
 				System.out.println(list);
 				
 				
