@@ -111,7 +111,7 @@
 							<tr>
 								<td colspan="2">
 								<a href="ChallengeDetailServlet?chall_id=<%=chall_id%>"> 
-									<img src="images/<%=chall_img%>" border="0" align="middle"
+									<img src="/eclipse/upload/<%=chall_img%>" border="0" align="middle"
 										width="250" height="250">
 								</a></td>
 							</tr>
