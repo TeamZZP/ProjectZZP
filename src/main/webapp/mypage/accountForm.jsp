@@ -28,36 +28,93 @@
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 	$(document).ready(function() {
-		$("#result1").css({"font-size":"13.5px", "background-color":"lightgreen", "font-weight":"bold"});
+		$("#result1").css({"font-size":"13.5px", "font-weight":"bold"});
+		$("#result2").css({"font-size":"13.5px", "background-color":"lightgreen", "font-weight":"bold"});
 		
-		//비밀번호 일치 확인
-		$("#checkPasswd").on("click", function () {
+		//1. 비밀번호 입력 확인
+		$("#checkPasswd").on("focus", function () {
 			if ($("#changedPasswd").val().length == 0) {
-				$("#result2").css({"font-size":"13.5px", "background-color":"lightgreen", "font":"bold"});
 				$("#result2").text("변경할 비밀번호를 입력하세요.");
 				$("#checkPasswd").val("");
 				$("#changedPasswd").focus();
 			}
 		});//end fn
-		$("#checkPasswd").on("keyup", function() {
-			if ($("#changedPasswd").val().length != 0
-					&& $(this).val() == $("#changedPasswd").val()) {
-				$("#result").text("비밀번호 일치");
-			} else {
-				$("#result").text("비밀번호 불일치");
+		$("#changedPasswd").on("keyup", function() {
+			if ($(this).val().length != 0) {
+				$("#result2").text("");
 			}
 		});//end fn
 		
+		//2. 비밀번호 일치 확인
+		$("#checkPasswd").on("keyup", function() {
+			if ($("#changedPasswd").val().length != 0
+					&& $(this).val() == $("#changedPasswd").val()) {
+				$("#result2").text("비밀번호 일치");
+			} else {
+				$("#result2").text("비밀번호 불일치");
+			}
+		});//end fn
+		
+		//이메일 select
+		$("#emailSel").on("change", function() {
+			$("#email2").val($(this).val());
+		});//end fn
+		
+		//3. 폼 제출, db 업데이트
 		$("form").on("submit", function() {
-			
+			if ($(".pw").val().length != 0) {//비밀번호 변경 데이터가 있을 때
+				var pwChk = /^(?=.*[a-zA-Z])(?=.*[!@#$%^&*+=-_])(?=.*[0-9]).{8,25}$/;
+//				if (!pwChk.test(changedPasswd))//비밀번호 유효성 검사
+				if (false) {//비밀번호 유효성 검사--맞게 입력해도 alert 출력
+					alert("비밀번호를 형식에 맞게 입력해주세요 :)");
+					$("#changedPasswd").val("");
+					$("#checkPasswd").val("");
+					$("#result2").text("");
+					$("#changedPasswd").focus();
+					event.preventDefault();
+				} else if ($("#result2").text() == "비밀번호 불일치" || $("#result2").text().length == 0) {//새로운 비밀번호 미검증
+					console.log("비번 체크");
+					event.preventDefault();
+					alert("변경할 비밀번호를 확인하세요.");
+					$("#checkPasswd").focus();
+					$("#checkPasswd").val("");
+				} else {//변경 데이터 있음 && 비번 일치 상태
+					//*****ajax
+					event.preventDefault();
+					$.ajax({
+						type : "post",
+						url : "PasswdChangeServlet",//페이지 이동 없이 해당 url에서 작업 완료 후 데이터만 가져옴
+						dataType : "text",
+						data : {//서버에 전송할 데이터
+							userid : $("#userid").val(),
+							passwd : $("#passwd").val(),
+							changedPasswd : $("#changedPasswd").val()
+						},
+		 				success : function(data, status, xhr) {//data : 
+							alert(data);
+						},
+						error: function(xhr, status, error) {
+							console.log(error);
+						}						
+					});//end ajax
+				}
+			} else if ($("#email1").val() != "<%= email1 %>" || $("#email2").val() != "<%= email2 %>") {//이메일이 변경되었을 때
+				event.preventDefault();
+				console.log("이메일 변경");
+			} else {
+				event.preventDefault();
+				console.log("비밀번호 변경 안 함");
+			}//end if
 		});//end submit
+		
 	});//end ready
 </script>
 <div style = "padding: 5px 5px 5px 20px;">
 <form action=" " method="post">
 <input type="hidden" name="userid" id="userid" value="<%= userid %>"/>
+<input type="hidden" name="passwd" id="passwd" value="<%= passwd %>"/>
 <img alt="" src="mypage/user.png" width="30px" height="30px">
-	<input type="text" name="username" value="<%= username %>" readonly="readonly"/><br><!-- 수정 불가 or 퍼센트로 데이터 가져옴 -->
+	<input type="text" name="username" value="<%= username %>" readonly="readonly"/><br><!-- 수정 불가 -->
 <br>
 <img alt="" src="mypage/userprofile.png" width="30px" height="30px">
 	<input type="text" name="changeProfile" value="프로필 변경" readonly="readonly"/>
@@ -70,17 +127,73 @@
 	&nbsp;<span id="result2"></span><br>
 <br>
 <img alt="" src="mypage/email.png" width="30px" height="30px">
-	<input type="text" name="email1" id="email1" readonly="readonly" value="<%= email1 %>"> @
-	<input type="text" name="email2" placeholder="직접입력" id="email2" readonly="readonly" value="<%= email2 %>">
-	<button id="changeEmail" class="btn btn-outline-success">변경</button><br>
+	<input type="text" name="email1" id="email1" value="<%= email1 %>"> @
+	<input type="text" name="email2" placeholder="직접입력" id="email2" value="<%= email2 %>">
+	<select id="emailSel">
+		<option value="" selected disabled>이메일 선택</option>
+		<option value="daum.net">daum.net</option>
+		<option value="naver.com">naver.com</option>
+		<option value="google.com">google.com</option>
+	</select><br>
 <img alt="" src="mypage/address.png" width="30px" height="30px">
-	<input type="text" name="post" id="sample4_postcode" placeholder="우편번호" readonly="readonly" value="<%= post_num %>"><br><!-- script 긁어서 자식창에 넣기 -->
+	<input type="text" name="post" id="sample4_postcode" placeholder="우편번호" readonly="readonly" value="<%= post_num %>"><!-- script 긁어서 자식창에 넣기 -->
+	<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기" class="btn btn-outline-success"><br>
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	<input type="text" name="addr1" id="sample4_roadAddress" placeholder="도로명주소" readonly="readonly" value="<%= addr1 %>" style="width: 450px">
 	<input type="text" name="addr2" id="sample4_jibunAddress" placeholder="지번주소" readonly="readonly" value="<%= addr2 %>" style="width: 300px">
-	<span id="guide" style="color:#999"></span>
-	<button id="changeAddress" class="btn btn-outline-success">주소 관리</button><br>
+	<span id="guide" style="color:#999"></span><br>
 <br>
 <button class="btn btn-outline-success">변경</button><br>
 </form>
 </div>
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script>
+	//본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
+	function sample4_execDaumPostcode() {
+		new daum.Postcode({
+			oncomplete: function(data) {
+				// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+				// 도로명 주소의 노출 규칙에 따라 주소를 조합한다.
+				// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+				var fullRoadAddr = data.roadAddress; // 도로명 주소 변수
+				var extraRoadAddr = ''; // 도로명 조합형 주소 변수
+
+				// 법정동명이 있을 경우 추가한다. (법정리는 제외)
+				// 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+				if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+					extraRoadAddr += data.bname;
+				}
+				// 건물명이 있고, 공동주택일 경우 추가한다.
+				if(data.buildingName !== '' && data.apartment === 'Y'){
+					extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+				}
+				// 도로명, 지번 조합형 주소가 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+				if(extraRoadAddr !== ''){
+					extraRoadAddr = ' (' + extraRoadAddr + ')';
+				}
+				// 도로명, 지번 주소의 유무에 따라 해당 조합형 주소를 추가한다.
+				if(fullRoadAddr !== ''){
+					fullRoadAddr += extraRoadAddr;
+				}
+
+				// 우편번호와 주소 정보를 해당 필드에 넣는다.
+				document.getElementById('sample4_postcode').value = data.zonecode; //5자리 새우편번호 사용
+				document.getElementById('sample4_roadAddress').value = fullRoadAddr;
+				document.getElementById('sample4_jibunAddress').value = data.jibunAddress;
+
+				// 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
+				if(data.autoRoadAddress) {
+					//예상되는 도로명 주소에 조합형 주소를 추가한다.
+					var expRoadAddr = data.autoRoadAddress + extraRoadAddr;
+					document.getElementById('guide').innerHTML = '(예상 도로명 주소 : ' + expRoadAddr + ')';
+				} else if(data.autoJibunAddress) {
+					var expJibunAddr = data.autoJibunAddress;
+					document.getElementById('guide').innerHTML = '(예상 지번 주소 : ' + expJibunAddr + ')';
+				} else {
+					document.getElementById('guide').innerHTML = '';
+				}
+			}
+		}).open();
+	}
+</script>

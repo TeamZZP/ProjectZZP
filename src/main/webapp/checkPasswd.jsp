@@ -34,7 +34,7 @@
 <form action="AccountManagementServlet" method="post">
 <input type="hidden" name="userid" id="userid" value="<%= userid %>">
 <h2>비밀번호를 입력해 주십시오</h2>
-기존 비밀번호 확인: <input type="text" name="passwd" id="passwd">
+기존 비밀번호 확인: <input type="password" name="passwd" id="passwd">
 <br><br>
 <button id="check" class="btn btn-success">확인</button>
 </form>
