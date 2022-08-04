@@ -12,11 +12,11 @@ public class ProductService {
 	
 	ProductDAO dao = new ProductDAO();
 
-	public List<ProductDTO> productList(String c_name) {
+	public List<ProductDTO> productList(int c_id) {
 		List<ProductDTO> list = null;
 		SqlSession session = MySqlSessionFactory.getSqlSession();
 		try {
-			list = dao.productList(session, c_name);
+			list = dao.productList(session, c_id);
 		}finally {
 			session.close();
 		}

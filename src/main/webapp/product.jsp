@@ -22,8 +22,6 @@
 <body>
 
 <jsp:include page="common/header.jsp" flush="true"></jsp:include><br>
-<jsp:include page="category.jsp" flush="true"></jsp:include>
-<div id="center">
+<%-- <jsp:include page="category/category.jsp" flush="true"></jsp:include> --%>
 <jsp:include page="product/product.jsp" flush="true"></jsp:include><br>
-</div>
 <jsp:include page="common/footer.jsp" flush="true"></jsp:include><br>

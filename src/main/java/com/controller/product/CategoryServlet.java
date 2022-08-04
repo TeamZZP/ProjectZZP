@@ -43,7 +43,9 @@ public class CategoryServlet extends HttpServlet {
 		
 		List<CategoryDTO> list  = service.allCategory(); //카테고리 전체 데이터
 		
-		request.setAttribute("category_nameMap", map);
+		/* request.setAttribute("category_nameMap", map); */
+		
+		request.setAttribute("categoryList", list);
 		RequestDispatcher dis = request.getRequestDispatcher("category.jsp");
 		dis.forward(request, response);
 
