@@ -42,6 +42,9 @@
 		$("#changedPasswd").on("keyup", function() {
 			if ($(this).val().length != 0) {
 				$("#result2").text("");
+			} else {//2-1. 변경 데이터 삭제시 확인 데이터 삭제
+				$("#checkPasswd").val("");
+				$("#result2").text("");
 			}
 		});//end fn
 		
@@ -55,57 +58,94 @@
 			}
 		});//end fn
 		
-		//이메일 select
+		//3. 이메일 select
 		$("#emailSel").on("change", function() {
 			$("#email2").val($(this).val());
 		});//end fn
 		
-		//3. 폼 제출, db 업데이트
+		//4. 폼 제출, db 업데이트
 		$("form").on("submit", function() {
-			if ($(".pw").val().length != 0) {//비밀번호 변경 데이터가 있을 때
+			if ($("#changedPasswd").val().length != 0) {//4-1. 비밀번호 변경 데이터가 있을 때
 				var pwChk = /^(?=.*[a-zA-Z])(?=.*[!@#$%^&*+=-_])(?=.*[0-9]).{8,25}$/;
-//				if (!pwChk.test(changedPasswd))//비밀번호 유효성 검사
-				if (false) {//비밀번호 유효성 검사--맞게 입력해도 alert 출력
-					alert("비밀번호를 형식에 맞게 입력해주세요 :)");
+				if (!pwChk.test($("#changedPasswd").val())){//비밀번호 유효성 검사
+//				if (false) {//비밀번호 유효성 검사--맞게 입력해도 alert 출력
+					alert("비밀번호를 형식에 맞게 입력해주세요 :<");
 					$("#changedPasswd").val("");
 					$("#checkPasswd").val("");
 					$("#result2").text("");
 					$("#changedPasswd").focus();
 					event.preventDefault();
-				} else if ($("#result2").text() == "비밀번호 불일치" || $("#result2").text().length == 0) {//새로운 비밀번호 미검증
-					console.log("비번 체크");
+				} else if ($("#result2").text() == "비밀번호 불일치" || $("#result2").text().length == 0) {//비밀번호 미검증
 					event.preventDefault();
+					console.log("비번 체크");
 					alert("변경할 비밀번호를 확인하세요.");
 					$("#checkPasswd").focus();
 					$("#checkPasswd").val("");
-				} else {//변경 데이터 있음 && 비번 일치 상태
-					//*****ajax
+				} else if ($("#email1").val().length == 0 || $("#email2").val().length == 0) {//이메일 공백
 					event.preventDefault();
+					alert("이메일 주소를 입력하세요.");
+					$("#email1").focus();
+				} else {//주소는 readonly 상태--새로 입력하지 않는 이상 삭제 불가능해서 따로 공백 검사 안 함--아냐 해야 됨..
+					event.preventDefault();
+					if ($("#sample4_jibunAddress").val().length == 0) {//null 방지->서블릿에 데이터 넘길 때 null 예방 필요
+						$("#sample4_jibunAddress").val("상세 주소를 입력하세요.");
+					}
+					console.log("유효성 검사 통과, 비밀번호 검증 완료, 비번, 이메일, 주소 update");
+					//*****ajax
 					$.ajax({
 						type : "post",
-						url : "PasswdChangeServlet",//페이지 이동 없이 해당 url에서 작업 완료 후 데이터만 가져옴
+						url : "AccountChangeServlet",//페이지 이동 없이 해당 url에서 작업 완료 후 데이터만 가져옴
 						dataType : "text",
 						data : {//서버에 전송할 데이터
 							userid : $("#userid").val(),
 							passwd : $("#passwd").val(),
-							changedPasswd : $("#changedPasswd").val()
+							changedPasswd : $("#changedPasswd").val(),
+							email1 : $("#email1").val(),
+							email2 : $("#email2").val(),
+							post : $("#sample4_postcode").val(),
+							addr1 : $("#sample4_roadAddress").val(),
+							addr2 : $("#sample4_jibunAddress").val()
 						},
-		 				success : function(data, status, xhr) {//data : 
+		 				success : function(data, status, xhr) {//data :
 							alert(data);
+							location.href="main.jsp";//수정 후 메인페이지 이동
 						},
 						error: function(xhr, status, error) {
 							console.log(error);
 						}						
 					});//end ajax
 				}
-			} else if ($("#email1").val() != "<%= email1 %>" || $("#email2").val() != "<%= email2 %>") {//이메일이 변경되었을 때
+			} else {//4-2. 비밀번호 변경 데이터가 없을 때
 				event.preventDefault();
-				console.log("이메일 변경");
-			} else {
-				event.preventDefault();
-				console.log("비밀번호 변경 안 함");
-			}//end if
-		});//end submit
+				if ($("#sample4_jibunAddress").val().length == 0) {//null 방지->서블릿에 데이터 넘길 때 null 예방 필요
+					$("#sample4_jibunAddress").val("상세 주소를 입력하세요.");
+				}
+				console.log("이메일, 주소 update");
+				//*****ajax
+				$.ajax({
+					type : "post",
+					url : "AccountChangeServlet",//페이지 이동 없이 해당 url에서 작업 완료 후 데이터만 가져옴
+					dataType : "text",
+					data : {//서버에 전송할 데이터
+						userid : $("#userid").val(),
+						email1 : $("#email1").val(),
+						email2 : $("#email2").val(),
+						post : $("#sample4_postcode").val(),
+						addr1 : $("#sample4_roadAddress").val(),
+						addr2 : $("#sample4_jibunAddress").val()
+					},
+	 				success : function(data, status, xhr) {//data : 
+						alert(data);
+						location.href="main.jsp";//수정 후 메인페이지 이동
+					},
+					error: function(xhr, status, error) {
+						console.log(error);
+					}						
+				});//end ajax
+			};//end if
+		});//end fn
+		
+		//5. 회원 탈퇴
 		
 	});//end ready
 </script>
@@ -116,14 +156,10 @@
 <img alt="" src="mypage/user.png" width="30px" height="30px">
 	<input type="text" name="username" value="<%= username %>" readonly="readonly"/><br><!-- 수정 불가 -->
 <br>
-<img alt="" src="mypage/userprofile.png" width="30px" height="30px">
-	<input type="text" name="changeProfile" value="프로필 변경" readonly="readonly"/>
-	<button id="changeProfile" class="btn btn-outline-success">변경</button><br>
-<br>
 <img alt="" src="mypage/passwd.png" width="30px" height="30px">
-	<input type="text" class="pw" name="changedPasswd" id="changedPasswd" placeholder="변경할 비밀번호를 입력하세요." style="width: 250px">
+	<input type="password" name="changedPasswd" id="changedPasswd" placeholder="변경할 비밀번호를 입력하세요." style="width: 250px">
 	&nbsp;<span id="result1">영문자, 숫자, 특수문자를 포함하여 8~25자리를 입력하세요 :></span><br>
-	<input type="text" class="pw" name="checkPasswd" id="checkPasswd" placeholder="비밀번호를 한번 더 입력하세요." style="width: 250px">
+	<input type="password" name="checkPasswd" id="checkPasswd" placeholder="비밀번호를 한번 더 입력하세요." style="width: 250px">
 	&nbsp;<span id="result2"></span><br>
 <br>
 <img alt="" src="mypage/email.png" width="30px" height="30px">
@@ -139,11 +175,13 @@
 	<input type="text" name="post" id="sample4_postcode" placeholder="우편번호" readonly="readonly" value="<%= post_num %>"><!-- script 긁어서 자식창에 넣기 -->
 	<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기" class="btn btn-outline-success"><br>
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	<input type="text" name="addr1" id="sample4_roadAddress" placeholder="도로명주소" readonly="readonly" value="<%= addr1 %>" style="width: 450px">
-	<input type="text" name="addr2" id="sample4_jibunAddress" placeholder="지번주소" readonly="readonly" value="<%= addr2 %>" style="width: 300px">
+	<input type="text" name="addr1" id="sample4_roadAddress" placeholder="도로명 주소" readonly="readonly" value="<%= addr1 %>" style="width: 450px">
+	<input type="text" name="addr2" id="sample4_jibunAddress" placeholder="상세 주소를 입력하세요." value="<%= addr2 %>" style="width: 300px">
 	<span id="guide" style="color:#999"></span><br>
 <br>
 <button class="btn btn-outline-success">변경</button><br>
+<br><br>
+<button type="button" id="delAccount">회원 탈퇴</button>
 </form>
 </div>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
