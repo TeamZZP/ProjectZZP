@@ -1,21 +1,21 @@
 <%@page import="java.util.HashMap"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@page import="java.util.List" %>
+    <%@page import="com.dto.CategoryDTO" %>
     <%System.out.println("category폴더 안 category.jsp"); %>
     
     <%
-   HashMap<Integer,String> c_nameMap = (HashMap<Integer,String>)request.getAttribute("category_nameMap");
+    List<CategoryDTO> list = (List<CategoryDTO>)request.getAttribute("CategoryDTO_List");
     
-    for (int key : c_nameMap.keySet()) {
-		String cName = c_nameMap.get(key);
-		%>
+    for( int i = 0; i< list.size(); i++){
+    	
+    	list.get(i).getC_id();
+    }
+    %>
 		
-		<%-- <a href="aa.jsp?"+<%=cName %>><%=cName %></a>  --%>
+	
 		
-		<% 
-	      }
-          %>
-    
     
 <!DOCTYPE html>
 <html>
