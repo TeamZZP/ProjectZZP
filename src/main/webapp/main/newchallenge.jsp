@@ -7,39 +7,10 @@
     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-     </div>
-  <div class="carousel-inner">
-    <div class="carousel-item active" data-bs-interval="3000" onclick="javascrip:location.href='IntroductionUIServlet';">
-      <img src="images/main/banner_zzp.png" class="d-block w-100" alt="...">
-    </div>
-    <div class="carousel-item" data-bs-interval="3000" onclick="javascrip:location.href='ProductListServlet?p_category=timeEvent';">
-      <img src="images/main/banner_time.png" class="d-block w-100" alt="...">
-    </div>
-    <div class="carousel-item" data-bs-interval="3000" onclick="javascrip:location.href='ChallengeDetailServlet?chall_id=1';">
-      <img src="images/main/banner_monthchall.png" class="d-block w-100" alt="...">
-    </div>
-  </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
-</div>
-</div>
-
-<div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
-   <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
-  <div class="carousel-indicators">
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
   </div>
      
   <div class="carousel-inner">
-    <div class="carousel-item active" data-bs-interval="2000">
+    <div class="carousel-item active" data-bs-interval="3000">
       <div class="container px-4 py-5" id="custom-cards">
     <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
     <!-- 1 -->
@@ -108,7 +79,7 @@
     </div>
   </div>
     </div>
-    <div class="carousel-item" data-bs-interval="2000">
+    <div class="carousel-item" data-bs-interval="3000">
       <div class="container px-4 py-5" id="custom-cards">
     <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
     <!-- 1 -->
@@ -189,5 +160,3 @@
   </button>
 </div>
 </div>
-  
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
