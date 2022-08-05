@@ -45,7 +45,7 @@ session.removeAttribute("memberAdd");
 <body>
 <input type="hidden" id="kakao_token"/>
 <jsp:include page="common/header.jsp" flush="true"></jsp:include><br>
-<jsp:include page="main/banner.jsp" flush="true"></jsp:include><br>
+<jsp:include page="main/mainview.jsp" flush="true"></jsp:include><br>
 <jsp:include page="common/footer.jsp" flush="true"></jsp:include><br>
 </body>
 </html>

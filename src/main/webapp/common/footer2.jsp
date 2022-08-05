@@ -1,5 +1,66 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
+<div class="container" style="margin-top: 50px; margin-bottom: -20px;">
+  <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+    <div class="col-md-12 d-flex align-items-center">
+      <span class="mb-3 mb-md-0" style="color: graytext;">대표전화</span>
+    </div>
+    <div class="col-md-12 d-flex align-items-center">
+      <span class="mb-3 mb-md-0" style="font-size: x-large; color: graytext; font-weight: bold;">&#9742 02)1234-5678</span>
+    </div>
+    <div class="col-md-12 d-flex align-items-center">
+      <span class="mb-3 mb-md-0" style="color: graytext; font-weight: bold; font-size: small;">운영시간&nbsp;</span>  
+      <span class="mb-3 mb-md-0" style="color: graytext; font-size: small;"> 월-금 9시 - 18시 /&nbsp;</span>
+      <span class="mb-3 mb-md-0" style="color: graytext; font-weight: bold; font-size: small;">점심시간&nbsp;</span>
+      <span class="mb-3 mb-md-0" style="color: graytext; font-size: small;"> 12시 -13시</span>
+    </div>
+    <div class="col-md-12 d-flex align-items-center">
+      <span class="mb-3 mb-md-0" style="color: graytext; font-size: small;">* 배송 및 고객센터 : 주말, 공휴일 휴무</span>
+    </div>
+  </footer>
+</div>
+
+
+
+
+<div class="container border-top">
+  <footer class="py-5" style="margin-bottom: -30px;">
+    <div class="row" style="margin-top: -30px;">
+      <!-- <div class="col-4 col-md-4 mb-3"> -->
+      <div class="col-md-9">
+        <h5 style="font-weight: bold; color: green;">지구지키기 프로젝트 ZZP</h5>
+        <ul class="nav flex-column">
+          <li class="nav-item mb-2"><a href="IntroductionUIServlet" class="nav-link p-0 text-muted">소개</a></li>
+          <li class="nav-item mb-2"><a href="StoreUIServlet" class="nav-link p-0 text-muted">스토어</a></li>
+          <li class="nav-item mb-2"><a href="ChallengeListServlet" class="nav-link p-0 text-muted">챌린지</a></li>
+          <li class="nav-item mb-2"><a href="NoticeListServlet" class="nav-link p-0 text-muted">공지사항</a></li>
+          <li class="nav-item mb-2"><a href="QuestionListServlet" class="nav-link p-0 text-muted">문의</a></li>
+        </ul>
+      </div>
+      <div class="col-3 text-start">
+       	  <h5><a href="javascript:termsOfUse();" style="text-decoration: none; color: black; font-size: medium;">이용약관</a>
+       	  &nbsp;&#124;&nbsp;&nbsp;<a href="javascript:personalInfo();" style="text-decoration: none; color: black; font-size: medium;">개인정보처리방침</a></h5>
+       	  	<div class="text-start text-muted">
+	       	  	회사명 : (주) 지구지키기 프로젝트<br>
+				대표자 : 김에이콘<br>
+				주소 : 서울특별시 강남구 역삼로<br>
+				이메일 : abcd@efghr.com<br>
+				팩스 : 3423-3423-3342<br>
+				사업자등록번호 : 123-45-67890<br>
+				개인정보보호책임자 : 김에이콘
+			</div>
+      </div>
+    </div>
+      </footer>
+	<div class="col-md-4 d-flex align-items-center">
+      <a href="MainServlet" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
+        <svg class="bi" width="30" height="24"><img alt="로고" src="images/header/main.png" width="50" height="50"></svg>
+      </a>
+      <span class="mb-3 mb-md-0 text-muted">© 2022 ZZP Company, Inc</span>
+    </div>
+   </div>
+
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
 	function termsOfUse() {
@@ -14,77 +75,4 @@
 		window.open("common/personalInfo.jsp","new",'status=no, height=300, width=600, left='+ popupX + ', top='+ popupY);
 	}
 </script>
-
-<!-- <div class="container">
-  <footer class="py-3 my-4" >
-    <ul class="nav justify-content-center border-bottom pb-3 mb-3">
-      <li class="nav-item"><a href="MainServlet" class="nav-link px-2 text-muted">홈</a></li>
-      <li class="nav-item"><a href="javascript:termsOfUse();" class="nav-link px-2 text-muted">이용약관</a></li>
-      <li class="nav-item"><a href="javascript:personalInfo();" class="nav-link px-2 text-muted">개인정보처리방침</a></li>
-    </ul>
-    <p class="text-center text-muted">© 2022 ZZP Company, Inc</p>
-  </footer>
-</div> -->
-
-
-
-<div class="container">
-  <footer class="py-5">
-    <div class="row">
-      <div class="col-6 col-md-2 mb-3">
-        <h5>Section</h5>
-        <ul class="nav flex-column">
-          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
-          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
-          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
-          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
-          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
-        </ul>
-      </div>
-
-      <div class="col-6 col-md-2 mb-3">
-        <h5>Section</h5>
-        <ul class="nav flex-column">
-          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
-          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
-          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
-          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
-          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
-        </ul>
-      </div>
-
-      <div class="col-6 col-md-2 mb-3">
-        <h5>Section</h5>
-        <ul class="nav flex-column">
-          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
-          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
-          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
-          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
-          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
-        </ul>
-      </div>
-
-      <div class="col-md-5 offset-md-1 mb-3">
-        <form>
-          <h5>Subscribe to our newsletter</h5>
-          <p>Monthly digest of what's new and exciting from us.</p>
-          <div class="d-flex flex-column flex-sm-row w-100 gap-2">
-            <label for="newsletter1" class="visually-hidden">Email address</label>
-            <input id="newsletter1" type="text" class="form-control" placeholder="Email address">
-            <button class="btn btn-primary" type="button">Subscribe</button>
-          </div>
-        </form>
-      </div>
-    </div>
-
-    <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
-      <p>© 2022 Company, Inc. All rights reserved.</p>
-      <ul class="list-unstyled d-flex">
-        <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#twitter"></use></svg></a></li>
-        <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#instagram"></use></svg></a></li>
-        <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"></use></svg></a></li>
-      </ul>
-    </div>
-  </footer>
-</div>
 </html>
