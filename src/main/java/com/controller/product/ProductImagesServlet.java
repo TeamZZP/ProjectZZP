@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.dto.CategoryDTO;
 import com.dto.ImagesDTO;
 import com.dto.ProductDTO;
 import com.service.ImagesService;
@@ -22,23 +23,23 @@ public class ProductImagesServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		List<ProductDTO> Productlist = (List<ProductDTO>)request.getAttribute("productList"); 
-		int p_id = 8;
-		/* String p_id = request.getParameter("p_id"); */  //둘중하나 선택
-		/* int p_id = 8; */
+		List<ProductDTO> productList = (List<ProductDTO>)request.getAttribute("productList"); 
+		
+		System.out.println("ProductImagesServlet에서 getAttribute한 Productlist "+ productList);
+		System.out.println("ProductImagesServlet에서 p_id== "+ productList.get(0).getP_id());
+		
+		int p_id = productList.get(0).getP_id();
 		
 		ImagesService service= new ImagesService();
 		List<ImagesDTO> list =  service.selectImages(p_id); 
-		System.out.println(list);
+		System.out.println("ProductImagesServlet에서 select한 ImagesDTO list "+list);
+		
 		
 		request.setAttribute("ImagesList", list);
-		request.setAttribute("productList", Productlist);
+		request.setAttribute("productList", productList);
 		
 		  RequestDispatcher dis = request.getRequestDispatcher("product.jsp");
 		  dis.forward(request, response);
-		 
-		
-			/* response.sendRedirect("product.jsp"); */
 		
 		
 		
