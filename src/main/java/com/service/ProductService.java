@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import com.config.MySqlSessionFactory;
 import com.dao.ProductDAO;
 import com.dto.CategoryProductDTO;
+import com.dto.ImagesDTO;
 import com.dto.ProductDTO;
 
 public class ProductService {
@@ -24,7 +25,7 @@ public class ProductService {
 		return list;
 	}
 
-	public ProductDTO productRetrieve(String p_id) {
+	public ProductDTO productRetrieve(int p_id) {
 		ProductDTO dto = null;
 		SqlSession session = MySqlSessionFactory.getSqlSession();
 		try {
@@ -56,6 +57,18 @@ public class ProductService {
 		}
 		return list;
 	}
+
+	public List<ImagesDTO> ImagesRetrieve(int p_id) {
+		List<ImagesDTO> ilist = null;
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		try {
+			ilist = dao.ImagesRetrieve(session, p_id);
+		}finally {
+			session.close();
+		}
+		return ilist;
+	}
+
 
 	
 
