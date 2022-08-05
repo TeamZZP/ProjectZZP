@@ -81,6 +81,11 @@ public class ChallengeDAO {
 		return map;
 	}
 
+	public List<String> selectAllLikedUserid(SqlSession session, String chall_id) {
+		List<String> list = session.selectList("ChallengeMapper.selectAllLikedUserid", chall_id);
+		return list;
+	}
+
 
 
 }

@@ -140,6 +140,17 @@ public class ChallengeService {
 		return map;
 	}
 
+	public List<String> selectAllLikedUserid(String chall_id) {
+		List<String> list = null;
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		try {
+			list = dao.selectAllLikedUserid(session, chall_id);
+		} finally {
+			session.close();
+		}
+		return list;
+	}
+
 
 
 }

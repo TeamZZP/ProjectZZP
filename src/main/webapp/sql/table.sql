@@ -175,6 +175,12 @@ CREATE TABLE comments (
 	userid	VARCHAR2(30)		NOT NULL REFERENCES member(userid) ON DELETE CASCADE
 );
 
+-- 챌린지 좋아요
+CREATE TABLE chall_liked (
+  chall_id	NUMBER		NOT NULL REFERENCES challenge(chall_id) ON DELETE CASCADE,
+  userid	VARCHAR2(30)		NOT NULL REFERENCES member(userid) ON DELETE CASCADE
+);
+
 -- 시퀀스
 CREATE SEQUENCE 테이블명_컬럼명_seq
   START WITH 1
