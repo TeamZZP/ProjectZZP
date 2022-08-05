@@ -23,7 +23,7 @@ public class ProductImagesServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		List<ProductDTO> Productlist = (List<ProductDTO>)request.getAttribute("productList"); 
-		int p_id = Productlist.get(0).getP_id();
+		int p_id = 8;
 		/* String p_id = request.getParameter("p_id"); */  //둘중하나 선택
 		/* int p_id = 8; */
 		
@@ -33,8 +33,12 @@ public class ProductImagesServlet extends HttpServlet {
 		
 		request.setAttribute("ImagesList", list);
 		request.setAttribute("productList", Productlist);
-		RequestDispatcher dis = request.getRequestDispatcher("product.jsp");
-		dis.forward(request, response);
+		
+		  RequestDispatcher dis = request.getRequestDispatcher("product.jsp");
+		  dis.forward(request, response);
+		 
+		
+			/* response.sendRedirect("product.jsp"); */
 		
 		
 		

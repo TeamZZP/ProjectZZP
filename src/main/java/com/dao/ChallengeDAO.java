@@ -12,8 +12,8 @@ import com.dto.PageDTO;
 
 public class ChallengeDAO {
 
-	public int insertChallenge(SqlSession session, ChallengeDTO dto) {
-		int n = session.insert("ChallengeMapper.insertChallenge", dto);
+	public int insertChallenge(SqlSession session, HashMap<String, String> map) {
+		int n = session.insert("ChallengeMapper.insertChallenge", map);
 		return n;
 	}
 

@@ -45,7 +45,7 @@ public class CategoryServlet extends HttpServlet {
 		
 		/* request.setAttribute("category_nameMap", map); */
 		
-		request.setAttribute("CategoryDTO_List", list);
+		request.setAttribute("categoryList", list);
 		RequestDispatcher dis = request.getRequestDispatcher("category.jsp");
 		dis.forward(request, response);
 

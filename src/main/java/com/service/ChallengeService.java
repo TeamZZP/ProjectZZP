@@ -15,11 +15,11 @@ public class ChallengeService {
 	
 	ChallengeDAO dao = new ChallengeDAO();
 
-	public int insertChallenge(ChallengeDTO dto) {
+	public int insertChallenge(HashMap<String, String> map) {
 		int n = 0;
 		SqlSession session = MySqlSessionFactory.getSqlSession();
 		try {
-			n = dao.insertChallenge(session, dto);
+			n = dao.insertChallenge(session, map);
 			session.commit();
 		} finally {
 			session.close();

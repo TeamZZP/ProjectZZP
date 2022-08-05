@@ -29,7 +29,7 @@ a{
 </head>
 <body>
     <%
-    List<CategoryDTO> list = (List<CategoryDTO>)request.getAttribute("CategoryDTO_List");
+    List<CategoryDTO> list = (List<CategoryDTO>)request.getAttribute("categoryList");
     
     
     for( int i = 0; i< list.size(); i++){
@@ -44,7 +44,7 @@ a{
     %>
 		<div id="category">
 			<ul>
-				<li><a href="CategoryListServlet?c_id=<%=c_id %>"><%=c_name %></a></li>
+				<li><a href="ProductListServlet?c_id=<%=c_id %>"><%=c_name %></a></li>
 			</ul>
 		</div>
 		
