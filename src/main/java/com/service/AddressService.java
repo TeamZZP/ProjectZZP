@@ -27,6 +27,18 @@ public class AddressService {
 		return address;
 	}
 
+	public int changeAdd(HashMap<String, String> changedAddMap) {
+		SqlSession session=MySqlSessionFactory.getSqlSession();
+		int num=0;
+		try {
+			num=dao.changeAdd(session, changedAddMap);
+			session.commit();
+		} finally {
+			session.close();
+		}
+		return num;
+	}
+
 
 
 	
