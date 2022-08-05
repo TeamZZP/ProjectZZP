@@ -12,8 +12,8 @@ import com.dto.PageDTO;
 
 public class ChallengeDAO {
 
-	public int insertChallenge(SqlSession session, ChallengeDTO dto) {
-		int n = session.insert("ChallengeMapper.insertChallenge", dto);
+	public int insertChallenge(SqlSession session, HashMap<String, String> map) {
+		int n = session.insert("ChallengeMapper.insertChallenge", map);
 		return n;
 	}
 
@@ -79,6 +79,10 @@ public class ChallengeDAO {
 	public HashMap<String, String> selectProfile(SqlSession session, String userid) {
 		HashMap<String, String> map = session.selectOne("ChallengeMapper.selectProfile", userid);
 		return map;
+	}
+
+	public List<ChallengeDTO> selectNewChallenge(SqlSession session) {
+		return session.selectList("selectNewChallenge");
 	}
 
 

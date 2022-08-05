@@ -4,9 +4,27 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ChallengeMapper">
 
-<insert id="insertChallenge" parameterType="ChallengeDTO">
-	insert into challenge (chall_id, userid, chall_title, chall_content, chall_category, chall_hits, chall_liked, chall_created, chall_img) 
-	values (challenge_chall_id_seq.NEXTVAL, #{userid}, #{chall_title}, #{chall_content}, #{chall_category}, 0, 0, sysdate, #{chall_img})
+<insert id="insertChallenge" parameterType="hashmap">
+	insert into challenge 
+		(chall_id, 
+		userid, 
+		chall_title, 
+		chall_content, 
+		chall_category, 
+		chall_hits, 
+		chall_liked, 
+		chall_created, 
+		chall_img) 
+	values 
+		(challenge_chall_id_seq.NEXTVAL, 
+		#{userid}, 
+		#{chall_title}, 
+		#{chall_content}, 
+		#{chall_category}, 
+		0, 
+		0, 
+		sysdate, 
+		#{chall_img})
 </insert>
 
 <select id="selectAllChallenge" parameterType="hashmap" resultType="ChallengeDTO">
@@ -100,6 +118,10 @@
 <select id="selectProfile" resultType="hashmap">
 	select * from profile
 	where userid=#{userid}
+</select>
+
+<select id="selectNewChallenge" resultType="ChallengeDTO">
+	select * from challenge where rownum <![CDATA[<=]]> 8 order by chall_id desc
 </select>
 
 </mapper>

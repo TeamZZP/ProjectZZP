@@ -52,9 +52,9 @@ public class ChallengeAddServlet extends HttpServlet {
 			dto.setChall_content(chall_content);
 			
 			ChallengeService service = new ChallengeService();
-			int n = service.insertChallenge(dto);
-			System.out.println(n+"개의 레코드 추가");
-			System.out.println(dto.getChall_id());
+//			int n = service.insertChallenge(dto);
+//			System.out.println(n+"개의 레코드 추가");
+//			System.out.println(dto.getChall_id());
 			
 			//자기가 올린 게시글로 이동??? 
 			response.sendRedirect("ChallengeListServlet");

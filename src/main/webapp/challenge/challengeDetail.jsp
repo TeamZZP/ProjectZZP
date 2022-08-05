@@ -126,7 +126,7 @@
 	  <td height="10">
 	</tr>
 	<tr>
-	  <td colspan="3"><div style="text-align: center"><img src="images/<%= chall_img %>" width="500" height="500"></div></td>
+	  <td colspan="3"><div style="text-align: center"><img src="/eclipse/upload/<%= chall_img %>" width="500" height="500"></div></td>
 	</tr>
 	<tr>
 	  <td height="10">
