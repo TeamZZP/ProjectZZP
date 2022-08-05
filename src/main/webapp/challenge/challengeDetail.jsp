@@ -44,6 +44,8 @@
 	List<CommentsDTO> commentsList = (List<CommentsDTO>) request.getAttribute("commentsList");
 	//이 글 작성자의 프로필 이미지 얻어오기
 	String profile_img = (String) request.getAttribute("profile_img");
+	//현재 회원이 이 글의 좋아요를 눌렀는지 판단하기 
+	int likedIt = (int) request.getAttribute("likedIt");
 	
 %>
 
@@ -93,9 +95,27 @@
 			}
 		});
 		
-		//좋아요 
-		$("#chall_liked").on("click", function () {
-			$(this).attr("src", "images/liked.png");
+		//좋아요 추가
+		$("body").on("click", ".liked", function () {
+			if ("<%= currUserid %>" == "null") {
+				alert("로그인이 필요합니다.");
+			} else {
+				$.ajax({
+					type:"post",
+					url:"LikeServlet",
+					data: {
+						"chall_id":"<%= chall_id %>",
+						"userid":"<%= currUserid %>"
+					},
+					dataType:"html",
+					success: function (data) {
+						$("#liked_area").html(data);
+					},
+					error: function () {
+						
+					}
+				});
+			}
 		});
 		
 	});
@@ -112,8 +132,8 @@
 	  <% if (userid.equals(currUserid)) { %>
 	  	<a href="ChallengeUIServlet?chall_id=<%= chall_id %>&userid=<%= currUserid %>">수정 </a>
 	  	<a href="ChallengeDeleteServlet?chall_id=<%= chall_id %>&userid=<%= currUserid %>" id="deleteChallenge">삭제</a>
-	  <% } else { %>
 	  <!-- 그외의 경우 -->
+	  <% } else { %>
 	    <a href="">신고</a>
 	  <% } %>
 	  </td>
@@ -137,7 +157,17 @@
 	  <td height="10">
 	</tr>
 	<tr>
-	  <td><img src="images/like.png" width="40" height="40" id="chall_liked"> <%= chall_liked %></td>
+	  <td>
+	  <span id="liked_area">
+	  <!-- 해당 게시글을 현재 로그인한 회원이 좋아요했던 경우 -->
+	  <% if (likedIt == 1) { %>
+	    <img src="images/liked.png" width="40" height="40" class="liked"> <%= chall_liked %>
+	  <!-- 그외의 경우 -->
+	  <% } else { %>
+	    <img src="images/like.png" width="40" height="40" class="liked"> <%= chall_liked %>
+	  <% } %>
+	  </span>
+	  </td>
 	  <td></td>
 	  <td><img src="images/bubble.png" width="30" height="27"> <span id="commentsNum"><%= commentsList.size() %></span></td>
 	</tr>

@@ -1,6 +1,7 @@
 package com.controller.product;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.dto.ImagesDTO;
 import com.dto.ProductDTO;
 import com.service.ProductService;
 
@@ -22,14 +24,16 @@ public class productRetrieveServlet extends HttpServlet {
        
   
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String p_id = request.getParameter("p_id"); 
+		int p_id = Integer.parseInt(request.getParameter("p_id")) ; 
 		System.out.println(p_id);
 		
 		ProductService service = new ProductService();
-		ProductDTO dto = service.productRetrieve(p_id);
+		ProductDTO pdto = service.productRetrieve(p_id);
+		List <ImagesDTO> ilist = service.ImagesRetrieve(p_id);
 		
 		HttpSession session = request.getSession();
-		session.setAttribute("Retrieve", dto);
+		session.setAttribute("ProductRetrieveDTO", pdto);
+		session.setAttribute("ImagesRetrieveList", ilist);
 		
 		RequestDispatcher dis = request.getRequestDispatcher("productRetrieve.jsp");
 		dis.forward(request, response);

@@ -24,9 +24,9 @@ public class ProductListServlet extends HttpServlet {
 		int c_id = Integer.parseInt( request.getParameter("c_id"));
 		
 		    ProductService service = new ProductService();
-			List<CategoryProductDTO> list = service.productList(c_id);
+			List<CategoryProductDTO> list = service.productList(c_id);  //카테고리상품 가져오기(이미지,productDTO)
 			System.out.println("ProductListServlet에서 productList==="+list);
-		 
+		
 					    
 			request.setAttribute("productList", list);
 			

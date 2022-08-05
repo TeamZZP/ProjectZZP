@@ -1,155 +1,58 @@
 <%@page import="com.dto.ProductDTO"%>
 <%@page import="com.dto.MemberDTO"%>
+<%@page import="com.dto.ImagesDTO" %>
+<%@page import="java.util.List" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-  <%
-   ProductDTO dto = (ProductDTO)session.getAttribute("Retrieve");
-   String p_id = dto.getP_id();
-   String p_name = dto.getP_name();
-   String p_content = dto.getP_content();
-   String p_category = dto.getP_category();
-   int p_cost_price =dto.getP_cost_price();
-   int p_selling_price =dto.getP_cost_price();
-   int p_discount =dto.getP_cost_price();
-   String p_created = dto.getP_created();
-   int p_stock =dto.getP_stock();
-   String p_img = dto.getP_img();
 
-%>    
-
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  
+  
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script type="text/javascript">
+<script type="text/javascript"></script>
 
-$(function() {
-	
-	$("#up").on("click",function(){
-		var count =parseInt($("#gAmount").val());
-		$("#gAmount").val(parseInt(count)+1);
-		
-		 var total = ((count+1)* $("#price").text());
-		$("#total").text(total); 
-		
-	})//
-	
-	$("#down").on("click",function(){
-		var count = parseInt($("#gAmount").val());
-		if(count > 1){
-			$("#gAmount").val(parseInt(count)-1);
-			var total = ((count-1) * $("#price").text());
-			$("#total").text(total);
-		}
-	});
-	 
-	<%MemberDTO dtoM = new MemberDTO();
-	dtoM = (MemberDTO)session.getAttribute("login");%>
-	
 
-	$("#order").click(function() {
-		
+ <%
 
-		<%if(dtoM != null){
-			/*  RequestDispatcher dis = request.getRequestDispatcher("OrderServlet");
-			dis.forward(request, response);  */
-		}else{%>
-		var openWin = window.open("orderLoginCheck.jsp","","width=570, height=350");
-		<%}%>
-	
-		
-	});
+ProductDTO pdto = (ProductDTO)request.getAttribute("ProductRetrieveDTO");
 
+pdto.getC_id();
+pdto.getP_content();
+pdto.getP_cost_price();
+pdto.getP_created();
+pdto.getP_discount();
+pdto.getP_id();
+pdto.getP_name();
+pdto.getP_selling_price();
+pdto.getP_stock();
+
+%>  
+
+<%
+List<ImagesDTO> ilist = (List<ImagesDTO>)request.getAttribute("ImagesRetrieveList");
+
+for(int i = 0; i <ilist.size();i++){
+
+	int p_id = ilist.get(i).getP_id();
+	String image_route = ilist.get(i).getImage_route();
+	int image_rnk = ilist.get(i).getImage_rnk();
+	String update_date = ilist.get(i).getUpdate_date();
+
+%>
 	
 
-});//end ready
+<html>
+<head>
+</head>
 
-</script> 
+<body>
+
+<img src="images/p_image/life01.jpg" class="img-thumbnail" >
 
 
-   <table cellspacing="0" cellpadding="0">
-      <tr>
-         <td height="30">
-      </tr>
-      <tr>
-         <td>
-            <table align="center" width="710" cellspacing="0" cellpadding="0"
-               border="0" style='margin-left: 30px'>
-               <tr>
-                  <td class="td_default"><font size="5"><b>- 상품 정보 -</b></font>
-                     &nbsp;</td>
-               </tr>
-               <tr>
-                  <td height="5"></td>
-               </tr>
-               <tr>
-                  <td height="1" colspan="8" bgcolor="CECECE"></td>
-               </tr>
-               <tr>
-                  <td height="10"></td>
-               </tr>
 
-               <tr>
-                  <td rowspan="7"><img src="images/p_image/<%=p_img %>.jpg"
-                     border="0" align="center" width="300" />
-                  </td>
-                  
-               <tr>
-                  <td class="td_title">상품명</td>
-                  <td class="td_default" colspan="2" style='padding-left: 30px'><%=p_name %></td>
-               </tr>
-               <tr>
-                  <td class="td_title">가격</td>   
-                  <td class="td_red"  colspan="2" style='padding-left: 30px' id="price" >
-                  <%=p_selling_price %>
-                  </td>
-                
-               </tr>
-               <tr>
-                  <td class="td_title">제품소개</td>
-                  <td class="td_default" colspan="2" style='padding-left: 30px'>
-                   <%=p_content %><br>
-                  </td>
-                  </tr> 
-                  <tr>
-                  </tr>
-               <tr>
-                  <td class="td_title">배송비</td>
-                  <td colspan="2"><font 
-                     style='padding-left: 30px'><b> 3000원</b> </font><br>
-                      <font size="2">(50000원 이상 무료배송/도서산간지역 별도 배송비 추가)</font></td>
-               </tr>
-               
-
-               <tr>
-                  <td class="td_title">주문수량</td>
-                  <td style="padding-left: 30px">
-                  <input type="text"
-                     name="gAmount" value="1" id="gAmount"
-                     style="text-align: right; height: 18px">
-                     <button  id="up" class="btn btn-success" style="width: 30px; height: 30px; ">+</button>
-                     <button  id="down" class="btn btn-success" style="width: 30px; height: 30px; " >-</button><br>
-                     </td>
-               </tr>
-              	<tr >
-              	<td></td>
-              	<td class="td_title" >결제금액</td>
-              	<td style="padding-left: 30px">
-				<span id="total" style="text-align: right;"> <%=p_selling_price%></span>
-				</tr>
-            </table>
-               
-         </td> 
-      </tr>
-      <tr>
-      <td></td>
-      <td>
-      <button  class="btn btn-success" id="order">구매</button>
-   &nbsp;&nbsp;
-  	 <button class="btn btn-success">장바구니</button>
-      </td>
-      </tr>
-      
-   </table>
-
-   
-
-    
+	
+ <%} %> 
+</body>
+</html>
