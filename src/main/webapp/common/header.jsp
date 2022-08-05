@@ -21,7 +21,7 @@
       <a href="MainServlet" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
         <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap">
         <use xlink:href="#bootstrap"></use>
-        <img alt="로고" src="images/header/main.png" width="50" height="50"><span id="main">ZZP</span> 
+        <img alt="로고" src="images/header/main.png" width="50" height="50">&nbsp;<span id="main" style="font-weight: bold;">ZZP</span> 
         </svg>
       </a>
 

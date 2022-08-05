@@ -22,13 +22,19 @@
 </div>
 
 
-
-
 <div class="container border-top">
   <footer class="py-5" style="margin-bottom: -30px;">
     <div class="row" style="margin-top: -30px;">
-      <!-- <div class="col-4 col-md-4 mb-3"> -->
-      <div class="col-md-9">
+      <div class="col-4">
+        <a href="MainServlet" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
+        <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap">
+        <use xlink:href="#bootstrap"></use>
+        <img alt="로고" src="images/header/main.png" width="70" height="70">&nbsp;<span id="main" style="font-weight: bold; font-size: x-large;">ZZP</span> 
+        </svg>
+      </a>
+      </div>
+      <div class="col-5 text-start">
+       	  <div class="col-md-6">
         <h5 style="font-weight: bold; color: green;">지구지키기 프로젝트 ZZP</h5>
         <ul class="nav flex-column">
           <li class="nav-item mb-2"><a href="IntroductionUIServlet" class="nav-link p-0 text-muted">소개</a></li>
@@ -38,8 +44,9 @@
           <li class="nav-item mb-2"><a href="QuestionListServlet" class="nav-link p-0 text-muted">문의</a></li>
         </ul>
       </div>
-      <div class="col-3 text-start">
-       	  <h5><a href="javascript:termsOfUse();" style="text-decoration: none; color: black; font-size: medium;">이용약관</a>
+      </div>
+      <div class="col-3">
+      		<h5><a href="javascript:termsOfUse();" style="text-decoration: none; color: black; font-size: medium;">이용약관</a>
        	  &nbsp;&#124;&nbsp;&nbsp;<a href="javascript:personalInfo();" style="text-decoration: none; color: black; font-size: medium;">개인정보처리방침</a></h5>
        	  	<div class="text-start text-muted">
 	       	  	회사명 : (주) 지구지키기 프로젝트<br>
@@ -51,15 +58,9 @@
 				개인정보보호책임자 : 김에이콘
 			</div>
       </div>
-    </div>
+    </div><!-- end row -->
       </footer>
-	<div class="col-md-4 d-flex align-items-center">
-      <a href="MainServlet" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
-        <svg class="bi" width="30" height="24"><img alt="로고" src="images/header/main.png" width="50" height="50"></svg>
-      </a>
-      <span class="mb-3 mb-md-0 text-muted">© 2022 ZZP Company, Inc</span>
-    </div>
-   </div>
+</div>
 
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
