@@ -1,3 +1,6 @@
+<%@page import="java.io.Console"%>
+<%@page import="java.util.List"%>
+<%@page import="com.dto.ChallengeDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -37,6 +40,8 @@
 </div>
 </div>
 <br>
+
+
 <!-- 베스트상품 -->
 <div class="container px-4 py-5">
 <nav class="nav" >
@@ -186,7 +191,6 @@
   </div>
     </div>
   </div>
-  
   <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval2" data-bs-slide="prev">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
     <span class="visually-hidden">Previous</span>
@@ -199,6 +203,7 @@
 </div>
 
 
+<!-- middle banner -->
 <img src="images/main/banner_middle.png" class="d-block w-100" alt="...">
 
 
@@ -209,36 +214,27 @@
 	    <b style="font-size: xx-large; color: green;">NEW CHALLENGE</b>
 	  </li>
 	</ul>
-	<div class="row">
-		<div class="col-lg-3 col-md-6">
-			<img src="https://image.shutterstock.com/image-photo/group-diverse-people-planting-tree-260nw-619014041.jpg" width="250" height="250" class=" mx-auto d-block" alt="...">
+
+	<div class="row" style="float: none; margin:100 auto;">
+	<%
+		List<ChallengeDTO> list = (List<ChallengeDTO>)request.getAttribute("newchall");
+			for(int i=0; i<=7; i++){
+				System.out.println();
+				ChallengeDTO dto = list.get(i);
+				int chall_id = dto.getChall_id();
+				String chall_img = dto.getChall_img();
+	%>
+		<div class="col-lg-3 col-md-6" style="margin-bottom: 5px;">
+			<a href="ChallengeDetailServlet?chall_id=<%=chall_id%>">
+				<img src="/eclipse/upload/<%=chall_img%>" width="250" height="250" class=" mx-auto d-block" alt="...">
+			</a>
 		</div>
-		<div class="col-lg-3 col-md-6">
-			<img src="https://image.shutterstock.com/image-photo/ecology-human-hand-holding-stuff-260nw-633655349.jpg" width="250" height="250" class=" mx-auto d-block" alt="...">
-		</div>
-		<div class="col-lg-3 col-md-6">
-			<img src="https://image.shutterstock.com/image-photo/people-hands-cupping-plant-nurture-260nw-604290230.jpg" width="250" height="250" class=" mx-auto d-block" alt="...">
-		</div>
-		<div class="col-lg-3 col-md-6">
-			<img src="https://image.shutterstock.com/image-photo/energy-saving-eco-lamp-made-260nw-1272714919.jpg" width="250" height="250" class=" mx-auto d-block" alt="...">
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-lg-3 col-md-6">
-			<img src="https://image.shutterstock.com/image-photo/unrecognizable-woman-holding-eco-friendly-260nw-1655538373.jpg" width="250" height="250" class=" mx-auto d-block" alt="...">
-		</div>
-		<div class="col-lg-3 col-md-6">
-			<img src="https://image.shutterstock.com/image-photo/zero-waste-beauty-body-care-260nw-1553146538.jpg" width="250" height="250" class=" mx-auto d-block" alt="...">
-		</div>
-		<div class="col-lg-3 col-md-6">
-			<img src="https://image.shutterstock.com/image-photo/wooden-soap-dish-eucalyptus-over-260nw-1470882224.jpg" width="250" height="250" class=" mx-auto d-block" alt="...">
-		</div>
-		<div class="col-lg-3 col-md-6">
-			<img src="https://image.shutterstock.com/image-photo/natural-eco-bamboo-toothbrush-coconut-260nw-1168585570.jpg" width="250" height="250" class=" mx-auto d-block" alt="...">
-		</div>
+	<%
+		}
+	%>
 	</div>
 </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
 </body>
 </html>

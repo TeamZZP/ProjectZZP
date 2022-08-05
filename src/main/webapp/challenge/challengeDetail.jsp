@@ -93,6 +93,11 @@
 			}
 		});
 		
+		//좋아요 
+		$("#chall_liked").on("click", function () {
+			$(this).attr("src", "images/liked.png");
+		});
+		
 	});
 </script>
 
@@ -132,7 +137,7 @@
 	  <td height="10">
 	</tr>
 	<tr>
-	  <td><img src="images/keeping.png" width="30" height="30"> <%= chall_liked %></td>
+	  <td><img src="images/like.png" width="40" height="40" id="chall_liked"> <%= chall_liked %></td>
 	  <td></td>
 	  <td><img src="images/bubble.png" width="30" height="27"> <span id="commentsNum"><%= commentsList.size() %></span></td>
 	</tr>

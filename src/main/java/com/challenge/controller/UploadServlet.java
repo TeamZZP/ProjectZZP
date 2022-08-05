@@ -100,7 +100,6 @@ public class UploadServlet extends HttpServlet {
 								map.put("chall_img", saveName);
 								
 							}catch (Exception e) {
-								// TODO: handle exception
 								e.printStackTrace();
 							}
 						}//end else
@@ -108,7 +107,6 @@ public class UploadServlet extends HttpServlet {
 					
 					
 				} catch (FileUploadException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				
@@ -116,6 +114,7 @@ public class UploadServlet extends HttpServlet {
 				String operate = request.getParameter("operate");
 				
 				//어떤 동작을 요청받았는지에 따라 다른 작업 처리하기
+				//챌린지 게시글 업로드
 				if ("upload".equals(operate)) {
 					int n = service.insertChallenge(map);
 					System.out.println(n+"개의 레코드 추가");
@@ -123,22 +122,24 @@ public class UploadServlet extends HttpServlet {
 					//자기가 올린 게시글로 이동??? 
 					response.sendRedirect("ChallengeListServlet");
 					
+				//챌린지 게시글 업데이트
 				} else if ("update".equals(operate)) {
 					int n = service.updateChallenge(map);
 					System.out.println(n+"개의 레코드 업데이트");
 					
 					response.sendRedirect("ChallengeDetailServlet?chall_id="+map.get("chall_id"));
+					
+					
 				}
 				
 				
 			}
 			
 			
-		} 
-//		else {
-//			session.setAttribute("mesg", "잘못된 접근입니다.");
-//			response.sendRedirect("ChallengeListServlet");
-//		}
+		} else {
+			session.setAttribute("mesg", "잘못된 접근입니다.");
+			response.sendRedirect("ChallengeListServlet");
+		}
 		
 	
 	}

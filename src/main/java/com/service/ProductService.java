@@ -6,14 +6,15 @@ import org.apache.ibatis.session.SqlSession;
 
 import com.config.MySqlSessionFactory;
 import com.dao.ProductDAO;
+import com.dto.CategoryProductDTO;
 import com.dto.ProductDTO;
 
 public class ProductService {
 	
 	ProductDAO dao = new ProductDAO();
 
-	public List<ProductDTO> productList(int c_id) {
-		List<ProductDTO> list = null;
+	public List<CategoryProductDTO> productList(int c_id) {
+		List<CategoryProductDTO> list = null;
 		SqlSession session = MySqlSessionFactory.getSqlSession();
 		try {
 			list = dao.productList(session, c_id);
