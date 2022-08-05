@@ -119,7 +119,7 @@
 								<td height="10">
 							</tr>
 							<tr>
-								<td align="center"><img src="images/keeping.png" width="20" height="20"> <%=chall_liked%></td>
+								<td align="center"><img src="images/like.png" width="20" height="20"> <%=chall_liked%></td>
 								<td align="center"><img src="images/bubble.png" width="20" height="17"> <%= commentsMap.get(chall_id) %></td>
 							</tr>
 							<tr>
