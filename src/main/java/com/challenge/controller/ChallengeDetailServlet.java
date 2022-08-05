@@ -48,6 +48,9 @@ public class ChallengeDetailServlet extends HttpServlet {
 		//해당 게시글의 프로필 정보 가져와서 프로필 이미지만 전달
 		HashMap<String, String> profileMap = service.selectProfile(dto.getUserid());
 		
+		//해당 게시글에 좋아요를 누른 회원 아이디 목록 가져오기
+		List<String> likedUserid = service.selectAllLikedUserid(chall_id);
+		
 		request.setAttribute("dto", dto);
 		request.setAttribute("commentsList", commentsList);
 		request.setAttribute("profile_img", profileMap.get("PROFILE_IMG"));

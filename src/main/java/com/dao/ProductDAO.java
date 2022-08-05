@@ -4,13 +4,14 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
+import com.dto.CategoryProductDTO;
 import com.dto.ProductDTO;
 
 public class ProductDAO {
 
-	public List<ProductDTO> productList(SqlSession session, int c_id) {
+	public List<CategoryProductDTO> productList(SqlSession session, int c_id) {
 		
-		List<ProductDTO> list = session.selectList("ProductMapper.productList", c_id);
+		List<CategoryProductDTO> list = session.selectList("ProductMapper.productList", c_id);
 		return list;
 	}
 
