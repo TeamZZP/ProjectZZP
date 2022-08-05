@@ -1,3 +1,6 @@
+<%@page import="java.io.Console"%>
+<%@page import="java.util.List"%>
+<%@page import="com.dto.ChallengeDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -203,6 +206,15 @@
 
 
 <!-- 뉴챌린지 -->
+<%
+List<ChallengeDTO> list = (List<ChallengeDTO>)request.getAttribute("newchall");
+	for(int i=0; i<=7; i++){
+		ChallengeDTO dto = list.get(i);
+		int chall_id = dto.getChall_id();
+		String chall_img = dto.getChall_img();
+		System.out.println(chall_id);
+	}
+%>
 <div class="container" style="margin-top: 60px;">
 	<ul class="nav justify-content-center" style="margin-bottom: 20px;">
 	  <li class="nav-item">

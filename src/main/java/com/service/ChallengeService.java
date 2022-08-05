@@ -140,6 +140,17 @@ public class ChallengeService {
 		return map;
 	}
 
+	public List<ChallengeDTO> selectNewChallenge() {
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		List<ChallengeDTO> list = null;
+		try {
+			list = dao.selectNewChallenge(session);
+		} finally {
+			session.close();
+		}
+		return list;
+	}
+
 
 
 }

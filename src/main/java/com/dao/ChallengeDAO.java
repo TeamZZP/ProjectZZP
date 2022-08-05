@@ -81,6 +81,10 @@ public class ChallengeDAO {
 		return map;
 	}
 
+	public List<ChallengeDTO> selectNewChallenge(SqlSession session) {
+		return session.selectList("selectNewChallenge");
+	}
+
 
 
 }
