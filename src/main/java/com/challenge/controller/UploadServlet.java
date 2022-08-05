@@ -59,11 +59,11 @@ public class UploadServlet extends HttpServlet {
 				long sizeInBytes=0;
 				String saveName= null;
 				
+				HashMap<String, String> map = new HashMap<String, String>();
+				
 				try {
 					List<FileItem> items= upload.parseRequest(request);
 					Iterator<FileItem> iter= items.iterator();
-					
-					HashMap<String, String> map = new HashMap<String, String>();
 					
 					while (iter.hasNext()) {
 						FileItem item= iter.next();
@@ -106,17 +106,30 @@ public class UploadServlet extends HttpServlet {
 						}//end else
 					}//end while
 					
-					ChallengeService service = new ChallengeService();
-					int n = service.insertChallenge(map);
-					System.out.println(n+"개의 레코드 추가");
 					
 				} catch (FileUploadException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				
-				//자기가 올린 게시글로 이동??? 
-				response.sendRedirect("ChallengeListServlet");
+				ChallengeService service = new ChallengeService();
+				String operate = request.getParameter("operate");
+				
+				//어떤 동작을 요청받았는지에 따라 다른 작업 처리하기
+				if ("upload".equals(operate)) {
+					int n = service.insertChallenge(map);
+					System.out.println(n+"개의 레코드 추가");
+					
+					//자기가 올린 게시글로 이동??? 
+					response.sendRedirect("ChallengeListServlet");
+					
+				} else if ("update".equals(operate)) {
+					int n = service.updateChallenge(map);
+					System.out.println(n+"개의 레코드 업데이트");
+					
+					response.sendRedirect("ChallengeDetailServlet?chall_id="+map.get("chall_id"));
+				}
+				
 				
 			}
 			

@@ -159,7 +159,7 @@
 			      <option value="chall_content">내용</option>
 			    </select>
 			    <input type="text" name="searchValue">
-			    <button class="btn btn-outline-success" style="height: 30px">검색</button>
+			    <button class="btn btn-outline-success btn-sm">검색</button>
 		    </form>
 		    </td>
 	    </tr>

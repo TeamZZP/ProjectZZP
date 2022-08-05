@@ -24,6 +24,9 @@
 	//dto의 존재 유무에 따라 form의 전송 페이지를 달리 한다.
 //	String formAction = "ChallengeAddServlet"; 
 	
+	//dto의 존재 유무에 따라 어떤 동작을 할 것인지 전송해 준다.
+	String operate = "upload";
+	
 	if (dto != null) {
 		chall_id = dto.getChall_id();
 		chall_category = dto.getChall_category();
@@ -31,6 +34,7 @@
 		chall_img = dto.getChall_img();
 		chall_content = dto.getChall_content();
 	//	formAction = "ChallengeUpdateServlet";
+		operate = "update";
 	}
 	
 	//session에 저장된 userid 읽어오기 
@@ -44,7 +48,7 @@
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function () {
-		//공백으로 제출 금지
+		//폼 제출시 조건 검사
 		$("form").on("submit", function () {
 			if ($("#chall_category").val() == "none") {
 				event.preventDefault();
@@ -52,9 +56,11 @@
 			} else if ($("#chall_title").val().length == 0) {
 				event.preventDefault();
 				alert("제목을 입력해 주세요.");
-			} else if ($("#chall_img").val().length == 0) {
+			} else if ($("#chall_img")[0].files[0] == null) {
 				event.preventDefault();
 				alert("사진을 업로드해 주세요.");
+			} else if (!checkFileExtension()) {
+				event.preventDefault();
 			} else if ($("#chall_content").val().length == 0) {
 				event.preventDefault();
 				alert("본문을 입력해 주세요.");
@@ -63,12 +69,13 @@
 		//이미지 미리보기
 		$("#chall_img").on("change", function (e) {
 			if (checkFileExtension()) {
-				let preview = document.querySelector('.thumb');
-				preview.src = URL.createObjectURL(e.target.files[0]); //파일 객체에서 이미지 데이터 가져옴.
-
-			    preview.onload = function() {
-			        URL.revokeObjectURL(preview.src); //URL 객체 해제
-			    }
+				let preview = $(".thumb");
+				preview.attr("src", URL.createObjectURL(e.target.files[0]));
+				
+				preview.on("load", function () {
+					URL.revokeObjectURL(preview.attr("src"));
+					console.log("메모리에서 해제됨");
+				});
 			}
 		});
 		
@@ -87,7 +94,7 @@
 </script>
 
 <div id="challWriteContent">
-<form action="UploadServlet?userid=<%= currUserid %>" method="post" enctype="multipart/form-data">
+<form action="UploadServlet?userid=<%= currUserid %>&operate=<%= operate %>" method="post" enctype="multipart/form-data">
 <input type="hidden" name="chall_id" value="<%= chall_id %>">
 <input type="hidden" name="userid" value="<%= currUserid %>">
 <table border="1" align="center" width="600" cellspacing="0" cellpadding="0">
@@ -108,16 +115,15 @@
 	  </td>
 	</tr>
 	<tr>
+	  <td colspan="2">
 	  <% if(chall_img==null) {%>
-	  	<td colspan="2">
-	  		<img src="" class="thumb" width="500" height="500" />
-	  	사진 올리기<input type="file" accept="image/*" name="chall_img" id="chall_img"></td>
+	  		<img src="images/uploadarea.png" class="thumb" width="500" height="500" /><br>
+	  	사진 올리기<input type="file" accept="image/*" name="chall_img" id="chall_img">
 	  <%} else { %>
-	 	<td colspan="2">
-	 		<img src="images/<%= chall_img %>" width="500" height="500" border="0" align="middle"><br>
-	 		이미지수정하기<input type="text" name="chall_img" value="<%= chall_img %>">
-	 	</td>
+	 		<img src="/eclipse/upload/<%= chall_img %>" class="thumb" width="500" height="500" border="0" align="middle"><br>
+	 		이미지수정하기<input type="file" accept="image/*" name="chall_img" id="chall_img" value="<%= chall_img %>">
 	  <%} %>
+	  </td>
 	</tr>
 	<tr>
 	  <td colspan="2">
