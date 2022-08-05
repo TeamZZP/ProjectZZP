@@ -1,3 +1,4 @@
+<%@page import="org.apache.ibatis.reflection.SystemMetaObject"%>
 <%@page import="com.dto.ProductDTO"%>
 <%@page import="com.dto.MemberDTO"%>
 <%@page import="com.dto.ImagesDTO" %>
@@ -6,7 +7,6 @@
     pageEncoding="UTF-8"%>
 
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
   
   
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -32,6 +32,9 @@ pdto.getP_stock();
 <%
 List<ImagesDTO> ilist = (List<ImagesDTO>)request.getAttribute("ImagesRetrieveList");
 
+System.out.println("productRetrieve.jsp에서 파싱한 pdto=="+pdto);
+System.out.println("productRetrieve.jsp에서 파싱한 ilist=="+ilist);
+
 for(int i = 0; i <ilist.size();i++){
 
 	int p_id = ilist.get(i).getP_id();
@@ -48,7 +51,7 @@ for(int i = 0; i <ilist.size();i++){
 
 <body>
 
-<img src="images/p_image/life01.jpg" class="img-thumbnail" >
+<img src="images/p_image/<%= image_route%>.png"  >
 
 
 
