@@ -146,7 +146,10 @@
 		});//end fn
 		
 		//5. 회원 탈퇴
-		
+		$("#delAccount").on("click", function() {
+			console.log("회원 탈퇴 버튼 클릭");
+			location.href="accountDelete.jsp";//회원 탈퇴 페이지 이동
+		});
 	});//end ready
 </script>
 <div style = "padding: 5px 5px 5px 20px;">
