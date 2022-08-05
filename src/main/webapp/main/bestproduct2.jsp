@@ -217,8 +217,12 @@
 
 	<div class="row" style="float: none; margin:100 auto;">
 	<%
+		int idx = 8;
 		List<ChallengeDTO> list = (List<ChallengeDTO>)request.getAttribute("newchall");
-			for(int i=0; i<=7; i++){
+		if(list.size()<8){
+			idx = list.size();
+		}
+			for(int i=0; i<idx; i++){
 				System.out.println();
 				ChallengeDTO dto = list.get(i);
 				int chall_id = dto.getChall_id();
