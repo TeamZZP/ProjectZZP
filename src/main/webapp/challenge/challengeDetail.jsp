@@ -32,6 +32,7 @@
 	int chall_liked = dto.getChall_liked();
 	String chall_created = dto.getChall_created();
 	String chall_img = dto.getChall_img();
+	int chall_comments = dto.getChall_comments();
 	
 	//session에 저장된 userid 읽어오기 
 	MemberDTO member = (MemberDTO) session.getAttribute("login"); 
@@ -82,20 +83,38 @@
 						$("#commentsNum").text(parseInt($("#commentsNum").text())+1);
 					},
 					error: function () {
-						
+						alert("문제가 발생했습니다. 다시 시도해 주세요.");
 					}
 				});
 			}
 		});
 		//댓글 삭제 
-		$(".commentDelBtn").on("click", function () { 
+		$("body").on("click", ".commentDelBtn", function () { 
 			let mesg = "정말 삭제하시겠습니까?";
-			if (!confirm(mesg)) {
+			if (confirm(mesg)) {
+				$.ajax({
+					type:"post",
+					url:"CommentsDeleteServlet",
+					data: {
+						"chall_id":"<%= chall_id %>",
+						"comment_id":$(this).attr("data-cid"),
+						"userid":"<%= currUserid %>"
+					},
+					dataType:"html",
+					success: function (data) {
+						$("#comment_area").html(data);
+						$("#commentsNum").text(parseInt($("#commentsNum").text())-1);
+					},
+					error: function () {
+						alert("문제가 발생했습니다. 다시 시도해 주세요.");
+					}
+				});
+			} else {
 				event.preventDefault();
 			}
 		});
 		
-		//좋아요 추가
+		//좋아요 추가/삭제
 		$("body").on("click", ".liked", function () {
 			if ("<%= currUserid %>" == "null") {
 				alert("로그인이 필요합니다.");
@@ -112,7 +131,7 @@
 						$("#liked_area").html(data);
 					},
 					error: function () {
-						
+						alert("문제가 발생했습니다. 다시 시도해 주세요.");
 					}
 				});
 			}
@@ -151,7 +170,7 @@
 	  <td height="10">
 	</tr>
 	<tr>
-	  <td colspan="3"><div style="text-align: center"><img src="/eclipse/upload/<%= chall_img %>" width="500" height="500"></div></td>
+	  <td colspan="3"><div style="text-align: center"><img src="/eclipse/upload/<%= chall_img %>" onerror="this.src='images/uploadarea.png'" width="500" height="500"></div></td>
 	</tr>
 	<tr>
 	  <td height="10">
@@ -169,7 +188,7 @@
 	  </span>
 	  </td>
 	  <td></td>
-	  <td><img src="images/bubble.png" width="30" height="27"> <span id="commentsNum"><%= commentsList.size() %></span></td>
+	  <td><img src="images/bubble.png" width="30" height="27"> <span id="commentsNum"><%= chall_comments %></span></td>
 	</tr>
 	<tr>
 	  <td colspan="3" height="100"><%= chall_content %></td>

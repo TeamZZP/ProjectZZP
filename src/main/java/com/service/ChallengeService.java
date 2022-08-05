@@ -232,6 +232,30 @@ public class ChallengeService {
 		return n;
 	}
 
+	public int upChall_comments(String chall_id) {
+		int n = 0;
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		try {
+			n = dao.upChall_comments(session, chall_id);
+			session.commit();
+		} finally {
+			session.close();
+		}
+		return n;
+	}
+
+	public int downChall_comments(String chall_id) {
+		int n = 0;
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		try {
+			n = dao.downChall_comments(session, chall_id);
+			session.commit();
+		} finally {
+			session.close();
+		}
+		return n;
+	}
+
 
 
 }

@@ -51,9 +51,16 @@ public class CommentsAddServlet extends HttpServlet {
 			dto.setUserid(userid);
 			
 			ChallengeService service = new ChallengeService();
-			int n = service.insertComment(dto);
 			
-			System.out.println(n+"개의 레코드 추가");
+			//댓글 테이블에 레코드 추가
+			int n = service.insertComment(dto);
+			System.out.println(n+"개의 댓글 레코드 추가");
+			
+			if (n == 1) {
+				//챌린지 테이블에 댓글수 컬럼 증가
+				int n2 = service.upChall_comments(chall_id);
+				System.out.println(n2+"개의 게시글 댓글수 변경");
+			}
 			
 			List<CommentsDTO> commentsList = service.selectAllComments(chall_id);
 			
@@ -67,8 +74,7 @@ public class CommentsAddServlet extends HttpServlet {
 				result += "<td>"+c.getUserid()+"</td>";
 				result += "<td>"+c.getComment_content()+"</td><td>";
 				if (c.getUserid()!=null && c.getUserid().equals(userid)) {
-					result += "<a href='CommentsDeleteServlet?chall_id="+chall_id;
-					result += "&comment_id="+c.getComment_id()+"&userid="+c.getUserid()+"' class='commentDelBtn'>삭제</a>";
+					result += "<span class='commentDelBtn' data-cid='"+c.getComment_id()+"'>삭제</span>";
 				} else {
 					result += "<a href=''>신고</a>";
 				}

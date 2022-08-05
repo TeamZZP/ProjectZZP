@@ -40,7 +40,7 @@ request.setCharacterEncoding("utf-8");
 			
 			//해당 게시글에 현재 회원이 좋아요를 눌렀는지 확인
 			int likedIt = service.countLikedByMap(map);
-			
+			 
 			//좋아요 추가
 			if (likedIt == 0) {
 				int n = service.insertLike(map);

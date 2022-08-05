@@ -120,6 +120,16 @@ public class ChallengeDAO {
 		return n;
 	}
 
+	public int upChall_comments(SqlSession session, String chall_id) {
+		int n = session.update("ChallengeMapper.upChall_comments", chall_id);
+		return n;
+	}
+
+	public int downChall_comments(SqlSession session, String chall_id) {
+		int n = session.update("ChallengeMapper.downChall_comments", chall_id);
+		return n;
+	}
+
 
 
 }

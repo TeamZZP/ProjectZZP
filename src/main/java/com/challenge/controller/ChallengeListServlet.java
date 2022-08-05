@@ -48,37 +48,34 @@ public class ChallengeListServlet extends HttpServlet {
 		//검색기준, 검색어
 		String searchName = request.getParameter("searchName");
 		String searchValue = request.getParameter("searchValue");
-	//	String sortBy = request.getParameter("sortBy");
+		String sortBy = request.getParameter("sortBy");
+		if (sortBy == null) {
+			sortBy = "chall_id";
+		}
 		
-		System.out.println(curPage+" "+searchName+" "+searchValue);
+		System.out.println(curPage+" "+searchName+" "+searchValue+" "+sortBy);
 		
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("searchName", searchName);
 		map.put("searchValue", searchValue);
+		map.put("sortBy", sortBy);
 		System.out.println(">>>>>>>"+map);
-	//	map.put("sortBy", sortBy);
 		
 		PageDTO pDTO = service.selectAllChallenge(map, Integer.parseInt(curPage));
 		
 		List<ChallengeDTO> list = pDTO.getList();
-		//각 게시글마다 댓글수 가져오기
-		HashMap<Integer, Integer> commentsMap = new HashMap<Integer, Integer>();
+	
 		//각 게시글마다 프로필 가져오기
 		ArrayList<HashMap<String, String>> profileList = new ArrayList<HashMap<String,String>>();
 		
 		for (ChallengeDTO c : list) {
-			int commentsNum = service.countComments(c.getChall_id());
-			commentsMap.put(c.getChall_id(), commentsNum);
-			
 			profileList.add(service.selectProfile(c.getUserid()));
 		}
-		
 		
 		request.setAttribute("pDTO", pDTO);
 		request.setAttribute("searchName", searchName);
 		request.setAttribute("searchValue", searchValue);
-	//	request.setAttribute("sortBy", sortBy);
-		request.setAttribute("commentsMap", commentsMap);
+		request.setAttribute("sortBy", sortBy);
 		request.setAttribute("profileList", profileList);
 		
 		RequestDispatcher dis = request.getRequestDispatcher("challengeMain.jsp");
