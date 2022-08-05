@@ -87,7 +87,37 @@ public class ChallengeDAO {
 	}
 	
 	public List<ChallengeDTO> selectNewChallenge(SqlSession session) {
-		return session.selectList("selectNewChallenge");
+		return session.selectList("ChallengeMapper.selectNewChallenge");
+	}
+
+	public int insertLike(SqlSession session, HashMap<String, String> map) {
+		int n = session.insert("ChallengeMapper.insertLike", map);
+		return n;
+	}
+
+	public int upChall_liked(SqlSession session, String chall_id) {
+		int n = session.update("ChallengeMapper.upChall_liked", chall_id);
+		return n;
+	}
+
+	public int countLiked(SqlSession session, String chall_id) {
+		int n = session.selectOne("ChallengeMapper.countLiked", chall_id);
+		return n;
+	}
+
+	public int deleteLike(SqlSession session, HashMap<String, String> map) {
+		int n = session.delete("ChallengeMapper.deleteLike", map);
+		return n;
+	}
+
+	public int downChall_liked(SqlSession session, String chall_id) {
+		int n = session.update("ChallengeMapper.downChall_liked", chall_id);
+		return n;
+	}
+
+	public int countLikedByMap(SqlSession session, HashMap<String, String> map) {
+		int n = session.selectOne("ChallengeMapper.countLikedByMap", map);
+		return n;
 	}
 
 
