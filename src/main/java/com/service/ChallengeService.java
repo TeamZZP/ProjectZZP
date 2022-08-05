@@ -150,6 +150,17 @@ public class ChallengeService {
 		}
 		return list;
 	}
+			
+	public List<ChallengeDTO> selectNewChallenge() {
+		List<ChallengeDTO> list = null;
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		try {
+			list = dao.selectNewChallenge(session);
+		} finally {
+			session.close();
+		}
+		return list;
+	}
 
 
 
