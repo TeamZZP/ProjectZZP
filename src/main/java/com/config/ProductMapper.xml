@@ -33,13 +33,17 @@ where p.c_id = #{c_id}
 	 
 </select>
 
-<!-- <select id="productRetrieve" parameterType="String" resultType="ProductDTO">
+<select id="productRetrieve" parameterType="int" resultType="ProductDTO">
 	select * from product where p_id = #{p_id}
-</select>	 -->
+</select>	
 
-<select id="bestProduct" resultType="productDTO">
-select * from product
+<select id="ImagesRetrieve" parameterType="int" resultType="ImagesDTO">
+select * from images where p_id= #{p_id}
 </select>
+
+<!-- <select id="bestProduct" resultType="productDTO">
+select * from product
+</select> -->
 
 <select id="searchProduct" resultType="productDTO" parameterType="String">
 select * from product where p_name like '%'||#{searchValue}||'%' or p_content like '%'||#{searchValue}||'%'

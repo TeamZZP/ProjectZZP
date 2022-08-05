@@ -24,5 +24,20 @@ public class MemberDAO {
 		MemberDTO member=session.selectOne("MemberMapper.selectMember", userid);
 		return member;
 	}
+
+	public int changePw(SqlSession session, HashMap<String, String> changedPwMap) {
+		int num=session.update("MemberMapper.changePw", changedPwMap);
+		return num;
+	}
+	
+	public int changeEmail(SqlSession session, HashMap<String, String> changedEmailMap) {
+		int num=session.update("MemberMapper.changeEmail", changedEmailMap);
+		return num;
+	}
+
+	public int deleteMember(SqlSession session, String userid) {
+		int num=session.update("MemberMapper.deleteMember", userid);
+		return num;
+	}
 	
 }

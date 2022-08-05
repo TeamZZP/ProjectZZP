@@ -7,6 +7,11 @@
 		select * from address
 		where userid = #{userid}
 	</select>
-		
-	
+	<update id="changeAdd" parameterType="hashmap">
+		update address
+		set post_num = #{post}, 
+			addr1 = #{addr1}, 
+			addr2 = #{addr2}
+		where userid = #{userid}
+	</update>
 </mapper>

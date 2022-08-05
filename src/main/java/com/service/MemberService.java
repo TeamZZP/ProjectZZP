@@ -62,4 +62,40 @@ public class MemberService {
 		return member;
 	}
 
+	public int changePw(HashMap<String, String> changedPwMap) {
+		SqlSession session=MySqlSessionFactory.getSqlSession();
+		int num=0;
+		try {
+			num=dao.changePw(session, changedPwMap);
+			session.commit();
+		} finally {
+			session.close();
+		}
+		return num;
+	}
+	
+	public int changeEmail(HashMap<String, String> changedEmailMap) {
+		SqlSession session=MySqlSessionFactory.getSqlSession();
+		int num=0;
+		try {
+			num=dao.changeEmail(session, changedEmailMap);
+			session.commit();
+		} finally {
+			session.close();
+		}
+		return num;
+	}
+
+	public int deleteMember(String userid) {
+		SqlSession session=MySqlSessionFactory.getSqlSession();
+		int num=0;
+		try {
+			num=dao.deleteMember(session, userid);
+			session.commit();
+		} finally {
+			session.close();
+		}
+		return num;
+	}
+
 }
