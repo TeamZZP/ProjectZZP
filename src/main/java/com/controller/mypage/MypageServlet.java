@@ -10,8 +10,6 @@ import javax.servlet.http.HttpSession;
 
 import com.dto.AddressDTO;
 import com.dto.MemberDTO;
-import com.dto.ProfileDTO;
-import com.service.AccountService;
 import com.service.AddressService;
 import com.service.MemberService;
 
@@ -39,14 +37,9 @@ public class MypageServlet extends HttpServlet {
 			//주소 정보
 			AddressService a_service=new AddressService();
 			AddressDTO address=a_service.selectAddress(userid);
-			//프로필 정보
-			AccountService service=new AccountService();
-			ProfileDTO profile=service.selectProfile(userid);
-			System.out.println(profile);
 			
 			session.setAttribute("login", member);
 			session.setAttribute("address", address);
-			session.setAttribute("profile", profile);
 			response.sendRedirect("mypage.jsp");//로그인 된 계정 정보 session 저장-마이페이지 오픈
 		} else {
 			//alert로 로그인 후 이용하세요 출력
