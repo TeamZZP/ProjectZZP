@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="QuestionMapper">
 	<select id="questionList" resultType="QuestionDTO">
-		select * from QUESTION order by Q_ID desc
+		select * from QUESTION where not Q_BOARD_CATEGORY = 3 order by Q_ID desc
 	</select>
 	<select id="questionOneSelect" resultType="QuestionDTO" parameterType="string">
 		select * from QUESTION where Q_ID = #{Q_ID}
