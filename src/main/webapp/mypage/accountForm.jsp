@@ -83,8 +83,8 @@
 					$("#checkPasswd").val("");
 				} else if ($("#email1").val().length == 0 || $("#email2").val().length == 0) {//이메일 공백
 					event.preventDefault();
-					alert("이메일 주소를 입력하세요.");
-					$("#email1").focus();
+					//alert("이메일 주소를 입력하세요.");
+					//$("#email1").focus();
 				} else {//주소는 readonly 상태--새로 입력하지 않는 이상 삭제 불가능해서 따로 공백 검사 안 함--아냐 해야 됨..
 					event.preventDefault();
 					if ($("#sample4_jibunAddress").val().length == 0) {//null 방지->서블릿에 데이터 넘길 때 null 예방 필요

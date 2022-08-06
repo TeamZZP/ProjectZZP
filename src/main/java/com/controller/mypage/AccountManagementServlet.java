@@ -44,6 +44,7 @@ public class AccountManagementServlet extends HttpServlet {
 			
 			session.setAttribute("login", member);
 			session.setAttribute("address", address);
+//			response.sendRedirect("accountForm.jsp");//로그인 된 계정 정보 session 저장-마이페이지 오픈//mypage로 이름 바꿀까?
 			response.sendRedirect("accountForm.jsp");//로그인 된 계정 정보 session 저장-마이페이지 오픈//mypage로 이름 바꿀까?
 		} else {
 			//alert로 로그인 후 이용하세요 출력
