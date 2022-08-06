@@ -44,49 +44,75 @@
 <div style="text-align: center; display: flex; justify-content:center; height: 100px; margin-bottom: 10px;" >
 		<img src="images/question.png" alt="..." style="width: auto;">
 </div>
+
 <form action="" id="questionForm">
-	<input type="hidden" id="qt" value=""><span id="pp"></span>
+<div class="container justify-content-center">
+<div class="row">
 		<table>
 			<tr>
-				<td colspan="2"> 제목 <input type="text" name="qTittle" id="qTittle"> </td>
+				<td colspan="2"> 
+					<div class="input-group">
+					  <span class="input-group-text">제목</span>
+					  <input type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1" name="qTittle" id="qTittle">
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<th colspan="2"> 
+					<div class="input-group">
+					  <button id="pID" class="btn btn-outline-secondary" type="button" id="button-addon1">상품 정보</button>
+					  <input type="text" class="form-control" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1" name="pId" id="pId">
+					</div>
+				</th>
 			</tr>
 			<tr>
 				<td colspan="2"> 
-					<button id="pID" type="button" class="btn btn-outline-success">상품 정보</button>
-					<input type="text" name="pId" id="pId">
+					<div class="input-group">
+					  <label class="input-group-text" for="inputGroupSelect01">문의 글 카테고리</label>
+					  <select class="form-select"  name="qboard_category">
+					    <option value="1" selected>상품문의</option>
+					    <option value="2">문의 게시판</option>
+					  </select>
+					</div>
 				</td>
 			</tr>
 			<tr>
-				<td colspan="2"> 문의 글 카테고리
-					<select name="qboard_category">
-						<option value="1">상품문의</option>
-						<option value="2" selected="selected">문의 게시판</option>
-					</select>
+				<td colspan="2"> 
+					<div class="input-group">
+					  <label class="input-group-text" for="inputGroupSelect01">질문 카테고리</label>
+					  <select name="qcategory" class="form-select">
+					    <option>상품</option>
+					    <option>배송</option>
+					    <option>교환</option>
+					    <option>환불</option>
+					    <option selected>기타</option>
+					  </select>
+					</div>
 				</td>
 			</tr>
 			<tr>
-				<td colspan="2"> 질문 카테고리
-					<select name="qcategory">
-						<option>상품</option>
-						<option>배송</option>
-						<option>교환</option>
-						<option>환불</option>
-						<option selected="selected">기타</option>
-					</select>
+				<td colspan="2">
+					<div>
+					  <textarea class="form-control" rows="15" cols="50" name="qContent" id="qContent" placeholder="내용을 입력하십시오"></textarea>
+					</div>
 				</td>
 			</tr>
 			<tr>
-				<td colspan="2"> <textarea rows="10" cols="40" name="qContent" id="qContent" placeholder="내용을 입력하십시오"></textarea> </td>
-			</tr>
-			<tr>
-				<td colspan="2">첨부파일 <input type="file" name="qFile"> </td>
+				<td colspan="2">
+					<div>
+					  <label for="formFileMultiple" class="form-label">첨부파일</label>
+					  <input class="form-control" type="file" id="formFileMultiple" name="qFile" multiple>
+					</div>
+				</td>
 			</tr>
 			<tr>
 				<td> <button id="QuestionList" class="btn btn-success">목록</button> </td>
-				<td>
+				<td style="text-align: right;">
 					<button id="QuestionInsert" class="btn btn-success">등록</button>
 					<button type="reset" class="btn btn-success">취소</button>
 				</td>
 			</tr>
 		</table>
-	</form>
+</div>
+</div>
+</form>
