@@ -163,7 +163,8 @@ CREATE TABLE challenge (
  	chall_hits 		NUMBER	 DEFAULT 0 	  NOT NULL,
  	chall_liked 	NUMBER   DEFAULT 0	  NOT NULL,
  	chall_created 	DATE 	 DEFAULT sysdate NOT NULL,
- 	chall_img 		VARCHAR2(300) NULL
+ 	chall_img 		VARCHAR2(300) NULL,
+ 	chall_comments  NUMBER 	 DEFAULT 0	  NOT NULL
 );
 
 -- 챌린지 댓글

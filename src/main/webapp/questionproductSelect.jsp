@@ -32,16 +32,22 @@
 	String searchValue = request.getParameter("searchValue"); //검색어
 	if(searchValue == null){searchValue = "";}
 %>
-	<form action="QuestionProdSelet" method="post">
+	<form action="QuestionProdSelectServlet" method="post">
+	<div class="container justify-content-center">
+	<div class="row">
 		<table border="1" style="border-collapse: collapse;">
 			<tr>
-				<td colspan="3">
-					<select name="category" id="category">
-						<option value="P_NAME" <%if("P_NAME".equals(category)){ %> selected="selected" <%} %>>상품명</option>
+				<td>
+					<select  name="category" id="category" class="form-select">
+						 <option value="P_NAME" <%if("P_NAME".equals(category)){ %> selected="selected" <%} %>>상품명</option>
 						<option value="P_ID" <%if("P_ID".equals(category)){ %> selected="selected" <%} %>>상품코드</option>
 					</select>
-					<input type="text" name="searchValue" id="searchValue" value="<%=searchValue%>">
-					<button id="search" class="btn btn-success">검색하기</button>
+				</td>
+				<td colspan="2">
+					<div class="input-group">
+					  <input type="text" name="searchValue" id="searchValue" value="<%=searchValue%>" class="form-control">
+					  <button class="btn btn-outline-secondary" type="submit" id="search">검색하기</button>
+					</div>
 				</td>
 			</tr>
 	<%
@@ -53,10 +59,10 @@
 		<tr>
 			<td style="color: blue;" colspan="2">총 <%=SelectNum%> 개의 상품이 검색되었습니다.</td>
 			<td> 
-				<select name="prodNum" id="prodNum">
+				<select class="form-select" name="prodNum" id="prodNum">
 					<option value="5" <%if("5".equals(prodNum)){ %> selected="selected" <%} %>>5개씩보기</option>
 					<option value="10" <%if("10".equals(prodNum)){ %> selected="selected" <%} %>>10개씩보기</option>
-				</select> 
+				</select>
 			</td>
 		</tr>
 		<tr>
@@ -97,7 +103,7 @@
 			          	if(i== curPage){
 			          		out.print(i+"&nbsp;"); //현재페이지
 			          	}else{
-			          		out.print("<a style='color: green;' href ='QuestionProdSelet?curPage="+i+"&category="+category+"&searchValue="+searchValue
+			          		out.print("<a style='color: green;' href ='QuestionProdSelectServlet?curPage="+i+"&category="+category+"&searchValue="+searchValue
 			          				+"&prodNum="+prodNum+"'>" + i + "</a>");  
 			          	} //다른 페이지 선택시 링크로 이동
 			        }//end for
@@ -106,6 +112,8 @@
 			</td>
 		</tr>
 	</table>
+	</div>
+	</div>
 </form>
 </body>
 </html>

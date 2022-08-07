@@ -17,16 +17,17 @@ import javax.servlet.http.HttpSession;
 
 import com.dto.PageDTO;
 import com.dto.ProductDTO;
+import com.dto.QuestionDTO;
 import com.service.QuestionService;
 
 /**
  * Servlet implementation class QuestionProdSelet
  */
-@WebServlet("/QuestionProdSelet")
-public class QuestionProdSelet extends HttpServlet {
+@WebServlet("/QuestionProdSelectServlet")
+public class QuestionProdSelectServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public QuestionProdSelet() {
+    public QuestionProdSelectServlet() {
         super();
     }
 
@@ -51,12 +52,22 @@ public class QuestionProdSelet extends HttpServlet {
 		}
 		
 		PageDTO page = service.prodSelect(map, Integer.parseInt(curPage), Integer.parseInt(prodNum));
-			System.out.println(page);
+		System.out.println(page);
+		
+		if (page != null) {
+			List<ProductDTO> pList = page.getList();
+			List<String> pID = null;
+			for (int i = 0; i < pList.size(); i++) {
+				ProductDTO pDTO = pList.get(i);
+				pID.add(pDTO.getP_id());
+			}
+		}
 		
 		//List<ProductDTO> list = service.prodSelect(map);
 		//System.out.println("검색한내용 " + list);
 		int num = service.count(map);
 		System.out.println("검색된 갯수 " + num);
+		
 
 		request.setAttribute("category", category);
 		request.setAttribute("searchValue", searchValue);

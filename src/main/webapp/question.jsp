@@ -8,6 +8,7 @@
 </head>
 <body>
 	<jsp:include page="common/header.jsp" flush="true"></jsp:include><br>
+	<jsp:include page="question/FA.jsp" flush="true"></jsp:include> <br>
 	<jsp:include page="question/questionList.jsp" flush="true"></jsp:include> <br>
 	<jsp:include page="common/footer.jsp" flush="true"></jsp:include><br>
 </body>

@@ -1,3 +1,4 @@
+<%@page import="com.dto.MemberDTO"%>
 <%@page import="com.dto.PageDTO"%>
 <%@page import="java.util.List"%>
 <%@page import="com.dto.QuestionDTO"%>
@@ -15,9 +16,7 @@
 	}
 	session.removeAttribute("mesg");
 %>
-	<div style="text-align: center; display: flex; justify-content:center; height: 100px; margin-bottom: 10px;" >
-		<img src="images/question.png" alt="..." style="width: auto;">
-	</div>
+	
     <table  style="text-align: center;" class="table table-hover">
     	<tr>
     		<td>번호</td>
