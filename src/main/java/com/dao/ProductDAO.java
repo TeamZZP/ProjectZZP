@@ -17,7 +17,7 @@ public class ProductDAO {
 	}
 
 	public ProductDTO productRetrieve(SqlSession session, int p_id) {
-		ProductDTO dto = session.selectOne("productRetrieve",p_id);
+		ProductDTO dto = session.selectOne("ProductMapper.productRetrieve",p_id);
 		return dto;
 	}
 

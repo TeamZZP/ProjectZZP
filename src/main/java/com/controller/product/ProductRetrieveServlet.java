@@ -35,12 +35,12 @@ public class ProductRetrieveServlet extends HttpServlet {
 		request.setAttribute("ProductRetrieveDTO", pdto);
 		request.setAttribute("ImagesRetrieveList", ilist);
 		
-		response.sendRedirect("productRetrieve.jsp");
+		/* response.sendRedirect("productRetrieve.jsp"); */
 		
-		/*
-		 * RequestDispatcher dis = request.getRequestDispatcher("productRetrieve.jsp");
-		 * dis.forward(request, response);
-		 */
+		
+		  RequestDispatcher dis = request.getRequestDispatcher("productRetrieve.jsp");
+		  dis.forward(request, response);
+		 
 		
 	}
 
