@@ -19,7 +19,7 @@ $(function() {
 		var count=$("#count").val();
 		$("#count").val(parseInt(count)+1);
 		
-		
+		//수정
 	    $("#total").text($("#count").val()* $("#total").text());
 		
 	});//end up
@@ -44,6 +44,15 @@ $(function() {
 	
 	
 })//end ready
+
+function imageChange(this) {
+	
+	//수정
+	String src2 = this.src;
+	
+	$("#firstImage").attr(src,src2 )
+	
+}
 
 
 
@@ -97,7 +106,7 @@ for(int i = 0; i <ilist.size();i++){
 
 <% if(image_rnk ==1){%> 
 <tr>
-<td colspan="4"><img src="images/p_image/<%= ilist.get(i).getImage_route()%>.png" class="img-thumbnail" style="height: 500; width: 600;"></td>
+<td colspan="4"><img id="firstImage" src="images/p_image/<%= ilist.get(i).getImage_route()%>.png" class="img-thumbnail" style="height: 500; width: 600;"></td>
 </tr>
 <%}%>
 
@@ -110,7 +119,7 @@ for(int i = 0; i <ilist.size();i++){
 	<div class="col-md-6">
 	<td>
 	<%if (image_rnk !=1){%> 
-		<img src="images/p_image/<%= ilist.get(i).getImage_route()%>.png" class="img-thumbnail" style="height: 100; width: 100;">
+		<img src="images/p_image/<%= ilist.get(i).getImage_route()%>.png" class="img-thumbnail" style="height: 100; width: 100;" onmouseover="imageChange(this)">
 	<%}%>
 	</td>
 	</div>
@@ -189,9 +198,9 @@ for(int i = 0; i <ilist.size();i++){
 </tr>
 
 <tr>
-<td><button type="button" class="btn btn-success">주문하기</button>
+<td><button type="button" class="btn btn-success">주문하기</button></td>
 <td>&nbsp&nbsp&nbsp&nbsp</td>
-<td><button type="button" class="btn btn-success">장바구니</button>
+<td><button type="button" class="btn btn-success">장바구니</button></td>
 </tr>
 
 </table>
@@ -200,4 +209,14 @@ for(int i = 0; i <ilist.size();i++){
 
 </body>
 </form>
+
+<div class="row">
+ <div class="btn-group" role="group" aria-label="Basic example">
+<button type="button" class="btn btn-outline-success">제품상세</button>
+<button type="button" class="btn btn-outline-success">구매후기</button>
+<button type="button" class="btn btn-outline-success">QnA</button>
+</div>
+
+
+</div>
 </html>
