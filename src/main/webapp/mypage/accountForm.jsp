@@ -108,7 +108,7 @@
 						},
 		 				success : function(data, status, xhr) {//data :
 							alert(data);
-							//location.href="main.jsp";//수정 후 메인페이지 이동
+							location.href="main.jsp";//수정 후 메인페이지 이동
 						},
 						error: function(xhr, status, error) {
 							console.log(error);
@@ -117,31 +117,36 @@
 				}
 			} else {//4-2. 비밀번호 변경 데이터가 없을 때
 				event.preventDefault();
-				if ($("#sample4_jibunAddress").val().length == 0) {//null 방지->서블릿에 데이터 넘길 때 null 예방 필요
+				if ($("#email1").val().length == 0 || $("#email2").val().length == 0) {//null 방지->서블릿에 데이터 넘길 때 null 예방 필요
+					alert("이메일 주소를 입력하세요.");
+					$("#email1").focus();
+					event.preventDefault();
+				} else if ($("#sample4_jibunAddress").val().length == 0) {//null 방지->서블릿에 데이터 넘길 때 null 예방 필요
 					$("#sample4_jibunAddress").val("상세 주소를 입력하세요.");
+				} else {
+					console.log("이메일, 주소 update");
+					//*****ajax
+					$.ajax({
+						type : "post",
+						url : "AccountChangeServlet",//페이지 이동 없이 해당 url에서 작업 완료 후 데이터만 가져옴
+						dataType : "text",
+						data : {//서버에 전송할 데이터
+							userid : $("#userid").val(),
+							email1 : $("#email1").val(),
+							email2 : $("#email2").val(),
+							post : $("#sample4_postcode").val(),
+							addr1 : $("#sample4_roadAddress").val(),
+							addr2 : $("#sample4_jibunAddress").val()
+						},
+		 				success : function(data, status, xhr) {//data : 
+							alert(data);
+							location.href="main.jsp";//수정 후 메인페이지 이동
+						},
+						error: function(xhr, status, error) {
+							console.log(error);
+						}						
+					});//end ajax
 				}
-				console.log("이메일, 주소 update");
-				//*****ajax
-				$.ajax({
-					type : "post",
-					url : "AccountChangeServlet",//페이지 이동 없이 해당 url에서 작업 완료 후 데이터만 가져옴
-					dataType : "text",
-					data : {//서버에 전송할 데이터
-						userid : $("#userid").val(),
-						email1 : $("#email1").val(),
-						email2 : $("#email2").val(),
-						post : $("#sample4_postcode").val(),
-						addr1 : $("#sample4_roadAddress").val(),
-						addr2 : $("#sample4_jibunAddress").val()
-					},
-	 				success : function(data, status, xhr) {//data : 
-						alert(data);
-						//location.href="main.jsp";//수정 후 메인페이지 이동
-					},
-					error: function(xhr, status, error) {
-						console.log(error);
-					}						
-				});//end ajax
 			};//end if
 		});//end fn
 		

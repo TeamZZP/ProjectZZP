@@ -21,7 +21,6 @@
 		$("#n").on("click", function() {
 			alert("메인 페이지로 돌아갑니다.");
 			location.href="main.jsp";//취소 후 메인페이지 이동
-//			location.href="../main.jsp";//취소 후 메인페이지 이동
 		});//end fn
 		
 		$("form").on("submit", function() {
@@ -38,7 +37,6 @@
 				//*****ajax
 				$.ajax({
 					type : "post",
-//					url : "AccountDeleteServlet",//페이지 이동 없이 해당 url에서 작업 완료 후 데이터만 가져옴
 					url : "AccountDeleteServlet",//페이지 이동 없이 해당 url에서 작업 완료 후 데이터만 가져옴
 					dataType : "text",
 					data : {//서버에 전송할 데이터
@@ -47,7 +45,6 @@
 					},
 					success : function(data, status, xhr) {
 						alert(data);
-//						location.href="LogoutServlet";//수정 후 메인페이지 이동
 						location.href="LogoutServlet";//수정 후 메인페이지 이동
 					},
 					error: function(xhr, status, error) {
