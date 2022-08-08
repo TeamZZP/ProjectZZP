@@ -89,7 +89,7 @@
 			}
 		});
 		//댓글 삭제 
-		$("body").on("click", ".commentDelBtn", function () { 
+		$("#comment_area").on("click", ".commentDelBtn", function () { 
 			let mesg = "정말 삭제하시겠습니까?";
 			if (confirm(mesg)) {
 				$.ajax({
@@ -115,7 +115,7 @@
 		});
 		
 		//좋아요 추가/삭제
-		$("body").on("click", ".liked", function () {
+		$("#liked_area").on("click", ".liked", function () {
 			if ("<%= currUserid %>" == "null") {
 				alert("로그인이 필요합니다.");
 			} else {
@@ -177,7 +177,7 @@
 	</tr>
 	<tr>
 	  <td>
-	  <span id="liked_area">
+	  <div id="liked_area">
 	  <!-- 해당 게시글을 현재 로그인한 회원이 좋아요했던 경우 -->
 	  <% if (likedIt == 1) { %>
 	    <img src="images/liked.png" width="40" height="40" class="liked"> <%= chall_liked %>
@@ -185,7 +185,7 @@
 	  <% } else { %>
 	    <img src="images/like.png" width="40" height="40" class="liked"> <%= chall_liked %>
 	  <% } %>
-	  </span>
+	  </div>
 	  </td>
 	  <td></td>
 	  <td><img src="images/bubble.png" width="30" height="27"> <span id="commentsNum"><%= chall_comments %></span></td>
