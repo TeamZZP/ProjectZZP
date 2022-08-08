@@ -63,4 +63,11 @@
 			</otherwise> 
 		</choose>
 	</select>
+	<select id="ProdImg" parameterType="list" resultType="ImagesDTO">
+		select * from IMAGES where P_ID in 
+		<foreach collection="list" item="x" open="(" separator="," close=")">
+			#{x}
+		</foreach>
+		and IMAGE_RNK = 1
+	</select>
 </mapper>

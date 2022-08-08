@@ -8,6 +8,7 @@ import org.omg.PortableServer.REQUEST_PROCESSING_POLICY_ID;
 
 import com.config.MySqlSessionFactory;
 import com.dao.QuestionDAO;
+import com.dto.ImagesDTO;
 import com.dto.PageDTO;
 import com.dto.ProductDTO;
 import com.dto.QuestionDTO;
@@ -110,6 +111,17 @@ public class QuestionService {
 			session.close();
 		}
 		return num;
+	}
+
+	public List<ImagesDTO> ProdImg(List<String> p) {
+		List<ImagesDTO> list = null;
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		try {
+			list = dao.ProdImg(session, p);
+		} finally {
+			session.close();
+		}
+		return list;
 	}
 
 
