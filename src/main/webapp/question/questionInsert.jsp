@@ -18,7 +18,7 @@
     %>
 	<script type="text/javascript">
 		$(document).ready(function() {
-			$("#ok").click(function() {
+			$("#QuestionInsert").click(function() {
 				var qtittle = $("#qTittle").val();
 				var qContent = $("#qContent").val();
 				if (qtittle.length == 0) {
@@ -45,7 +45,7 @@
 		<img src="images/question.png" alt="..." style="width: auto;">
 </div>
 
-<form action="" id="questionForm">
+<form action="" id="questionForm" enctype="multipart/form-data">
 <div class="container justify-content-center">
 <div class="row">
 		<table>
