@@ -53,15 +53,15 @@
 				<td colspan="2"> 
 					<div class="input-group">
 					  <span class="input-group-text">제목</span>
-					  <input type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1" name="qTittle" id="qTittle">
+					  <input type="text" class="form-control" name="qTittle" id="qTittle">
 					</div>
 				</td>
 			</tr>
 			<tr>
 				<th colspan="2"> 
 					<div class="input-group">
-					  <button id="pID" class="btn btn-outline-secondary" type="button" id="button-addon1">상품 정보</button>
-					  <input type="text" class="form-control" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1" name="pId" id="pId">
+					  <button id="pID" class="btn btn-outline-secondary" type="button">상품 정보</button>
+					  <input type="text" class="form-control" name="pId" id="pId">
 					</div>
 				</th>
 			</tr>

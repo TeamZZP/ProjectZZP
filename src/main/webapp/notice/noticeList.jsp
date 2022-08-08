@@ -40,9 +40,11 @@ a{
 			if (admin == 1){
 	%>
 	<form method="post" action="noticeInsert.jsp" id="NoticeInsertFrom">
-	<table border="1" style="border-collapse: collapse;">
+	<table style="border-collapse: collapse;">
 		<tr>
-			<td> <button id="NoticeInsert" type="submit">글쓰기</button> </td>
+			<td> 
+				<button id="NoticeInsert" type="submit" class="btn btn-outline-success">글쓰기</button> 
+			</td>
 		</tr>
 	</table>
 	</form>

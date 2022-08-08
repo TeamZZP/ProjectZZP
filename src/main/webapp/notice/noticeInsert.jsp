@@ -19,23 +19,36 @@
 	});;//end ready
 </script>
 	<form method="post" action="NoticeInsertServlet">
+	<div class="container justify-content-center">
+	<div class="row">
 	    <table border="1" style="border-collapse: collapse;">
 	    	<tr>
-	    		<td colspan="2"> 제목 <input type="text" name="nTittle" id="nTittle"> 
-	    		<select name="nCategory">
-	    			<option value="main">point</option>
-	    			<option value="notice" selected="selected">notice</option>
-	    		</select>
-	    	</td>
+	    		<td colspan="2"> 
+		    		<div class="input-group">
+						  <span class="input-group-text">제목</span>
+						  <input type="text" class="form-control" name="nTittle" id="nTittle">
+					</div>
+	    			
+	    			<div class="input-group">
+					  <select class="form-select"   name="nCategory">
+					    <option value="main">point</option>
+	    				<option value="notice" selected="selected">notice</option>
+					  </select>
+					</div>
+	    		</td>
 	    	</tr>
 	    	<tr>
-	    		<td colspan="2"> <textarea rows="10" cols="50" placeholder="공지사항 내용을 입력하십시오." name="nContent" id="nContent"></textarea> </td>
+	    		<td colspan="2">
+	    			<textarea class="form-control" rows="15" cols="50" name="nContent" id="nContent" placeholder="공지사항 내용을 입력하십시오."></textarea>
+	    		</td>
 	    	</tr>
 	    	<tr>
 	    		<td style="text-align: right;">
-	    			<button type="submit" id="noticeInsert">글입력</button> 
-	    			<button type="reset">글삭제</button> 
+	    			<button type="submit" id="noticeInsert" class="btn btn-outline-success">글입력</button> 
+	    			<button type="reset" class="btn btn-outline-success">글삭제</button> 
 	    		</td>
 	    	</tr>
 	    </table>
+	  </div>
+	  </div>
     </form>

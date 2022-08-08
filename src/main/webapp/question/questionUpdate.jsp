@@ -23,49 +23,73 @@
 <div style="text-align: center; display: flex; justify-content:center; height: 100px; margin-bottom: 10px;" >
 		<img src="images/question.png" alt="..." style="width: auto;">
 </div>
- <form action="" id="questionForm" method="post">
+<form action="" id="questionForm" method="post">
+<div class="container justify-content-center">
+<div class="row">
  <input type="hidden" name="qId" value="<%=qDTO.getQ_ID()%>">
 		<table>
 			<tr>
-				<td colspan="2"> 제목 <input type="text" name="qTittle" id="qTittle" value="<%=qDTO.getQ_TITLE()%>"> </td>
-			</tr>
-			<tr>
-				<td colspan="2"> 
-					<button id="pID" type="button" class="btn btn-outline-success">상품 정보</button> 
-					<input type="text" name="pId" id="pId" value="<%=qDTO.getP_ID()%>"> 
+				<td colspan="2">
+					<div class="input-group">
+					  <span class="input-group-text">제목</span>
+					  <input type="text" class="form-control" name="qTittle" id="qTittle" value="<%=qDTO.getQ_TITLE()%>">
+					</div>
 				</td>
 			</tr>
 			<tr>
-				<td colspan="2"> 문의 글 카테고리
-					<select name="qboard_category">
-						<option value="1" <%if(1 == qDTO.getQ_BOARD_CATEGORY()){ %>selected="selected"<%}%>>상품문의</option>
+				<td colspan="2"> 
+					<div class="input-group">
+					  <button id="pID" class="btn btn-outline-secondary" type="button">상품 정보</button>
+					  <input type="text" class="form-control" value="<%=qDTO.getP_ID()%>" name="pId" id="pId">
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2"> 
+					<div class="input-group">
+					  <label class="input-group-text" for="inputGroupSelect01">문의 글 카테고리</label>
+					  <select class="form-select"  name="qboard_category">
+					   	<option value="1" <%if(1 == qDTO.getQ_BOARD_CATEGORY()){ %>selected="selected"<%}%>>상품문의</option>
 						<option value="2" <%if(2 == qDTO.getQ_BOARD_CATEGORY()){ %>selected="selected"<%}%>>문의 게시판</option>
-					</select>
+					  </select>
+					</div>
 				</td>
 			</tr>
 			<tr>
 				<td colspan="2"> 질문 카테고리
-					<select name="qcategory">
-						<option <%if("상품".equals(qDTO.getQ_CATEGORY())){ %>selected="selected"<%} %>>상품</option>
+					<div class="input-group">
+					  <label class="input-group-text" for="inputGroupSelect01">질문 카테고리</label>
+					  <select name="qcategory" class="form-select">
+					    <option <%if("상품".equals(qDTO.getQ_CATEGORY())){ %>selected="selected"<%} %>>상품</option>
 						<option <%if("배송".equals(qDTO.getQ_CATEGORY())){ %>selected="selected"<%} %>>배송</option>
 						<option <%if("교환".equals(qDTO.getQ_CATEGORY())){ %>selected="selected"<%} %>>교환</option>
 						<option <%if("환불".equals(qDTO.getQ_CATEGORY())){ %>selected="selected"<%} %>>환불</option>
 						<option <%if("기타".equals(qDTO.getQ_CATEGORY())){ %>selected="selected"<%} %>>기타</option>
-					</select>
+					  </select>
+					</div>
 				</td>
 			</tr>
 			<tr>
-				<td colspan="2"> <textarea rows="10" cols="40" name="qContent" id="qContent"><%= qDTO.getQ_CONTENT() %></textarea> </td>
+				<td colspan="2">
+					<textarea class="form-control" rows="15" cols="50" name="qContent" id="qContent"><%= qDTO.getQ_CONTENT() %></textarea>
+				</td>
 			</tr>
 			<tr>
-				<td colspan="2">첨부파일 <input type="file" name="qFile" value="<%=qDTO.getQ_IMG()%>"> </td>
+				<td colspan="2">
+					<div>
+					  <label for="formFileMultiple" class="form-label">첨부파일</label>
+					  <input class="form-control" type="file" name="qFile" value="<%=qDTO.getQ_IMG()%>">
+					</div>
+				</td>
 			</tr>
 			<tr>
 				<td> <button id="QuestionList" class="btn btn-outline-success" >목록</button> </td>
-				<td>
+				<td style="text-align: right;">
 					<button type="submit" id="questionUpdate" class="btn btn-outline-success" >등록</button>
 					<button type="reset" class="btn btn-outline-success" >취소</button>
 				</td>
 			</tr>
 		</table>
-	</form>
+</div>
+</div>
+</form>
