@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 
+import com.dto.ImagesDTO;
 import com.dto.NoticeDTO;
 import com.dto.PageDTO;
 import com.dto.ProductDTO;
@@ -78,6 +79,11 @@ public class QuestionDAO {
 	public int count(SqlSession session, Map<String, String> map) {
 		int num = session.selectOne("QuestionMapper.count", map);
 		return num;
+	}
+
+	public List<ImagesDTO> ProdImg(SqlSession session, List<String> p) {
+		List<ImagesDTO> list = session.selectList("QuestionMapper.ProdImg", p);
+		return list;
 	}
 
 

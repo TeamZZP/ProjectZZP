@@ -2,6 +2,7 @@ package com.controller.Question;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.dto.ImagesDTO;
 import com.dto.PageDTO;
 import com.dto.ProductDTO;
 import com.dto.QuestionDTO;
@@ -56,11 +58,19 @@ public class QuestionProdSelectServlet extends HttpServlet {
 		
 		if (page != null) {
 			List<ProductDTO> pList = page.getList();
-			List<String> pID = null;
+			String xxx = "";
 			for (int i = 0; i < pList.size(); i++) {
 				ProductDTO pDTO = pList.get(i);
-				pID.add(pDTO.getP_id());
+				xxx += (pDTO.getP_id()) + ",";
 			}
+			String[] pID = xxx.split(",");
+			List<String> p = Arrays.asList(pID);
+			System.out.println(p); //pID List
+			
+			List<ImagesDTO> iDTO = service.ProdImg(p);
+			System.out.println("상품 이미지" + iDTO);
+			
+			request.setAttribute("iDTO", iDTO);
 		}
 		
 		//List<ProductDTO> list = service.prodSelect(map);
@@ -73,7 +83,7 @@ public class QuestionProdSelectServlet extends HttpServlet {
 		request.setAttribute("searchValue", searchValue);
 		request.setAttribute("prodNum", prodNum);
 		request.setAttribute("SelectList", page);
-		request.setAttribute("SelectNum", num);
+		request.setAttribute("SelectNum", num); 
 		request.setAttribute("perPage", prodNum); //검색갯수
 		
 		RequestDispatcher dis = request.getRequestDispatcher("questionproductSelect.jsp");

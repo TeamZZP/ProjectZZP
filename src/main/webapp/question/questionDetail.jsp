@@ -27,26 +27,51 @@
 		<img src="images/question.png" alt="..." style="width: auto;">
 </div>
 	<form method="post" id="detailForm">
+	<div class="container justify-content-center">
+	<div class="row">
 		<table>
 			<caption style="caption-side: top;">문의 내용</caption>
 			<tr>
-				<td colspan="2">제목 <%= qDTO.getQ_TITLE() %> </td>
+				<td colspan="2" style="height: 10px;"></td>
 			</tr>
 			<tr>
-				<td>작성일 <%= qDTO.getQ_CREATED() %></td>
-				<td>작성자 <%= qDTO.getUSERID() %> </td>
+				<td colspan="2"> 
+					<div class="input-group mb-3">
+					  <span class="input-group-text">제목</span>
+					  <input type="text" class="form-control" value="<%= qDTO.getQ_TITLE() %>" readonly="readonly">
+					</div>
+				</td>
 			</tr>
 			<tr>
-				<td colspan="2"> <%= qDTO.getQ_CONTENT() %> </td>
+				<td> 
+					<div class="input-group mb-3">
+					  <span class="input-group-text">작성일</span>
+					  <input type="text" class="form-control" value="<%= qDTO.getQ_CREATED() %>" readonly="readonly">
+					</div>
+				</td>
+				<td> 
+					<div class="input-group mb-3">
+					  <span class="input-group-text">작성자</span>
+					  <input type="text" class="form-control" value="<%= qDTO.getUSERID() %> " readonly="readonly">
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+				
+				  <textarea class="form-control" rows="15" cols="50"> <%= qDTO.getQ_CONTENT() %> </textarea>
+				</td>
 			</tr>
 			<tr>
 				<td>
 				 	<button id="questionList" class="btn btn-outline-success" >목록</button> 
 				</td>
-				<td>
+				<td style="text-align: right;">
 					<button id="questionUpdate" class="btn btn-outline-success" >수정</button> 
 				 	<button id="questionDelete" class="btn btn-outline-success" >삭제</button>
 				</td>
 			</tr>
 		</table>
+	</div>
+	</div>
 	</form>

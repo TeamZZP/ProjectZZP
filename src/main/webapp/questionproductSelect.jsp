@@ -1,3 +1,4 @@
+<%@page import="com.dto.ImagesDTO"%>
 <%@page import="com.dto.PageDTO"%>
 
 <%@page import="com.dto.ProductDTO"%>
@@ -33,9 +34,7 @@
 	if(searchValue == null){searchValue = "";}
 %>
 	<form action="QuestionProdSelectServlet" method="post">
-	<div class="container justify-content-center">
-	<div class="row">
-		<table border="1" style="border-collapse: collapse;">
+		<table border="1" style="border-collapse: collapse; border: 1px solid green;">
 			<tr>
 				<td>
 					<select  name="category" id="category" class="form-select">
@@ -52,7 +51,7 @@
 			</tr>
 	<%
 		String prodNum = (String)request.getAttribute("prodNum"); 
-		System.out.print("검색할 갯수 가져온거" + prodNum);
+		System.out.print("검색한 갯수 가져온거" + prodNum);
 		Integer SelectNum = (Integer)request.getAttribute("SelectNum");
 		if(SelectNum == null){SelectNum = 0;}
 	%>
@@ -72,23 +71,25 @@
 		</tr>
 		<%
 			PageDTO list = (PageDTO)request.getAttribute("SelectList");
-			System.out.print(list);
+			List<ImagesDTO> imgList = (List<ImagesDTO>)request.getAttribute("iDTO");
 			if(list != null){
 				List<ProductDTO> pList = list.getList();
 				for (int i = 0; i < pList.size(); i++) {
 					ProductDTO pDTO = pList.get(i);
-					String img = pDTO.getP_img();
 					String pName = pDTO.getP_name();
 					String pContent = pDTO.getP_content();
 					int pPrice = pDTO.getP_cost_price();
+					
+					ImagesDTO iDTO = imgList.get(i);
+					String imgs = iDTO.getImage_route();
 		%>
 		<tr>
-			<td> <img alt="상품사진" src="images/p_image/<%=img%>.jpg" width="100px" height="100px"></td>
+			<td> <img alt="상품사진" src="images/p_image/<%=imgs%>.png" width="100px" height="100px"></td>
 			<td> <%=pName %> <br> <%=pContent %> <br> <%=pPrice %> </td>
 			<td> <button class="btn btn-outline-success check" data-pID="<%=pDTO.getP_id()%>" >선택</button> </td>
 		</tr>
 		<%
-				}//end for
+			}//end prod for
 		%>
 		<tr>
 			<td>
@@ -103,7 +104,8 @@
 			          	if(i== curPage){
 			          		out.print(i+"&nbsp;"); //현재페이지
 			          	}else{
-			          		out.print("<a style='color: green;' href ='QuestionProdSelectServlet?curPage="+i+"&category="+category+"&searchValue="+searchValue
+			          		out.print("<a style='color: green;' href ='QuestionProdSelectServlet?curPage="+i
+			          				+"&category="+category+"&searchValue="+searchValue
 			          				+"&prodNum="+prodNum+"'>" + i + "</a>");  
 			          	} //다른 페이지 선택시 링크로 이동
 			        }//end for
@@ -112,8 +114,6 @@
 			</td>
 		</tr>
 	</table>
-	</div>
-	</div>
 </form>
 </body>
 </html>
