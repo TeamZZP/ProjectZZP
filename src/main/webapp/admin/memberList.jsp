@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <%@page import="java.util.List"%>
 <%@page import="com.dto.AddressDTO"%>
 <%@page import="com.dto.MemberDTO"%>
@@ -35,3 +36,8 @@
 
 
 
+=======
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+memberList 뿌려줄 화면
+>>>>>>> b36693a753a70930130cbfe844234815de43b9ca
