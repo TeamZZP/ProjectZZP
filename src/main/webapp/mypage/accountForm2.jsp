@@ -35,7 +35,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <script>
 	$(document).ready(function() {
-		$("#result1").css({"font-size":"13.5px", "font-weight":"bold"});
+		//$("#result1").css({"font-size":"13.5px", "font-weight":"bold"});
 		$("#result2").css({"font-size":"13.5px", "background-color":"lightgreen", "font-weight":"bold"});
 		
 		//1. 비밀번호 입력 확인
@@ -75,7 +75,6 @@
 			if ($("#changedPasswd").val().length != 0) {//4-1. 비밀번호 변경 데이터가 있을 때
 				var pwChk = /^(?=.*[a-zA-Z])(?=.*[!@#$%^&*+=-_])(?=.*[0-9]).{8,25}$/;
 				if (!pwChk.test($("#changedPasswd").val())){//비밀번호 유효성 검사
-//				if (false) {//비밀번호 유효성 검사--맞게 입력해도 alert 출력
 					alert("비밀번호를 형식에 맞게 입력해주세요 :<");
 					$("#changedPasswd").val("");
 					$("#checkPasswd").val("");
@@ -86,8 +85,9 @@
 					event.preventDefault();
 					console.log("비번 체크");
 					alert("변경할 비밀번호를 확인하세요.");
-					$("#checkPasswd").focus();
 					$("#checkPasswd").val("");
+					$("#result2").text("");
+					$("#checkPasswd").focus();
 				} else if ($("#email1").val().length == 0 || $("#email2").val().length == 0) {//이메일 공백
 					event.preventDefault();
 					alert("이메일 주소를 입력하세요.");
@@ -101,7 +101,6 @@
 					//*****ajax
 					$.ajax({
 						type : "post",
-//						url : "AccountChangeServlet",//페이지 이동 없이 해당 url에서 작업 완료 후 데이터만 가져옴
 						url : "AccountChangeServlet",//페이지 이동 없이 해당 url에서 작업 완료 후 데이터만 가져옴
 						dataType : "text",
 						data : {//서버에 전송할 데이터
@@ -116,7 +115,6 @@
 						},
 		 				success : function(data, status, xhr) {//data :
 							alert(data);
-//							location.href="main.jsp";//수정 후 메인페이지 이동
 							location.href="main.jsp";//수정 후 메인페이지 이동
 						},
 						error: function(xhr, status, error) {
@@ -126,154 +124,156 @@
 				}
 			} else {//4-2. 비밀번호 변경 데이터가 없을 때
 				event.preventDefault();
-				if ($("#sample4_jibunAddress").val().length == 0) {//null 방지->서블릿에 데이터 넘길 때 null 예방 필요
+				if ($("#email1").val().length == 0 || $("#email2").val().length == 0) {//null 방지->서블릿에 데이터 넘길 때 null 예방 필요
+					alert("이메일 주소를 입력하세요.");
+					$("#email1").focus();
+					event.preventDefault();				
+				} else if ($("#sample4_jibunAddress").val().length == 0) {//null 방지->서블릿에 데이터 넘길 때 null 예방 필요
 					$("#sample4_jibunAddress").val("상세 주소를 입력하세요.");
-				}
-				console.log("이메일, 주소 update");
-				//*****ajax
-				$.ajax({
-					type : "post",
-//					url : "AccountChangeServlet",//페이지 이동 없이 해당 url에서 작업 완료 후 데이터만 가져옴
-					url : "AccountChangeServlet",//페이지 이동 없이 해당 url에서 작업 완료 후 데이터만 가져옴
-					dataType : "text",
-					data : {//서버에 전송할 데이터
-						userid : $("#userid").val(),
-						email1 : $("#email1").val(),
-						email2 : $("#email2").val(),
-						post : $("#sample4_postcode").val(),
-						addr1 : $("#sample4_roadAddress").val(),
-						addr2 : $("#sample4_jibunAddress").val()
-					},
-	 				success : function(data, status, xhr) {//data : 
-						alert(data);
-//						location.href="main.jsp";//수정 후 메인페이지 이동
-						location.href="main.jsp";//수정 후 메인페이지 이동
-					},
-					error: function(xhr, status, error) {
-						console.log(error);
-					}						
-				});//end ajax
+				} else {
+					console.log("이메일, 주소 update");
+					//*****ajax
+					$.ajax({
+						type : "post",
+						url : "AccountChangeServlet",//페이지 이동 없이 해당 url에서 작업 완료 후 데이터만 가져옴
+						dataType : "text",
+						data : {//서버에 전송할 데이터
+							userid : $("#userid").val(),
+							email1 : $("#email1").val(),
+							email2 : $("#email2").val(),
+							post : $("#sample4_postcode").val(),
+							addr1 : $("#sample4_roadAddress").val(),
+							addr2 : $("#sample4_jibunAddress").val()
+						},
+		 				success : function(data, status, xhr) {//data : 
+							alert(data);
+							location.href="main.jsp";//수정 후 메인페이지 이동
+						},
+						error: function(xhr, status, error) {
+							console.log(error);
+						}						
+					});//end ajax
+				}	
 			};//end if
 		});//end fn
 		
 		//5. 회원 탈퇴
 		$("#delAccount").on("click", function() {
 			console.log("회원 탈퇴 버튼 클릭");
-//			location.href="accountDelete.jsp";//회원 탈퇴 페이지 이동
 			location.href="accountDelete.jsp";//회원 탈퇴 페이지 이동
 		});
 	});//end ready
 </script>
 <div class="container">
 <div class="row justify-content-center">
-                    <div class="col-md-8">
-                        <div class="card">
-                            <div class="card-header" style="text-align: center; font-weight: bold; font-size: x-large;">회원 정보 수정</div>
-                            <div class="card-body">
-                                <form class="form-horizontal" method="post" action=" ">
-                                <input type="hidden" name="userid" id="userid" value="<%= userid %>"/>
-								<input type="hidden" name="passwd" id="passwd" value="<%= passwd %>"/>
-                                	<!-- username -->
-                                    <div class="form-group">
-                                        <label for="username" class="cols-sm-2 control-label" style="font-weight: bold;">이름</label>
-                                        <div class="cols-sm-10">
-                                            <div class="input-group">
-                                                <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-                                                <input type="text" class="form-control" name="username" value="<%= username %>" readonly="readonly"/><!-- 수정 불가 -->
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- 비밀번호 -->
-                                     <div class="form-group">
-                                        <label for="changedPasswd" class="cols-sm-2 control-label" style="font-weight: bold;">변경할 비밀번호</label>
-                                        <div class="cols-sm-10">
-                                            <div class="input-group">
-                                                <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-                                                <input type="password" class="form-control" name="changedPasswd" id="changedPasswd" placeholder="변경할 비밀번호를 입력하세요." style="width: 250px"/>
-                                                <span id="result1">영문자, 숫자, 특수문자를 포함하여 8~25자리를 입력하세요 :></span><br>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="checkPasswd" class="cols-sm-2 control-label" style="font-weight: bold;">비밀번호 확인</label>
-                                        <div class="cols-sm-10">
-                                            <div class="input-group">
-                                                <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-                                                <input type="password" class="form-control" name="checkPasswd" id="checkPasswd" placeholder="비밀번호를 한번 더 입력하세요." style="width: 250px"/>
-                                                <span id="result2"></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- 이메일 -->
-                                   	<div class="form-group">
-                   					   <label for="type" class="col-sm-3 control-label" style="font-weight: bold;">이메일</label>
-                   					  <div class="row g-3">
-									  <div class="col-sm-4">
-									    <input type="text" name="email1" id="email1" class="form-control" value="<%= email1 %>">
-									  </div>
-									  <div class="col-sm-4">
-									    <div class="input-group">
-									      <div class="input-group-text">@</div>
-									      <input type="text" name="email2"  placeholder="직접입력" id="email2" class="form-control" value="<%= email2 %>">
-									    </div>
-									  </div>
-									  <div class="col-sm-4">
-									   <div class="col-sm">
-									    <label class="visually-hidden" for="autoSizingSelect">Preference</label>
-									    <select id="emailSel" class="form-select" aria-label="Default select example">
-                            				<option value="" selected disabled hidden>이메일 선택</option>
-									        <option value="daum.net">daum.net</option>
-									        <option value="naver.com">naver.com</option>
-									        <option value="google.com">google.com</option>
-					            		</select>
-									  </div>
-									</div>
-									</div>
-								  </div>
-                         		    <!-- 전화번호 -->
-                                    <div class="form-group">
-                                        <label for="phone" class="cols-sm-2 control-label" style="font-weight: bold;">전화번호</label>
-                                        <div class="cols-sm-10">
-                                            <div class="input-group">
-                                                <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
-                                                <input type="text" class="form-control" readonly="readonly" name="phone" id="phone" value="<%= phone %>"/>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- 주소 -->
-                                    <div class="form-group">
-                                        <label for="address" class="cols-sm-2 control-label" style="font-weight: bold;">주소</label>
-                                        <div class="cols-sm-10">
-                                            <div class="input-group">
-                                                <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
-                                            	<input type="text" name="post" id="sample4_postcode" placeholder="우편번호" class="form-control" readonly="readonly" value="<%= post_num %>">
-												<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기" class="btn btn-outline-success"><br>
-                                            </div>
-                                            <div class="row g-3" style="margin-top: -10px;">
-                                            	<div class="col-md-6">
-                      								<input type="text" name="addr1" id="sample4_roadAddress" placeholder="도로명주소" class="form-control" readonly="readonly" value="<%= addr1 %>" style="width: 450px">
-                      						 	</div>
-                      						 	<div class="col-md-6">
-													<input type="text" name="addr2" id="sample4_jibunAddress" placeholder="상세 주소를 입력하세요." class="form-control" value="<%= addr2 %>" style="width: 300px">
-												<span id="guide" style="color:#999"></span>    
-												</div>                  
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--  -->
-                                    <div class="form-group" style="margin-top: 10px; text-align: center;">
-                                        <input type="submit" value="변경" id="addMember" class="btn btn-success">
-										<input type="reset" value="취소" class="btn btn-success">
-                                    </div>
-                                   <!--  <div class="login-register">
-                                    </div> -->
-                                    <button type="button" id="delAccount">회원 탈퇴</button>
-                                </form>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
+	<div class="col-md-8">
+		<div class="card">
+			<div class="card-header" style="text-align: center; font-weight: bold; font-size: x-large;">회원 정보 수정</div>
+			<div class="card-body">
+				<form class="form-horizontal" method="post" action=" ">
+				<input type="hidden" name="userid" id="userid" value="<%= userid %>"/>
+				<input type="hidden" name="passwd" id="passwd" value="<%= passwd %>"/>
+					<!-- username -->
+					<div class="form-group">
+						<label for="username" class="cols-sm-2 control-label" style="font-weight: bold;">이름</label>
+						<div class="cols-sm-10">
+							<div class="input-group">
+								<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+								<input type="text" class="form-control" name="username" value="<%= username %>" readonly="readonly"/><!-- 수정 불가 -->
+							</div>
+						</div>
+					</div>
+					<!-- 비밀번호 -->
+					<div class="form-group">
+						<label for="changedPasswd" class="cols-sm-2 control-label" style="font-weight: bold;">변경할 비밀번호</label>
+						<div class="cols-sm-10">
+							<div class="input-group">
+								<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+								<input type="password" class="form-control" name="changedPasswd" id="changedPasswd" placeholder="영문자, 숫자, 특수문자를 포함하여 8~25자리를 입력하세요." style="width: 250px"/>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="checkPasswd" class="cols-sm-2 control-label" style="font-weight: bold;">비밀번호 확인</label>
+						<div class="cols-sm-10">
+							<div class="input-group">
+								<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+								<input type="password" class="form-control" name="checkPasswd" id="checkPasswd" placeholder="비밀번호를 한번 더 입력하세요." style="width: 250px"/>
+								<span id="result2"></span>
+							</div>
+						</div>
+					</div>
+					<!-- 이메일 -->
+					<div class="form-group">
+						<label for="type" class="col-sm-3 control-label" style="font-weight: bold;">이메일</label>
+							<div class="row g-3">
+							<div class="col-sm-4">
+								<input type="text" name="email1" id="email1" class="form-control" value="<%= email1 %>">
+							</div>
+							<div class="col-sm-4">
+								<div class="input-group">
+									<div class="input-group-text">@</div>
+									<input type="text" name="email2"  placeholder="직접입력" id="email2" class="form-control" value="<%= email2 %>">
+								</div>
+							</div>
+							<div class="col-sm-4">
+								<div class="col-sm">
+									<label class="visually-hidden" for="autoSizingSelect">Preference</label>
+									<select id="emailSel" class="form-select" aria-label="Default select example">
+										<option value="" selected disabled hidden>이메일 선택</option>
+										<option value="daum.net">daum.net</option>
+										<option value="naver.com">naver.com</option>
+										<option value="google.com">google.com</option>
+									</select>
+								</div>
+							</div>
+							</div>
+					</div>
+					<!-- 전화번호 -->
+					<div class="form-group">
+						<label for="phone" class="cols-sm-2 control-label" style="font-weight: bold;">전화번호</label>
+						<div class="cols-sm-10">
+							<div class="input-group">
+								<span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+								<input type="text" class="form-control" readonly="readonly" name="phone" id="phone" value="<%= phone %>"/>
+							</div>
+						</div>
+					</div>
+					<!-- 주소 -->
+					<div class="form-group">
+						<label for="address" class="cols-sm-2 control-label" style="font-weight: bold;">주소</label>
+						<div class="cols-sm-10">
+							<div class="input-group">
+								<span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
+								<input type="text" name="post" id="sample4_postcode" placeholder="우편번호" class="form-control" readonly="readonly" value="<%= post_num %>" style="width: 50px">
+								<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기" class="btn btn-outline-success"><br>
+							</div>
+							<div class="row g-3" style="margin-top: -10px;">
+								<div class="col-md-6">
+									<input type="text" name="addr1" id="sample4_roadAddress" placeholder="도로명주소" class="form-control" readonly="readonly" value="<%= addr1 %>" style="width: 380px">
+								</div>
+								<div class="col-md-6">
+									<input type="text" name="addr2" id="sample4_jibunAddress" placeholder="상세 주소를 입력하세요." class="form-control" value="<%= addr2 %>" style="width: 300px">
+									<span id="guide" style="color:#999"></span>
+								</div>                  
+							</div>
+						</div>
+					</div>
+					<!--  -->
+					<div class="form-group" style="margin-top: 10px; text-align: center;">
+						<input type="submit" value="변경" class="btn btn-success">
+						<input type="reset" value="취소" class="btn btn-success">
+					</div>
+					<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+						<button class="btn btn-light btn-sm" type="button" id="delAccount">회원 탈퇴</button>
+					</div>
+					<!--  <div class="login-register">
+					</div> -->
+				</form>
+			</div>
+			</div>
+		</div>
+	</div>
 </div>
 
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
