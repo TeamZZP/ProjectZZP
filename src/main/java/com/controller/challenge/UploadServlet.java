@@ -31,7 +31,7 @@ public class UploadServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		
+		 
 		//회원전용처리
 		HttpSession session = request.getSession();
 		MemberDTO member = (MemberDTO) session.getAttribute("login"); 
@@ -67,7 +67,7 @@ public class UploadServlet extends HttpServlet {
 					
 					while (iter.hasNext()) {
 						FileItem item= iter.next();
-						if(item.isFormField()) {
+						if (item.isFormField()) {
 							//type="file"이 아닌 것의 처리
 							String name = item.getFieldName();
 							String value= item.getString("utf-8");

@@ -130,6 +130,11 @@ public class ChallengeDAO {
 		return n;
 	}
 
+	public String selectProfile_img(SqlSession session, String userid) {
+		String profile_img = session.selectOne("ChallengeMapper.selectProfile_img", userid);
+		return profile_img;
+	}
+
 
 
 }
