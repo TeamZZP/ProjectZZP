@@ -59,9 +59,8 @@ MemberDTO dto = (MemberDTO)session.getAttribute("login");
 <%
 	} 
 %>
-
-		
       </div>
+      
       <!-- 검색창 -->
 		<div class="container-fluid" style="margin-top: 5px;">
 			<form class="d-flex" style="float: right; display: inline-block;" action="ProductSearchServlet">
