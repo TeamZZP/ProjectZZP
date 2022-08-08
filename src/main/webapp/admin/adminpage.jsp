@@ -9,5 +9,5 @@
 	});//end ready
 </script>
 <form action="" method="post">
-	<button type="submit" class="btn btn-outline-success" id="memberManagement">1. 회원관리</button><br>dfs
+	<button type="submit" class="btn btn-outline-success" id="memberManagement">1. 회원관리</button><br>
 </form>
