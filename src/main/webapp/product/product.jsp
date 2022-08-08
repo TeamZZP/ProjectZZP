@@ -4,6 +4,7 @@
     <%@page import="com.dto.CategoryProductDTO" %>
     <%@page import="com.dto.CategoryDTO" %>
     <%@page import="java.util.List" %>
+    <% System.out.println("product.product.jsp");%>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
   
   <style>
@@ -33,7 +34,9 @@
   %>
 	<div class=container >
 		<div class="row" align="center">
+		
 				<%
+				
 				 for ( int i = 0 ; i < plist.size() ; i++ ) {
 					   
 					    int p_id = plist.get(i).getP_id();
