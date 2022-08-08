@@ -35,7 +35,7 @@
 	<div class="container justify-content-center">
 	<div class="row">
 		<input type="hidden" name="nId" value="<%=nDTO.getNOTICE_ID()%>">
-		<table border="1" style="border-collapse: collapse;" >
+		<table style="border-collapse: collapse;" >
 			<tr>
 				<td colspan="2">
 					<div class="input-group">
@@ -64,25 +64,31 @@
 				</td>
 			</tr>
 			<tr>
-				<td><button onclick="NoticeList()" class="btn btn-outline-success" >목록</button></td>
+				<td colspan="2">
+					<div class="input-group col-mb-3">
+					  <button class="btn btn-outline-success col-md-2" onclick="NoticeList()">목록</button>
+					  <button class="btn btn-outline-success col-md-2" type="button" onclick="location.href=href='NoticeOneSelectServlet?NOTICE_ID=<%=nextDTO.getNOTICE_ID()%>'">다음글</button>
+					  <a class="col-md-8" href="NoticeOneSelectServlet?NOTICE_ID=<%=nextDTO.getNOTICE_ID()%>" style="text-decoration: none;">
+						 <input style="text-align: center;" type="url" class="form-control" value="<%= nextDTO.getNOTICE_TITTLE() %>" readonly="readonly">
+					  </a>
+					</div>
+				</td>
+			</tr>
+			<tr>
 				<%
 					MemberDTO mDTO = (MemberDTO)session.getAttribute("login");
 					if(mDTO != null){
 						int admin = mDTO.getRole();
 						if (admin == 1){
 				%>
-				<td><button type="submit" id="NoticeUpdate" class="btn btn-outline-success" >수정</button>
+				<td colspan="2" style="text-align: right;">
+					<button type="submit" id="NoticeUpdate" class="btn btn-outline-success" >수정</button>
 					<button onclick="NoticeDelete()" class="btn btn-outline-success" >글 삭제</button>				
 				</td>
 				<%
 						}
 					}
 				%>
-			</tr>
-			<tr>
-				<td colspan="2">
-					다음글 <a href="NoticeOneSelectServlet?NOTICE_ID=<%=nextDTO.getNOTICE_ID()%>"> <%= nextDTO.getNOTICE_TITTLE() %>  </a>
-				</td>
 			</tr>
 		</table>
 	</div>

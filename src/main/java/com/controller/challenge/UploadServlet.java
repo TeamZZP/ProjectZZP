@@ -1,4 +1,4 @@
-package com.challenge.controller;
+package com.controller.challenge;
 
 import java.io.File;
 import java.io.IOException;

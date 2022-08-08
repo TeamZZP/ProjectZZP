@@ -47,8 +47,8 @@ public class ProductService {
 		return list;
 	}
 
-	public List<ProductDTO> searchProduct(String searchValue) {
-		List<ProductDTO> list = null;
+	public List<CategoryProductDTO> searchProduct(String searchValue) {
+		List<CategoryProductDTO> list = null;
 		SqlSession session = MySqlSessionFactory.getSqlSession();
 		try {
 			list = dao.searchProduct(session,searchValue);
