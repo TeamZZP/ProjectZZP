@@ -19,8 +19,6 @@ $(function() {
 		var count=$("#count").val();
 		$("#count").val(parseInt(count)+1);
 		
-		//수정
-	    $("#total").text($("#count").val()* $("#total").text());
 		
 	});//end up
 	
@@ -34,26 +32,18 @@ $(function() {
     		$("#count").val(1);
     	}
     	
-    	 $("#total").text($("#count").val()* $("#total").text());
     	
 	});//end down
 	
-	
-	
-	
-	
+	//$("#total").text(parseInt($("#count").val())*parseInt($("#total")));
 	
 })//end ready
 
-/* function imageChange(this) {
+function imageChange(this) {
 	
-	//수정
-	String src2 = this.src;
+	$("#firstImage").attr("src",this.src );
 	
-	$("#firstImage").attr(src,src2 )
-	
-} */
-
+}
 
 
 </script>
@@ -227,9 +217,9 @@ for(int i = 0; i <ilist.size();i++){
 
 <div class="row">
  <div class="btn-group" role="group" aria-label="Basic example">
-<button type="button" class="btn btn-outline-success" id="productDetail">제품상세</button>
-<button type="button" class="btn btn-outline-success" id="productReview">구매후기</button>
-<button type="button" class="btn btn-outline-success" id="productQnA">QnA</button>
+<button type="button" class="btn btn-outline-success" id="productDetail" href="#">제품상세</button>
+<button type="button" class="btn btn-outline-success" id="productReview" href="#">구매후기</button>
+<button type="button" class="btn btn-outline-success" id="productQnA" href="#">QnA</button>
 </div>
 
 
