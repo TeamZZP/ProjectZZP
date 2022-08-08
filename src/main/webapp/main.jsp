@@ -1,3 +1,5 @@
+<%@page import="com.dto.MemberDTO"%>
+<%@page import="java.lang.reflect.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -7,14 +9,22 @@
 <title>ZZP</title>
 <%
 	String mesg=(String) session.getAttribute("mesg");
+	//MemberDTO dto=(MemberDTO) session.getAttribute("login");
 	if (mesg != null){
 %>
 <script type="text/javascript">
 	alert("<%= mesg %>");
 </script>
-<%
+<%	
 	session.removeAttribute("mesg");
-	}
+	} 
+	//if (dto==null){
+%>	
+	<!-- <script type="text/javascript">
+		alert("로그아웃되었습니다");
+	</script> -->
+<%	
+	//}
 %>
 </head>
 <body>
