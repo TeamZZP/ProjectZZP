@@ -1,6 +1,7 @@
 package com.service;
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -37,6 +38,17 @@ public class AddressService {
 			session.close();
 		}
 		return num;
+	}
+
+	public List<AddressDTO> selectAllAddress() {
+		SqlSession session=MySqlSessionFactory.getSqlSession();
+		List<AddressDTO> addressList=null;
+		try {
+			addressList=dao.selectAllAddress(session);
+		} finally {
+			session.close();
+		}
+		return addressList;
 	}
 
 

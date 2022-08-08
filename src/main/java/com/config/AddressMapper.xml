@@ -14,4 +14,7 @@
 			addr2 = #{addr2}
 		where userid = #{userid}
 	</update>
+	<select id="selectAllAddress" resultType="AddressDTO">
+		select * from address
+	</select>
 </mapper>
