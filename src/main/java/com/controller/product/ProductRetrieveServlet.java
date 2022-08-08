@@ -18,25 +18,29 @@ import com.service.ProductService;
 /**
  * Servlet implementation class productRetrieveServlet
  */
-@WebServlet("/productRetrieveServlet")
-public class productRetrieveServlet extends HttpServlet {
+@WebServlet("/ProductRetrieveServlet")
+public class ProductRetrieveServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
   
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int p_id = Integer.parseInt(request.getParameter("p_id")) ; 
-		System.out.println(p_id);
+		System.out.println("ProductRetrieveServlet에서 파싱한 p_id=="+p_id);
 		
 		ProductService service = new ProductService();
 		ProductDTO pdto = service.productRetrieve(p_id);
 		List <ImagesDTO> ilist = service.ImagesRetrieve(p_id);
 		
-		HttpSession session = request.getSession();
-		session.setAttribute("ProductRetrieveDTO", pdto);
-		session.setAttribute("ImagesRetrieveList", ilist);
+		/* HttpSession session = request.getSession(); */
+		request.setAttribute("ProductRetrieveDTO", pdto);
+		request.setAttribute("ImagesRetrieveList", ilist);
 		
-		RequestDispatcher dis = request.getRequestDispatcher("productRetrieve.jsp");
-		dis.forward(request, response);
+		/* response.sendRedirect("productRetrieve.jsp"); */
+		
+		
+		  RequestDispatcher dis = request.getRequestDispatcher("productRetrieve.jsp");
+		  dis.forward(request, response);
+		 
 		
 	}
 

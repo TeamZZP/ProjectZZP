@@ -163,7 +163,8 @@ CREATE TABLE challenge (
  	chall_hits 		NUMBER	 DEFAULT 0 	  NOT NULL,
  	chall_liked 	NUMBER   DEFAULT 0	  NOT NULL,
  	chall_created 	DATE 	 DEFAULT sysdate NOT NULL,
- 	chall_img 		VARCHAR2(300) NULL
+ 	chall_img 		VARCHAR2(300) NULL,
+ 	chall_comments  NUMBER 	 DEFAULT 0	  NOT NULL
 );
 
 -- 챌린지 댓글
@@ -180,6 +181,7 @@ CREATE TABLE chall_liked (
   chall_id	NUMBER		NOT NULL REFERENCES challenge(chall_id) ON DELETE CASCADE,
   userid	VARCHAR2(30)		NOT NULL REFERENCES member(userid) ON DELETE CASCADE
 );
+ALTER TABLE chall_liked ADD PRIMARY KEY (chall_id,userid);
 
 -- 시퀀스
 CREATE SEQUENCE 테이블명_컬럼명_seq

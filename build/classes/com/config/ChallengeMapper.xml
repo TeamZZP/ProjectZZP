@@ -14,7 +14,8 @@
 		chall_hits, 
 		chall_liked, 
 		chall_created, 
-		chall_img) 
+		chall_img,
+		chall_comments) 
 	values 
 		(challenge_chall_id_seq.NEXTVAL, 
 		#{userid}, 
@@ -24,7 +25,8 @@
 		0, 
 		0, 
 		sysdate, 
-		#{chall_img})
+		#{chall_img},
+		0)
 </insert>
 
 <select id="selectAllChallenge" parameterType="hashmap" resultType="ChallengeDTO">
@@ -43,7 +45,7 @@
  	  	chall_content like '%${searchValue}%'
 	  </if>
 	</where> 
-	order by chall_id desc
+	order by ${sortBy} desc
 </select>
 
 <select id="countTotal" parameterType="hashmap" resultType="int">
@@ -113,6 +115,54 @@
 	where chall_id=#{chall_id}
 </select>
 
+<update id="upChall_comments">
+	update challenge
+	set chall_comments=chall_comments+1
+	where chall_id=#{chall_id}
+</update>
+
+<update id="downChall_comments">
+	update challenge
+	set chall_comments=chall_comments-1
+	where chall_id=#{chall_id}
+</update>
+
+<select id="selectAllLikedUserid" resultType="string">
+	select userid from chall_liked
+	where chall_id=#{chall_id}
+</select>
+
+<insert id="insertLike" parameterType="hashmap">
+	insert into chall_liked (chall_id, userid)
+	values (#{chall_id}, #{userid})
+</insert>
+
+<update id="upChall_liked">
+	update challenge
+	set chall_liked=chall_liked+1
+	where chall_id=#{chall_id}
+</update>
+
+<select id="countLiked" resultType="int">
+	select chall_liked from challenge
+	where chall_id=#{chall_id}
+</select>
+
+<select id="countLikedByMap" resultType="int">
+	select count(*) from chall_liked
+	where chall_id=#{chall_id} and userid=#{userid}
+</select>
+
+<delete id="deleteLike" parameterType="hashmap">
+	delete from chall_liked
+	where chall_id=#{chall_id} and userid=#{userid}
+</delete>
+
+<update id="downChall_liked">
+	update challenge
+	set chall_liked=chall_liked-1
+	where chall_id=#{chall_id}
+</update>
 
 
 <select id="selectProfile" resultType="hashmap">

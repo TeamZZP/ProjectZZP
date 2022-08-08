@@ -162,6 +162,100 @@ public class ChallengeService {
 		return list;
 	}
 
+	public int insertLike(HashMap<String, String> map) {
+		int n = 0;
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		try {
+			n = dao.insertLike(session, map);
+			session.commit();
+		} finally {
+			session.close();
+		}
+		return n;
+	}
+
+	public int upChall_liked(String chall_id) {
+		int n = 0;
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		try {
+			n = dao.upChall_liked(session, chall_id);
+			session.commit();
+		} finally {
+			session.close();
+		}
+		return n;
+	}
+
+	public int countLiked(String chall_id) {
+		int n = 0;
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		try {
+			n = dao.countLiked(session, chall_id);
+		} finally {
+			session.close();
+		}
+		return n;
+	}
+
+	public int deleteLike(HashMap<String, String> map) {
+		int n = 0;
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		try {
+			n = dao.deleteLike(session, map);
+			session.commit();
+		} finally {
+			session.close();
+		}
+		return n;
+	}
+
+	public int downChall_liked(String chall_id) {
+		int n = 0;
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		try {
+			n = dao.downChall_liked(session, chall_id);
+			session.commit();
+		} finally {
+			session.close();
+		}
+		return n;
+	}
+
+	public int countLikedByMap(HashMap<String, String> map) {
+		int n = 0;
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		try {
+			n = dao.countLikedByMap(session, map);
+		} finally {
+			session.close();
+		}
+		return n;
+	}
+
+	public int upChall_comments(String chall_id) {
+		int n = 0;
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		try {
+			n = dao.upChall_comments(session, chall_id);
+			session.commit();
+		} finally {
+			session.close();
+		}
+		return n;
+	}
+
+	public int downChall_comments(String chall_id) {
+		int n = 0;
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		try {
+			n = dao.downChall_comments(session, chall_id);
+			session.commit();
+		} finally {
+			session.close();
+		}
+		return n;
+	}
+
 
 
 }

@@ -46,8 +46,8 @@
 						String p_image = plist.get(i).getP_image();
 					%>
 			<div class="col-md-3">
-				<img src="images/p_image/<%=p_image%>.png"  class="img-thumbnail">
-				<p class="fs-3 text-center"><%=p_name %></p>
+				<a href="ProductRetrieveServlet?p_id=<%=p_id%>"><img src="images/p_image/<%=p_image%>.png"  class="img-thumbnail" ></a> 
+				<a href="ProductRetrieveServlet?p_id=<%=p_id%>"><p class="fs-3 text-center"><%=p_name %></p></a> 
 				<p class="fs-5 text-center text-success" style="color: green;"><%=p_selling_price %>원
 				
 			

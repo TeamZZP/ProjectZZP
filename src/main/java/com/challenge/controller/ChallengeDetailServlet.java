@@ -10,9 +10,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.dto.ChallengeDTO;
 import com.dto.CommentsDTO;
+import com.dto.MemberDTO;
 import com.service.ChallengeService;
 
 /**
@@ -36,6 +38,14 @@ public class ChallengeDetailServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String chall_id = request.getParameter("chall_id");
 		
+		//로그인 정보 가져오기
+		HttpSession session = request.getSession();
+		MemberDTO member = (MemberDTO) session.getAttribute("login");
+		String userid = "";
+		if (member != null) {
+			userid = member.getUserid();
+		}
+		
 		ChallengeService service = new ChallengeService();
 		
 		//조회수 +1 한 후 dto 가져오기
@@ -48,12 +58,16 @@ public class ChallengeDetailServlet extends HttpServlet {
 		//해당 게시글의 프로필 정보 가져와서 프로필 이미지만 전달
 		HashMap<String, String> profileMap = service.selectProfile(dto.getUserid());
 		
-		//해당 게시글에 좋아요를 누른 회원 아이디 목록 가져오기
-		List<String> likedUserid = service.selectAllLikedUserid(chall_id);
+		//현재 로그인한 회원이 해당 게시글에 좋아요를 눌렀는지 판단하기
+		HashMap<String, String> likedMap = new HashMap<String, String>();
+		likedMap.put("chall_id", chall_id);
+		likedMap.put("userid", userid);
+		int likedIt = service.countLikedByMap(likedMap);
 		
 		request.setAttribute("dto", dto);
 		request.setAttribute("commentsList", commentsList);
 		request.setAttribute("profile_img", profileMap.get("PROFILE_IMG"));
+		request.setAttribute("likedIt", likedIt);
 		
 		RequestDispatcher dis = request.getRequestDispatcher("challengeDetail.jsp");
 		dis.forward(request, response);

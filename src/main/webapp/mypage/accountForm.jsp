@@ -82,8 +82,8 @@
 					$("#checkPasswd").focus();
 					$("#checkPasswd").val("");
 				} else if ($("#email1").val().length == 0 || $("#email2").val().length == 0) {//이메일 공백
-					event.preventDefault();
 					alert("이메일 주소를 입력하세요.");
+					event.preventDefault();
 					$("#email1").focus();
 				} else {//주소는 readonly 상태--새로 입력하지 않는 이상 삭제 불가능해서 따로 공백 검사 안 함--아냐 해야 됨..
 					event.preventDefault();
