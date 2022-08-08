@@ -14,6 +14,12 @@
   margin-left: auto;
 }
 
+a{
+	color : #646464;
+	text-decoration: none;
+	
+}
+
 
 </style>
 
@@ -53,11 +59,32 @@
 					<img src="images/p_image/<%=p_image%>.png "  class="img-thumbnail" style=" width:300; height:300; "></a> 
 				<a href="ProductRetrieveServlet?p_id=<%=p_id%>">
 					<h2 style="margin-bottom:0.3em; font-weight:normal; color:#646464; font-size: 25px; display: "><%=p_name %></h2></a> 
-				<p style="color: green; font-size: 20px;"><%=p_selling_price %>원</p><br>
-				<a><img src="images/like.png" width="23" height="23"></a>
-				<a><img src="images/bubble.png" width="20" height="17"> </a>
-				<a><img src="images/cart.jpg" width="20" height="20"></a>
-			</div>
+				<p style="color: green; font-size: 20px;"><%=p_selling_price %>원</p>
+				<a><img src="images/like.png" width="30" height="30"></a>
+				<a><img src="images/bubble.png" width="25" height="22"> </a>
+				<!-- Button trigger modal -->
+				 <a type="button" class="btn " data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+				 	<img src="images/cart.jpg" width="25" height="25"></a>
+				<!-- Modal -->
+				<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+				  <div class="modal-dialog modal-dialog-scrollable">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <h5 class="modal-title" id="staticBackdropLabel">장바구니</h5>
+				        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				      </div>
+				      <div class="modal-body">
+				        <img src="images/p_image/<%=p_image%>.png " style="width:300; height:300;">
+				      </div>
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+				        <button type="button" class="btn btn-primary">Understood</button>
+				      </div>
+				    </div>
+				  </div>
+				</div>
+								
+							</div>
 			<%
 				}
 			%>	
