@@ -45,18 +45,19 @@ $(function() {
 	
 })//end ready
 
-function imageChange(this) {
+/* function imageChange(this) {
 	
 	//수정
 	String src2 = this.src;
 	
 	$("#firstImage").attr(src,src2 )
 	
-}
+} */
 
 
 
 </script>
+
 
 
 <%
@@ -85,6 +86,11 @@ System.out.println("productRetrieve.jsp에서 파싱한 ilist=="+ilist);%>
 
 
 <html>
+
+<style>
+table { font-family: sans-serif; }
+
+</style>
 <head>
 
 
@@ -135,6 +141,9 @@ for(int i = 0; i <ilist.size();i++){
 <div class="col-md-1"></div>
 <div class="col-md-5">
 <table> <!-- 상품 설명 -->
+
+<hr>
+
 <tr>
 <td>상품명 &nbsp</td>
 <td> </td>
@@ -158,7 +167,7 @@ for(int i = 0; i <ilist.size();i++){
 <tr>
 <td>가격 &nbsp</td>
 <td> </td>
-<td><p id="sellingPrice"> <%= p_selling_price%></p>  &nbsp원</td>
+<td><p id="sellingPrice"> <%= p_selling_price%></p>&nbsp원</td>
 </tr>
 
 <tr>
@@ -181,7 +190,12 @@ for(int i = 0; i <ilist.size();i++){
 <td></td>
 <td><input id="count" value="1">
 <button type="button" class="btn btn-outline-success" id="up">+</button>
-<button type="button" class="btn btn-outline-success" id="down">-</button></td>
+<button type="button" class="btn btn-outline-success" id="down">-</button>
+</td>
+<td>
+
+</td>
+
 </tr>
 
 <tr>
@@ -213,9 +227,9 @@ for(int i = 0; i <ilist.size();i++){
 
 <div class="row">
  <div class="btn-group" role="group" aria-label="Basic example">
-<button type="button" class="btn btn-outline-success">제품상세</button>
-<button type="button" class="btn btn-outline-success">구매후기</button>
-<button type="button" class="btn btn-outline-success">QnA</button>
+<button type="button" class="btn btn-outline-success" id="productDetail">제품상세</button>
+<button type="button" class="btn btn-outline-success" id="productReview">구매후기</button>
+<button type="button" class="btn btn-outline-success" id="productQnA">QnA</button>
 </div>
 
 

@@ -32,17 +32,36 @@
 		<img src="images/notice3.png" alt="..." style="width: auto;">
 	</div>
 	<form action="NoticeUpdate.jsp" method="post" id="DetailForm">
+	<div class="container justify-content-center">
+	<div class="row">
 		<input type="hidden" name="nId" value="<%=nDTO.getNOTICE_ID()%>">
 		<table border="1" style="border-collapse: collapse;" >
 			<tr>
-				<td colspan="2">제목 <%=nDTO.getNOTICE_TITTLE()%></td>
+				<td colspan="2">
+					<div class="input-group">
+						 <span class="input-group-text">제목</span>
+						 <input type="text" class="form-control"  value="<%=nDTO.getNOTICE_TITTLE()%>" readonly="readonly">
+					</div>
+				</td>
 			</tr>
 			<tr>
-				<td>작성일 <%=nDTO.getNOTICE_CREATED()%></td>
-				<td>조회 <%=nDTO.getNOTICE_HITS()%></td>
+				<td>
+					<div class="input-group mb-3">
+					  <span class="input-group-text">작성일</span>
+					  <input type="text" class="form-control" value="<%=nDTO.getNOTICE_CREATED()%>" readonly="readonly">
+					</div>
+				</td>
+				<td>
+					<div class="input-group mb-3">
+					  <span class="input-group-text">조회</span>
+					  <input type="text" class="form-control" value="<%=nDTO.getNOTICE_HITS()%>" readonly="readonly">
+					</div>
+				</td>
 			</tr>
 			<tr>
-				<td colspan="2"><%=nDTO.getNOTICE_CONTENT()%></td>
+				<td colspan="2">
+					<textarea class="form-control" rows="15" cols="50" readonly="readonly"> <%=nDTO.getNOTICE_CONTENT()%> </textarea>
+				</td>
 			</tr>
 			<tr>
 				<td><button onclick="NoticeList()" class="btn btn-outline-success" >목록</button></td>
@@ -66,4 +85,6 @@
 				</td>
 			</tr>
 		</table>
+	</div>
+	</div>
 	</form>
