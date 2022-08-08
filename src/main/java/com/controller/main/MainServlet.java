@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.dto.ChallengeDTO;
 import com.service.ChallengeService;
@@ -23,7 +24,7 @@ public class MainServlet extends HttpServlet {
 		ChallengeService service = new ChallengeService();
 		List<ChallengeDTO> list = service.selectNewChallenge();
 		System.out.println(list);
-		request.setAttribute("newchall", list);
+		request.setAttribute("newchall", list);;
 		
 		RequestDispatcher dis = request.getRequestDispatcher("main.jsp");		
 		dis.forward(request, response);

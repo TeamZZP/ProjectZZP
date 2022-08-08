@@ -1,4 +1,3 @@
-
 <%@page import="com.dto.ProductDTO"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -35,16 +34,16 @@
    
       
        ProductDTO dto = list.get(i-1);
-       String p_id = dto.getP_id();
+      // String p_id = dto.getP_id();
         String p_name = dto.getP_name();
         String p_content = dto.getP_content();
-        String p_category = dto.getP_category();
+       // String p_category = dto.getP_category();
         int p_cost_price =dto.getP_cost_price();
         int p_selling_price = dto.getP_selling_price();
         int p_discount = dto.getP_discount();
         String p_created = dto.getP_created();
         int p_stock = dto.getP_stock();
-        String p_img = dto.getP_img();
+       // String p_img = dto.getP_img();
        
        
  %>
@@ -53,9 +52,9 @@
                      <table style='padding:15px'>
                         <tr>
                            <td>
-                              <a href="productRetrieveServlet?p_id=<%=p_id%>"> <!-- 이미지링크 -->
+                             <%-- <a href="productRetrieveServlet?p_id=<%=p_id%>"> <!-- 이미지링크 -->
                                  <img src="images/p_image/<%=p_img %>.jpg" border="0" align="center" width="200" height="300">                                 
-                              </a>
+                              </a> --%>
                            </td>
                         </tr>
                         <tr>
@@ -64,7 +63,7 @@
                         </tr>
                         <tr>
                            <td class= "td_default" align ="left">
-                              <a class= "a_black" href="productRetrieveServlet?p_id=<%=p_id%>"> 
+                           <%--    <a class= "a_black" href="productRetrieveServlet?p_id=<%=p_id%>">  --%>
                               <%= p_name %>
                               <br>
                               </a>
