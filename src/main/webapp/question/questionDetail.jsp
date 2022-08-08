@@ -1,3 +1,4 @@
+<%@page import="org.apache.ibatis.reflection.SystemMetaObject"%>
 <%@page import="com.dto.MemberDTO"%>
 <%@page import="com.dto.QuestionDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -5,6 +6,10 @@
 <%
 	QuestionDTO qDTO = (QuestionDTO)session.getAttribute("questionOneSelect");
 	System.out.print("questionDetail " + qDTO);
+	
+	String date = qDTO.getQ_CREATED();
+	String day = date.substring(0,10);
+	System.out.print("날짜 " + day);
 %>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
@@ -46,7 +51,7 @@
 				<td> 
 					<div class="input-group mb-3">
 					  <span class="input-group-text">작성일</span>
-					  <input type="text" class="form-control" value="<%= qDTO.getQ_CREATED() %>" readonly="readonly">
+					  <input type="text" class="form-control" value="<%=day %>" readonly="readonly">
 					</div>
 				</td>
 				<td> 
@@ -58,8 +63,15 @@
 			</tr>
 			<tr>
 				<td colspan="2">
-				
-				  <textarea class="form-control" rows="15" cols="50"> <%= qDTO.getQ_CONTENT() %> </textarea>
+				  <textarea class="form-control" rows="15" cols="50" readonly="readonly"> <%= qDTO.getQ_CONTENT() %> </textarea>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<div>
+					  <label for="formFileMultiple" class="form-label">첨부파일</label>
+					  <img alt="" src="<%=qDTO.getQ_IMG()%>.png" width="100px" height="100px">
+					</div>
 				</td>
 			</tr>
 			<tr>

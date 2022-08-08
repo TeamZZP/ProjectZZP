@@ -10,15 +10,17 @@
 			var nContent = $("#nContent").val();
 			if (nTittle.length == 0) {
 				alert("제목을 입력하십시오");
-				event.prevetDefault();
+				evnet.preventDefault();
 			} else if (nContent.length == 0) {
 				alert("내용을 입력하십시오");
-				event.prevetDefault();
-			}  
+				evnet.preventDefault();
+			} else {
+				$("form").attr("action","NoticeInsertServlet");
+			}
 		});
 	});;//end ready
 </script>
-	<form method="post" action="NoticeInsertServlet">
+	<form method="post" action="">
 	<div class="container justify-content-center">
 	<div class="row">
 	    <table border="1" style="border-collapse: collapse;">

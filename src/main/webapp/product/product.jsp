@@ -52,11 +52,14 @@
 						String p_image = plist.get(i).getP_image();
 					%>
 			<div class="col-md-3">
-				<a href="ProductRetrieveServlet?p_id=<%=p_id%>"><img src="images/p_image/<%=p_image%>.png "  class="img-thumbnail" style=" width:300; height:300; "></a> 
-				<a href="ProductRetrieveServlet?p_id=<%=p_id%>"><p class="fs-3 text-center"><%=p_name %></p></a> 
-				<p class="fs-5 text-center text-success" style="color: green;"><%=p_selling_price %>원
-				
-		
+				<a href="ProductRetrieveServlet?p_id=<%=p_id%>">
+					<img src="images/p_image/<%=p_image%>.png "  class="img-thumbnail" style=" width:300; height:300; "></a> 
+				<a href="ProductRetrieveServlet?p_id=<%=p_id%>">
+					<h2 style="margin-bottom:0.3em; font-weight:normal; color:#646464; font-size: 25px; display: "><%=p_name %></h2></a> 
+				<p style="color: green; font-size: 20px;"><%=p_selling_price %>원</p><br>
+				<a><img src="images/like.png" width="23" height="23"></a>
+				<a><img src="images/bubble.png" width="20" height="17"> </a>
+				<a><img src="images/cart.jpg" width="20" height="20"></a>
 			</div>
 			<%
 				}
