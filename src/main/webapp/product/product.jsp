@@ -62,6 +62,7 @@ a{
 				<p style="color: green; font-size: 20px;"><%=p_selling_price %>원</p>
 				<a><img src="images/like.png" width="30" height="30"></a>
 				<a><img src="images/bubble.png" width="25" height="22"> </a>
+				<a><img src="images/cart.jpg" width="25" height="25"></a>
 				<!-- Button trigger modal -->
 				 <a type="button" class="btn " data-bs-toggle="modal" data-bs-target="#staticBackdrop">
 				 	<img src="images/cart.jpg" width="25" height="25"></a>
@@ -74,11 +75,15 @@ a{
 				        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				      </div>
 				      <div class="modal-body">
-				        <img src="images/p_image/<%=p_image%>.png " style="width:300; height:300;">
+				       <button type="button" class="gnb_close_btn"><i class="fa fa-times" aria-hidden="true"></i></button>
+						<!-- 내용 시작 -->
+				      	<div class="cont">
+					        <p>선택하신 상품이 장바구니에 담겼습니다.</p>
+					       </div>
 				      </div>
 				      <div class="modal-footer">
-				        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-				        <button type="button" class="btn btn-primary">Understood</button>
+				        <a href="<?php echo G5_SHOP_URL; ?>/list.php?ca_id=<?php echo $it['ca_id']; ?>" class="shopping">계속쇼핑하기</a>
+				        <a href="<?php echo G5_SHOP_URL; ?>/cart.php" class="carting">장바구니보기</a>
 				      </div>
 				    </div>
 				  </div>
