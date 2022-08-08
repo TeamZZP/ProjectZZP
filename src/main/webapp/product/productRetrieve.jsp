@@ -106,7 +106,8 @@ for(int i = 0; i <ilist.size();i++){
 
 <% if(image_rnk ==1){%> 
 <tr>
-<td colspan="4"><img id="firstImage" src="images/p_image/<%= ilist.get(i).getImage_route()%>.png" class="img-thumbnail" style="height: 500; width: 600;"></td>
+<td colspan="4">
+<img id="firstImage" src="images/p_image/<%= ilist.get(i).getImage_route()%>.png" class="img-thumbnail" style="height: 500; width: 600;"></td>
 </tr>
 <%}%>
 
