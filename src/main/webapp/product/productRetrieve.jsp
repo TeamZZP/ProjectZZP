@@ -13,47 +13,37 @@
 <script type="text/javascript">
 
 $(function() {
-	
-	$("#up").click(function() {
-		
-		var count=$("#count").val();
-		$("#count").val(parseInt(count)+1);
-		
-		//수정
-	    $("#total").text($("#count").val()* $("#total").text());
-		
-	});//end up
-	
+   
+   $("#up").click(function() {
+      
+      var count=$("#count").val();
+      $("#count").val(parseInt(count)+1);
+      
+      
+   });//end up
+   
     $("#down").click(function() {
-		
-    	var count=$("#count").val();
-    	
-    	if(count>1){
-		$("#count").val(parseInt(count)-1);
-    	}else{
-    		$("#count").val(1);
-    	}
-    	
-    	 $("#total").text($("#count").val()* $("#total").text());
-    	
-	});//end down
-	
-	
-	
-	
-	
-	
+      
+       var count=$("#count").val();
+       
+       if(count>1){
+      $("#count").val(parseInt(count)-1);
+       }else{
+          $("#count").val(1);
+       }
+       
+       
+   });//end down
+   
+   //$("#total").text(parseInt($("#count").val())*parseInt($("#total")));
+   
 })//end ready
 
-/* function imageChange(this) {
-	
-	//수정
-	String src2 = this.src;
-	
-	$("#firstImage").attr(src,src2 )
-	
-} */
-
+function imageChange(this) {
+   
+   $("#firstImage").attr("src",this.src );
+   
+}
 
 
 </script>
@@ -104,10 +94,10 @@ table { font-family: sans-serif; }
 <% 
 for(int i = 0; i <ilist.size();i++){
 
-	
-	String image_route = ilist.get(i).getImage_route();
-	int image_rnk = ilist.get(i).getImage_rnk();
-	String update_date = ilist.get(i).getUpdate_date();
+   
+   String image_route = ilist.get(i).getImage_route();
+   int image_rnk = ilist.get(i).getImage_rnk();
+   String update_date = ilist.get(i).getUpdate_date();
 %>
 
 <% if(image_rnk ==1){%> 
@@ -120,24 +110,24 @@ for(int i = 0; i <ilist.size();i++){
 <tr>
 
 
-	
-	
-	<div class="row">
-	<div class="col-md-6">
-	<td>
-	<%if (image_rnk !=1){%> 
-		<img src="images/p_image/<%= ilist.get(i).getImage_route()%>.png" class="img-thumbnail" style="height: 100; width: 100;" onmouseover="imageChange(this)">
-	<%}%>
-	</td>
-	</div>
-	</div>
-	
+   
+   
+   <div class="row">
+   <div class="col-md-6">
+   <td>
+   <%if (image_rnk !=1){%> 
+      <img src="images/p_image/<%= ilist.get(i).getImage_route()%>.png" class="img-thumbnail" style="height: 100; width: 100;" onmouseover="imageChange(this)">
+   <%}%>
+   </td>
+   </div>
+   </div>
+   
 
 
 </tr>
 </table>
 <%}%>
-</div>	
+</div>   
 <div class="col-md-1"></div>
 <div class="col-md-5">
 <table> <!-- 상품 설명 -->
@@ -227,9 +217,9 @@ for(int i = 0; i <ilist.size();i++){
 
 <div class="row">
  <div class="btn-group" role="group" aria-label="Basic example">
-<button type="button" class="btn btn-outline-success" id="productDetail">제품상세</button>
-<button type="button" class="btn btn-outline-success" id="productReview">구매후기</button>
-<button type="button" class="btn btn-outline-success" id="productQnA">QnA</button>
+<button type="button" class="btn btn-outline-success" id="productDetail" href="#">제품상세</button>
+<button type="button" class="btn btn-outline-success" id="productReview" href="#">구매후기</button>
+<button type="button" class="btn btn-outline-success" id="productQnA" href="#">QnA</button>
 </div>
 
 
