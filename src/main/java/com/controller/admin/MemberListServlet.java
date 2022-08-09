@@ -1,6 +1,7 @@
 package com.controller.admin;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -32,29 +33,28 @@ public class MemberListServlet extends HttpServlet {
 		
 		//관리자 전용
 		if (dto != null) {
-			//전체 회원 목록
 			MemberService m_service=new MemberService();
+			AddressService a_service=new AddressService();
+			HashMap<String, List<AddressDTO>> addressMap=new HashMap<String, List<AddressDTO>>();
+			//전체 회원 목록
 			List<MemberDTO> memberList=m_service.selectAllMember();
+			
+			String userid=null;
+			
 			//전체 회원 주소 목록--회원별 주소
 			for (int i = 0; i < memberList.size(); i++) {
-				String userid=memberList.get(i).getUserid();
-				
-				AddressService a_service=new AddressService();
-				AddressDTO address=a_service.selectAddress(userid);//addressDTO 출력
-				System.out.println(userid+"님의 주소 : "+address);
+				userid=memberList.get(i).getUserid();
+				List<AddressDTO> addressList=a_service.selectAllAddress(userid);//회원별 주소--userid로 select
+				//System.out.println(userid+"님의 주소 : "+addressList);
+				addressMap.put(userid, addressList);//userid로 해당 주소 리스트 출력
 			}
-//			AddressService a_service=new AddressService();//회원별 주소--userid로 select
-//			List<AddressDTO> addressList=a_service.selectAllAddress();
-			
-//			for (MemberDTO member : memberList) {
-//				System.out.println(member);
+//			System.out.println(addressMap);
+//			for (int i = 0; i < addressMap.size(); i++) {
+//				List<AddressDTO> addressList=addressMap.get("aaa1");
+//				//System.out.println(addressList);
 //			}
-//			for (AddressDTO address : addressList) {
-//				System.out.println(address);
-//			}
-			
 			session.setAttribute("memberList", memberList);
-			//session.setAttribute("addressList", addressList);//userid의 address 출력
+			session.setAttribute("addressMap", addressMap);//userid의 address 리스트
 			response.sendRedirect("memberList.jsp");
 		} else {
 			//alert로 로그인 후 이용하세요 출력

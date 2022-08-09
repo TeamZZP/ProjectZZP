@@ -40,11 +40,11 @@ public class AddressService {
 		return num;
 	}
 
-	public List<AddressDTO> selectAllAddress() {
+	public List<AddressDTO> selectAllAddress(String userid) {
 		SqlSession session=MySqlSessionFactory.getSqlSession();
 		List<AddressDTO> addressList=null;
 		try {
-			addressList=dao.selectAllAddress(session);
+			addressList=dao.selectAllAddress(session, userid);
 		} finally {
 			session.close();
 		}

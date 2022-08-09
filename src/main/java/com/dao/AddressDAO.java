@@ -19,8 +19,8 @@ public class AddressDAO {
 		return num;
 	}
 
-	public List<AddressDTO> selectAllAddress(SqlSession session) {
-		List<AddressDTO> addressList=session.selectList("AddressMapper.selectAllAddress");
+	public List<AddressDTO> selectAllAddress(SqlSession session, String userid) {
+		List<AddressDTO> addressList=session.selectList("AddressMapper.selectAllAddress", userid);
 		return addressList;
 	}
 

@@ -16,5 +16,6 @@
 	</update>
 	<select id="selectAllAddress" resultType="AddressDTO">
 		select * from address
+		where userid = #{userid}
 	</select>
 </mapper>
