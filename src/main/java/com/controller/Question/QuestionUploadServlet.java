@@ -22,6 +22,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import com.dto.MemberDTO;
 import com.service.ChallengeService;
+import com.service.QuestionService;
 
 /**
  * Servlet implementation class UploadServlet
@@ -34,9 +35,11 @@ public class QuestionUploadServlet extends HttpServlet {
 		
 		//회원전용처리
 		HttpSession session = request.getSession();
-		MemberDTO member = (MemberDTO) session.getAttribute("login"); 
+		MemberDTO mDTO = (MemberDTO) session.getAttribute("login"); 
+		String USERID = request.getParameter("USERID");
+		System.out.println("유저 "+ USERID);
 		
-		if (member!=null) {
+		if (mDTO!=null && mDTO.getUserid().equals(USERID)) {
 			
 			//multipart 여부 검사
 			boolean isMultipart= ServletFileUpload.isMultipartContent(request);
@@ -108,37 +111,39 @@ public class QuestionUploadServlet extends HttpServlet {
 					e.printStackTrace();
 				}
 				
-				ChallengeService service = new ChallengeService();
+				QuestionService service = new QuestionService();
 				String operate = request.getParameter("operate");
+				System.out.println("상태 "+ operate);
 				
-				//어떤 동작을 요청받았는지에 따라 다른 작업 처리하기
-				//챌린지 게시글 업로드
 				if ("upload".equals(operate)) {
-					int n = service.insertChallenge(map);
+					int n = service.questionInsert(map);
 					System.out.println(n+"개의 레코드 추가");
 					
-					//자기가 올린 게시글로 이동??? 
-					response.sendRedirect("ChallengeListServlet");
+					if (n != 0) {
+						session.setAttribute("mesg", "게시물이 등록되었습니다.");
+						response.sendRedirect("QuestionListServlet");
+					} else {
+						session.setAttribute("mesg", "게시물이 등록 실패하였습니다. 다시 시도하세요.");
+						response.sendRedirect("QuestionListServlet");
+					}
 					
-				//챌린지 게시글 업데이트
 				} else if ("update".equals(operate)) {
-					int n = service.updateChallenge(map);
+					int n = service.questionUpdate(map);
 					System.out.println(n+"개의 레코드 업데이트");
 					
-					response.sendRedirect("ChallengeDetailServlet?chall_id="+map.get("chall_id"));
-					
-					
+					if (n != 0) {
+						session.setAttribute("mesg", "게시물이 업데이트 되었습니다.");
+						response.sendRedirect("QuestionListServlet");
+					} else {
+						session.setAttribute("mesg", "게시물 업데이트를 실패하였습니다. 다시 시도하세요.");
+						response.sendRedirect("QuestionListServlet");
+					}
 				}
-				
-				
 			}
-			
-			
 		} else {
-			session.setAttribute("mesg", "잘못된 접근입니다.");
-			response.sendRedirect("ChallengeListServlet");
+			session.setAttribute("mesg", "로그인이 필요합니다.");
+			response.sendRedirect("LoginUIServlet");
 		}
-		
 	
 	}
 	

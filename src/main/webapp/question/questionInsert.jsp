@@ -4,6 +4,7 @@
  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <%
     	MemberDTO mDTO = (MemberDTO)session.getAttribute("login");
+    	String userid = "";
     	if(mDTO == null){
     %>
     <script>
@@ -14,7 +15,12 @@
 	});//
     </script>
     <%
+    	} else {
+    		userid = mDTO.getUserid();
     	}
+    %>
+    <%
+  	 	String operate = "upload";
     %>
 	<script type="text/javascript">
 		$(document).ready(function() {
@@ -34,7 +40,9 @@
 				$("#questionForm").attr("action", "QuestionListServlet");
 			})
 			$("#QuestionInsert").click(function () {
-				$("#questionForm").attr("action", "QuestionInsertServlet");
+				var operate = $("#QuestionInsert").attr("data-operate");
+				var userid = $("#QuestionInsert").attr("data-userid");
+				$("#questionForm").attr("action", "QuestionUploadServlet?USERID="+userid+"&operate="+operate);
 			})
 			$("#pID").click(function () {
 				window.open("questionproductSelect.jsp","","width=400px height=500px");
@@ -45,7 +53,8 @@
 		<img src="images/question.png" alt="..." style="width: auto;">
 </div>
 
-<form action="" id="questionForm" enctype="multipart/form-data">
+<form action="" id="questionForm" enctype="multipart/form-data" method="post">
+<input type="hidden" name="USERID" value="<%=userid%>">
 <div class="container justify-content-center">
 <div class="row">
 		<table>
@@ -53,7 +62,7 @@
 				<td colspan="2"> 
 					<div class="input-group">
 					  <span class="input-group-text">제목</span>
-					  <input type="text" class="form-control" name="qTittle" id="qTittle">
+					  <input type="text" class="form-control" name="Q_TITLE" id="qTittle">
 					</div>
 				</td>
 			</tr>
@@ -61,7 +70,7 @@
 				<th colspan="2"> 
 					<div class="input-group">
 					  <button id="pID" class="btn btn-outline-secondary" type="button">상품 정보</button>
-					  <input type="text" class="form-control" name="pId" id="pId">
+					  <input type="text" class="form-control" name="P_ID" id="pId">
 					</div>
 				</th>
 			</tr>
@@ -69,7 +78,7 @@
 				<td colspan="2"> 
 					<div class="input-group">
 					  <label class="input-group-text" for="inputGroupSelect01">문의 글 카테고리</label>
-					  <select class="form-select"  name="qboard_category">
+					  <select class="form-select"  name="Q_BOARD_CATEGORY">
 					    <option value="1" selected>상품문의</option>
 					    <option value="2">문의 게시판</option>
 					  </select>
@@ -80,7 +89,7 @@
 				<td colspan="2"> 
 					<div class="input-group">
 					  <label class="input-group-text" for="inputGroupSelect01">질문 카테고리</label>
-					  <select name="qcategory" class="form-select">
+					  <select name="Q_CATEGORY" class="form-select">
 					    <option>상품</option>
 					    <option>배송</option>
 					    <option>교환</option>
@@ -93,7 +102,7 @@
 			<tr>
 				<td colspan="2">
 					<div>
-					  <textarea class="form-control" rows="15" cols="50" name="qContent" id="qContent" placeholder="내용을 입력하십시오"></textarea>
+					  <textarea class="form-control" rows="15" cols="50" name="Q_CONTENT" id="qContent" placeholder="내용을 입력하십시오"></textarea>
 					</div>
 				</td>
 			</tr>
@@ -101,14 +110,14 @@
 				<td colspan="2">
 					<div>
 					  <label for="formFileMultiple" class="form-label">첨부파일</label>
-					  <input class="form-control" type="file" id="formFileMultiple" name="qFile" multiple>
+					  <input class="form-control" accept="image/*" type="file" name="qFile" multiple>
 					</div>
 				</td>
 			</tr>
 			<tr>
 				<td> <button id="QuestionList" class="btn btn-success">목록</button> </td>
 				<td style="text-align: right;">
-					<button id="QuestionInsert" class="btn btn-success">등록</button>
+					<button id="QuestionInsert" data-userid="<%=userid %>" data-operate="<%=operate %>" class="btn btn-success">등록</button>
 					<button type="reset" class="btn btn-success">취소</button>
 				</td>
 			</tr>
