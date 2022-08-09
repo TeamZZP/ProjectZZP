@@ -14,9 +14,11 @@ import javax.servlet.http.HttpServletResponse;
 public class ProductLikeServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("ProductLikeServlet 실행됨");
+		System.out.println("ProductLikeServlet 실행됨"+ request.getParameter("p_id"));
 		int p_id = Integer.parseInt(request.getParameter("p_id")) ;
+		System.out.println(p_id);
 		String userid = request.getParameter("userid");
+		System.out.println(userid);
 	}
 
 	/**
