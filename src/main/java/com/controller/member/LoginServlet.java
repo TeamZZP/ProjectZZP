@@ -39,7 +39,7 @@ public class LoginServlet extends HttpServlet {
 		} else {
 			//DB정보 없을 시 mesg 출력
 			session.setAttribute("mesg", "로그인 정보가 올바르지 않습니다:("); 
-			session.setMaxInactiveInterval(60*60);
+			session.setMaxInactiveInterval(60*30);
 			response.sendRedirect("LoginUIServlet");
 		}
 	}

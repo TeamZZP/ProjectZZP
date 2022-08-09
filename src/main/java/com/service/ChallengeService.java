@@ -108,10 +108,10 @@ public class ChallengeService {
 		return n;
 	}
 
-	public void updateChall_hits(String chall_id) {
+	public void updateChallHits(String chall_id) {
 		SqlSession session = MySqlSessionFactory.getSqlSession();
 		try {
-			dao.updateChall_hits(session, chall_id);
+			dao.updateChallHits(session, chall_id);
 			session.commit();
 		} finally {
 			session.close();
@@ -174,11 +174,11 @@ public class ChallengeService {
 		return n;
 	}
 
-	public int upChall_liked(String chall_id) {
+	public int upChallLiked(String chall_id) {
 		int n = 0;
 		SqlSession session = MySqlSessionFactory.getSqlSession();
 		try {
-			n = dao.upChall_liked(session, chall_id);
+			n = dao.upChallLiked(session, chall_id);
 			session.commit();
 		} finally {
 			session.close();
@@ -209,11 +209,11 @@ public class ChallengeService {
 		return n;
 	}
 
-	public int downChall_liked(String chall_id) {
+	public int downChallLiked(String chall_id) {
 		int n = 0;
 		SqlSession session = MySqlSessionFactory.getSqlSession();
 		try {
-			n = dao.downChall_liked(session, chall_id);
+			n = dao.downChallLiked(session, chall_id);
 			session.commit();
 		} finally {
 			session.close();
@@ -232,11 +232,11 @@ public class ChallengeService {
 		return n;
 	}
 
-	public int upChall_comments(String chall_id) {
+	public int upChallComments(String chall_id) {
 		int n = 0;
 		SqlSession session = MySqlSessionFactory.getSqlSession();
 		try {
-			n = dao.upChall_comments(session, chall_id);
+			n = dao.upChallComments(session, chall_id);
 			session.commit();
 		} finally {
 			session.close();
@@ -244,16 +244,28 @@ public class ChallengeService {
 		return n;
 	}
 
-	public int downChall_comments(String chall_id) {
+	public int downChallComments(String chall_id) {
 		int n = 0;
 		SqlSession session = MySqlSessionFactory.getSqlSession();
 		try {
-			n = dao.downChall_comments(session, chall_id);
+			n = dao.downChallComments(session, chall_id);
 			session.commit();
 		} finally {
 			session.close();
 		}
 		return n;
+	}
+
+	public String selectProfileImg(String userid) {
+		String profile_img = null;
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		try {
+			profile_img = dao.selectProfileImg(session, userid);
+			session.commit();
+		} finally {
+			session.close();
+		}
+		return profile_img;
 	}
 
 

@@ -67,8 +67,8 @@ public class ChallengeDAO {
 		return n;
 	}
 
-	public void updateChall_hits(SqlSession session, String chall_id) {
-		session.update("ChallengeMapper.updateChall_hits", chall_id);
+	public void updateChallHits(SqlSession session, String chall_id) {
+		session.update("ChallengeMapper.updateChallHits", chall_id);
 	}
 
 	public int countComments(SqlSession session, int chall_id) {
@@ -95,8 +95,8 @@ public class ChallengeDAO {
 		return n;
 	}
 
-	public int upChall_liked(SqlSession session, String chall_id) {
-		int n = session.update("ChallengeMapper.upChall_liked", chall_id);
+	public int upChallLiked(SqlSession session, String chall_id) {
+		int n = session.update("ChallengeMapper.upChallLiked", chall_id);
 		return n;
 	}
 
@@ -110,8 +110,8 @@ public class ChallengeDAO {
 		return n;
 	}
 
-	public int downChall_liked(SqlSession session, String chall_id) {
-		int n = session.update("ChallengeMapper.downChall_liked", chall_id);
+	public int downChallLiked(SqlSession session, String chall_id) {
+		int n = session.update("ChallengeMapper.downChallLiked", chall_id);
 		return n;
 	}
 
@@ -120,14 +120,19 @@ public class ChallengeDAO {
 		return n;
 	}
 
-	public int upChall_comments(SqlSession session, String chall_id) {
-		int n = session.update("ChallengeMapper.upChall_comments", chall_id);
+	public int upChallComments(SqlSession session, String chall_id) {
+		int n = session.update("ChallengeMapper.upChallComments", chall_id);
 		return n;
 	}
 
-	public int downChall_comments(SqlSession session, String chall_id) {
-		int n = session.update("ChallengeMapper.downChall_comments", chall_id);
+	public int downChallComments(SqlSession session, String chall_id) {
+		int n = session.update("ChallengeMapper.downChallComments", chall_id);
 		return n;
+	}
+
+	public String selectProfileImg(SqlSession session, String userid) {
+		String profile_img = session.selectOne("ChallengeMapper.selectProfileImg", userid);
+		return profile_img;
 	}
 
 

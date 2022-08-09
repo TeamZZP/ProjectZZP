@@ -70,7 +70,9 @@
 				<td colspan="2">
 					<div>
 					  <label for="formFileMultiple" class="form-label">첨부파일</label>
-					  <img alt="" src="<%=qDTO.getQ_IMG()%>.png" width="100px" height="100px">
+					  <%if(qDTO.getUSERID() != " "){ %>
+					  <img alt="" src="/eclipse/upload/<%=qDTO.getQ_IMG()%>" width="100px" height="100px">
+					  <%} %>
 					</div>
 				</td>
 			</tr>

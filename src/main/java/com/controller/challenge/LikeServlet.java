@@ -1,4 +1,4 @@
-package com.challenge.controller;
+package com.controller.challenge;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -48,7 +48,7 @@ request.setCharacterEncoding("utf-8");
 				
 				if (n == 1) {
 					//해당 게시글의 좋아요 수 올리기
-					int result = service.upChall_liked(chall_id);
+					int result = service.upChallLiked(chall_id);
 					System.out.println(result+"개의 레코드 좋아요수 업데이트");
 					
 					//좋아요 수 올린 후 해당 게시글의 좋아요 수 가져오기
@@ -64,7 +64,7 @@ request.setCharacterEncoding("utf-8");
 				
 				if (n == 1) {
 					//해당 게시글의 좋아요 수 내리기
-					int result = service.downChall_liked(chall_id);
+					int result = service.downChallLiked(chall_id);
 					System.out.println(result+"개의 레코드 좋아요수 업데이트");
 					
 					//좋아요 수 올린 후 해당 게시글의 좋아요 수 가져오기

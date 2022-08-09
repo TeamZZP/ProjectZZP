@@ -15,6 +15,7 @@
       display: block;
       position: relative;
       overflow: hidden;
+      border-radius: 15px;
     }
     .hover-zoomin img {
       width: 100%;
@@ -32,6 +33,11 @@
       -ms-transform: scale(1.1);
       transform: scale(1.1);
     } 
+    
+    .form-select {
+    	display: inline;
+    	width: 150px;
+    }
 </style>
 <%
 	PageDTO pDTO = (PageDTO) request.getAttribute("pDTO");
@@ -70,13 +76,13 @@
        <a href="ChallengeDetailServlet?chall_id=1">[이 달의 챌린지] 용기내! 챌린지</a>
      </div>
      <div class="col-sm-6">
-			<select name="sortBy" id="sortBy">
-				<option value="none" selected disabled hidden>정렬</option>
-				<option value="chall_id" <%if ("chall_id".equals(sortBy)) {%>selected <%}%>>최신순</option>
-				<option value="chall_liked" <%if ("chall_liked".equals(sortBy)) {%>selected <%}%>>인기순</option>
-				<option value="chall_comments" <%if ("chall_comments".equals(sortBy)) {%> selected <%}%>>댓글 많은순</option>
-			</select> 
-			<a href="ChallengeUIServlet">글쓰기</a>
+		<select name="sortBy" id="sortBy" class="form-select" aria-label="Default select example">
+			<option value="chall_id" selected>정렬</option>
+			<option value="chall_id" <%if ("chall_id".equals(sortBy)) {%>selected <%}%>>최신순</option>
+			<option value="chall_liked" <%if ("chall_liked".equals(sortBy)) {%>selected <%}%>>인기순</option>
+			<option value="chall_comments" <%if ("chall_comments".equals(sortBy)) {%> selected <%}%>>댓글 많은순</option>
+		</select> 
+		<a href="ChallengeUIServlet" class="btn btn-outline-success">글쓰기</a>
 	 </div>
 	 <div style="height: 10px"></div>
 	 

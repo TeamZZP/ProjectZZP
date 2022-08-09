@@ -38,15 +38,34 @@
 //로그인 시 회원인증 후 login 데이터 세션에 저장
 MemberDTO dto = (MemberDTO)session.getAttribute("login");
 	if(dto!=null){	
+%>
+		<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop">로그아웃</button>
+		<!-- <button type="button" onclick="location.href='LogoutServlet';"  class="btn btn-success" id="button_logout">로그아웃</button> -->
+		<!-- Modal -->
+			<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+			  <div class="modal-dialog">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			      </div>
+			      <div class="modal-body text-center">
+			        정말 로그아웃 하시겠습니까?
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-success" data-bs-dismiss="modal" onclick="location.href='LogoutServlet';">확인</button>
+			        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+<%
 		if(dto.getRole()==0){
 %>	
-      	<button type="button" onclick="location.href='LogoutServlet';"  class="btn btn-success" id="button_logout">로그아웃</button>
 		<button type="button" onclick="location.href='MypageServlet';"  class="btn btn-success" id="button_mypage">마이페이지</button>
 		<button type="button" onclick="location.href='CartListServlet';" class="btn btn-success" style="margin-right: 10px;">장바구니</button>
 <%
 		} else {
 %>	
-		<button type="button" onclick="location.href='LogoutServlet';"  class="btn btn-success" id="button_logout">로그아웃</button>
 		<button type="button" onclick="location.href='AdminpageServlet';"  class="btn btn-success" id="button_adminpage">관리자페이지</button>
 <%	
 		}
@@ -59,9 +78,8 @@ MemberDTO dto = (MemberDTO)session.getAttribute("login");
 <%
 	} 
 %>
-
-		
       </div>
+      
       <!-- 검색창 -->
 		<div class="container-fluid" style="margin-top: 5px;">
 			<form class="d-flex" style="float: right; display: inline-block;" action="ProductSearchServlet">
