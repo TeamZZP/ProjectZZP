@@ -1,5 +1,6 @@
 package com.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -24,13 +25,13 @@ public class QuestionDAO {
 		return dto;
 	}
 
-	public int questionInsert(SqlSession session, QuestionDTO qDTO) {
-		int num = session.insert("QuestionMapper.questionInsert", qDTO);
+	public int questionInsert(SqlSession session, HashMap<String, String> map) {
+		int num = session.insert("QuestionMapper.questionInsert", map);
 		return num;
 	}
 
-	public int questionUpdate(SqlSession session, QuestionDTO qDTO) {
-		int num = session.update("QuestionMapper.questionUpdate", qDTO);
+	public int questionUpdate(SqlSession session, HashMap<String, String> map) {
+		int num = session.update("QuestionMapper.questionUpdate", map);
 		return num;
 	}
 

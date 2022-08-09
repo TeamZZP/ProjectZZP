@@ -2,6 +2,7 @@ package com.controller.challenge;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -58,11 +59,18 @@ public class CommentsAddServlet extends HttpServlet {
 			
 			if (n == 1) {
 				//챌린지 테이블에 댓글수 컬럼 증가
-				int n2 = service.upChall_comments(chall_id);
+				int n2 = service.upChallComments(chall_id);
 				System.out.println(n2+"개의 게시글 댓글수 변경");
 			}
 			
+			//해당 게시글의 댓글 목록 가져오기
 			List<CommentsDTO> commentsList = service.selectAllComments(chall_id);
+			
+			//해당 게시글의 댓글 작성자들의 프로필 이미지 가져오기
+			HashMap<String, String> profileMap = new HashMap<String, String>();
+			for (CommentsDTO c : commentsList) {
+				profileMap.put(c.getUserid(), service.selectProfileImg(c.getUserid()));
+			}
 			
 			response.setContentType("text/html;charset=utf-8");
 			PrintWriter out = response.getWriter();
@@ -70,15 +78,29 @@ public class CommentsAddServlet extends HttpServlet {
 			
 			for (int i = 0; i < commentsList.size(); i++) {
 				CommentsDTO c = commentsList.get(i);
-				result += "<tr>";
-				result += "<td>"+c.getUserid()+"</td>";
-				result += "<td>"+c.getComment_content()+"</td><td>";
+				result += "<div class='d-flex flex-row p-3'>"
+						+ "<div style='padding: 10px; padding-right: 20px;'>"
+						+ "<a href='ProfileMainServlet?userid="+c.getUserid()+"'>"
+						+ "<img src='images/"+profileMap.get(c.getUserid())+"' width='30' height='30' class='rounded-circle mr-3'>"
+						+ "</a></div>"
+						+ "<div class='w-100'>"
+						+ "<div class='d-flex justify-content-between align-items-center'>"
+						+ "<div class='d-flex flex-row align-items-center'> "
+						+ "<a href='ProfileMainServlet?userid="+c.getUserid()+"'>"
+						+ "<span class='mr-2'>"+c.getUserid()+"</span>"
+						+ "</a></div> "
+						+ "<small class='commentTime'></small>"
+						+ "<script>$('.commentTime').html(displayedAt('"+c.getComment_created()+"'));</script>"
+						+ "</div>"
+						+ "<p class='text-justify mb-0'>"+c.getComment_content()+"</p>"
+						+ "<div class='d-flex flex-row user-feed'> "
+						+ "<a class='ml-3'>답글 달기</a> &nbsp;&nbsp;&nbsp;";
 				if (c.getUserid()!=null && c.getUserid().equals(userid)) {
-					result += "<span class='commentDelBtn' data-cid='"+c.getComment_id()+"'>삭제</span>";
+					result += "<a class='ml-3 commentDelBtn' data-cid='"+c.getComment_id()+"'>삭제</a>";
 				} else {
-					result += "<a href=''>신고</a>";
+					result += "<a class='ml-3'>신고</a>";
 				}
-				result += "</td></tr>";
+				result += "</div></div></div>";
 			}
 			out.print(result);
 			

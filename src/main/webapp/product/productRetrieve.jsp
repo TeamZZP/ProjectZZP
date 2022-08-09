@@ -195,7 +195,7 @@ for(int i = 0; i <ilist.size();i++){
 <tr>
 <td>총</td> 
 <td></td>
-<td><a id="total" ><%=p_selling_price%></a> &nbsp원</td>
+<td><a id="total"><%=p_selling_price%></a> &nbsp원</td>
 </tr>
 
 <tr>
@@ -204,8 +204,9 @@ for(int i = 0; i <ilist.size();i++){
 
 <tr>
 <td><button type="button" class="btn btn-success">주문하기</button></td>
-<td>&nbsp&nbsp&nbsp&nbsp</td>
-<td><button type="button" class="btn btn-success">장바구니</button></td>
+<td>&nbsp&nbsp&nbsp&nbsp<button type="button" class="btn btn-success">장바구니</button></td>
+<td>&nbsp&nbsp&nbsp&nbsp<a id="productLike" onclick="productLike(<%=p_id%>)"><img src="images/like.png" width="23" height="23"></a></td>
+
 </tr>
 
 </table>

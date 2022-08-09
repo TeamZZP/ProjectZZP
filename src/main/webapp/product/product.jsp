@@ -29,35 +29,31 @@ a{
 
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script>
+  var productLike = 0;
   
- function productLike(n) {
-	
+  
+ function productChoice(n) {
+	console.log(n);
 
   
-  <%
+ <%
 MemberDTO mdto = (MemberDTO)session.getAttribute("login");
 if(mdto != null){%>
 
-	var userid = mdto.getUserid();
-
-
-
-var productLike = 0;
+	var userid = '<%=mdto.getUserid()%>'; 
 
  $.ajax({
 	  
-	    type: "get",
-	    url: "ProductLikeServlet",
-	    data:  {
-             "p_id":n ,
-             "userid":userid
-             },
-             dataType : "Json",
+	         type: "get",
+	         url: "ProductLikeServlet",
+	         data:  {"p_id":n , "userid":userid},
+             dataType : "json",
              success : function(data,status,xhr){
             	 $("#productLike").val(productLike++);
-             },error : function (xhr,status,error){
+             },
+             error : function (xhr,status,error){
               console.log(error);
-             }
+             } 
 
 
   }); //end ajax
@@ -146,7 +142,7 @@ var productLike = 0;
 							</div>
 
 				<p style="color: green; font-size: 20px;"><%=p_selling_price %>원</p><br>
-				<a id="productLike" onclick="productLike(<%=p_id%>)"><img src="images/like.png" width="23" height="23"></a>
+				<a id="productLike" href="javascript:productChoice('<%=p_id%>')" value=""><img src="images/like.png" width="23" height="23"></a>
 				<a><img src="images/bubble.png" width="20" height="17"> </a>
 				<a><img src="images/cart.jpg" width="20" height="20"></a>
 			</div>

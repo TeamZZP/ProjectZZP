@@ -48,16 +48,15 @@ public class QuestionInsertServlet extends HttpServlet {
 			
 			System.out.println("qDTO " + qDTO);
 			
-			QuestionService service = new QuestionService();
-			int num = service.questionInsert(qDTO);
-			
-			if (num == 1) {
-				session.setAttribute("mesg", "게시물이 등록되었습니다");
-				response.sendRedirect("QuestionListServlet");
-			} else {
-				session.setAttribute("mesg", "게시물이 등록 실패");
-				response.sendRedirect("QuestionListServlet");
-			}
+			/*
+			 * QuestionService service = new QuestionService(); int num =
+			 * service.questionInsert(qDTO);
+			 * 
+			 * if (num == 1) { session.setAttribute("mesg", "게시물이 등록되었습니다");
+			 * response.sendRedirect("QuestionListServlet"); } else {
+			 * session.setAttribute("mesg", "게시물이 등록 실패");
+			 * response.sendRedirect("QuestionListServlet"); }
+			 */
 			
 		} else {
 			session.setAttribute("mesg", "로그인이 필요합니다");
