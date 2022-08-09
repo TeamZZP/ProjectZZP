@@ -268,6 +268,17 @@ public class ChallengeService {
 		return profile_img;
 	}
 
+	public List<CommentsDTO> selectAllReplies(int parent_id) {
+		List<CommentsDTO> list = null;
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		try {
+			list = dao.selectAllReplies(session, parent_id);
+		} finally {
+			session.close();
+		}
+		return list;
+	}
+
 
 
 }

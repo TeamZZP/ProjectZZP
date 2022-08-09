@@ -6,17 +6,20 @@ public class CommentsDTO {
 	private String comment_content;
 	private String comment_created;
 	private String userid;
+	private int parent_id;
 	public CommentsDTO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public CommentsDTO(int comment_id, int chall_id, String comment_content, String comment_created, String userid) {
+	public CommentsDTO(int comment_id, int chall_id, String comment_content, String comment_created, String userid,
+			int parent_id) {
 		super();
 		this.comment_id = comment_id;
 		this.chall_id = chall_id;
 		this.comment_content = comment_content;
 		this.comment_created = comment_created;
 		this.userid = userid;
+		this.parent_id = parent_id;
 	}
 	public int getComment_id() {
 		return comment_id;
@@ -48,10 +51,17 @@ public class CommentsDTO {
 	public void setUserid(String userid) {
 		this.userid = userid;
 	}
+	public int getParent_id() {
+		return parent_id;
+	}
+	public void setParent_id(int parent_id) {
+		this.parent_id = parent_id;
+	}
 	@Override
 	public String toString() {
 		return "CommentsDTO [comment_id=" + comment_id + ", chall_id=" + chall_id + ", comment_content="
-				+ comment_content + ", comment_created=" + comment_created + ", userid=" + userid + "]";
+				+ comment_content + ", comment_created=" + comment_created + ", userid=" + userid + ", parent_id="
+				+ parent_id + "]";
 	}
 	
 }
