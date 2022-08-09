@@ -1,4 +1,4 @@
-package com.challenge.controller;
+package com.controller.Question;
 
 import java.io.File;
 import java.io.IOException;
@@ -26,8 +26,8 @@ import com.service.ChallengeService;
 /**
  * Servlet implementation class UploadServlet
  */
-@WebServlet("/UploadServlet")
-public class UploadServlet extends HttpServlet {
+@WebServlet("/QuestionUploadServlet")
+public class QuestionUploadServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
@@ -35,10 +35,8 @@ public class UploadServlet extends HttpServlet {
 		//회원전용처리
 		HttpSession session = request.getSession();
 		MemberDTO member = (MemberDTO) session.getAttribute("login"); 
-		String userid = request.getParameter("userid");
-		System.out.println(userid);
 		
-		if (member!=null && member.getUserid().equals(userid)) {
+		if (member!=null) {
 			
 			//multipart 여부 검사
 			boolean isMultipart= ServletFileUpload.isMultipartContent(request);
@@ -97,7 +95,7 @@ public class UploadServlet extends HttpServlet {
 							
 							try {
 								item.write(new File(dir, saveName));
-								map.put("chall_img", saveName);
+								map.put("question_img", saveName);
 								
 							}catch (Exception e) {
 								e.printStackTrace();

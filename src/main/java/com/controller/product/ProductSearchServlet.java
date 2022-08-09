@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.dto.CategoryProductDTO;
 import com.dto.ProductDTO;
 import com.service.ProductService;
 
@@ -25,13 +26,13 @@ public class ProductSearchServlet extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		
-		if (searchValue!=null) {
+		if (searchValue!=null&&searchValue!="") {
 			ProductService service = new ProductService();
-			List<ProductDTO> list = service.searchProduct(searchValue);
+			List<CategoryProductDTO> list = service.searchProduct(searchValue);
 			System.out.println(list);
 			
 			request.setAttribute("productList", list);
-			RequestDispatcher dis = request.getRequestDispatcher("productSearch.jsp");
+			RequestDispatcher dis = request.getRequestDispatcher("product.jsp");
 			dis.forward(request, response);
 		} else {
 			session.setAttribute("mesg", "검색어를 입력하세요!"); 

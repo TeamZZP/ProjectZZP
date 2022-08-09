@@ -15,6 +15,7 @@
       display: block;
       position: relative;
       overflow: hidden;
+      border-radius: 15px;
     }
     .hover-zoomin img {
       width: 100%;

@@ -3,8 +3,11 @@
     <%@page import="com.dto.ImagesDTO" %>
     <%@page import="com.dto.CategoryProductDTO" %>
     <%@page import="com.dto.CategoryDTO" %>
+    <%@page import="com.dto.MemberDTO" %>
     <%@page import="java.util.List" %>
+    <% System.out.println("product.product.jsp");%>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
   
   <style>
   .container {
@@ -24,6 +27,54 @@ a{
 </style>
 
 
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script>
+  
+ function productLike(n) {
+	
+
+  
+  <%
+MemberDTO mdto = (MemberDTO)session.getAttribute("login");
+if(mdto != null){%>
+
+	var userid = mdto.getUserid();
+
+
+
+var productLike = 0;
+
+ $.ajax({
+	  
+	    type: "get",
+	    url: "ProductLikeServlet",
+	    data:  {
+             "p_id":n ,
+             "userid":userid
+             },
+             dataType : "Json",
+             success : function(data,status,xhr){
+            	 $("#productLike").val(productLike++);
+             },error : function (xhr,status,error){
+              console.log(error);
+             }
+
+
+  }); //end ajax
+
+<%}else{%>
+ alert("로그인이 필요합니다.");
+ event.preventDefault();
+<%}%>
+
+
+  } 
+  
+  
+  </script>
+
+
+
   <div class="container ">
  		<h1 class="display=3" align="center">상품 목록</h1>
 		</div>
@@ -39,7 +90,9 @@ a{
   %>
 	<div class=container >
 		<div class="row" align="center">
+		
 				<%
+				
 				 for ( int i = 0 ; i < plist.size() ; i++ ) {
 					   
 					    int p_id = plist.get(i).getP_id();
@@ -59,6 +112,7 @@ a{
 					<img src="images/p_image/<%=p_image%>.png "  class="img-thumbnail" style=" width:300; height:300; "></a> 
 				<a href="ProductRetrieveServlet?p_id=<%=p_id%>">
 					<h2 style="margin-bottom:0.3em; font-weight:normal; color:#646464; font-size: 25px; display: "><%=p_name %></h2></a> 
+
 				<p style="color: green; font-size: 20px;"><%=p_selling_price %>원</p>
 				<a><img src="images/like.png" width="30" height="30"></a>
 				<a><img src="images/bubble.png" width="25" height="22"> </a>
@@ -90,6 +144,13 @@ a{
 				</div>
 								
 							</div>
+
+				<p style="color: green; font-size: 20px;"><%=p_selling_price %>원</p><br>
+				<a id="productLike" onclick="productLike(<%=p_id%>)"><img src="images/like.png" width="23" height="23"></a>
+				<a><img src="images/bubble.png" width="20" height="17"> </a>
+				<a><img src="images/cart.jpg" width="20" height="20"></a>
+			</div>
+
 			<%
 				}
 			%>	

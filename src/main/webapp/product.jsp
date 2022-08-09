@@ -5,9 +5,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
         <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+        
 
 <%@page import="com.dto.ProductDTO"%>
 <%@page import="java.util.List"%>
+<% System.out.println("webapp.product.jsp");%>
 <link type="text/css" rel="stylesheet" href="<c:url value='/bootstrap/css/bootstrap.css'/>"/>    
 <link type="text/css" rel="stylesheet" href="<c:url value='/bootstrap/css/bootstrap.min.css'/>"/>    
 <script src="<c:url value='/bootstrap/js/bootstrap.js'/>" type="text/javascript"></script>

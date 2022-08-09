@@ -24,7 +24,7 @@ public class MainServlet extends HttpServlet {
 		ChallengeService service = new ChallengeService();
 		List<ChallengeDTO> list = service.selectNewChallenge();
 		System.out.println(list);
-		request.setAttribute("newchall", list);;
+		request.setAttribute("newchall", list);
 		
 		RequestDispatcher dis = request.getRequestDispatcher("main.jsp");		
 		dis.forward(request, response);
