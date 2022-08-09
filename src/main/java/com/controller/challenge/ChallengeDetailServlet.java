@@ -50,7 +50,7 @@ public class ChallengeDetailServlet extends HttpServlet {
 		ChallengeService service = new ChallengeService();
 		
 		//조회수 +1 한 후 dto 가져오기
-		service.updateChall_hits(chall_id); 
+		service.updateChallHits(chall_id); 
 		ChallengeDTO dto = service.selectOneChallenge(chall_id);
 		
 		//해당 게시글의 댓글 목록 가져오기
@@ -59,14 +59,14 @@ public class ChallengeDetailServlet extends HttpServlet {
 		//해당 게시글의 댓글 작성자들의 프로필 이미지 가져오기
 		HashMap<String, String> profileMap = new HashMap<String, String>();
 		for (CommentsDTO c : commentsList) {
-			profileMap.put(c.getUserid(), service.selectProfile_img(c.getUserid()));
+			profileMap.put(c.getUserid(), service.selectProfileImg(c.getUserid()));
 		}
 		
 		//해당 게시글 작성자의 프로필 이미지 가져오기
-		String profile_img = service.selectProfile_img(dto.getUserid());
+		String profile_img = service.selectProfileImg(dto.getUserid());
 		
 		//현재 로그인한 회원의 프로필 이미지 가져오기
-		String currProfile_img = service.selectProfile_img(userid);
+		String currProfile_img = service.selectProfileImg(userid);
 		
 		//현재 로그인한 회원이 해당 게시글에 좋아요를 눌렀는지 판단하기
 		HashMap<String, String> likedMap = new HashMap<String, String>();

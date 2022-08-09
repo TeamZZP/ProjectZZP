@@ -54,7 +54,7 @@ public class CommentsDeleteServlet extends HttpServlet {
 			
 			if (n == 1) {
 				//챌린지 테이블에 댓글수 컬럼 감소
-				int n2 = service.downChall_comments(chall_id);
+				int n2 = service.downChallComments(chall_id);
 				System.out.println(n2+"개의 게시글 댓글수 변경");
 			}
 			
@@ -64,7 +64,7 @@ public class CommentsDeleteServlet extends HttpServlet {
 			//해당 게시글의 댓글 작성자들의 프로필 이미지 가져오기
 			HashMap<String, String> profileMap = new HashMap<String, String>();
 			for (CommentsDTO c : commentsList) {
-				profileMap.put(c.getUserid(), service.selectProfile_img(c.getUserid()));
+				profileMap.put(c.getUserid(), service.selectProfileImg(c.getUserid()));
 			}
 			
 			response.setContentType("text/html;charset=utf-8");
@@ -84,7 +84,8 @@ public class CommentsDeleteServlet extends HttpServlet {
 						+ "<a href='ProfileMainServlet?userid="+c.getUserid()+"'>"
 						+ "<span class='mr-2'>"+c.getUserid()+"</span>"
 						+ "</a></div> "
-						+ "<small>12h ago</small>"
+						+ "<small class='commentTime'></small>"
+						+ "<script>$('.commentTime').html(displayedAt('"+c.getComment_created()+"'));</script>"
 						+ "</div>"
 						+ "<p class='text-justify mb-0'>"+c.getComment_content()+"</p>"
 						+ "<div class='d-flex flex-row user-feed'> "
