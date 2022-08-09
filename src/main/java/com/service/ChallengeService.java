@@ -256,6 +256,18 @@ public class ChallengeService {
 		return n;
 	}
 
+	public String selectProfile_img(String userid) {
+		String profile_img = null;
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		try {
+			profile_img = dao.selectProfile_img(session, userid);
+			session.commit();
+		} finally {
+			session.close();
+		}
+		return profile_img;
+	}
+
 
 
 }

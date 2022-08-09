@@ -26,7 +26,7 @@ public class ProductSearchServlet extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		
-		if (searchValue!=null) {
+		if (searchValue!=null&&searchValue!="") {
 			ProductService service = new ProductService();
 			List<CategoryProductDTO> list = service.searchProduct(searchValue);
 			System.out.println(list);

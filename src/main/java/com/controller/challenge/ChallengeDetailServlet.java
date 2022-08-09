@@ -1,6 +1,7 @@
 package com.controller.challenge;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -55,8 +56,17 @@ public class ChallengeDetailServlet extends HttpServlet {
 		//해당 게시글의 댓글 목록 가져오기
 		List<CommentsDTO> commentsList = service.selectAllComments(chall_id);
 		
-		//해당 게시글의 프로필 정보 가져와서 프로필 이미지만 전달
-		HashMap<String, String> profileMap = service.selectProfile(dto.getUserid());
+		//해당 게시글의 댓글 작성자들의 프로필 이미지 가져오기
+		HashMap<String, String> profileMap = new HashMap<String, String>();
+		for (CommentsDTO c : commentsList) {
+			profileMap.put(c.getUserid(), service.selectProfile_img(c.getUserid()));
+		}
+		
+		//해당 게시글 작성자의 프로필 이미지 가져오기
+		String profile_img = service.selectProfile_img(dto.getUserid());
+		
+		//현재 로그인한 회원의 프로필 이미지 가져오기
+		String currProfile_img = service.selectProfile_img(userid);
 		
 		//현재 로그인한 회원이 해당 게시글에 좋아요를 눌렀는지 판단하기
 		HashMap<String, String> likedMap = new HashMap<String, String>();
@@ -66,7 +76,9 @@ public class ChallengeDetailServlet extends HttpServlet {
 		
 		request.setAttribute("dto", dto);
 		request.setAttribute("commentsList", commentsList);
-		request.setAttribute("profile_img", profileMap.get("PROFILE_IMG"));
+		request.setAttribute("profileMap", profileMap);
+		request.setAttribute("profile_img", profile_img);
+		request.setAttribute("currProfile_img", currProfile_img);
 		request.setAttribute("likedIt", likedIt);
 		
 		RequestDispatcher dis = request.getRequestDispatcher("challengeDetail.jsp");

@@ -34,6 +34,38 @@ a {
 	text-decoration: none;
 	color: black;
 }
+
+/* 댓글 목록 */
+.card {
+    background-color: #fff;
+    border: none;
+}
+.form-color {
+    background-color: #fafafa
+}
+.form-control {
+    height: 48px;
+    border-radius: 15px;
+    text-indent: 10px;
+}
+.form-control:focus {
+    color: #495057;
+    background-color: #fff;
+    border-color: #35b69f;
+    outline: 0;
+    box-shadow: none;
+}
+.user-feed {
+    font-size: 14px;
+    margin-top: 12px;
+}
+#commentAddBtn {
+ position: absolute;
+    top: 0;
+    right: 5px;
+    margin-left: -10px;
+      box-sizing: border-box;
+}
 </style>
 <% 
 	ChallengeDTO dto = (ChallengeDTO) request.getAttribute("dto");
@@ -57,8 +89,15 @@ a {
 	
 	//이 글에 속한 댓글 list 얻어오기
 	List<CommentsDTO> commentsList = (List<CommentsDTO>) request.getAttribute("commentsList");
+	//이 글에 속한 댓글 작성자들의 프로필 이미지 얻어오기
+	HashMap<String, String> profileMap = (HashMap<String, String>) request.getAttribute("profileMap");
 	//이 글 작성자의 프로필 이미지 얻어오기
 	String profile_img = (String) request.getAttribute("profile_img");
+	//현재 로그인한 회원의 프로필 이미지 얻어오기
+	String currProfile_img = (String) request.getAttribute("currProfile_img");
+	if (currProfile_img == null) {
+		currProfile_img = "user.png";
+	}
 	//현재 회원이 이 글의 좋아요를 눌렀는지 판단하기 
 	int likedIt = (int) request.getAttribute("likedIt");
 	
@@ -169,8 +208,8 @@ a {
 			<div class="col">
 				<!-- 해당 게시글의 글쓴이인 경우 -->
 				<% if (userid.equals(currUserid)) { %>
-				<a href="ChallengeUIServlet?chall_id=<%= chall_id %>&userid=<%= currUserid %>">수정</a> 
-				<a href="ChallengeDeleteServlet?chall_id=<%= chall_id %>&userid=<%= currUserid %>" id="deleteChallenge">삭제</a>
+				<a href="ChallengeUIServlet?chall_id=<%= chall_id %>&userid=<%= currUserid %>" class="btn btn-outline-success">수정</a> 
+				<a href="ChallengeDeleteServlet?chall_id=<%= chall_id %>&userid=<%= currUserid %>" id="deleteChallenge" class="btn btn-outline-success">삭제</a>
 				<!-- 그외의 경우 -->
 				<% } else { %>
 				<a href="">신고</a>
@@ -221,50 +260,83 @@ a {
 		<div class="row" style="height: 100px;">
 			<%= chall_content %>
 		</div>
-
-		<div>댓글 목록</div>
-
-		<div>
-			<table id="comment_area" style="width: 100%">
-			<% for (CommentsDTO comment : commentsList) {
-		    	int comment_id = comment.getComment_id();
-		    	String comment_content = comment.getComment_content();
-		    	String comment_created = comment.getComment_created();
-		    	String commentUserid = comment.getUserid();
-	   	 	%>
-				<tr>
-					<td><%= commentUserid %></td>
-					<td><%= comment_content %></td>
-					<!-- 해당 댓글의 작성자인 경우 -->
-					<td>
-						<% if (commentUserid!=null && commentUserid.equals(currUserid)) { %>
-						<a href="CommentsDeleteServlet?chall_id=<%= chall_id %>&comment_id=<%= comment_id %>&userid=<%= currUserid %>"
-							class="commentDelBtn">삭제</a> 
-						<% } else { %> <!-- 그외의 경우 --> 
-						<a href="">신고</a> 
-						<% } %>
-					</td>
-				</tr>
-			<%} %>
-			</table>
-		</div>
-
-		<div>
-			<input type="text" name="comment_content" id="comment_content"
-				placeholder="칭찬과 격려의 댓글은 작성자에게 큰 힘이 됩니다 :)">
-			<button id="commentAddBtn" class="btn btn-outline-success">입력</button>
-		</div>
-
-		<div class="row">
-		  <div class="col">
-		  	<a href="ChallengeListServlet">목록</a>
-		  </div>
-		  <div class="col">
-		  	<a href="ChallengeUIServlet">글쓰기</a>
-		  </div>
-		</div>
-
+		
 	</div>
-
-
 </div>
+
+		
+<div class="container mt-5 mb-5">
+    <div class="row height d-flex justify-content-center align-items-center">
+        <div class="col-md-7">
+            <div class="card">
+                <div class="p-3">
+                    <h6>댓글</h6>
+                </div>
+                <div class="mt-3 d-flex flex-row align-items-center p-3 form-color"> 
+                	<img src="images/<%= currProfile_img %>" width="50" class="rounded-circle mr-2"> &nbsp;&nbsp;&nbsp;
+                	<input type="text" class="form-control" name="comment_content" id="comment_content" 
+                		placeholder="칭찬과 격려의 댓글은 작성자에게 큰 힘이 됩니다 :)"> 
+                	<button id="commentAddBtn" class="btn btn-outline-success">입력</button>
+                </div>
+                
+                <div class="mt-2" id="comment_area"> 
+                <% for (CommentsDTO comment : commentsList) {
+			    	int comment_id = comment.getComment_id();
+			    	String comment_content = comment.getComment_content();
+			    	String comment_created = comment.getComment_created();
+			    	String commentUserid = comment.getUserid();
+	   	 		%>
+                    <div class="d-flex flex-row p-3"> 
+                    	<div style="padding: 10px; padding-right: 20px;">
+                    		<a href="ProfileMainServlet?userid=<%= userid %>">
+                    			<img src="images/<%= profileMap.get(comment.getUserid()) %>" width="30" height="30" class="rounded-circle mr-3"></a>
+                        </div>
+                        <div class="w-100">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="d-flex flex-row align-items-center"> 
+                                	<a href="ProfileMainServlet?userid=<%= commentUserid %>">
+                                	<span class="mr-2"><%= commentUserid %></span></a> 
+                                </div> 
+                                <small>12h ago</small>
+                            </div>
+                            <p class="text-justify mb-0"><%= comment_content %></p>
+                            <div class="d-flex flex-row user-feed"> 
+                            	<a class="ml-3">답글 달기</a> &nbsp;&nbsp;&nbsp;
+                            	<!-- 해당 댓글의 작성자인 경우 -->
+                            	<% if (commentUserid!=null && commentUserid.equals(currUserid)) { %>
+								<a class="ml-3 commentDelBtn" data-cid="<%= comment_id %>">삭제</a> 
+								<!-- 그외의 경우 --> 
+								<% } else { %> 
+								<a class="ml-3">신고</a> 
+								<% } %>
+                            </div>
+                        </div>
+                    </div>
+                <%} %>    
+                </div>
+                
+                
+                
+            </div>
+        
+        
+        
+        <div class="row" style="padding-top: 30px;">
+		  <div class="col">
+		  	<a href="ChallengeListServlet" class="btn btn-outline-success">목록</a>
+		  </div>
+		  <div class="col" style="text-align: right">
+		  	<a href="ChallengeUIServlet" class="btn btn-outline-success">글쓰기</a>
+		  </div>
+		</div>
+		
+		
+        </div>
+    </div>
+</div>
+		
+		
+		
+
+		
+

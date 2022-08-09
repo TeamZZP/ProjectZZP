@@ -102,7 +102,7 @@
 <select id="selectAllComments" resultType="com.dto.CommentsDTO">
 	select * from comments
 	where chall_id=#{chall_id}
-	order by comment_id
+	order by comment_id desc
 </select>
 
 <delete id="deleteComment">
@@ -167,6 +167,11 @@
 
 <select id="selectProfile" resultType="hashmap">
 	select * from profile
+	where userid=#{userid}
+</select>
+
+<select id="selectProfile_img" resultType="string">
+	select profile_img from profile
 	where userid=#{userid}
 </select>
 
