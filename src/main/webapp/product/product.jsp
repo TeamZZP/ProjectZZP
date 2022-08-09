@@ -28,8 +28,10 @@ a{
 <script type="text/javascript"
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
+var productLike = 0;
+
 function productLike(n) {
-	
+		console.log(n);
 
 	  
 	  <%
@@ -37,11 +39,11 @@ function productLike(n) {
 	MemberDTO mdto = (MemberDTO)session.getAttribute("login");
 	if(mdto != null){%>
 
-		var userid = mdto.getUserid();
+		var userid =  '<%=mdto.getUserid()%>'; 
 
 
 
-	var productLike = 0;
+	
 
 	 $.ajax({
 		  
@@ -51,7 +53,7 @@ function productLike(n) {
 	             "p_id":n ,
 	             "userid":userid
 	             },
-	             dataType : "Json",
+	             dataType : "json",
 	             success : function(data,status,xhr){
 	            	 $("#productLike").val(productLike++);
 	             },error : function (xhr,status,error){
@@ -140,7 +142,7 @@ function productLike(n) {
 					<a style="margin-bottom:0.3em; font-weight:normal; color:#646464; font-size: 25px;"><%=p_name %></a></a> 
 				<p style="color: green; font-size: 20px;"><%=p_selling_price %>원</p>
 				<!-- 찜기능  -->
-				<a id="productLike" onclick="productLike(<%=p_id%>)"><img src="images/like.png" width="30" height="30"></a>
+				<a id="productLike" href="javascript:productChoice(<%=p_id%>)"><img src="images/like.png" width="30" height="30"></a>
 				<a><img src="images/bubble.png" width="25" height="22"> </a>
 				<!-- 장바구니 모달창-->
 				 <a type="button" class="btn " data-bs-toggle="modal" data-bs-target="#staticBackdrop">
