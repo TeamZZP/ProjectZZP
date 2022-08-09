@@ -13,27 +13,30 @@
 <script type="text/javascript">
 
 $(function() {
-   
-   $("#up").click(function() {
-      
-      var count=$("#count").val();
-      $("#count").val(parseInt(count)+1);
-      
-      
-   });//end up
-   
+	
+	$("#up").click(function() {
+		
+		var count=parseInt($("#count").val());
+		$("#count").val(parseInt(count)+1);
+		
+		var sellingPrice = $("#sellingPrice").text();
+		//수정
+	    $("#total").text((count+1)*sellingPrice);
+		
+	});//end up
+	
     $("#down").click(function() {
-      
-       var count=$("#count").val();
-       
-       if(count>1){
-      $("#count").val(parseInt(count)-1);
-       }else{
-          $("#count").val(1);
-       }
-       
-       
-   });//end down
+		
+    	var count=parseInt($("#count").val());
+    	
+    	if(count!=1){
+    		$("#count").val(parseInt(count)-1);
+    		var sellingPrice = $("#sellingPrice").text();
+    		$("#total").text((count-1)*sellingPrice);
+    	}
+    	
+    	
+	});//end down
    
    //$("#total").text(parseInt($("#count").val())*parseInt($("#total")));
    
