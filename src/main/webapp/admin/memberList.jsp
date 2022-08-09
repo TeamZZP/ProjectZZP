@@ -10,6 +10,31 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- Bootstrap CSS -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("#delete").on("click", function() {
+			event.preventDefault();
+			//console.log($(this).attr("data-xxx"));
+			console.log("click");//첫번째 선택자만 이벤트 실행됨
+/* 			//*****ajax
+			$.ajax({
+				type : "post",
+				url : "AccountDeleteServlet",//페이지 이동 없이 해당 url에서 작업 완료 후 데이터만 가져옴
+				dataType : "text",
+				data : {//서버에 전송할 데이터
+					userid : $("#userid").val()
+				},
+				success : function(data, status, xhr) {
+					alert(data);
+				},
+				error: function(xhr, status, error) {
+					console.log(error);
+				}						
+			});//end ajax */
+		});//end fn
+	});//end ready
+</script>
 <div class="dropdown">
   <button class="btn btn-success btn-sm dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
     카테고리
@@ -67,7 +92,7 @@
 	} */
 
 %>
-
+<form>
 	<tr>
 		<td><%= userid %></td>
 		<td><%= username %></td>
@@ -75,17 +100,19 @@
 		<td><%= phone %></td>
 		<td><%= post_num + "&nbsp;&nbsp;&nbsp;" + addr1+ "&nbsp;" + addr2 %></td>
 		<td>
-			<button class="btn btn-outline-success btn-sm">수정</button>
-			<button class="btn btn-outline-success btn-sm">삭제</button>
+			<button type="button" class="btn btn-outline-success btn-sm" id="change" data-xxx="<%= userid %>">수정</button>
+			<button type="button" class="btn btn-outline-success btn-sm" id="delete" data-xxx="<%= userid %>">삭제</button>
 		</td>
 <%
 			}
 //		}
 	}
 %>
+
 	</tr>
+</form>
 </table>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
 
