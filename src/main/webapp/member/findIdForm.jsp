@@ -50,6 +50,8 @@
 			$(".type").click(function() {
 				var chkvalue = $(".type:checked").val();
 				if (chkvalue=='email') {
+					$("#username").val("");
+					$("#username").focus();
 					$("#phonediv").css("display","none");
 					$("#email").css("display","");
 				} else {

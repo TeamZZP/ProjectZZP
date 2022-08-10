@@ -34,15 +34,25 @@
 	 			QuestionDTO qDTO = list.get(i);
 	 			String created = qDTO.getQ_CREATED();
 	 			String crete = created.substring(0, 10);
-	%>
+
+	 			String user = qDTO.getUSERID();
+	 %>
     	<tr>
     		<td> <%= qDTO.getQ_ID() %> </td>
-    		<td> <span id="pId<%=qDTO.getP_ID()%>"><%=qDTO.getP_ID()%></span> </td>
+    		<td> <span id="pId<%=qDTO.getP_ID()%>"> <%=qDTO.getP_ID()%> </span> </td>
     		<td> <%= qDTO.getQ_CATEGORY() %> </td>
     		<td> <a style="text-decoration: none; color: black;" 
     			href="QuestionOneSelect?Q_ID=<%= qDTO.getQ_ID() %>&USERID=<%=qDTO.getUSERID()%>"> <%= qDTO.getQ_TITLE() %> </a> </td>
     		<td> <%= crete %> </td>
-    		<td> <%= qDTO.getUSERID() %> </td>
+    		<td> 
+    			<% 
+    			   String use = "";	
+    			   for(int j=0; j < user.substring(5).length(); j++){
+    				use += "*";
+    			%>
+    			<% } %>
+    			<%= user.substring(0, 5).concat(use) %>
+    		</td>
     		<td> <%= qDTO.getQ_STATUS() %> </td>
     	</tr>
     <%
