@@ -1,5 +1,6 @@
 package com.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -34,6 +35,11 @@ public class ProductDAO {
 	public List<ImagesDTO> ImagesRetrieve(SqlSession session, int p_id) {
 		List<ImagesDTO> ilist = session.selectList("ImagesRetrieve",p_id);
 		return ilist;
+	}
+
+	public int addLike(SqlSession session, HashMap<String, String> map) {
+		int n = session.insert("addLike",map);
+		return n;
 	}
 
 
