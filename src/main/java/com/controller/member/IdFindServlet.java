@@ -20,17 +20,16 @@ public class IdFindServlet extends HttpServlet {
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
+		HttpSession session = request.getSession();
+		
+		String type = request.getParameter("type");
 		String username = request.getParameter("username");
 		String phone = request.getParameter("phone");
 		String email1 = request.getParameter("email1");
 		String email2 = request.getParameter("email2");
-		System.out.println(username);
-		System.out.println(phone);
-		System.out.println(email1);
-		System.out.println(email2);
-		HttpSession session = request.getSession();
-		//전화번호로 찾기
-		if (phone!=""&&phone!=null) {
+		System.out.println(type);
+		
+		if (type.equals("phone")) {
 			HashMap<String, String> map = new HashMap<String, String>();
 			map.put("username", username);
 			map.put("phone", phone);
@@ -39,7 +38,7 @@ public class IdFindServlet extends HttpServlet {
 			MemberDTO dto = service.findId(map);
 			if (dto!=null) {
 				session.setAttribute("findId", dto);
-				response.sendRedirect("member/findIresult.jsp");
+				response.sendRedirect("findIresult.jsp");
 			} else {
 				 response.setContentType("text/html; charset=UTF-8");
 		         PrintWriter out = response.getWriter();
@@ -49,11 +48,33 @@ public class IdFindServlet extends HttpServlet {
 		         out.println("</script>");
 		         out.flush();
 		         response.sendRedirect("IdFindUIServlet");
+		         return;
 			}
 		} 
 		//이메일로 찾기
-		if (email1!=""&&email1!=null) {
-			
+		else {
+			HashMap<String, String> map = new HashMap<String, String>();
+			map.put("username", username);
+			map.put("email1", email1);
+			map.put("email2", email2);
+			System.out.println(map);
+			MemberService service = new MemberService();
+			MemberDTO dto = service.findIdforemail(map);
+			System.out.println(dto);
+			if (dto!=null) {
+				session.setAttribute("findId", dto);
+				response.sendRedirect("findIresult.jsp");
+			} else {
+				 response.setContentType("text/html; charset=UTF-8");
+		         PrintWriter out = response.getWriter();
+				 out.println("<script language='javascript'>");
+		         out.println("alert('해당 회원 정보가 없습니다:(')");
+		         out.println("location.href='IdFindUIServlet';");
+		         out.println("</script>");
+		         out.flush();
+		         response.sendRedirect("IdFindUIServlet");
+		         return;
+			}
 		}
 	}
 
