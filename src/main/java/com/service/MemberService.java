@@ -121,4 +121,15 @@ public class MemberService {
 		return memberList;
 	}
 
+	public MemberDTO findIdforemail(HashMap<String, String> map) {
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		MemberDTO dto = null;
+		try {
+			dto = dao.findIdforemail(session, map);
+		} finally {
+			session.close();
+		}
+		return dto;
+	}
+
 }

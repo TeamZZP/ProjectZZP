@@ -1,61 +1,73 @@
 <%@page import="org.apache.ibatis.reflection.SystemMetaObject"%>
 <%@page import="com.dto.ProductDTO"%>
 <%@page import="com.dto.MemberDTO"%>
-<%@page import="com.dto.ImagesDTO" %>
-<%@page import="java.util.List" %>
+<%@page import="com.dto.ImagesDTO"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-
-
-  
-  
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	pageEncoding="UTF-8"%>
+<%
+	String mesg = (String)session.getAttribute("mesg");
+	if(mesg != null){
+%>
+	<script>
+	alert("<%=mesg%>");
+	</script>
+<%
+	session.removeAttribute("mesg");
+	}
+%>	
+<script type="text/javascript"
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
+	$(function() {
 
-$(function() {
+		$("#up").click(function() {
+
+			var count = parseInt($("#p_amount").val());
+			$("#p_amount").val(parseInt(count) + 1);
+
+			var sellingPrice = $("#sellingPrice").text();
+			//수정
+			$("#total").text((count + 1) * sellingPrice);
+
+		});//end up
+
+		$("#down").click(function() {
+
+			var count = parseInt($("#p_amount").val());
+
+			if (count != 1) {
+				$("#p_amount").val(parseInt(count) - 1);
+				var sellingPrice = $("#sellingPrice").text();
+				$("#total").text((count - 1) * sellingPrice);
+			}
+
+		});//end down
+
+		 $("#cart").on("click", function() {
+			if ($("#p_amount").val() == 0) {
+				alert("수량을 선택하세요.");
+				event.preventDefault();
+			}
+			$("form").attr("action", "productCartServlet");
+		})//cart 
+
+	})//end ready
+
+	/* function imageChange(this) {
 	
-	$("#up").click(function() {
-		
-		var count=parseInt($("#count").val());
-		$("#count").val(parseInt(count)+1);
-		
-		var sellingPrice = $("#sellingPrice").text();
-		//수정
-	    $("#total").text((count+1)*sellingPrice);
-		
-	});//end up
+	 //수정
+	 String src2 = this.src;
 	
-    $("#down").click(function() {
-		
-    	var count=parseInt($("#count").val());
-    	
-    	if(count!=1){
-    		$("#count").val(parseInt(count)-1);
-    		var sellingPrice = $("#sellingPrice").text();
-    		$("#total").text((count-1)*sellingPrice);
-    	}
-    	
-    	
-	});//end down
-   
-   //$("#total").text(parseInt($("#count").val())*parseInt($("#total")));
-   
-})//end ready
-
-function imageChange(this) {
-   
-   $("#firstImage").attr("src",this.src );
-   
-}
-
-
+	 $("#firstImage").attr(src,src2 )
+	
+	 } */
 </script>
 
 
 
 <%
-
-ProductDTO pdto = (ProductDTO)request.getAttribute("ProductRetrieveDTO");
+ProductDTO pdto = (ProductDTO) request.getAttribute("ProductRetrieveDTO");
 
 int c_id = pdto.getC_id();
 String p_content = pdto.getP_content();
@@ -66,166 +78,172 @@ int p_id = pdto.getP_id();
 String p_name = pdto.getP_name();
 int p_selling_price = pdto.getP_selling_price();
 int p_stock = pdto.getP_stock();
-
-%>  
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+%>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+	crossorigin="anonymous">
 
 <%
-List<ImagesDTO> ilist = (List<ImagesDTO>)request.getAttribute("ImagesRetrieveList");
+List<ImagesDTO> ilist = (List<ImagesDTO>) request.getAttribute("ImagesRetrieveList");
 
-System.out.println("productRetrieve.jsp에서 파싱한 pdto=="+pdto);
-System.out.println("productRetrieve.jsp에서 파싱한 ilist=="+ilist);%>
-
-
-
-<html>
-
-<style>
-table { font-family: sans-serif; }
-
-</style>
-<head>
-
-
-<body>
-<form action="#">
-<div class="row">
-<div class="col-md-1"></div>
-<div class="col-md-5">
-<table > <!-- 제품사진 -->
-
-<% 
-for(int i = 0; i <ilist.size();i++){
-
-   
-   String image_route = ilist.get(i).getImage_route();
-   int image_rnk = ilist.get(i).getImage_rnk();
-   String update_date = ilist.get(i).getUpdate_date();
+System.out.println("productRetrieve.jsp에서 파싱한 pdto==" + pdto);
+System.out.println("productRetrieve.jsp에서 파싱한 ilist==" + ilist);
 %>
 
-<% if(image_rnk ==1){%> 
-<tr>
-<td colspan="4">
-<img id="firstImage" src="images/p_image/<%= ilist.get(i).getImage_route()%>.png" class="img-thumbnail" style="height: 500; width: 600;"></td>
-</tr>
-<%}%>
-
-<tr>
 
 
-   
-   
-   <div class="row">
-   <div class="col-md-6">
-   <td>
-   <%if (image_rnk !=1){%> 
-      <img src="images/p_image/<%= ilist.get(i).getImage_route()%>.png" class="img-thumbnail" style="height: 100; width: 100;" onmouseover="imageChange(this)">
-   <%}%>
-   </td>
-   </div>
-   </div>
-   
 
+<style>
+	table {
+	font-family: sans-serif;
+	}
+</style>
 
-</tr>
-</table>
-<%}%>
-</div>   
-<div class="col-md-1"></div>
-<div class="col-md-5">
-<table> <!-- 상품 설명 -->
+	<form  name="goodRetrieveForm" action="#" method="get">
+		<div class="row">
+			<div class="col-md-1"></div>
+			<div class="col-md-5">
+				<table>
+					<!-- 제품사진 -->
 
-<hr>
+					<%
+					for (int i = 0; i < ilist.size(); i++) {
 
-<tr>
-<td>상품명 &nbsp</td>
-<td> </td>
-<td><%= p_name%></td>
-</tr>
+						String image_route = ilist.get(i).getImage_route();
+						int image_rnk = ilist.get(i).getImage_rnk();
+						String update_date = ilist.get(i).getUpdate_date();
+					%>
+					<input type="hidden" name="p_id" value="<%=p_id%>">
+					<input type="hidden" name="p_image" value="<%=ilist.get(i).getImage_route()%>">
+					<input type="hidden" name="p_name" value="<%=p_name%>">
+					<input type="hidden" name="p_selling_price" value="<%=p_selling_price%>">
+					<%
+					if (image_rnk == 1) {
+					%>
+					<tr>
+						<td colspan="4">
+						<img id="firstImage"
+							src="images/p_image/<%=ilist.get(i).getImage_route()%>.png"
+							class="img-thumbnail" style="height: 500; width: 600;"></td>
+					</tr>
+					<%
+					}
+					%>
 
-<tr>
-<td> &nbsp  </td>
-</tr>
+					<tr>
+						<div class="row">
+							<div class="col-md-6">
+								<td>
+									<%
+									if (image_rnk != 1) {
+									%> 
+									<img
+									src="images/p_image/<%=ilist.get(i).getImage_route()%>.png"
+									class="img-thumbnail" style="height: 100; width: 100;"
+									onmouseover="imageChange(this)"> <%
+ }
+ %>
+								</td>
+							</div>
+						</div>
+					</tr>
+				</table>
+				<%
+				}
+				%>
+			</div>
+			<div class="col-md-1"></div>
+			<div class="col-md-5">
+				<table>
+					<!-- 상품 설명 -->
 
-<tr>
-<td>설명 &nbsp</td>
-<td> </td>
-<td><%= p_content %></td>
-</tr>
+					<tr>
+						<td>상품명</td>
+						<td></td>
+						<td><%=p_name%></td>
+					</tr>
 
-<tr>
-<td> &nbsp  </td>
-</tr>
+					<tr>
+						<td></td>
+					</tr>
 
-<tr>
-<td>가격 &nbsp</td>
-<td> </td>
-<td><p id="sellingPrice"> <%= p_selling_price%></p>&nbsp원</td>
-</tr>
+					<tr>
+						<td>설명</td>
+						<td></td>
+						<td><%=p_content%></td>
+					</tr>
 
-<tr>
-<td> &nbsp  </td>
-</tr>
+					<tr>
+						<td></td>
+					</tr>
 
-<tr>
-<td>배송비 &nbsp</td> 
-<td> </td>
-<td>3,000원(50,000원 이상 무료배송)
-</td>
-</tr>
+					<tr>
+						<td>총 상품가격</td>
+						<td></td>
+						<td><p id="sellingPrice"><%=p_selling_price%></p>&nbsp;원</td>
+					</tr>
 
-<tr>
-<td> &nbsp  </td>
-</tr>
+					<tr>
+						<td></td>
+					</tr>
 
-<tr>
-<td>수량</td> 
-<td></td>
-<td><input id="count" value="1">
-<button type="button" class="btn btn-outline-success" id="up">+</button>
-<button type="button" class="btn btn-outline-success" id="down">-</button>
-</td>
-<td>
+					<tr>
+						<td>배송비</td>
+						<td></td>
+						<td>3,000원(50,000원 이상 무료배송)</td>
+					</tr>
 
-</td>
+					<tr>
+						<td></td>
+					</tr>
 
-</tr>
+					<tr>
+						<td>수량</td>
+						<td></td>
+						<td><input id="p_amount" name="p_amount" value="1" >
+							<button type="button" class="btn btn-outline-success" id="up">+</button>
+							<button type="button" class="btn btn-outline-success" id="down">-</button>
+						</td>
+						<td></td>
 
-<tr>
-<td> &nbsp  </td>
-</tr>
+					</tr>
 
-<tr>
-<td>총</td> 
-<td></td>
-<td><a id="total"><%=p_selling_price%></a> &nbsp원</td>
-</tr>
+					<tr>
+						<td></td>
+					</tr>
 
-<tr>
-<td> &nbsp  </td>
-</tr>
+					<tr>
+						<td>총 상품가격</td>
+						<td></td>
+						<td><a id="total"><%=p_selling_price%></a>원</td>
+					</tr>
 
-<tr>
-<td><button type="button" class="btn btn-success">주문하기</button></td>
-<td>&nbsp&nbsp&nbsp&nbsp<button type="button" class="btn btn-success">장바구니</button></td>
-<td>&nbsp&nbsp&nbsp&nbsp<a id="productLike" onclick="productLike(<%=p_id%>)"><img src="images/like.png" width="23" height="23"></a></td>
+					<tr>
+						<td></td>
+					</tr>
 
-</tr>
+					<tr>
+						<td><button type="button" class="btn btn-success">주문하기</button></td>
+						<td></td>
+						<td><button type="submit" class="btn btn-success" id="cart">장바구니</button></td>
+					</tr>
 
-</table>
-</div> 
-</div>
-
-</body>
-</form>
+				</table>
+			</div>
+		</div>
+	</form>
 
 <div class="row">
- <div class="btn-group" role="group" aria-label="Basic example">
-<button type="button" class="btn btn-outline-success" id="productDetail" href="#">제품상세</button>
-<button type="button" class="btn btn-outline-success" id="productReview" href="#">구매후기</button>
-<button type="button" class="btn btn-outline-success" id="productQnA" href="#">QnA</button>
-</div>
+	<div class="btn-group" role="group" aria-label="Basic example">
+		<button type="button" class="btn btn-outline-success"
+			id="productDetail">제품상세</button>
+		<button type="button" class="btn btn-outline-success"
+			id="productReview">구매후기</button>
+		<button type="button" class="btn btn-outline-success" id="productQnA">QnA</button>
+	</div>
 
 
 </div>
-</html>
+

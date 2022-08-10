@@ -125,5 +125,16 @@ public class QuestionService {
 		return list;
 	}
 
+	public List<QuestionDTO> prodQuestion(int pID) {
+		List<QuestionDTO> list = null;
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		try {
+			list = dao.prodQuestion(session, pID);
+		} finally {
+			session.close();
+		}
+		return list;
+	}
+
 
 }

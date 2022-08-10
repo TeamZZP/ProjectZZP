@@ -50,5 +50,9 @@ public class MemberDAO {
 		return memberList;
 
 	}
+
+	public MemberDTO findIdforemail(SqlSession session, HashMap<String, String> map) {
+		return session.selectOne("findIdforemail", map);
+	}
 	
 }

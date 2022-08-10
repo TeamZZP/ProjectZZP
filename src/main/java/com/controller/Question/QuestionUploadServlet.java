@@ -82,7 +82,11 @@ public class QuestionUploadServlet extends HttpServlet {
 							contentType= item.getContentType();
 							isInMemory=item.isInMemory();
 							sizeInBytes= item.getSize();
-							saveName = getTodayString() + "-" + fileName;
+							if (fileName.length() != 0) {
+								saveName = getTodayString() + "-" + fileName;
+							} else {
+								saveName = "null";
+							}
 							
 								System.out.println("fieldName====" + fieldName);					
 								System.out.println("fileName====" + fileName);					

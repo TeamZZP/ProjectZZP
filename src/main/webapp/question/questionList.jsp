@@ -20,11 +20,12 @@
     <table  style="text-align: center;" class="table table-hover">
     	<tr>
     		<td>번호</td>
-    		<td>상품</td>
+    		<td>상품번호</td>
     		<td>카테고리</td>
     		<td>제목</td>
     		<td>작성일</td>
     		<td>작성자</td>
+    		<td>답변상태</td>
     	</tr>
     <%
 	 		PageDTO pDTO = (PageDTO)session.getAttribute("pDTO");
@@ -33,21 +34,32 @@
 	 			QuestionDTO qDTO = list.get(i);
 	 			String created = qDTO.getQ_CREATED();
 	 			String crete = created.substring(0, 10);
-	%>
+
+	 			String user = qDTO.getUSERID();
+	 %>
     	<tr>
     		<td> <%= qDTO.getQ_ID() %> </td>
-    		<td> <span id="pId<%=qDTO.getP_ID()%>"><%=qDTO.getP_ID()%></span> </td>
+    		<td> <span id="pId<%=qDTO.getP_ID()%>"> <%=qDTO.getP_ID()%> </span> </td>
     		<td> <%= qDTO.getQ_CATEGORY() %> </td>
     		<td> <a style="text-decoration: none; color: black;" 
     			href="QuestionOneSelect?Q_ID=<%= qDTO.getQ_ID() %>&USERID=<%=qDTO.getUSERID()%>"> <%= qDTO.getQ_TITLE() %> </a> </td>
     		<td> <%= crete %> </td>
-    		<td> <%= qDTO.getUSERID() %> </td>
+    		<td> 
+    			<% 
+    			   String use = "";	
+    			   for(int j=0; j < user.substring(5).length(); j++){
+    				use += "*";
+    			%>
+    			<% } %>
+    			<%= user.substring(0, 5).concat(use) %>
+    		</td>
+    		<td> <%= qDTO.getQ_STATUS() %> </td>
     	</tr>
     <%
     	}
     %>
     <tr>
-		<td colspan="6">
+		<td colspan="7">
 			 <%
 		        int curPage = pDTO.getCurPage();
 		        int perPage = pDTO.getPerPage();
@@ -65,7 +77,7 @@
 		</td>
 	</tr>
     <tr>
-    	<td colspan="5"></td>
+    	<td colspan="6"></td>
     	<td>  
     		<button class="btn btn-outline-success" onclick="location.href='questionInsert.jsp'">글쓰기</button>
     	</td>

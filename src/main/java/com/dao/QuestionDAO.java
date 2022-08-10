@@ -87,5 +87,10 @@ public class QuestionDAO {
 		return list;
 	}
 
+	public List<QuestionDTO> prodQuestion(SqlSession session, int pID) {
+		List<QuestionDTO> list = session.selectList("QuestionMapper.prodQuestion", pID);
+		return list;
+	}
+
 
 }

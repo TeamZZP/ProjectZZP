@@ -135,6 +135,11 @@ public class ChallengeDAO {
 		return profile_img;
 	}
 
+	public List<CommentsDTO> selectAllReplies(SqlSession session, int parent_id) {
+		List<CommentsDTO> list = session.selectList("ChallengeMapper.selectAllReplies", parent_id);
+		return list;
+	}
+
 
 
 }
