@@ -53,7 +53,7 @@ select * from product
 </select>
 
 <insert id="addLike" parameterType="hashmap">
-insert into product_like (p_id,userid) values (#{p_id},#{userid})
+insert into product_liked values (#{p_id},#{userid})
 </insert>
 
 </mapper>
