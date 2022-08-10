@@ -4,9 +4,6 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ProductMapper">
 
-<!-- <select id="bestProduct" resultType="CategoryProductDTO">
-select * from product order by  order by p_stock desc
-</select>  -->
 
 
 <select id="productList" resultType="CategoryProductDTO" parameterType="int">

@@ -24,18 +24,6 @@ public class CategoryServlet extends HttpServlet {
 		
 		CategoryService service = new CategoryService();
 		
-		/*
-		 * int count = service.getCount(); System.out.println(count); HashMap<Integer,
-		 * String> map = new HashMap<Integer, String>();
-		 * 
-		 * for (int i = 0; i < count; i++) {
-		 * 
-		 * String c_name = service.categoryName(i); //카테고리 이름만 가져오기 map.put(i, c_name);
-		 * System.out.println(c_name); System.out.println(i); }
-		 * 
-		 * for (int key : map.keySet()) { String cName = map.get(key);
-		 * System.out.println(cName); }
-		 */
 		
 		List<CategoryDTO> list  = service.allCategory(); //카테고리 전체 데이터
 		

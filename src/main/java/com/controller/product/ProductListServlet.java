@@ -23,12 +23,7 @@ public class ProductListServlet extends HttpServlet {
 		  
 		int c_id = Integer.parseInt( request.getParameter("c_id"));
 		
-		if(c_id==0||c_id<6) {
-		/*	ProductService service = new ProductService();
-			List<CategoryProductDTO> list = service.bestProduct();*/
-			
-			
-		}else {
+	
 		
 		    ProductService service = new ProductService();
 			List<CategoryProductDTO> list = service.productList(c_id);  //카테고리상품 가져오기(이미지,productDTO)
@@ -41,7 +36,7 @@ public class ProductListServlet extends HttpServlet {
 			RequestDispatcher dis = request.getRequestDispatcher("product.jsp");
 			dis.forward(request, response);
 			  
-		}
+		
 
 		}
 		
