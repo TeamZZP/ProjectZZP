@@ -14,9 +14,9 @@
     <table>
     <%
   	 	 List<QuestionDTO> prodQuestionList = (List<QuestionDTO>)session.getAttribute("prodQuestionList");
-    	 for(QuestionDTO qDTO : prodQuestionList){
+   		 for(int i = 0; i < prodQuestionList.size(); i++){
+			 QuestionDTO qDTO = prodQuestionList.get(i);
     		 String user = qDTO.getUSERID();
-    		 
     		 String created = qDTO.getQ_CREATED().substring(0,10);
     %>
     	<tr id="questionDetail" data-QID="<%=qDTO.getQ_ID()%>">
