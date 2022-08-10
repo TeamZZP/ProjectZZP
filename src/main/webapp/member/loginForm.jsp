@@ -136,6 +136,7 @@ $(document).ready(function() {
 	
 });
 </script>
+
 <div class="login-page">
   <div class="form">
     <form class="login-form" action="LoginServlet" method="post">
@@ -146,8 +147,8 @@ $(document).ready(function() {
       <button type="reset" id="resetBtn">취소</button>
       <p class="message">Not registered? <a href="MemberUIServlet">Create an account</a></p>
       <p class="message">
-     	<a href="member/findIdForm.jsp">아이디찾기</a>
-      	<a href="member/findIdForm.jsp">비밀번호찾기</a>
+     	<a href="IdFindUIServlet">아이디찾기</a>
+      	<a href="PwFindUIServlet">비밀번호찾기</a>
       </p>
     </form>
     <a id="custom-login-btn" href="javascript:loginWithKakao();">

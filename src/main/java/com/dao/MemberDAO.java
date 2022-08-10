@@ -39,5 +39,9 @@ public class MemberDAO {
 		int num=session.update("MemberMapper.deleteMember", userid);
 		return num;
 	}
+
+	public MemberDTO findId(SqlSession session, HashMap<String, String> map) {
+		return session.selectOne("findId", map);
+	}
 	
 }

@@ -9,7 +9,6 @@
 <title>ZZP</title>
 <%
 	String mesg=(String) session.getAttribute("mesg");
-	//MemberDTO dto=(MemberDTO) session.getAttribute("login");
 	if (mesg != null){
 %>
 <script type="text/javascript">
@@ -18,14 +17,8 @@
 <%	
 	session.removeAttribute("mesg");
 	} 
-	//if (dto==null){
 %>	
-	<!-- <script type="text/javascript">
-		alert("로그아웃되었습니다");
-	</script> -->
-<%	
-	//}
-%>
+
 </head>
 <body>
 <jsp:include page="common/header.jsp" flush="true"></jsp:include><br>

@@ -98,4 +98,15 @@ public class MemberService {
 		return num;
 	}
 
+	public MemberDTO findId(HashMap<String, String> map) {
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		MemberDTO dto = null;
+		try {
+			dto = dao.findId(session, map);
+		} finally {
+			session.close();
+		}
+		return dto;
+	}
+
 }
