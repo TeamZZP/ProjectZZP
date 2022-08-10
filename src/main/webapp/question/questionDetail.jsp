@@ -43,6 +43,7 @@
 				datatype:"text",
 				success: function (date, status, xhr) {
 					alert("답변완료");
+					$("#answerCheck").text(date);
 					$("#answer").text(date);
 				},
 				error: function (xhr, status, error) {
@@ -114,7 +115,7 @@
 				<td colspan="2">
 					<div class="input-group">
 					  <span class="input-group-text">답변</span>
-					  <textarea class="form-control" readonly="readonly">
+					  <textarea class="form-control" readonly="readonly" id="answerCheck">
 					  	<%if(aDTO != null){ %>
 					  	<%= aDTO.getANSWER_CONTENT() %>
 					  	<%} else { %>
