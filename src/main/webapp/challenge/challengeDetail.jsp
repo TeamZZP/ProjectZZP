@@ -326,7 +326,8 @@ function displayedAt(createdAt) {
 	</div>
 </div>
 
-		
+
+<!-- 댓글 목록 -->		
 <div class="container mt-5 mb-5 comment">
     <div class="row height d-flex justify-content-center align-items-center">
         <div class="col-md-7">
@@ -351,8 +352,8 @@ function displayedAt(createdAt) {
 	   	 		%>
                     <div class="d-flex flex-row p-3"> 
                     	<div class="profile">
-                    		<a href="ProfileMainServlet?userid=<%= userid %>">
-                    			<img src="images/<%= profileMap.get(comment.getUserid()) %>" width="30" height="30" class="rounded-circle mr-3"></a>
+                    		<a href="ProfileMainServlet?userid=<%= commentUserid %>">
+                    			<img src="images/<%= profileMap.get(commentUserid) %>" width="30" height="30" class="rounded-circle mr-3"></a>
                         </div>
                         <div class="w-100">
                             <div class="d-flex justify-content-between align-items-center">
