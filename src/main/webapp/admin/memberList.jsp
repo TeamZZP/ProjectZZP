@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <%@page import="java.util.List"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.Set"%>
@@ -11,30 +10,7 @@
 	<!-- Bootstrap CSS -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script type="text/javascript">
-	$(document).ready(function() {
-		$("#delete").on("click", function() {
-			event.preventDefault();
-			//console.log($(this).attr("data-xxx"));
-			console.log("click");//첫번째 선택자만 이벤트 실행됨
-/* 			//*****ajax
-			$.ajax({
-				type : "post",
-				url : "AccountDeleteServlet",//페이지 이동 없이 해당 url에서 작업 완료 후 데이터만 가져옴
-				dataType : "text",
-				data : {//서버에 전송할 데이터
-					userid : $("#userid").val()
-				},
-				success : function(data, status, xhr) {
-					alert(data);
-				},
-				error: function(xhr, status, error) {
-					console.log(error);
-				}						
-			});//end ajax */
-		});//end fn
-	});//end ready
-</script>
+
 <div class="dropdown">
   <button class="btn btn-success btn-sm dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
     카테고리
@@ -92,16 +68,74 @@
 	} */
 
 %>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("#deleteMember").on("shown.bs.modal", function (e) {//#deleteMember modal 창을 열 때 선택한 버튼의 data-id를 가져옴(deleteID로 설정했더니 안돼서 다시 id로 바꿈)--modal창의 삭제 버튼에 저장
+		    var id = $(e.relatedTarget).data("id");
+		    $("#delete<%= userid %>").val(id);
+		});
+		$("#delete<%= userid %>").on("click", function() {
+			var userid=$(this).val();
+			console.log(userid);
+			//*****ajax
+			$.ajax({
+				type : "post",
+				url : "AccountDeleteServlet",//페이지 이동 없이 해당 url에서 작업 완료 후 데이터만 가져옴
+				dataType : "text",
+				data : {//서버에 전송할 데이터
+					userid : userid
+				},
+				success : function(data, status, xhr) {
+					alert(data);
+					//location.href="memberList.jsp";//수정 후 페이지 이동--새로운 목록으로 출력하도록 수정
+				},
+				error: function(xhr, status, error) {
+					console.log(error);
+				}						
+			});//end ajax
+		});
+<%--  		$("#checkDelete<%= userid %>").on("click", function() {//첫번째 선택자만 이벤트 실행됨//userid 추가해서 버튼 구분함--ok
+			event.preventDefault();
+			var id = $(this).attr("data-xxx");
+
+		});//end fn --%>
+	});//end ready
+</script>
 <form>
-	<tr>
+	<tr id="list">
 		<td><%= userid %></td>
 		<td><%= username %></td>
 		<td><%= email1+"@"+email2 %></td>
 		<td><%= phone %></td>
 		<td><%= post_num + "&nbsp;&nbsp;&nbsp;" + addr1+ "&nbsp;" + addr2 %></td>
 		<td>
-			<button type="button" class="btn btn-outline-success btn-sm" id="change" data-xxx="<%= userid %>">수정</button>
-			<button type="button" class="btn btn-outline-success btn-sm" id="delete" data-xxx="<%= userid %>">삭제</button>
+			<!-- Modal -->
+			<div class="modal fade" id="deleteMember" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+			  <div class="modal-dialog">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h5 class="modal-title" id="staticBackdropLabel">회원 삭제</h5>
+			        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			      </div>
+			      <div class="modal-body">
+			        <%-- 회원 <%= userid %>님을 삭제하시겠습니까?--첫번째 데이터가 출력됨 --%>
+			        선택한 회원을 삭제하시겠습니까?
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" id="delete<%= userid %>" class="btn btn-success">삭제</button>
+			        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+			<!-- Button trigger modal -->
+			<form name="delMember">
+				<input type="hidden" name="userid" value="<%= userid %>">
+			</form>
+			<button type="button" id="change<%= userid %>" data-xxx="<%= userid %>" class="btn btn-outline-success btn-sm">수정</button>
+			<button type="button" id="checkDelete<%= userid %>" data-id="<%= userid %>" class="btn btn-outline-dark btn-sm" data-bs-toggle="modal" data-bs-target="#deleteMember">
+				삭제
+			</button><!-- open modal -->
 		</td>
 <%
 			}
