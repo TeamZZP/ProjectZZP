@@ -52,8 +52,10 @@ a{
 			}
 		}
 	%>
-	<table border="1" style="border-collapse: collapse; text-align: center;" class="table table-hover">
-    				<colgroup style="caption-side: top;" >zzp 고정 공지</colgroup> 
+	<table style="border-collapse: collapse; text-align: center;" class="table table-hover">
+					<tr>
+						<td colspan="4" style="background-color: #8FBC8F" height="40px"></td>
+					</tr>
     				<tr>
 				    	<td>번호</td>
 				    	<td>제목</td>

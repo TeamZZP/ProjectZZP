@@ -28,12 +28,16 @@ public class CartListServlet extends HttpServlet {
 		
 		if(userid != null) {
 			CartService service = new CartService();
-			List<CartDTO> list = service.cartList(userid);
+			List<CartDTO> list = service.cartList(userid); 
+		
 			System.out.println("CartListServlet"+list);
 			request.setAttribute("cartList", list);
 			
-			RequestDispatcher dis = request.getRequestDispatcher("cartList");
+			RequestDispatcher dis = request.getRequestDispatcher("cartList.jsp");
 			dis.forward(request, response);
+		}else {
+			session.setAttribute("mssg", "로그인이 필요합니다");
+			response.sendRedirect("LoingUIServlet");
 		}
 	}
 

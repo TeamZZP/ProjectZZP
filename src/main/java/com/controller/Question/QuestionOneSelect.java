@@ -8,8 +8,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.dto.AnswerDTO;
 import com.dto.MemberDTO;
 import com.dto.QuestionDTO;
+import com.service.AnswerService;
 import com.service.QuestionService;
 
 /**
@@ -27,20 +29,26 @@ public class QuestionOneSelect extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		HttpSession session = request.getSession();
 		
-		String qID = request.getParameter("Q_ID");
+		String Q_ID = request.getParameter("Q_ID");
 		String userid = request.getParameter("USERID");
-		System.out.println("detailservlet " + qID + userid);
+		System.out.println("detailservlet " + Q_ID + userid);
 
 		MemberDTO mDTO = (MemberDTO) session.getAttribute("login");
 		if (mDTO != null) {
 			String mUserid = mDTO.getUserid();
 			
-			if (userid.equals(mUserid)) {
+			if (userid.equals(mUserid) || mUserid.equals("admin1")) {
 				QuestionService service = new QuestionService();
-				QuestionDTO dto = service.questionOneSelect(qID);
-				System.out.println(dto);
+				QuestionDTO dto = service.questionOneSelect(Q_ID);
+				System.out.println(dto); //list 얻어옴
 				
+				AnswerService Aservice = new AnswerService();
+				AnswerDTO aDTO = Aservice.selectAnswer(Q_ID);
+				System.out.println(aDTO);
+				
+				session.setAttribute("aDTO", aDTO);
 				session.setAttribute("questionOneSelect", dto);
+				session.setAttribute("userid", userid);
 				response.sendRedirect("questionDetail.jsp");
 			} else {
 				session.setAttribute("mesg", "다른 사용자의 글입니다");

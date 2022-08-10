@@ -183,6 +183,14 @@ CREATE TABLE chall_liked (
 );
 ALTER TABLE chall_liked ADD PRIMARY KEY (chall_id,userid);
 
+-- 큐엔에이 답변
+CREATE TABLE answer (
+	answer_id	number CONSTRAINT pk_answer_answer_id PRIMARY key,
+	answer_content	VARCHAR(200)	NOT NULL,
+	q_id	NUMBER CONSTRAINT FK_answer_q_id REFERENCES QUESTION(Q_ID) on DELETE CASCADE,
+	answer_created	DATE DEFAULT sysdate
+);
+
 -- 시퀀스
 CREATE SEQUENCE 테이블명_컬럼명_seq
   START WITH 1
@@ -253,7 +261,12 @@ CREATE SEQUENCE question_q_id_seq
   NOCYCLE
   NOCACHE;
 
-  
+ -- 답변 글 번호 시퀀스
+ CREATE SEQUENCE answer_answer_id
+  START WITH 1
+  INCREMENT BY 1
+  NOCYCLE
+  NOCACHE;
   
 -------------- insert --------------
 -- 상품

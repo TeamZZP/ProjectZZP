@@ -13,7 +13,9 @@ import javax.servlet.http.HttpSession;
 
 import com.dto.ImagesDTO;
 import com.dto.ProductDTO;
+import com.dto.QuestionDTO;
 import com.service.ProductService;
+import com.service.QuestionService;
 
 /**
  * Servlet implementation class productRetrieveServlet
@@ -31,6 +33,12 @@ public class ProductRetrieveServlet extends HttpServlet {
       ProductDTO pdto = service.productRetrieve(p_id);
       List <ImagesDTO> ilist = service.ImagesRetrieve(p_id);
       
+      	int pID = pdto.getP_id();
+		
+		QuestionService qservice = new QuestionService();
+		List<QuestionDTO> prodQuestionList = qservice.prodQuestion(pID);
+		System.out.println("prodQuestionList--- " + prodQuestionList);
+		
       /* HttpSession session = request.getSession(); */
       request.setAttribute("ProductRetrieveDTO", pdto);
       request.setAttribute("ImagesRetrieveList", ilist);
