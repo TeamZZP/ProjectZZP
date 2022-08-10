@@ -52,17 +52,15 @@ public class QuestionUpdateServlet extends HttpServlet {
 			qDTO.setUSERID(USERID);
 			System.out.println("qDTO " + qDTO);
 			
-			QuestionService service = new QuestionService();
-			int num = service.questionUpdate(qDTO);
-			System.out.println(num);
-			
-			if (num == 1) {
-				session.setAttribute("mesg", "게시물이 변경되었습니다");
-				response.sendRedirect("QuestionListServlet");
-			} else {
-				session.setAttribute("mesg", "게시물이 변경 실패");
-				response.sendRedirect("QuestionListServlet");
-			}
+			/*
+			 * QuestionService service = new QuestionService(); int num =
+			 * service.questionUpdate(qDTO); System.out.println(num);
+			 * 
+			 * if (num == 1) { session.setAttribute("mesg", "게시물이 변경되었습니다");
+			 * response.sendRedirect("QuestionListServlet"); } else {
+			 * session.setAttribute("mesg", "게시물이 변경 실패");
+			 * response.sendRedirect("QuestionListServlet"); }
+			 */
 			
 		} else {
 			session.setAttribute("mesg", "로그인이 필요합니다");

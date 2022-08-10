@@ -52,4 +52,9 @@
 			where username = #{username} and phone = #{phone}
 		</select>
 		
+
+		<select id="selectAllMember" resultType="MemberDTO">
+			select * from member
+		</select>
+
 </mapper>

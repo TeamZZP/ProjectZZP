@@ -9,14 +9,14 @@
 	<select id="questionOneSelect" resultType="QuestionDTO" parameterType="string">
 		select * from QUESTION where Q_ID = #{Q_ID}
 	</select>
-	<insert id="questionInsert" parameterType="QuestionDTO">
+	<insert id="questionInsert" parameterType="map">
 		insert into QUESTION (Q_BOARD_CATEGORY, Q_CATEGORY, Q_TITLE, Q_CONTENT, Q_CREATED, Q_IMG, Q_STATUS, Q_ID, P_ID, USERID)
-			values (#{Q_BOARD_CATEGORY}, #{Q_CATEGORY}, #{Q_TITLE}, #{Q_CONTENT}, sysdate, #{Q_IMG}, '답변대기', QUESTION_Q_ID_SEQ.nextval, 
+			values (#{Q_BOARD_CATEGORY}, #{Q_CATEGORY}, #{Q_TITLE}, #{Q_CONTENT}, sysdate, #{question_img}, '답변대기', QUESTION_Q_ID_SEQ.nextval, 
 			#{P_ID}, #{USERID})
 	</insert>
-	<update id="questionUpdate" parameterType="QuestionDTO">
+	<update id="questionUpdate" parameterType="map">
 		update QUESTION set Q_BOARD_CATEGORY = #{Q_BOARD_CATEGORY}, Q_CATEGORY = #{Q_CATEGORY}, Q_TITLE = #{Q_TITLE}, Q_CONTENT = #{Q_CONTENT},
-			Q_IMG = #{Q_IMG}, P_ID = #{P_ID}  where Q_ID = #{Q_ID} 
+			Q_IMG = #{question_img}, P_ID = #{P_ID}  where Q_ID = #{Q_ID} 
 	</update>
 	<delete id="questionDelete" parameterType="string">
 		delete from QUESTION where Q_ID = #{qID} 

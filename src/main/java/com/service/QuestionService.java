@@ -1,5 +1,6 @@
 package com.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -44,11 +45,11 @@ public class QuestionService {
 		return dto;
 	}
 
-	public int questionInsert(QuestionDTO qDTO) {
+	public int questionInsert(HashMap<String, String> map) {
 		int num = 0;
 		SqlSession session = MySqlSessionFactory.getSqlSession();
 		try {
-			num = dao.questionInsert(session, qDTO);
+			num = dao.questionInsert(session, map);
 			session.commit();
 		} finally {
 			session.close();
@@ -56,11 +57,11 @@ public class QuestionService {
 		return num;
 	}
 
-	public int questionUpdate(QuestionDTO qDTO) {
+	public int questionUpdate(HashMap<String, String> map) {
 		int num = 0;
 		SqlSession session = MySqlSessionFactory.getSqlSession();
 		try {
-			num = dao.questionUpdate(session, qDTO);
+			num = dao.questionUpdate(session, map);
 			session.commit();
 		} finally {
 			session.close();

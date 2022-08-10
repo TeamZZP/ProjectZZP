@@ -13,27 +13,30 @@
 <script type="text/javascript">
 
 $(function() {
-   
-   $("#up").click(function() {
-      
-      var count=$("#count").val();
-      $("#count").val(parseInt(count)+1);
-      
-      
-   });//end up
-   
+	
+	$("#up").click(function() {
+		
+		var count=parseInt($("#count").val());
+		$("#count").val(parseInt(count)+1);
+		
+		var sellingPrice = $("#sellingPrice").text();
+		//수정
+	    $("#total").text((count+1)*sellingPrice);
+		
+	});//end up
+	
     $("#down").click(function() {
-      
-       var count=$("#count").val();
-       
-       if(count>1){
-      $("#count").val(parseInt(count)-1);
-       }else{
-          $("#count").val(1);
-       }
-       
-       
-   });//end down
+		
+    	var count=parseInt($("#count").val());
+    	
+    	if(count!=1){
+    		$("#count").val(parseInt(count)-1);
+    		var sellingPrice = $("#sellingPrice").text();
+    		$("#total").text((count-1)*sellingPrice);
+    	}
+    	
+    	
+	});//end down
    
    //$("#total").text(parseInt($("#count").val())*parseInt($("#total")));
    
@@ -195,7 +198,7 @@ for(int i = 0; i <ilist.size();i++){
 <tr>
 <td>총</td> 
 <td></td>
-<td><a id="total" ><%=p_selling_price%></a> &nbsp원</td>
+<td><a id="total"><%=p_selling_price%></a> &nbsp원</td>
 </tr>
 
 <tr>
@@ -204,8 +207,9 @@ for(int i = 0; i <ilist.size();i++){
 
 <tr>
 <td><button type="button" class="btn btn-success">주문하기</button></td>
-<td>&nbsp&nbsp&nbsp&nbsp</td>
-<td><button type="button" class="btn btn-success">장바구니</button></td>
+<td>&nbsp&nbsp&nbsp&nbsp<button type="button" class="btn btn-success">장바구니</button></td>
+<td>&nbsp&nbsp&nbsp&nbsp<a id="productLike" onclick="productLike(<%=p_id%>)"><img src="images/like.png" width="23" height="23"></a></td>
+
 </tr>
 
 </table>

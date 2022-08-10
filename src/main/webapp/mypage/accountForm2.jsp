@@ -36,7 +36,7 @@
 <script>
 	$(document).ready(function() {
 		//$("#result1").css({"font-size":"13.5px", "font-weight":"bold"});
-		$("#result2").css({"font-size":"13.5px", "background-color":"lightgreen", "font-weight":"bold"});
+		$("#result2").css({"font-size":"14px", "background-color":"lightgreen", "font-weight":"bold"});
 		
 		//1. 비밀번호 입력 확인
 		$("#checkPasswd").on("focus", function () {
@@ -189,7 +189,7 @@
 						<div class="cols-sm-10">
 							<div class="input-group">
 								<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-								<input type="password" class="form-control" name="changedPasswd" id="changedPasswd" placeholder="영문자, 숫자, 특수문자를 포함하여 8~25자리를 입력하세요." style="width: 250px"/>
+								<input type="password" class="form-control" name="changedPasswd" id="changedPasswd" placeholder="영문자, 숫자, 특수문자를 포함하여 8~25자리를 입력하세요."/>
 							</div>
 						</div>
 					</div>
@@ -198,7 +198,9 @@
 						<div class="cols-sm-10">
 							<div class="input-group">
 								<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-								<input type="password" class="form-control" name="checkPasswd" id="checkPasswd" placeholder="비밀번호를 한번 더 입력하세요." style="width: 250px"/>
+								<input type="password" class="form-control" name="checkPasswd" id="checkPasswd" placeholder="비밀번호를 한번 더 입력하세요."/>
+							</div>
+							<div style="text-align: right">
 								<span id="result2"></span>
 							</div>
 						</div>
@@ -245,15 +247,15 @@
 						<div class="cols-sm-10">
 							<div class="input-group">
 								<span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
-								<input type="text" name="post" id="sample4_postcode" placeholder="우편번호" class="form-control" readonly="readonly" value="<%= post_num %>" style="width: 50px">
+								<input type="text" name="post" id="sample4_postcode" placeholder="우편번호" class="form-control" readonly="readonly" value="<%= post_num %>">
 								<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기" class="btn btn-outline-success"><br>
 							</div>
 							<div class="row g-3" style="margin-top: -10px;">
 								<div class="col-md-6">
-									<input type="text" name="addr1" id="sample4_roadAddress" placeholder="도로명주소" class="form-control" readonly="readonly" value="<%= addr1 %>" style="width: 380px">
+									<input type="text" name="addr1" id="sample4_roadAddress" placeholder="도로명주소" class="form-control" readonly="readonly" value="<%= addr1 %>">
 								</div>
 								<div class="col-md-6">
-									<input type="text" name="addr2" id="sample4_jibunAddress" placeholder="상세 주소를 입력하세요." class="form-control" value="<%= addr2 %>" style="width: 300px">
+									<input type="text" name="addr2" id="sample4_jibunAddress" placeholder="상세 주소를 입력하세요." class="form-control" value="<%= addr2 %>">
 									<span id="guide" style="color:#999"></span>
 								</div>                  
 							</div>

@@ -1,5 +1,6 @@
 package com.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -67,6 +68,19 @@ public class ProductService {
 			session.close();
 		}
 		return ilist;
+	}
+
+	public int addLike(HashMap<String, String> map) {		
+		int n = 0;
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+        try {
+        	n = dao.addLike(session, map);
+        	session.commit();
+        }finally {
+        	session.close();
+        }
+		
+		return n;
 	}
 
 
