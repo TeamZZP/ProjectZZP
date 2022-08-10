@@ -20,7 +20,7 @@
     		 String created = qDTO.getQ_CREATED().substring(0,10);
     %>
     	<tr id="questionDetail" data-QID="<%=qDTO.getQ_ID()%>">
-    		<td> <img alt="Q" src="images/question/question.png"> </td>
+    		<td> <img alt="Q" src="images/question/question.png" width="50px" height="50px"> </td>
     		<td> <%=qDTO.getQ_STATUS() %> </td>
     		<td> <% 
     			   String use = "";	
