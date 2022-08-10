@@ -90,10 +90,7 @@ function productLike(n) {
 			}
 		})//end down
 		
-		$("#cartView").on("click",function(){
-			
-		})
-	
+		
 	})//
 </script>
 
@@ -177,7 +174,7 @@ function productLike(n) {
 				      </div>
 				      <div class="modal-footer">
 				        <a href="" class="shopping">계속쇼핑하기</a>
-				        <a id="cartView">장바구니보기</a>
+				        <a href="productCartServlet">장바구니저장</a>
 				      </div>
 				    </div>
 				  </div>
