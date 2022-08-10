@@ -1,6 +1,7 @@
 package com.dao;
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -38,6 +39,16 @@ public class MemberDAO {
 	public int deleteMember(SqlSession session, String userid) {
 		int num=session.update("MemberMapper.deleteMember", userid);
 		return num;
+	}
+
+
+	public MemberDTO findId(SqlSession session, HashMap<String, String> map) {
+		return session.selectOne("findId", map);
+	}
+	public List<MemberDTO> selectAllMember(SqlSession session) {
+		List<MemberDTO> memberList=session.selectList("MemberMapper.selectAllMember");
+		return memberList;
+
 	}
 	
 }

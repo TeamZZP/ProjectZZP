@@ -18,95 +18,89 @@
 }
 
 a{
-	color : #646464;
-	text-decoration: none;
-	
+   color : #646464;
+   text-decoration: none;
+   
 }
 
 </style>
  
 <script type="text/javascript"
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+   src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-function productLike(n) {
-	
+var productLike = 0;
 
-	  
-	  <%
-	  
-	MemberDTO mdto = (MemberDTO)session.getAttribute("login");
-	if(mdto != null){%>
+function productChoice(n) {
+      console.log(n);
 
-		var userid = mdto.getUserid();
+     
+     <%
+     
+   MemberDTO mdto = (MemberDTO)session.getAttribute("login");
+   if(mdto != null){%>
 
-
-
-	var productLike = 0;
+      var userid =  '<%=mdto.getUserid()%>'; 
 
 	 $.ajax({
-		  
-		    type: "get",
-		    url: "ProductLikeServlet",
-		    data:  {
-	             "p_id":n ,
-	             "userid":userid
-	             },
-	             dataType : "Json",
-	             success : function(data,status,xhr){
-	            	 $("#productLike").val(productLike++);
-	             },error : function (xhr,status,error){
-	              console.log(error);
-	             }
+        
+          type: "get",
+          url: "ProductLikeServlet",
+          data:  {
+                "p_id":n ,
+                "userid":userid
+                },
+                dataType : "json",
+                success : function(data,status,xhr){
+                   $("#productLike").val(productLike++);
+                },error : function (xhr,status,error){
+                 console.log(error);
+                }
 
 
-	  }); //end ajax
+     }); //end ajax
 
-	<%}else{%>
-	 alert("로그인이 필요합니다.");
-	 event.preventDefault();
-	<%}%>
+   <%}else{%>
+    alert("로그인이 필요합니다.");
+    event.preventDefault();
+   <%}%>
 
 
-	  } 
-	$(function() {
-		$("#up").on("click",function(){
-			//input태그 수량변화
-			var quantity = parseInt($("#quantity").val()); 
-			$("#quantity").val(parseInt(quantity)+1);
-			
-			var price = $("#price").val();
-				//총합 구하기
-				$("#total").text((quantity+1)*price);
-		})//end up
-		
-		$("#down").on("click",function(){
-			var quantity = parseInt($("#quantity").val()); 
-			
-			if(quantity != 1){
-				$("#quantity").val(parseInt(quantity)-1);
-				var price = $("#price").val();
-				$("#total").text((quantity-1)*price);
-
+     } 
+   $(function() {
+      $("#up").on("click",function(){
+         //input태그 수량변화
+         var quantity = parseInt($("#quantity").val()); 
+         $("#quantity").val(parseInt(quantity)+1);
+         
+         var price = $("#price").val();
+            //총합 구하기
+            $("#total").text((quantity+1)*price);
+      })//end up
+      
+      $("#down").on("click",function(){
+         var quantity = parseInt($("#quantity").val()); 
+         
+         if(quantity != 1){
+            $("#quantity").val(parseInt(quantity)-1);
+            var price = $("#price").val();
+            $("#total").text((quantity-1)*price);
 			}
 		})//end down
 		
 		
 	})//
+        
 </script>
 
   <div class="container ">
-  	<div class="row">
- 		<h1 class="display=3" align="center">상품 목록</h1>
-		</div>
-	    <%
-	    
-	   
-		
-	
-    
+     <div class="row">
+       <h1 class="display=3" align="center">상품 목록</h1>
+      </div>
+       <%
+  
     //List<ImagesDTO> ilist = (List<ImagesDTO>)request.getAttribute("ImagesList");
     List<CategoryProductDTO> plist = (List<CategoryProductDTO>)request.getAttribute("productList");
-   	
+      
 
    // System.out.println("product/product.jsp에서 getAttribute한 ImagesDTO list==="+ilist);
    // System.out.println("product/product.jsp에서 getAttribute한 ProductDTO list==="+plist);
@@ -187,5 +181,4 @@ function productLike(n) {
 			</div>
 	
 		</div>
-  </div>
- 
+     

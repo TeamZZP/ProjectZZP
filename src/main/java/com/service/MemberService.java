@@ -1,6 +1,7 @@
 package com.service;
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -96,6 +97,28 @@ public class MemberService {
 			session.close();
 		}
 		return num;
+	}
+
+	public MemberDTO findId(HashMap<String, String> map) {
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		MemberDTO dto = null;
+		try {
+			dto = dao.findId(session, map);
+		} finally {
+			session.close();
+		}
+		return dto;
+	}
+	
+	public List<MemberDTO> selectAllMember() {
+		SqlSession session=MySqlSessionFactory.getSqlSession();
+		List<MemberDTO> memberList=null;
+		try {
+			memberList=dao.selectAllMember(session);
+		} finally {
+			session.close();
+		}
+		return memberList;
 	}
 
 }

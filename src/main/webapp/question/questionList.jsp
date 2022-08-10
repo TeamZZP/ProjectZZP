@@ -20,11 +20,12 @@
     <table  style="text-align: center;" class="table table-hover">
     	<tr>
     		<td>번호</td>
-    		<td>상품</td>
+    		<td>상품번호</td>
     		<td>카테고리</td>
     		<td>제목</td>
     		<td>작성일</td>
     		<td>작성자</td>
+    		<td>답변상태</td>
     	</tr>
     <%
 	 		PageDTO pDTO = (PageDTO)session.getAttribute("pDTO");
@@ -42,12 +43,13 @@
     			href="QuestionOneSelect?Q_ID=<%= qDTO.getQ_ID() %>&USERID=<%=qDTO.getUSERID()%>"> <%= qDTO.getQ_TITLE() %> </a> </td>
     		<td> <%= crete %> </td>
     		<td> <%= qDTO.getUSERID() %> </td>
+    		<td> <%= qDTO.getQ_STATUS() %> </td>
     	</tr>
     <%
     	}
     %>
     <tr>
-		<td colspan="6">
+		<td colspan="7">
 			 <%
 		        int curPage = pDTO.getCurPage();
 		        int perPage = pDTO.getPerPage();
@@ -65,7 +67,7 @@
 		</td>
 	</tr>
     <tr>
-    	<td colspan="5"></td>
+    	<td colspan="6"></td>
     	<td>  
     		<button class="btn btn-outline-success" onclick="location.href='questionInsert.jsp'">글쓰기</button>
     	</td>

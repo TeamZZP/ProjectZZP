@@ -23,23 +23,38 @@
 			select userid, passwd, username, email1, email2, phone, created_at, role
 			from member where userid=#{userid} and passwd=#{passwd}
 		</select>
+		
 		<select id="selectMember" parameterType="String" resultType="MemberDTO">
 			select * from member
 			where userid = #{userid}
 		</select>
+		
 		<update id="changePw" parameterType="hashmap">
 			update member
 			set passwd = #{changedPasswd} 
 			where userid = #{userid}
 		</update>
+		
 		<update id="changeEmail" parameterType="hashmap">
 			update member
 			set email1 = #{email1}, 
 				email2 = #{email2}
 			where userid = #{userid}
 		</update>
+		
 		<delete id="deleteMember">
 			delete from member
 			where userid = #{userid}
 		</delete>
+		
+		<select id="findId" parameterType="hashmap" resultType="MemberDTO">
+			select * from member
+			where username = #{username} and phone = #{phone}
+		</select>
+		
+
+		<select id="selectAllMember" resultType="MemberDTO">
+			select * from member
+		</select>
+
 </mapper>
