@@ -39,15 +39,18 @@ public class ProductRetrieveServlet extends HttpServlet {
 		List<QuestionDTO> prodQuestionList = qservice.prodQuestion(pID);
 		System.out.println("prodQuestionList--- " + prodQuestionList);
 		
-      /* HttpSession session = request.getSession(); */
+      HttpSession session = request.getSession(); 
       request.setAttribute("ProductRetrieveDTO", pdto);
       request.setAttribute("ImagesRetrieveList", ilist);
       
       /* response.sendRedirect("productRetrieve.jsp"); */
       
-      
-        RequestDispatcher dis = request.getRequestDispatcher("productRetrieve.jsp");
-        dis.forward(request, response);
+      	session.setAttribute("list", prodQuestionList);
+		response.sendRedirect("product/prodQA.jsp");
+		/*
+		 * RequestDispatcher dis = request.getRequestDispatcher("productRetrieve.jsp");
+		 * dis.forward(request, response);
+		 */
        
       
    }
