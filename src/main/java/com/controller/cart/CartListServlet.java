@@ -36,7 +36,7 @@ public class CartListServlet extends HttpServlet {
 			RequestDispatcher dis = request.getRequestDispatcher("cartList.jsp");
 			dis.forward(request, response);
 		}else {
-			session.setAttribute("mssg", "로그인이 필요합니다");
+			session.setAttribute("mesg", "로그인이 필요합니다");
 			response.sendRedirect("LoingUIServlet");
 		}
 	}
