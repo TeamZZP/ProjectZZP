@@ -42,4 +42,7 @@
 			delete from member
 			where userid = #{userid}
 		</delete>
+		<select id="selectAllMember" resultType="MemberDTO">
+			select * from member
+		</select>
 </mapper>
