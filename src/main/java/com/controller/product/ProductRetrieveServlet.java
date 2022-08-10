@@ -34,7 +34,8 @@ public class ProductRetrieveServlet extends HttpServlet {
       List <ImagesDTO> ilist = service.ImagesRetrieve(p_id);
       
       	int pID = pdto.getP_id();
-		
+      	
+     
 		QuestionService qservice = new QuestionService();
 		List<QuestionDTO> prodQuestionList = qservice.prodQuestion(pID);
 		System.out.println("prodQuestionList--- " + prodQuestionList);

@@ -24,9 +24,8 @@ public class ProductListServlet extends HttpServlet {
 		int c_id = Integer.parseInt( request.getParameter("c_id"));
 		
 		if(c_id==0||c_id<6) {
-			//베스트상품
-			
-			
+		/*	ProductService service = new ProductService();
+			List<CategoryProductDTO> list = service.bestProduct();*/
 			
 			
 		}else {
