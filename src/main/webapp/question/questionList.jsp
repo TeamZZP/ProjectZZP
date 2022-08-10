@@ -20,7 +20,7 @@
     <table  style="text-align: center;" class="table table-hover">
     	<tr>
     		<td>번호</td>
-    		<td>상품</td>
+    		<td>상품번호</td>
     		<td>카테고리</td>
     		<td>제목</td>
     		<td>작성일</td>
