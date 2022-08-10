@@ -24,7 +24,7 @@
 		#{chall_category}, 
 		0, 
 		0, 
-		sysdate, 
+		CURRENT_TIMESTAMP, 
 		#{chall_img},
 		0)
 </insert>
@@ -96,13 +96,38 @@
 
 <insert id="insertComment" parameterType="com.dto.CommentsDTO">
 	insert into comments
-	values (comments_comment_id_seq.NEXTVAL, #{chall_id}, #{comment_content}, sysdate, #{userid})
+		(comment_id,
+		chall_id,
+		comment_content,
+		comment_created,
+		userid
+		<if test="parent_id != null">
+		,parent_id
+		</if>
+		)
+	values 
+		(comments_comment_id_seq.NEXTVAL, 
+		#{chall_id}, 
+		#{comment_content}, 
+		CURRENT_TIMESTAMP, 
+		#{userid}
+		<if test="parent_id != null">
+		,#{parent_id}
+		</if>
+		)
 </insert>
 
 <select id="selectAllComments" resultType="com.dto.CommentsDTO">
 	select * from comments
 	where chall_id=#{chall_id}
+	and parent_id=0
 	order by comment_id desc
+</select>
+
+<select id="selectAllReplies" resultType="com.dto.CommentsDTO">
+	select * from comments
+	where parent_id=#{parent_id}
+	order by comment_id
 </select>
 
 <delete id="deleteComment">

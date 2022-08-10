@@ -1,8 +1,8 @@
 package com.controller.challenge;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -53,13 +53,24 @@ public class ChallengeDetailServlet extends HttpServlet {
 		service.updateChallHits(chall_id); 
 		ChallengeDTO dto = service.selectOneChallenge(chall_id);
 		
-		//해당 게시글의 댓글 목록 가져오기
+		//해당 게시글의 댓글 목록 가져오기 (답글 미포함)
 		List<CommentsDTO> commentsList = service.selectAllComments(chall_id);
+		
+		//해당 게시글의 댓글 목록 중 답글 가져오기
+		HashMap<Integer, List<CommentsDTO>> commentsMap = new HashMap<Integer, List<CommentsDTO>>();
+		List<CommentsDTO> replyList = null;
 		
 		//해당 게시글의 댓글 작성자들의 프로필 이미지 가져오기
 		HashMap<String, String> profileMap = new HashMap<String, String>();
 		for (CommentsDTO c : commentsList) {
+			
+			replyList = service.selectAllReplies(c.getComment_id());
+			commentsMap.put(c.getComment_id(), replyList);
+			
 			profileMap.put(c.getUserid(), service.selectProfileImg(c.getUserid()));
+			for (CommentsDTO r : replyList) {
+				profileMap.put(r.getUserid(), service.selectProfileImg(r.getUserid()));
+			}
 		}
 		
 		//해당 게시글 작성자의 프로필 이미지 가져오기
@@ -76,6 +87,7 @@ public class ChallengeDetailServlet extends HttpServlet {
 		
 		request.setAttribute("dto", dto);
 		request.setAttribute("commentsList", commentsList);
+		request.setAttribute("commentsMap", commentsMap);
 		request.setAttribute("profileMap", profileMap);
 		request.setAttribute("profile_img", profile_img);
 		request.setAttribute("currProfile_img", currProfile_img);
