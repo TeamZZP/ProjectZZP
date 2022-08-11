@@ -23,21 +23,23 @@ public class PwFindServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		
 		String type = request.getParameter("type");
+		String userid = request.getParameter("userid");
 		String username = request.getParameter("username");
 		String phone = request.getParameter("phone");
 		String email1 = request.getParameter("email1");
 		String email2 = request.getParameter("email2");
-		System.out.println(type);
 		
 		if (type.equals("phone")) {
 			HashMap<String, String> map = new HashMap<String, String>();
+			map.put("userid", userid);
 			map.put("username", username);
 			map.put("phone", phone);
+			map.put("type", type);
 			System.out.println(map);
 			MemberService service = new MemberService();
-			MemberDTO dto = service.findIdPw(map);
+			MemberDTO dto = service.findPw(map);
 			if (dto!=null) {
-				session.setAttribute("findId", dto);
+				session.setAttribute("findPw", dto);
 				response.sendRedirect("findPwResult.jsp");
 			} else {
 				 response.setContentType("text/html; charset=UTF-8");
@@ -54,15 +56,17 @@ public class PwFindServlet extends HttpServlet {
 		//이메일로 찾기
 		else {
 			HashMap<String, String> map = new HashMap<String, String>();
+			map.put("userid", userid);
 			map.put("username", username);
 			map.put("email1", email1);
 			map.put("email2", email2);
+			map.put("type", type);
 			System.out.println(map);
 			MemberService service = new MemberService();
-			MemberDTO dto = service.findIdPwforemail(map);
+			MemberDTO dto = service.findPw(map);
 			System.out.println(dto);
 			if (dto!=null) {
-				session.setAttribute("findId", dto);
+				session.setAttribute("findPw", dto);
 				response.sendRedirect("findPwResult.jsp");
 			} else {
 				 response.setContentType("text/html; charset=UTF-8");
