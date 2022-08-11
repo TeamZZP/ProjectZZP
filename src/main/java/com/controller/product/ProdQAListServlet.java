@@ -31,7 +31,7 @@ public class ProdQAListServlet extends HttpServlet {
 		List<QuestionDTO> prodQuestionList = service.prodQuestion(pID);
 		System.out.println("prodQuestionList--- " + prodQuestionList);
 		
-		session.setAttribute("list", prodQuestionList);
+		session.setAttribute("prodQuestionList", prodQuestionList);
 		response.sendRedirect("prodQA.jsp");
 	}
 

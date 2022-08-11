@@ -128,6 +128,14 @@ CREATE TABLE question (
 	p_id	VARCHAR2(40)		NULL REFERENCES product(p_id) ON DELETE CASCADE
 );
 
+-- 문의 답변
+CREATE TABLE answer (
+	answer_id	number		PRIMARY KEY,
+	answer_content	VARCHAR(200)		NOT NULL,
+	q_id	NUMBER		NOT NULL REFERENCES question(q_id) ON DELETE CASCADE,
+	answer_created	DATE	DEFAULT sysdate	NOT NULL
+);
+
 -- 챌린지 도장
 CREATE TABLE stamp (
 	stamp_id		VARCHAR2(10)		PRIMARY KEY,
@@ -173,6 +181,8 @@ CREATE TABLE comments (
 	chall_id	NUMBER		NOT NULL REFERENCES challenge(chall_id) ON DELETE CASCADE,
 	comment_content	VARCHAR2(800)		NOT NULL,
 	comment_created 		DATE 	DEFAULT sysdate		NOT NULL,
+	group_id 				NUMBER   NULL,
+	parent_id				NUMBER   NULL, 
 	userid	VARCHAR2(30)		NOT NULL REFERENCES member(userid) ON DELETE CASCADE
 );
 

@@ -47,6 +47,7 @@ a {
     height: 48px;
     border-radius: 15px;
     text-indent: 10px;
+    display: inline;
 }
 .form-control:focus {
     color: #495057;
@@ -59,12 +60,22 @@ a {
     font-size: 14px;
     margin-top: 12px;
 }
-#commentAddBtn {
- position: absolute;
+.profile {
+	padding: 10px; 
+	padding-right: 20px;
+}
+.commentBtn {
+	width: 10%;
+	background: none;
+	color: gray;
+	border: none;
+	display:inline;
     top: 0;
     right: 5px;
-    margin-left: -10px;
-      box-sizing: border-box;
+    box-sizing: border-box;
+}
+.commentBtn:hover {
+	color: #35b69f;
 }
 </style>
 <% 
@@ -89,6 +100,8 @@ a {
 	
 	//이 글에 속한 댓글 list 얻어오기
 	List<CommentsDTO> commentsList = (List<CommentsDTO>) request.getAttribute("commentsList");
+	//이 글에 속한 댓글의 답글 list 얻어오기
+	HashMap<Integer, List<CommentsDTO>> commentsMap = (HashMap<Integer, List<CommentsDTO>>) request.getAttribute("commentsMap");
 	//이 글에 속한 댓글 작성자들의 프로필 이미지 얻어오기
 	HashMap<String, String> profileMap = (HashMap<String, String>) request.getAttribute("profileMap");
 	//이 글 작성자의 프로필 이미지 얻어오기
@@ -115,24 +128,32 @@ a {
 			}
 		});
 		//댓글 입력 
-		$("#commentAddBtn").on("click", function () {
+		$(".comment").on("click", ".commentBtn", function () {
+			let cid = $(this).attr("data-cid");
 			if ("<%= currUserid %>" == "null") {
 				alert("로그인이 필요합니다.");
-			} else if ($("#comment_content").val().length == 0) {
-				$("#comment_content").focus();
+			} else if ($(this).hasClass("commentAddBtn") && $(".comment_content").val().length == 0) {
+				$(".comment_content").focus();
+			} else if ($(this).hasClass("commentReplyBtn") && $("#reply_content"+cid).val().length == 0) {
+				$("#reply_content"+cid).focus();
 			} else {
-				let comment_content = $("#comment_content").val();
+				let comment_content = $(".comment_content").val();
+				if ($(this).hasClass("commentReplyBtn")) {
+					comment_content = $("#reply_content"+cid).val();
+				}
 				$.ajax({
 					type:"post",
 					url:"CommentsAddServlet",
 					data: {
 						"chall_id":"<%= chall_id %>",
 						"comment_content":comment_content,
-						"userid":"<%= currUserid %>"
+						"userid":"<%= currUserid %>",
+						"parent_id":cid
 					},
 					dataType:"html",
 					success: function (data) {
-						$("#comment_content").val("");
+						$(".comment_content").val("");
+						$("#reply_content"+cid).val("");
 						$("#comment_area").html(data);
 						$("#commentsNum").text(parseInt($("#commentsNum").text())+1);
 					},
@@ -167,6 +188,15 @@ a {
 				event.preventDefault();
 			}
 		});
+		//댓글 답글 창 보이기
+		$("#comment_area").on("click", ".reply", function () {
+			if ("<%= currUserid %>" == "null") {
+				alert("로그인이 필요합니다.");
+			} else {
+				let comment_id = $(this).attr("data-cid");
+				$("#reply"+comment_id).css("display", "block");
+			}
+		});
 		
 		//좋아요 추가/삭제
 		$("#liked_area").on("click", ".liked", function () {
@@ -192,35 +222,36 @@ a {
 		});
 		
 		
-		
 	});
 	
 
 //댓글 게시 시각 구하기
 function displayedAt(createdAt) {
 	  const milliSeconds = new Date() - new Date(createdAt);
-	  console.log(milliSeconds)
 	  
 	  const seconds = milliSeconds / 1000;
-	  if (seconds < 60) return "방금 전";
-	  
 	  const minutes = seconds / 60;
-	  if (minutes < 60) return Math.floor(minutes)+"분 전";
-	  
 	  const hours = minutes / 60;
-	  if (hours < 24) return Math.floor(hours)+"시간 전";
-	  
 	  const days = hours / 24;
-	  if (days < 7) return Math.floor(days)+"일 전";
-	  
 	  const weeks = days / 7;
-	  if (weeks < 5) return Math.floor(weeks)+"주 전";
-	  
 	  const months = days / 30;
-	  if (months < 12) return Math.floor(months)+"개월 전";
-	  
 	  const years = days / 365;
-	  return Math.floor(years)+"년 전";
+	  
+	  if (seconds < 60) {
+		  return "방금 전";
+	  } else if (minutes < 60) {
+		  return Math.floor(minutes)+"분 전";
+	  } else if (hours < 24) {
+		  return Math.floor(hours)+"시간 전";
+	  } else if (days < 7) {
+		  return Math.floor(days)+"일 전";
+	  } else if (weeks < 5) {
+		  return Math.floor(weeks)+"주 전";
+	  } else if (months < 12) {
+		  return Math.floor(months)+"개월 전";
+	  } else {
+		  return Math.floor(years)+"년 전";
+	  }
 }
 	
 </script>
@@ -295,8 +326,9 @@ function displayedAt(createdAt) {
 	</div>
 </div>
 
-		
-<div class="container mt-5 mb-5">
+
+<!-- 댓글 목록 -->		
+<div class="container mt-5 mb-5 comment">
     <div class="row height d-flex justify-content-center align-items-center">
         <div class="col-md-7">
             <div class="card">
@@ -305,9 +337,9 @@ function displayedAt(createdAt) {
                 </div>
                 <div class="mt-3 d-flex flex-row align-items-center p-3 form-color"> 
                 	<img src="images/<%= currProfile_img %>" width="50" class="rounded-circle mr-2"> &nbsp;&nbsp;&nbsp;
-                	<input type="text" class="form-control" name="comment_content" id="comment_content" 
+                	<input type="text" class="comment_content form-control" name="comment_content"
                 		placeholder="칭찬과 격려의 댓글은 작성자에게 큰 힘이 됩니다 :)"> 
-                	<button id="commentAddBtn" class="btn btn-outline-success">입력</button>
+                	<button class="commentBtn commentAddBtn">입력</button>
                 </div>
                 
                 <div class="mt-2" id="comment_area"> 
@@ -319,9 +351,9 @@ function displayedAt(createdAt) {
 			    	String commentUserid = comment.getUserid();
 	   	 		%>
                     <div class="d-flex flex-row p-3"> 
-                    	<div style="padding: 10px; padding-right: 20px;">
-                    		<a href="ProfileMainServlet?userid=<%= userid %>">
-                    			<img src="images/<%= profileMap.get(comment.getUserid()) %>" width="30" height="30" class="rounded-circle mr-3"></a>
+                    	<div class="profile">
+                    		<a href="ProfileMainServlet?userid=<%= commentUserid %>">
+                    			<img src="images/<%= profileMap.get(commentUserid) %>" width="30" height="30" class="rounded-circle mr-3"></a>
                         </div>
                         <div class="w-100">
                             <div class="d-flex justify-content-between align-items-center">
@@ -329,12 +361,12 @@ function displayedAt(createdAt) {
                                 	<a href="ProfileMainServlet?userid=<%= commentUserid %>">
                                 	<span class="mr-2"><%= commentUserid %></span></a> 
                                 </div> 
-                                <small class="commentTime"></small>
-                                	<script>$(".commentTime").html(displayedAt('<%= comment_created %>'));</script>
+                                <small id="commentTime<%= comment_id %>"></small>
+                                	<script>$("#commentTime<%= comment_id %>").html(displayedAt('<%= comment_created %>'));</script>
                             </div>
                             <p class="text-justify mb-0"><%= comment_content %></p>
                             <div class="d-flex flex-row user-feed"> 
-                            	<a class="ml-3">답글 달기</a> &nbsp;&nbsp;&nbsp;
+                            	<a class="reply ml-3" data-cid="<%= comment_id %>">답글 달기</a> &nbsp;&nbsp;&nbsp;
                             	<!-- 해당 댓글의 작성자인 경우 -->
                             	<% if (commentUserid!=null && commentUserid.equals(currUserid)) { %>
 								<a class="ml-3 commentDelBtn" data-cid="<%= comment_id %>">삭제</a> 
@@ -345,7 +377,59 @@ function displayedAt(createdAt) {
                             </div>
                         </div>
                     </div>
-                <%} %>    
+                    
+                    
+                    <!-- 해당 댓글의 답글 목록 -->
+                    <%
+	                    List<CommentsDTO> replyList = commentsMap.get(comment_id);
+	                    for (CommentsDTO r : replyList) {
+                    %>
+                    <div class="d-flex flex-row p-3"> 
+                    	<div style="width: 60px;"></div>
+                    	<div class="profile">
+                    		<a href="ProfileMainServlet?userid=<%= r.getUserid() %>">
+                    			<img src="images/<%= profileMap.get(r.getUserid()) %>" width="30" height="30" class="rounded-circle mr-3"></a>
+                        </div>
+                        <div class="w-100">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="d-flex flex-row align-items-center"> 
+                                	<a href="ProfileMainServlet?userid=<%= r.getUserid() %>">
+                                	<span class="mr-2"><%= r.getUserid() %></span></a> 
+                                </div> 
+                                <small id="commentTime<%= r.getComment_id() %>"></small>
+                                	<script>$("#commentTime<%= r.getComment_id() %>").html(displayedAt('<%= r.getComment_created() %>'));</script>
+                            </div>
+                            <p class="text-justify mb-0"><%= r.getComment_content() %></p>
+                            <div class="d-flex flex-row user-feed"> 
+                            	<a class="reply ml-3" data-cid="<%= comment_id %>">답글 달기</a> &nbsp;&nbsp;&nbsp;
+                            	<!-- 해당 댓글의 작성자인 경우 -->
+                            	<% if (r.getUserid()!=null && r.getUserid().equals(currUserid)) { %>
+								<a class="ml-3 commentDelBtn" data-cid="<%= r.getComment_id() %>">삭제</a> 
+								<!-- 그외의 경우 --> 
+								<% } else { %> 
+								<a class="ml-3">신고</a> 
+								<% } %>
+                            </div>
+                        </div>
+                    </div>
+                    <% } %><!-- end reply for -->
+                    
+                    
+                    
+                    <!-- 답글 입력창 -->
+                    <div id="reply<%= comment_id %>" style="display: none;">
+	                    <div class="d-flex flex-row p-3">
+	                    	<div style="width: 60px;"></div>
+	                    	<div class="profile">
+	                    		<img src="images/<%= currProfile_img %>" width="30" height="30" class="rounded-circle mr-3">
+	                    	</div>
+	                    	<div class="d-flex flex-row align-items-center w-100 text-justify mb-0">
+	                    		<input type="text" class="form-control" name="comment_content" id="reply_content<%= comment_id %>"> 
+	                    		<button class="commentBtn commentReplyBtn" data-cid="<%= comment_id %>">입력</button>
+	                    	</div>
+	                    </div>
+                    </div>
+                <%} %><!-- end for -->
                 </div>
                 
                 

@@ -5,6 +5,7 @@
 <mapper namespace="ProductMapper">
 
 
+
 <select id="productList" resultType="CategoryProductDTO" parameterType="int">
 	
 	 
@@ -41,10 +42,6 @@ where p.c_id = #{c_id}
 select * from images where p_id= #{p_id}
 </select>
 
-<!-- <select id="bestProduct" resultType="productDTO">
-select * from product
-</select> -->
-
 <select id="searchProduct" resultType="CategoryProductDTO" parameterType="String">
 	select p.P_ID,(select IMAGE_ROUTE from images where p_id = p.p_id and IMAGE_RNK = 1) as p_image
 	, p.P_NAME, p.P_CONTENT, p.C_ID, p.P_COST_PRICE, p.P_SELLING_PRICE, p.P_DISCOUNT, p.P_CREATED, p.P_STOCK
@@ -53,7 +50,7 @@ select * from product
 </select>
 
 <insert id="addLike" parameterType="hashmap">
-insert into product_like (p_id,userid) values (#{p_id},#{userid})
+insert into product_liked values (#{userid},#{p_id})
 </insert>
 
 </mapper>
