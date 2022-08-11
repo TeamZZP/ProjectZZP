@@ -54,4 +54,8 @@ public class MemberDAO {
 		return session.selectOne("findPw", map);
 	}
 
+	public MemberDTO checkPw(SqlSession session, String userid) {
+		return session.selectOne("checkPw", userid);
+	}
+
 }

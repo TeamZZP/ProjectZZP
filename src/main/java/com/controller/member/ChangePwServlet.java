@@ -21,11 +21,11 @@ public class ChangePwServlet extends HttpServlet {
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		String userid = request.getParameter("userid");
-		String changedPasswd = request.getParameter("changedPasswd");
+		String userid = (String)request.getAttribute("userid");
+		String changedPasswd = (String)request.getAttribute("changedPasswd");
 		System.out.println(userid+" "+changedPasswd);
 		
-		MemberService service=new MemberService();
+		MemberService service = new MemberService();
 		HashMap<String, String> changedPwMap = new HashMap<String, String>();
 		changedPwMap.put("userid", userid);
 		changedPwMap.put("changedPasswd", changedPasswd);

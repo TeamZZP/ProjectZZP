@@ -132,4 +132,15 @@ public class MemberService {
 		return dto;
 	}
 
+	public MemberDTO checkPw(String userid) {
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		MemberDTO dto = null;
+		try {
+			dto = dao.checkPw(session, userid);
+		} finally {
+			session.close();
+		}
+		return dto;
+	}
+
 }
