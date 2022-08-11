@@ -17,6 +17,9 @@
 		$("#accountChange").on("click", function() {
 			$("form").attr("action", "checkPasswd.jsp");
 		});//end fn
+		$("#shippingAddress").on("click", function() {
+			$("form").attr("action", "addressList.jsp");
+		});//end fn
 	});//end ready
 </script>
 <div style = "padding: 5px 5px 5px 20px;">
@@ -34,6 +37,8 @@
 <button type="button" class="btn btn-outline-success">4. 내 문의 내역</button><br>
 <br>
 <button id="accountChange" class="btn btn-outline-success">5. 계정 관리</button><br>
+<br>
+<button id="shippingAddress" class="btn btn-outline-success">6. 배송지 관리</button><br>
 <br>
 </form>
 </div>

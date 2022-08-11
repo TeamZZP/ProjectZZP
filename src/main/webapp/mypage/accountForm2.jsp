@@ -72,7 +72,14 @@
 		
 		//4. 폼 제출, db 업데이트
 		$("form").on("submit", function() {
-			if ($("#changedPasswd").val().length != 0) {//4-1. 비밀번호 변경 데이터가 있을 때
+			if ($("#email1").val().length == 0 || $("#email2").val().length == 0) {//이메일 공백 불가
+				event.preventDefault();
+				alert("이메일 주소를 입력하세요.");
+				$("#email1").focus();
+			} else if ($("#sample4_jibunAddress").val().length == 0) {//상세주소 null 방지->서블릿에 데이터 넘길 때 null 예방 필요
+				event.preventDefault();
+				$("#sample4_jibunAddress").val("상세 주소를 입력하세요.");
+			} else if ($("#changedPasswd").val().length != 0) {//4-1. 비밀번호 변경 데이터가 있을 때
 				var pwChk = /^(?=.*[a-zA-Z])(?=.*[!@#$%^&*+=-_])(?=.*[0-9]).{8,25}$/;
 				if (!pwChk.test($("#changedPasswd").val())){//비밀번호 유효성 검사
 					alert("비밀번호를 형식에 맞게 입력해주세요 :<");
@@ -88,15 +95,8 @@
 					$("#checkPasswd").val("");
 					$("#result2").text("");
 					$("#checkPasswd").focus();
-				} else if ($("#email1").val().length == 0 || $("#email2").val().length == 0) {//이메일 공백
+				} else {
 					event.preventDefault();
-					alert("이메일 주소를 입력하세요.");
-					$("#email1").focus();
-				} else {//주소는 readonly 상태--새로 입력하지 않는 이상 삭제 불가능해서 따로 공백 검사 안 함--아냐 해야 됨..
-					event.preventDefault();
-					if ($("#sample4_jibunAddress").val().length == 0) {//null 방지->서블릿에 데이터 넘길 때 null 예방 필요
-						$("#sample4_jibunAddress").val("상세 주소를 입력하세요.");
-					}
 					console.log("유효성 검사 통과, 비밀번호 검증 완료, 비번, 이메일, 주소 update");
 					//*****ajax
 					$.ajax({
@@ -124,40 +124,36 @@
 				}
 			} else {//4-2. 비밀번호 변경 데이터가 없을 때
 				event.preventDefault();
-				if ($("#email1").val().length == 0 || $("#email2").val().length == 0) {//null 방지->서블릿에 데이터 넘길 때 null 예방 필요
-					alert("이메일 주소를 입력하세요.");
-					$("#email1").focus();
-					event.preventDefault();				
-				} else if ($("#sample4_jibunAddress").val().length == 0) {//null 방지->서블릿에 데이터 넘길 때 null 예방 필요
-					$("#sample4_jibunAddress").val("상세 주소를 입력하세요.");
-				} else {
-					console.log("이메일, 주소 update");
-					//*****ajax
-					$.ajax({
-						type : "post",
-						url : "AccountChangeServlet",//페이지 이동 없이 해당 url에서 작업 완료 후 데이터만 가져옴
-						dataType : "text",
-						data : {//서버에 전송할 데이터
-							userid : $("#userid").val(),
-							email1 : $("#email1").val(),
-							email2 : $("#email2").val(),
-							post : $("#sample4_postcode").val(),
-							addr1 : $("#sample4_roadAddress").val(),
-							addr2 : $("#sample4_jibunAddress").val()
-						},
-		 				success : function(data, status, xhr) {//data : 
-							alert(data);
-							location.href="main.jsp";//수정 후 메인페이지 이동
-						},
-						error: function(xhr, status, error) {
-							console.log(error);
-						}						
-					});//end ajax
-				}	
+				console.log("이메일, 주소 update");
+				//*****ajax
+				$.ajax({
+					type : "post",
+					url : "AccountChangeServlet",//페이지 이동 없이 해당 url에서 작업 완료 후 데이터만 가져옴
+					dataType : "text",
+					data : {//서버에 전송할 데이터
+						userid : $("#userid").val(),
+						email1 : $("#email1").val(),
+						email2 : $("#email2").val(),
+						post : $("#sample4_postcode").val(),
+						addr1 : $("#sample4_roadAddress").val(),
+						addr2 : $("#sample4_jibunAddress").val()
+					},
+	 				success : function(data, status, xhr) {//data : 
+						alert(data);
+						location.href="main.jsp";//수정 후 메인페이지 이동
+					},
+					error: function(xhr, status, error) {
+						console.log(error);
+					}						
+				});//end ajax
 			};//end if
 		});//end fn
 		
-		//5. 회원 탈퇴
+		//5. 취소
+		$("#cancle").on("click", function() {
+			location.href="mypage.jsp";
+		});//
+		//6. 회원 탈퇴
 		$("#delAccount").on("click", function() {
 			console.log("회원 탈퇴 버튼 클릭");
 			location.href="accountDelete.jsp";//회원 탈퇴 페이지 이동
@@ -201,7 +197,7 @@
 								<input type="password" class="form-control" name="checkPasswd" id="checkPasswd" placeholder="비밀번호를 한번 더 입력하세요."/>
 							</div>
 							<div style="text-align: right">
-								<span id="result2"></span>
+								<span id="result2">비밀번호를 확인하세요 :)</span>
 							</div>
 						</div>
 					</div>
@@ -264,7 +260,7 @@
 					<!--  -->
 					<div class="form-group" style="margin-top: 10px; text-align: center;">
 						<input type="submit" value="변경" class="btn btn-success">
-						<input type="reset" value="취소" class="btn btn-success">
+						<input type="reset" value="변경 취소" class="btn btn-success" id="cancle">
 					</div>
 					<div class="d-grid gap-2 d-md-flex justify-content-md-end">
 						<button class="btn btn-light btn-sm" type="button" id="delAccount">회원 탈퇴</button>

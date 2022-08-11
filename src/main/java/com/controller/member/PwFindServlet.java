@@ -14,8 +14,8 @@ import javax.servlet.http.HttpSession;
 import com.dto.MemberDTO;
 import com.service.MemberService;
 
-@WebServlet("/IdFindServlet")
-public class IdFindServlet extends HttpServlet {
+@WebServlet("/PwFindServlet")
+public class PwFindServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -23,6 +23,7 @@ public class IdFindServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		
 		String type = request.getParameter("type");
+		String userid = request.getParameter("userid");
 		String username = request.getParameter("username");
 		String phone = request.getParameter("phone");
 		String email1 = request.getParameter("email1");
@@ -30,50 +31,49 @@ public class IdFindServlet extends HttpServlet {
 		
 		if (type.equals("phone")) {
 			HashMap<String, String> map = new HashMap<String, String>();
+			map.put("userid", userid);
 			map.put("username", username);
 			map.put("phone", phone);
 			map.put("type", type);
-			System.out.println(map);
 			MemberService service = new MemberService();
-			MemberDTO dto = service.findId(map);
+			MemberDTO dto = service.findPw(map);
 			if (dto!=null) {
-				session.setAttribute("findId", dto);
-				response.sendRedirect("findIdresult.jsp");
+				session.setAttribute("findPw", dto);
+				response.sendRedirect("findPwResult.jsp");
 			} else {
 				 response.setContentType("text/html; charset=UTF-8");
 		         PrintWriter out = response.getWriter();
 				 out.println("<script language='javascript'>");
 		         out.println("alert('해당 회원 정보가 없습니다:(')");
-		         out.println("location.href='IdFindUIServlet';");
+		         out.println("location.href='PwFindUIServlet';");
 		         out.println("</script>");
 		         out.flush();
-		         response.sendRedirect("IdFindUIServlet");
+		         response.sendRedirect("PwFindUIServlet");
 		         return;
 			}
 		} 
 		//이메일로 찾기
 		else {
 			HashMap<String, String> map = new HashMap<String, String>();
+			map.put("userid", userid);
 			map.put("username", username);
 			map.put("email1", email1);
 			map.put("email2", email2);
 			map.put("type", type);
-			System.out.println(map);
 			MemberService service = new MemberService();
-			MemberDTO dto = service.findId(map);
-			System.out.println(dto);
+			MemberDTO dto = service.findPw(map);
 			if (dto!=null) {
-				session.setAttribute("findId", dto);
-				response.sendRedirect("findIdresult.jsp");
+				session.setAttribute("findPw", dto);
+				response.sendRedirect("findPwResult.jsp");
 			} else {
 				 response.setContentType("text/html; charset=UTF-8");
 		         PrintWriter out = response.getWriter();
 				 out.println("<script language='javascript'>");
 		         out.println("alert('해당 회원 정보가 없습니다:(')");
-		         out.println("location.href='IdFindUIServlet';");
+		         out.println("location.href='PwFindUIServlet';");
 		         out.println("</script>");
 		         out.flush();
-		         response.sendRedirect("IdFindUIServlet");
+		         response.sendRedirect("PwFindUIServlet");
 		         return;
 			}
 		}

@@ -99,17 +99,6 @@ public class MemberService {
 		return num;
 	}
 
-	public MemberDTO findId(HashMap<String, String> map) {
-		SqlSession session = MySqlSessionFactory.getSqlSession();
-		MemberDTO dto = null;
-		try {
-			dto = dao.findId(session, map);
-		} finally {
-			session.close();
-		}
-		return dto;
-	}
-	
 	public List<MemberDTO> selectAllMember() {
 		SqlSession session=MySqlSessionFactory.getSqlSession();
 		List<MemberDTO> memberList=null;
@@ -121,11 +110,33 @@ public class MemberService {
 		return memberList;
 	}
 
-	public MemberDTO findIdforemail(HashMap<String, String> map) {
+	public MemberDTO findId(HashMap<String, String> map) {
 		SqlSession session = MySqlSessionFactory.getSqlSession();
 		MemberDTO dto = null;
 		try {
-			dto = dao.findIdforemail(session, map);
+			dto = dao.findId(session, map);
+		} finally {
+			session.close();
+		}
+		return dto;
+	}
+	
+	public MemberDTO findPw(HashMap<String, String> map) {
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		MemberDTO dto = null;
+		try {
+			dto = dao.findPw(session, map);
+		} finally {
+			session.close();
+		}
+		return dto;
+	}
+
+	public MemberDTO checkPw(String userid) {
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		MemberDTO dto = null;
+		try {
+			dto = dao.checkPw(session, userid);
 		} finally {
 			session.close();
 		}

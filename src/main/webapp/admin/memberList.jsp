@@ -10,7 +10,8 @@
 	<!-- Bootstrap CSS -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
+<div class="container col col-lg-8">
+<div class="row justify-content-md-center">
 <div class="dropdown">
   <button class="btn btn-success btn-sm dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
     카테고리
@@ -73,8 +74,8 @@
 		$("#deleteMember").on("shown.bs.modal", function (e) {//#deleteMember modal 창을 열 때 선택한 버튼의 data-id를 가져옴(deleteID로 설정했더니 안돼서 다시 id로 바꿈)--modal창의 삭제 버튼에 저장
 		    var id = $(e.relatedTarget).data("id");
 		    $("#delete<%= userid %>").val(id);
-		});
-		$("#delete<%= userid %>").on("click", function() {
+		});//end fn
+		$("#delete<%= userid %>").on("click", function() {//모달의 삭제 버튼 클릭시 회원 삭제
 			var userid=$(this).val();
 			console.log(userid);
 			//*****ajax
@@ -93,12 +94,16 @@
 					console.log(error);
 				}						
 			});//end ajax
-		});
+		});//end fn
 <%--  		$("#checkDelete<%= userid %>").on("click", function() {//첫번째 선택자만 이벤트 실행됨//userid 추가해서 버튼 구분함--ok
 			event.preventDefault();
 			var id = $(this).attr("data-xxx");
-
 		});//end fn --%>
+		$("#change<%= userid %>").on("click", function() {//회원 정보 출력 페이지로 이동
+			var userid=$(this).attr("data-edit");
+			console.log(userid);
+			
+		});//end fn
 	});//end ready
 </script>
 <form>
@@ -129,10 +134,7 @@
 			  </div>
 			</div>
 			<!-- Button trigger modal -->
-			<form name="delMember">
-				<input type="hidden" name="userid" value="<%= userid %>">
-			</form>
-			<button type="button" id="change<%= userid %>" data-xxx="<%= userid %>" class="btn btn-outline-success btn-sm">수정</button>
+			<button type="button" id="change<%= userid %>" data-edit="<%= userid %>" class="btn btn-outline-success btn-sm">수정</button>
 			<button type="button" id="checkDelete<%= userid %>" data-id="<%= userid %>" class="btn btn-outline-dark btn-sm" data-bs-toggle="modal" data-bs-target="#deleteMember">
 				삭제
 			</button><!-- open modal -->
@@ -146,7 +148,8 @@
 	</tr>
 </form>
 </table>
-
+</div>
+</div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
 

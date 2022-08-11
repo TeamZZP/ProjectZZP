@@ -7,6 +7,8 @@
     <%@page import="com.dto.ProductDTO" %>
     <%@page import="java.util.List" %>
     <%@page import="com.dto.MemberDTO" %>
+    
+    
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
   
   <style>
@@ -51,7 +53,7 @@ function productChoice(n) {
                 },
                 dataType : "json",
                 success : function(data,status,xhr){
-                   $("#productLike").val(productLike++);
+                   $("#productChoice").val(productLike++);
                 },error : function (xhr,status,error){
                  console.log(error);
                 }

@@ -5,6 +5,39 @@
 <mapper namespace="ProductMapper">
 
 
+<<<<<<< HEAD
+=======
+
+<select id="bestProductList" resultType="CategoryProductDTO" >
+select *
+from (
+select p.P_ID
+,(select 
+
+IMAGE_ROUTE
+
+from images
+where p_id = p.p_id 
+and IMAGE_RNK = 1) as p_image
+
+,(select count(*) from Orders where p_id = p.p_id  ) as p_order
+,p.P_NAME
+,p.P_CONTENT
+,p.C_ID
+,p.P_COST_PRICE
+,p.P_SELLING_PRICE
+,p.P_DISCOUNT
+,p.P_CREATED
+,p.P_STOCK
+from product p
+) 
+order by p_order desc
+
+
+</select>
+
+
+>>>>>>> 93610af9c28944060f7005e6c494095c93c1a5c8
 <select id="productList" resultType="CategoryProductDTO" parameterType="int">
 	
 	 
@@ -49,4 +82,17 @@ select * from product
 select * from product where p_name like '%'||#{searchValue}||'%' or p_content like '%'||#{searchValue}||'%'
 </select>
 
+<<<<<<< HEAD
+=======
+<insert id="addLike" parameterType="hashmap">
+insert into product_liked values (#{userid},#{p_id})
+</insert>
+
+
+<select id="likeCheck" parameterType="hashmap" resultType="int">
+select count(*) from product_liked where p_id= #{p_id} and userid = #{userid}
+</select>
+
+
+>>>>>>> 93610af9c28944060f7005e6c494095c93c1a5c8
 </mapper>

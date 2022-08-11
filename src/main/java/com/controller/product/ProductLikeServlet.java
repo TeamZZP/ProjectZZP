@@ -30,8 +30,18 @@ public class ProductLikeServlet extends HttpServlet {
 		map.put("userid", userid);
 		
 		ProductService service = new ProductService();
-		int n = service.addLike(map);
-	}
+		
+		
+		if(service.likeCheck(map) == 0) {
+			int n = service.addLike(map);
+			
+		}
+		
+		
+		
+		
+		
+		}
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -38,6 +38,8 @@
     	display: inline;
     	width: 150px;
     }
+    
+
 </style>
 <%
 	PageDTO pDTO = (PageDTO) request.getAttribute("pDTO");
@@ -73,16 +75,18 @@
 <div class="container">
    <div class="row">
      <div class="col-sm-6">
-       <a href="ChallengeDetailServlet?chall_id=1">[이 달의 챌린지] 용기내! 챌린지</a>
+       <a href="ChallengeDetailServlet?chall_id=1" class="">[이 달의 챌린지] 용기내! 챌린지</a>
      </div>
      <div class="col-sm-6">
-		<select name="sortBy" id="sortBy" class="form-select" aria-label="Default select example">
+       <div class="float-end">
+		<select name="sortBy" id="sortBy" class="form-select">
 			<option value="chall_id" selected>정렬</option>
 			<option value="chall_id" <%if ("chall_id".equals(sortBy)) {%>selected <%}%>>최신순</option>
 			<option value="chall_liked" <%if ("chall_liked".equals(sortBy)) {%>selected <%}%>>인기순</option>
 			<option value="chall_comments" <%if ("chall_comments".equals(sortBy)) {%> selected <%}%>>댓글 많은순</option>
 		</select> 
 		<a href="ChallengeUIServlet" class="btn btn-outline-success">글쓰기</a>
+	   </div>
 	 </div>
 	 <div style="height: 10px"></div>
 	 
@@ -105,7 +109,7 @@
 	%>
 					
      <div class="col-lg-3 col-md-4 col-sm-6">
-       <div style="padding: 10px;">
+       <div class="p-3">
 	       <a href="ProfileMainServlet?userid=<%=userid%>"><img src="images/<%=profile_img%>" width="30" height="30"></a>&nbsp;&nbsp;
 	       <a href="ProfileMainServlet?userid=<%=userid%>"><%=userid%></a><br>
        </div>
@@ -113,11 +117,11 @@
 	       <a href="ChallengeDetailServlet?chall_id=<%=chall_id%>"> 
 			<img src="/eclipse/upload/<%=chall_img%>" border="0" onerror="this.src='images/uploadarea.png'"></a>
 	   </div>
-	   <div style="padding: 10px; text-align: center;">
+	   <div class="p-2 text-center">
 	       <img src="images/like.png" width="30" height="30"> <%=chall_liked%> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		   <img src="images/bubble.png" width="30" height="25"> <%=chall_comments%>
 	   </div>
-	   <div style="padding-bottom: 40px; text-align: center;">
+	   <div class="pb-5 text-center">
 	   		<a href="ChallengeDetailServlet?chall_id=<%=chall_id%>"><%=chall_title%></a>
 	   </div>
      </div>
@@ -126,18 +130,20 @@
 	%>
 
 	<!-- 검색기능 -->
-	<div style="padding: 10px; text-align: center;">
-		<select name="searchName">
+	<div class="d-flex justify-content-center p-2">
+		<select name="searchName" class="form-select p-2">
 			<option value="userid" <% if("userid".equals(searchName)) {%>selected<%} %>>아이디</option>
 			<option value="chall_title" <% if("chall_title".equals(searchName)) {%>selected<%} %>>제목</option>
 			<option value="chall_content" <% if("chall_content".equals(searchName)) {%>selected<%} %>>내용</option>
 		</select>
-		<input type="text" name="searchValue" <% if(searchValue!=null && !searchValue.equals("null")) {%>value="<%=searchValue%>"<%} %>>
-		<button class="btn btn-outline-success btn-sm">검색</button>
+		&nbsp;
+		<input type="text" name="searchValue" class="form-control" style="width: 200px;" <% if(searchValue!=null && !searchValue.equals("null")) {%>value="<%=searchValue%>"<%} %>>
+		&nbsp;
+		<button class="btn btn-outline-success">검색</button>
 	</div>
 		
 	<!-- 페이징 -->
-	  <div style="padding: 10px; text-align: center;">
+	  <div class="p-2 text-center">
 	  <% 
 		    int curPage = pDTO.getCurPage(); 
 		    int perPage = pDTO.getPerPage(); 

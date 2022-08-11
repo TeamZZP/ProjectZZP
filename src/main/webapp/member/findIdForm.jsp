@@ -51,10 +51,15 @@
 				var chkvalue = $(".type:checked").val();
 				if (chkvalue=='email') {
 					$("#username").val("");
+					$("#email1").val("");
+					$("#email2").val("");
 					$("#username").focus();
 					$("#phonediv").css("display","none");
 					$("#email").css("display","");
 				} else {
+					$("#username").val("");
+					$("#phone").val("");
+					$("#username").focus();
 					$("#email").css("display","none");
 					$("#phonediv").css("display","");
 				}

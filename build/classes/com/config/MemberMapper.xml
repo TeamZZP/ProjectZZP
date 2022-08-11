@@ -46,19 +46,38 @@
 			delete from member
 			where userid = #{userid}
 		</delete>
-		
-		<select id="findId" parameterType="hashmap" resultType="MemberDTO">
-			select * from member
-			where username = #{username} and phone = #{phone}
-		</select>
-		
-		<select id="findIdforemail" parameterType="hashmap" resultType="MemberDTO">
-			select * from member
-			where username = #{username} and email1 = #{email1} and email2 = #{email2}
-		</select>
 
 		<select id="selectAllMember" resultType="MemberDTO">
 			select * from member
 		</select>
-
+		
+		<select id="findId" parameterType="hashmap" resultType="MemberDTO">
+			select * from member
+			<where>
+				<if test='type=="phone"'>
+					username = #{username} and phone = #{phone}
+				</if>
+				<if test='type=="email"'>
+					username = #{username} and email1 = #{email1} and email2 = #{email2}
+				</if>
+			</where>
+		</select>
+		
+		<select id="findPw" parameterType="hashmap" resultType="MemberDTO">
+			select * from member
+			<where>
+				<if test='type=="phone"'>
+					userid = #{userid} and username = #{username} and phone = #{phone}
+				</if>
+				<if test='type=="email"'>
+					userid = #{userid} and username = #{username} and email1 = #{email1} and email2 = #{email2}
+				</if>
+			</where>
+		</select>
+		
+		<select id="checkPw" parameterType="String" resultType="MemberDTO">
+			select * from member
+			where userid = #{userid}
+		</select>
+		
 </mapper>
