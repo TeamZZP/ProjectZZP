@@ -35,7 +35,6 @@ public class PwFindServlet extends HttpServlet {
 			map.put("username", username);
 			map.put("phone", phone);
 			map.put("type", type);
-			System.out.println(map);
 			MemberService service = new MemberService();
 			MemberDTO dto = service.findPw(map);
 			if (dto!=null) {
@@ -61,10 +60,8 @@ public class PwFindServlet extends HttpServlet {
 			map.put("email1", email1);
 			map.put("email2", email2);
 			map.put("type", type);
-			System.out.println(map);
 			MemberService service = new MemberService();
 			MemberDTO dto = service.findPw(map);
-			System.out.println(dto);
 			if (dto!=null) {
 				session.setAttribute("findPw", dto);
 				response.sendRedirect("findPwResult.jsp");

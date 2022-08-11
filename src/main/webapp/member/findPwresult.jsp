@@ -96,7 +96,7 @@
 						$("#changedPasswd").focus();
 					} 
 					if (userid.length!=0 && passwd.length!=0 && changedPasswd.length!=0 && 
-							$("#check").text()!=mesg ) {
+							$("#check").text()!=mesg && $("#check").text()!="비밀번호가 일치하지 않습니다:(" ) {
 						$("form").submit();
 					} 
 			});
@@ -104,10 +104,19 @@
 	});
 </script> 
 <%
-MemberDTO dto = (MemberDTO)session.getAttribute("findPw");
-String userid = dto.getUserid();
-String username = dto.getUsername();
-String passwd = dto.getPasswd();
+	MemberDTO dto = (MemberDTO)session.getAttribute("findPw");
+	String userid = dto.getUserid();
+	String username = dto.getUsername();
+	String passwd = dto.getPasswd();
+	//session에 저장된 메시지가 있는 경우 경고창 띄워주고 삭제하기
+	String mesg = (String) session.getAttribute("mesg");
+	if (mesg != null) {
+%>
+	<script type="text/javascript">
+		alert("<%= mesg %>");
+	</script>
+<% } 
+	session.removeAttribute("mesg");
 %>
 <div id="container" cellpadding="0" cellspacing="0" marginleft="0" margintop="0" width="100%" height="100%" align="center">
 	<div class="card align-middle" style="width:25rem; margin-top: -80px; margin-bottom: 50px;">
@@ -115,7 +124,7 @@ String passwd = dto.getPasswd();
 			<h2 class="card-title" style="color:#f58b34; text-align: center; "><img alt="로고" src="images/header/main.png" width="50" height="50">
 			<span id="main" style="font-weight: bold;">ZZP</span> </h2>
 		</div>
-	      <form action="ChangePwServlet" class="find" method="POST">
+	      <form action="PwCheckServlet" class="find" method="POST">
 	        <div class="card-body" style="font-weight: bold;">
 	            비밀번호 재설정
 	         </div>

@@ -21,12 +21,12 @@ public class ChangePwServlet extends HttpServlet {
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		String userid=request.getParameter("userid");
-		String changedPasswd=request.getParameter("changedPasswd");
+		String userid = (String)request.getAttribute("userid");
+		String changedPasswd = (String)request.getAttribute("changedPasswd");
 		System.out.println(userid+" "+changedPasswd);
 		
-		MemberService service=new MemberService();
-		HashMap<String, String> changedPwMap=new HashMap<String, String>();
+		MemberService service = new MemberService();
+		HashMap<String, String> changedPwMap = new HashMap<String, String>();
 		changedPwMap.put("userid", userid);
 		changedPwMap.put("changedPasswd", changedPasswd);
 		
@@ -36,7 +36,7 @@ public class ChangePwServlet extends HttpServlet {
 		
 		response.setContentType("text/html; charset=UTF-8");
         PrintWriter out = response.getWriter();
-		 out.println("<script language='javascript'>");
+		out.println("<script language='javascript'>");
         out.println("alert('비밀번호가 변경되었습니다:)')");
         out.println("location.href='LoginUIServlet';");
         out.println("</script>");
