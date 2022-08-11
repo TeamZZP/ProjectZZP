@@ -4,10 +4,6 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ProductMapper">
 
-
-<<<<<<< HEAD
-=======
-
 <select id="bestProductList" resultType="CategoryProductDTO" >
 select *
 from (
@@ -36,8 +32,6 @@ order by p_order desc
 
 </select>
 
-
->>>>>>> 93610af9c28944060f7005e6c494095c93c1a5c8
 <select id="productList" resultType="CategoryProductDTO" parameterType="int">
 	
 	 
@@ -61,9 +55,7 @@ from product p
 
 where p.c_id = #{c_id} 
 	 
-	 
-	 
-	 
+	 	 
 </select>
 
 <select id="productRetrieve" parameterType="int" resultType="ProductDTO">
@@ -82,8 +74,6 @@ select * from product
 select * from product where p_name like '%'||#{searchValue}||'%' or p_content like '%'||#{searchValue}||'%'
 </select>
 
-<<<<<<< HEAD
-=======
 <insert id="addLike" parameterType="hashmap">
 insert into product_liked values (#{userid},#{p_id})
 </insert>
@@ -93,6 +83,4 @@ insert into product_liked values (#{userid},#{p_id})
 select count(*) from product_liked where p_id= #{p_id} and userid = #{userid}
 </select>
 
-
->>>>>>> 93610af9c28944060f7005e6c494095c93c1a5c8
 </mapper>

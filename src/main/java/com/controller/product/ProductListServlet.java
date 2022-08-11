@@ -21,12 +21,9 @@ public class ProductListServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			
-		
-
-<<<<<<< HEAD
 		  
-			int c_id = Integer.parseInt( request.getParameter("c_id"));
-=======
+		int c_id = Integer.parseInt( request.getParameter("c_id"));
+
 		CategoryService caservice = new CategoryService();
 		
 		
@@ -46,13 +43,10 @@ public class ProductListServlet extends HttpServlet {
 			
 		}else {
 			
-			int c_id = Integer.parseInt( request.getParameter("c_id"));
-			list= service.productList(c_id);  //카테고리상품 가져오기(이미지,productDTO)
+			int c_id2 = Integer.parseInt( request.getParameter("c_id"));
+			list= service.productList(c_id2);  //카테고리상품 가져오기(이미지,productDTO)
 			
-		}
->>>>>>> 93610af9c28944060f7005e6c494095c93c1a5c8
-		
-		
+		}		
 			System.out.println("ProductListServlet에서 productList==="+list);
 		
 					    
