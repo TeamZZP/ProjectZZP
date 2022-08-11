@@ -146,7 +146,7 @@ CREATE TABLE stamp (
 -- 찜한 상품
 CREATE TABLE product_liked (
 	userid	VARCHAR2(30)		NOT NULL REFERENCES member(userid) ON DELETE CASCADE,
-	p_id	VARCHAR2(40)		NOT NULL REFERENCES product(p_id) ON DELETE CASCADE
+	p_id	NUMBER		NOT NULL REFERENCES product(p_id) ON DELETE CASCADE
 );
 
 -- 리뷰
