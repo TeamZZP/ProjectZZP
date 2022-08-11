@@ -95,7 +95,7 @@
 					$("#checkPasswd").val("");
 					$("#result2").text("");
 					$("#checkPasswd").focus();
-				} else {//주소는 readonly 상태--새로 입력하지 않는 이상 삭제 불가능해서 따로 공백 검사 안 함--아냐 해야 됨..
+				} else {
 					event.preventDefault();
 					console.log("유효성 검사 통과, 비밀번호 검증 완료, 비번, 이메일, 주소 update");
 					//*****ajax
@@ -257,26 +257,6 @@
 							</div>
 						</div>
 					</div>
-					<!-- 주소지 추가 -->
-					<div class="form-group">
-						<label for="address" class="cols-sm-2 control-label" style="font-weight: bold;">주소 추가</label>
-						<div class="cols-sm-10">
-							<div class="input-group">
-								<span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
-								<input type="text" name="post_2" id="sample4_postcode_2" placeholder="우편번호" class="form-control" readonly="readonly" value="">
-								<input type="button" onclick="sample4_execDaumPostcode_2()" value="우편번호 찾기" class="btn btn-outline-success"><br>
-							</div>
-							<div class="row g-3" style="margin-top: -10px;">
-								<div class="col-md-6">
-									<input type="text" name="addr1_2" id="sample4_roadAddress_2" placeholder="도로명주소" class="form-control" readonly="readonly" value="">
-								</div>
-								<div class="col-md-6">
-									<input type="text" name="addr2_2" id="sample4_jibunAddress_2" placeholder="상세 주소를 입력하세요." class="form-control" value="">
-									<span id="guide_2" style="color:#999"></span>
-								</div>                  
-							</div>
-						</div>
-					</div>
 					<!--  -->
 					<div class="form-group" style="margin-top: 10px; text-align: center;">
 						<input type="submit" value="변경" class="btn btn-success">
@@ -340,53 +320,6 @@
 					document.getElementById('guide').innerHTML = '(예상 지번 주소 : ' + expJibunAddr + ')';
 				} else {
 					document.getElementById('guide').innerHTML = '';
-				}
-			}
-		}).open();
-	}
-	function sample4_execDaumPostcode_2() {
-		new daum.Postcode({
-			oncomplete: function(data) {
-				// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-
-				// 도로명 주소의 노출 규칙에 따라 주소를 조합한다.
-				// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-				var fullRoadAddr = data.roadAddress; // 도로명 주소 변수
-				var extraRoadAddr = ''; // 도로명 조합형 주소 변수
-
-				// 법정동명이 있을 경우 추가한다. (법정리는 제외)
-				// 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
-				if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
-					extraRoadAddr += data.bname;
-				}
-				// 건물명이 있고, 공동주택일 경우 추가한다.
-				if(data.buildingName !== '' && data.apartment === 'Y'){
-					extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-				}
-				// 도로명, 지번 조합형 주소가 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
-				if(extraRoadAddr !== ''){
-					extraRoadAddr = ' (' + extraRoadAddr + ')';
-				}
-				// 도로명, 지번 주소의 유무에 따라 해당 조합형 주소를 추가한다.
-				if(fullRoadAddr !== ''){
-					fullRoadAddr += extraRoadAddr;
-				}
-
-				// 우편번호와 주소 정보를 해당 필드에 넣는다.
-				document.getElementById('sample4_postcode_2').value = data.zonecode; //5자리 새우편번호 사용
-				document.getElementById('sample4_roadAddress_2').value = fullRoadAddr;
-				document.getElementById('sample4_jibunAddress_2').value = data.jibunAddress;
-
-				// 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
-				if(data.autoRoadAddress) {
-					//예상되는 도로명 주소에 조합형 주소를 추가한다.
-					var expRoadAddr = data.autoRoadAddress + extraRoadAddr;
-					document.getElementById('guide_2').innerHTML = '(예상 도로명 주소 : ' + expRoadAddr + ')';
-				} else if(data.autoJibunAddress) {
-					var expJibunAddr = data.autoJibunAddress;
-					document.getElementById('guide_2').innerHTML = '(예상 지번 주소 : ' + expJibunAddr + ')';
-				} else {
-					document.getElementById('guide_2').innerHTML = '';
 				}
 			}
 		}).open();
