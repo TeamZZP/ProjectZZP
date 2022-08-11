@@ -68,7 +68,7 @@
 				<td colspan="2"> 
 					<div class="input-group mb-3">
 					  <span class="input-group-text">제목</span>
-					  <input type="text" class="form-control" value="<%= qDTO.getQ_TITLE() %>" readonly="readonly">
+					  <input type="text" class="form-control shadow-none" value="<%= qDTO.getQ_TITLE() %>" readonly="readonly">
 					</div>
 				</td>
 			</tr>
@@ -76,13 +76,13 @@
 				<td> 
 					<div class="input-group mb-3">
 					  <span class="input-group-text">작성일</span>
-					  <input type="text" class="form-control" value="<%=day %>" readonly="readonly">
+					  <input type="text" class="form-control shadow-none" value="<%=day %>" readonly="readonly">
 					</div>
 				</td>
 				<td> 
 					<div class="input-group mb-3">
 					  <span class="input-group-text">작성자</span>
-					  <input type="text" class="form-control" value="<%= qDTO.getUSERID() %> " readonly="readonly">
+					  <input type="text" class="form-control shadow-none" value="<%= qDTO.getUSERID() %> " readonly="readonly">
 					</div>
 				</td>
 			</tr>
@@ -90,13 +90,13 @@
 				<th colspan="2"> 
 					<div class="input-group">
 					  <span class="input-group-text">상품정보</span>
-					  <input type="text" class="form-control"  value="<%=qDTO.getP_ID() %>" readonly="readonly">
+					  <input type="text" class="form-control shadow-none"  value="<%=qDTO.getP_ID() %>" readonly="readonly">
 					</div>
 				</th>
 			</tr>
 			<tr>
 				<td colspan="2">
-				  <textarea class="form-control" rows="15" cols="50" readonly="readonly"> <%= qDTO.getQ_CONTENT() %> </textarea>
+				  <textarea class="form-control shadow-none" rows="15" cols="50" readonly="readonly"> <%= qDTO.getQ_CONTENT() %> </textarea>
 				</td>
 			</tr>
 			<tr>
@@ -105,7 +105,7 @@
 			<%} else { %>
 				<td>
 					<div>
-					  <label for="formFileMultiple" class="form-label">첨부파일</label>
+					  <label for="formFileMultiple" class="form-label shadow-none">첨부파일</label>
 					  	<img alt="" src="/eclipse/upload/<%=qDTO.getQ_IMG()%>" width="100px" height="100px">
 					</div>
 				<%} %>
@@ -115,7 +115,7 @@
 				<td colspan="2">
 					<div class="input-group">
 					  <span class="input-group-text">답변</span>
-					  <textarea class="form-control" readonly="readonly" id="answerCheck">
+					  <textarea class="form-control shadow-none" readonly="readonly" id="answerCheck">
 					  	<%if(aDTO != null){ %>
 					  	<%= aDTO.getANSWER_CONTENT() %>
 					  	<%} else { %>

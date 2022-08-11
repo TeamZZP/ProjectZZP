@@ -11,9 +11,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.dto.AnswerDTO;
 import com.dto.ImagesDTO;
 import com.dto.ProductDTO;
 import com.dto.QuestionDTO;
+import com.service.AnswerService;
 import com.service.ProductService;
 import com.service.QuestionService;
 
@@ -33,21 +35,23 @@ public class ProductRetrieveServlet extends HttpServlet {
       ProductDTO pdto = service.productRetrieve(p_id);
       List <ImagesDTO> ilist = service.ImagesRetrieve(p_id);
       
-      	int pID = pdto.getP_id();
-      	
-     
-		QuestionService qservice = new QuestionService();
-		List<QuestionDTO> prodQuestionList = qservice.prodQuestion(pID);
+      	String pID = String.valueOf(pdto.getP_id());
+		
+		QuestionService Qservice = new QuestionService();
+		List<QuestionDTO> prodQuestionList = Qservice.prodQuestion(Integer.parseInt(pID));
 		System.out.println("prodQuestionList--- " + prodQuestionList);
 		
-      HttpSession session = request.getSession(); 
-      request.setAttribute("ProductRetrieveDTO", pdto);
-      request.setAttribute("ImagesRetrieveList", ilist);
+		AnswerService Aservice = new AnswerService();
+		AnswerDTO aDTO = Aservice.selectAnswer(pID);
+		System.out.println(aDTO);
+		
+		HttpSession session = request.getSession();
+		session.setAttribute("aDTO", aDTO);
+		session.setAttribute("prodQuestionList", prodQuestionList);
+		response.sendRedirect("product/prodQA.jsp");
       
       /* response.sendRedirect("productRetrieve.jsp"); */
       
-      	session.setAttribute("prodQuestionList", prodQuestionList);
-		response.sendRedirect("product/prodQA.jsp");
 		/*
 		 * RequestDispatcher dis = request.getRequestDispatcher("productRetrieve.jsp");
 		 * dis.forward(request, response);
