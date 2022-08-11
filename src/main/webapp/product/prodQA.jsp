@@ -56,8 +56,6 @@
 		String user = qDTO.getUSERID();
 		String created = qDTO.getQ_CREATED().substring(0, 10);
 %>
-<div class="container justify-content-center">
-<div class="row">
 <table class="questionDetail" data-qID="<%=qDTO.getQ_ID()%>">
 	<tr>
 		<td rowspan="2" style="text-align: center;"><img alt="Q" src="../images/question/question.png" width="50px" height="50px">
@@ -82,8 +80,6 @@
 	</tr>
 </table>
  <div style="text-align: center;" id="answer<%=qDTO.getQ_ID()%>">
-</div>
-</div>
 <%
 	}
 %>
