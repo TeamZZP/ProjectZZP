@@ -16,6 +16,12 @@ public class ProductDAO {
 		List<CategoryProductDTO> list = session.selectList("ProductMapper.productList", c_id);
 		return list;
 	}
+	
+	public List<CategoryProductDTO> bestProductList(SqlSession session) {
+		
+		List<CategoryProductDTO> list = session.selectList("ProductMapper.bestProductList");
+		return list;
+	}
 
 	public ProductDTO productRetrieve(SqlSession session, int p_id) {
 		ProductDTO dto = session.selectOne("ProductMapper.productRetrieve",p_id);
@@ -38,6 +44,9 @@ public class ProductDAO {
 		return n;
 	}
 
-
+	public int likeCheck(SqlSession session, HashMap<String, String> map) {
+		return session.selectOne("likeCheck",map);
+		 
+	}
 
 }
