@@ -59,9 +59,11 @@
 	List<CartDTO> list = (List<CartDTO>) request.getAttribute("cartList");
 	if(list == null){
 		%>
+			<h1>저장된게 없습니다!!!!!!!!!!	</h1>
 			
 		<%}else{
 			for (int i = 0; i <= list.size(); i++) {
+			
 			int cart_id = list.get(i).getCart_id();
 			String userid = list.get(i).getUserid();
 			int p_id = list.get(i).getP_id();
@@ -69,6 +71,7 @@
 			int p_selling_price = list.get(i).getP_selling_price();
 			int p_amount = list.get(i).getP_amount();
 			String p_image = list.get(i).getP_image();
+			
 			%>
 			<form>
 				<table width="90%" cellspacing="0" cellpadding="0" border="0" align="center">

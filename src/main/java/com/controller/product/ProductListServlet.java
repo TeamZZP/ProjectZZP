@@ -21,7 +21,7 @@ public class ProductListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		  
-		int c_id = Integer.parseInt( request.getParameter("c_id"));
+			int c_id = Integer.parseInt( request.getParameter("c_id"));
 		
 	
 		
