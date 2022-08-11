@@ -14,8 +14,8 @@ import javax.servlet.http.HttpSession;
 import com.dto.MemberDTO;
 import com.service.MemberService;
 
-@WebServlet("/IdFindServlet")
-public class IdFindServlet extends HttpServlet {
+@WebServlet("/PwFindServlet")
+public class PwFindServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -38,16 +38,16 @@ public class IdFindServlet extends HttpServlet {
 			MemberDTO dto = service.findIdPw(map);
 			if (dto!=null) {
 				session.setAttribute("findId", dto);
-				response.sendRedirect("findIdresult.jsp");
+				response.sendRedirect("findPwResult.jsp");
 			} else {
 				 response.setContentType("text/html; charset=UTF-8");
 		         PrintWriter out = response.getWriter();
 				 out.println("<script language='javascript'>");
 		         out.println("alert('해당 회원 정보가 없습니다:(')");
-		         out.println("location.href='IdFindUIServlet';");
+		         out.println("location.href='PwFindUIServlet';");
 		         out.println("</script>");
 		         out.flush();
-		         response.sendRedirect("IdFindUIServlet");
+		         response.sendRedirect("PwFindUIServlet");
 		         return;
 			}
 		} 
@@ -63,16 +63,16 @@ public class IdFindServlet extends HttpServlet {
 			System.out.println(dto);
 			if (dto!=null) {
 				session.setAttribute("findId", dto);
-				response.sendRedirect("findIdresult.jsp");
+				response.sendRedirect("findPwResult.jsp");
 			} else {
 				 response.setContentType("text/html; charset=UTF-8");
 		         PrintWriter out = response.getWriter();
 				 out.println("<script language='javascript'>");
 		         out.println("alert('해당 회원 정보가 없습니다:(')");
-		         out.println("location.href='IdFindUIServlet';");
+		         out.println("location.href='PwFindUIServlet';");
 		         out.println("</script>");
 		         out.flush();
-		         response.sendRedirect("IdFindUIServlet");
+		         response.sendRedirect("PwFindUIServlet");
 		         return;
 			}
 		}
