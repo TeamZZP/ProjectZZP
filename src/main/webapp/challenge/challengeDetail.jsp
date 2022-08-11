@@ -278,21 +278,21 @@ function displayedAt(createdAt) {
 <div class="container">
 	<div id="challDetailContent">
 		<div class="row">
-			<div class="col">
-				<%= chall_category %>
+		    <div class="d-flex w-75">
+				<div class="w-50"><%= chall_category %></div>
+				<div class="w-50"><%= chall_title %></div>
 			</div>
-			<div class="col">
-				<%= chall_title %>
-			</div>
-			<div class="col">
+			<div class="w-25">
+			  <div class="float-end">
 				<!-- 해당 게시글의 글쓴이인 경우 -->
 				<% if (userid.equals(currUserid)) { %>
 				<a href="ChallengeUIServlet?chall_id=<%= chall_id %>&userid=<%= currUserid %>" class="btn btn-outline-success">수정</a> 
 				<a href="ChallengeDeleteServlet?chall_id=<%= chall_id %>&userid=<%= currUserid %>" id="deleteChallenge" class="btn btn-outline-success">삭제</a>
 				<!-- 그외의 경우 -->
 				<% } else { %>
-				<a href="">신고</a>
+				<a href="" class="btn btn-outline-success">신고</a>
 				<% } %>
+			   </div>
 			</div>
 		</div>
 		<div style="height: 10px"></div>
@@ -301,24 +301,26 @@ function displayedAt(createdAt) {
 				<%= chall_created %>
 			</div>
 			<div class="col">
+			  <div class="float-end">
 				조회수 <%= chall_hits %>
+			  </div>
 			</div>
 		</div>
 		<div style="height: 10px"></div>
-		<div class="row" style="padding: 10px;">
+		<div class="row p-3">
 			<div class="col">
 				<a href="ProfileMainServlet?userid=<%= userid %>">
 				   <img src="images/<%= profile_img %>" width="50" height="50"></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<a href="ProfileMainServlet?userid=<%= userid %>"><%= userid %></a>
 			</div>
 		</div>
-		<div class="row" style="padding: 10px;">
+		<div class="row p-3">
 			<div class="col">
 				<img src="/eclipse/upload/<%= chall_img %>" class="img"
 					onerror="this.src='images/uploadarea.png'" width="600" height="600">
 			</div>
 		</div>
-		<div class="row" style="padding: 10px; text-align: center;">
+		<div class="row p-2 text-center">
 			<div class="col" id="liked_area">
 				<!-- 해당 게시글을 현재 로그인한 회원이 좋아요했던 경우 -->
 				<% if (likedIt == 1) { %>
@@ -336,7 +338,7 @@ function displayedAt(createdAt) {
 			</div>
 		</div>
 
-		<div class="row" style="height: 100px;">
+		<div class="row p-4" style="height: 100px;">
 			<%= chall_content %>
 		</div>
 		
@@ -348,9 +350,10 @@ function displayedAt(createdAt) {
 <div class="container mt-5 mb-5 comment">
     <div class="row height d-flex justify-content-center align-items-center">
         <div class="col-md-7">
+         <hr>
             <div class="card">
                 <div class="p-3">
-                    <h6>댓글</h6>
+                    <h6><b>댓글</b></h6>
                 </div>
                 <div class="mt-3 d-flex flex-row align-items-center p-3 form-color"> 
                 	<img src="images/<%= currProfile_img %>" width="50" class="rounded-circle mr-2"> &nbsp;&nbsp;&nbsp;
@@ -455,12 +458,14 @@ function displayedAt(createdAt) {
         
         
         
-        <div class="row" style="padding-top: 30px;">
+        <div class="row pt-5">
 		  <div class="col">
 		  	<a href="ChallengeListServlet" class="btn btn-outline-success">목록</a>
 		  </div>
-		  <div class="col" style="text-align: right">
-		  	<a href="ChallengeUIServlet" class="btn btn-outline-success">글쓰기</a>
+		  <div class="col">
+		    <div class="float-end">
+		  	  <a href="ChallengeUIServlet" class="btn btn-outline-success">글쓰기</a>
+		  	</div>
 		  </div>
 		</div>
 		
