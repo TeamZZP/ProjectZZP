@@ -79,7 +79,7 @@
 		<td colspan="5"><%=qDTO.getQ_TITLE()%></td>
 	</tr>
 </table>
- <div style="text-align: center;" id="answer<%=qDTO.getQ_ID()%>">
+ <div style="text-align: center;" id="answer<%=qDTO.getQ_ID()%>"> </div>
 <%
 	}
 %>
