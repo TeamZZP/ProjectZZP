@@ -135,6 +135,11 @@
 	where comment_id=#{comment_id}
 </delete>
 
+<delete id="deleteReplies">
+	delete from comments
+	where parent_id=#{comment_id}
+</delete>
+
 <select id="countComments" resultType="int">
 	select count(*) from comments
 	where chall_id=#{chall_id}
@@ -146,9 +151,9 @@
 	where chall_id=#{chall_id}
 </update>
 
-<update id="downChallComments">
+<update id="downChallComments" parameterType="hashmap">
 	update challenge
-	set chall_comments=chall_comments-1
+	set chall_comments=chall_comments-${num}
 	where chall_id=#{chall_id}
 </update>
 

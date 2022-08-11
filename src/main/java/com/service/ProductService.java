@@ -25,6 +25,18 @@ public class ProductService {
 		}
 		return list;
 	}
+	
+	public List<CategoryProductDTO> bestProductList() {
+		List<CategoryProductDTO> list = null;
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		try {
+			list = dao.bestProductList(session);
+		}finally {
+			session.close();
+		}
+		return list;
+	}
+	
 
 	public ProductDTO productRetrieve(int p_id) {
 		ProductDTO dto = null;
@@ -73,6 +85,19 @@ public class ProductService {
 		return n;
 	}
 
+	public int likeCheck(HashMap<String, String> map) {		
+		int n = 0;
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+        try {
+        	n = dao.likeCheck(session, map);
+        	session.commit();
+        }finally {
+        	session.close();
+        }
+		
+		return n;
+	}
+	
 
 	
 

@@ -13,20 +13,41 @@ import javax.servlet.http.HttpServletResponse;
 import com.dto.CategoryDTO;
 import com.dto.CategoryProductDTO;
 import com.dto.ProductDTO;
+import com.service.CategoryService;
 import com.service.ProductService;
 
 @WebServlet("/ProductListServlet")
 public class ProductListServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+			
+		
 
-		  
-		int c_id = Integer.parseInt( request.getParameter("c_id"));
+		CategoryService caservice = new CategoryService();
 		
-	
 		
-		    ProductService service = new ProductService();
-			List<CategoryProductDTO> list = service.productList(c_id);  //카테고리상품 가져오기(이미지,productDTO)
+		List<CategoryDTO> ca_list  = caservice.allCategory(); //카테고리 전체 데이터
+		
+		
+		
+		request.setAttribute("categoryList", ca_list);
+		
+		ProductService service = new ProductService();
+		List<CategoryProductDTO> list  = null;
+		 
+		if (request.getParameter("c_id")== null ||"".equals(request.getParameter("c_id"))) {
+			
+			list= service.bestProductList();  //베스트 상품 가져오기(이미지,productDTO)
+			
+			
+		}else {
+			
+			int c_id = Integer.parseInt( request.getParameter("c_id"));
+			list= service.productList(c_id);  //카테고리상품 가져오기(이미지,productDTO)
+			
+		}
+		
+		
 			System.out.println("ProductListServlet에서 productList==="+list);
 		
 					    

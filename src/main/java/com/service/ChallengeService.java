@@ -244,11 +244,11 @@ public class ChallengeService {
 		return n;
 	}
 
-	public int downChallComments(String chall_id) {
+	public int downChallComments(HashMap<String, String> map) {
 		int n = 0;
 		SqlSession session = MySqlSessionFactory.getSqlSession();
 		try {
-			n = dao.downChallComments(session, chall_id);
+			n = dao.downChallComments(session, map);
 			session.commit();
 		} finally {
 			session.close();
@@ -277,6 +277,18 @@ public class ChallengeService {
 			session.close();
 		}
 		return list;
+	}
+
+	public int deleteReplies(String comment_id) {
+		int n = 0;
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		try {
+			n = dao.deleteReplies(session, comment_id);
+			session.commit();
+		} finally {
+			session.close();
+		}
+		return n;
 	}
 
 

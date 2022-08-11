@@ -155,7 +155,7 @@ a {
 						$(".comment_content").val("");
 						$("#reply_content"+cid).val("");
 						$("#comment_area").html(data);
-						$("#commentsNum").text(parseInt($("#commentsNum").text())+1);
+						countComments();
 					},
 					error: function () {
 						alert("문제가 발생했습니다. 다시 시도해 주세요.");
@@ -178,7 +178,7 @@ a {
 					dataType:"html",
 					success: function (data) {
 						$("#comment_area").html(data);
-						$("#commentsNum").text(parseInt($("#commentsNum").text())-1);
+						countComments();
 					},
 					error: function () {
 						alert("문제가 발생했습니다. 다시 시도해 주세요.");
@@ -188,6 +188,23 @@ a {
 				event.preventDefault();
 			}
 		});
+		//댓글 개수 구해오기
+		function countComments() {
+			$.ajax({
+				type:"post",
+				url:"CommentsCountServlet",
+				data: {
+					"chall_id":"<%= chall_id %>",
+				},
+				dataType:"text",
+				success: function (data) {
+					$("#commentsNum").text(data);
+				},
+				error: function () {
+					alert("문제가 발생했습니다. 다시 시도해 주세요.");
+				}
+			});
+		}
 		//댓글 답글 창 보이기
 		$("#comment_area").on("click", ".reply", function () {
 			if ("<%= currUserid %>" == "null") {

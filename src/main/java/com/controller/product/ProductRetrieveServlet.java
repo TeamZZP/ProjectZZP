@@ -46,7 +46,7 @@ public class ProductRetrieveServlet extends HttpServlet {
       
       /* response.sendRedirect("productRetrieve.jsp"); */
       
-      	session.setAttribute("list", prodQuestionList);
+      	session.setAttribute("prodQuestionList", prodQuestionList);
 		response.sendRedirect("product/prodQA.jsp");
 		/*
 		 * RequestDispatcher dis = request.getRequestDispatcher("productRetrieve.jsp");

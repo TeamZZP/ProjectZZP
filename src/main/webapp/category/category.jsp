@@ -28,6 +28,12 @@ a{
 <title>Category</title>
 </head>
 <body>
+
+	<div id="category">
+			<ul>
+				<li><a href="ProductListServlet">베스트</a></li>
+			</ul>
+		</div>
     <%
     List<CategoryDTO> list = (List<CategoryDTO>)request.getAttribute("categoryList");
     request.setAttribute("categoryList", list);
@@ -49,5 +55,8 @@ a{
 		</div>
 		
 	<% } %>
+	
+	
+	
 </body>
 </html>
