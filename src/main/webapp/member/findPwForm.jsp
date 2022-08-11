@@ -50,9 +50,18 @@
 			$(".type").click(function() {
 				var chkvalue = $(".type:checked").val();
 				if (chkvalue=='email') {
+					$("#userid").val("");
+					$("#username").val("");
+					$("#email1").val("");
+					$("#email2").val("");
+					$("#userid").focus();
 					$("#phonediv").css("display","none");
 					$("#email").css("display","");
 				} else {
+					$("#userid").val("");
+					$("#username").val("");
+					$("#phone").val("");
+					$("#userid").focus();
 					$("#email").css("display","none");
 					$("#phonediv").css("display","");
 				}
@@ -109,7 +118,7 @@
 			<h2 class="card-title" style="color:#f58b34; text-align: center; "><img alt="로고" src="images/header/main.png" width="50" height="50">
 			<span id="main" style="font-weight: bold;">ZZP</span> </h2>
 		</div>
-	      <form action="IdFindServlet" class="find" method="POST">
+	      <form action="PwFindServlet" class="find" method="POST">
 	        <div class="checkbox">
 	            <label>
 		            <input type="radio" class="type" name="type" value="phone" checked="checked"> 전화번호
@@ -132,7 +141,6 @@
 		       	 </div>
 		       	 <p id="check" class="check"></p><br/>
 		       <button type="button" id="btn" class="btn btn-lg  btn btn-success" style="margin-bottom: 30px;">비밀번호 찾기</button>
-		         <!-- <input class="btn btn-lg  btn btn-success" type="submit" value="아이디 찾기" style="margin-bottom: 30px;"> -->
 		      </div>
 	      </form>
 	   </div>

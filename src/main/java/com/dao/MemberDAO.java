@@ -42,8 +42,8 @@ public class MemberDAO {
 	}
 
 
-	public MemberDTO findId(SqlSession session, HashMap<String, String> map) {
-		return session.selectOne("findId", map);
+	public MemberDTO findIdPw(SqlSession session, HashMap<String, String> map) {
+		return session.selectOne("findIdPw", map);
 	}
 	public List<MemberDTO> selectAllMember(SqlSession session) {
 		List<MemberDTO> memberList=session.selectList("MemberMapper.selectAllMember");
@@ -51,8 +51,8 @@ public class MemberDAO {
 
 	}
 
-	public MemberDTO findIdforemail(SqlSession session, HashMap<String, String> map) {
-		return session.selectOne("findIdforemail", map);
+	public MemberDTO findIdPwforemail(SqlSession session, HashMap<String, String> map) {
+		return session.selectOne("findIdPwforemail", map);
 	}
 	
 }
