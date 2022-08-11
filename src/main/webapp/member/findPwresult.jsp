@@ -96,7 +96,7 @@
 						$("#changedPasswd").focus();
 					} 
 					if (userid.length!=0 && passwd.length!=0 && changedPasswd.length!=0 && 
-							$("#check").text()!=mesg ) {
+							$("#check").text()!=mesg && $("#check").text()!="비밀번호가 일치하지 않습니다:(" ) {
 						$("form").submit();
 					} 
 			});

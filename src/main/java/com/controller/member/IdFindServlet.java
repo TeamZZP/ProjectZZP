@@ -27,7 +27,6 @@ public class IdFindServlet extends HttpServlet {
 		String phone = request.getParameter("phone");
 		String email1 = request.getParameter("email1");
 		String email2 = request.getParameter("email2");
-		System.out.println(type);
 		
 		if (type.equals("phone")) {
 			HashMap<String, String> map = new HashMap<String, String>();
