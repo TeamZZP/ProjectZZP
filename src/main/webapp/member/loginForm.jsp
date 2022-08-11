@@ -114,6 +114,12 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;      
 }
+#link{
+	margin-bottom: 10px;
+}
+#naver{
+	margin-top: 0px;
+}
 </style>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
@@ -132,8 +138,6 @@ $(document).ready(function() {
 		}
 	});
 	
-	//아이디, 비밀번호 값
-	
 });
 </script>
 
@@ -146,18 +150,22 @@ $(document).ready(function() {
       <br>
       <button type="reset" id="resetBtn">취소</button>
       <p class="message">Not registered? <a href="MemberUIServlet">Create an account</a></p>
-      <p class="message">
+      <p class="message" id="link">
      	<a href="IdFindUIServlet">아이디찾기</a>
       	<a href="PwFindUIServlet">비밀번호찾기</a>
       </p>
     </form>
-    <a id="custom-login-btn" href="javascript:loginWithKakao();">
-<img src="//k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg"
-	width="222" alt="카카오 로그인 버튼" />
-</a><br>
-<a id="naver-login-btn" href="#">
-<img src="images/naverlogin.png"
-	width="222" alt="네이버 로그인 버튼" />
-</a>
+      <div id="kko">
+	    <a id="custom-login-btn" href="javascript:loginWithKakao();">
+			<img src="//k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg"
+				width="222" alt="카카오 로그인 버튼" />
+		</a>
+	  </div>
+	  <div id="naver">
+		<a id="naver-login-btn" href="#">
+			<img src="images/naverlogin.png"
+				width="222" alt="네이버 로그인 버튼" />
+		</a>
+	  </div>
   </div>
 </div>
