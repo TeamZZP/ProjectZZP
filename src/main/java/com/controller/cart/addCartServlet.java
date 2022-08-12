@@ -42,9 +42,6 @@ public class addCartServlet extends HttpServlet {
 			int p_amount = Integer.parseInt(request.getParameter("p_amount"));
 			String p_image = request.getParameter("p_image");
 			
-			
-			
-			
 			CartDTO cart = new CartDTO();
 			cart.setUserid(userid);
 			cart.setP_id(p_id);
