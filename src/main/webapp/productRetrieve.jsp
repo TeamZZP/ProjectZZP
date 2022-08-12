@@ -12,4 +12,6 @@
 <title>ZZP</title>
 <jsp:include page="common/header.jsp" flush="true"></jsp:include><br>
 <jsp:include page="product/productRetrieve.jsp" flush="true"></jsp:include><br>
+<hr>
+<jsp:include page="product/prodQA.jsp" flush="true"></jsp:include><br>
 <jsp:include page="common/footer.jsp" flush="true"></jsp:include><br>

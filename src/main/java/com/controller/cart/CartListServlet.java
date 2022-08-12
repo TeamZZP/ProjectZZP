@@ -25,6 +25,7 @@ public class CartListServlet extends HttpServlet {
 		MemberDTO dto = (MemberDTO)session.getAttribute("login");
 		
 		String userid = dto.getUserid();
+		System.out.println(userid);
 		
 		if(userid != null) {
 			CartService service = new CartService();
@@ -35,10 +36,8 @@ public class CartListServlet extends HttpServlet {
 			
 			RequestDispatcher dis = request.getRequestDispatcher("cartList.jsp");
 			dis.forward(request, response);
-		}else {
-			session.setAttribute("mssg", "로그인이 필요합니다");
-			response.sendRedirect("LoingUIServlet");
 		}
+				
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

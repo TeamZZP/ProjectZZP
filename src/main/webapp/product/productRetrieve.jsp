@@ -44,14 +44,11 @@
 
 		});//end down
 
-		 $("#cart").on("click", function() {
-			if ($("#p_amount").val() == 0) {
-				alert("수량을 선택하세요.");
-				event.preventDefault();
-			}
-			$("form").attr("action", "productCartServlet");
-		})//cart 
-
+	/* 	 $("#cart").on("click", function() {
+			
+			$("form").attr("action", "addCartServlet");
+		})//cart  
+ */
 	})//end ready
 
 	/* function imageChange(this) {
@@ -101,13 +98,16 @@ System.out.println("productRetrieve.jsp에서 파싱한 ilist==" + ilist);
 	}
 </style>
 
-	<form  name="goodRetrieveForm" action="#" method="get">
+	<form  name="goodRetrieveForm" action="addCartServlet" method="get">
 		<div class="row">
 			<div class="col-md-1"></div>
 			<div class="col-md-5">
 				<table>
 					<!-- 제품사진 -->
-
+					<input type="hidden" name="p_id" value="<%=p_id%>">	
+					<input type="hidden" name="p_name" value="<%=p_name%>">	
+					<input type="hidden" name="p_selling_price" value="<%=p_selling_price%>">	
+					
 					<%
 					for (int i = 0; i < ilist.size(); i++) {
 
@@ -115,23 +115,21 @@ System.out.println("productRetrieve.jsp에서 파싱한 ilist==" + ilist);
 						int image_rnk = ilist.get(i).getImage_rnk();
 						String update_date = ilist.get(i).getUpdate_date();
 					%>
-					<input type="hidden" name="p_id" value="<%=p_id%>">
-					<input type="hidden" name="p_image" value="<%=ilist.get(i).getImage_route()%>">
-					<input type="hidden" name="p_name" value="<%=p_name%>">
-					<input type="hidden" name="p_selling_price" value="<%=p_selling_price%>">
+							
 					<%
 					if (image_rnk == 1) {
 					%>
 					<tr>
 						<td colspan="4">
-						<img id="firstImage"
-							src="images/p_image/<%=ilist.get(i).getImage_route()%>.png"
+						<img id="firstImage" name="p_image"
+							src="images/p_image/<%=image_route%>.png"
 							class="img-thumbnail" style="height: 500; width: 600;"></td>
+							<input type="hidden" name="p_image" value="<%=ilist.get(0).getImage_route() %>">
 					</tr>
 					<%
 					}
 					%>
-
+						
 					<tr>
 						<div class="row">
 							<div class="col-md-6">
@@ -140,7 +138,7 @@ System.out.println("productRetrieve.jsp에서 파싱한 ilist==" + ilist);
 									if (image_rnk != 1) {
 									%> 
 									<img
-									src="images/p_image/<%=ilist.get(i).getImage_route()%>.png"
+									src="images/p_image/<%=image_route%>.png"
 									class="img-thumbnail" style="height: 100; width: 100;"
 									onmouseover="imageChange(this)"> <%
  }
@@ -153,6 +151,7 @@ System.out.println("productRetrieve.jsp에서 파싱한 ilist==" + ilist);
 				<%
 				}
 				%>
+				
 			</div>
 			<div class="col-md-1"></div>
 			<div class="col-md-5">
@@ -162,7 +161,7 @@ System.out.println("productRetrieve.jsp에서 파싱한 ilist==" + ilist);
 					<tr>
 						<td>상품명</td>
 						<td></td>
-						<td><%=p_name%></td>
+						<td ><%=p_name%></td>
 					</tr>
 
 					<tr>
@@ -182,7 +181,7 @@ System.out.println("productRetrieve.jsp에서 파싱한 ilist==" + ilist);
 					<tr>
 						<td>총 상품가격</td>
 						<td></td>
-						<td><p id="sellingPrice"><%=p_selling_price%></p>&nbsp;원</td>
+						<td><p id="sellingPrice" name="p_selling_price"><%=p_selling_price%></p>&nbsp;원</td>
 					</tr>
 
 					<tr>

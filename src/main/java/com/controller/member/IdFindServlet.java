@@ -27,15 +27,15 @@ public class IdFindServlet extends HttpServlet {
 		String phone = request.getParameter("phone");
 		String email1 = request.getParameter("email1");
 		String email2 = request.getParameter("email2");
-		System.out.println(type);
 		
 		if (type.equals("phone")) {
 			HashMap<String, String> map = new HashMap<String, String>();
 			map.put("username", username);
 			map.put("phone", phone);
+			map.put("type", type);
 			System.out.println(map);
 			MemberService service = new MemberService();
-			MemberDTO dto = service.findIdPw(map);
+			MemberDTO dto = service.findId(map);
 			if (dto!=null) {
 				session.setAttribute("findId", dto);
 				response.sendRedirect("findIdresult.jsp");
@@ -57,9 +57,10 @@ public class IdFindServlet extends HttpServlet {
 			map.put("username", username);
 			map.put("email1", email1);
 			map.put("email2", email2);
+			map.put("type", type);
 			System.out.println(map);
 			MemberService service = new MemberService();
-			MemberDTO dto = service.findIdPwforemail(map);
+			MemberDTO dto = service.findId(map);
 			System.out.println(dto);
 			if (dto!=null) {
 				session.setAttribute("findId", dto);

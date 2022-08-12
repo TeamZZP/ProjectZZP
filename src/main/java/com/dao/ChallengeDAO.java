@@ -125,8 +125,8 @@ public class ChallengeDAO {
 		return n;
 	}
 
-	public int downChallComments(SqlSession session, String chall_id) {
-		int n = session.update("ChallengeMapper.downChallComments", chall_id);
+	public int downChallComments(SqlSession session, HashMap<String, String> map) {
+		int n = session.update("ChallengeMapper.downChallComments", map);
 		return n;
 	}
 
@@ -138,6 +138,11 @@ public class ChallengeDAO {
 	public List<CommentsDTO> selectAllReplies(SqlSession session, int parent_id) {
 		List<CommentsDTO> list = session.selectList("ChallengeMapper.selectAllReplies", parent_id);
 		return list;
+	}
+
+	public int deleteReplies(SqlSession session, String comment_id) {
+		int n = session.delete("ChallengeMapper.deleteReplies", comment_id);
+		return n;
 	}
 
 

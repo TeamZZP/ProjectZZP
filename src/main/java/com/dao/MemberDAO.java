@@ -41,18 +41,21 @@ public class MemberDAO {
 		return num;
 	}
 
-
-	public MemberDTO findIdPw(SqlSession session, HashMap<String, String> map) {
-		return session.selectOne("findIdPw", map);
-	}
 	public List<MemberDTO> selectAllMember(SqlSession session) {
 		List<MemberDTO> memberList=session.selectList("MemberMapper.selectAllMember");
 		return memberList;
-
 	}
 
-	public MemberDTO findIdPwforemail(SqlSession session, HashMap<String, String> map) {
-		return session.selectOne("findIdPwforemail", map);
+	public MemberDTO findId(SqlSession session, HashMap<String, String> map) {
+		return session.selectOne("findId", map);
 	}
 	
+	public MemberDTO findPw(SqlSession session, HashMap<String, String> map) {
+		return session.selectOne("findPw", map);
+	}
+
+	public MemberDTO checkPw(SqlSession session, String userid) {
+		return session.selectOne("checkPw", userid);
+	}
+
 }

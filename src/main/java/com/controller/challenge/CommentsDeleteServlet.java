@@ -53,9 +53,17 @@ public class CommentsDeleteServlet extends HttpServlet {
 			System.out.println(n+"개의 레코드 삭제");
 			
 			if (n == 1) {
+				//해당 댓글을 부모 댓글로 가지고 있는 댓글들 삭제
+				int n2 = service.deleteReplies(comment_id);
+				System.out.println(n2+"개의 레코드 추가 삭제");
+				
 				//챌린지 테이블에 댓글수 컬럼 감소
-				int n2 = service.downChallComments(chall_id);
-				System.out.println(n2+"개의 게시글 댓글수 변경");
+				HashMap<String, String> map = new HashMap<String, String>();
+				map.put("chall_id", chall_id);
+				map.put("num", String.valueOf(n+n2));
+				
+				int result = service.downChallComments(map);
+				System.out.println(result+"개의 게시글 댓글수 변경");
 			}
 			
 			//해당 게시글의 댓글 목록 가져오기 (답글 미포함)

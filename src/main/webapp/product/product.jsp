@@ -89,6 +89,9 @@ function productChoice(n) {
 			}
 		})//end down
 		
+		$("#cart").on("click",function(){
+			
+		})//
 		
 	})//
         
@@ -166,7 +169,7 @@ function productChoice(n) {
 				      </div>
 				      <div class="modal-footer">
 				        <a href="" class="shopping">계속쇼핑하기</a>
-				        <a href="productCartServlet">장바구니저장</a>
+				        <a href="productCartServlet" id="cart">장바구니저장</a>
 				      </div>
 				    </div>
 				  </div>

@@ -4,13 +4,18 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="CartMapper">
 	
-	<insert id="cartAdd" parameterType="CartDTO">
-		insert into cart (cart_id,userid,p_id,p_name,p_selling_price,p_amount,p_image)
+<insert id="cartAdd" parameterType="CartDTO">
+
+		insert into cart 
 		values
-		(cart_cart_id_seq.nextval,#{userid},#{p_id},#{p_name},#{p_selling_price},#{p_amount},#{p_image})
+		(cart_cart_id_seq.nextval,#{userid},#{p_id},sysdate,#{p_amount})	
 	</insert>
 	
 	<select id="cartList" parameterType="string" resultType="CartDTO">
-		select * from cart where userid = #{userid}
+		select cart_id,p_name,p_amount,p_selling_price, p.p_id,
+		(select IMAGE_ROUTE from images 
+		where p_id = c.p_id and IMAGE_RNK = 1) as p_image 
+		from cart c , product p, member m
+		where c.userid = #{userid} 
 	</select>
 </mapper>

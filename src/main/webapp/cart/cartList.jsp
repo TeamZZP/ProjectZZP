@@ -1,6 +1,6 @@
 
-<%@page import="com.dto.CartDTO"%>
-<%@page import="java.util.List"%>
+<%@ page import="com.dto.CartDTO"%>
+<%@ page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 	
@@ -59,9 +59,11 @@
 	List<CartDTO> list = (List<CartDTO>) request.getAttribute("cartList");
 	if(list == null){
 		%>
-			<h1>장바구니가 비어있습니다.</h1>
+			<h1>저장된게 없습니다!!!!!!!!!!	</h1>
+			
 		<%}else{
 			for (int i = 0; i <= list.size(); i++) {
+			
 			int cart_id = list.get(i).getCart_id();
 			String userid = list.get(i).getUserid();
 			int p_id = list.get(i).getP_id();
@@ -69,6 +71,7 @@
 			int p_selling_price = list.get(i).getP_selling_price();
 			int p_amount = list.get(i).getP_amount();
 			String p_image = list.get(i).getP_image();
+			
 			%>
 			<form>
 				<table width="90%" cellspacing="0" cellpadding="0" border="0" align="center">
@@ -103,10 +106,30 @@
 				onclick="delCart('81')"></td>
 			<td height="10"></td>
 		</tr>
-					
-				</table>
-			</form>
 				
 		<%}%>
-		
+		</table>
+		</form>
+			<tr>
+		<td colspan="10">
+			<hr size="1" color="CCCCCC">
+		</td>
+	</tr>
+	<tr>
+		<td height="30">
+	</tr>
+
+	<tr>
+		<td align="center" colspan="5"><a class="a_black"
+			href="javascript:orderAllConfirm(myForm)"> 전체 주문하기 </a>&nbsp;&nbsp;&nbsp;&nbsp; 
+			<a class="a_black" href="javascript:delAllCart(myForm)"> 전체 삭제하기 </a>&nbsp;&nbsp;&nbsp;&nbsp;
+			<a class="a_black" href="index.jsp"> 계속 쇼핑하기 </a>&nbsp;&nbsp;&nbsp;&nbsp;
+		</td>
+	</tr>
+	<tr>
+		<td height="20">
+	</tr>
+
+</table>
 		<%}%>
+		

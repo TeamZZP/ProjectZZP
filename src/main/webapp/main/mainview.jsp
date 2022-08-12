@@ -230,7 +230,7 @@
 	%>
 		<div class="col-lg-3 col-md-6" style="margin-bottom: 5px;">
 			<a href="ChallengeDetailServlet?chall_id=<%=chall_id%>">
-				<img src="/eclipse/upload/<%=chall_img%>" width="250" height="250" class=" mx-auto d-block" alt="...">
+				<img src="/eclipse/upload/<%=chall_img%>" width="250" height="250" class=" mx-auto d-block" alt="..." onerror="this.src='images/uploadarea.png'">
 			</a>
 		</div>
 	<%
