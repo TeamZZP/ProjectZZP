@@ -104,10 +104,10 @@ System.out.println("productRetrieve.jsp에서 파싱한 ilist==" + ilist);
 			<div class="col-md-5">
 				<table>
 					<!-- 제품사진 -->
-					<input type="hidden" name="p_id" value="<%=p_id%>">	
+					<%-- <input type="hidden" name="p_id" value="<%=p_id%>">	
 					<input type="hidden" name="p_name" value="<%=p_name%>">	
 					<input type="hidden" name="p_selling_price" value="<%=p_selling_price%>">	
-					
+					 --%>
 					<%
 					for (int i = 0; i < ilist.size(); i++) {
 
@@ -124,7 +124,7 @@ System.out.println("productRetrieve.jsp에서 파싱한 ilist==" + ilist);
 						<img id="firstImage" name="p_image"
 							src="images/p_image/<%=image_route%>.png"
 							class="img-thumbnail" style="height: 500; width: 600;"></td>
-							<input type="hidden" name="p_image" value="<%=ilist.get(0).getImage_route() %>">
+						<%-- 	<input type="hidden" name="p_image" value="<%=ilist.get(0).getImage_route() %>"> --%>
 					</tr>
 					<%
 					}

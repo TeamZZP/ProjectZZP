@@ -49,6 +49,9 @@ public class ProductRetrieveServlet extends HttpServlet {
 		session.setAttribute("aDTO", aDTO);
 		session.setAttribute("prodQuestionList", prodQuestionList);
 		response.sendRedirect("product/prodQA.jsp");
+		
+		 request.setAttribute("ProductRetrieveDTO", pdto);
+	      request.setAttribute("ImagesRetrieveList", ilist);
       
       /* response.sendRedirect("productRetrieve.jsp"); */
       
