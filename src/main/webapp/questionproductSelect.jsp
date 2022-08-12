@@ -15,13 +15,15 @@
 <link type="text/css" rel="stylesheet" href="<c:url value='/bootstrap/css/bootstrap.min.css'/>"/>    
 <script src="<c:url value='/bootstrap/js/bootstrap.js'/>" type="text/javascript"></script>
 <script src="<c:url value='/bootstrap/js/bootstrap.min.js'/>" type="text/javascript"></script>
+
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function () {
 			$(".check").click(function () {
 				var pID = $(this).attr("data-pID");
-				console.log(pID);
-				opener.$("#pId").val(pID);
+				var pName = $(this).attr("data-pName");
+				opener.$("#pName").val(pName);
+				opener.$("#P_ID").val(pID);
 				window.close();
 			});
 		})//end ready
@@ -38,7 +40,7 @@
 			<tr>
 				<td>
 					<select  name="category" id="category" class="form-select">
-						 <option value="P_NAME" <%if("P_NAME".equals(category)){ %> selected="selected" <%} %>>상품명</option>
+						<option value="P_NAME" <%if("P_NAME".equals(category)){ %> selected="selected" <%} %>>상품명</option>
 						<option value="P_ID" <%if("P_ID".equals(category)){ %> selected="selected" <%} %>>상품코드</option>
 					</select>
 				</td>
@@ -86,7 +88,7 @@
 		<tr>
 			<td> <img alt="상품사진" src="images/p_image/<%=imgs%>.png" width="100px" height="100px"></td>
 			<td> <%=pName %> <br> <%=pContent %> <br> <%=pPrice %> </td>
-			<td> <button class="btn btn-outline-success check" data-pID="<%=pDTO.getP_id()%>" >선택</button> </td>
+			<td> <button class="btn btn-outline-success check" data-pID="<%=pDTO.getP_id()%>" data-pName="<%=pName %>" >선택</button> </td>
 		</tr>
 		<%
 			}//end prod for

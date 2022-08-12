@@ -30,18 +30,42 @@ public class ProdOneSelectServlet extends HttpServlet {
 		String Q_ID = request.getParameter("qID");
 		System.out.println("Q_ID " + Q_ID);
 		
-		AnswerService Aservice = new AnswerService();
-		AnswerDTO aDTO = Aservice.selectAnswer(Q_ID);
-		System.out.println("aDTO " + aDTO);
-		
-		if (aDTO != null) {
-			String Acontent = aDTO.getANSWER_CONTENT();
+		HttpSession session = request.getSession();
+		MemberDTO mDTO = (MemberDTO) session.getAttribute("login");
+		if (mDTO != null) {
+			String userid = mDTO.getUserid();
 			
-			response.setContentType("text/html;charset=utf-8");
-			PrintWriter out = response.getWriter();
-			out.print(Acontent);
+			QuestionService service = new QuestionService();
+			QuestionDTO qDTO = service.questionOneSelect(Q_ID);
+			String writer = qDTO.getUSERID();
+			
+			if (userid.equals(writer)) {
+				AnswerService Aservice = new AnswerService();
+				AnswerDTO aDTO = Aservice.selectAnswer(Q_ID);
+				System.out.println("aDTO " + aDTO);
+				
+				if (aDTO != null) {
+					String Acontent = aDTO.getANSWER_CONTENT();
+					
+					response.setContentType("text/html;charset=utf-8");
+					PrintWriter out = response.getWriter();
+					out.print(Acontent);
+				} else {
+					String Acontent = "답변대기";
+					
+					response.setContentType("text/html;charset=utf-8");
+					PrintWriter out = response.getWriter();
+					out.print(Acontent);
+				}
+			} else {
+				String Acontent = "다른 사용자의 글 입니다";
+				
+				response.setContentType("text/html;charset=utf-8");
+				PrintWriter out = response.getWriter();
+				out.print(Acontent);
+			}
 		} else {
-			String Acontent = "답변대기";
+			String Acontent = "로그인이 필요합니다";
 			
 			response.setContentType("text/html;charset=utf-8");
 			PrintWriter out = response.getWriter();
