@@ -34,20 +34,17 @@
 <style>
 	table.questionDetail {
 	  border-collapse: separate;
-	  border-spacing: 1px;
+	  border-spacing: 10px;
 	  text-align: left;
 	  line-height: 1.5;
-	  border-top: 1px solid #ccc;
+	  /* border-top: 1px solid #8FBC8F; */
 	  margin : 20px 10px;
 	}
 	table.questionDetail td {
 	  width: 350px;
 	  padding: 10px;
 	  vertical-align: top;
-	  border-bottom: 1px solid #ccc;
-	}
-	#tog {
-		text-align: center;
+	  border-bottom: 1px solid #8FBC8F;
 	}
 </style>
 <%
@@ -57,6 +54,9 @@
 		String created = qDTO.getQ_CREATED().substring(0, 10);
 %>
 <table class="questionDetail" data-qID="<%=qDTO.getQ_ID()%>">
+	<tr>
+		<td colspan="5" style="background-color: #8FBC8F;" ></td>
+	</tr>
 	<tr>
 		<td rowspan="2" style="text-align: center;"><img alt="Q" src="images/question/question.png" width="50px" height="50px">
 		</td>
@@ -79,7 +79,7 @@
 		<td colspan="5"><%=qDTO.getQ_TITLE()%></td>
 	</tr>
 </table>
- <div style="text-align: center;" id="answer<%=qDTO.getQ_ID()%>"> </div>
+<div style="text-align: center;" id="answer<%=qDTO.getQ_ID()%>"> </div>
 <%
 	}
 %>
