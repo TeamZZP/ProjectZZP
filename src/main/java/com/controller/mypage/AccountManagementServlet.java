@@ -1,6 +1,7 @@
 package com.controller.mypage;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -29,6 +30,7 @@ public class AccountManagementServlet extends HttpServlet {
 		HttpSession session=request.getSession();
 		
 		MemberDTO dto=(MemberDTO) session.getAttribute("login");
+		
 		//회원 전용
 		if (dto != null) {
 			String userid=dto.getUserid();
@@ -36,14 +38,13 @@ public class AccountManagementServlet extends HttpServlet {
 			
 			MemberService m_service=new MemberService();
 			MemberDTO member=m_service.selectMember(userid);
-			//System.out.println(member);
 			
 			AddressService a_service=new AddressService();
-			AddressDTO address=a_service.selectAddress(userid);
-			//System.out.println(address);
+			List<AddressDTO> addressList=a_service.selectAllAddress(userid);
 			
 			session.setAttribute("login", member);
-			session.setAttribute("address", address);
+			session.setAttribute("addressList", addressList);
+//			session.setAttribute("address", address);
 			response.sendRedirect("accountForm.jsp");//로그인 된 계정 정보 session 저장-마이페이지 오픈//mypage로 이름 바꿀까?
 		} else {
 			//alert로 로그인 후 이용하세요 출력

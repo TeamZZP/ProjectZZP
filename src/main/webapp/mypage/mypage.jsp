@@ -14,11 +14,11 @@
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 	$(document).ready(function() {
-		$("#accountChange").on("click", function() {
+		$("#accountManagement").on("click", function() {
 			$("form").attr("action", "checkPasswd.jsp");
 		});//end fn
-		$("#shippingAddress").on("click", function() {
-			$("form").attr("action", "addressList.jsp");
+		$("#shippingAddManagement").on("click", function() {
+			$("form").attr("action", "AddressListServlet");
 		});//end fn
 	});//end ready
 </script>
@@ -36,9 +36,9 @@
 <br>
 <button type="button" class="btn btn-outline-success">4. 내 문의 내역</button><br>
 <br>
-<button id="accountChange" class="btn btn-outline-success">5. 계정 관리</button><br>
+<button id="accountManagement" class="btn btn-outline-success">5. 계정 관리</button><br>
 <br>
-<button id="shippingAddress" class="btn btn-outline-success">6. 배송지 관리</button><br>
+<button id="shippingAddManagement" class="btn btn-outline-success">6. 배송지 관리</button><br>
 <br>
 </form>
 </div>
