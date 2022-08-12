@@ -12,10 +12,10 @@
 	</insert>
 	
 	<select id="cartList" parameterType="string" resultType="CartDTO">
-		select cart_id,p_name,p_amount,p_selling_price, p.p_id,
-		(select IMAGE_ROUTE from images 
-		where p_id = c.p_id and IMAGE_RNK = 1) as p_image 
-		from cart c , product p, member m
+		select c.cart_id,p.p_name,c.p_amount,p.p_selling_price,p.p_id,
+		(select IMAGE_ROUTE from images where p_id = c.p_id and IMAGE_RNK = 1) as p_image 
+      	from cart c join product p 
+      	on c.p_id = p.p_id
 		where c.userid = #{userid} 
 	</select>
 </mapper>

@@ -63,7 +63,6 @@
 			
 		<%}else{
 			for (int i = 0; i <= list.size(); i++) {
-			
 			int cart_id = list.get(i).getCart_id();
 			String userid = list.get(i).getUserid();
 			int p_id = list.get(i).getP_id();
@@ -107,7 +106,7 @@
 			<td height="10"></td>
 		</tr>
 				
-		<%}%>
+		<%} }%>
 		</table>
 		</form>
 			<tr>
@@ -131,5 +130,5 @@
 	</tr>
 
 </table>
-		<%}%>
+	
 		
