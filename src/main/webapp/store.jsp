@@ -36,8 +36,7 @@ padding-right: 11%;
 </style>
 
    <script>
-function getCategoryProduct(id){
-     
+function getCategoryProduct(id){  //category.jsp에서 비동기처리로 product.jsp의 $("#categoryProductContainer") 바꾸기     
 	
 	
 	

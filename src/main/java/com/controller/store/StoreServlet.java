@@ -15,8 +15,8 @@ import com.dto.CategoryProductDTO;
 import com.service.CategoryService;
 import com.service.ProductService;
 
-@WebServlet("/StoreUIServlet")
-public class StoreUIServlet extends HttpServlet {
+@WebServlet("/StoreServlet")
+public class StoreServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
