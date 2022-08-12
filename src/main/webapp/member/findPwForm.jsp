@@ -130,7 +130,7 @@
 		       	 <input type="text" name="userid" id="userid" class="form-control" placeholder="아이디" autofocus ><BR>
 		       	 <input type="text" name="username" id="username" class="form-control" placeholder="이름" autofocus ><BR>
 		       	 <div id="phonediv" >
-		       	 <input type="text" name="phone" id="phone" class="form-control" placeholder="전화번호"><br>
+		       	 <input type="text" name="phone" id="phone" class="form-control" placeholder="전화번호를 -없이 입력하세요"><br>
 		       	 </div>
 		       	 <div class="row g-3" id="email" style="display: none; margin-bottom: 40px;">
 		       	 <input type="text" name="email1" id="email1" class="col form-control" style="margin-left: 8px;" placeholder="이메일 주소" required>

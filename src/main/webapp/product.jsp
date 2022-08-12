@@ -6,7 +6,8 @@
 
         <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
         
-
+<%@page import="org.apache.ibatis.reflection.SystemMetaObject"%>
+<%@page import="java.util.HashMap"%>
 <%@page import="com.dto.ProductDTO"%>
 <%@page import="java.util.List"%>
 <% System.out.println("webapp.product.jsp");%>
