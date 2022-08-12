@@ -206,7 +206,7 @@ $("#addMember").click(function() {
                                         <div class="cols-sm-10">
                                             <div class="input-group">
                                                 <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
-                                                <input type="text" class="form-control" name="phone" id="phone" placeholder="전화번호를 입력하세요" />
+                                                <input type="text" class="form-control" name="phone" id="phone" placeholder="- 없이 입력하세요" />
                                             </div>
                                         </div>
                                     </div>
