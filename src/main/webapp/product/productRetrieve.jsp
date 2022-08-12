@@ -44,11 +44,11 @@
 
 		});//end down
 
-	/* 	 $("#cart").on("click", function() {
+	 $("#cart").on("click", function() {
 			
 			$("form").attr("action", "addCartServlet");
 		})//cart  
- */
+ 
 	})//end ready
 
 	/* function imageChange(this) {
