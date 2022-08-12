@@ -35,14 +35,14 @@
 <style>
 	table.questionDetail {
 	  border-collapse: separate;
-	  border-spacing: 10px;
+	  border-spacing: 30px;
 	  text-align: left;
 	  line-height: 1.5;
 	  /* border-top: 1px solid #8FBC8F; */
 	  margin : 20px 10px;
 	}
 	table.questionDetail td {
-	  width: 350px;
+	  width: 350px; 
 	  padding: 10px;
 	  vertical-align: top;
 	  border-bottom: 1px solid #8FBC8F;
