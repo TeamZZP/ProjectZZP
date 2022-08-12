@@ -31,13 +31,16 @@
 		text-decoration: none;
 		color: black;
 	}
+	.img {
+		border-radius: 15px;
+	}
 </style>
 
 <script type="text/javascript"
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function () {
-		$(".category").on("click", function () {
+		$(".container").on("click", ".category", function () {
 			let category = $(this).attr("data-category");
 			$.ajax({
 				type:"get",
@@ -89,6 +92,8 @@
 	
 	
 	<div id="profileContent" class="col-lg-9 p-5">
+	
+	
 		<div>
 		  <div class="row p-2 mx-4">
 		    <div class="col">챌린지 <span class="text-success fw-bold"><%= challengeList.size() %></span></div>
@@ -100,12 +105,17 @@
 		        	int chall_id = challDTO.getChall_id();
 		        	String chall_img = challDTO.getChall_img();
 		        %>
-		        	
-		        	<a href="ChallengeDetailServlet?chall_id=<%=chall_id%>"> 
-						<img src="/eclipse/upload/<%=chall_img%>" border="0" align="middle"
-								width="200" height="200" onerror="this.src='images/uploadarea.png'"></a>
-		        	
-		        <% } %>
+		        <a href="ChallengeDetailServlet?chall_id=<%=chall_id%>"> 
+					<img src="/eclipse/upload/<%=chall_img%>" border="0" align="middle" class="img"
+						width="200" height="200" onerror="this.src='images/uploadarea.png'"></a>
+		        <% } 
+		        if (challNum < 4) {
+		        	System.out.println(challNum);
+		        	for (int i = 0; i < 4-challNum; i++) {
+		        %>
+		        	<img src="images/none.png" class="img" width="200" height="200" >
+		        <% }
+		        } %>
 	      </div>
 		</div>
 		
