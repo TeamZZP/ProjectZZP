@@ -53,7 +53,7 @@ function productChoice(n) {
                 },
                 dataType : "json",
                 success : function(data,status,xhr){
-                   $("#productChoice").val(productLike++);
+                   //이미지 바뀌는부분
                 },error : function (xhr,status,error){
                  console.log(error);
                 }

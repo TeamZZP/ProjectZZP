@@ -37,7 +37,7 @@ public class CategoryServlet extends HttpServlet {
 			
 			
 		}else {
-			product_list= pservice.productList(Integer.parseInt(request.getParameter("c_id")));  //베스트 상품 가져오기(이미지,productDTO)
+			product_list= pservice.productList(Integer.parseInt(request.getParameter("c_id"))); 
 		}
    		
         request.setAttribute("product_list", product_list);
