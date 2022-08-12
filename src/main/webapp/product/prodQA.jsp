@@ -54,7 +54,7 @@
 		String user = qDTO.getUSERID();
 		String created = qDTO.getQ_CREATED().substring(0, 10);
 %>
-<table class="questionDetail" data-qID="<%=qDTO.getQ_ID()%>">
+<table class="questionDetail" data-qID="<%=qDTO.getQ_ID()%>" title="더블클릭">
 	<tr>
 		<td colspan="5" style="background-color: #8FBC8F;" ></td>
 	</tr>
@@ -74,7 +74,7 @@
 			<%=user.substring(0, 5).concat(use)%>
 		</td>
 		<td><%=created%></td>
-		<td>▼</td>
+		<td> <img alt="문의 답변 보기" src="images/question/down.png" width="20px" height="20px"> </td>
 	</tr>
 	<tr>
 		<td colspan="5"><%=qDTO.getQ_TITLE()%></td>
