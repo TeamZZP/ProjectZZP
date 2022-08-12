@@ -21,7 +21,8 @@
 				},
 				datatype:"text",
 				success: function (data, status, xhr) {
-					$("#answer"+qID).slideToggle().text(data);
+					$("#answer"+qID).slideToggle("fast").html(data + 
+						" &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <img alt='A' src='images/question/A.png' width='50px' height='55px'>");
 				},
 				error: function (xhr, status, error) {
 					alert("오류");
@@ -58,7 +59,7 @@
 		<td colspan="5" style="background-color: #8FBC8F;" ></td>
 	</tr>
 	<tr>
-		<td rowspan="2" style="text-align: center;"><img alt="Q" src="images/question/question.png" width="50px" height="50px">
+		<td rowspan="2" style="text-align: center;"><img alt="Q" src="images/question/Q.png" width="50px" height="55px">
 		</td>
 		<td><%=qDTO.getQ_STATUS()%></td>
 		<td>
@@ -79,7 +80,7 @@
 		<td colspan="5"><%=qDTO.getQ_TITLE()%></td>
 	</tr>
 </table>
-<div style="text-align: center;" id="answer<%=qDTO.getQ_ID()%>"> </div>
+<div style="text-align: right; margin-right: 70px;" id="answer<%=qDTO.getQ_ID()%>"> </div>
 <%
 	}
 %>
