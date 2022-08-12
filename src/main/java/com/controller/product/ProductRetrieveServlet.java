@@ -38,7 +38,7 @@ public class ProductRetrieveServlet extends HttpServlet {
       String P_ID = String.valueOf(pdto.getP_id());
 		
 		QuestionService Qservice = new QuestionService();
-		List<QuestionDTO> prodQuestionList = Qservice.prodQuestion(Integer.parseInt(P_ID));
+		List<QuestionDTO> prodQuestionList = Qservice.prodQuestion(P_ID);
 		System.out.println("prodQuestionList--- " + prodQuestionList);
 		
 		AnswerService Aservice = new AnswerService();
