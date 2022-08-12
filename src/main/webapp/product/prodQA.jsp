@@ -15,7 +15,7 @@
 			
 			$.ajax({
 				type:"post",
-				url: "../ProdOneSelectServlet",
+				url: "ProdOneSelectServlet",
 				data:{
 					qID : $(this).attr("data-qID")
 				},
