@@ -70,7 +70,7 @@
 		<input type="hidden" id="pName" value="<%=pdto.getP_name()%>">
 			<table class="questionDetail" data-qID="<%=qDTO.getQ_ID()%>" title="더블클릭">
 				<tr>
-					<td colspan="5" style="background-color: #8FBC8F;" ></td>
+					<td colspan="5" style="background-color: #8FBC8F;"></td>
 				</tr>
 				<tr>
 					<td rowspan="2" style="text-align: center;"><img alt="Q" src="images/question/Q.png" width="50px" height="55px">
