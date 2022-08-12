@@ -57,8 +57,8 @@ public class ProductRetrieveServlet extends HttpServlet {
       /* response.sendRedirect("productRetrieve.jsp"); */
       
 		
-		  RequestDispatcher dis = request.getRequestDispatcher("productRetrieve.jsp");
-		  dis.forward(request, response);
+	RequestDispatcher dis = request.getRequestDispatcher("productRetrieve.jsp");
+	dis.forward(request, response);
 		 
        
       
