@@ -1,6 +1,7 @@
-package com.controller.mypage;
+package com.controller.address;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -13,17 +14,15 @@ import javax.servlet.http.HttpSession;
 import com.dto.AddressDTO;
 import com.dto.MemberDTO;
 import com.service.AddressService;
-import com.service.MemberService;
 
 /**
- * Servlet implementation class MypageServlet
+ * Servlet implementation class AddressListServlet
  */
-@WebServlet("/MypageServlet")
-public class MypageServlet extends HttpServlet {
+@WebServlet("/AddressListServlet")
+public class AddressListServlet extends HttpServlet {
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//데이터 베이스에서 회원 정보 가져옴
-		System.out.println("마이페이지 서블릿 실행");
+		System.out.println("회원별 배송지 목록 출력 서블릿 실행");
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
 		HttpSession session=request.getSession();
@@ -33,17 +32,16 @@ public class MypageServlet extends HttpServlet {
 		//회원 전용
 		if (dto != null) {
 			String userid=dto.getUserid();
-			//회원 정보
-			MemberService m_service=new MemberService();
-			MemberDTO member=m_service.selectMember(userid);
-			//주소 정보
+			System.out.println(userid);
 			AddressService a_service=new AddressService();
+			HashMap<String, List<AddressDTO>> addressMap=new HashMap<String, List<AddressDTO>>();
+			
 			List<AddressDTO> addressList=a_service.selectAllAddress(userid);//회원별 주소--userid로 select
-//			AddressDTO address=a_service.selectAddress(userid);//배송지 관리 추가--배송지가 2개 이상인 경우에 TooManyResultsException->리스트로 가져옴
-			System.out.println(addressList);
-			session.setAttribute("login", member);
-			session.setAttribute("addressList", addressList);
-			response.sendRedirect("mypage.jsp");//로그인 된 계정 정보 session 저장-마이페이지 오픈
+			addressMap.put(userid, addressList);//userid로 해당 주소 리스트 출력
+//			System.out.println(addressMap);
+			
+			session.setAttribute("addressMap", addressMap);//userid의 address 리스트
+			response.sendRedirect("addressList.jsp");
 		} else {
 			//alert로 로그인 후 이용하세요 출력
 			String mesg="로그인이 필요합니다.";
@@ -51,11 +49,10 @@ public class MypageServlet extends HttpServlet {
 			session.setMaxInactiveInterval(60*30);
 			
 			response.sendRedirect("LoginUIServlet");
-		}
+		}		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

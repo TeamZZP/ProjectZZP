@@ -1,5 +1,6 @@
 <%@page import="com.dto.AddressDTO"%>
 <%@page import="com.dto.MemberDTO"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 	<!-- Required meta tags -->
 	<meta charset="UTF-8">
@@ -9,7 +10,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <%
 	MemberDTO member=(MemberDTO) session.getAttribute("login");
-	AddressDTO address=(AddressDTO) session.getAttribute("address");
+	List<AddressDTO> addressList=(List<AddressDTO>) session.getAttribute("addressList");
 	
 	String userid=member.getUserid();
 	String passwd=member.getPasswd();
@@ -19,14 +20,24 @@
 	String phone=member.getPhone();
 	String created_at=member.getCreated_at();
 	
-	String address_name=address.getAddress_name();
-	String receiver_name=address.getReceiver_name();
-	String receiver_phone=address.getReceiver_phone();
-	String post_num=address.getPost_num();
-	String addr1=address.getAddr1();
-	String addr2=address.getAddr2();
-	int default_chk=address.getDefault_chk();
-	
+	AddressDTO address=null;
+	String address_name=null;
+	String receiver_name=null;
+	String receiver_phone=null;
+	String post_num=null;
+	String addr1=null;
+	String addr2=null;
+	int default_chk=0;
+	for (int j = 0; j < addressList.size(); j++) {
+		address=addressList.get(j);//첫번째로 입력한 기본 주소지만 출력되도록 설정하는 방법은?--default_chk 이용해보기
+		address_name=address.getAddress_name();
+		receiver_name=address.getReceiver_name();
+		receiver_phone=address.getReceiver_phone();
+		post_num=address.getPost_num();
+		addr1=address.getAddr1();
+		addr2=address.getAddr2();
+		default_chk=address.getDefault_chk();
+	}
 	if (addr2 == null) {
 		addr2="상세 주소를 입력하세요.";
 	}
@@ -273,7 +284,6 @@
 		</div>
 	</div>
 </div>
-
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
 	//본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
