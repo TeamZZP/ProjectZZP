@@ -1,6 +1,7 @@
 package com.controller.product;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -24,8 +25,6 @@ public class ProductListServlet extends HttpServlet {
 		
 
 		CategoryService caservice = new CategoryService();
-		
-		
 		List<CategoryDTO> ca_list  = caservice.allCategory(); //카테고리 전체 데이터
 		
 		
@@ -34,6 +33,7 @@ public class ProductListServlet extends HttpServlet {
 		
 		ProductService service = new ProductService();
 		List<CategoryProductDTO> list  = null;
+		
 		 
 		if (request.getParameter("c_id")== null ||"".equals(request.getParameter("c_id"))) {
 			
@@ -50,7 +50,9 @@ public class ProductListServlet extends HttpServlet {
 		
 			System.out.println("ProductListServlet에서 productList==="+list);
 		
-					    
+			List<CategoryProductDTO> plist  = null; //베스트상품
+			plist = new ArrayList<CategoryProductDTO>();
+	        request.setAttribute("best", plist);		    
 			request.setAttribute("productList", list);
 			
 			

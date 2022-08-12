@@ -9,105 +9,11 @@
     <%@page import="com.dto.MemberDTO" %>
     
     
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-  
-  <style>
-  .container {
-  padding-right: 15px;
-  padding-left: 15px;
-  margin-right: auto;
-  margin-left: auto;
-}
-
-a{
-   color : #646464;
-   text-decoration: none;
-   
-}
-
-</style>
- 
-<script type="text/javascript"
-   src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>
-var productLike = 0;
-
-function productChoice(n) {
-      console.log(n);
-
-     
-     <%
-     
-   MemberDTO mdto = (MemberDTO)session.getAttribute("login");
-   if(mdto != null){%>
-
-      var userid =  '<%=mdto.getUserid()%>'; 
-
-	 $.ajax({
-        
-          type: "get",
-          url: "ProductLikeServlet",
-          data:  {
-                "p_id":n ,
-                "userid":userid
-                },
-                dataType : "json",
-                success : function(data,status,xhr){
-                   $("#productChoice").val(productLike++);
-                },error : function (xhr,status,error){
-                 console.log(error);
-                }
-
-
-     }); //end ajax
-
-   <%}else{%>
-    alert("로그인이 필요합니다.");
-    event.preventDefault();
-   <%}%>
-
-
-     } 
-   $(function() {
-      $("#up").on("click",function(){
-         //input태그 수량변화
-         var quantity = parseInt($("#quantity").val()); 
-         $("#quantity").val(parseInt(quantity)+1);
-         
-         var price = $("#price").val();
-            //총합 구하기
-            $("#total").text((quantity+1)*price);
-      })//end up
-      
-      $("#down").on("click",function(){
-         var quantity = parseInt($("#quantity").val()); 
-         
-         if(quantity != 1){
-            $("#quantity").val(parseInt(quantity)-1);
-            var price = $("#price").val();
-            $("#total").text((quantity-1)*price);
-			}
-		})//end down
-		
-		
-	})//
-        
-</script>
-
-  <div class="container ">
-     <div class="row">
-       <h1 class="display=3" align="center" style="font-family: 'GulimChe' ">. </h1>
-      </div>
-      
-     <% List<CategoryProductDTO> product_list = (List<CategoryProductDTO>)request.getAttribute("product_list"); 
-
-     %>
-   
-
-
- <div id = "categoryProductContainer" class="container" >
-		<div class="row" align="center">
+    <div class="row" align="center">
 				<%
+				 List<CategoryProductDTO> product_list = (List<CategoryProductDTO>)request.getAttribute("product_list"); 
+				
+				
 				 for ( int i = 0 ; i < product_list.size() ; i++ ) {
 					   
 					    int p_id = product_list.get(i).getP_id();
@@ -177,6 +83,3 @@ function productChoice(n) {
 				}
 			%>	
 			</div>
-	
-		</div>
-     
