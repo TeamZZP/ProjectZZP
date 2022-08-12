@@ -58,7 +58,7 @@
 %>
 <table class="questionDetail" data-qID="<%=qDTO.getQ_ID()%>">
 	<tr>
-		<td rowspan="2" style="text-align: center;"><img alt="Q" src="../images/question/question.png" width="50px" height="50px">
+		<td rowspan="2" style="text-align: center;"><img alt="Q" src="images/question/question.png" width="50px" height="50px">
 		</td>
 		<td><%=qDTO.getQ_STATUS()%></td>
 		<td>
