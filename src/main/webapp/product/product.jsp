@@ -89,9 +89,7 @@ function productChoice(n) {
 			}
 		})//end down
 		
-		$("#cart").on("click",function(){
-			
-		})//
+		
 		
 	})//
         
@@ -103,7 +101,7 @@ function productChoice(n) {
       </div>
       
      <% List<CategoryProductDTO> product_list = (List<CategoryProductDTO>)request.getAttribute("product_list"); 
-
+		
      %>
    
 
@@ -135,15 +133,20 @@ function productChoice(n) {
 				<a id="productChoice" href="javascript:productChoice(<%=p_id%>)"><img src="images/like.png" width="30" height="30"></a>
 				<a><img src="images/bubble.png" width="25" height="22"> </a>
 				<!-- 장바구니 모달창-->
-				 <a type="button" class="btn " data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+			<form action="addCartServlet" >
+				 <a type="button" class="btn " data-bs-toggle="modal" data-bs-target="#cartback">
 				 	<img src="images/cart.jpg" width="25" height="25"></a>
 				<!-- Modal -->
-				<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+				<div class="modal fade" id="cartback" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 				  <div class="modal-dialog modal-dialog-scrollable">
 				    <div class="modal-content">
 				      <div class="modal-header">
 				        <h5 class="modal-title" id="staticBackdropLabel">장바구니</h5>
 				        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				        <input type="hidden" name="p_id" value="<%=p_id%>">	
+						<input type="hidden" name="p_name" value="<%=p_name%>">	
+						<input type="hidden" name="p_selling_price" value="<%=p_selling_price%>">	
+						<input type="hidden" name="p_image" value="<%=p_image%>">
 				      </div>
 				      <div class="modal-body">
 				      <!--  <button type="button" class="gnb_close_btn"><i class="fa fa-times" aria-hidden="true"></i></button> -->
@@ -155,7 +158,7 @@ function productChoice(n) {
 					        <div class="area_count holder">		
 					        <div class="option_btn_wrap" style="top:0;"> 			
 					        <div class="option_btn_tools" style="float: none;"> 
-					        <input id="quantity" value="1" >
+					        <input id="p_amount" name="p_amount" value="1" >
 							<button type="button" class="btn btn-outline-success" id="up">+</button>
 							<button type="button" class="btn btn-outline-success" id="down">-</button><br>	
 					        <input type="hidden" id="price" value="<%=p_selling_price%>">
@@ -169,11 +172,12 @@ function productChoice(n) {
 				      </div>
 				      <div class="modal-footer">
 				        <a href="" class="shopping">계속쇼핑하기</a>
-				        <a href="productCartServlet" id="cart">장바구니저장</a>
+				        <a><input type="submit">장바구니저장</a>
 				      </div>
 				    </div>
 				  </div>
-				</div>			
+				</div>	
+				</form>		
 			</div>
 							
 			<%
