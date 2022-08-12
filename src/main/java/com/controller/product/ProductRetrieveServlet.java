@@ -34,7 +34,7 @@ public class ProductRetrieveServlet extends HttpServlet {
       ProductService service = new ProductService();
       ProductDTO pdto = service.productRetrieve(p_id);
       List <ImagesDTO> ilist = service.ImagesRetrieve(p_id);
-      
+      		
       	String pID = String.valueOf(pdto.getP_id());
 		
 		QuestionService Qservice = new QuestionService();
@@ -45,13 +45,16 @@ public class ProductRetrieveServlet extends HttpServlet {
 		AnswerDTO aDTO = Aservice.selectAnswer(pID);
 		System.out.println(aDTO);
 		
+		
 		HttpSession session = request.getSession();
+		request.setAttribute("ProductRetrieveDTO", pdto);
+	    request.setAttribute("ImagesRetrieveList", ilist);
+	    
 		session.setAttribute("aDTO", aDTO);
 		session.setAttribute("prodQuestionList", prodQuestionList);
 		response.sendRedirect("product/prodQA.jsp");
 		
-		 request.setAttribute("ProductRetrieveDTO", pdto);
-	      request.setAttribute("ImagesRetrieveList", ilist);
+		 
       
       /* response.sendRedirect("productRetrieve.jsp"); */
       
