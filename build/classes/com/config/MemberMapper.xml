@@ -6,12 +6,17 @@
 
 		<insert id="addMember" parameterType="hashMap">
 			insert all
+			
 			into member
 			values (#{userid}, #{passwd}, #{username}, #{email1}, #{email2}, #{phone}, sysdate, 0)
-			into address (userid, post_num, addr1, addr2, address_id)
-			values (#{userid}, #{post_num}, #{addr1}, #{addr2}, address_address_id_seq.nextval)
+			
+			into address
+			values (address_address_id_seq.nextval, #{userid}, #{username}, #{username}, #{phone}, 
+					#{post_num}, #{addr1}, #{addr2}, 1 )
+			
 			into profile 
 			values (#{userid}, 'user.png', ' ')
+			
 			select * from dual
 		</insert>
 		

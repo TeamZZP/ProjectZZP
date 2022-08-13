@@ -1,4 +1,3 @@
-<%@page import="org.apache.ibatis.reflection.SystemMetaObject"%>
 <%@page import="com.dto.CategoryProductDTO"%>
 <%@page import="java.io.Console"%>
 <%@page import="java.util.List"%>
@@ -44,31 +43,7 @@
 <br>
 
 
-<!-- 베스트상품 -->
-<%
-				 List<CategoryProductDTO> product_list = (List<CategoryProductDTO>)request.getAttribute("product_list"); 
-				
-				
-				 for ( int i = 0 ; i < product_list.size() ; i++ ) {
-					   
-					    int p_id = product_list.get(i).getP_id();
-					    String p_name =product_list.get(i).getP_name();
-						String p_content =product_list.get(i).getP_content();
-						int c_id =product_list.get(i).getC_id();
-						int p_cost_price =product_list.get(i).getP_cost_price();
-						int p_selling_price =product_list.get(i).getP_selling_price();
-						int p_discount =product_list.get(i).getP_discount();
-						String p_created=product_list.get(i).getP_created();
-						int p_stock =product_list.get(i).getP_stock();
-						String userid =product_list.get(i).getUserid();
-						String p_image = product_list.get(i).getP_image();
-%>
-<%
-	}
-%>
-<%-- <a href="ProductRetrieveServlet?p_id=<%=p_id%>">
-					<img src="images/p_image/<%=p_image%>.png "  class="img-thumbnail" style=" width:300; height:300; "></a>  --%>
-<div class="container px-4 py-5">
+<!-- 베스트상품 --><div class="container px-4 py-5">
 <nav class="nav" >
   <b style="font-size: xx-large; color: black;">BEST PRODUCT</b>
 </nav>
@@ -78,12 +53,13 @@
   <div class="carousel-inner">
     <div class="carousel-item active" data-bs-interval="false">
       <div class="container px-4 py-5" id="custom-cards">
+      <!-- <span>BEST PRODUCT</span> -->
     <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
     <!-- 1 -->
       <div class="col" onclick="javascrip:location.href='StoreServlet';">
         <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-image: url('https://image.shutterstock.com/image-photo/upcycled-glass-jar-silicon-straws-260nw-2145836275.jpg');">
           <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
-            <h2 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">best</h2>
+            <h2 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Short title, long jacket</h2>
             <ul class="d-flex list-unstyled mt-auto">
               <li class="me-auto">
                 <img src="images/header/main.png" alt="Bootstrap" width="32" height="32" class="rounded-circle border border-white">
@@ -225,7 +201,6 @@
   </button>
 </div>
 </div>
-	
 
 <!-- middle banner -->
 <img src="images/main/banner_middle.png" class="d-block w-100" alt="...">
