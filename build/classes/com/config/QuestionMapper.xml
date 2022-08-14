@@ -70,7 +70,7 @@
 		</foreach>
 		and IMAGE_RNK = 1
 	</select>
-	<select id="prodQuestion" parameterType="int" resultType="QuestionDTO">
+	<select id="prodQuestion" parameterType="string" resultType="QuestionDTO">
 		select * from QUESTION where P_ID = #{P_ID}
 	</select>
 </mapper>

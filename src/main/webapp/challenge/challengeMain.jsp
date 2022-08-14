@@ -85,7 +85,7 @@
 			<option value="chall_liked" <%if ("chall_liked".equals(sortBy)) {%>selected <%}%>>인기순</option>
 			<option value="chall_comments" <%if ("chall_comments".equals(sortBy)) {%> selected <%}%>>댓글 많은순</option>
 		</select> 
-		<a href="ChallengeUIServlet" class="btn btn-outline-success">글쓰기</a>
+		<a href="ChallengeUIServlet" class="btn btn-outline-success" style="margin-bottom: 5px;">글쓰기</a>
 	   </div>
 	 </div>
 	 <div style="height: 10px"></div>

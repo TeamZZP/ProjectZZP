@@ -214,7 +214,6 @@ a {
 				$("#reply"+comment_id).css("display", "block");
 			}
 		});
-		
 		//좋아요 추가/삭제
 		$("#liked_area").on("click", ".liked", function () {
 			if ("<%= currUserid %>" == "null") {
@@ -235,6 +234,16 @@ a {
 						alert("문제가 발생했습니다. 다시 시도해 주세요.");
 					}
 				});
+			}
+		});
+		//목록으로 돌아가기
+		$(".backList").on("click", function () {
+			let preUrl = document.referrer;
+			//게시글 업데이트한 후 이동한 페이지에서는 글작성 페이지로 돌아가지 않도록 최신글 화면으로 이동한다.
+			if (preUrl.includes("ChallengeUIServlet")) {
+				location.href = "ChallengeListServlet";
+			} else {
+				history.back();
 			}
 		});
 		
@@ -460,7 +469,7 @@ function displayedAt(createdAt) {
         
         <div class="row pt-5">
 		  <div class="col">
-		  	<a href="ChallengeListServlet" class="btn btn-outline-success">목록</a>
+		  	<a class="backList btn btn-outline-success">목록</a>
 		  </div>
 		  <div class="col">
 		    <div class="float-end">

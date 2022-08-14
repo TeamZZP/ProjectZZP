@@ -87,8 +87,8 @@ public class QuestionDAO {
 		return list;
 	}
 
-	public List<QuestionDTO> prodQuestion(SqlSession session, int pID) {
-		List<QuestionDTO> list = session.selectList("QuestionMapper.prodQuestion", pID);
+	public List<QuestionDTO> prodQuestion(SqlSession session, String p_ID) {
+		List<QuestionDTO> list = session.selectList("QuestionMapper.prodQuestion", p_ID);
 		return list;
 	}
 

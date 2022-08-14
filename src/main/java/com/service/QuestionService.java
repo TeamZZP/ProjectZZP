@@ -125,11 +125,11 @@ public class QuestionService {
 		return list;
 	}
 
-	public List<QuestionDTO> prodQuestion(int pID) {
+	public List<QuestionDTO> prodQuestion(String p_ID) {
 		List<QuestionDTO> list = null;
 		SqlSession session = MySqlSessionFactory.getSqlSession();
 		try {
-			list = dao.prodQuestion(session, pID);
+			list = dao.prodQuestion(session, p_ID);
 		} finally {
 			session.close();
 		}

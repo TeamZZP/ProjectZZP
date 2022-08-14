@@ -145,6 +145,11 @@ public class ChallengeDAO {
 		return n;
 	}
 
+	public List<ChallengeDTO> selectChallengeByUserid(SqlSession session, String userid) {
+		List<ChallengeDTO> list = session.selectList("ChallengeMapper.selectChallengeByUserid", userid);
+		return list;
+	}
+
 
 
 }

@@ -1,6 +1,7 @@
 package com.controller.challenge;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -16,16 +17,16 @@ import com.dto.PageDTO;
 import com.service.ChallengeService;
 
 /**
- * Servlet implementation class ProfileMainServlet
+ * Servlet implementation class ProfileCategoryServlet
  */
-@WebServlet("/ProfileMainServlet")
-public class ProfileMainServlet extends HttpServlet {
+@WebServlet("/ProfileCategoryServlet")
+public class ProfileCategoryServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ProfileMainServlet() {
+    public ProfileCategoryServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,20 +35,37 @@ public class ProfileMainServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		
 		String userid = request.getParameter("userid");
+		String category = request.getParameter("category");
+		System.out.println(userid+" "+category);
 		
 		ChallengeService service = new ChallengeService();
-		HashMap<String, String> profileMap = service.selectProfile(userid);
 		
-		//회원의 챌린지 목록 가져오기
-		List<ChallengeDTO> challengeList = service.selectChallengeByUserid(userid);
+		if (category.equals("all")) {
+			//회원의 챌린지 목록 가져오기
+			List<ChallengeDTO> challengeList = service.selectChallengeByUserid(userid);
+			
+			request.setAttribute("userid", userid);
+			request.setAttribute("challengeList", challengeList);
+			RequestDispatcher dis = request.getRequestDispatcher("profile/profileAll.jsp");
+			dis.forward(request, response);
+			
+		} else if (category.equals("challenge")) {
+			//회원의 챌린지 목록 가져오기
+			List<ChallengeDTO> challengeList = service.selectChallengeByUserid(userid);
+			//회원의 프로필 이미지 가져오기
+			String profile_img = service.selectProfileImg(userid);
+			
+			request.setAttribute("profile_img", profile_img);
+			request.setAttribute("challengeList", challengeList);
+			RequestDispatcher dis = request.getRequestDispatcher("profile/profileChallenge.jsp");
+			dis.forward(request, response);
+			
+		}
 		
-		request.setAttribute("profileMap", profileMap);
-		request.setAttribute("challengeList", challengeList);
 		
-		RequestDispatcher dis = request.getRequestDispatcher("profileMain.jsp");
-		dis.forward(request, response);
+		
 	}
 
 	/**

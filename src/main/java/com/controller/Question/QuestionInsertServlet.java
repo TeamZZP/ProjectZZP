@@ -31,7 +31,7 @@ public class QuestionInsertServlet extends HttpServlet {
 		if (mDTO != null) {
 			String USERID = mDTO.getUserid();
 			String Q_TITLE = request.getParameter("qTittle");
-			String P_ID = request.getParameter("pId");
+			String P_ID = request.getParameter("P_ID");
 			String Q_CONTENT = request.getParameter("qContent");
 			int Q_BOARD_CATEGORY = Integer.parseInt(request.getParameter("qboard_category"));
 			String Q_CATEGORY = request.getParameter("qcategory");

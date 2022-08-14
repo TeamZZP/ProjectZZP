@@ -14,7 +14,11 @@
 #header_login_bar{
 	background-color: white;
 }
-</style>	
+ .headercss:hover {
+	color: green;
+	font-weight: bold;
+}
+</style>
 <html>
 <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom"
 	id="headerColor">
@@ -26,11 +30,11 @@
       </a>
 
       <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-        <li><a href="IntroductionUIServlet" class="nav-link px-2 link-dark">소개</a></li>
-        <li><a href="StoreServlet" class="nav-link px-2 link-dark">스토어</a></li>
-        <li><a href="ChallengeListServlet" class="nav-link px-2 link-dark">챌린지</a></li>
-        <li><a href="NoticeListServlet" class="nav-link px-2 link-dark">공지사항</a></li>
-        <li><a href="QuestionListServlet" class="nav-link px-2 link-dark">문의</a></li>
+        <li><a href="IntroductionUIServlet" class="nav-link px-2 link-dark"><span class="headercss">소개</span></a></li>
+        <li><a href="StoreServlet" class="nav-link px-2 link-dark"><span class="headercss">스토어</span></a></li>
+        <li><a href="ChallengeListServlet" class="nav-link px-2 link-dark"><span class="headercss">챌린지</span></a></li>
+        <li><a href="NoticeListServlet" class="nav-link px-2 link-dark"><span class="headercss">공지사항</span></a></li>
+        <li><a href="QuestionListServlet" class="nav-link px-2 link-dark"><span class="headercss">문의</span></a></li>
       </ul>
 
 <div class="col-md-3 text-end" id="header_login_bar" style="background-color: white;">

@@ -25,6 +25,9 @@
 				$("#passwd").focus();
 			}
 		});//end fn
+		$("#cancle").on("click", function() {
+			location.href="mypage.jsp";
+		});//end fn
 	});//end ready
 </script>
 </head>
@@ -38,6 +41,7 @@
 기존 비밀번호 확인: <input type="password" name="passwd" id="passwd">
 <br><br>
 <button id="check" class="btn btn-success">확인</button>
+<button type="button" id="cancle" class="btn btn-outline-success">취소</button>
 </form>
 </div>
 

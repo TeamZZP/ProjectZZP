@@ -291,6 +291,17 @@ public class ChallengeService {
 		return n;
 	}
 
+	public List<ChallengeDTO> selectChallengeByUserid(String userid) {
+		List<ChallengeDTO> list = null;
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		try {
+			list = dao.selectChallengeByUserid(session, userid);
+		} finally {
+			session.close();
+		}
+		return list;
+	}
+
 
 
 }

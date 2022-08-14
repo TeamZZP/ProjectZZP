@@ -35,14 +35,14 @@ public class ProductRetrieveServlet extends HttpServlet {
       ProductDTO pdto = service.productRetrieve(p_id);
       List <ImagesDTO> ilist = service.ImagesRetrieve(p_id);
       		
-      	String pID = String.valueOf(pdto.getP_id());
+      String P_ID = String.valueOf(pdto.getP_id());
 		
 		QuestionService Qservice = new QuestionService();
-		List<QuestionDTO> prodQuestionList = Qservice.prodQuestion(Integer.parseInt(pID));
+		List<QuestionDTO> prodQuestionList = Qservice.prodQuestion(P_ID);
 		System.out.println("prodQuestionList--- " + prodQuestionList);
 		
 		AnswerService Aservice = new AnswerService();
-		AnswerDTO aDTO = Aservice.selectAnswer(pID);
+		AnswerDTO aDTO = Aservice.selectAnswer(P_ID);
 		System.out.println(aDTO);
 		
 		
@@ -57,8 +57,8 @@ public class ProductRetrieveServlet extends HttpServlet {
       /* response.sendRedirect("productRetrieve.jsp"); */
       
 		
-		  RequestDispatcher dis = request.getRequestDispatcher("productRetrieve.jsp");
-		  dis.forward(request, response);
+	RequestDispatcher dis = request.getRequestDispatcher("productRetrieve.jsp");
+	dis.forward(request, response);
 		 
        
       

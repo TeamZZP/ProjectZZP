@@ -48,6 +48,12 @@
 	order by ${sortBy} desc
 </select>
 
+<select id="selectChallengeByUserid" resultType="ChallengeDTO">
+	select * from challenge 
+	where userid=#{userid}
+	order by chall_id desc
+</select>
+
 <select id="countTotal" parameterType="hashmap" resultType="int">
 	select count(*) from challenge
  	<where>
