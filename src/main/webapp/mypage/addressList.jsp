@@ -9,29 +9,36 @@
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<style>
+	th {
+		text-align: center;
+	}
+</style>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("#addAddress").on("click", function() {
+			console.log("추가 버튼 클릭");
+			location.href="AddressAddServlet";
+		});//end fn
+	});//end ready
+</script>
 <div class="container">
 <div class="row">
 <div class="col-lg-2">
-	<table>
-		<tr>
-			<td>좌측 카테고리</td>
-		</tr>
-	</table>
+	<div class="col">회원 관리</div>
+	<div class="col">주문 관리</div>
+	<div class="col">상품 관리</div>
+	<div class="col">상품 문의</div>
+	<div class="col">문의 게시판</div>
 </div>
 <div class="col-lg-10">
-<div style="width : 90px; float : right;">
-	<input type="button" class="btn btn-success btn-sm" value="배송지 추가">
-</div>
-<table class="table table-sm">
-	<tr>
-		<th>배송지명</th>
-		<th>수령인</th>
-		<th>연락처</th>
-		<th>우편번호</th>
-		<th>주소</th>
-		<th>상세주소</th>
-		<th>기본 배송지</th>
+<table class="table table-hover" style="table-layout: fixed">
+	<tr class="table-success">
+		<th width="20%">배송지</th>
+		<th width="50%">주소</th>
+		<th width="10%">연락처</th>
+		<th width="10%">수정·삭제</th>
 	</tr>
 <%
 	MemberDTO member=(MemberDTO) session.getAttribute("login");
@@ -64,19 +71,21 @@
 			}
 			System.out.println("출력 확인 : "+address);
 %>
-<script type="text/javascript">
-	$(document).ready(function() {
-		
-	});//end ready
-</script>
 <form>
 	<tr id="list">
-		<td><%= userid %></td>
-		<td><%= username %></td>
-		<td><%= email1+"@"+email2 %></td>
-		<td><%= phone %></td>
-		<td><%= post_num + "&nbsp;&nbsp;&nbsp;" + addr1+ "&nbsp;" + addr2 %></td>
+		<td style="padding:5 0 0 10px;">
+			<span><%= address_name %></span><br>
+			<span><%= username %></span><br>
+			<span><%= default_chk %></span>
+		</td>
 		<td>
+			<span style="font-size: 14px"><%= post_num %></span><br>
+			<%=  addr1+ "<br>" + addr2 %>
+		</td>
+		<td style="text-align: center;">
+			<span><%= phone %></span>
+		</td>
+		<td style="text-align: center;">
 			<!-- Modal -->
 			<div class="modal fade" id="deleteMember" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 			  <div class="modal-dialog">
@@ -86,7 +95,6 @@
 			        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 			      </div>
 			      <div class="modal-body">
-			        <%-- 회원 <%= userid %>님을 삭제하시겠습니까?--첫번째 데이터가 출력됨 --%>
 			        선택한 배송지를 삭제하시겠습니까?
 			      </div>
 			      <div class="modal-footer">
@@ -96,14 +104,13 @@
 			    </div>
 			  </div>
 			</div>
+			<div class="btns" style="display: inline-block">
 			<!-- Button trigger modal -->
-			<button type="button" id="change<%= userid %>" data-edit="<%= userid %>" class="btn btn-outline-success btn-sm">수정</button>
-			<button type="button" id="checkDelete<%= userid %>" data-id="<%= userid %>" class="btn btn-outline-dark btn-sm" data-bs-toggle="modal" data-bs-target="#deleteMember">
+			<button type="button" id="change<%= userid %>" data-edit="<%= userid %>" class="btn btn-light btn-sm">수정</button>
+			<button type="button" id="checkDelete<%= userid %>" data-id="<%= userid %>" class="btn btn-light btn-sm" data-bs-toggle="modal" data-bs-target="#deleteMember">
 				삭제
 			</button><!-- open modal -->
-		</td>
-		<td>
-			default_check
+			</div>
 		</td>
 <%
 		}
@@ -114,5 +121,8 @@
 </table>
 </div>
 </div>
+	<div style="width : 95px; float : right;">
+		<input type="button" id="addAddress" class="btn btn-success btn-sm" value="배송지 추가">
+	</div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
