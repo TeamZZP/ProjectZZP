@@ -1,5 +1,6 @@
 package com.dto;
 
+
 public class AddressDTO {
 	private int address_id;
 	private String userid;

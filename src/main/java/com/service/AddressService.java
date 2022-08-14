@@ -51,6 +51,18 @@ public class AddressService {
 		return addressList;
 	}
 
+	public int deleteAddress(int address_id) {
+		SqlSession session=MySqlSessionFactory.getSqlSession();
+		int num=0;
+		try {
+			num=dao.deleteAddress(session, address_id);
+			session.commit();
+		} finally {
+			session.close();
+		}
+		return num;
+	}
+
 
 
 	
