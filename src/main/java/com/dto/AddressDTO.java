@@ -1,6 +1,7 @@
 package com.dto;
 
 public class AddressDTO {
+	private int address_id;
 	private String userid;
 	private String address_name;	
 	private String receiver_name;	
@@ -14,9 +15,10 @@ public class AddressDTO {
 		super();
 	}
 
-	public AddressDTO(String userid, String address_name, String receiver_name, String receiver_phone, String post_num,
-			String addr1, String addr2, int default_chk) {
+	public AddressDTO(int address_id, String userid, String address_name, String receiver_name, String receiver_phone,
+			String post_num, String addr1, String addr2, int default_chk) {
 		super();
+		this.address_id = address_id;
 		this.userid = userid;
 		this.address_name = address_name;
 		this.receiver_name = receiver_name;
@@ -25,6 +27,14 @@ public class AddressDTO {
 		this.addr1 = addr1;
 		this.addr2 = addr2;
 		this.default_chk = default_chk;
+	}
+
+	public int getAddress_id() {
+		return address_id;
+	}
+
+	public void setAddress_id(int address_id) {
+		this.address_id = address_id;
 	}
 
 	public String getUserid() {
@@ -93,9 +103,9 @@ public class AddressDTO {
 
 	@Override
 	public String toString() {
-		return "AddressDTO [userid=" + userid + ", address_name=" + address_name + ", receiver_name=" + receiver_name
-				+ ", receiver_phone=" + receiver_phone + ", post_num=" + post_num + ", addr1=" + addr1 + ", addr2="
-				+ addr2 + ", default_chk=" + default_chk + "]";
+		return "AddressDTO [address_id=" + address_id + ", userid=" + userid + ", address_name=" + address_name
+				+ ", receiver_name=" + receiver_name + ", receiver_phone=" + receiver_phone + ", post_num=" + post_num
+				+ ", addr1=" + addr1 + ", addr2=" + addr2 + ", default_chk=" + default_chk + "]";
 	}
 	
 }

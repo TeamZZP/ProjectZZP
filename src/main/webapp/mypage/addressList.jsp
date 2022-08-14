@@ -71,6 +71,38 @@
 			}
 			System.out.println("출력 확인 : "+address);
 %>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("#deleteAddress").on("shown.bs.modal", function (e) {//#deleteMember modal 창을 열 때 선택한 버튼의 data-id를 가져옴(deleteID로 설정했더니 안돼서 다시 id로 바꿈)--modal창의 삭제 버튼에 저장
+		    var id = $(e.relatedTarget).data("id");
+		    $("#delete<%= userid %>").val(id);
+		});//end fn
+		$("#delete<%= userid %>").on("click", function() {//모달의 삭제 버튼 클릭시 회원 삭제
+			var userid=$(this).val();
+			console.log(userid);
+/* 			//*****ajax
+			$.ajax({
+				type : "post",
+				url : "",//페이지 이동 없이 해당 url에서 작업 완료 후 데이터만 가져옴
+				dataType : "text",
+				data : {//서버에 전송할 데이터
+					userid : userid
+				},
+				success : function(data, status, xhr) {
+					alert(data);
+					//location.href="memberList.jsp";//수정 후 페이지 이동--새로운 목록으로 출력하도록 수정
+				},
+				error: function(xhr, status, error) {
+					console.log(error);
+				}						
+			});//end ajax */
+		});//end fn
+		$("#change<%= userid %>").on("click", function() {//배송지 정보 출력 페이지로 이동
+			var userid=$(this).attr("data-edit");
+			console.log(userid);
+		});//end fn
+	});//end ready
+</script>
 <form>
 	<tr id="list">
 		<td style="padding:5 0 0 10px;">
@@ -87,11 +119,11 @@
 		</td>
 		<td style="text-align: center;">
 			<!-- Modal -->
-			<div class="modal fade" id="deleteMember" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+			<div class="modal fade" id="deleteAddress" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 			  <div class="modal-dialog">
 			    <div class="modal-content">
 			      <div class="modal-header">
-			        <h5 class="modal-title" id="staticBackdropLabel">회원 삭제</h5>
+			        <h5 class="modal-title" id="staticBackdropLabel">배송지 삭제</h5>
 			        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 			      </div>
 			      <div class="modal-body">
@@ -107,7 +139,7 @@
 			<div class="btns" style="display: inline-block">
 			<!-- Button trigger modal -->
 			<button type="button" id="change<%= userid %>" data-edit="<%= userid %>" class="btn btn-light btn-sm">수정</button>
-			<button type="button" id="checkDelete<%= userid %>" data-id="<%= userid %>" class="btn btn-light btn-sm" data-bs-toggle="modal" data-bs-target="#deleteMember">
+			<button type="button" id="checkDelete<%= userid %>" data-id="<%= userid %>" class="btn btn-light btn-sm" data-bs-toggle="modal" data-bs-target="#deleteAddress">
 				삭제
 			</button><!-- open modal -->
 			</div>
