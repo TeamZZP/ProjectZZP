@@ -83,14 +83,16 @@
 			$.ajax({
 				type : "post",
 				url : "AddressDeleteServlet",//페이지 이동 없이 해당 url에서 작업 완료 후 데이터만 가져옴
-				dataType : "html",
+				dataType : "text",
 				data : {//서버에 전송할 데이터
 					address_id : address_id
 				},
 				success : function(data, status, xhr) {
-					alert("해당 배송지가 삭제되었습니다.");
-					//$("#list").empty();
-					//$("#list").html(data);
+					alert("해당 배송지가 삭제되었습니다."); 
+					$("#deleteAddress").modal('hide');
+					$('.modal-backdrop').hide();  //모달창 닫고 백드롭 hide
+					$("#list").empty();
+					$("#list").append(data);
 					//$("#list").load(location.href+" #list");//기존 테이블 지우고 새로운 목록으로 출력하도록 수정--X
 					//location.href="addressList.jsp";//수정 후 페이지 이동
 				},
