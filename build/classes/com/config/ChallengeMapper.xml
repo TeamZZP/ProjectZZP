@@ -106,34 +106,53 @@
 		chall_id,
 		comment_content,
 		comment_created,
-		userid
-		<if test="parent_id != null">
-		,parent_id
-		</if>
+		userid,
+		parent_id,
+		group_order,
+		step
 		)
 	values 
 		(comments_comment_id_seq.NEXTVAL, 
 		#{chall_id}, 
 		#{comment_content}, 
 		CURRENT_TIMESTAMP, 
-		#{userid}
-		<if test="parent_id != null">
-		,#{parent_id}
-		</if>
+		#{userid},
+		0,
+		(select nvl(max(group_order),0)+1 from comments where chall_id=#{chall_id}),
+		0
+		)
+</insert>
+
+<insert id="insertReply" parameterType="com.dto.CommentsDTO">
+	insert into comments
+		(comment_id,
+		chall_id,
+		comment_content,
+		comment_created,
+		userid,
+		parent_id,
+		group_order,
+		step
+		)
+	values 
+		(comments_comment_id_seq.NEXTVAL, 
+		#{chall_id}, 
+		#{comment_content}, 
+		CURRENT_TIMESTAMP, 
+		#{userid},
+		#{parent_id},
+		#{group_order},
+		(	select max(step)+1 from comments 
+			where chall_id=#{chall_id} 
+			and group_order=#{group_order}
+			)
 		)
 </insert>
 
 <select id="selectAllComments" resultType="com.dto.CommentsDTO">
 	select * from comments
 	where chall_id=#{chall_id}
-	and parent_id=0
-	order by comment_id desc
-</select>
-
-<select id="selectAllReplies" resultType="com.dto.CommentsDTO">
-	select * from comments
-	where parent_id=#{parent_id}
-	order by comment_id
+	order by group_order desc, step
 </select>
 
 <delete id="deleteComment">
@@ -144,6 +163,12 @@
 <delete id="deleteReplies">
 	delete from comments
 	where parent_id=#{comment_id}
+</delete>
+
+<delete id="deleteRepliesGroup" parameterType="hashmap">
+	delete from comments
+	where chall_id=#{chall_id}
+	and group_order=(select group_order from comments where comment_id=#{comment_id})
 </delete>
 
 <select id="countComments" resultType="int">
@@ -162,6 +187,9 @@
 	set chall_comments=chall_comments-${num}
 	where chall_id=#{chall_id}
 </update>
+
+
+
 
 <select id="selectAllLikedUserid" resultType="string">
 	select userid from chall_liked

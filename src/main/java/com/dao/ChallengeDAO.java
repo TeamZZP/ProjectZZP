@@ -150,6 +150,26 @@ public class ChallengeDAO {
 		return list;
 	}
 
+	public int updateCommentsGroupOrder(SqlSession session, String chall_id) {
+		int n = session.update("ChallengeMapper.updateCommentsGroupOrder", chall_id);
+		return n;
+	}
+
+	public int updateRepliesGroupOrder(SqlSession session, String chall_id) {
+		int n = session.update("ChallengeMapper.updateRepliesGroupOrder", chall_id);
+		return n;
+	}
+
+	public int insertReply(SqlSession session, CommentsDTO dto) {
+		int n = session.insert("ChallengeMapper.insertReply", dto);
+		return n;
+	}
+
+	public int deleteRepliesGroup(SqlSession session, HashMap<String, String> map) {
+		int n = session.delete("ChallengeMapper.deleteRepliesGroup", map);
+		return n;
+	}
+
 
 
 }
