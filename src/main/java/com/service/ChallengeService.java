@@ -268,22 +268,23 @@ public class ChallengeService {
 		return profile_img;
 	}
 
-	public List<CommentsDTO> selectAllReplies(int parent_id) {
-		List<CommentsDTO> list = null;
-		SqlSession session = MySqlSessionFactory.getSqlSession();
-		try {
-			list = dao.selectAllReplies(session, parent_id);
-		} finally {
-			session.close();
-		}
-		return list;
-	}
-
 	public int deleteReplies(String comment_id) {
 		int n = 0;
 		SqlSession session = MySqlSessionFactory.getSqlSession();
 		try {
 			n = dao.deleteReplies(session, comment_id);
+			session.commit();
+		} finally {
+			session.close();
+		}
+		return n;
+	}
+	
+	public int deleteRepliesGroup(HashMap<String, String> map) {
+		int n = 0;
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		try {
+			n = dao.deleteRepliesGroup(session, map);
 			session.commit();
 		} finally {
 			session.close();
@@ -301,6 +302,44 @@ public class ChallengeService {
 		}
 		return list;
 	}
+
+	public int updateCommentsGroupOrder(String chall_id) {
+		int n = 0;
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		try {
+			n = dao.updateCommentsGroupOrder(session, chall_id);
+			session.commit();
+		} finally {
+			session.close();
+		}
+		return n;
+	}
+
+	public int updateRepliesGroupOrder(String chall_id) {
+		int n = 0;
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		try {
+			n = dao.updateRepliesGroupOrder(session, chall_id);
+			session.commit();
+		} finally {
+			session.close();
+		}
+		return n;
+	}
+
+	public int insertReply(CommentsDTO dto) {
+		int n = 0;
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		try {
+			n = dao.insertReply(session, dto);
+			session.commit();
+		} finally {
+			session.close();
+		}
+		return n;
+	}
+
+
 
 
 
