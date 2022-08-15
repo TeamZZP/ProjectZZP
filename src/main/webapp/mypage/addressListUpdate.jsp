@@ -3,6 +3,17 @@
 <%@page import="java.util.List"%>
 <%@page import="java.util.HashMap"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+
+<table class="table table-hover" style="table-layout: fixed">
+	<tr class="table-success">
+		<th width="20%">배송지</th>
+		<th width="50%">주소</th>
+		<th width="10%">연락처</th>
+		<th width="10%">수정·삭제</th>
+	</tr>
+
+
 <%
 	MemberDTO member=(MemberDTO) session.getAttribute("login");
 	HashMap<String, List<AddressDTO>> addressMap=(HashMap<String, List<AddressDTO>>) session.getAttribute("addressMap");
@@ -35,6 +46,7 @@
 			}
 			System.out.println("출력 확인 : "+address);
 %>
+
 	<tr>
 		<td style="padding:5 0 0 10px;">
 			<span><%= address_name %></span><br>
@@ -80,3 +92,5 @@
 	}
 %>
 	</tr>
+	
+	</table>

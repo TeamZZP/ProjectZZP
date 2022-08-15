@@ -9,12 +9,7 @@
 <script>
 
 function deleteAdd (x) {//모달의 삭제 버튼 클릭시 배송지 삭제
-	$("#deleteAddress").on("shown.bs.modal", function (e) {
-	    var address=x;
-		var id = $(e.relatedTarget).data("id");
-	    $("#delete"+address).val(id);
-	});//end fn
-	//*****ajax
+	
 	$.ajax({
 		type : "post",
 		url : "AddressDeleteServlet",//페이지 이동 없이 해당 url에서 작업 완료 후 데이터만 가져옴
@@ -26,8 +21,10 @@ function deleteAdd (x) {//모달의 삭제 버튼 클릭시 배송지 삭제
 			alert("해당 배송지가 삭제되었습니다."); 
 			$("#deleteAddress").modal('hide');
 			$('.modal-backdrop').hide();  //모달창 닫고 백드롭 hide
-			$("#list").empty();
-			$("#list").append(data);
+			$("#addTable").remove();
+			console.log(data);
+			$("#addTableDiv").append(data);
+			
 		},
 		error: function(xhr, status, error) {
 			console.log(error);

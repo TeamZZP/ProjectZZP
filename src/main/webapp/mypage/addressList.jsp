@@ -25,7 +25,8 @@
 	<div class="col">문의 게시판</div>
 </div>
 <div class="col-lg-10">
-<table class="table table-hover" style="table-layout: fixed">
+<div id="addTableDiv">
+<table id="addTable" class="table table-hover" style="table-layout: fixed">
 	<tr class="table-success">
 		<th width="20%">배송지</th>
 		<th width="50%">주소</th>
@@ -109,6 +110,7 @@
 	
 </script>
 <form>
+
 	<tr id="list">
 		<td style="padding:5 0 0 10px;">
 			<span><%= address_name %></span><br>
@@ -128,7 +130,7 @@
 			  <div class="modal-dialog">
 			    <div class="modal-content">
 			      <div class="modal-header">
-			        <h5 class="modal-title" id="staticBackdropLabel">배송지 삭제</h5>
+			        <h5 class="modal-title" id="staticBackdropLabel">배송지제</h5>
 			        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 			      </div>
 			      <div class="modal-body">
@@ -141,6 +143,7 @@
 			    </div>
 			  </div>
 			</div>
+			<!-- end modal -->
 			<div class="btns" style="display: inline-block">
 			<!-- Button trigger modal -->
 			<button type="button" id="change<%= address_id %>" data-edit="<%= address_id %>" class="btn btn-light btn-sm">수정</button>
@@ -154,8 +157,10 @@
 	}
 %>
 	</tr>
+	
 </form>
 </table>
+</div>
 </div>
 </div>
 	<div style="width : 95px; float : right;">
