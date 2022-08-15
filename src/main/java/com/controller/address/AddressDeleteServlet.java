@@ -35,13 +35,14 @@ public class AddressDeleteServlet extends HttpServlet {
 		System.out.println(address_id);
 		
 		String mesg="";
+		HashMap<String, List<AddressDTO>> addressMap=new HashMap<String, List<AddressDTO>>();
 		//회원 전용
 		if (dto != null) {
 			String result="";
 			String userid=dto.getUserid();
 			System.out.println(userid);
 			AddressService a_service=new AddressService();
-			HashMap<String, List<AddressDTO>> addressMap=new HashMap<String, List<AddressDTO>>();
+			
 			
 			//회원의 주소 목록 가져오기
 			List<AddressDTO> addressList=a_service.selectAllAddress(userid);
@@ -53,15 +54,14 @@ public class AddressDeleteServlet extends HttpServlet {
 				int num=a_service.deleteAddress(address_id);
 				System.out.println("삭제 배송지 갯수 : "+num);
 				//삭제 후 회원 배송지 리스트 출력
-				addressList=a_service.selectAllAddress(userid);
-//				for (int i = 0; i < addressList.size(); i++) {
-//					AddressDTO a=addressList.get(i);
-//				}
-				addressMap.put(userid, addressList);
+
 			}
-			request.setAttribute("addressMap", addressMap);
-			RequestDispatcher dis=request.getRequestDispatcher("addressListUpdate.jsp");
-			dis.forward(request, response);
+			addressList=a_service.selectAllAddress(userid);
+//			for (int i = 0; i < addressList.size(); i++) {
+//				AddressDTO a=addressList.get(i);
+//			}
+			addressMap.put(userid, addressList);
+			System.out.println(addressMap);
 			//ajax--redirectX
 		} else {
 			//alert로 로그인 후 이용하세요 출력
@@ -71,6 +71,10 @@ public class AddressDeleteServlet extends HttpServlet {
 			
 			response.sendRedirect("LoginUIServlet");
 		}
+		
+		System.out.println("addressDelete서블릿 안의 addressmap"+addressMap);
+		session.setAttribute("addressMap", addressMap);
+		response.sendRedirect("mypage/addressListUpdate.jsp");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

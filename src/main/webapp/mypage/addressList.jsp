@@ -76,23 +76,23 @@
 		    var id = $(e.relatedTarget).data("id");
 		    $("#delete<%= address_id %>").val(id);
 		});//end fn
-		$("#delete<%= address_id %>").on("click", function() {//모달의 삭제 버튼 클릭시 배송지 삭제
+<%-- 		$("#delete<%= address_id %>").on("click", function() {//모달의 삭제 버튼 클릭시 배송지 삭제
 			var address_id=$(this).val();
 			console.log(address_id);
-  			//*****ajax
+   			//*****ajax
 			$.ajax({
 				type : "post",
 				url : "AddressDeleteServlet",//페이지 이동 없이 해당 url에서 작업 완료 후 데이터만 가져옴
 				dataType : "text",
 				data : {//서버에 전송할 데이터
-					address_id : address_id
+					"address_id" : address_id
 				},
 				success : function(data, status, xhr) {
 					alert("해당 배송지가 삭제되었습니다."); 
 					$("#deleteAddress").modal('hide');
 					$('.modal-backdrop').hide();  //모달창 닫고 백드롭 hide
 					$("#list").empty();
-					$("#list").append(data);
+					//$("#list").append(data);
 					//$("#list").load(location.href+" #list");//기존 테이블 지우고 새로운 목록으로 출력하도록 수정--X
 					//location.href="addressList.jsp";//수정 후 페이지 이동
 				},
@@ -100,12 +100,13 @@
 					console.log(error);
 				}						
 			});//end ajax
-		});//end fn
+		});//end fn --%>
 		$("#change<%= address_id %>").on("click", function() {//배송지 정보 출력 페이지로 이동
 			var address_id=$(this).attr("data-edit");
 			console.log(address_id);
 		});//end fn
 	});//end ready
+	
 </script>
 <form>
 	<tr id="list">
@@ -134,7 +135,7 @@
 			        선택한 배송지를 삭제하시겠습니까?
 			      </div>
 			      <div class="modal-footer">
-			        <button type="button" id="delete<%= address_id %>" class="btn btn-success">삭제</button>
+			        <button type="button" id="delete<%= address_id %>" onclick="deleteAdd('<%= address_id %>')" class="btn btn-success">삭제</button>
 			        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
 			      </div>
 			    </div>
