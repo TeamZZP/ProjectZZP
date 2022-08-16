@@ -10,7 +10,7 @@
 		text-decoration: none;
 		color: black;
 	}
-	/*ZoomIn Hover Effect*/
+	/*ZoomIn Hover Effect*/  
      .hover-zoomin a {
       display: block;
       position: relative;

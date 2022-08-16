@@ -7,7 +7,31 @@
     <%@page import="com.dto.ProductDTO" %>
     <%@page import="java.util.List" %>
     <%@page import="com.dto.MemberDTO" %>
-    
+  <style>
+  .hover-zoomin a {
+      display: block;
+      position: relative;
+      overflow: hidden;
+      border-radius: 15px;
+    }
+    .hover-zoomin img {
+      width: 300px;
+      height: 300px;
+      -webkit-transition: all 0.2s ease-in-out;
+      -moz-transition: all 0.2s ease-in-out;
+      -o-transition: all 0.2s ease-in-out;
+      -ms-transition: all 0.2s ease-in-out;
+      transition: all 0.2s ease-in-out;
+    }
+    .hover-zoomin:hover img {
+      -webkit-transform: scale(1.1);
+      -moz-transform: scale(1.1);
+      -o-transform: scale(1.1);
+      -ms-transform: scale(1.1);
+      transform: scale(1.1);
+    } 
+  
+  </style>
     
     <div class="row" align="center">
 				<%
@@ -29,8 +53,10 @@
 						String p_image = product_list.get(i).getP_image();
 					%>
 			<div class="col-lg-3 col-md-4 col-sm-6">
+				<div class="hover-zoomin">
 				<a href="ProductRetrieveServlet?p_id=<%=p_id%>">
-					<img src="images/p_image/<%=p_image%>.png "  class="img-thumbnail" style=" width:300; height:300; "></a> 
+					<img src="images/p_image/<%=p_image%>.png " ></a> 
+				</div>	
 				<a href="ProductRetrieveServlet?p_id=<%=p_id%>">
 					<a style="margin-bottom:0.3em; font-weight:normal; color:#646464; font-size: 25px;"><%=p_name %></a></a> 
 				<p style="color: green; font-size: 20px;"><%=p_selling_price %>원</p>
