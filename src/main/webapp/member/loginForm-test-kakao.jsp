@@ -174,20 +174,6 @@ $(document).ready(function() {
 <script type="text/javascript">
 	window.Kakao.init("6967e0449063c04f2ba9d396e18a25a6"); //js key세팅
 	
-	function kakaoLogin() {
-		window.Kakao.Auth.login({
-			scope: 'profile_nickname, profile_image, account_email',
-			success: function(authObj) {
-				console.log(authObj);
-				window.Kakao.API.request({
-					url: '/v2/user/me',/* 로그인한 사용자의 정보 가져오기 */
-					success: res => {
-						const kakao_account = res.kakao_account;
-						console.log(kakao_account);
-					}
-				});
-			}
-		});
-	};
+	
 
 </script>

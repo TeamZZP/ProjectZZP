@@ -10,7 +10,7 @@
     
     
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
   <style>
   .container {
   padding-right: 15px;
@@ -24,6 +24,29 @@ a{
    text-decoration: none;
    
 }
+
+ .hover-zoomin a {
+      display: block;
+      position: relative;
+      overflow: hidden;
+      border-radius: 15px;
+    }
+    .hover-zoomin img {
+      width: 300px;
+      height: 300px;
+      -webkit-transition: all 0.2s ease-in-out;
+      -moz-transition: all 0.2s ease-in-out;
+      -o-transition: all 0.2s ease-in-out;
+      -ms-transition: all 0.2s ease-in-out;
+      transition: all 0.2s ease-in-out;
+    }
+    .hover-zoomin:hover img {
+      -webkit-transform: scale(1.1);
+      -moz-transform: scale(1.1);
+      -o-transform: scale(1.1);
+      -ms-transform: scale(1.1);
+      transform: scale(1.1);
+    } 
 
 </style>
  
@@ -96,9 +119,9 @@ function productChoice(n) {
 </script>
 
   <div class="container ">
-     <div class="row">
-       <h1 class="display=3" align="center" style="font-family: 'GulimChe' ">. </h1>
-      </div>
+     <!-- <div class="row">
+       <h1 class="display=3" align="center" style="font-family: 'GulimChe' "> </h1>
+      </div> -->
       
      <% List<CategoryProductDTO> product_list = (List<CategoryProductDTO>)request.getAttribute("product_list"); 
 		
@@ -106,8 +129,8 @@ function productChoice(n) {
    
 
 
- <div id = "categoryProductContainer" class="container" >
-		<div class="row" align="center">
+ <div id = "categoryProductContainer" class="container "  >
+		<div class="row " align="center">
 				<%
 				 for ( int i = 0 ; i < product_list.size() ; i++ ) {
 					   
@@ -124,14 +147,16 @@ function productChoice(n) {
 						String p_image = product_list.get(i).getP_image();
 					%>
 			<div class="col-lg-3 col-md-4 col-sm-6">
+				<div class="hover-zoomin">
 				<a href="ProductRetrieveServlet?p_id=<%=p_id%>">
-					<img src="images/p_image/<%=p_image%>.png "  class="img-thumbnail" style=" width:300; height:300; "></a> 
+					<img src="images/p_image/<%=p_image%>.png "  ></a> 
+				</div>
 				<a href="ProductRetrieveServlet?p_id=<%=p_id%>">
 					<a style="margin-bottom:0.3em; font-weight:normal; color:#646464; font-size: 25px;"><%=p_name %></a></a> 
 				<p style="color: green; font-size: 20px;"><%=p_selling_price %>원</p>
 				<!-- 찜기능  -->
 				<a id="productChoice" href="javascript:productChoice(<%=p_id%>)"><img src="images/like.png" width="30" height="30"></a>
-				<a><img src="images/bubble.png" width="25" height="22"> </a>
+				<a><img src="images/bubble.png" width="25" height="22"></a>
 				<!-- 장바구니 모달창-->
 			<form action="addCartServlet" >
 				 <a type="button" class="btn " data-bs-toggle="modal" data-bs-target="#cartback">
@@ -158,12 +183,12 @@ function productChoice(n) {
 					        <div class="area_count holder">		
 					        <div class="option_btn_wrap" style="top:0;"> 			
 					        <div class="option_btn_tools" style="float: none;"> 
-					        <input id="p_amount" name="p_amount" value="1" >
+					        <input id="p_amount" name="p_amount" value="1" > 
 							<button type="button" class="btn btn-outline-success" id="up">+</button>
 							<button type="button" class="btn btn-outline-success" id="down">-</button><br>	
 					        <input type="hidden" id="price" value="<%=p_selling_price%>">
 					        <hr>
-					        <a>총 상품금액</a><span id="total"><%=p_selling_price%></span>원
+					        <a>총 상품금액 </a><span id="total" style="font-size: 15px;"><%=p_selling_price%></span>원
 					       	</div>		
 					        </div> 	
 					        </div> 
@@ -172,7 +197,7 @@ function productChoice(n) {
 				      </div>
 				      <div class="modal-footer">
 				        <a href="" class="shopping">계속쇼핑하기</a>
-				        <a><input type="submit">장바구니저장</a>
+				        <a><input type="submit" value="장바구니저장"></a>
 				      </div>
 				    </div>
 				  </div>

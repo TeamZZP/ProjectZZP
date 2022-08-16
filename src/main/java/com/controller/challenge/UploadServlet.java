@@ -57,7 +57,7 @@ public class UploadServlet extends HttpServlet {
 				String contentType= null;
 				boolean isInMemory= false;
 				long sizeInBytes=0;
-				String saveName= null;
+				//String saveName= null;
 				
 				HashMap<String, String> map = new HashMap<String, String>();
 				
@@ -81,14 +81,14 @@ public class UploadServlet extends HttpServlet {
 							contentType= item.getContentType();
 							isInMemory=item.isInMemory();
 							sizeInBytes= item.getSize();
-							saveName = getTodayString() + "-" + fileName;
+							//saveName = getTodayString() + "-" + fileName;
 							
 								System.out.println("fieldName====" + fieldName);					
 								System.out.println("fileName====" + fileName);					
 								System.out.println("contentType====" + contentType);					
 								System.out.println("isInMemory====" + isInMemory);					
 								System.out.println("sizeInBytes====" + sizeInBytes);		
-								System.out.println("savedName====" + saveName);		
+								//System.out.println("savedName====" + saveName);		
 							
 							File dir = new File("C:\\eclipse\\upload");
 							if (!dir.exists()) {
@@ -96,8 +96,16 @@ public class UploadServlet extends HttpServlet {
 							}
 							
 							try {
-								item.write(new File(dir, saveName));
-								map.put("chall_img", saveName);
+								String old_file = map.get("old_file");
+								
+								if (old_file.length()==0) {
+									item.write(new File(dir, fileName));
+									map.put("chall_img", fileName);
+								} else {
+									map.put("chall_img", old_file);
+								}
+								
+								
 								
 							}catch (Exception e) {
 								e.printStackTrace();
