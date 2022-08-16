@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -51,40 +52,50 @@ public class CommentsAddServlet extends HttpServlet {
 			dto.setChall_id(Integer.parseInt(chall_id));
 			dto.setComment_content(comment_content);
 			dto.setUserid(userid);
-			if (parent_id != null) {
-				dto.setParent_id(Integer.parseInt(parent_id));
-			}
 			
 			ChallengeService service = new ChallengeService();
 			
-			//댓글 테이블에 레코드 추가
-			int n = service.insertComment(dto);
-			System.out.println(n+"개의 댓글 레코드 추가");
-			
-			if (n == 1) {
-				//챌린지 테이블에 댓글수 컬럼 증가
-				int n2 = service.upChallComments(chall_id);
-				System.out.println(n2+"개의 게시글 댓글수 변경");
+			//댓글인 경우 해당 게시글의 최대 group_order+1, step=0으로 insert
+			if (parent_id == null) {
+				
+				//댓글 테이블에 레코드 추가
+				int n = service.insertComment(dto);
+				System.out.println(n+"개의 댓글 레코드 추가");
+				
+				if (n == 1) {
+					//챌린지 테이블에 댓글수 컬럼 증가
+					int n2 = service.upChallComments(chall_id);
+					System.out.println(n2+"개의 게시글 댓글수 변경");
+				}
+				
+				
+			//답글인 경우 부모댓글의 group_order로 insert, 해당 group_order내 MAX(step)+1하여 insert
+			} else {
+				String group_order = request.getParameter("group_order");
+				
+				dto.setParent_id(Integer.parseInt(parent_id));
+				dto.setGroup_order(Integer.parseInt(group_order));
+				
+				//댓글 테이블에 레코드 추가
+				int n = service.insertReply(dto);
+				System.out.println(n+"개의 댓글 레코드 추가");
+				
+				if (n == 1) {
+					//챌린지 테이블에 댓글수 컬럼 증가
+					int n2 = service.upChallComments(chall_id);
+					System.out.println(n2+"개의 게시글 댓글수 변경");
+				}
+				
+				
 			}
 			
-			//해당 게시글의 댓글 목록 가져오기 (답글 미포함)
+			//해당 게시글의 전체 댓글 목록 가져오기
 			List<CommentsDTO> commentsList = service.selectAllComments(chall_id);
-			
-			//해당 게시글의 댓글 목록 중 답글 가져오기
-			HashMap<Integer, List<CommentsDTO>> commentsMap = new HashMap<Integer, List<CommentsDTO>>();
-			List<CommentsDTO> replyList = null;
 			
 			//해당 게시글의 댓글 작성자들의 프로필 이미지 가져오기
 			HashMap<String, String> profileMap = new HashMap<String, String>();
 			for (CommentsDTO c : commentsList) {
-				
-				replyList = service.selectAllReplies(c.getComment_id());
-				commentsMap.put(c.getComment_id(), replyList);
-				
 				profileMap.put(c.getUserid(), service.selectProfileImg(c.getUserid()));
-				for (CommentsDTO r : replyList) {
-					profileMap.put(r.getUserid(), service.selectProfileImg(r.getUserid()));
-				}
 			}
 			
 			//현재 로그인한 회원의 프로필 이미지 가져오기
@@ -93,79 +104,13 @@ public class CommentsAddServlet extends HttpServlet {
 				currProfile_img = "user.png";
 			}
 			
-			response.setContentType("text/html;charset=utf-8");
-			PrintWriter out = response.getWriter();
-			String result = "";
+			request.setAttribute("commentsList", commentsList);
+			request.setAttribute("profileMap", profileMap);
+			request.setAttribute("currProfile_img", currProfile_img);
 			
-			for (int i = 0; i < commentsList.size(); i++) {
-				CommentsDTO c = commentsList.get(i);
-				result += "<div class='d-flex flex-row p-3'>"
-						+ "<div class='profile'>"
-						+ "<a href='ProfileMainServlet?userid="+c.getUserid()+"'>"
-						+ "<img src='images/"+profileMap.get(c.getUserid())+"' width='30' height='30' class='rounded-circle mr-3'>"
-						+ "</a></div>"
-						+ "<div class='w-100'>"
-						+ "<div class='d-flex justify-content-between align-items-center'>"
-						+ "<div class='d-flex flex-row align-items-center'> "
-						+ "<a href='ProfileMainServlet?userid="+c.getUserid()+"'>"
-						+ "<span class='mr-2'>"+c.getUserid()+"</span>"
-						+ "</a></div> "
-						+ "<small id='commentTime"+c.getComment_id()+"'></small>"
-						+ "<script>$('#commentTime"+c.getComment_id()+"').html(displayedAt('"+c.getComment_created()+"'));</script>"
-						+ "</div>"
-						+ "<p class='text-justify mb-0'>"+c.getComment_content()+"</p>"
-						+ "<div class='d-flex flex-row user-feed'> "
-						+ "<a class='reply ml-3' data-cid='"+c.getComment_id()+"'>답글 달기</a> &nbsp;&nbsp;&nbsp;";
-				if (c.getUserid()!=null && c.getUserid().equals(userid)) {
-					result += "<a class='ml-3 commentDelBtn' data-cid='"+c.getComment_id()+"'>삭제</a>";
-				} else {
-					result += "<a class='ml-3'>신고</a>";
-				}
-				result += "</div></div></div>";
-				
-				//해당 댓글의 답글 목록
-				 List<CommentsDTO> list = commentsMap.get(c.getComment_id());
-                 for (CommentsDTO r : list) {
-                	 result += "<div class='d-flex flex-row p-3'>"
-                			 + "<div style='width: 60px;'></div>"
-                			 + "<div class='profile'>"
-                			 + "<a href='ProfileMainServlet?userid="+r.getUserid()+"'>"
-                			 + "<img src='images/"+profileMap.get(r.getUserid())+"' width='30' height='30' class='rounded-circle mr-3'></a>"
-                			 + "</div>"
-                			 + "<div class='w-100'>"
-                			 + "<div class='d-flex justify-content-between align-items-center'>"
-                			 + "<div class='d-flex flex-row align-items-center'>"
-                			 + "<a href='ProfileMainServlet?userid="+r.getUserid()+"'>"
-                			 + "<span class='mr-2'>"+r.getUserid()+"</span></a>"
-                			 + "</div>"
-                			 + "<small id='commentTime"+r.getComment_id()+"'></small>"
-                			 + "<script>$('#commentTime"+r.getComment_id()+"').html(displayedAt('"+r.getComment_created()+"'));</script>"
-                			 + "</div>"
-                			 + "<p class='text-justify mb-0'>"+r.getComment_content()+"</p>"
-                			 + "<div class='d-flex flex-row user-feed'>"
-                			 + "<a class='reply ml-3' data-cid='"+c.getComment_id()+"'>답글 달기</a> &nbsp;&nbsp;&nbsp;"; 
-                	 if (r.getUserid()!=null && r.getUserid().equals(userid)) {
-                		 result += "<a class='ml-3 commentDelBtn' data-cid='"+r.getComment_id()+"'>삭제</a>";
-                	 } else {
-                		 result += "<a class='ml-3'>신고</a>";
-					 }
-                	 result += "</div></div></div>";
-                 }
-				
-				
-				//답글 입력창
-				result += "<div id='reply"+c.getComment_id()+"' style='display: none;'>"
-						+ "<div class='d-flex flex-row p-3'>"
-						+ "<div style='width: 60px;'></div>"
-						+ "<div class='profile'>"
-						+ "<img src='images/"+currProfile_img+"' width='30' height='30' class='rounded-circle mr-3'>"
-						+ "</div>"
-						+ "<div class='d-flex flex-row align-items-center w-100 text-justify mb-0'>"
-						+ "<input type='text' class='form-control' name='comment_content' id='reply_content"+c.getComment_id()+"'>"
-						+ "<button class='commentBtn commentReplyBtn' data-cid='"+c.getComment_id()+"'>입력</button>"
-						+ "</div></div></div>";
-			}
-			out.print(result);
+			RequestDispatcher dis = request.getRequestDispatcher("challenge/comments.jsp");
+			dis.forward(request, response);
+			
 			
 		} else {
 			session.setAttribute("mesg", "잘못된 접근입니다.");

@@ -11,7 +11,7 @@
 }
 .uploadBtn:hover, #deleteBtn:hover {
 	cursor: pointer;
-	filter: opacity(80%);
+	filter: opacity(70%);
 }
 #updateBtn {
 	position: absolute;

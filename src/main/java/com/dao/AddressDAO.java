@@ -24,6 +24,11 @@ public class AddressDAO {
 		return addressList;
 	}
 
+	public int deleteAddress(SqlSession session, int address_id) {
+		int num=session.update("AddressMapper.deleteAddress", address_id);
+		return num;
+	}
+
 	
 
 }
