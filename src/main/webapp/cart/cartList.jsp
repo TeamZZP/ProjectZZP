@@ -30,7 +30,7 @@
 	border-bottom: 5px solid green;
 }
 
-.cart_list li : frist-child {
+.cart_list li :frist-child {
 	 border-top: 5px solid green; 
 	
 }
@@ -103,7 +103,7 @@
 			var cart_id = $(this).attr("data-xxx");
 			var amount = $("#p_amount").val();
 			var 
-		})//end#
+		})//end
 	})//end
 </script>
 <header>
