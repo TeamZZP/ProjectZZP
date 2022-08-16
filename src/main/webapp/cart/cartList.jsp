@@ -49,18 +49,19 @@
 
 .cart_list li .cart_list_info {
 	flex: 1;
-	margin: 21px;
+	margin: 20px;
+	
 }
 
 .cart_list_info span{
 	padding: 20px;
 	
 }
-#p_amount {
+#cartAmount {
 	border: none;
 	width: 59px;
 	height: 30px;
-	line-height: 30px;
+	/* line-height: px; */
 	border-radius: 4px;
 	border: 1px solid #D0D0D0;
 	text-align: center;
@@ -99,11 +100,12 @@
 			location.href="CartDelServlet?cart_id="+cart_id;
 		})//end
 		
-		$("#updBtn").on("click",function(){
+		$(".updBtn").on("click",function(){
 			var cart_id = $(this).attr("data-xxx");
-			var p_selling_price = $(this).attr("date-price");
-			var p_amount = $("#p_amount"+cart_id).val();
-			$.ajax({
+			var p_selling_price = $(this).attr("data-price");
+			var p_amount =$("#cartAmount"+cart_id).val();
+			console.log(cart_id,p_selling_price,p_amount)
+			 $.ajax({
 				data:"get",
 				url:"CartUpdateServlet",
 				data:{
@@ -113,14 +115,17 @@
 				dataType:"text",
 				success:function(data,status,xhr){
 					var sum = p_amount*p_selling_price;
-					$("#item_price")
+					$("#item_price"+cart_id).text(sum);
+				},
+				error:function(xhr,status,error){
+					console.log(error);
 				}
-			})
+			}) 
 		})//end
 	})//end
 </script>
 <header>
-	<div class="heading">
+	<div style="text-align: center; display: flex; justify-content:center; height: 100px; margin-bottom: 10px;" >
 		<img src="images/cart2.png">
 	</div>
 </header>
@@ -170,20 +175,20 @@ for (int i = 0; i < list.size(); i++) {
 		<h3>
 			<span></span>
 		</h3>
-		<ul class="cart_list">
+		<ul class="cart_list" style="line-height: 50px; font-size: 20px;">
 			<li>
-			<input type="checkbox" name="chk" id="chk" style=" position: relative;  top: 1.5px;">
-			<img src="images/p_image/<%=p_image%>.png" width="200"
-				height="200">
-				<div class="cart_list_info">
+			<input type="checkbox" name="chk" id="chk" style="width: 30px; position: relative; bottom:100px; margin-right: 10px;">
+			<img src="images/p_image/<%=p_image%>.png" width="200" style="border: 10px; "
+				height="250">
+				<div class="cart_list_info" >
 					주문번호: <span><%=cart_id%></span><br> 
 					상품명:<span style="font-weight: bold; margin: 8px; display: line"><%=p_name%></span>
 					<br> 
 					<div class="amount">
-						<label style="line-height: 30px;">수량</label> 
-						<input type="text" id="p_amount" name="p_amount" style="text-align: right" maxlength="3"
+						<label >수량:</label> 
+						<input type="text" id="cartAmount<%=cart_id %>" name="p_amount" style="text-align: right; line-height: 0px;"  maxlength="3"
 								size="2"  value="<%=p_amount%>">
-						<input type="button" value="수정" id="updBtn"
+						<input type="button" value="수정" class="updBtn" style="line-height: 28px;"
 						data-xxx="<%=cart_id %>" data-price="<%=p_selling_price %>" />
 						<br>
 					</div>
@@ -192,7 +197,7 @@ for (int i = 0; i < list.size(); i++) {
 					
 				</div>
 				 <span class="cart_item_del">
-					<img src="images/delete.png" width="50" height="50" class="delBtn" data-xxx="<%=cart_id %>"></span></li>
+					<img src="images/delete.png" width="20" height="20" class="delBtn" data-xxx="<%=cart_id %>"></span></li>
 		</ul>
 	</div>
 
