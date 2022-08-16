@@ -131,6 +131,8 @@ System.out.println("productRetrieve.jsp에서 파싱한 ilist==" + ilist);
 					%>
 						
 					<tr>
+						<div class="row">
+							<div class="col-md-6">
 								<td>
 									<%
 									if (image_rnk != 1) {
@@ -142,6 +144,8 @@ System.out.println("productRetrieve.jsp에서 파싱한 ilist==" + ilist);
  }
  %>
 								</td>
+							</div>
+						</div>
 					</tr>
 				</table>
 				<%
