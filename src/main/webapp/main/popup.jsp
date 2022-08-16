@@ -1,35 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<script type="text/javascript">
-//head 태그 안에 스크립트 선언
-        function setCookie( name, value, expiredays ) {
-            var todayDate = new Date();
-            todayDate.setDate( todayDate.getDate() + expiredays ); 
-            document.cookie = name + "=" + escape( value ) + "; path=/; expires=" + todayDate.toGMTString() + ";"
-        }
-        function closePop() {
-            if ( document.pop_form.chkbox.checked ){
-                setCookie( "maindiv", "done" , 1 );
-            }
-            document.all['layer_popup'].style.visibility = "hidden";
-        }
-</script>
- <script type="text/javascript">
-    cookiedata = document.cookie;   
-    if ( cookiedata.indexOf("maindiv=done") < 0 ){     
-        document.all['layer_popup'].style.visibility = "visible";
-    }
-    else {
-        document.all['layer_popup'].style.visibility = "hidden";
-    } 
-</script>
  <style>
 font-family: SF Pro KR, SF Pro Display, SF Pro Icons, AOS Icons, Apple Gothic, HY Gulim, MalgunGothic, HY Dotum, Lexi Gulim, Helvetica Neue, Helvetica, Arial, sans-serif;
 .layerPopup img{
 	margin-bottom : 20px;
 }
 .layerPopup:before {
-	display:block; 
+	display:block;  
 	content:""; 
 	position:fixed; 
 	left:0; 
@@ -109,9 +86,79 @@ font-family: SF Pro KR, SF Pro Display, SF Pro Icons, AOS Icons, Apple Gothic, H
             </p>
         </div>
           <form name="pop_form">
-        <div id="check" ><input type="checkbox" name="chkbox" value="checkbox" id='chkbox' >
-        <label for="chkbox">&nbsp&nbsp오늘 하루동안 보지 않기</label></div>
-		<div id="close" ><a href="javascript:closePop();">닫기</a></div>    
+        <div id="check">
+	        <input type="checkbox" name="chkbox" value="checkbox" id='chkbox' >
+	        <label for="chkbox">&nbsp&nbsp오늘 하루동안 보지 않기</label>
+        </div>
+		<div id="close">닫기</div>    
 		</form>
 	</div>
 </div>
+
+<script type="text/javascript">
+	var myPopup = document.querySelector(".layerPopup");
+	var checkbox = document.querySelector("#chkbox");
+	var popupClose = document.querySelector("#close");
+	
+	//쿠키 생성
+	function setCookie(name, value, day) {
+		var date = new Date(); //현재 날짜 생성
+		date.setDate(date.getDate() + day);
+		
+		var mycookie = '';
+		mycookie += name + '=' +value + ';';
+		mycookie += 'Expires=' + date.toUTCString();
+		
+		document.cookie = mycookie; //쿠키 설정, 생성
+	}
+	//setCookie('ZZP','Main', 1); -> 사용자가 닫기 버튼 누를 때 체크박스 여부 확인 후 쿠키 생성
+	
+	//쿠키 삭제
+	function delCookie(name) {
+		var date = new Date();
+		date.setDate(date.getDate() - 1);
+		
+		var setCookie = '';
+		setCookie += name +'=Main;';
+		setCookie += 'Expires=' + date.toUTCString();
+		
+		document.cookie = setCookie; //쿠키 설정, 생성
+	}
+	
+	//쿠키 확인
+	function checkCookie(name) {
+		var cookies = document.cookie.split(';');
+		console.log(cookies);
+		var visited = false; //방문여부 - 거짓(방문한적없음)
+		
+		for ( var i in cookies) {
+			if (cookies[i].indexOf(name) > -1) { //사용자가 확인하고자 하는 쿠키가 있다면 true
+				visited = true;
+				console.log(visited);
+			}
+		}
+		console.log(visited);
+		
+		//재방문이면 안 띄움
+		if (visited) {//true:재방문
+			myPopup.style.display = 'none';
+		} else { //신규방문
+			myPopup.style.display = 'block';
+		} 
+		
+	}
+	checkCookie('ZZP'); //페이지 열리자마자 'ZZP' 쿠키유무 확인
+	
+	//닫기버튼
+	popupClose.addEventListener('click', function() {
+		//대상.checked
+		if (checkbox.checked) {//팝업을 다시 안 봄, 팝업 닫고 쿠키 생성->visited 값이 true이므로 팝업 보이지 않음
+			setCookie('ZZP','Main', 1);
+			myPopup.style.display = 'none';
+		} else {//팝업 계속 봄, 팝업 닫고 쿠키 제거->새로 열었을 때 visited 값이 false이므로 팝업 계속 떠 있음
+			myPopup.style.display = 'none';
+			delCookie('ZZP');
+		}
+	});
+   
+</script>
