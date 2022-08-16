@@ -81,7 +81,7 @@
 			} else if ($("#old_file").val().length == 0 && $("#chall_img")[0].files[0] == null) {
 				event.preventDefault();
 				alert("사진을 업로드해 주세요.");
-			} else if (!checkFileExtension()) {
+			} else if ($("#chall_img").val() != 0 && !checkFileExtension()) {
 				event.preventDefault();
 			} else if ($("#chall_content").val().length == 0) {
 				event.preventDefault();
@@ -120,6 +120,8 @@
 				$("#uploadarea").removeClass("uploadBtn");
 				$("#updateBtn").css("display", "");
 				$("#deleteBtn").css("display", "");
+				
+				$("#old_file").val("");
 			}
 		});
 		
@@ -172,7 +174,7 @@
 	 		<img src="images/reload.png" class="uploadBtn" id="updateBtn" width="50" title="사진 다시 올리기">
 	 		<img src="images/trash.png" class="deleteBtn" id="deleteBtn" width="50" title="사진 삭제하기">
 	 		<input type="hidden" name="old_file" id="old_file" value="<%= chall_img %>">
-	 		<input type="file" accept="image/*" name="chall_img" id="chall_img" style="display: none;">
+	 		<input type="file" accept="image/*" name="chall_img" id="chall_img" value="<%= chall_img %>" style="display: none;">
 	  <%} %>
 	</div>
   </div>
