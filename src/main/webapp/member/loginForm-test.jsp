@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%-- <jsp:include page="../common/header.jsp" flush="true"></jsp:include> --%>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script type="text/javascript">
@@ -10,6 +9,7 @@ $(document).ready(function() {
 	console.log(Kakao.Auth.getAccessToken());
 	console.log(Kakao.isInitialized());
 	$("#header_login_bar").hide();
+	
 	//아이디 비밀번호 필수
 	$("form").submit(function() {
 		if ($("#userid").val().length == 0) {
