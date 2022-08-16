@@ -101,8 +101,21 @@
 		
 		$("#updBtn").on("click",function(){
 			var cart_id = $(this).attr("data-xxx");
-			var amount = $("#p_amount").val();
-			var 
+			var p_selling_price = $(this).attr("date-price");
+			var p_amount = $("#p_amount"+cart_id).val();
+			$.ajax({
+				data:"get",
+				url:"CartUpdateServlet",
+				data:{
+					cart_id:cart_id,
+					p_amount:p_amount
+				},
+				dataType:"text",
+				success:function(data,status,xhr){
+					var sum = p_amount*p_selling_price;
+					$("#item_price")
+				}
+			})
 		})//end
 	})//end
 </script>
@@ -111,19 +124,22 @@
 		<img src="images/cart2.png">
 	</div>
 </header>
-
+<div class="container">
+<div class="row" >
+	<div class="btn-group" role="group" aria-label="Basic example">
+		<button type="button" class="btn btn-outline-success"
+			id="productDetail">장바구니()</button>
+		<button type="button" class="btn btn-outline-success"
+			id="productReview">찜한상품()</button>
+		
+	</div>
+	</div>
 <%
 request.setCharacterEncoding("utf-8");
 List<CartDTO> list = (List<CartDTO>) request.getAttribute("cartList");
 if (list.size() == 0) {
 %>
-<table>
-	<thead style="flex: 1;">
-		<tr>
-			<th>장바구니()</th>
-			<th>찜()</th>
-		</tr>
-	</thead>
+<table >
 	<tbody>
 		<tr>
 		<td>
@@ -149,8 +165,8 @@ for (int i = 0; i < list.size(); i++) {
 	String p_image = list.get(i).getP_image();
 %>
 
-	<form action="#" style="padding: 200px;">
-	<div class="cart_content">
+	<form action="#" >
+	<div class="cart_content" >
 		<h3>
 			<span></span>
 		</h3>
@@ -167,10 +183,11 @@ for (int i = 0; i < list.size(); i++) {
 						<label style="line-height: 30px;">수량</label> 
 						<input type="text" id="p_amount" name="p_amount" style="text-align: right" maxlength="3"
 								size="2"  value="<%=p_amount%>">
-						<input type="button" value="수정" id="updBtn" />
+						<input type="button" value="수정" id="updBtn"
+						data-xxx="<%=cart_id %>" data-price="<%=p_selling_price %>" />
 						<br>
 					</div>
-					상품가격 :<span id="item_price" style="margin-bottom: 15px;"><%=p_selling_price * p_amount%></span>
+					상품가격 :<span id="item_price<%=cart_id %>" style="margin-bottom: 15px;"><%=p_selling_price * p_amount%></span>
 					<br>
 					
 				</div>
@@ -192,8 +209,7 @@ for (int i = 0; i < list.size(); i++) {
 			<span class="price"></span>
 		</div>
 	</div>
-	<a class="a_black"
-			href="javascript:orderAllConfirm(myForm)"> 전체 주문하기 </a>&nbsp;&nbsp;&nbsp;&nbsp; 
+	<a class="a_black" href="javascript:orderAllConfirm(myForm)"> 전체 주문하기 </a>&nbsp;&nbsp;&nbsp;&nbsp; 
 			<a class="a_black" href="javascript:delAllCart(myForm)"> 전체 삭제하기 </a>&nbsp;&nbsp;&nbsp;&nbsp;
 			<a class="a_black" href="index.jsp"> 계속 쇼핑하기 </a>
 	<!-- <button class="btn big">주문하기</button> -->
@@ -201,4 +217,5 @@ for (int i = 0; i < list.size(); i++) {
 	}
 	%>
 </form>
+</div>
 <!-- </div> -->
