@@ -156,7 +156,7 @@ $(document).ready(function() {
       </p>
     </form>
       <div id="kko">
-	    <a id="custom-login-btn" href="javascript:loginWithKakao();">
+	    <a id="custom-login-btn" href="javascript:kakaoLogin();">
 			<img src="//k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg"
 				width="222" alt="카카오 로그인 버튼" />
 		</a>
@@ -169,3 +169,25 @@ $(document).ready(function() {
 	  </div>
   </div>
 </div>
+
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+<script type="text/javascript">
+	window.Kakao.init("6967e0449063c04f2ba9d396e18a25a6"); //js key세팅
+	
+	function kakaoLogin() {
+		window.Kakao.Auth.login({
+			scope: 'profile_nickname, profile_image, account_email',
+			success: function(authObj) {
+				console.log(authObj);
+				window.Kakao.API.request({
+					url: '/v2/user/me',/* 로그인한 사용자의 정보 가져오기 */
+					success: res => {
+						const kakao_account = res.kakao_account;
+						console.log(kakao_account);
+					}
+				});
+			}
+		});
+	};
+
+</script>
