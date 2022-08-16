@@ -12,46 +12,102 @@
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
-		
+		//완료 클릭, 서블릿에서 update, 배송지 목록으로
+		$("#submit").on("click", function() {
+			var address_name=$("#inputAddressName").val();
+			var receiver_name=$("#inputReceiverName").val();
+			var receiver_phone=$("#inputReceiverPhone").val();
+			var post_num=$("#sample4_postcode").val();
+			var addr1=$("#sample4_roadAddress").val();
+			var addr2=$("#sample4_jibunAddress").val();
+			var default_chk=0;
+			var numChk = /^[0-9]*.{11}$/;
+			
+			if (address_name=="" || receiver_name=="" || receiver_phone=="" ||
+					post_num=="" || addr1=="" || addr2=="") {//공백 불가
+				alert("배송지 정보를 입력해주세요.");
+				event.preventDefault();
+			} else if (receiver_phone != "" && !numChk.test(receiver_phone)) {//연락처는 숫자 11자리만 가능
+				alert("연락처를 형식에 맞게 입력해주세요.");
+				$("#inputReceiverPhone").val("");
+				$("#inputReceiverPhone").focus();
+				event.preventDefault();
+			} else {
+				//기본 배송지 체크
+				if ($("#gridCheck").is(":checked")) {
+					console.log("기본 배송지 체크");
+					default_chk=1;
+				}
+				console.log(default_chk);
+				
+				$.ajax({
+					type : "post",
+					url : "AddressAddServlet",
+					dataType : "text",
+					data : {
+						address_name : address_name,
+						receiver_name : receiver_name,
+						receiver_phone : receiver_phone,
+						post_num : post_num,
+						addr1 : addr1,
+						addr2 : addr2,
+						default_chk : default_chk
+					},
+					success : function(data, status, xhr) {
+						alert(data);
+					},
+					error : function(xhr, statux, error) {
+						alert(error);
+					}
+				});//end ajax
+			}
+		});//end submit fn
 	});//end ready
 </script>
 </head>
 <body>
 <jsp:include page="common/header.jsp" flush="true"></jsp:include><br>
 	<input type="hidden" name="userid" id="userid" value="<%= userid %>">
-
-<div class="container"><!-- ¿중앙 정렬? -->
+<div class="row justify-content-center">
 	<div class="col-md-5">
-		<form class="row g-3"><!-- ¿한 줄에 그리드 3개? -->
-		  <div class="col-md-6">
-		    <label for="inputAddressName" class="form-label">배송지명</label><!-- 줄 안 바꾸고 싶음 -->
-		    <input type="text" class="form-control" id="inputAddressName">
-		  </div>
-		  <div class="col-md-6"></div><!-- 줄바꿈 -->
-		  <div class="col-md-6">
-		    <label for="inputReceiverName" class="form-label">수령인</label>
-		    <input type="text" class="form-control" id="inputReceiverName">
-		  </div>
-		  <div class="col-12">
-		    <label for="inputReceiverPhone" class="form-label">연락처</label>
-		    <input type="text" class="form-control" id="inputReceiverPhone">
-		  </div>
+		<form class="row g-2"><!-- 한 줄에 그리드 3개?-div 태그 간격 -->
 		  <div class="col-md-5">
-		    <label for="" class="form-label" style="font-weight: bold;">주소</label>
-		    <input type="text" name="post" class="form-control" id="sample4_postcode" placeholder="우편번호">
+		    <label for="inputAddressName" class="form-label" style="font-weight: bold;">배송지명</label><!-- 줄 안 바꾸고 싶음 -->
+		    <input type="text" class="form-control" id="inputAddressName" placeholder="ex) 집, 회사...">
 		  </div>
-		  <div class="col-md-3"></div><!-- 공백 -->
-		  <div class="col-md-4">
-		    <label for="" class="form-label">우편번호 찾기</label>
-		    <input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기" class="btn btn-outline-success form-control" readonly="readonly">
-		  </div>
-		  <div class="col-md-7">
-		    <input type="text" name="addr1" id="sample4_roadAddress" placeholder="도로명주소" class="form-control" readonly="readonly">
-		  </div>
+		  <div class="col-md-7"></div><!-- 줄바꿈 -->
 		  <div class="col-md-5">
-		    <input type="text" name="addr2" id="sample4_jibunAddress" placeholder="상세 주소를 입력하세요." class="form-control">
-		    <span id="guide" style="color:#999"></span>
+		    <label for="inputReceiverName" class="form-label" style="font-weight: bold;">수령인</label>
+		    <input type="text" class="form-control" id="inputReceiverName" placeholder="받는 분 성함">
 		  </div>
+		  <div class="col-md-7"></div><!-- 줄바꿈 -->
+		  <div class="col-md-5">
+		    <label for="inputReceiverPhone" class="form-label" style="font-weight: bold;">연락처</label>
+		    <input type="text" class="form-control" id="inputReceiverPhone" placeholder="숫자 11자리 입력">
+		  </div>
+		  <div class="col-md-7"></div><!-- 줄바꿈 -->
+		  <!-- 주소 -->
+			<div class="col-12">
+					<div class="form-group">
+						<label for="address" class="cols-sm-2 control-label" style="font-weight: bold;">주소</label>
+						<div class="cols-sm-10">
+							<div class="input-group">
+								<span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
+								<input type="text" name="post" id="sample4_postcode" placeholder="우편번호" class="form-control" readonly="readonly">
+								<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기" class="btn btn-outline-success"><br>
+							</div>
+							<div class="row g-3" style="margin-top: -10px;">
+								<div class="col-md-6">
+									<input type="text" name="addr1" id="sample4_roadAddress" placeholder="도로명주소" class="form-control" readonly="readonly">
+								</div>
+								<div class="col-md-6">
+									<input type="text" name="addr2" id="sample4_jibunAddress" placeholder="상세 주소를 입력하세요." class="form-control">
+									<span id="guide" style="color:#999"></span>
+								</div>                  
+							</div>
+						</div>
+					</div>
+			</div>
 		  <div class="col-12">
 		    <div class="form-check">
 		      <input class="form-check-input" type="checkbox" id="gridCheck">
@@ -60,74 +116,13 @@
 		      </label>
 		    </div>
 		  </div>
-		  <div class="col-12">
-		    <button type="submit" class="btn btn-success">완료</button>
-		  </div>
 		</form>
 	</div>
-
-
-<div class="row justify-content-center">
-	<div class="col-md-4">	
-		<form action="AddressAddServlet" method="post">
-		  <div class="row mb-3"><!-- ??? -->
-		    <label for="inputAddressName" class="col-sm-3 col-form-label">배송지명</label>
-		    <div class="col-sm-6">
-		      <input type="text" class="form-control" id="inputAddressName">
-		    </div>
-		  </div>
-		  <div class="row mb-3">
-		    <label for="inputReceiverName" class="col-sm-3 col-form-label">수령인</label>
-		    <div class="col-sm-6">
-		      <input type="text" class="form-control" id="inputReceiverName">
-		    </div>
-		  </div>
-		  <div class="row mb-3">
-		    <label for="inputReceiverPhone" class="col-sm-3 col-form-label">연락처</label>
-		    <div class="col-sm-6">
-		      <input type="text" class="form-control" id="inputReceiverPhone">
-		    </div>
-		  </div>
+	<div class="col-12">
+		<div style="width : 475px; float : right;">
+			<button type="button" id="submit" class="btn btn-success">완료</button>
+		</div>
 	</div>
-	<div class="col-md-6">
-		 	<!-- 주소 -->
-			<div class="form-group">
-				<label for="address" class="cols-sm-2 control-label" style="font-weight: bold;">주소</label>
-				<div class="cols-sm-8">
-					<div class="input-group">
-						<span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
-						<input type="text" name="post" id="sample4_postcode" placeholder="우편번호" class="form-control col-md-5" readonly="readonly">
-					<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기" class="btn btn-outline-success"><br>
-					</div>
-					<div class="row g-3" style="margin-top: -10px;">
-						<div class="col-md-5">
-							<input type="text" name="addr1" id="sample4_roadAddress" placeholder="도로명주소" class="form-control" readonly="readonly">
-						</div>
-						<div class="col-md-5">
-							<input type="text" name="addr2" id="sample4_jibunAddress" placeholder="상세 주소를 입력하세요." class="form-control">
-							<span id="guide" style="color:#999"></span>
-						</div>                  
-					</div>
-				</div>
-			</div>
-		  <div class="row mb-3">
-		    <div class="col-sm-4 offset-sm-6">
-		      <div class="form-check">
-		        <input class="form-check-input" type="checkbox" id="gridCheck1">
-		        <label class="form-check-label" for="gridCheck1">
-		          기본 배송지로 설정
-		        </label>
-		      </div>
-		    </div>
-		  </div>
-		  <button type="submit" class="btn btn-success">배송지 추가</button>
-		</form>	
-	</div>
-</div>
-
-
-
-
 </div>
 <jsp:include page="common/footer.jsp" flush="true"></jsp:include><br>
 </body>

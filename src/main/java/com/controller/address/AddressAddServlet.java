@@ -34,6 +34,22 @@ public class AddressAddServlet extends HttpServlet {
 			String userid=dto.getUserid();
 			System.out.println(userid);
 			AddressService a_service=new AddressService();
+			
+			//데이터 파싱
+			String address_name=request.getParameter("address_name");
+			String receiver_name=request.getParameter("receiver_name");
+			String receiver_phone=request.getParameter("receiver_phone");
+			String post_num=request.getParameter("post_num");
+			String addr1=request.getParameter("addr1");
+			String addr2=request.getParameter("addr2");
+			int default_chk=Integer.parseInt(request.getParameter("address_name"));
+			System.out.println(address_name);
+			System.out.println(receiver_name);
+			System.out.println(receiver_phone);
+			System.out.println(post_num);
+			System.out.println(addr1);
+			System.out.println(addr2);
+			System.out.println(default_chk);
 
 //			session.setAttribute("addressMap", addressMap);//userid의 address 리스트
 //			response.sendRedirect("addressList.jsp");
