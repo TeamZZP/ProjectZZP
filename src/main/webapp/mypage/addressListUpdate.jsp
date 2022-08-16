@@ -4,8 +4,7 @@
 <%@page import="java.util.HashMap"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-
-<table class="table table-hover" style="table-layout: fixed">
+<table id="addTable" class="table table-hover" style="table-layout: fixed">
 	<tr class="table-success">
 		<th width="20%">배송지</th>
 		<th width="50%">주소</th>
@@ -13,11 +12,10 @@
 		<th width="10%">수정·삭제</th>
 	</tr>
 
-
 <%
 	MemberDTO member=(MemberDTO) session.getAttribute("login");
 	HashMap<String, List<AddressDTO>> addressMap=(HashMap<String, List<AddressDTO>>) session.getAttribute("addressMap");
-	System.out.println("addressListUpdate 안의 "+addressMap);
+	System.out.println("addressListUpdate 안의 addressmap "+addressMap);
 	String userid=member.getUserid();
 //	String passwd=member.getPasswd();
 	String username=member.getUsername();
@@ -46,7 +44,6 @@
 			}
 			System.out.println("출력 확인 : "+address);
 %>
-
 	<tr>
 		<td style="padding:5 0 0 10px;">
 			<span><%= address_name %></span><br>
@@ -79,6 +76,7 @@
 			    </div>
 			  </div>
 			</div>
+			<!-- end modal -->
 			<div class="btns" style="display: inline-block">
 			<!-- Button trigger modal -->
 			<button type="button" id="change<%= address_id %>" data-edit="<%= address_id %>" class="btn btn-light btn-sm">수정</button>
@@ -92,5 +90,4 @@
 	}
 %>
 	</tr>
-	
-	</table>
+</table>

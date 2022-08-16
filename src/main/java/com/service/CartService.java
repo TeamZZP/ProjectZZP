@@ -38,6 +38,18 @@ public class CartService {
 		}
 		return list;
 	}
+
+	public int cartDel(int cart_id) {
+		int num = 0;
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		try {
+			num = dao.cartDel(session,cart_id);
+			session.commit();
+		} finally {
+			session.close();
+		}
+		return num;
+	}
 	
 	
 }

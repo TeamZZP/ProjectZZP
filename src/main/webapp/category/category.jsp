@@ -3,13 +3,20 @@
     pageEncoding="UTF-8"%>
     <%@page import="java.util.List" %>
     <%@page import="com.dto.CategoryDTO" %>
+   <style>
+  #category_a:hover{
+  		color: green;
+		font-weight: bold;
+		cursor: pointer;
+  	}
+   </style>
    
-
+	<div class="row " >
+	 
 	<div id="category">
-			<ul>
-				<li><a id="category_a" onclick="getCategoryProduct()">베스트</a></li>
-			</ul>
-		</div>
+			<ul  >
+				<li class="nav-link px-2 link-dark"><a id="category_a" class="categorycss" onclick="getCategoryProduct()" >베스트</a></li>
+			
     <%
     List<CategoryDTO> category_list = (List<CategoryDTO>)request.getAttribute("category_list");
     
@@ -24,14 +31,14 @@
     	String c_created_date = category_list.get(i).getC_created_date();
     	
     %>
-		<div id="category">
-			<ul>
-				<li><a id="category_a" onclick="getCategoryProduct('<%=c_id%>')"><%=c_name %></a></li>
+		
+				<li class="nav-link px-2 link-dark" ><a id="category_a"   class="categorycss" onclick="getCategoryProduct('<%=c_id%>')"><%=c_name %></a></li>
+				<% } %>
 			</ul>
 		</div>
 		
-	<% } %>
-	
+</div>
+	</div>
 
 	
 	
