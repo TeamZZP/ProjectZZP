@@ -16,6 +16,12 @@
 	session.removeAttribute("mesg");
 	}
 %>	
+<style>
+	.item_info td{
+		padding-left: 10px;
+	}
+
+</style>
 <script type="text/javascript"
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
@@ -96,6 +102,8 @@ System.out.println("productRetrieve.jsp에서 파싱한 ilist==" + ilist);
 	table {
 	font-family: sans-serif;
 	}
+	
+	
 </style>
 
 	<form  name="goodRetrieveForm" action="addCartServlet" method="get">
@@ -150,12 +158,12 @@ System.out.println("productRetrieve.jsp에서 파싱한 ilist==" + ilist);
 				
 			</div>
 			<div class="col-md-1"></div>
-			<div class="col-md-5">
-				<table>
+			<div class="col-md-5" >
+				<table class="item_info" style="line-height: 70px;">
 					<!-- 상품 설명 -->
-
+				
 					<tr>
-						<td>상품명</td>
+						<th>상품명</th>
 						<td></td>
 						<td ><%=p_name%></td>
 					</tr>
@@ -165,7 +173,7 @@ System.out.println("productRetrieve.jsp에서 파싱한 ilist==" + ilist);
 					</tr>
 
 					<tr>
-						<td>설명</td>
+						<th>설명</th>
 						<td></td>
 						<td><%=p_content%></td>
 					</tr>
@@ -175,9 +183,9 @@ System.out.println("productRetrieve.jsp에서 파싱한 ilist==" + ilist);
 					</tr>
 
 					<tr>
-						<td>총 상품가격</td>
+						<th>상품가격</th>
 						<td></td>
-						<td><p id="sellingPrice" name="p_selling_price"><%=p_selling_price%></p>&nbsp;원</td>
+						<td><span id="sellingPrice" name="p_selling_price"><%=p_selling_price%></span>원</td>
 					</tr>
 
 					<tr>
@@ -185,7 +193,7 @@ System.out.println("productRetrieve.jsp에서 파싱한 ilist==" + ilist);
 					</tr>
 
 					<tr>
-						<td>배송비</td>
+						<th>배송비</th>
 						<td></td>
 						<td>3,000원(50,000원 이상 무료배송)</td>
 					</tr>
@@ -195,10 +203,11 @@ System.out.println("productRetrieve.jsp에서 파싱한 ilist==" + ilist);
 					</tr>
 
 					<tr>
-						<td>수량</td>
+						<th>수량</th>
 						<td></td>
-						<td><input id="p_amount" name="p_amount" value="1" >
-							<button type="button" class="btn btn-outline-success" id="up">+</button>
+						<td><input id="p_amount" name="p_amount" value="1" style="line-height: 27px;"  maxlength="3"
+								size="2" >
+							<button type="button" class="btn btn-outline-success" id="up" >+</button>
 							<button type="button" class="btn btn-outline-success" id="down">-</button>
 						</td>
 						<td></td>
@@ -210,7 +219,7 @@ System.out.println("productRetrieve.jsp에서 파싱한 ilist==" + ilist);
 					</tr>
 
 					<tr>
-						<td>총 상품가격</td>
+						<th>총 상품가격</th>
 						<td></td>
 						<td><a id="total"><%=p_selling_price%></a>원</td>
 					</tr>
@@ -219,12 +228,13 @@ System.out.println("productRetrieve.jsp에서 파싱한 ilist==" + ilist);
 						<td></td>
 					</tr>
 
-					<tr>
-						<td><button type="button" class="btn btn-success">주문하기</button></td>
+					<tr >
+						
+						<td><button type="button" class="btn btn-success" >주문하기</button></td>
 						<td></td>
 						<td><button type="submit" class="btn btn-success" id="cart">장바구니저장</button></td>
 					</tr>
-
+					
 				</table>
 			</div>
 		</div>
