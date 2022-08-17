@@ -2,6 +2,7 @@ package com.controller.challenge;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -47,26 +48,9 @@ public class CommentsDeleteServlet extends HttpServlet {
 		if (member!=null && member.getUserid().equals(userid)) {
 			String chall_id = request.getParameter("chall_id");
 			String comment_id = request.getParameter("comment_id");
-			String step = request.getParameter("step");
 			
 			ChallengeService service = new ChallengeService();
-			
-			int n = 0;
-			if (step.equals("0")) {
-				//해당 댓글이 속한 그룹 전체 삭제
-				HashMap<String, String> delMap = new HashMap<String, String>();
-				delMap.put("chall_id", chall_id);
-				delMap.put("comment_id", comment_id);
-				n = service.deleteRepliesGroup(delMap);
-				
-			} else {
-				//댓글 테이블에 레코드 삭제
-				n = service.deleteComment(comment_id);
-				//해당 댓글을 부모 댓글로 가지고 있는 댓글들 삭제
-				n += service.deleteReplies(comment_id);
-				
-			}
-				
+			int n = service.deleteAllComments(comment_id);
 			System.out.println(n+"개의 레코드 삭제");
 			
 			//챌린지 테이블에 댓글수 컬럼 감소

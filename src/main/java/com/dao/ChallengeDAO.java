@@ -62,11 +62,6 @@ public class ChallengeDAO {
 		return list;
 	}
 
-	public int deleteComment(SqlSession session, String comment_id) {
-		int n = session.delete("ChallengeMapper.deleteComment", comment_id);
-		return n;
-	}
-
 	public void updateChallHits(SqlSession session, String chall_id) {
 		session.update("ChallengeMapper.updateChallHits", chall_id);
 	}
@@ -135,29 +130,10 @@ public class ChallengeDAO {
 		return profile_img;
 	}
 
-	public List<CommentsDTO> selectAllReplies(SqlSession session, int parent_id) {
-		List<CommentsDTO> list = session.selectList("ChallengeMapper.selectAllReplies", parent_id);
-		return list;
-	}
-
-	public int deleteReplies(SqlSession session, String comment_id) {
-		int n = session.delete("ChallengeMapper.deleteReplies", comment_id);
-		return n;
-	}
 
 	public List<ChallengeDTO> selectChallengeByUserid(SqlSession session, String userid) {
 		List<ChallengeDTO> list = session.selectList("ChallengeMapper.selectChallengeByUserid", userid);
 		return list;
-	}
-
-	public int updateCommentsGroupOrder(SqlSession session, String chall_id) {
-		int n = session.update("ChallengeMapper.updateCommentsGroupOrder", chall_id);
-		return n;
-	}
-
-	public int updateRepliesGroupOrder(SqlSession session, String chall_id) {
-		int n = session.update("ChallengeMapper.updateRepliesGroupOrder", chall_id);
-		return n;
 	}
 
 	public int insertReply(SqlSession session, CommentsDTO dto) {
@@ -165,8 +141,8 @@ public class ChallengeDAO {
 		return n;
 	}
 
-	public int deleteRepliesGroup(SqlSession session, HashMap<String, String> map) {
-		int n = session.delete("ChallengeMapper.deleteRepliesGroup", map);
+	public int deleteAllComments(SqlSession session, String comment_id) {
+		int n = session.delete("ChallengeMapper.deleteAllComments", comment_id);
 		return n;
 	}
 

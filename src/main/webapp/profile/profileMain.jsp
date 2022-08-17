@@ -34,13 +34,18 @@
 	.img {
 		border-radius: 15px;
 	}
+	.category:hover {
+  		color: green;
+		font-weight: bold;
+		cursor: pointer;
+	}
 </style>
 
 <script type="text/javascript"
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function () {
-		$(".container").on("click", ".category", function () {
+		$("body").on("click", ".category", function () {
 			let category = $(this).attr("data-category");
 			$.ajax({
 				type:"get",
@@ -63,18 +68,20 @@
 </script>
 
 
-<div class="container">
+<div class="col-lg-1 float-md-start">
+	   <ul class="list-group justify-content-center mt-5">
+	     <li class="list-group-item border-0"><a class="category" data-category="all">모두보기</a></li>
+	     <li class="list-group-item border-0"><a class="category" data-category="review">상품리뷰</a></li>
+	     <li class="list-group-item border-0"><a class="category" data-category="challenge">챌린지</a></li>
+	     <li class="list-group-item border-0"><a class="category" data-category="stamp">도장</a></li>
+	   </ul>
+</div>
 
-  <div>
-    <ul class="list-group list-group-horizontal justify-content-center mt-5">
-      <li class="list-group-item border-0"><a class="category" data-category="all">모두보기</a></li>
-      <li class="list-group-item border-0"><a class="category" data-category="review">상품리뷰</a></li>
-      <li class="list-group-item border-0"><a class="category" data-category="challenge">챌린지</a></li>
-      <li class="list-group-item border-0"><a class="category" data-category="stamp">도장</a></li>
-    </ul>
-  </div>
-<hr>
+
+
+<div class="container">
   <div class="row">
+  
     <div class="col-lg-3 p-5">
 		<div class="card" style="width: 18rem; height: 22rem;">
 		  <div class="text-center">
@@ -117,20 +124,20 @@
 		        <% }
 		        } %>
 	      </div>
-		</div>
+		</div><!-- end challenge -->
 		
 		
 		
 		
 		
-	</div>
+	</div><!-- end profileContent -->
 	
 	
-  </div>
+  </div><!-- end row -->
 
    
         
      
      
-</div>
+</div><!-- end container -->
 

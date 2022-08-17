@@ -1,5 +1,6 @@
 package com.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -94,18 +95,6 @@ public class ChallengeService {
 			session.close();
 		}
 		return list;
-	}
-
-	public int deleteComment(String comment_id) {
-		int n = 0;
-		SqlSession session = MySqlSessionFactory.getSqlSession();
-		try {
-			n = dao.deleteComment(session, comment_id);
-			session.commit();
-		} finally {
-			session.close();
-		}
-		return n;
 	}
 
 	public void updateChallHits(String chall_id) {
@@ -268,30 +257,6 @@ public class ChallengeService {
 		return profile_img;
 	}
 
-	public int deleteReplies(String comment_id) {
-		int n = 0;
-		SqlSession session = MySqlSessionFactory.getSqlSession();
-		try {
-			n = dao.deleteReplies(session, comment_id);
-			session.commit();
-		} finally {
-			session.close();
-		}
-		return n;
-	}
-	
-	public int deleteRepliesGroup(HashMap<String, String> map) {
-		int n = 0;
-		SqlSession session = MySqlSessionFactory.getSqlSession();
-		try {
-			n = dao.deleteRepliesGroup(session, map);
-			session.commit();
-		} finally {
-			session.close();
-		}
-		return n;
-	}
-
 	public List<ChallengeDTO> selectChallengeByUserid(String userid) {
 		List<ChallengeDTO> list = null;
 		SqlSession session = MySqlSessionFactory.getSqlSession();
@@ -303,35 +268,23 @@ public class ChallengeService {
 		return list;
 	}
 
-	public int updateCommentsGroupOrder(String chall_id) {
-		int n = 0;
-		SqlSession session = MySqlSessionFactory.getSqlSession();
-		try {
-			n = dao.updateCommentsGroupOrder(session, chall_id);
-			session.commit();
-		} finally {
-			session.close();
-		}
-		return n;
-	}
-
-	public int updateRepliesGroupOrder(String chall_id) {
-		int n = 0;
-		SqlSession session = MySqlSessionFactory.getSqlSession();
-		try {
-			n = dao.updateRepliesGroupOrder(session, chall_id);
-			session.commit();
-		} finally {
-			session.close();
-		}
-		return n;
-	}
-
 	public int insertReply(CommentsDTO dto) {
 		int n = 0;
 		SqlSession session = MySqlSessionFactory.getSqlSession();
 		try {
 			n = dao.insertReply(session, dto);
+			session.commit();
+		} finally {
+			session.close();
+		}
+		return n;
+	}
+
+	public int deleteAllComments(String comment_id) {
+		int n = 0;
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		try {
+			n = dao.deleteAllComments(session, comment_id);
 			session.commit();
 		} finally {
 			session.close();
