@@ -130,14 +130,14 @@
 	</div>
 </header>
 <div class="container">
-<div class="row" >
-	<div class="btn-group" role="group" aria-label="Basic example">
-		<button type="button" class="btn btn-outline-success"
-			id="productDetail">장바구니()</button>
-		<button type="button" class="btn btn-outline-success"
-			id="productReview">찜한상품()</button>
-		
-	</div>
+	<div class="row" >
+		<div class="btn-group" role="group" aria-label="Basic example">
+			<button type="button" class="btn btn-outline-success"
+				id="productDetail">장바구니()</button>
+			<button type="button" class="btn btn-outline-success"
+				id="productReview">찜한상품()</button>
+			
+		</div>
 	</div>
 <%
 request.setCharacterEncoding("utf-8");

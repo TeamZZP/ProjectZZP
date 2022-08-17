@@ -16,9 +16,6 @@ import com.dto.MemberDTO;
 import com.service.AddressService;
 import com.service.MemberService;
 
-/**
- * Servlet implementation class MemberListServlet
- */
 @WebServlet("/MemberListServlet")
 public class MemberListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -55,7 +52,7 @@ public class MemberListServlet extends HttpServlet {
 //			}
 			session.setAttribute("memberList", memberList);
 			session.setAttribute("addressMap", addressMap);//userid의 address 리스트
-			response.sendRedirect("memberList.jsp");
+			response.sendRedirect("adminpage.jsp");
 		} else {
 			//alert로 로그인 후 이용하세요 출력
 			String mesg="로그인이 필요합니다.";
