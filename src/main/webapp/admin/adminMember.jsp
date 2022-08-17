@@ -1,49 +1,5 @@
-<%@page import="java.util.List"%>
-<%@page import="java.util.HashMap"%>
-<%@page import="java.util.Set"%>
-<%@page import="com.dto.AddressDTO"%>
-<%@page import="com.dto.MemberDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-	<!-- Required meta tags -->
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script type="text/javascript">
-	$(document).ready(function () {
-		
-		$(".category").click(function() {
-			let category = $(this).attr("data-category");
-			$.ajax({
-				type: "post",
-				url: "AdminCategoryServlet",
-				data: {
-					category:category
-				},
-				success: function(data) {
-					$("#adminContent").html(data);
-				},
-				error: function() {
-					alert("문제가 발생했습니다. 다시 시도해 주세요.");
-				}
-			});//ajax
-		});
-		
-	
-	});//end ready
-</script>
-<div class="container">
-	<form action="" method="post">
-		<div class="row">
-			<div class="btn-group" role="group" aria-label="Basic example">
-				<button type="button" class="btn btn-outline-success category" data-category="member" id="memberManagement">회원관리</button>
-				<button type="button" class="btn btn-outline-success category" data-category="product" id="productManagement">상품관리</button>
-			</div>
-		</div>
-	</form>
-</div>
-
-<div id="adminContent" class="col-md-auto">
 <div class="container col-md-auto">
 <!-- <div class="container col col-lg-9"> -->
 <div class="row justify-content-md-center">
@@ -183,6 +139,5 @@
 	</tr>
 </form>
 </table>
-</div>
 </div>
 </div>
