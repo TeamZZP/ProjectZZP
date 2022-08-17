@@ -42,6 +42,8 @@
 			$("#QuestionInsert").click(function () {
 				var operate = $("#QuestionInsert").attr("data-operate");
 				var userid = $("#QuestionInsert").attr("data-userid");
+				var qFile = $("#qFile").val();
+				console.log(qFile);
 				$("#questionForm").attr("action", "QuestionUploadServlet?USERID="+userid+"&operate="+operate);
 			})
 			$("#pID").click(function () {
@@ -55,6 +57,7 @@
 
 <form action="" id="questionForm" enctype="multipart/form-data" method="post">
 <input type="hidden" name="USERID" value="<%=userid%>">
+<input type="hidden" name="oldFile" value="">
 <div class="container justify-content-center">
 <div class="row">
 		<table>
@@ -107,15 +110,14 @@
 			<tr>
 				<td colspan="2">
 					<div>
-					  <textarea class="form-control" rows="15" cols="50" name="Q_CONTENT" id="qContent" placeholder="내용을 입력하십시오"></textarea>
+					  <textarea class="form-control" rows="15" cols="50" name="Q_CONTENT" id="qContent" placeholder="내용을 입력하십시오."></textarea>
 					</div>
 				</td>
 			</tr>
 			<tr>
 				<td colspan="2">
 					<div>
-					  <label for="formFileMultiple" class="form-label">첨부파일</label>
-					  <input class="form-control" accept="image/*" type="file" name="qFile" multiple>
+					  <input class="form-control" accept="image/*" type="file" name="qFile" id="qFile" multiple>
 					</div>
 				</td>
 			</tr>
