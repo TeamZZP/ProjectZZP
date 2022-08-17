@@ -47,7 +47,7 @@
 	<tr>
 		<td style="padding:5 0 0 10px;">
 			<span><%= address_name %></span><br>
-			<span><%= username %></span><br>
+			<span><%= receiver_name %></span><br>
 			<span><%= default_chk %></span>
 		</td>
 		<td>

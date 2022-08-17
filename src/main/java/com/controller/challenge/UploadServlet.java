@@ -96,8 +96,16 @@ public class UploadServlet extends HttpServlet {
 							}
 							
 							try {
-								item.write(new File(dir, fileName));
-								map.put("chall_img", fileName);
+								String old_file = map.get("old_file");
+								
+								if (old_file.length()==0) {
+									item.write(new File(dir, fileName));
+									map.put("chall_img", fileName);
+								} else {
+									map.put("chall_img", old_file);
+								}
+								
+								
 								
 							}catch (Exception e) {
 								e.printStackTrace();
