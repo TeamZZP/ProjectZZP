@@ -42,6 +42,7 @@
 <div class="row">
  <input type="hidden" name="Q_ID" value="<%=qDTO.getQ_ID()%>">
  <input type="hidden" name="USERID" value="<%=userid%>">
+ <input type="hidden" name="oldFile" value="<%=qDTO.getQ_IMG()%>">
 		<table>
 			<tr>
 				<td colspan="2">
@@ -90,14 +91,19 @@
 				</td>
 			</tr>
 			<tr>
+				<%if(qDTO.getQ_IMG() == null){ %>
+				<td colspan="2">
+					<input class="form-control" type="file" accept="image/*" name="qFile">
+				</td>
+				<%} else { %>
 				<td colspan="2">
 					<div>
-					  <label for="formFileMultiple" class="form-label">올린 첨부파일</label>
-					  <img alt="" src="/eclipse/upload/<%=qDTO.getQ_IMG()%>" width="100px" height="100px"> <br>
-					  <label for="formFileMultiple" class="form-label">변경할 첨부파일</label>
-					  <input class="form-control" type="file" accept="image/*" name="qFile">
+					  <label for="formFileMultiple" class="form-label shadow-none">첨부파일</label>
+					  	<img alt="" src="/eclipse/upload/<%=qDTO.getQ_IMG()%>" width="100px" height="100px">
+					  	<input class="form-control" type="file" accept="image/*" name="qFile">
 					</div>
 				</td>
+				<%} %>
 			</tr>
 			<tr>
 				<td> <button id="QuestionList" class="btn btn-outline-success" >목록</button> </td>

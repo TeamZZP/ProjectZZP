@@ -100,7 +100,7 @@
 				</td>
 			</tr>
 			<tr>
-			<%if(qDTO.getQ_IMG().equals("null")){ %>
+			<%if(qDTO.getQ_IMG() == null){ %>
 				<td></td>
 			<%} else { %>
 				<td>
@@ -108,8 +108,8 @@
 					  <label for="formFileMultiple" class="form-label shadow-none">첨부파일</label>
 					  	<img alt="" src="/eclipse/upload/<%=qDTO.getQ_IMG()%>" width="100px" height="100px">
 					</div>
-				<%} %>
 				</td>
+			<%} %>
 			</tr>
 			<tr>
 				<td colspan="2">
