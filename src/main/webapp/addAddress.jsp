@@ -39,8 +39,7 @@
 					default_chk=1;
 				}
 				console.log(default_chk);
-				
-				$.ajax({
+/* 				$.ajax({
 					type : "post",
 					url : "AddressAddServlet",
 					dataType : "text",
@@ -59,7 +58,7 @@
 					error : function(xhr, statux, error) {
 						alert(error);
 					}
-				});//end ajax
+				});//end ajax */
 			}
 		});//end submit fn
 	});//end ready

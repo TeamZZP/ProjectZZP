@@ -15,6 +15,7 @@
 	}
 </style>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<div id="addContainer">
 <div class="container">
 <div class="row">
 <div class="col-lg-2">
@@ -92,9 +93,9 @@
 					alert("해당 배송지가 삭제되었습니다."); 
 					$("#deleteAddress").modal("hide");
 					$(".modal-backdrop").hide();//모달창 닫고 백드롭 hide
-					$("#addTable").remove();
+					$(".container").remove();
 					console.log(data);
-					$("#addTableDiv").append(data);
+					$("#addContainer").append(data);
 				},
 				error: function(xhr, status, error) {
 					console.log(error);
@@ -164,4 +165,7 @@
 		<input type="button" id="addAddress" class="btn btn-success btn-sm" value="배송지 추가"><!-- 두 번 실행됨 -->
 	</div>
 </div>
+
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
