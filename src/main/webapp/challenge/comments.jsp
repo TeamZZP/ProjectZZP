@@ -52,7 +52,7 @@
                 	<a class="reply ml-3" data-cid="<%= comment_id %>" data-user="<%= commentUserid %>">답글 달기</a> &nbsp;&nbsp;&nbsp;
                 	<!-- 해당 댓글의 작성자인 경우 -->
                 	<% if (commentUserid!=null && commentUserid.equals(currUserid)) { %>
-					<a class="ml-3 commentDelBtn" data-cid="<%= comment_id %>" data-step="<%= step %>">삭제</a> 
+					<a class="ml-3 commentDelBtn" data-cid="<%= comment_id %>">삭제</a> 
 					<!-- 그외의 경우 --> 
 					<% } else { %> 
 					<a class="ml-3">신고</a> 
