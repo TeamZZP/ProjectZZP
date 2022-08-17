@@ -86,19 +86,19 @@ font-family: SF Pro KR, SF Pro Display, SF Pro Icons, AOS Icons, Apple Gothic, H
             </p>
         </div>
           <form name="pop_form">
-        <div id="check">
-	        <input type="checkbox" name="chkbox" value="checkbox" id='chkbox' >
-	        <label for="chkbox">&nbsp&nbsp오늘 하루동안 보지 않기</label>
-        </div>
-		<div id="close">닫기</div>    
+	        <div id="check">
+		        <input type="checkbox" name="chkbox" value="checkbox" id='chkbox' >
+		        <label for="chkbox">&nbsp&nbsp오늘 하루동안 보지 않기</label>
+	        </div>
+			<div id="close">닫기</div>    
 		</form>
 	</div>
 </div>
 
 <script type="text/javascript">
-	var myPopup = document.querySelector(".layerPopup");
-	var checkbox = document.querySelector("#chkbox");
-	var popupClose = document.querySelector("#close");
+	var myPopup = document.querySelector(".layerPopup");//popup
+	var checkbox = document.querySelector("#chkbox");//체크박스
+	var popupClose = document.querySelector("#close");//닫기버튼
 	
 	//쿠키 생성
 	function setCookie(name, value, day) {

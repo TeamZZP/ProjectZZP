@@ -66,11 +66,11 @@ MemberDTO dto = (MemberDTO)session.getAttribute("login");
 		if(dto.getRole()==0){
 %>	
 		<button type="button" onclick="location.href='MypageServlet';"  class="btn btn-success" id="button_mypage">마이페이지</button>
-		<button type="button" onclick="location.href='CartListServlet';" class="btn btn-success" style="margin-right: 10px;">장바구니</button>
+		<button type="button" onclick="location.href='CartListServlet';" class="btn btn-success" style="margin-right: 13px;">장바구니</button>
 <%
 		} else {
 %>	
-		<button type="button" onclick="location.href='AdminpageServlet';"  class="btn btn-success" id="button_adminpage">관리자페이지</button>
+		<button type="button" onclick="location.href='AdminpageServlet';"  class="btn btn-success" id="button_adminpage" style="margin-right: 13px;">관리자페이지</button>
 <%	
 		}
 	
@@ -78,7 +78,7 @@ MemberDTO dto = (MemberDTO)session.getAttribute("login");
 %>
 		<button type="button" onclick="location.href='LoginUIServlet';"  class="btn btn-success" id="button_login">로그인</button>
       	<button type="button" onclick="location.href='MemberUIServlet';"  class="btn btn-success" id="button_signin">회원가입</button>
-      	<button type="button" onclick="location.href='CartListServlet';" class="btn btn-success" style="margin-right: 10px;">장바구니</button>
+      	<button type="button" onclick="location.href='CartListServlet';" class="btn btn-success" style="margin-right: 13px;">장바구니</button>
 <%
 	} 
 %>
