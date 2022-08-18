@@ -13,8 +13,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.dto.AddressDTO;
+import com.dto.ChallengeDTO;
 import com.dto.MemberDTO;
 import com.service.AddressService;
+import com.service.ChallengeService;
 import com.service.MemberService;
 
 @WebServlet("/AdminCategoryServlet")
@@ -52,7 +54,13 @@ public class AdminCategoryServlet extends HttpServlet {
 		} else if(category.equals("product")) {
 			
 		} else if(category.equals("challenge")) {
+			//관리자가 작성한 챌린지 목록
+			ChallengeService challService = new ChallengeService();
+			List<ChallengeDTO> challList = challService.selectChallengeByUserid("admin1");
 			
+			request.setAttribute("challList", challList);
+			RequestDispatcher dis = request.getRequestDispatcher("admin/adminChallenge.jsp");
+			dis.forward(request, response);
 		}
 		
 	}
