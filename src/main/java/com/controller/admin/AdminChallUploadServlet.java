@@ -172,42 +172,42 @@ public class AdminChallUploadServlet extends HttpServlet {
 		doGet(request, response);
 	}
 	
-	public byte[] imageToByteArray (String filePath) {
-		byte[] returnValue = null;
-		
-		ByteArrayOutputStream baos = null;
-		FileInputStream fis = null;
-		
-		try {
-			baos = new ByteArrayOutputStream();
-			fis = new FileInputStream(filePath);
-			
-			byte[] buf = new byte[1024];
-			int read = 0;
-			
-			while ((read=fis.read(buf, 0, buf.length)) != -1) {
-				baos.write(buf, 0, read);
-			}
-			
-			returnValue = baos.toByteArray();
-			
-		} catch (Exception e) {
-			// TODO: handle exception
-		} finally {
-			try {
-				if (baos != null) {
-					baos.close();
-				}
-				if (fis != null) {
-					fis.close();
-				}
-			} catch (Exception e2) {
-				// TODO: handle exception
-			}
-		}
-		
-		return returnValue;
-	}
+//	public byte[] imageToByteArray (String filePath) {
+//		byte[] returnValue = null;
+//		
+//		ByteArrayOutputStream baos = null;
+//		FileInputStream fis = null;
+//		
+//		try {
+//			baos = new ByteArrayOutputStream();
+//			fis = new FileInputStream(filePath);
+//			
+//			byte[] buf = new byte[1024];
+//			int read = 0;
+//			
+//			while ((read=fis.read(buf, 0, buf.length)) != -1) {
+//				baos.write(buf, 0, read);
+//			}
+//			
+//			returnValue = baos.toByteArray();
+//			
+//		} catch (Exception e) {
+//			// TODO: handle exception
+//		} finally {
+//			try {
+//				if (baos != null) {
+//					baos.close();
+//				}
+//				if (fis != null) {
+//					fis.close();
+//				}
+//			} catch (Exception e2) {
+//				// TODO: handle exception
+//			}
+//		}
+//		
+//		return returnValue;
+//	}
 	
 	private String getTodayString() {
 		return new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss").format(System.currentTimeMillis());
