@@ -50,6 +50,8 @@ public class CommentsDeleteServlet extends HttpServlet {
 			String comment_id = request.getParameter("comment_id");
 			
 			ChallengeService service = new ChallengeService();
+			
+			//해당 댓글 번호에서 시작해서 연쇄적으로 모든 답글 삭제
 			int n = service.deleteAllComments(comment_id);
 			System.out.println(n+"개의 레코드 삭제");
 			
