@@ -136,13 +136,6 @@ CREATE TABLE answer (
 	answer_created	DATE	DEFAULT sysdate	NOT NULL
 );
 
--- 챌린지 도장
-CREATE TABLE stamp (
-	stamp_id		VARCHAR2(10)		PRIMARY KEY,
-	userid	VARCHAR2(30)		NOT NULL REFERENCES member(userid) ON DELETE CASCADE,
-	stamp_created	DATE	DEFAULT sysdate	NOT NULL
-);
-
 -- 찜한 상품
 CREATE TABLE product_liked (
 	userid	VARCHAR2(30)		NOT NULL REFERENCES member(userid) ON DELETE CASCADE,
@@ -172,7 +165,8 @@ CREATE TABLE challenge (
  	chall_liked 	NUMBER   DEFAULT 0	  NOT NULL,
  	chall_created 	DATE 	 DEFAULT sysdate NOT NULL,
  	chall_img 		VARCHAR2(300) NULL,
- 	chall_comments  NUMBER 	 DEFAULT 0	  NOT NULL
+ 	chall_comments  NUMBER 	 DEFAULT 0	  NOT NULL,
+ 	chall_this_month NUMBER  DEFAULT 0	  NOT NULL
 );
 
 -- 챌린지 댓글
@@ -193,6 +187,14 @@ CREATE TABLE chall_liked (
   userid	VARCHAR2(30)		NOT NULL REFERENCES member(userid) ON DELETE CASCADE
 );
 ALTER TABLE chall_liked ADD PRIMARY KEY (chall_id,userid);
+
+-- 챌린지 도장
+create table stamp ( 
+  stamp_id NUMBER PRIMARY KEY,
+  chall_id NUMBER NOT NULL REFERENCES challenge(chall_id) ON DELETE CASCADE,
+  stamp_img VARCHAR2(300) NOT NULL,
+  stamp_name VARCHAR2(50) NOT NULL
+);
 
 -- 큐엔에이 답변
 CREATE TABLE answer (
@@ -258,6 +260,13 @@ CREATE SEQUENCE comments_comment_id_seq
   NOCYCLE
   NOCACHE;  
 
+-- 챌린지 도장 시퀀스
+CREATE SEQUENCE stamp_stamp_id_seq
+  START WITH 1
+  INCREMENT BY 1
+  NOCYCLE
+  NOCACHE;
+  
 -- 공지 글 번호 시퀀스
 CREATE SEQUENCE notice_notice_id_seq
   START WITH 1

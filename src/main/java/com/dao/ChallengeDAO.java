@@ -146,6 +146,11 @@ public class ChallengeDAO {
 		return n;
 	}
 
+	public int insertStamp(SqlSession session, HashMap<String, String> map) {
+		int n = session.delete("ChallengeMapper.insertStamp", map);
+		return n;
+	}
+
 
 
 }
