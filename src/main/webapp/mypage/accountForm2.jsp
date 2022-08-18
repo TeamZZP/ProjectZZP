@@ -123,9 +123,13 @@
 							email1 : $("#email1").val(),
 							email2 : $("#email2").val(),
 							address_id : $("#address_id").val(),
+							address_name : $("#address_name").val(),
+							receiver_name : $("#receiver_name").val(),
+							receiver_phone : $("#receiver_phone").val(),
 							post : $("#sample4_postcode").val(),
 							addr1 : $("#sample4_roadAddress").val(),
-							addr2 : $("#sample4_jibunAddress").val()
+							addr2 : $("#sample4_jibunAddress").val(),
+							default_chk : $("#default_chk").val()
 						},
 		 				success : function(data, status, xhr) {//data :
 							alert(data);
@@ -149,9 +153,13 @@
 						email1 : $("#email1").val(),
 						email2 : $("#email2").val(),
 						address_id : $("#address_id").val(),
+						address_name : $("#address_name").val(),
+						receiver_name : $("#receiver_name").val(),
+						receiver_phone : $("#receiver_phone").val(),
 						post : $("#sample4_postcode").val(),
 						addr1 : $("#sample4_roadAddress").val(),
-						addr2 : $("#sample4_jibunAddress").val()
+						addr2 : $("#sample4_jibunAddress").val(),
+						default_chk : $("#default_chk").val()
 					},
 	 				success : function(data, status, xhr) {//data : 
 						alert(data);
@@ -185,6 +193,10 @@
 				<input type="hidden" name="userid" id="userid" value="<%= userid %>"/>
 				<input type="hidden" name="passwd" id="passwd" value="<%= passwd %>"/>
 				<input type="hidden" name="address_id" id="address_id" value="<%= address_id %>"/>
+				<input type="hidden" name="address_name" id="address_name" value="<%= address_name %>"/>
+				<input type="hidden" name="receiver_name" id="receiver_name" value="<%= receiver_name %>"/>
+				<input type="hidden" name="receiver_phone" id="receiver_phone" value="<%= receiver_phone %>"/>
+				<input type="hidden" name="default_chk" id="default_chk" value="<%= default_chk %>"/>
 					<!-- username -->
 					<div class="form-group">
 						<label for="username" class="cols-sm-2 control-label" style="font-weight: bold;">이름</label>
