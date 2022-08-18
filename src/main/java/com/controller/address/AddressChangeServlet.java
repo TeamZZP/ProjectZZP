@@ -2,7 +2,6 @@ package com.controller.address;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,13 +15,13 @@ import com.dto.MemberDTO;
 import com.service.AddressService;
 
 /**
- * Servlet implementation class AddressAddServlet222
+ * Servlet implementation class AddressChangeServlet
  */
-@WebServlet("/AddressAddServlet")
-public class AddressAddServlet extends HttpServlet {
-
+@WebServlet("/AddressChangeServlet")
+public class AddressChangeServlet extends HttpServlet {
+       
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("회원 배송지 추가 서블릿 실행");
+		System.out.println("배송지 수정 서블릿 실행");
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
 		HttpSession session=request.getSession();
@@ -32,42 +31,47 @@ public class AddressAddServlet extends HttpServlet {
 		//회원 전용
 		if (dto != null) {
 			String userid=dto.getUserid();
-			System.out.println(userid);
 			AddressService a_service=new AddressService();
+			HashMap<String, String> changedAddMap=new HashMap<String, String>();
 			
 			//데이터 파싱
+			String address_id=request.getParameter("address_id");
 			String address_name=request.getParameter("address_name");
 			String receiver_name=request.getParameter("receiver_name");
 			String receiver_phone=request.getParameter("receiver_phone");
 			String post_num=request.getParameter("post");
 			String addr1=request.getParameter("addr1");
 			String addr2=request.getParameter("addr2");
-//			String default_chk=request.getParameter("default_chk");
-			
+			System.out.println(address_id);
 			System.out.println(address_name);
 			System.out.println(receiver_name);
 			System.out.println(receiver_phone);
 			System.out.println(post_num);
 			System.out.println(addr1);
 			System.out.println(addr2);
-//			System.out.println(default_chk);//기본 배송지 체크하면 on 출력, 안 하면 null 출력
 			
-			AddressDTO address=null;
+			//주소 map
+			changedAddMap.put("address_id", address_id);
+			changedAddMap.put("userid", userid);
+			changedAddMap.put("address_name", address_name);
+			changedAddMap.put("receiver_name", receiver_name);
+			changedAddMap.put("receiver_phone", receiver_phone);
+			changedAddMap.put("post_num", post_num);
+			changedAddMap.put("addr1", addr1);
+			changedAddMap.put("addr2", addr2);
 			if (request.getParameter("default_chk") == null) {
 				System.out.println("기본 배송지 아님");
-				address=new AddressDTO(0, userid, address_name, receiver_name,
-						receiver_phone, post_num, addr1, addr2, 0);
+				changedAddMap.put("default_chk", "0");
 			} else {
 				System.out.println("기본 배송지 체크");
-				address=new AddressDTO(0, userid, address_name, receiver_name,
-						receiver_phone, post_num, addr1, addr2, 1);
+				changedAddMap.put("default_chk", "1");
 			}
-			AddressService service=new AddressService();
-			int num=service.addAddress(address);
-			System.out.println("추가된 배송지 갯수 : "+num);
-
-//			session.setAttribute("addressMap", addressMap);//userid의 address 리스트
-			response.sendRedirect("AddressListServlet");
+			
+			int a_num=a_service.changeAddress(changedAddMap);
+			System.out.println(changedAddMap);
+			System.out.println("회원 주소 수정 갯수 : "+a_num);
+			
+//			response.sendRedirect("addressList.jsp");
 		} else {
 			//alert로 로그인 후 이용하세요 출력
 			String mesg="로그인이 필요합니다.";
@@ -79,6 +83,7 @@ public class AddressAddServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

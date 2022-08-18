@@ -1,9 +1,18 @@
 <%@page import="com.dto.MemberDTO"%>
+<%@page import="com.dto.AddressDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%
-	MemberDTO member=(MemberDTO) session.getAttribute("login");
-	String userid=member.getUserid();
+	AddressDTO addressidAddress=(AddressDTO) session.getAttribute("addressidAddress");
+	
+	int address_id=addressidAddress.getAddress_id();
+	String address_name=addressidAddress.getAddress_name();
+	String receiver_name=addressidAddress.getReceiver_name();
+	String receiver_phone=addressidAddress.getReceiver_phone();
+	String post_num=addressidAddress.getPost_num();
+	String addr1=addressidAddress.getAddr1();
+	String addr2=addressidAddress.getAddr2();
+	int default_chk=addressidAddress.getDefault_chk();
 %>
 <html>
 <head>
@@ -32,15 +41,6 @@
 				$("#inputReceiverPhone").val("");
 				$("#inputReceiverPhone").focus();
 				event.preventDefault();
-			} else {
-				//기본 배송지 체크
-/* 				check = "0";
- 				if ($("#gridCheck").is(":checked")) {
-					console.log("기본 배송지 체크");
-					check="1";
-				}
-				console.log(check); */
-//				event.preventDefault();
 			}
 		});//end submit
 	});//end ready
@@ -48,23 +48,23 @@
 </head>
 <body>
 <jsp:include page="common/header.jsp" flush="true"></jsp:include><br>
-	<input type="hidden" name="userid" id="userid" value="<%= userid %>">
-<form action="AddressAddServlet" method="post" class="row g-2">
+<form action="AddressChangeServlet" method="post" class="row g-2">
+<input type="hidden" name="address_id" id="address_id" value="<%= address_id %>">
 	<div class="row justify-content-center">
 		<div class="col-md-5">
 			  <div class="col-md-5">
 			    <label for="inputAddressName" class="form-label" style="font-weight: bold;">배송지명</label><!-- 줄 안 바꾸고 싶음 -->
-			    <input type="text" class="form-control" name="address_name" id="inputAddressName" placeholder="ex) 집, 회사...">
+			    <input type="text" class="form-control" name="address_name" id="inputAddressName" value="<%= address_name %>">
 			  </div>
 			  <div class="col-md-7"></div><!-- 줄바꿈 -->
 			  <div class="col-md-5">
 			    <label for="inputReceiverName" class="form-label" style="font-weight: bold;">수령인</label>
-			    <input type="text" class="form-control" name="receiver_name" id="inputReceiverName" placeholder="받는 분 성함">
+			    <input type="text" class="form-control" name="receiver_name" id="inputReceiverName" value="<%= receiver_name %>">
 			  </div>
 			  <div class="col-md-7"></div><!-- 줄바꿈 -->
 			  <div class="col-md-5">
 			    <label for="inputReceiverPhone" class="form-label" style="font-weight: bold;">연락처</label>
-			    <input type="text" class="form-control" name="receiver_phone" id="inputReceiverPhone" placeholder="숫자 11자리 입력">
+			    <input type="text" class="form-control" name="receiver_phone" id="inputReceiverPhone" value="<%= receiver_phone %>">
 			  </div>
 			  <div class="col-md-7"></div><!-- 줄바꿈 -->
 			  <!-- 주소 -->
@@ -74,15 +74,15 @@
 							<div class="cols-sm-10">
 								<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
-									<input type="text" name="post" id="sample4_postcode" placeholder="우편번호" class="form-control" readonly="readonly">
+									<input type="text" name="post" id="sample4_postcode" value="<%= post_num %>" class="form-control" readonly="readonly">
 									<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기" class="btn btn-outline-success"><br>
 								</div>
 								<div class="row g-3" style="margin-top: -10px;">
 									<div class="col-md-6">
-										<input type="text" name="addr1" id="sample4_roadAddress" placeholder="도로명주소" class="form-control" readonly="readonly">
+										<input type="text" name="addr1" id="sample4_roadAddress" value="<%= addr1 %>" class="form-control" readonly="readonly">
 									</div>
 									<div class="col-md-6">
-										<input type="text" name="addr2" id="sample4_jibunAddress" placeholder="상세 주소를 입력하세요." class="form-control">
+										<input type="text" name="addr2" id="sample4_jibunAddress" value="<%= addr2 %>" class="form-control">
 										<span id="guide" style="color:#999"></span>
 									</div>                  
 								</div>
@@ -102,7 +102,7 @@
 		</div>
 		<div class="col-12">
 			<div style="width : 475px; float : right;">
-				<button type="submit" id="succ" class="btn btn-success">완료</button>
+				<button type="submit" id="succ" class="btn btn-success">수정</button>
 			</div>
 		</div>
 	</div>

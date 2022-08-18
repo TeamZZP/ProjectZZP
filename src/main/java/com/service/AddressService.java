@@ -28,11 +28,11 @@ public class AddressService {
 		return address;
 	}
 
-	public int changeAdd(HashMap<String, String> changedAddMap) {
+	public int changeAddress(HashMap<String, String> changedAddMap) {
 		SqlSession session=MySqlSessionFactory.getSqlSession();
 		int num=0;
 		try {
-			num=dao.changeAdd(session, changedAddMap);
+			num=dao.changeAddress(session, changedAddMap);
 			session.commit();
 		} finally {
 			session.close();
@@ -63,8 +63,27 @@ public class AddressService {
 		return num;
 	}
 
+	public int addAddress(AddressDTO address) {
+		SqlSession session=MySqlSessionFactory.getSqlSession();
+		int num=0;
+		try {
+			num=dao.addAddress(session, address);
+			session.commit();
+		} finally {
+			session.close();
+		}
+		return num;
+	}
 
+	public AddressDTO selectAddressId(String address_id) {
+		SqlSession session=MySqlSessionFactory.getSqlSession();
+		AddressDTO address=null;
+		try {
+			address=dao.selectAddressId(session, address_id);
+		} finally {
+			session.close();
+		}
+		return address;
+	}
 
-	
-	
 }

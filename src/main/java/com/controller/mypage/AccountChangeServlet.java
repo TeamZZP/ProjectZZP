@@ -35,6 +35,8 @@ public class AccountChangeServlet extends HttpServlet {
 		String changedPasswd=request.getParameter("changedPasswd");
 		String email1=request.getParameter("email1");
 		String email2=request.getParameter("email2");
+		String address_id=request.getParameter("address_id");
+		System.out.println(request.getParameter("address_id"));
 		String post=request.getParameter("post");
 		String addr1=request.getParameter("addr1");
 		String addr2=request.getParameter("addr2");
@@ -44,6 +46,7 @@ public class AccountChangeServlet extends HttpServlet {
 		System.out.println(changedPasswd);
 		System.out.println(email1);
 		System.out.println(email2);
+		System.out.println(address_id);
 		System.out.println(post);
 		System.out.println(addr1);
 		System.out.println(addr2);
@@ -66,6 +69,7 @@ public class AccountChangeServlet extends HttpServlet {
 				changedEmailMap.put("email1", email1);
 				changedEmailMap.put("email2", email2);
 				//주소 map
+				changedAddMap.put("address_id", address_id);
 				changedAddMap.put("userid", userid);
 				changedAddMap.put("post", post);
 				changedAddMap.put("addr1", addr1);
@@ -76,7 +80,7 @@ public class AccountChangeServlet extends HttpServlet {
 				System.out.println("회원 비밀번호 수정 갯수 : "+p_num);
 				int e_num=m_service.changeEmail(changedEmailMap);
 				System.out.println("회원 이메일 수정 갯수 : "+e_num);				
-				int a_num=a_service.changeAdd(changedAddMap);
+				int a_num=a_service.changeAddress(changedAddMap);
 				System.out.println("회원 주소 수정 갯수 : "+a_num);
 				
 				mesg="계정 정보가 변경되었습니다.";
@@ -90,7 +94,7 @@ public class AccountChangeServlet extends HttpServlet {
 				changedEmailMap.put("email1", email1);
 				changedEmailMap.put("email2", email2);
 				//주소 map
-				changedAddMap.put("userid", userid);
+				changedAddMap.put("address_id", address_id);
 				changedAddMap.put("post", post);
 				changedAddMap.put("addr1", addr1);
 				changedAddMap.put("addr2", addr2);
@@ -99,7 +103,7 @@ public class AccountChangeServlet extends HttpServlet {
 				System.out.println(changedEmailMap);
 				int e_num=m_service.changeEmail(changedEmailMap);
 				System.out.println("회원 이메일 수정 갯수 : "+e_num);				
-				int a_num=a_service.changeAdd(changedAddMap);
+				int a_num=a_service.changeAddress(changedAddMap);
 				System.out.println("회원 주소 수정 갯수 : "+a_num);
 				
 				mesg="계정 정보가 변경되었습니다.";

@@ -21,6 +21,7 @@
 	String created_at=member.getCreated_at();
 	
 	AddressDTO address=null;
+	int address_id=0;
 	String address_name=null;
 	String receiver_name=null;
 	String receiver_phone=null;
@@ -30,6 +31,7 @@
 	int default_chk=0;
 	for (int j = 0; j < addressList.size(); j++) {
 		address=addressList.get(j);//첫번째로 입력한 기본 주소지만 출력되도록 설정하는 방법은?--default_chk 이용해보기
+		address_id=address.getAddress_id();
 		address_name=address.getAddress_name();
 		receiver_name=address.getReceiver_name();
 		receiver_phone=address.getReceiver_phone();
@@ -120,6 +122,7 @@
 							changedPasswd : $("#changedPasswd").val(),
 							email1 : $("#email1").val(),
 							email2 : $("#email2").val(),
+							address_id : $("#address_id").val(),
 							post : $("#sample4_postcode").val(),
 							addr1 : $("#sample4_roadAddress").val(),
 							addr2 : $("#sample4_jibunAddress").val()
@@ -129,7 +132,7 @@
 							location.href="main.jsp";//수정 후 메인페이지 이동
 						},
 						error: function(xhr, status, error) {
-							console.log(error);
+							alert(error);
 						}						
 					});//end ajax
 				}
@@ -145,6 +148,7 @@
 						userid : $("#userid").val(),
 						email1 : $("#email1").val(),
 						email2 : $("#email2").val(),
+						address_id : $("#address_id").val(),
 						post : $("#sample4_postcode").val(),
 						addr1 : $("#sample4_roadAddress").val(),
 						addr2 : $("#sample4_jibunAddress").val()
@@ -154,7 +158,7 @@
 						location.href="main.jsp";//수정 후 메인페이지 이동
 					},
 					error: function(xhr, status, error) {
-						console.log(error);
+						alert(error);
 					}						
 				});//end ajax
 			};//end if
@@ -180,6 +184,7 @@
 				<form class="form-horizontal" method="post" action=" ">
 				<input type="hidden" name="userid" id="userid" value="<%= userid %>"/>
 				<input type="hidden" name="passwd" id="passwd" value="<%= passwd %>"/>
+				<input type="hidden" name="address_id" id="address_id" value="<%= address_id %>"/>
 					<!-- username -->
 					<div class="form-group">
 						<label for="username" class="cols-sm-2 control-label" style="font-weight: bold;">이름</label>
