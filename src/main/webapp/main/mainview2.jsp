@@ -79,11 +79,10 @@
 	      <div class="col" onclick="javascrip:location.href='#';">
 	        <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" 
 	        	style="background-image: url('images/p_image/<%=p_image%>.png'); background-size:cover;">
-	          <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
-	            <h2 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold"><%= p_content %></h2>
+	          <div class="d-flex flex-column h-100 p-5 pb-3 text-white fw-bold text-shadow-1">
+	            <h2 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold text-shadow-1"><%= p_content %></h2>
 	            <ul class="d-flex list-unstyled mt-auto">
 	              <li class="me-auto">
-	                <img src="images/header/main.png" alt="Bootstrap" width="32" height="32" class="rounded-circle border border-white">
 	              </li>
 	              <li class="d-flex align-items-center me-3">
 	                <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#geo-fill"></use></svg>
@@ -100,123 +99,78 @@
 	      <%
 	    	}
 	      %>
-	      <!-- <div class="col" onclick="javascrip:location.href='StoreServlet';">
-	        <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-image: url('https://image.shutterstock.com/image-photo/upcycled-glass-jar-silicon-straws-260nw-2145836275.jpg');">
-	          <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
-	            <h2 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Short title, long jacket</h2>
-	            <ul class="d-flex list-unstyled mt-auto">
-	              <li class="me-auto">
-	                <img src="images/header/main.png" alt="Bootstrap" width="32" height="32" class="rounded-circle border border-white">
-	              </li>
-	              <li class="d-flex align-items-center me-3">
-	                <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#geo-fill"></use></svg>
-	                <small>친환경 빨대</small>
-	              </li>
-	              <li class="d-flex align-items-center">
-	                <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#calendar3"></use></svg>
-	                <small>$10</small>
-	              </li>
-	            </ul>
-	          </div>
-	        </div>
-	      </div>
-	      <div class="col" onclick="javascrip:location.href='StoreServlet';">
-	        <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-image: url('https://image.shutterstock.com/image-photo/upcycled-glass-jar-silicon-straws-260nw-2145836275.jpg');">
-	          <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
-	            <h2 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Short title, long jacket</h2>
-	            <ul class="d-flex list-unstyled mt-auto">
-	              <li class="me-auto">
-	                <img src="images/header/main.png" alt="Bootstrap" width="32" height="32" class="rounded-circle border border-white">
-	              </li>
-	              <li class="d-flex align-items-center me-3">
-	                <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#geo-fill"></use></svg>
-	                <small>친환경 빨대</small>
-	              </li>
-	              <li class="d-flex align-items-center">
-	                <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#calendar3"></use></svg>
-	                <small>$10</small>
-	              </li>
-	            </ul>
-	          </div>
-	        </div>
-	      </div> -->
 	    </div>
   	  </div>
     </div>
     <div class="carousel-item" data-bs-interval="false">
       <div class="container px-4 py-5" id="custom-cards">
 	    <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
-	    <!-- 2 -->
-	      <div class="col" onclick="javascrip:location.href='test3.jsp';">
-	        <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-image: url('https://image.shutterstock.com/image-photo/father-son-planting-young-tree-260nw-595513394.jpg');">
-	          <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
-	            <h2 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Short title, long jacket</h2>
+	    <%
+	    int idx2 = 5;
+	    List<CategoryProductDTO> product_list2 = (List<CategoryProductDTO>)request.getAttribute("bestprod"); 
+		if(product_list2.size()<5){
+			idx2 = product_list2.size();
+		}
+	    for ( int i = 3 ; i <= idx2 ; i++ ) {
+		    int p_id2 = product_list2.get(i).getP_id();
+		    String p_name2 =product_list2.get(i).getP_name();
+			String p_content2 =product_list2.get(i).getP_content();
+			int c_id2 =product_list2.get(i).getC_id();
+			int p_cost_price2 =product_list2.get(i).getP_cost_price();
+			int p_selling_price2 =product_list2.get(i).getP_selling_price();
+			int p_discount2 =product_list2.get(i).getP_discount();
+			String p_created2 =product_list2.get(i).getP_created();
+			int p_stock2 =product_list2.get(i).getP_stock();
+			String userid2 =product_list2.get(i).getUserid();
+			String p_image2 = product_list2.get(i).getP_image();
+	    %>
+	    <!-- carousel_2 -->
+	  <%--   <div class="col">
+		    <div class="card" onclick="javascrip:location.href='#';" style="width: 20rem;">
+			  <img src="images/p_image/<%=p_image2%>.png" class="card-img-top" alt="상품이미지">
+			  	<div class="card-body">
+				    <h5 class="card-title"><%= p_name2 %></h5>
+				    <p class="card-text">
+				    <%=p_content2%>
+				    <%= p_selling_price2 %>
+				    </p>
+				    <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+			  	</div>
+			</div>
+		</div> --%>
+	      <div class="col" onclick="javascrip:location.href='#';">
+	        <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" 
+	        	style="background-image: url('images/p_image/<%=p_image2%>.png'); background-size:cover;">
+	          <div class="d-flex flex-column h-100 p-5 pb-3 fw-bold text-shadow-1">
+	           <h2 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold text-shadow-1"><%=p_content2%></h2> 
 	            <ul class="d-flex list-unstyled mt-auto">
 	              <li class="me-auto">
-	                <img src="https://github.com/twbs.png" alt="Bootstrap" width="32" height="32" class="rounded-circle border border-white">
 	              </li>
-	              <li class="d-flex align-items-center me-3">
+	              <li class="d-flex align-items-center me-3" >
 	                <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#geo-fill"></use></svg>
-	                <small>Earth</small>
+	                <small><%= p_name2 %></small>
 	              </li>
 	              <li class="d-flex align-items-center">
 	                <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#calendar3"></use></svg>
-	                <small>3d</small>
+	                <small><%= p_selling_price2 %></small>
 	              </li>
 	            </ul>
 	          </div>
 	        </div>
-	      </div>
-	      <div class="col" onclick="javascrip:location.href='test3.jsp';">
-	        <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-image: url('https://image.shutterstock.com/image-photo/father-son-planting-young-tree-260nw-595513394.jpg');">
-	          <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
-	            <h2 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Short title, long jacket</h2>
-	            <ul class="d-flex list-unstyled mt-auto">
-	              <li class="me-auto">
-	                <img src="https://github.com/twbs.png" alt="Bootstrap" width="32" height="32" class="rounded-circle border border-white">
-	              </li>
-	              <li class="d-flex align-items-center me-3">
-	                <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#geo-fill"></use></svg>
-	                <small>Earth</small>
-	              </li>
-	              <li class="d-flex align-items-center">
-	                <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#calendar3"></use></svg>
-	                <small>3d</small>
-	              </li>
-	            </ul>
-	          </div>
-	        </div>
-	      </div>
-	      <div class="col" onclick="javascrip:location.href='test3.jsp';">
-	        <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-image: url('https://image.shutterstock.com/image-photo/father-son-planting-young-tree-260nw-595513394.jpg');">
-	          <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
-	            <h2 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Short title, long jacket</h2>
-	            <ul class="d-flex list-unstyled mt-auto">
-	              <li class="me-auto">
-	                <img src="https://github.com/twbs.png" alt="Bootstrap" width="32" height="32" class="rounded-circle border border-white">
-	              </li>
-	              <li class="d-flex align-items-center me-3">
-	                <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#geo-fill"></use></svg>
-	                <small>Earth</small>
-	              </li>
-	              <li class="d-flex align-items-center">
-	                <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#calendar3"></use></svg>
-	                <small>3d</small>
-	              </li>
-	            </ul>
-	          </div>
-	        </div>
-	      </div>
+	      </div> 
+       <%
+    	 }
+       %>
 	    </div>
   	  </div>
     </div>
   </div>
   <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval2" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="carousel-control-prev-icon"></span>
     <span class="visually-hidden">Previous</span>
   </button>
   <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval2" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="carousel-control-next-icon"></span>
     <span class="visually-hidden">Next</span>
   </button>
 </div>
@@ -236,12 +190,12 @@
 
 	<div class="row" style="float: none; margin:100 auto;">
 	<%
-		int idx2 = 8;
+		int idx3 = 8;
 		List<ChallengeDTO> callenge_list = (List<ChallengeDTO>)request.getAttribute("newchall");
 		if(callenge_list.size()<8){
-			idx2 = callenge_list.size();
+			idx3 = callenge_list.size();
 		}
-			for(int i=0; i<idx2; i++){
+			for(int i=0; i<idx3; i++){
 				ChallengeDTO dto = callenge_list.get(i);
 				int chall_id = dto.getChall_id();
 				String chall_img = dto.getChall_img();
