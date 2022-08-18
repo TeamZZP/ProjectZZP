@@ -106,7 +106,7 @@
 			var p_amount =$("#cartAmount"+cart_id).val();
 			console.log(cart_id,p_selling_price,p_amount)
 			 $.ajax({
-				data:"get",
+				type:"get",
 				url:"CartUpdateServlet",
 				data:{
 					cart_id:cart_id,
@@ -121,27 +121,46 @@
 					console.log(error);
 				}
 			}) 
+			$("#cart").on("click",function(){
+			
+				 $.ajax({
+						type:"get",
+						url:"CartListServlet",
+						data:{
+							userid:userid
+						},
+						dataType:"text",
+						success:function(data,status,xhr){
+							$(".container").empty();
+							$("#outer").append(data);
+						},
+						error:function(xhr,status,error){
+							console.log(error);
+						}
+			})//cart
 		})//end
 	})//end
 </script>
 <header>
+<div id="outer">
 	<div style="text-align: center; display: flex; justify-content:center; height: 100px; margin-bottom: 10px;" >
 		<img src="images/cart2.png">
 	</div>
 </header>
+
 <div class="container">
-	<div class="row" >
-		<div class="btn-group" role="group" aria-label="Basic example">
-			<button type="button" class="btn btn-outline-success"
-				id="productDetail">장바구니()</button>
-			<button type="button" class="btn btn-outline-success"
-				id="productReview">찜한상품()</button>
-			
-		</div>
+<%int count = (int)request.getAttribute("cartCount"); %>
+<div class="row" >
+	<div class="btn-group" role="group" aria-label="Basic example">
+		<button type="button" class="btn btn-outline-success" id="cart">장바구니(<%=count %>)</button>
+		<button type="button" class="btn btn-outline-success" id="like">찜한상품()</button>
+		
+	</div>
 	</div>
 <%
 request.setCharacterEncoding("utf-8");
 List<CartDTO> list = (List<CartDTO>) request.getAttribute("cartList");
+
 if (list.size() == 0) {
 %>
 <table >
@@ -222,5 +241,6 @@ for (int i = 0; i < list.size(); i++) {
 	}
 	%>
 </form>
+</div>
 </div>
 <!-- </div> -->

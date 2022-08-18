@@ -28,5 +28,10 @@ public class CartDAO {
 		int num  = session.update("cartUpdate",map);
 		return num;
 	}
+
+	public int cartCount(SqlSession session, String userid) {
+		int num = session.selectOne("cartCount",userid);
+		return num;
+	}
 	
 }
