@@ -29,6 +29,11 @@ public class CartListServlet extends HttpServlet {
 			CartService service = new CartService();
 			List<CartDTO> list = service.cartList(userid); 
 			System.out.println("CartListServlet"+list);
+			//장바구니count
+			int count = service.cartCount(userid);
+			System.out.println(count);
+			
+			request.setAttribute("cartCount", count);
 			request.setAttribute("cartList", list);
 			nextPage="cartList.jsp";
 			
