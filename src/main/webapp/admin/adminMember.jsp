@@ -5,22 +5,30 @@
 <%@page import="com.dto.MemberDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
+<div class="container" style="margin-top: 5px; margin-bottom: 5px;">
+	<div class="row row-cols-auto">
+		  <div class="col"></div>
+			  <div class="col">
+				  <select class="form-select" data-style="btn-info" id="inputGroupSelect01" 
+				  		  style="width: 145px; margin-right: -20px; margin-left: -24px;">
+					    <option selected disabled="disabled">카테고리</option>
+					    <option value="userid">아이디</option>
+					    <option value="username">이름</option>
+					    <option value="email">이메일</option>
+					    <option value="phone">전화번호</option>
+					    <option value="address">주소</option>
+				  </select>
+			  </div>
+		  <div class="col"><input type="text" class="form-control" style="width: 150px; margin-right: -20px;"></div>
+	      <div class="col"><button type="button" class="btn btn-success">검색</button></div>
+	</div>
+</div>
+
 <div class="container col-md-auto">
 <!-- <div class="container col col-lg-9"> -->
 <div class="row justify-content-md-center">
-<div class="dropdown">
-  <button class="btn btn-success btn-sm dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-    카테고리
-  </button>
-  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-    <li><a class="dropdown-item" href="#">아이디</a></li>
-    <li><a class="dropdown-item" href="#">이름</a></li>
-    <li><a class="dropdown-item" href="#">이메일</a></li>
-    <li><a class="dropdown-item" href="#">전화번호</a></li>
-    <li><a class="dropdown-item" href="#">주소</a></li>
-  </ul>
-  <input type="text"/>
-</div>
+
 <br>
 <table class="table table-sm">
 	<tr>
