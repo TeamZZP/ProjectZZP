@@ -9,6 +9,11 @@
 <head>
 <meta charset="UTF-8">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+<style type="text/css">
+ .retrieve{
+  cursor: pointer;
+ }
+</style>
 </head>
 <body>
 <!-- 배너 -->
@@ -76,7 +81,7 @@
 			String p_image = product_list.get(i).getP_image();
 	    %>
 	    <!-- carousel_1 -->
-	      <div class="col" onclick="javascrip:location.href='#';">
+	      <div class="col retrieve" onclick="javascrip:location.href='ProductRetrieveServlet?p_id=<%=p_id%>';">
 	        <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" 
 	        	style="background-image: url('images/p_image/<%=p_image%>.png'); background-size:cover;">
 	          <div class="d-flex flex-column h-100 p-5 pb-3 text-white fw-bold text-shadow-1">
@@ -125,20 +130,7 @@
 			String p_image2 = product_list2.get(i).getP_image();
 	    %>
 	    <!-- carousel_2 -->
-	  <%--   <div class="col">
-		    <div class="card" onclick="javascrip:location.href='#';" style="width: 20rem;">
-			  <img src="images/p_image/<%=p_image2%>.png" class="card-img-top" alt="상품이미지">
-			  	<div class="card-body">
-				    <h5 class="card-title"><%= p_name2 %></h5>
-				    <p class="card-text">
-				    <%=p_content2%>
-				    <%= p_selling_price2 %>
-				    </p>
-				    <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
-			  	</div>
-			</div>
-		</div> --%>
-	      <div class="col" onclick="javascrip:location.href='#';">
+	      <div class="col retrieve" onclick="javascrip:location.href='ProductRetrieveServlet?p_id=<%=p_id2%>';">
 	        <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" 
 	        	style="background-image: url('images/p_image/<%=p_image2%>.png'); background-size:cover;">
 	          <div class="d-flex flex-column h-100 p-5 pb-3 fw-bold text-shadow-1">
