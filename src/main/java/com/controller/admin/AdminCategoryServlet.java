@@ -51,6 +51,8 @@ public class AdminCategoryServlet extends HttpServlet {
 			dis.forward(request, response);
 		} else if(category.equals("product")) {
 			
+		} else if(category.equals("challenge")) {
+			
 		}
 		
 	}

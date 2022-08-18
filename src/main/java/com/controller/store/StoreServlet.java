@@ -26,6 +26,7 @@ public class StoreServlet extends HttpServlet {
 		
 		List<CategoryDTO> category_list = category_service.allCategory();
 		List<CategoryProductDTO> product_list = product_service.bestProductList();
+		System.out.println(product_list);
 		
 		request.setAttribute("category_list", category_list);		    
 		request.setAttribute("product_list", product_list);
