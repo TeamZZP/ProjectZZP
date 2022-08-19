@@ -78,4 +78,11 @@
 	<update id="ImgUpdate" parameterType="string">
 		update QUESTION set Q_IMG = 'null' where Q_IMG = #{img}
 	</update>
+	<select id="MyQeustionList" parameterType="string" resultType="QuestionProductDTO">
+		select P_id, p_name, q_id, q.q_board_category,q.q_category, q.q_content, q.q_created, q.q_img, 
+			q.q_status, q.q_title, q.userid from product right outer join question q using(p_id) where q.userid = #{userid} order by Q_ID desc 
+	</select>
+	<select id="myQuestionNum" resultType="int">
+		select count(*) from QUESTION where userid = #{userid}
+	</select>
 </mapper>
