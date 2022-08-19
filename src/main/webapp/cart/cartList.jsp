@@ -82,7 +82,7 @@
 			location.href="CartDelServlet?cart_id="+cart_id;
 		})//end
 		
-		$("#updBtn").on("click",function(){
+		$(".updBtn").on("click",function(){
 			var cart_id = $(this).attr("data-xxx"); //cart_id
 			var p_selling_price = $(this).attr("data-price");
 			var p_amount = $("#cartAmount"+cart_id).val();
@@ -219,10 +219,6 @@ for (int i = 0; i < list.size(); i++) {
 	</div>
 	<%
 	}
-	/* Map<String,Integer> map = (Map<String,Integer>)request.getAttribute("map");
-		int sum_money = map.get("sum_money");
-		int fee = map.get("fee");
-		int total = map.get("total"); */
 	%>
 	<div class="cart_total">
 		<div class="shipping">

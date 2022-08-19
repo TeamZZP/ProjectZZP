@@ -11,9 +11,9 @@ System.out.println("challList"+challList);
 <script>
 $(document).ready(function () {
 	$("body").on("click", ".writeBtn", function () {
-		//location.href = "AdminUIServlet?operate=challengeWrite";
+		location.href = "AdminUIServlet?operate=challengeWrite";
 		
-		$.ajax({
+		/* $.ajax({
 			type: "post",
 			url: "AdminUIServlet",
 			data: {
@@ -25,7 +25,7 @@ $(document).ready(function () {
 			error: function() {
 				alert("문제가 발생했습니다. 다시 시도해 주세요.");
 			}
-		});//ajax
+		});//ajax */
 	});
 	
 	$("body").on("click", ".challengeDetail", function () {
@@ -47,10 +47,12 @@ $(document).ready(function () {
 });
 </script>
 
+
+<div class="container col-md-auto">
+
+<div class="p-4 text-end">
 <button class="writeBtn btn btn-success">이 달의 챌린지 등록하기</button>
-
-
-<div class="container col col-lg-8">
+</div>
 <div class="row justify-content-md-center">
 <div class="dropdown">
   <button class="btn btn-success btn-sm dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">

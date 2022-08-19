@@ -158,7 +158,7 @@ CREATE TABLE review (
 CREATE TABLE challenge (	
 	chall_id 	NUMBER PRIMARY KEY,
  	userid 	VARCHAR2(30) NOT NULL REFERENCES member(userid) ON DELETE CASCADE,
- 	chall_title 	VARCHAR2(50) NOT NULL,
+ 	chall_title 	VARCHAR2(100) NOT NULL,
  	chall_content 	VARCHAR2(1000) NOT NULL,
  	chall_category 	VARCHAR2(30) NOT NULL,
  	chall_hits 		NUMBER	 DEFAULT 0 	  NOT NULL,

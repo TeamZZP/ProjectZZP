@@ -26,7 +26,7 @@
   <input type="text"/>
 </div>
 <br>
-<table class="table table-sm">
+<table class="table table-hover table-sm">
 	<tr>
 		<th>아이디</th>
 		<th>이름</th>

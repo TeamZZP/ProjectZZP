@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.dto.ChallengeDTO;
+import com.dto.StampDTO;
 import com.service.ChallengeService;
 
 /**
@@ -36,8 +37,10 @@ public class AdminChallDetailServlet extends HttpServlet {
 		ChallengeService service = new ChallengeService();
 		
 		ChallengeDTO challDTO = service.selectOneChallenge(chall_id);
+		StampDTO stampDTO = service.selectOneStamp(chall_id);
 		
 		request.setAttribute("challDTO", challDTO);
+		request.setAttribute("stampDTO", stampDTO);
 		
 		RequestDispatcher dis = request.getRequestDispatcher("admin/adminChallengeDetail.jsp");
 		dis.forward(request, response);

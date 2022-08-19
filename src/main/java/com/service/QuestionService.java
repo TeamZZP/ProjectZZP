@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
 import org.omg.PortableServer.REQUEST_PROCESSING_POLICY_ID;
 
 import com.config.MySqlSessionFactory;
@@ -147,6 +148,17 @@ public class QuestionService {
 			session.close();
 		}
 		return num;
+	}
+
+	public PageDTO MyQeustionList(int curPage, String userid) {
+		PageDTO list = null;
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		try {
+			list = dao.MyQeustionList(session, curPage, userid);
+		} finally {
+			session.close();
+		}
+		return list;
 	}
 
 }

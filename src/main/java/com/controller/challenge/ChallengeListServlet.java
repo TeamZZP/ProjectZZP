@@ -66,17 +66,20 @@ public class ChallengeListServlet extends HttpServlet {
 		List<ChallengeDTO> list = pDTO.getList();
 	
 		//각 게시글마다 프로필 가져오기
-		ArrayList<HashMap<String, String>> profileList = new ArrayList<HashMap<String,String>>();
-		
+		HashMap<String, String> profileMap = new HashMap<String, String>();
 		for (ChallengeDTO c : list) {
-			profileList.add(service.selectProfile(c.getUserid()));
+			profileMap.put(c.getUserid(), service.selectProfileImg(c.getUserid()));
 		}
+		
+		//이 달의 챌린지 가져오기
+		ChallengeDTO challThisMonth = service.selectChallThisMonth();
 		
 		request.setAttribute("pDTO", pDTO);
 		request.setAttribute("searchName", searchName);
 		request.setAttribute("searchValue", searchValue);
 		request.setAttribute("sortBy", sortBy);
-		request.setAttribute("profileList", profileList);
+		request.setAttribute("profileMap", profileMap);
+		request.setAttribute("challThisMonth", challThisMonth);
 		
 		RequestDispatcher dis = request.getRequestDispatcher("challengeMain.jsp");
 		dis.forward(request, response);
