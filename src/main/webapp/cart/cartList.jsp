@@ -134,14 +134,13 @@
 
 	})//end
 </script>
-<header>
-
 <div id="outer">
+	<header>
 	<div style="text-align: center; display: flex; justify-content:center; height: 100px; margin-bottom: 10px;" >
 		<img src="images/cart2.png">
 	</div>
 </header>
-
+</div>
 <div class="container">
 <%int count = (int)request.getAttribute("cartCount"); %>
 <div class="row" >
@@ -150,7 +149,7 @@
 		<button type="button" class="btn btn-outline-success" id="like">찜한상품</button>
 		
 	</div>
-	</div>
+</div>
 <%
 request.setCharacterEncoding("utf-8");
 
@@ -242,5 +241,5 @@ for (int i = 0; i < list.size(); i++) {
 	<%
 	}
 	%>
-</div>
+	</form>
 </div>
