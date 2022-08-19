@@ -15,7 +15,8 @@
 		chall_liked, 
 		chall_created, 
 		chall_img,
-		chall_comments) 
+		chall_comments,
+		chall_this_month) 
 	values 
 		(challenge_chall_id_seq.NEXTVAL, 
 		#{userid}, 
@@ -26,7 +27,8 @@
 		0, 
 		CURRENT_TIMESTAMP, 
 		#{chall_img},
-		0)
+		0,
+		#{chall_this_month})
 </insert>
 
 <select id="selectAllChallenge" parameterType="hashmap" resultType="ChallengeDTO">
@@ -235,5 +237,20 @@
 <select id="selectNewChallenge" resultType="ChallengeDTO">
 	select * from challenge where rownum <![CDATA[<=]]> 8 order by chall_id desc
 </select>
+
+
+
+<insert id="insertStamp" parameterType="hashmap">
+	insert into stamp
+		(stamp_id,
+		chall_id,
+		stamp_img,
+		stamp_name)
+	values
+		(stamp_stamp_id_seq.NEXTVAL,
+		challenge_chall_id_seq.CURRVAL,
+		#{stamp_img},
+		#{stamp_name})
+</insert>
 
 </mapper>

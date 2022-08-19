@@ -7,12 +7,17 @@
 		select * from address
 		where userid = #{userid}
 	</select>
-	<update id="changeAdd" parameterType="hashmap">
+	<update id="changeAddress" parameterType="hashmap">
 		update address
-		set post_num = #{post}, 
+		set userid = #{userid}, 
+			address_name = #{address_name}, 
+			receiver_name = #{receiver_name}, 
+			receiver_phone = #{receiver_phone}, 
+			post_num = #{post_num}, 
 			addr1 = #{addr1}, 
-			addr2 = #{addr2}
-		where userid = #{userid}
+			addr2 = #{addr2},
+			default_chk = #{default_chk}
+		where address_id = #{address_id}
 	</update>
 	<select id="selectAllAddress" resultType="AddressDTO">
 		select * from address
@@ -22,4 +27,13 @@
 		delete from address
 		where address_id = #{address_id}
 	</delete>
+	<insert id="addAddress" parameterType="AddressDTO">
+		insert into address
+		values (address_address_id_seq.nextval, #{userid}, #{address_name}, #{receiver_name}, #{receiver_phone}, 
+				#{post_num}, #{addr1}, #{addr2}, #{default_chk})
+	</insert>
+	<select id="selectAddressId" resultType="AddressDTO">
+		select * from address
+		where address_id = #{address_id}
+	</select>
 </mapper>

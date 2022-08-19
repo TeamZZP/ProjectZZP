@@ -1,6 +1,8 @@
-package com.controller.challenge;
+package com.controller.admin;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
@@ -24,10 +26,10 @@ import com.dto.MemberDTO;
 import com.service.ChallengeService;
 
 /**
- * Servlet implementation class UploadServlet
+ * Servlet implementation class AdminChallUploadServlet
  */
-@WebServlet("/UploadServlet")
-public class UploadServlet extends HttpServlet {
+@WebServlet("/AdminChallUploadServlet")
+public class AdminChallUploadServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8"); 
@@ -94,22 +96,41 @@ public class UploadServlet extends HttpServlet {
 							if (!dir.exists()) {
 								dir.mkdirs();
 							}
-							
-							try {
-								String old_file = map.get("old_file");
 								
-								if (old_file==null || old_file.length()==0) {
-									item.write(new File(dir, saveName));
-									map.put("chall_img", saveName);
-								} else {
-									map.put("chall_img", old_file);
+							if ("chall_img".equals(fieldName)) {
+								
+								try {
+									String old_file = map.get("old_file");
+									
+									if (old_file==null || old_file.length()==0) {
+										item.write(new File(dir, saveName));
+										map.put("chall_img", saveName);
+									} else {
+										map.put("chall_img", old_file);
+									}
+									
+								}catch (Exception e) {
+									e.printStackTrace();
 								}
-								
-								
-								
-							}catch (Exception e) {
-								e.printStackTrace();
 							}
+							
+							if ("stamp_img".equals(fieldName)) {
+								
+								try {
+									String old_stamp = map.get("old_stamp");
+									
+									if (old_stamp==null || old_stamp.length()==0) {
+										item.write(new File(dir, saveName));
+										map.put("stamp_img", saveName);
+									} else {
+										map.put("stamp_img", old_stamp);
+									}
+									System.out.println(map);
+								}catch (Exception e) {
+									e.printStackTrace();
+								}
+							}
+							
 						}//end else
 					}//end while
 					
@@ -118,6 +139,7 @@ public class UploadServlet extends HttpServlet {
 					e.printStackTrace();
 				}
 				
+				
 				ChallengeService service = new ChallengeService();
 				String operate = request.getParameter("operate");
 				
@@ -125,41 +147,70 @@ public class UploadServlet extends HttpServlet {
 				//챌린지 게시글 업로드
 				if ("upload".equals(operate)) {
 					int n = service.insertChallenge(map);
-					System.out.println(n+"개의 레코드 추가");
+					System.out.println(n+"개의 챌린지 레코드 추가");
 					
-					//자기가 올린 게시글로 이동??? 
-					response.sendRedirect("ChallengeListServlet");
+					int n2 = service.insertStamp(map);
+					System.out.println(n2+"개의 도장 레코드 추가");
+					
+					response.sendRedirect("AdminMainServlet");
 					
 				//챌린지 게시글 업데이트
 				} else if ("update".equals(operate)) {
 					int n = service.updateChallenge(map);
-					System.out.println(n+"개의 레코드 업데이트");
+					System.out.println(n+"개의 챌린지 레코드 업데이트");
 					
 					response.sendRedirect("ChallengeDetailServlet?chall_id="+map.get("chall_id"));
 					
 					
 				}
-				
-				
 			}
-			
-			
-		} else {
-			session.setAttribute("mesg", "잘못된 접근입니다.");
-			response.sendRedirect("ChallengeListServlet");
 		}
-		
-	
-	}
-	
-	private String getTodayString() {
-		return new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss").format(System.currentTimeMillis());
 	}
 
-	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
+	}
+	
+//	public byte[] imageToByteArray (String filePath) {
+//		byte[] returnValue = null;
+//		
+//		ByteArrayOutputStream baos = null;
+//		FileInputStream fis = null;
+//		
+//		try {
+//			baos = new ByteArrayOutputStream();
+//			fis = new FileInputStream(filePath);
+//			
+//			byte[] buf = new byte[1024];
+//			int read = 0;
+//			
+//			while ((read=fis.read(buf, 0, buf.length)) != -1) {
+//				baos.write(buf, 0, read);
+//			}
+//			
+//			returnValue = baos.toByteArray();
+//			
+//		} catch (Exception e) {
+//			// TODO: handle exception
+//		} finally {
+//			try {
+//				if (baos != null) {
+//					baos.close();
+//				}
+//				if (fis != null) {
+//					fis.close();
+//				}
+//			} catch (Exception e2) {
+//				// TODO: handle exception
+//			}
+//		}
+//		
+//		return returnValue;
+//	}
+	
+	private String getTodayString() {
+		return new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss").format(System.currentTimeMillis());
 	}
 
 }
