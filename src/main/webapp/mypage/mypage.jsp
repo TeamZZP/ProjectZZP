@@ -29,7 +29,7 @@
 <br>
 <button type="button" class="btn btn-outline-success">3. 내 챌린지</button><br>
 <br>
-<a href="MyQuestionSertvlet" class="btn btn-outline-success">4. 내 문의 내역</a><br>
+<a href="MyQuestionServlet" class="btn btn-outline-success">4. 내 문의 내역</a><br>
 <br>
 <a href="checkPasswd.jsp" class="btn btn-outline-success">5. 계정 관리</a><br>
 <br>
