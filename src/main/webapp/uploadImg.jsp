@@ -13,7 +13,7 @@
 			$("#upload").attr("src", img);
 			
 			$("#uploadDel").click(function () {
-				console.log("클릭");
+				var openerImg = opener.$("#upload");
 				$.ajax({
 					type:"post",
 					url:"imgDelServlet",
@@ -22,12 +22,15 @@
 					},
 					dataType:"text",
 					success: function (data, status, xhr) {
-						window.close();
+						
 					},
 					erorr: function (xhr, status, error) {
 						
 					}
 				});//end ajax
+				openerImg.attr("src", "null");
+				opener.$("#oldFile").val("null");
+				window.close();
 			});//
 		});//end ready
 	</script>

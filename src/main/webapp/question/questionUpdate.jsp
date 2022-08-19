@@ -46,7 +46,7 @@
 <div class="row">
  <input type="hidden" name="Q_ID" value="<%=qDTO.getQ_ID()%>">
  <input type="hidden" name="USERID" value="<%=userid%>">
- <input type="hidden" name="oldFile" value="<%=qDTO.getQ_IMG()%>">
+ <input type="hidden" name="oldFile" id="oldFile" value="<%=qDTO.getQ_IMG()%>">
 		<table>
 			<tr>
 				<td colspan="2">

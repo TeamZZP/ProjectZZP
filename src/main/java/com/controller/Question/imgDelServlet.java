@@ -1,6 +1,9 @@
 package com.controller.Question;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Iterator;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,10 +25,21 @@ public class imgDelServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		String img = request.getParameter("img");
 		System.out.println(img);
+		String[] xx = img.split("/");
+		String imgDel = "";
+		for (int i = 0; i < xx.length; i++) {
+			System.out.println(xx[i]);
+			imgDel = xx[i];
+		}
+		System.out.println(imgDel);
 		
 		QuestionService service = new QuestionService();
-		int num = service.ImgUpdate(img);
-		System.out.println("삭제된 이미지 갯수" + num);
+		int num = service.ImgUpdate(imgDel);
+		System.out.println("삭제된 이미지 갯수 " + num);
+		
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.print("null");
 	
 	}
 
