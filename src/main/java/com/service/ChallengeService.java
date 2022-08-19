@@ -292,6 +292,18 @@ public class ChallengeService {
 		return n;
 	}
 
+	public int insertStamp(HashMap<String, String> map) {
+		int n = 0;
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		try {
+			n = dao.insertStamp(session, map);
+			session.commit();
+		} finally {
+			session.close();
+		}
+		return n;
+	}
+
 
 
 

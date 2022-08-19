@@ -1,6 +1,7 @@
 
 <%@ page import="com.dto.CartDTO"%>
 <%@ page import="java.util.List"%>
+<%@ page import="java.util.Map"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <style>
@@ -92,7 +93,6 @@
 
 <script>
 	$(function() {
-		
 		//삭제버튼
 		$(".delBtn").on("click",function(){
 			var cart_id = $(this).attr("data-xxx");
@@ -105,8 +105,9 @@
 			var p_selling_price = $(this).attr("data-price");
 			var p_amount =$("#cartAmount"+cart_id).val();
 			console.log(cart_id,p_selling_price,p_amount)
+			var userid = $(this).attr("data-id");
 			 $.ajax({
-				data:"get",
+				type:"get",
 				url:"CartUpdateServlet",
 				data:{
 					cart_id:cart_id,
@@ -116,32 +117,93 @@
 				success:function(data,status,xhr){
 					var sum = p_amount*p_selling_price;
 					$("#item_price"+cart_id).text(sum);
+					/* var sum_money = sum+p_amount */
+					var fee = sum_money >= 50000? 0: 3000;
+					var total = sum_money +fee;
+					$("#fee").text(fee);
+					$("#total").text(total);
 				},
 				error:function(xhr,status,error){
 					console.log(error);
 				}
-			}) 
+			}) //up end
 		})//end
+			$("#cart").on("click",function(){
+			
+				 $.ajax({
+						type:"get",
+						url:"CartListServlet",
+						data:{
+							userid:userid
+						},
+						dataType:"text",
+						success:function(data,status,xhr){
+							$(".container").empty();
+							$("#outer").append(data);
+						},
+						error:function(xhr,status,error){
+							console.log(error);
+						}
+				 })//end ajax
+			})//end cart
+			/* cartUpdateServlet -> Update 이후에 cartList를 다시 뽑아오는 새로운 리스트를 생성...?
+					
+				$(".updBtn").on("click",function(){
+				
+				var cart_id = $(this).attr("data-xxx");
+				var p_amount =$("#cartAmount"+cart_id).val();
+				
+				$.ajax({
+					type : "get",
+					url : "CartListServlet"
+					data : {
+						cart_id:cart_id,
+						p_amount : p_amount
+					},
+					dataType:"text",
+					success:function(data,status,xhr){
+						 $(".price").empty(); 
+						var fee = map.get("fee");
+						var total = map.get("total");
+						$("#fee").text(fee);
+						$("#total").text(total);
+					},
+					error:function(xhr,status,error){
+						console.log(error);
+					}
+				})//ajax
+			})//end updBtn */   
+		
+			/* $("#delAllCart").on("click",function(){
+				$("form").attr("action","CartDelAllServlet");
+				$("form").submit();//form 밖에 위치해있음 ->이벤트trigger 사용
+			}) */
+		
 	})//end
 </script>
+
 <header>
+
+<div id="outer">
 	<div style="text-align: center; display: flex; justify-content:center; height: 100px; margin-bottom: 10px;" >
 		<img src="images/cart2.png">
 	</div>
 </header>
+
 <div class="container">
-	<div class="row" >
-		<div class="btn-group" role="group" aria-label="Basic example">
-			<button type="button" class="btn btn-outline-success"
-				id="productDetail">장바구니()</button>
-			<button type="button" class="btn btn-outline-success"
-				id="productReview">찜한상품()</button>
-			
-		</div>
+<%int count = (int)request.getAttribute("cartCount"); %>
+<div class="row" >
+	<div class="btn-group" role="group" aria-label="Basic example">
+		<button type="button" class="btn btn-outline-success" id="cart">장바구니(<%=count %>)</button>
+		<button type="button" class="btn btn-outline-success" id="like">찜한상품</button>
+		
+	</div>
 	</div>
 <%
 request.setCharacterEncoding("utf-8");
+
 List<CartDTO> list = (List<CartDTO>) request.getAttribute("cartList");
+
 if (list.size() == 0) {
 %>
 <table >
@@ -186,10 +248,10 @@ for (int i = 0; i < list.size(); i++) {
 					<br> 
 					<div class="amount">
 						<label >수량:</label> 
-						<input type="text" id="cartAmount<%=cart_id %>" name="p_amount" style="text-align: right; line-height: 0px;"  maxlength="3"
+						<input type="text" id="cartAmount<%=cart_id %>" class="p_amount" name="p_amount" style="text-align: right; line-height: 0px;"  maxlength="3"
 								size="2"  value="<%=p_amount%>">
-						<input type="button" value="수정" class="updBtn" style="line-height: 28px;"
-						data-xxx="<%=cart_id %>" data-price="<%=p_selling_price %>" />
+						<input type="button" value="수정"  class="updBtn" style="line-height: 28px;"
+						data-xxx="<%=cart_id %>" data-price="<%=p_selling_price %>" data-id="<%=userid %>" />
 						<br>
 					</div>
 					상품가격 :<span id="item_price<%=cart_id %>" style="margin-bottom: 15px;"><%=p_selling_price * p_amount%></span>
@@ -203,24 +265,30 @@ for (int i = 0; i < list.size(); i++) {
 
 	<%
 	}
+	Map<String,Integer> map = (Map<String,Integer>)request.getAttribute("map");
+	int sum_money = map.get("sum_money");
+	int fee = map.get("fee");
+	int total = map.get("total");
 	%>
 	<div class="cart_total">
 		<div class="shipping">
-			<h6>배송료</h6>
-			<span class="price">3000</span>
+			<h6>상품금액</h6>
+			<span class="price" id="sum_money"><%=sum_money %></span>
+			<h6>배송비</h6>
+			<span class="price" id="fee"><%=fee %></span>
 		</div>
 		<div class="total_price">
-			<h6>총금액</h6>
-			<span class="price"></span>
+			<h6>총 주문금액</h6>
+			<span class="price" id="total"><%=total %></span>
 		</div>
 	</div>
-	<a class="a_black" href="javascript:orderAllConfirm(myForm)"> 전체 주문하기 </a>&nbsp;&nbsp;&nbsp;&nbsp; 
-			<a class="a_black" href="javascript:delAllCart(myForm)"> 전체 삭제하기 </a>&nbsp;&nbsp;&nbsp;&nbsp;
-			<a class="a_black" href="index.jsp"> 계속 쇼핑하기 </a>
-	<!-- <button class="btn big">주문하기</button> -->
+		<a class="a_black" href="javascript:orderAllConfirm(myForm)"> 전체 주문하기 </a>
+		<a class="a_black" href="CartDelAllServlet" id=delAllCart> 전체 삭제하기 </a>
+		<a class="a_black" href="StoreServlet"> 계속 쇼핑하기 </a>
+
+ 
 	<%
 	}
 	%>
-</form>
 </div>
-<!-- </div> -->
+</div>

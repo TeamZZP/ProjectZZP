@@ -37,17 +37,17 @@
        	  <div class="col-md-6">
         <h5 style="font-weight: bold; color: green;">지구지키기 프로젝트 ZZP</h5>
         <ul class="nav flex-column">
-          <li class="nav-item mb-2"><a href="IntroductionUIServlet" class="nav-link p-0 text-muted">소개</a></li>
-          <li class="nav-item mb-2"><a href="StoreUIServlet" class="nav-link p-0 text-muted">스토어</a></li>
-          <li class="nav-item mb-2"><a href="ChallengeListServlet" class="nav-link p-0 text-muted">챌린지</a></li>
-          <li class="nav-item mb-2"><a href="NoticeListServlet" class="nav-link p-0 text-muted">공지사항</a></li>
-          <li class="nav-item mb-2"><a href="QuestionListServlet" class="nav-link p-0 text-muted">문의</a></li>
+          <li class="nav-item mb-2"><a href="IntroductionUIServlet" class="nav-link p-0 text-muted"><span class="headercss">소개</span></a></li>
+          <li class="nav-item mb-2"><a href="StoreServlet" class="nav-link p-0 text-muted"><span class="headercss">스토어</span></a></li>
+          <li class="nav-item mb-2"><a href="ChallengeListServlet" class="nav-link p-0 text-muted"><span class="headercss">챌린지</span></a></li>
+          <li class="nav-item mb-2"><a href="NoticeListServlet" class="nav-link p-0 text-muted"><span class="headercss">공지사항</span></a></li>
+          <li class="nav-item mb-2"><a href="QuestionListServlet" class="nav-link p-0 text-muted"><span class="headercss">문의</span></a></li>
         </ul>
       </div>
       </div>
       <div class="col-3">
-      		<h5><a data-bs-toggle="modal" data-bs-target="#termsOfUse" style="text-decoration: none; color: black; font-size: medium;">이용약관</a>
-       	  &nbsp;&#124;&nbsp;&nbsp;<a data-bs-toggle="modal" data-bs-target="#personalInfo" style="text-decoration: none; color: black; font-size: medium;">개인정보처리방침</a></h5>
+      		<h5><a class="headercss" data-bs-toggle="modal" data-bs-target="#termsOfUse" style="text-decoration: none; color: black; font-size: medium; cursor: pointer;">이용약관</a>
+       	  &nbsp;&#124;&nbsp;&nbsp;<a class="headercss" data-bs-toggle="modal" data-bs-target="#personalInfo" style="text-decoration: none; color: black; font-size: medium; cursor: pointer;">개인정보처리방침</a></h5>
        	  	<div class="text-start text-muted">
 	       	  	회사명 : (주) 지구지키기 프로젝트<br>
 				대표자 : 김에이콘<br>

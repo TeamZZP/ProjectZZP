@@ -5,45 +5,7 @@
 <%@page import="com.dto.MemberDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script type="text/javascript">
-	$(document).ready(function () {
-		
-		$(".category").click(function() {
-			let category = $(this).attr("data-category");
-			$.ajax({
-				type: "post",
-				url: "AdminCategoryServlet",
-				data: {
-					category:category
-				},
-				success: function(data) {
-					$("#adminContent").html(data);
-				},
-				error: function() {
-					alert("문제가 발생했습니다. 다시 시도해 주세요.");
-				}
-			});//ajax
-		});
-		
-	
-	});//end ready
-</script>
-<div class="container">
-	<form action="" method="post">
-		<div class="row">
-			<div class="btn-group" role="group" aria-label="Basic example">
-				<button type="button" class="btn btn-outline-success category" data-category="member" id="memberManagement">회원관리</button>
-				<button type="button" class="btn btn-outline-success category" data-category="product" id="productManagement">상품관리</button>
-				<button type="button" class="btn btn-outline-success category" data-category="challenge" id="challengeManagement">챌린지관리</button>
-			</div>
-		</div>
-	</form>
-</div>
 
-<div id="adminContent" class="col-md-auto">
 <div class="container" style="margin-top: 5px; margin-bottom: 5px;">
 	<div class="row row-cols-auto">
 		  <div class="col"></div>
@@ -62,21 +24,10 @@
 	      <div class="col"><button type="button" class="btn btn-success">검색</button></div>
 	</div>
 </div>
+
 <div class="container col-md-auto">
+<!-- <div class="container col col-lg-9"> -->
 <div class="row justify-content-md-center">
-<!-- <div class="dropdown">
-  <button class="btn btn-success btn-sm dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-    카테고리
-  </button>
-  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-    <li><a class="dropdown-item" href="#">아이디</a></li>
-    <li><a class="dropdown-item" href="#">이름</a></li>
-    <li><a class="dropdown-item" href="#">이메일</a></li>
-    <li><a class="dropdown-item" href="#">전화번호</a></li>
-    <li><a class="dropdown-item" href="#">주소</a></li>
-  </ul>
-  <input type="text"/>
-</div> -->
 
 <br>
 <table class="table table-sm">
@@ -201,6 +152,5 @@
 	</tr>
 </form>
 </table>
-</div>
 </div>
 </div>

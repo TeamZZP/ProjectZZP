@@ -21,6 +21,7 @@
 	String created_at=member.getCreated_at();
 	
 	AddressDTO address=null;
+	int address_id=0;
 	String address_name=null;
 	String receiver_name=null;
 	String receiver_phone=null;
@@ -30,6 +31,7 @@
 	int default_chk=0;
 	for (int j = 0; j < addressList.size(); j++) {
 		address=addressList.get(j);//첫번째로 입력한 기본 주소지만 출력되도록 설정하는 방법은?--default_chk 이용해보기
+		address_id=address.getAddress_id();
 		address_name=address.getAddress_name();
 		receiver_name=address.getReceiver_name();
 		receiver_phone=address.getReceiver_phone();
@@ -107,56 +109,10 @@
 					$("#result2").text("");
 					$("#checkPasswd").focus();
 				} else {
-					event.preventDefault();
 					console.log("유효성 검사 통과, 비밀번호 검증 완료, 비번, 이메일, 주소 update");
-					//*****ajax
-					$.ajax({
-						type : "post",
-						url : "AccountChangeServlet",//페이지 이동 없이 해당 url에서 작업 완료 후 데이터만 가져옴
-						dataType : "text",
-						data : {//서버에 전송할 데이터
-							userid : $("#userid").val(),
-							passwd : $("#passwd").val(),
-							changedPasswd : $("#changedPasswd").val(),
-							email1 : $("#email1").val(),
-							email2 : $("#email2").val(),
-							post : $("#sample4_postcode").val(),
-							addr1 : $("#sample4_roadAddress").val(),
-							addr2 : $("#sample4_jibunAddress").val()
-						},
-		 				success : function(data, status, xhr) {//data :
-							alert(data);
-							location.href="main.jsp";//수정 후 메인페이지 이동
-						},
-						error: function(xhr, status, error) {
-							console.log(error);
-						}						
-					});//end ajax
 				}
 			} else {//4-2. 비밀번호 변경 데이터가 없을 때
-				event.preventDefault();
 				console.log("이메일, 주소 update");
-				//*****ajax
-				$.ajax({
-					type : "post",
-					url : "AccountChangeServlet",//페이지 이동 없이 해당 url에서 작업 완료 후 데이터만 가져옴
-					dataType : "text",
-					data : {//서버에 전송할 데이터
-						userid : $("#userid").val(),
-						email1 : $("#email1").val(),
-						email2 : $("#email2").val(),
-						post : $("#sample4_postcode").val(),
-						addr1 : $("#sample4_roadAddress").val(),
-						addr2 : $("#sample4_jibunAddress").val()
-					},
-	 				success : function(data, status, xhr) {//data : 
-						alert(data);
-						location.href="main.jsp";//수정 후 메인페이지 이동
-					},
-					error: function(xhr, status, error) {
-						console.log(error);
-					}						
-				});//end ajax
 			};//end if
 		});//end fn
 		
@@ -177,9 +133,14 @@
 		<div class="card">
 			<div class="card-header" style="text-align: center; font-weight: bold; font-size: x-large;">회원 정보 수정</div>
 			<div class="card-body">
-				<form class="form-horizontal" method="post" action=" ">
+				<form class="form-horizontal" method="post" action="AccountChangeServlet">
 				<input type="hidden" name="userid" id="userid" value="<%= userid %>"/>
 				<input type="hidden" name="passwd" id="passwd" value="<%= passwd %>"/>
+				<input type="hidden" name="address_id" id="address_id" value="<%= address_id %>"/>
+				<input type="hidden" name="address_name" id="address_name" value="<%= address_name %>"/>
+				<input type="hidden" name="receiver_name" id="receiver_name" value="<%= receiver_name %>"/>
+				<input type="hidden" name="receiver_phone" id="receiver_phone" value="<%= receiver_phone %>"/>
+				<input type="hidden" name="default_chk" id="default_chk" value="<%= default_chk %>"/>
 					<!-- username -->
 					<div class="form-group">
 						<label for="username" class="cols-sm-2 control-label" style="font-weight: bold;">이름</label>

@@ -11,7 +11,7 @@
   	}
    </style>
    
-	<div class="row " >
+	<div class="row float-md-start" >
 	 
 	<div id="category">
 			<ul  >

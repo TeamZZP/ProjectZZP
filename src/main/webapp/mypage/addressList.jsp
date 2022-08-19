@@ -30,9 +30,9 @@
 <table id="addTable" class="table table-hover" style="table-layout: fixed">
 	<tr class="table-success">
 		<th width="20%">배송지</th>
-		<th width="50%">주소</th>
-		<th width="10%">연락처</th>
-		<th width="10%">수정·삭제</th>
+		<th width="55%">주소</th>
+		<th width="20%">연락처</th>
+		<th width="15%">수정·삭제</th>
 	</tr>
 <%
 	MemberDTO member=(MemberDTO) session.getAttribute("login");
@@ -64,7 +64,7 @@
 			if (addr2 == null){
 				addr2="상세 주소를 입력하세요.";
 			}
-			System.out.println("출력 확인 : "+address);
+//			System.out.println("출력 확인 : "+address);
 %>
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -106,6 +106,7 @@
 		$("#change<%= address_id %>").on("click", function() {//배송지 정보 출력 페이지로 이동
 			var address_id=$(this).attr("data-edit");
 			console.log(address_id);
+			location.href="AddressSelectServlet?address_id=<%= address_id %>";
 		});//end fn
 	});//end ready
 	
@@ -121,7 +122,7 @@
 			<%=  addr1+ "<br>" + addr2 %>
 		</td>
 		<td style="text-align: center;">
-			<span><%= phone %></span>
+			<span><%= receiver_phone %></span>
 		</td>
 		<td style="text-align: center;">
 			<!-- Modal -->

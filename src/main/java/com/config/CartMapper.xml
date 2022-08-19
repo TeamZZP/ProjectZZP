@@ -12,11 +12,12 @@
 	</insert>
 	
 	<select id="cartList" parameterType="string" resultType="CartDTO">
-		select c.cart_id,p.p_name,c.p_amount,p.p_selling_price,p.p_id,c.userid,
+		select c.cart_id,p.p_name,c.p_amount,p.p_selling_price,p.p_id,c.userid, p_selling_price*p_amount money,
 		(select IMAGE_ROUTE from images where p_id = c.p_id and IMAGE_RNK = 1) as p_image 
       	from cart c join product p 
       	on c.p_id = p.p_id
 		where c.userid = #{userid} 
+		order by p_name
 	</select>
 	
 	<delete id="cartDel" parameterType="int">
@@ -26,4 +27,18 @@
 	<update id="cartUpdate" parameterType="hashmap">
 		update cart set p_amount = #{p_amount} where cart_id = #{cart_id}
 	</update>
+	<!-- 장바구니 비우기 -->
+	<delete id="clear_cart" parameterType="String">
+		delete from cart where userid = #{userid}
+	</delete>
+	
+	<select id="cartCount" parameterType="String" resultType="int">
+		select count(*) from cart where userid = #{userid}
+	</select>
+	<!-- 총금액 구하기 null인 경우 0 -->
+	<select id="sum_money" resultType="int">
+		select nvl(sum(p.p_selling_price*c.p_amount),0) money
+		from cart c, product p 
+		where c.p_id = p.p_id and c.userid = #{userid}
+	</select>  
 </mapper>

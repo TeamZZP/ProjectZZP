@@ -14,8 +14,8 @@ public class AddressDAO {
 		return address;
 	}
 
-	public int changeAdd(SqlSession session, HashMap<String, String> changedAddMap) {
-		int num=session.update("AddressMapper.changeAdd", changedAddMap);
+	public int changeAddress(SqlSession session, HashMap<String, String> changedAddMap) {
+		int num=session.update("AddressMapper.changeAddress", changedAddMap);
 		return num;
 	}
 
@@ -27,6 +27,16 @@ public class AddressDAO {
 	public int deleteAddress(SqlSession session, int address_id) {
 		int num=session.update("AddressMapper.deleteAddress", address_id);
 		return num;
+	}
+
+	public int addAddress(SqlSession session, AddressDTO address) {
+		int num=session.insert("AddressMapper.addAddress", address);
+		return num;
+	}
+
+	public AddressDTO selectAddressId(SqlSession session, String address_id) {
+		AddressDTO address=session.selectOne("AddressMapper.selectAddressId", address_id);
+		return address;
 	}
 
 	
