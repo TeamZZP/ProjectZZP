@@ -152,14 +152,19 @@ public class ChallengeDAO {
 		return dto;
 	}
 
-	public int updateChallThisMonth(SqlSession session) {
-		int n = session.delete("ChallengeMapper.updateChallThisMonth");
+	public int updateChallThisMonth(SqlSession session, HashMap<String, Integer> map) {
+		int n = session.update("ChallengeMapper.updateChallThisMonth", map);
 		return n;
 	}
 
 	public int insertAdminChallenge(SqlSession session, HashMap<String, String> map) {
 		int n = session.insert("ChallengeMapper.insertAdminChallenge", map);
 		return n;
+	}
+
+	public ChallengeDTO selectChallThisMonth(SqlSession session) {
+		ChallengeDTO dto = session.selectOne("ChallengeMapper.selectChallThisMonth");
+		return dto;
 	}
 
 

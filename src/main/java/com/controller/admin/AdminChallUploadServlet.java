@@ -146,8 +146,11 @@ public class AdminChallUploadServlet extends HttpServlet {
 				//어떤 동작을 요청받았는지에 따라 다른 작업 처리하기
 				//챌린지 게시글 업로드
 				if ("upload".equals(operate)) {
-					//현재 이 달의 챌린지 게시글 1=>0으로 변경
-					int updateNum = service.updateChallThisMonth();
+					//현재 진행중인 이 달의 챌린지 게시글 1=>0으로 변경
+					HashMap<String, Integer> updateMap = new HashMap<String, Integer>();
+					updateMap.put("before", 1);
+					updateMap.put("after", 0);
+					int updateNum = service.updateChallThisMonth(updateMap);
 					System.out.println(updateNum+"개의 이달의 챌린지 레코드 상태 변경");
 					
 					int n = service.insertAdminChallenge(map);
