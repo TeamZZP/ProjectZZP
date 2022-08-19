@@ -14,6 +14,7 @@ import com.dao.AnswerDAO;
 import com.dto.AnswerDTO;
 import com.dto.MemberDTO;
 import com.dto.QuestionDTO;
+import com.dto.QuestionProductDTO;
 import com.service.AnswerService;
 import com.service.QuestionService;
 
@@ -36,7 +37,7 @@ public class ProdOneSelectServlet extends HttpServlet {
 			String userid = mDTO.getUserid();
 			
 			QuestionService service = new QuestionService();
-			QuestionDTO qDTO = service.questionOneSelect(Q_ID);
+			QuestionProductDTO qDTO = service.questionOneSelect(Q_ID);
 			String writer = qDTO.getUSERID();
 			
 			if (userid.equals(writer)) {

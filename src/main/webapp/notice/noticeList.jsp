@@ -54,9 +54,6 @@ a{
 	%>
     <table border="1" style="text-align: center; border-collapse: collapse;" class="table table-hover">
 		<tr>
-			<td colspan="4" style="background-color: #8FBC8F" height="40px"></td>
-		</tr>
-		<tr>
 			<td>번호</td>
 			<td>제목</td>
 			<td>작성일</td>
@@ -66,7 +63,7 @@ a{
     			List<NoticeDTO> pointNotice = (List<NoticeDTO>)session.getAttribute("pointNotice");
     			for(NoticeDTO nDTO : pointNotice){
 			%>
-    	<tr>
+    	<tr style="background: #DCDCDC">
     		<td> <%= nDTO.getNOTICE_ID() %> </td>
     		<td> <a href="NoticeOneSelectServlet?NOTICE_ID=<%= nDTO.getNOTICE_ID() %>"> <%= nDTO.getNOTICE_TITTLE() %> </a> </td>
     		<td> <%= nDTO.getNOTICE_CREATED() %> </td>
@@ -75,9 +72,6 @@ a{
     		<%
 				}
 			%>
-    	<tr>
-			<td colspan="4" style="background-color: #8FBC8F" height="40px"></td>
-		</tr>
     	<%
 	 		PageDTO pDTO = (PageDTO)session.getAttribute("pDTO");
 	 		List<NoticeDTO> list = pDTO.getList();

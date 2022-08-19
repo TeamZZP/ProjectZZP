@@ -8,10 +8,10 @@ import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 
 import com.dto.ImagesDTO;
-import com.dto.NoticeDTO;
 import com.dto.PageDTO;
 import com.dto.ProductDTO;
 import com.dto.QuestionDTO;
+import com.dto.QuestionProductDTO;
 
 public class QuestionDAO {
 
@@ -20,8 +20,8 @@ public class QuestionDAO {
 		return list;
 	}
 
-	public QuestionDTO questionOneSelect(SqlSession session, String qID) {
-		QuestionDTO dto = session.selectOne("QuestionMapper.questionOneSelect", qID);
+	public QuestionProductDTO questionOneSelect(SqlSession session, String qID) {
+		QuestionProductDTO dto = session.selectOne("QuestionMapper.questionOneSelect", qID);
 		return dto;
 	}
 
@@ -46,7 +46,7 @@ public class QuestionDAO {
 		int perPage = pDTO.getPerPage();
 		int offset = (curPage - 1) * perPage;
 		
-		List<NoticeDTO> list = session.selectList("QuestionMapper.questionList", null, new RowBounds(offset, perPage));
+		List<QuestionProductDTO> list = session.selectList("QuestionMapper.questionList", null, new RowBounds(offset, perPage));
 		
 		pDTO.setCurPage(curPage);
 		pDTO.setList(list);
@@ -90,6 +90,11 @@ public class QuestionDAO {
 	public List<QuestionDTO> prodQuestion(SqlSession session, String p_ID) {
 		List<QuestionDTO> list = session.selectList("QuestionMapper.prodQuestion", p_ID);
 		return list;
+	}
+
+	public int ImgUpdate(SqlSession session, String img) {
+		int num = session.update("QuestionMapper.ImgUpdate", img);
+		return num;
 	}
 
 

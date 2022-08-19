@@ -13,6 +13,7 @@ import com.dto.ImagesDTO;
 import com.dto.PageDTO;
 import com.dto.ProductDTO;
 import com.dto.QuestionDTO;
+import com.dto.QuestionProductDTO;
 
 public class QuestionService {
 	
@@ -34,8 +35,8 @@ public class QuestionService {
 		return list;
 	}
 
-	public QuestionDTO questionOneSelect(String qID) {
-		QuestionDTO dto = null;
+	public QuestionProductDTO questionOneSelect(String qID) {
+		QuestionProductDTO dto = null;
 		SqlSession session = MySqlSessionFactory.getSqlSession();
 		try {
 			dto = dao.questionOneSelect(session, qID);
@@ -136,5 +137,16 @@ public class QuestionService {
 		return list;
 	}
 
+	public int ImgUpdate(String img) {
+		int num = 0;
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		try {
+			num = dao.ImgUpdate(session, img);
+			session.commit();
+		} finally {
+			session.close();
+		}
+		return num;
+	}
 
 }
