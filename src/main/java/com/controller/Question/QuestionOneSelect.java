@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import com.dto.AnswerDTO;
 import com.dto.MemberDTO;
 import com.dto.QuestionDTO;
+import com.dto.QuestionProductDTO;
 import com.service.AnswerService;
 import com.service.QuestionService;
 
@@ -39,7 +40,7 @@ public class QuestionOneSelect extends HttpServlet {
 			
 			if (userid.equals(mUserid) || mUserid.equals("admin1")) {
 				QuestionService service = new QuestionService();
-				QuestionDTO dto = service.questionOneSelect(Q_ID);
+				QuestionProductDTO dto = service.questionOneSelect(Q_ID);
 				System.out.println(dto); //list 얻어옴
 				
 				AnswerService Aservice = new AnswerService();

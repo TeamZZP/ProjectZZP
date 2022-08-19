@@ -1,6 +1,8 @@
 package com.controller.Question;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -12,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import com.dto.NoticeDTO;
 import com.dto.PageDTO;
+import com.dto.ProductDTO;
 import com.dto.QuestionDTO;
 import com.service.NoticeService;
 import com.service.QuestionService;
@@ -34,7 +37,7 @@ public class QuestionListServlet extends HttpServlet {
 			curPage = "1";
 		}
 		
-		QuestionService service = new QuestionService();
+		QuestionService service = new QuestionService(); 
 		pDTO = service.page(Integer.parseInt(curPage));
 		System.out.println("pDTO " + pDTO);//나머지
 		

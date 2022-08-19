@@ -1,10 +1,11 @@
+<%@page import="com.dto.QuestionProductDTO"%>
 <%@page import="com.dto.MemberDTO"%>
 <%@page import="com.dto.QuestionDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
 <%
-	QuestionDTO qDTO = (QuestionDTO)session.getAttribute("questionOneSelect");
+	QuestionProductDTO qDTO = (QuestionProductDTO)session.getAttribute("questionOneSelect");
 	System.out.print("questionUpdate " + qDTO);
 	
 	String operate = "update";
@@ -31,7 +32,10 @@
 		});
 		$("#QuestionList").click(function () {
 			$("#questionForm").attr("action", "QuestionListServlet");
-		})
+		});
+		$("#uploadBtu").click(function () {
+			window.open("uploadImg.jsp", "", "width=400px height=500px");
+		});
 	});//end ready
 </script>
 <div style="text-align: center; display: flex; justify-content:center; height: 100px; margin-bottom: 10px;" >
@@ -56,7 +60,8 @@
 				<td colspan="2"> 
 					<div class="input-group">
 					  <button id="pID" class="btn btn-outline-secondary" type="button">상품 정보</button>
-					  <input type="text" class="form-control" value="<%=qDTO.getP_ID()%>" name="P_ID" id="pId">
+					  <input type="text" class="form-control shadow-none"  <%if(qDTO.getP_NAME() != null){ %> value="<%=qDTO.getP_NAME() %>" <% }%> readonly="readonly" name="P_Name" id="P_Name">
+					  <input type="hidden" class="form-control" <%if(qDTO.getP_ID() != 0){ %> value="<%=qDTO.getP_ID()%>" <%} %>  name="P_ID" id="pId">
 					</div>
 				</td>
 			</tr>
@@ -72,7 +77,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td colspan="2"> 질문 카테고리
+				<td colspan="2">
 					<div class="input-group">
 					  <label class="input-group-text" for="inputGroupSelect01">질문 카테고리</label>
 					  <select name="Q_CATEGORY" class="form-select">
@@ -91,15 +96,15 @@
 				</td>
 			</tr>
 			<tr>
-				<%if(qDTO.getQ_IMG() == null){ %>
+				<%if(qDTO.getQ_IMG() == null || qDTO.getQ_IMG().equals("null")){ %>
 				<td colspan="2">
 					<input class="form-control" type="file" accept="image/*" name="qFile">
 				</td>
 				<%} else { %>
 				<td colspan="2">
 					<div>
-					  <label for="formFileMultiple" class="form-label shadow-none">첨부파일</label>
-					  	<img alt="" src="/eclipse/upload/<%=qDTO.getQ_IMG()%>" width="100px" height="100px">
+					  <button type="button" class="btn btn-secondary" id="uploadBtu" style="padding: 2rem;">첨부파일</button>
+					  	<img id="upload" alt="" src="/eclipse/upload/<%=qDTO.getQ_IMG()%>" width="100px" height="100px" style="border: 1px solid gray;">
 					  	<input class="form-control" type="file" accept="image/*" name="qFile">
 					</div>
 				</td>

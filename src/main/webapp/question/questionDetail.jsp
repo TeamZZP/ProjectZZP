@@ -1,3 +1,4 @@
+<%@page import="com.dto.QuestionProductDTO"%>
 <%@page import="com.dto.AnswerDTO"%>
 <%@page import="org.apache.ibatis.reflection.SystemMetaObject"%>
 <%@page import="com.dto.MemberDTO"%>
@@ -5,10 +6,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	QuestionDTO qDTO = (QuestionDTO)session.getAttribute("questionOneSelect");
+	QuestionProductDTO qDTO = (QuestionProductDTO)session.getAttribute("questionOneSelect");
 	System.out.print("questionDetail " + qDTO);
 	
-	AnswerDTO aDTO = (AnswerDTO)session.getAttribute("aDTO");
+	AnswerDTO aDTO = (AnswerDTO)session.getAttribute("aDTO");	
 	
 	String date = qDTO.getQ_CREATED();
 	String day = date.substring(0,10);
@@ -90,7 +91,7 @@
 				<th colspan="2"> 
 					<div class="input-group">
 					  <span class="input-group-text">상품정보</span>
-					  <input type="text" class="form-control shadow-none"  value="<%=qDTO.getP_ID() %>" readonly="readonly">
+					  <input type="text" class="form-control shadow-none"  <%if(qDTO.getP_NAME() != null){ %> value="<%=qDTO.getP_NAME() %>" <% }%>  readonly="readonly">
 					</div>
 				</th>
 			</tr>
@@ -100,13 +101,13 @@
 				</td>
 			</tr>
 			<tr>
-			<%if(qDTO.getQ_IMG() == null){ %>
+			<%if(qDTO.getQ_IMG() == null || qDTO.getQ_IMG().equals("null")){ %>
 				<td></td>
 			<%} else { %>
 				<td>
 					<div>
-					  <label for="formFileMultiple" class="form-label shadow-none">첨부파일</label>
-					  	<img alt="" src="/eclipse/upload/<%=qDTO.getQ_IMG()%>" width="100px" height="100px">
+					  	<button type="button" class="btn btn-secondary" disabled style="padding: 2rem;">첨부파일</button>
+					  	<img alt="" src="/eclipse/upload/<%=qDTO.getQ_IMG()%>" width="100px" height="100px" style="border: 1px solid gray;">
 					</div>
 				</td>
 			<%} %>
@@ -115,25 +116,21 @@
 				<td colspan="2">
 					<div class="input-group">
 					  <span class="input-group-text">답변</span>
-					  <textarea class="form-control shadow-none" readonly="readonly" id="answerCheck">
-					  	<%if(aDTO != null){ %>
-					  	<%= aDTO.getANSWER_CONTENT() %>
-					  	<%} else { %>
-					  	<%=qDTO.getQ_STATUS() %>
-					  	<%} %>
+					  <textarea class="form-control shadow-none" readonly="readonly" id="answerCheck"><%if(aDTO != null){ %>
+					  	<%= aDTO.getANSWER_CONTENT() %><%} else { %><%=qDTO.getQ_STATUS() %><%} %>
 					  </textarea>
 					</div>
 				</td>
 			</tr>
 			<tr>
-				<td>
-				 	<button id="questionList" class="btn btn-outline-success" >목록</button> 
-				</td>
 				<% 
 					MemberDTO mDTO = (MemberDTO)session.getAttribute("login");
 					String userid = (String)session.getAttribute("userid");
 					if(mDTO.getUserid().equals(userid)){
 				%>
+				<td>
+				 	<button id="questionList" class="btn btn-outline-success" >목록</button> 
+				</td>
 				<td style="text-align: right;">
 					<button id="questionUpdate" class="btn btn-outline-success" >수정</button> 
 				 	<button id="questionDelete" class="btn btn-outline-success" >삭제</button>
@@ -142,26 +139,30 @@
 					}
 				%>
 			</tr>
+			<%
+				if(mDTO.getUserid().equals("admin1")){
+			%>
 			<tr>
-				<td></td>
-				<%
-					if(mDTO.getUserid().equals("admin1")){
-				%>
-				<td style="text-align: right;">
+				<td colspan="2">
 					<div class="input-group">
-					  <textarea class="form-control" id="answer" cols="15">
-					  	<%if(aDTO != null){ %>
+					  <textarea class="form-control" id="answer"><%if(aDTO != null){ %>
 					  	<%=aDTO.getANSWER_CONTENT() %>
-					  	<%} %>
-					  </textarea>
-					  <button class="btn btn-outline-secondary" type="button" id="answerBtn" data-qid="<%=qDTO.getQ_ID()%>">답글</button>
+					  	<%} %></textarea>
+					  <button class="btn btn-outline-secondary" type="button" id="answerBtn" data-qid="<%=qDTO.getQ_ID()%>">답글 올리기</button>
 					</div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+				 	<button id="questionList" class="btn btn-outline-success" >목록</button> 
+				</td>
+				<td style="text-align: right;">
 					<button id="questionDelete" class="btn btn-outline-success" >게시글 삭제</button>
 				</td>
-				<%
-					}
-				%>
 			</tr>
+			<%
+				}
+			%>
 		</table>
 	</div>
 	</div>

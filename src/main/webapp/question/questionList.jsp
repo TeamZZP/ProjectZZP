@@ -1,3 +1,5 @@
+<%@page import="com.dto.QuestionProductDTO"%>
+<%@page import="com.dto.ProductDTO"%>
 <%@page import="com.dto.MemberDTO"%>
 <%@page import="com.dto.PageDTO"%>
 <%@page import="java.util.List"%>
@@ -20,7 +22,7 @@
     <table  style="text-align: center;" class="table table-hover">
     	<tr>
     		<td>번호</td>
-    		<td>상품번호</td>
+    		<td>상품명</td>
     		<td>카테고리</td>
     		<td>제목</td>
     		<td>작성일</td>
@@ -29,17 +31,20 @@
     	</tr>
     <%
 	 		PageDTO pDTO = (PageDTO)session.getAttribute("pDTO");
-	 		List<QuestionDTO> list = pDTO.getList();
+	 		List<QuestionProductDTO> list = pDTO.getList();
 	 		for(int i = 0; i < list.size(); i++){
-	 			QuestionDTO qDTO = list.get(i);
+	 			QuestionProductDTO qDTO = list.get(i);
 	 			String created = qDTO.getQ_CREATED();
 	 			String crete = created.substring(0, 10);
 
 	 			String user = qDTO.getUSERID();
 	 %>
-    	<tr>
     		<td> <%= qDTO.getQ_ID() %> </td>
-    		<td> <span id="pId<%=qDTO.getP_ID()%>"> <%=qDTO.getP_ID()%> </span> </td>
+    		<%if(qDTO.getP_NAME() == null){ %>
+	    		<td> - </td>
+	    	<% } else { %> 
+	    		<td> <%= qDTO.getP_NAME() %> </td>
+    		<%} %>
     		<td> <%= qDTO.getQ_CATEGORY() %> </td>
     		<td> <a style="text-decoration: none; color: black;" 
     			href="QuestionOneSelect?Q_ID=<%= qDTO.getQ_ID() %>&USERID=<%=qDTO.getUSERID()%>"> <%= qDTO.getQ_TITLE() %> </a> </td>

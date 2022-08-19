@@ -35,7 +35,7 @@ public class QuestionUploadServlet extends HttpServlet {
 		
 		//회원전용처리
 		HttpSession session = request.getSession();
-		MemberDTO mDTO = (MemberDTO) session.getAttribute("login"); 
+		MemberDTO mDTO = (MemberDTO) session.getAttribute("login");
 		String USERID = request.getParameter("USERID");
 		System.out.println("유저 "+ USERID);
 		
@@ -77,36 +77,63 @@ public class QuestionUploadServlet extends HttpServlet {
 							
 						} else {
 							//type="file"의 처리 
-							fieldName= item.getFieldName();
 							fileName= item.getName();
-							contentType= item.getContentType();
-							isInMemory=item.isInMemory();
-							sizeInBytes= item.getSize();
 							if (fileName.length() != 0) {
+								fieldName= item.getFieldName();
+								contentType= item.getContentType();
+								isInMemory=item.isInMemory();
+								sizeInBytes= item.getSize();
 								saveName = getTodayString() + "-" + fileName;
-							} else {
-								saveName = "null";
-							}
-							
-								System.out.println("fieldName====" + fieldName);					
-								System.out.println("fileName====" + fileName);					
-								System.out.println("contentType====" + contentType);					
-								System.out.println("isInMemory====" + isInMemory);					
-								System.out.println("sizeInBytes====" + sizeInBytes);		
-								System.out.println("savedName====" + saveName);		
-							
-							File dir = new File("C:\\eclipse\\upload");
-							if (!dir.exists()) {
-								dir.mkdirs();
-							}
-							
-							try {
-								item.write(new File(dir, saveName));
-								map.put("question_img", saveName);
 								
-							}catch (Exception e) {
-								e.printStackTrace();
+									System.out.println("fieldName====" + fieldName);					
+									System.out.println("fileName====" + fileName);					
+									System.out.println("contentType====" + contentType);					
+									System.out.println("isInMemory====" + isInMemory);					
+									System.out.println("sizeInBytes====" + sizeInBytes);		
+									System.out.println("savedName====" + saveName);		
+								
+								File dir = new File("C:\\eclipse\\upload");
+								if (!dir.exists()) {
+									dir.mkdirs();
+								}
+								
+								try {
+									item.write(new File(dir, saveName));
+									map.put("question_img", saveName);
+									
+								}catch (Exception e) {
+									e.printStackTrace();
+								}
+							} else {
+								fieldName= item.getFieldName();
+								contentType= item.getContentType();
+								isInMemory=item.isInMemory();
+								sizeInBytes= item.getSize();
+								saveName = getTodayString() + "-" + fileName;
+								
+								String oldFile = map.get("oldFile");
+								
+									System.out.println("fieldName====" + fieldName);					
+									System.out.println("fileName====" + fileName);					
+									System.out.println("contentType====" + contentType);					
+									System.out.println("isInMemory====" + isInMemory);					
+									System.out.println("sizeInBytes====" + sizeInBytes);		
+									System.out.println("savedName====" + saveName);	
+									System.out.println("oldFile====" + oldFile);
+								
+								try {
+									if (oldFile.length() != 0 || oldFile != null ) {
+										map.put("question_img", oldFile);
+									} else {
+										map.put("question_img", fileName);
+									} 
+										
+									
+								}catch (Exception e) {
+									e.printStackTrace();
+								}
 							}
+							
 						}//end else
 					}//end while
 					
