@@ -9,11 +9,9 @@
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 	$(function () {
-		
 		$(".questionDetail").click(function () {
 			var qID = $(this).attr("data-qID");
 			console.log("클릭된 게시글 번호 " + qID);
-			
 			$.ajax({
 				type:"post",
 				url: "ProdOneSelectServlet",
@@ -22,8 +20,10 @@
 				},
 				datatype:"text",
 				success: function (data, status, xhr) {
+					console.log(data);
 					if (data != null) {
-						$("#answer"+qID).slideToggle("fast").html(data + 
+						$("#answer"+qID).attr("display","none");
+						$("#answer"+qID).toggle().html(data + 
 						" &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <img alt='A' src='images/question/A.png' width='50px' height='55px'>");
 					} else {
 						alert("권한이 없습니다.");
@@ -33,12 +33,13 @@
 					alert("오류");
 				}
 			});//end ajax
-		}); 
+		}); //
+		
 		$("#QuestionInsert").click(function () {
 			var qID = $("#qID").val();
 			var pName = $("#pName").val();
 			location.href = "questionInsert.jsp?P_ID="+qID+"&P_Name="+pName;
-		});
+		});//
 	}); //end ready
 </script>
 <style>
@@ -69,10 +70,10 @@
 		<input type="hidden" id="pID" value="<%=qDTO.getP_ID()%>">
 		<input type="hidden" id="pName" value="<%=pdto.getP_name()%>">
 			<table class="questionDetail" data-qID="<%=qDTO.getQ_ID()%>" title="더블클릭">
-				<tr>
+				<tr class="answer">
 					<td colspan="5" style="background-color: #8FBC8F;"></td>
 				</tr>
-				<tr>
+				<tr class="answer">
 					<td rowspan="2" style="text-align: center;"><img alt="Q" src="images/question/Q.png" width="50px" height="55px">
 					</td>
 					<td><%=qDTO.getQ_STATUS()%></td>
@@ -90,12 +91,12 @@
 					<td><%=created%></td>
 					<td style="text-align: center;"> <img alt="문의 답변 보기" src="images/question/down.png" width="20px" height="20px"> </td>
 				</tr>
-				<tr>
+				<tr class="answer">
 					<td colspan="5"><%=qDTO.getQ_TITLE()%></td>
 				</tr>
-				<tr>
+				<tr id="question">
 					<td colspan="6" style="border: none;">
-						<div style="text-align: right; margin-right: 70px;" id="answer<%=qDTO.getQ_ID()%>"> </div> 
+						<div style="text-align: right; margin-right: 70px;" id="answer<%=qDTO.getQ_ID()%>"> <span class="answer<%=qDTO.getQ_ID()%>"> </span> </div> 
 					</td>
 				</tr>
 			</table>

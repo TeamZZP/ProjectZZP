@@ -67,6 +67,8 @@ public class AddressAddServlet extends HttpServlet {
 			System.out.println("추가된 배송지 갯수 : "+num);
 
 //			session.setAttribute("addressMap", addressMap);//userid의 address 리스트
+			String mesg="배송지가 추가되었습니다.";
+			session.setAttribute("mesg", mesg);
 			response.sendRedirect("AddressListServlet");
 		} else {
 			//alert로 로그인 후 이용하세요 출력
