@@ -82,7 +82,7 @@
 			location.href="CartDelServlet?cart_id="+cart_id;
 		})//end
 		
-		$("#updBtn").on("click",function(){
+		$(".updBtn").on("click",function(){
 			var cart_id = $(this).attr("data-xxx"); //cart_id
 			var p_selling_price = $(this).attr("data-price");
 			var p_amount = $("#cartAmount"+cart_id).val();
@@ -101,9 +101,11 @@
 				success:function(data,status,xhr){
 					var sum = p_amount*p_selling_price;
 					$("#item_price"+cart_id).text(sum);
+					
 					sum_money = parseInt(data);
 					var fee = sum_money >= 50000? 0: 3000;
 					var total = sum_money +fee;
+					
 					$("#sum_money").text(sum_money);
 					$("#fee").text(fee);
 					$("#total").text(total);
@@ -179,6 +181,7 @@ if (list.size() == 0) {
 	int sum_money = map.get("sum_money");
 	int fee = map.get("fee");
 	int total = map.get("total");
+	
 for (int i = 0; i < list.size(); i++) {
 	int cart_id = list.get(i).getCart_id();
 	String userid = list.get(i).getUserid();
