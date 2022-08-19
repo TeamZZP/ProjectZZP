@@ -146,11 +146,12 @@ public class AdminChallUploadServlet extends HttpServlet {
 				//어떤 동작을 요청받았는지에 따라 다른 작업 처리하기
 				//챌린지 게시글 업로드
 				if ("upload".equals(operate)) {
-					int n = service.insertChallenge(map);
-					System.out.println(n+"개의 챌린지 레코드 추가");
+					//현재 이 달의 챌린지 게시글 1=>0으로 변경
+					int updateNum = service.updateChallThisMonth();
+					System.out.println(updateNum+"개의 이달의 챌린지 레코드 상태 변경");
 					
-					int n2 = service.insertStamp(map);
-					System.out.println(n2+"개의 도장 레코드 추가");
+					int n = service.insertAdminChallenge(map);
+					System.out.println(n+"개의 챌린지와 도장 레코드 추가");
 					
 					response.sendRedirect("AdminMainServlet");
 					
