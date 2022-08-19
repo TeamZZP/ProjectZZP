@@ -1,6 +1,7 @@
 package com.controller.cart;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,18 +15,15 @@ import javax.servlet.http.HttpSession;
 import com.dto.MemberDTO;
 import com.service.CartService;
 
-/**
- * Servlet implementation class CartUpdateServlet
- */
 @WebServlet("/CartUpdateServlet")
 public class CartUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int cart_id = Integer.parseInt(request.getParameter("cart_id"));
 		int p_amount = Integer.parseInt(request.getParameter("p_amount"));
-		System.out.println(cart_id + " " + p_amount);
+		int sum_money = Integer.parseInt(request.getParameter("sum_money"));
+		System.out.println(cart_id + " " + p_amount+" "+sum_money);
 
 		String nextPage = null;
 		HttpSession session = request.getSession();
@@ -41,6 +39,13 @@ public class CartUpdateServlet extends HttpServlet {
 			CartService service = new CartService();
 			int num = service.cartUpdate(map);
 			System.out.println(num);
+			
+			sum_money = service.sum_money(userid);
+			System.out.println("sum_money 수정"+sum_money);
+			
+			response.setContentType("text/html;charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.print(sum_money);
 
 			/*
 			 * int sum_money = service.sum_money(userid); //총금액 int fee = sum_money >=
@@ -63,8 +68,6 @@ public class CartUpdateServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
-
 }
