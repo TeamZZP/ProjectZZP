@@ -117,7 +117,7 @@
 				success:function(data,status,xhr){
 					var sum = p_amount*p_selling_price;
 					$("#item_price"+cart_id).text(sum);
-					/* var sum_money = sum+p_amount */
+					/* var sum_money =  */
 					var fee = sum_money >= 50000? 0: 3000;
 					var total = sum_money +fee;
 					$("#fee").text(fee);
