@@ -47,18 +47,6 @@ public class CartUpdateServlet extends HttpServlet {
 			PrintWriter out = response.getWriter();
 			out.print(sum_money);
 
-			/*
-			 * int sum_money = service.sum_money(userid); //총금액 int fee = sum_money >=
-			 * 50000? 0: 3000; //배송비 계산 int total = sum_money+fee; //총금액 + 배송비
-			 * 
-			 * 
-			 * Map<String,Integer> map2 = new HashMap<>(); map2.put("sum_money",sum_money);
-			 * map2.put("fee",fee); map2.put("total",total);
-			 * 
-			 * 
-			 * request.setAttribute("fee",fee ); request.setAttribute("total",total );
-			 */
-
 		} else {
 			nextPage = "LoginUIServlet";
 			session.setAttribute("mesg", "로그인이 필요합니다.");

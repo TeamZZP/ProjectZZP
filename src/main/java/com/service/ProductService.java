@@ -97,6 +97,17 @@ public class ProductService {
 		
 		return n;
 	}
+
+	public List<CategoryProductDTO> ProductList() {
+		List<CategoryProductDTO> list = null;
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		try {
+			list = dao.ProductList(session);
+		}finally {
+			session.close();
+		}
+		return list;
+	}
 	
 
 	

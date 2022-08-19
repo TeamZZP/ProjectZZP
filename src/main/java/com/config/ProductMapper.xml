@@ -9,13 +9,10 @@ select *
 from (
 select p.P_ID
 ,(select 
-
 IMAGE_ROUTE
-
 from images
 where p_id = p.p_id 
 and IMAGE_RNK = 1) as p_image
-
 ,(select count(*) from Orders where p_id = p.p_id  ) as p_order
 ,p.P_NAME
 ,p.P_CONTENT
@@ -28,8 +25,28 @@ and IMAGE_RNK = 1) as p_image
 from product p
 ) 
 order by p_order desc
+</select>
 
-
+<select id="ProductList" resultType="CategoryProductDTO" >
+select *
+from (
+select p.P_ID
+,(select 
+IMAGE_ROUTE
+from images
+where p_id = p.p_id 
+and IMAGE_RNK = 1) as p_image
+,(select count(*) from Orders where p_id = p.p_id  ) as p_order
+,p.P_NAME
+,p.P_CONTENT
+,p.C_ID
+,p.P_COST_PRICE
+,p.P_SELLING_PRICE
+,p.P_DISCOUNT
+,p.P_CREATED
+,p.P_STOCK
+from product p
+) 
 </select>
 
 <select id="productList" resultType="CategoryProductDTO" parameterType="int">

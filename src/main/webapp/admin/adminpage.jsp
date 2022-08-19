@@ -64,22 +64,8 @@
 </div>
 <div class="container col-md-auto">
 <div class="row justify-content-md-center">
-<!-- <div class="dropdown">
-  <button class="btn btn-success btn-sm dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-    카테고리
-  </button>
-  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-    <li><a class="dropdown-item" href="#">아이디</a></li>
-    <li><a class="dropdown-item" href="#">이름</a></li>
-    <li><a class="dropdown-item" href="#">이메일</a></li>
-    <li><a class="dropdown-item" href="#">전화번호</a></li>
-    <li><a class="dropdown-item" href="#">주소</a></li>
-  </ul>
-  <input type="text"/>
-</div> -->
-
 <br>
-<table class="table table-sm">
+<table class="table table-hover table-sm">
 	<tr>
 		<th>아이디</th>
 		<th>이름</th>

@@ -48,4 +48,9 @@ public class ProductDAO {
 		 
 	}
 
+	public List<CategoryProductDTO> ProductList(SqlSession session) {
+		List<CategoryProductDTO> list = session.selectList("ProductMapper.ProductList");
+		return list;
+	}
+
 }
