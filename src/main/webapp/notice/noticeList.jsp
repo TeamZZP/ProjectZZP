@@ -53,7 +53,7 @@ a{
 		}
 	%>
     <table border="1" style="text-align: center; border-collapse: collapse;" class="table table-hover">
-		<tr>
+		<tr style="background-color: #8FBC8F">
 			<td>번호</td>
 			<td>제목</td>
 			<td>작성일</td>
@@ -64,10 +64,10 @@ a{
     			for(NoticeDTO nDTO : pointNotice){
 			%>
     	<tr style="background: #DCDCDC">
-    		<td> <%= nDTO.getNOTICE_ID() %> </td>
-    		<td> <a href="NoticeOneSelectServlet?NOTICE_ID=<%= nDTO.getNOTICE_ID() %>"> <%= nDTO.getNOTICE_TITTLE() %> </a> </td>
-    		<td> <%= nDTO.getNOTICE_CREATED() %> </td>
-    		<td> <%= nDTO.getNOTICE_HITS() %> </td>
+    		<td> <b> <%= nDTO.getNOTICE_ID() %> </b> </td>
+    		<td> <a href="NoticeOneSelectServlet?NOTICE_ID=<%= nDTO.getNOTICE_ID() %>"> <b> <%= nDTO.getNOTICE_TITTLE() %> </b> </a> </td>
+    		<td> <b>  <%= nDTO.getNOTICE_CREATED() %> </b> </td>
+    		<td> <b>  <%= nDTO.getNOTICE_HITS() %> </b> </td>
     	</tr>
     		<%
 				}

@@ -43,6 +43,10 @@
 				event.preventDefault();
 			}
 		});//end submit
+		$("#cancle").on("click", function() {
+			alert("배송지 수정을 취소합니다.");
+			location.href="addressList.jsp";
+		});
 	});//end ready
 </script>
 </head>
@@ -101,8 +105,9 @@
 			
 		</div>
 		<div class="col-12">
-			<div style="width : 475px; float : right;">
+			<div style="width : 525px; float : right;">
 				<button type="submit" id="succ" class="btn btn-success">수정</button>
+				<button type="reset" id="cancle" class="btn btn-success">취소</button>
 			</div>
 		</div>
 	</div>

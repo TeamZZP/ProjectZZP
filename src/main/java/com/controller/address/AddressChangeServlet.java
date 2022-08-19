@@ -71,7 +71,9 @@ public class AddressChangeServlet extends HttpServlet {
 			System.out.println(changedAddMap);
 			System.out.println("회원 주소 수정 갯수 : "+a_num);
 			
-//			response.sendRedirect("addressList.jsp");
+			String mesg="배송지가 수정되었습니다.";
+			session.setAttribute("mesg", mesg);
+			response.sendRedirect("AddressListServlet");
 		} else {
 			//alert로 로그인 후 이용하세요 출력
 			String mesg="로그인이 필요합니다.";
