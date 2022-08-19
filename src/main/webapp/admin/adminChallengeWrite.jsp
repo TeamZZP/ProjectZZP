@@ -3,6 +3,11 @@
 <%@page import="com.dto.ChallengeDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ZZP</title>
 <style>
 #challDetailContent {
 	width: 700px;
@@ -16,12 +21,12 @@
 }
 #updateBtn {
 	position: absolute;
-	top: 585px;
+	top: 655px;
     left : 85px; 
 }
 #deleteBtn {
 	position: absolute;
-	top: 585px;
+	top: 655px;
 	left : 160px; 
 }
 
@@ -68,6 +73,24 @@
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function () {
+		//카테고리
+		$(".category").click(function() {
+			let category = $(this).attr("data-category");
+			$.ajax({
+				type: "post",
+				url: "AdminCategoryServlet",
+				data: {
+					category:category
+				},
+				success: function(data) {
+					$("#adminContent").html(data);
+				},
+				error: function() {
+					alert("문제가 발생했습니다. 다시 시도해 주세요.");
+				}
+			});//ajax
+		});
+		
 		
 		//글쓰기 취소
 		$(".cancelBtn").on("click", function () {
@@ -181,6 +204,23 @@
 	
 	});//end ready
 </script>
+</head>
+<body>
+<jsp:include page="../common/header.jsp" flush="true"></jsp:include><br>
+
+<div class="container">
+	<form action="" method="post">
+		<div class="row">
+			<div class="btn-group" role="group" aria-label="Basic example">
+				<button type="button" class="btn btn-outline-success category" data-category="member" id="memberManagement">회원관리</button>
+				<button type="button" class="btn btn-outline-success category" data-category="product" id="productManagement">상품관리</button>
+				<button type="button" class="btn btn-outline-success category" data-category="challenge" id="challengeManagement">챌린지관리</button>
+			</div>
+		</div>
+	</form>
+</div>
+
+
 
 
 <div class="container pt-5">
@@ -189,8 +229,12 @@
 <form action="AdminChallUploadServlet?userid=<%= currUserid %>&operate=<%= operate %>" method="post" enctype="multipart/form-data">
 <input type="hidden" name="chall_id" value="<%= chall_id %>">
 <input type="hidden" name="userid" value="<%= currUserid %>">
-<input type="hidden" name="chall_this_month" value="1">
 
+  <div class="row pt-3 pl-5 pb-3">
+  <b>이 달의 챌린지 등록하기</b>
+  <hr>
+  </div>
+  
   <div class="row">
 	<div class="d-flex w-25">
 		<select name="chall_category" id="chall_category" class="form-select">
@@ -217,30 +261,33 @@
 	  <%} %>
 	  		<input type="hidden" name="old_file" id="old_file" value="<%= chall_img %>">
 	</div>
-	<div class="row pt-2 pl-5 pb-5">
+  </div>
+  <div>
+  	<textarea class="form-control" rows="10" name="chall_content" id="chall_content" placeholder="본문 입력">
+<% if(chall_content!=null) {%><%=chall_content%><%} %></textarea>
+  </div>
+  
+  <br>
+  <div class="row pt-5 pl-5 pb-3">
+  <b>도장 등록하기</b>
+  <hr>
+  </div>
+  <div class="row pt-2 pl-5 pb-5">
 	  <div class="col-6 m-0 text-center">
 	  <% if(stamp_img==null) {%>
-		<img src="images/stamp.png" class="thumb-stamp uploadBtn-stamp" id="uploadarea-stamp" width="200" height="200">
+		<img src="images/stamp.png" class="thumb-stamp uploadBtn-stamp" id="uploadarea-stamp" width="300" height="300">
 		<input type="file" accept="image/*" name="stamp_img" id="stamp_img" style="display: none;">
 	  <%} else { %>
 	  
 	  <%} %>
 	    <input type="hidden" name="old_stamp" id="old_stamp" value="<%= stamp_img %>">
 	  </div>
-	  <div class="col-6 m-0">
-	    <div class="float-start">
-	    <br><br><br>
+	  <div class="col-6 m-0 my-auto">
 	    <input type="text" class="form-control" name="stamp_name" id="stamp_name" placeholder="도장 이름 입력">
-	    </div>
 	  </div>
-	</div>
-  </div>
-  <div>
-  	<textarea class="form-control" rows="10" name="chall_content" id="chall_content" placeholder="본문 입력">
-<% if(chall_content!=null) {%><%=chall_content%><%} %></textarea>
   </div>
 	  
-  <div class="row p-4">
+  <div class="row pt-5">
     <div class="col">
 	  <a class="cancelBtn btn btn-success">취소</a>
 	</div>
@@ -260,3 +307,6 @@
 </div>
 
 
+<jsp:include page="../common/footer.jsp" flush="true"></jsp:include><br>
+</body>
+</html>

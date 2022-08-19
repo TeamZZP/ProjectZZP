@@ -1,9 +1,11 @@
+<%@page import="com.dto.StampDTO"%>
 <%@page import="com.dto.MemberDTO"%>
 <%@page import="com.dto.ChallengeDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
 	ChallengeDTO dto = (ChallengeDTO) request.getAttribute("challDTO");
+	StampDTO stampDTO = (StampDTO) request.getAttribute("stampDTO");
 
 	int chall_id = dto.getChall_id();
 	String userid = dto.getUserid();
@@ -15,6 +17,10 @@
 	String chall_created = dto.getChall_created();
 	String chall_img = dto.getChall_img();
 	int chall_comments = dto.getChall_comments();
+	
+	int stamp_id = stampDTO.getStamp_id();
+	String stamp_img = stampDTO.getStamp_img();
+	String stamp_name = stampDTO.getStamp_name();
 	
 	//session에 저장된 userid 읽어오기 
 	MemberDTO member = (MemberDTO) session.getAttribute("login"); 
@@ -41,6 +47,30 @@ a {
 	color: black;
 }
 </style>
+<script type="text/javascript"
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function () {
+		//글 삭제시 컨펌창 띄우기 
+		$("#deleteChallenge").on("click", function () {
+			let mesg = "정말 삭제하시겠습니까? 한번 삭제한 글은 되돌릴 수 없습니다.";
+			if (!confirm(mesg)) {
+				event.preventDefault();
+			}
+		});
+		//목록으로 돌아가기
+		$(".backList").on("click", function () {
+			let preUrl = document.referrer;
+			//게시글 업데이트한 후 이동한 페이지에서는 글작성 페이지로 돌아가지 않도록 최신글 화면으로 이동한다.
+			if (preUrl.includes("ChallengeUIServlet")) {
+				location.href = "ChallengeListServlet";
+			} else {
+				history.back();
+			}
+		});
+		
+	});
+</script>
 
 <div class="container pt-5">
 	<div id="challDetailContent">
@@ -99,14 +129,11 @@ a {
 		
 		<div class="row pt-5 pl-5 pb-5">
 		  <div class="col-6 m-0 text-center">
-			<img src="images/stamp.png" class="thumb-stamp uploadBtn-stamp" id="uploadarea-stamp" width="200" height="200">
+			<img src="/eclipse/upload/<%= stamp_img %>" class="thumb-stamp uploadBtn-stamp" id="uploadarea-stamp" width="300" height="300">
 		  
 		  </div>
-		  <div class="col-6 m-0">
-		    <div class="float-start">
-		    <br><br><br>
-		    <input type="text" class="form-control" name="stamp_name" id="stamp_name" placeholder="도장 이름 입력">
-		    </div>
+		  <div class="col-6 m-0 my-auto">
+		    <%= stamp_name %>
 		  </div>
 		</div>
 		
