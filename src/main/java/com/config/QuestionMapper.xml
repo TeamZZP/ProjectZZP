@@ -3,11 +3,13 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="QuestionMapper">
-	<select id="questionList" resultType="QuestionDTO">
-		select * from QUESTION where not Q_BOARD_CATEGORY = 3 order by Q_ID desc
+	<select id="questionList" resultType="QuestionProductDTO">
+		select P_id, p_name, q_id, q.q_board_category,q.q_category, q.q_content, q.q_created, q.q_img, 
+			q.q_status, q.q_title, q.userid from product right outer join question q using(p_id) order by Q_ID desc
 	</select>
-	<select id="questionOneSelect" resultType="QuestionDTO" parameterType="string">
-		select * from QUESTION where Q_ID = #{Q_ID}
+	<select id="questionOneSelect" resultType="QuestionProductDTO" parameterType="string">
+		select P_id, p_name, q_id, q.q_board_category,q.q_category, q.q_content, q.q_created, q.q_img, 
+			q.q_status, q.q_title, q.userid from product right outer join question q using(p_id) where Q_ID = #{Q_ID}
 	</select>
 	<insert id="questionInsert" parameterType="map">
 		insert into QUESTION (Q_BOARD_CATEGORY, Q_CATEGORY, Q_TITLE, Q_CONTENT, Q_CREATED, Q_IMG, Q_STATUS, Q_ID, P_ID, USERID)
@@ -73,4 +75,7 @@
 	<select id="prodQuestion" parameterType="string" resultType="QuestionDTO">
 		select * from QUESTION where P_ID = #{P_ID}
 	</select>
+	<update id="ImgUpdate" parameterType="string">
+		update QUESTION set Q_IMG = 'null' where Q_IMG = #{img}
+	</update>
 </mapper>

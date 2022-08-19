@@ -119,13 +119,13 @@ CREATE TABLE question (
 	q_id	NUMBER		PRIMARY KEY,
 	q_board_category	NUMBER		NOT NULL,
 	q_category	VARCHAR2(20)		NOT NULL,
-	q_title	VARCHAR2(50)		NOT NULL,
+	q_title	VARCHAR2(200)	NOT NULL,
 	q_content		VARCHAR2(1000)		NOT NULL,
 	q_created		DATE	DEFAULT sysdate	NOT NULL,
 	q_img	VARCHAR2(300)		NULL,
 	q_status	VARCHAR(20)		NOT NULL,
 	userid	VARCHAR2(30)		NOT NULL REFERENCES member(userid) ON DELETE CASCADE,
-	p_id	VARCHAR2(40)		NULL REFERENCES product(p_id) ON DELETE CASCADE
+	p_id	number	 REFERENCES product(p_id) ON DELETE CASCADE
 );
 
 -- 문의 답변

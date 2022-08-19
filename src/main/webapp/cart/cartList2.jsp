@@ -100,7 +100,7 @@
 				success:function(data,status,xhr){
 					var sum = p_amount*p_selling_price;
 					$("#item_price"+cart_id).text(sum);
-					/* var sum_money =  */
+					/* var sum_money = sum+p_amount */
 					var fee = sum_money >= 50000? 0: 3000;
 					var total = sum_money +fee;
 					$("#fee").text(fee);
@@ -130,8 +130,39 @@
 						}
 				 })//end ajax
 			})//end cart
-			
-
+			/* cartUpdateServlet -> Update 이후에 cartList를 다시 뽑아오는 새로운 리스트를 생성...?
+					
+				$(".updBtn").on("click",function(){
+				
+				var cart_id = $(this).attr("data-xxx");
+				var p_amount =$("#cartAmount"+cart_id).val();
+				
+				$.ajax({
+					type : "get",
+					url : "CartListServlet"
+					data : {
+						cart_id:cart_id,
+						p_amount : p_amount
+					},
+					dataType:"text",
+					success:function(data,status,xhr){
+						 $(".price").empty(); 
+						var fee = map.get("fee");
+						var total = map.get("total");
+						$("#fee").text(fee);
+						$("#total").text(total);
+					},
+					error:function(xhr,status,error){
+						console.log(error);
+					}
+				})//ajax
+			})//end updBtn */   
+		
+			/* $("#delAllCart").on("click",function(){
+				$("form").attr("action","CartDelAllServlet");
+				$("form").submit();//form 밖에 위치해있음 ->이벤트trigger 사용
+			}) */
+		
 	})//end
 </script>
 <header>

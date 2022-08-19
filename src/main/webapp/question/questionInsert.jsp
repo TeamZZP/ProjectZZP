@@ -78,7 +78,7 @@
 					%>
 					  <button id="pID" class="btn btn-outline-secondary" type="button">상품 정보</button>
 					  <input type="text" class="form-control shadow-none" name="P_Name" id="P_Name" readonly="readonly" <%if(P_Name != null){ %>value="<%=P_Name%>"<%} %>>
-					  <input type="hidden" id="P_ID" name="P_ID" value="<%=P_ID%>">
+					  <input type="hidden" id="P_ID" name="P_ID" <%if(P_Name != null){ %>value="<%=P_ID%>"<%} %>>
 					</div>
 				</th>
 			</tr>

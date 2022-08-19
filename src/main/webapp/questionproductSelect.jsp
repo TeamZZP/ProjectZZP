@@ -22,7 +22,7 @@
 			$(".check").click(function () {
 				var pID = $(this).attr("data-pID");
 				var pName = $(this).attr("data-pName");
-				opener.$("#pName").val(pName);
+				opener.$("#P_Name").val(pName);
 				opener.$("#P_ID").val(pID);
 				window.close();
 			});
