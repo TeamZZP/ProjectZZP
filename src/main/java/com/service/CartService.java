@@ -74,6 +74,17 @@ public class CartService {
 		}
 		return num;
 	}
+
+	public int sum_money(String userid) {
+		int sum = 0;
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		try {
+			sum = dao.sum_money(session,userid);
+		} finally {
+			session.close();
+		}
+		return sum;
+	}
 	
 	
 }

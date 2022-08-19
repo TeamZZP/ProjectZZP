@@ -151,7 +151,7 @@ function productChoice(n) {
 			 <div class="col-lg-3 col-md-4 col-sm-6">
 				<div class="hover-zoomin">
 				<a href="ProductRetrieveServlet?p_id=<%=p_id%>">
-					<img src="images/p_image/<%=p_image%>.png "  ></a> 
+					<img src="images/p_image/<%=p_image%>.png "></a> 
 				</div>
 				<a href="ProductRetrieveServlet?p_id=<%=p_id%>">
 					<a style="margin-bottom:0.3em; font-weight:normal; color:#646464; font-size: 25px;"><%=p_name %></a></a> 
@@ -161,10 +161,10 @@ function productChoice(n) {
 				<a id="productChoice" href="javascript:productChoice(<%=p_id%>)"><img src="images/like.png" width="30" height="30"></a>
 				<!-- <a><img src="images/bubble.png" width="25" height="22"></a> -->
 				<!-- 장바구니 모달창-->
-				 <a type="button" class="btn " data-bs-toggle="modal" data-bs-target="#cartback">
+				 <a type="button" class="btn " data-bs-toggle="modal" data-bs-target="#addcart">
 				 	<img src="images/cart.jpg" width="25" height="25"></a>
 				<!-- Modal -->
-				<div class="modal fade" id="cartback" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+				<div class="modal fade" id="addcart" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 				  <div class="modal-dialog modal-dialog-scrollable">
 				    <div class="modal-content">
 				      <div class="modal-header">
@@ -194,7 +194,7 @@ function productChoice(n) {
 					       </div>
 				      </div>
 				      <div class="modal-footer">
-				        <a href="" class="shopping">계속쇼핑하기</a>
+				        <a href="StoreServlet" class="shopping">계속쇼핑하기</a>
 				        <a href="addCartServlet">장바구니저장</a>
 				      </div>
 				    </div>

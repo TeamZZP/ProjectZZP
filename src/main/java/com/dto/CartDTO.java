@@ -10,6 +10,7 @@ public class CartDTO  {
 	String p_name;
 	int p_selling_price;
 	String cart_created;
+	int money;
 
 	public CartDTO() {
 		super();
@@ -17,7 +18,7 @@ public class CartDTO  {
 	}
 
 	public CartDTO(int cart_id, int p_id, String userid, int p_amount, String p_image, String p_name,
-			int p_selling_price, String cart_created) {
+			int p_selling_price, String cart_created, int money) {
 		super();
 		this.cart_id = cart_id;
 		this.p_id = p_id;
@@ -27,13 +28,14 @@ public class CartDTO  {
 		this.p_name = p_name;
 		this.p_selling_price = p_selling_price;
 		this.cart_created = cart_created;
+		this.money = money;
 	}
 
 	@Override
 	public String toString() {
 		return "CartDTO [cart_id=" + cart_id + ", p_id=" + p_id + ", userid=" + userid + ", p_amount=" + p_amount
 				+ ", p_image=" + p_image + ", p_name=" + p_name + ", p_selling_price=" + p_selling_price
-				+ ", cart_created=" + cart_created + "]";
+				+ ", cart_created=" + cart_created + ", money=" + money + "]";
 	}
 
 	public int getCart_id() {
@@ -100,6 +102,13 @@ public class CartDTO  {
 		this.cart_created = cart_created;
 	}
 
-	
+	public int getMoney() {
+		return money;
+	}
+
+	public void setMoney(int money) {
+		this.money = money;
+	}
+
 	
 }

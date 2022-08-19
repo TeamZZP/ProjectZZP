@@ -33,5 +33,10 @@ public class CartDAO {
 		int num = session.selectOne("cartCount",userid);
 		return num;
 	}
+
+	public int sum_money(SqlSession session, String userid) {
+		int sum = session.selectOne("sum_money",userid);
+		return sum;
+	}
 	
 }

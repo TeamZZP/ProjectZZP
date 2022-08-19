@@ -1,7 +1,9 @@
 package com.controller.cart;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -24,20 +26,34 @@ public class CartListServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		MemberDTO dto = (MemberDTO)session.getAttribute("login");
 		String nextPage = null;
+		
 		if(dto != null) {
 			String userid = dto.getUserid();
 			CartService service = new CartService();
-			List<CartDTO> list = service.cartList(userid); 
-			System.out.println("CartListServlet"+list);
+			
 			//장바구니count
 			int count = service.cartCount(userid);
 			System.out.println(count);
 			
+			List<CartDTO> list = service.cartList(userid); 
+			System.out.println("CartListServlet"+list);
+			
+			int sum_money = service.sum_money(userid); //총금액
+			int fee = sum_money >= 50000? 0: 3000; //배송비 계산
+			int total = sum_money+fee; //총금액 + 배송비
+			
+			Map<String,Integer> map = new HashMap<>();
+			map.put("sum_money",sum_money); 
+			map.put("fee",fee); 
+			map.put("total",total); 
+			
+			request.setAttribute("map", map);
 			request.setAttribute("cartCount", count);
 			request.setAttribute("cartList", list);
+			
 			nextPage="cartList.jsp";
 			
-		}else {
+			}else {
 			nextPage="LoginUIServlet";
 			session.setAttribute("mesg", "로그인이 필요합니다");
 		}
