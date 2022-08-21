@@ -97,14 +97,14 @@ a:hover{
 <script>
 	$(function() {
 		//체크박스 미선택시 alert창
-		$("#delAllCart").on("click",function(){
+		$("form").on("submit",function(){
 			if($(".check").is(":checked")==false){
 				
 				alert("삭제할 상품을 선택하세요.");
-				/*  event.preventDefault();  */
+				 event.preventDefault();  
 			}
-			 $("form").attr("action","CartDelAllServlet"); 
 		})//체크박스미선택
+
 		//전체선택
 		$("#allCheck").on("click", function() {
 			var result = this.checked;
@@ -281,7 +281,7 @@ a:hover{
 			</div>
 		</div>
 		<input type="submit" id="order" value="주문하기">
-	 	<input type="button" id=delAllCart value="선택상품삭제">
+	 	<input type="submit" id=delAllCart value="선택상품삭제">
 		<!-- <a class="a_black" href="javascript:orderAllConfirm(myForm)"> 전체주문하기 </a> -->
 		<!-- <a class="a_black" id=delAllCart>전체 삭제하기 </a>  -->
 		<!-- <a class="a_black" href="StoreServlet"> 계속 쇼핑하기 </a> -->
