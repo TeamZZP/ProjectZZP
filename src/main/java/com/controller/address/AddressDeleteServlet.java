@@ -40,19 +40,13 @@ public class AddressDeleteServlet extends HttpServlet {
 			AddressService a_service=new AddressService();
 			HashMap<String, List<AddressDTO>> addressMap=new HashMap<String, List<AddressDTO>>();
 			
-			//회원의 주소 목록 가져오기
-			List<AddressDTO> addressList=a_service.selectAllAddress(userid);
-			System.out.println(addressList.size());
-			if (addressList.size() == 1) {//회원의 주소가 1개 남았을 때는 삭제 불가--jsp에서 조건 검사하고 넘어도록 수정
-				String mesg="배송지는 최소 1개 이상이어야 합니다.";
-			} else {
-				//address_id로 해당 dto 삭제
-				int num=a_service.deleteAddress(address_id);
-				System.out.println("삭제 배송지 갯수 : "+num);
-			}
+			//회원의 주소 목록 가져오기//회원의 주소가 1개 남았을 때는 삭제 불가--jsp에서 조건 검사하고 넘어도록 수정-ok
+			//address_id로 해당 dto 삭제
+			int num=a_service.deleteAddress(address_id);
+			System.out.println("삭제 배송지 갯수 : "+num);
 			
 			//삭제 후 회원 주소 목록 출력
-			addressList=a_service.selectAllAddress(userid);
+			List<AddressDTO> addressList=a_service.selectAllAddress(userid);
 			addressMap.put(userid, addressList);
 			System.out.println("addressDelete서블릿 안의 addressmap "+addressMap);
 			

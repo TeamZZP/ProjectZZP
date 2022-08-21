@@ -118,7 +118,8 @@ a:hover{
 			location.href = "CartDelServlet?cart_id=" + cart_id;
 		})//end
 		//장바구니 수량 수정
-		$(".updBtn").on("click", function() {
+		$(".updBtn").on("click",function(){
+
 			var cart_id = $(this).attr("data-xxx"); //cart_id
 			var p_selling_price = $(this).attr("data-price");
 			var p_amount = $("#cartAmount" + cart_id).val();
@@ -258,13 +259,11 @@ a:hover{
 								data-xxx="<%=cart_id%>" data-price="<%=p_selling_price%>"
 								data-id="<%=userid%>" data-sum_money="<%=sum_money%>" /> <br>
 						</div>
-						상품가격 :<span id="item_price<%=cart_id%>"
-							style="margin-bottom: 15px;"><%=p_selling_price * p_amount%></span><br>
+						상품가격 :<span id="item_price<%=cart_id%>" style="margin-bottom: 15px;"><%=p_selling_price * p_amount%></span><br>
 					</div> <span class="cart_item_del"> <img src="images/delete.png"
 						width="20" height="20" class="delBtn" data-xxx="<%=cart_id%>"></span>
 				</li>
 			</ul>
-		</div>
 		<%
 		}
 		%>
@@ -285,6 +284,7 @@ a:hover{
 		<!-- <a class="a_black" href="javascript:orderAllConfirm(myForm)"> 전체주문하기 </a> -->
 		<!-- <a class="a_black" id=delAllCart>전체 삭제하기 </a>  -->
 		<!-- <a class="a_black" href="StoreServlet"> 계속 쇼핑하기 </a> -->
+		
 		<%
 		}
 		%>

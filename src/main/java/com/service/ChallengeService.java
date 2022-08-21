@@ -11,6 +11,7 @@ import com.dao.ChallengeDAO;
 import com.dto.ChallengeDTO;
 import com.dto.CommentsDTO;
 import com.dto.PageDTO;
+import com.dto.StampDTO;
 
 public class ChallengeService {
 	
@@ -250,7 +251,6 @@ public class ChallengeService {
 		SqlSession session = MySqlSessionFactory.getSqlSession();
 		try {
 			profile_img = dao.selectProfileImg(session, userid);
-			session.commit();
 		} finally {
 			session.close();
 		}
@@ -292,16 +292,50 @@ public class ChallengeService {
 		return n;
 	}
 
-	public int insertStamp(HashMap<String, String> map) {
+	public StampDTO selectOneStamp(String chall_id) {
+		StampDTO dto = null;
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		try {
+			dto = dao.selectOneStamp(session, chall_id);
+		} finally {
+			session.close();
+		}
+		return dto;
+	}
+
+	public int updateChallThisMonth(HashMap<String, Integer> map) {
 		int n = 0;
 		SqlSession session = MySqlSessionFactory.getSqlSession();
 		try {
-			n = dao.insertStamp(session, map);
+			n = dao.updateChallThisMonth(session, map);
 			session.commit();
 		} finally {
 			session.close();
 		}
 		return n;
+	}
+
+	public int insertAdminChallenge(HashMap<String, String> map) {
+		int n = 0;
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		try {
+			n = dao.insertAdminChallenge(session, map);
+			session.commit();
+		} finally {
+			session.close();
+		}
+		return n;
+	}
+
+	public ChallengeDTO selectChallThisMonth() {
+		ChallengeDTO dto = null;
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		try {
+			dto = dao.selectChallThisMonth(session);
+		} finally {
+			session.close();
+		}
+		return dto;
 	}
 
 

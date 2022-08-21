@@ -47,9 +47,9 @@
 //	String created_at=member.getCreated_at();
 	
 	String addr2=null;
+	int size=0;
 	for (int i = 0; i < addressMap.size(); i++) {
 		List<AddressDTO> addressList=addressMap.get(userid);
-		
 		for (int j = 0; j < addressList.size(); j++) {
 			AddressDTO address=addressList.get(j);
 			int address_id=address.getAddress_id();
@@ -61,10 +61,13 @@
 			addr2=address.getAddr2();
 			int default_chk=address.getDefault_chk();
 			
+			size += 1;//회원의 배송지 갯수
+			
 			if (addr2 == null){
 				addr2="상세 주소를 입력하세요.";
 			}
 //			System.out.println("출력 확인 : "+address);
+//			System.out.println("회원의 배송지 갯수 : "+size);
 %>
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -82,25 +85,34 @@
 		$("#delete<%= address_id %>").on("click", function() {
 			var id=$(this).val();
 			console.log(id);
- 			$.ajax({
-				type : "post",
-				url : "AddressDeleteServlet",//페이지 이동 없이 해당 url에서 작업 완료 후 데이터만 가져옴
-				dataType : "text",
-				data : {//서버에 전송할 데이터
-					"address_id" : id
-				},
-				success : function(data, status, xhr) {
-					alert("해당 배송지가 삭제되었습니다."); 
-					$("#deleteAddress").modal("hide");
-					$(".modal-backdrop").hide();//모달창 닫고 백드롭 hide
-					$(".container").remove();
-					console.log(data);
-					$("#addContainer").append(data);
-				},
-				error: function(xhr, status, error) {
-					console.log(error);
-				}						
-			});//end ajax
+			var size=$("#listSize").val();
+			if (size <= 1) {
+				console.log(size);
+				alert("배송지는 한 개 이상 있어야 합니다.");
+				$("#deleteAddress").modal("hide");
+				$(".modal-backdrop").hide();//모달창 닫고 백드롭 hide
+			} else {
+				console.log(size);
+	 			$.ajax({
+					type : "post",
+					url : "AddressDeleteServlet",//페이지 이동 없이 해당 url에서 작업 완료 후 데이터만 가져옴
+					dataType : "text",
+					data : {//서버에 전송할 데이터
+						"address_id" : id
+					},
+					success : function(data, status, xhr) {
+						alert("해당 배송지가 삭제되었습니다."); 
+						$("#deleteAddress").modal("hide");
+						$(".modal-backdrop").hide();//모달창 닫고 백드롭 hide
+						$(".container").remove();
+						console.log(data);
+						$("#addContainer").append(data);
+					},
+					error: function(xhr, status, error) {
+						console.log(error);
+					}						
+				});//end ajax
+			}
 		});//end fn
 		
 		$("#change<%= address_id %>").on("click", function() {//배송지 정보 출력 페이지로 이동
@@ -159,6 +171,7 @@
 	</tr>
 	
 </table>
+<input type="hidden" id="listSize" value="<%= size %>"><!-- for문 바깥에서 배송지 갯수 저장 -->
 </div>
 </div>
 </div>
