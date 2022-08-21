@@ -147,7 +147,8 @@
 <%int count = (int)request.getAttribute("cartCount"); %>
 <div class="row" >
 	<div class="btn-group" role="group" aria-label="Basic example">
-		<button type="button" class="btn btn-outline-success" id="cart">장바구니(<%=count %>)</button>
+		<button type="button" class="btn btn-outline-success" id="cart">
+		<input type="checkbox" name="allCheck" id="allCheck">장바구니(<%=count %>)</button>
 		<button type="button" class="btn btn-outline-success" id="like">찜한상품</button>
 	</div>
 </div>
@@ -189,9 +190,7 @@ for (int i = 0; i < list.size(); i++) {
 %>
 	<form action="#" >
 	<div class="cart_content" >
-		<h3>
-			<span></span>
-		</h3>
+		
 		<ul class="cart_list" style="line-height: 50px; font-size: 20px;">
 			<li>
 			<input type="checkbox" name="chk" id="chk" style="width: 30px; position: relative; bottom:100px; margin-right: 10px;">
