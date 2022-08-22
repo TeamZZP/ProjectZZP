@@ -174,7 +174,7 @@ a:hover {
 		
 		$("#order").on("click", function() {
 			$("form").attr("action", "OrderServlet");
-		}
+		})
 
 	})//end
 </script>
@@ -285,16 +285,8 @@ a:hover {
 				<span class="price" id="total"><%=total%></span>
 			</div>
 		</div>
-<<<<<<< HEAD
-		<input type="submit" id="order" value="주문하기"> <input
-			type="submit" id=delAllCart value="선택상품삭제">
-=======
 		<input type="submit" id=order value="주문하기">
 	 	<input type="submit" id=delAllCart value="선택상품삭제">
->>>>>>> 92f90248cb7039142ef6fd258d14d6eb944c0cae
-		<!-- <a class="a_black" href="javascript:orderAllConfirm(myForm)"> 전체주문하기 </a> -->
-		<!-- <a class="a_black" id=delAllCart>전체 삭제하기 </a>  -->
-		<!-- <a class="a_black" href="StoreServlet"> 계속 쇼핑하기 </a> -->
 		<%
 		}
 		%>
