@@ -177,8 +177,10 @@ a:hover {
 				},
 				dataType: String,
 				success  : function(data,status,xhr) {
-					//likeList.jsp에서 가져올 테이블
-				},error: function(xhr,status,error) {
+					$(".container").empty();
+					$("#outer").append(data);
+				},
+				error: function(xhr,status,error) {
 					console.log(error);
 				} 
 			})//end like ajax

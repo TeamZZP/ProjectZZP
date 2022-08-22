@@ -1,7 +1,6 @@
 package com.controller.product;
 
 import java.io.IOException;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -12,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.dto.CategoryProductDTO;
 import com.dto.MemberDTO;
 import com.dto.ProductDTO;
 import com.service.ProductService;
@@ -34,10 +34,10 @@ public class ProductLikeListServlet extends HttpServlet {
 			
 			ProductService service  = new ProductService();
 			List<Integer> liked_pId_List = service.selectLikeProduct(userid); //찜한 상품 p_id List
-			List<ProductDTO> productList = null;
+			List<CategoryProductDTO> productList = null;
 			
 			for (int i = 0; i <liked_pId_List.size() ; i++) {
-				productList = (List<ProductDTO>) service.productRetrieve(liked_pId_List.get(i));
+				productList = (List<CategoryProductDTO>) service.productList(liked_pId_List.get(i));
 			}
 			
 			request.setAttribute("productList", productList);
