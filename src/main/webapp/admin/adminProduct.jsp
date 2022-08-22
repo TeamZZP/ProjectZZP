@@ -91,7 +91,7 @@ for ( int i = 0 ; i < product_list.size() ; i++ ) {
 			        선택한 상품을 삭제하시겠습니까?
 			      </div>
 			      <div class="modal-footer">
-			        <button type="button" id="delProd<%= p_id %>" data_id="<%= p_id %>" class="btn btn-success">삭제</button>
+			        <button type="button" id="delProd<%= p_id %>" class="btn btn-success">삭제</button>
 			        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
 			      </div>
 			    </div> 
@@ -99,7 +99,7 @@ for ( int i = 0 ; i < product_list.size() ; i++ ) {
 			</div>
 			<!-- 버튼 -->
 			<button type="button" id="prodDetail" data-p_id="<%= p_id %>" class="btn btn-outline-success btn-sm">상품보기</button>
-			<button type="button" id="delPopup" class="btn btn-outline-dark btn-sm" data-bs-toggle="modal" data-bs-target="#deleteProduct">
+			<button type="button" id="delPopup<%= p_id %>" data-id="<%= p_id %>" class="btn btn-outline-dark btn-sm" data-bs-toggle="modal" data-bs-target="#deleteProduct">
 				삭제
 			</button>
 		</td>
@@ -130,7 +130,7 @@ $(document).ready(function () {
 	$("#delProd<%= p_id %>").on("click", function() {
 		var p_id = $(this).val();
 		console.log(p_id);
-		location.href="ProductDeleteServlet?p_id="+p_id;
+		//location.href="ProductDeleteServlet?p_id="+p_id;
 	});
 	
 	<%-- $("body").on("click", "#delProd<%= p_id %>", function () {
