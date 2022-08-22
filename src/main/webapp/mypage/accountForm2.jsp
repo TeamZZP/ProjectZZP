@@ -171,7 +171,7 @@
 								<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
 								<input type="password" class="form-control" name="checkPasswd" id="checkPasswd" placeholder="비밀번호를 한번 더 입력하세요."/>
 							</div>
-							<div id="mesg" style="text-align: right; visibility: hidden;">
+							<div style="text-align: right; visibility: hidden;">
 								<span id="result2">비밀번호 확인</span>
 							</div>
 						</div>
