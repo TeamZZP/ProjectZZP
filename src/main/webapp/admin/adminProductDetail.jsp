@@ -6,9 +6,7 @@
 <%@page import="com.dto.AnswerDTO"%>
 <%@page import="org.apache.ibatis.reflection.SystemMetaObject"%>
 <%@page import="com.dto.QuestionDTO"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <style>
 	table {
 	font-family: sans-serif;
@@ -30,8 +28,7 @@
 	  border-bottom: 1px solid #8FBC8F;
 	}
 </style>
-<script type="text/javascript"
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
 	$(function() {
 
@@ -52,9 +49,9 @@
 			}
 		});//end down
 
-		$("#cart").on("click", function() {
-				$("form").attr("action", "addCartServlet");
-			})//cart  
+	 	$("#cart").on("click", function() {
+			$("form").attr("action", "addCartServlet");
+		})//cart   
 		
 		$(".questionDetail").click(function () {
 			var qID = $(this).attr("data-qID");
@@ -89,35 +86,60 @@
 </script>
 <%
 ProductDTO pdto = (ProductDTO) request.getAttribute("ProductRetrieveDTO");
-	int c_id = pdto.getC_id();
-	String p_content = pdto.getP_content();
-	int p_cost_price = pdto.getP_cost_price();
-	String p_created = pdto.getP_created();
-	int p_discount = pdto.getP_discount();
-	int p_id = pdto.getP_id();
-	String p_name = pdto.getP_name();
-	int p_selling_price = pdto.getP_selling_price();
-	int p_stock = pdto.getP_stock();
+
+int c_id = pdto.getC_id();
+String p_content = pdto.getP_content();
+int p_cost_price = pdto.getP_cost_price();
+String p_created = pdto.getP_created();
+int p_discount = pdto.getP_discount();
+int p_id = pdto.getP_id();
+String p_name = pdto.getP_name();
+int p_selling_price = pdto.getP_selling_price();
+int p_stock = pdto.getP_stock();
 %>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+	crossorigin="anonymous">
+
 <%
 List<ImagesDTO> ilist = (List<ImagesDTO>) request.getAttribute("ImagesRetrieveList");
+
+System.out.println("productRetrieve.jsp에서 파싱한 pdto==" + pdto);
+System.out.println("productRetrieve.jsp에서 파싱한 ilist==" + ilist);
 %>
+
+
+
+
+<style>
+	table {
+	font-family: sans-serif;
+	}
+	
+	
+</style>
+
 	<form  name="goodRetrieveForm" action="addCartServlet" method="get">
 		<div class="row">
 			<div class="col-md-1"></div>
 			<div class="col-md-5">
-				<!-- 제품사진 -->
-				<input type="hidden" name="p_id" value="<%=p_id%>">	
-				<input type="hidden" name="p_name" value="<%=p_name%>">	
-				<input type="hidden" name="p_selling_price" value="<%=p_selling_price%>">	
 				<table>
+					<!-- 제품사진 -->
+					<input type="hidden" name="p_id" value="<%=p_id%>">	
+					<input type="hidden" name="p_name" value="<%=p_name%>">	
+					<input type="hidden" name="p_selling_price" value="<%=p_selling_price%>">	
+					
 					<%
 					for (int i = 0; i < ilist.size(); i++) {
+
 						String image_route = ilist.get(i).getImage_route();
 						int image_rnk = ilist.get(i).getImage_rnk();
 						String update_date = ilist.get(i).getUpdate_date();
-						
+					%>
+							
+					<%
 					if (image_rnk == 1) {
 					%>
 					<tr>
@@ -130,16 +152,19 @@ List<ImagesDTO> ilist = (List<ImagesDTO>) request.getAttribute("ImagesRetrieveLi
 					<%
 					}
 					%>
+						
 					<tr>
-						<td>
-							<%
-							if (image_rnk != 1) {
-							%> 
-							  <img src="images/p_image/<%=image_route%>.png" class="img-thumbnail" style="height: 100; width: 100;" onmouseover="imageChange(this)"> 
-							<%
-							}
-							%>
-						</td>
+								<td>
+									<%
+									if (image_rnk != 1) {
+									%> 
+									<img
+									src="images/p_image/<%=image_route%>.png"
+									class="img-thumbnail" style="height: 100; width: 100;  "
+									> <%
+ }
+ %>
+								</td>
 					</tr>
 				</table>
 				<%
