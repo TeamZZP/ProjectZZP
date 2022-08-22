@@ -5,32 +5,17 @@
 <%
 List<CategoryProductDTO> product_list = (List<CategoryProductDTO>) request.getAttribute("product_list");
 %>
-<style>
-
-</style>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>
-$(document).ready(function () {
-	$("body").on("click", ".productDetail", function() {
-		console.log($(this).attr("data-p_id"))
-		$.ajax({
-			type: "post",
-			url: "AdminProdDetailServlet",
-			data: {
-				p_id:$(this).attr("data-p_id")
-			},
-			success: function(data) {
-				$("#adminContent").html(data);
-			},
-			error: function() {
-				alert("문제가 발생했습니다. 다시 시도해 주세요.");
-			}
-		});//end ajax
-	});
-	
-	
-});//end ready
-</script>
+<div class="container">
+	<form action="" method="post">
+		<div class="row">
+			<div class="btn-group" role="group" aria-label="Basic example">
+				<button type="button" class="btn btn-outline-success category" data-category="member" id="memberManagement">회원관리</button>
+				<button type="button" class="btn btn-outline-success category" data-category="product" id="productManagement">상품관리</button>
+				<button type="button" class="btn btn-outline-success category" data-category="challenge" id="challengeManagement">챌린지관리</button>
+			</div>
+		</div>
+	</form>
+</div>
 
 <div class="container" style="margin-top: 5px; margin-bottom: 5px;">
 	<div class="row row-cols-auto">
@@ -38,7 +23,7 @@ $(document).ready(function () {
 			  <div class="col">
 				  <select class="form-select" data-style="btn-info" id="inputGroupSelect01" 
 				  		  style="width: 145px; margin-right: -20px; margin-left: -24px;">
-					    <option selected disabled="disabled">카테고리</option>
+					    <option selected disabled hidden>카테고리</option>
 					    <option value="userid">아이디</option>
 					    <option value="username">이름</option>
 					    <option value="email">이메일</option>
@@ -57,7 +42,7 @@ $(document).ready(function () {
 	<tr>
 		<th>카테고리</th>
 		<th>상품번호</th>
-		<th>상품이름</th>
+		<th>상품명</th>
 		<th>가격</th>
 		<th>할인금액</th>
 		<th>재고</th>
@@ -70,15 +55,20 @@ for ( int i = 0 ; i < product_list.size() ; i++ ) {
     String p_name =product_list.get(i).getP_name(); //상품이름
 	String p_content =product_list.get(i).getP_content(); //상품설명
 	int c_id =product_list.get(i).getC_id(); //카테고리 번호
-	int p_cost_price =product_list.get(i).getP_cost_price(); //구매비용?
-	int p_selling_price =product_list.get(i).getP_selling_price(); //판매가
+	int p_cost_price =product_list.get(i).getP_cost_price(); //판매가
+	int p_selling_price =product_list.get(i).getP_selling_price(); //할인적용판매가
 	int p_discount =product_list.get(i).getP_discount(); //할인
 	String p_created=product_list.get(i).getP_created(); //등록일
 	int p_stock =product_list.get(i).getP_stock(); // 재고
 	String p_image = product_list.get(i).getP_image(); //이미지
 %>
 	<tr id="list">
-		<td class="productDetail" data-p_id="<%= p_id %>"><%= c_id %></td>
+		<td class="productDetail" data-p_id="<%= p_id %>">
+			<% if(6==c_id) {%>sale<%} %>
+			<% if(8==c_id) {%>bath<%} %>
+			<% if(9==c_id) {%>kitchen<%} %>
+			<% if(10==c_id) {%>life<%} %>
+		</td>
 		<td class="productDetail" data-p_id="<%= p_id %>"><%= p_id %></td>
 		<td class="productDetail" data-p_id="<%= p_id %>"><%= p_name %></td>
 		<td class="productDetail" data-p_id="<%= p_id %>"><%= p_selling_price %>&nbsp;</td>
@@ -86,6 +76,22 @@ for ( int i = 0 ; i < product_list.size() ; i++ ) {
 		<td class="productDetail" data-p_id="<%= p_id %>"><%= p_stock %>&nbsp;&nbsp;</td>
 		<td class="productDetail" data-p_id="<%= p_id %>"><%= p_created %></td>
 		<td>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+$(document).ready(function () {
+	
+	$(".productDetail").click(function() {
+		location.href="AdminProdDetailServlet?p_id="+<%= p_id %>;
+	});
+	
+	$(".category").click(function() {
+		let category = $(this).attr("data-category");
+		location.href="AdminCategoryServlet?category="+category;
+	});
+	
+	
+});//end ready
+</script>
 			<!-- Modal -->
 			<div class="modal fade" id="deleteMember" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 			  <div class="modal-dialog">

@@ -196,6 +196,14 @@ create table stamp (
   stamp_name VARCHAR2(50) NOT NULL
 );
 
+-- 챌린지 획득 도장
+create table member_stamp( 
+	userid VARCHAR2(30) NOT NULL REFERENCES member(userid) ON DELETE CASCADE,
+	stamp_id NUMBER     NOT NULL REFERENCES stamp(stamp_id) ON DELETE CASCADE,
+	chall_id NUMBER     NOT NULL REFERENCES challenge(chall_id) ON DELETE CASCADE,
+	stamp_created DATE   DEFAULT sysdate    NOT NULL
+);
+
 -- 큐엔에이 답변
 CREATE TABLE answer (
 	answer_id	number CONSTRAINT pk_answer_answer_id PRIMARY key,
