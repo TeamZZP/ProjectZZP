@@ -204,7 +204,8 @@ a:hover {
 			<button type="button" class="btn btn-outline-success" id="cart">
 				<input type="checkbox" name="allCheck" id="allCheck"> 장바구니(<%=count%>)
 			</button>
-			<button type="button" class="btn btn-outline-success" id="like">찜한상품</button>
+			<button type="button" class="btn btn-outline-success" id="like">
+			<input type="checkbox" name="allCheck" id="allCheck">찜한상품()</button>
 		</div>
 	</div>
 	<%
@@ -215,7 +216,7 @@ a:hover {
 	%>
 	<div>
 		<div class="no_item_cart" style="text-align: center; padding: 50px; line-height: 70px;"   > 
-			<img src="images/like.png" width="150" height="150" ><br>
+			<img src="images/liked.png" width="150" height="150" ><br>
 			<span >찜한 상품이 없습니다.</span>
 			<div>
 				<button type="button" onclick="location.href='StoreServlet';"

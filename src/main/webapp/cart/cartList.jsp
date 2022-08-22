@@ -166,9 +166,6 @@ a:hover {
 				}
 			})//end ajax
 		})//end cart */
-<<<<<<< HEAD
-
-=======
 		
 		$("#like").on("click" function() {
 		
@@ -181,7 +178,7 @@ a:hover {
 				dataType: String,
 				success  : function(data,status,xhr) {
 					//likeList.jsp에서 가져올 테이블
-				}error: function(xhr,status,error) {
+				},error: function(xhr,status,error) {
 					console.log(error);
 				} 
 			})//end like ajax
@@ -189,8 +186,7 @@ a:hover {
 		
 		
 		
-		
->>>>>>> 12065fe9bc7f0fc3323e4f926739f53da2a7af38
+
 		$("#order").on("click", function() {
 			$("form").attr("action", "OrderServlet");
 		})
@@ -217,7 +213,8 @@ a:hover {
 			<button type="button" class="btn btn-outline-success" id="cart">
 				<input type="checkbox" name="allCheck" id="allCheck"> 장바구니(<%=count%>)
 			</button>
-			<button type="button" class="btn btn-outline-success" id="like">찜한상품</button>
+			<button type="button" class="btn btn-outline-success" id="like">
+			<input type="checkbox" name="allCheck" id="allCheck">찜한상품()</button>
 		</div>
 	</div>
 	<%
