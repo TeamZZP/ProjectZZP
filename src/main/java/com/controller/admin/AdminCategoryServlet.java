@@ -51,7 +51,7 @@ public class AdminCategoryServlet extends HttpServlet {
 			System.out.println("addressMap"+addressMap);
 			request.setAttribute("memberList", memberList);
 			request.setAttribute("addressMap", addressMap);//userid의 address 리스트
-			RequestDispatcher dis = request.getRequestDispatcher("admin/adminMember.jsp");
+			RequestDispatcher dis = request.getRequestDispatcher("adminMember.jsp");
 			dis.forward(request, response);
 		} else if(category.equals("product")) {
 			//전체 상품 목록
@@ -59,7 +59,7 @@ public class AdminCategoryServlet extends HttpServlet {
 			List<CategoryProductDTO> product_list = product_service.ProductList();
 
 			request.setAttribute("product_list", product_list);
-			RequestDispatcher dis = request.getRequestDispatcher("admin/adminProduct.jsp");
+			RequestDispatcher dis = request.getRequestDispatcher("adminProduct.jsp");
 			dis.forward(request, response);
 		} else if(category.equals("challenge")) {
 			//관리자가 작성한 챌린지 목록

@@ -26,7 +26,13 @@
 	$(function() {
 		
 		$("#backList").click(function() {
-			history.back();
+			$("form").attr("action","AdminCategoryServlet?category=product");
+			
+		});
+		
+		$(".category").click(function() {
+			let category = $(this).attr("data-category");
+			location.href="AdminCategoryServlet?category="+category;
 		});
 		
  
@@ -49,6 +55,18 @@ List<ImagesDTO> ilist = (List<ImagesDTO>) request.getAttribute("ImagesRetrieveLi
 System.out.println("productRetrieve.jsp에서 파싱한 pdto==" + pdto);
 System.out.println("productRetrieve.jsp에서 파싱한 ilist==" + ilist);
 %>
+
+<div class="container">
+	<form action="" method="post">
+		<div class="row">
+			<div class="btn-group" role="group" aria-label="Basic example">
+				<button type="button" class="btn btn-outline-success category" data-category="member" id="memberManagement">회원관리</button>
+				<button type="button" class="btn btn-outline-success category" data-category="product" id="productManagement">상품관리</button>
+				<button type="button" class="btn btn-outline-success category" data-category="challenge" id="challengeManagement">챌린지관리</button>
+			</div>
+		</div>
+	</form>
+</div>
 
 <div class="container prodContainer">
 	<div class="row justify-content-center">
@@ -166,7 +184,7 @@ System.out.println("productRetrieve.jsp에서 파싱한 ilist==" + ilist);
 					        </div>
 					    </div>
 					</div>
-					<!-- 상품등록or취소 버튼 : 취소하면 목록으로 가게 해야 함 -->
+					<!-- 상품등록or취소 버튼 -->
 					<div class="form-group" style="margin-top: 20px; text-align: center;">
 						<input type="submit" value="수정" id="updateProd" class="btn btn-success">
 						<button id="backList" class="btn btn-success">취소</button>

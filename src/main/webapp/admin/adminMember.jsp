@@ -6,13 +6,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
+<div class="container">
+	<form action="" method="post">
+		<div class="row">
+			<div class="btn-group" role="group" aria-label="Basic example">
+				<button type="button" class="btn btn-outline-success category" data-category="member" id="memberManagement">회원관리</button>
+				<button type="button" class="btn btn-outline-success category" data-category="product" id="productManagement">상품관리</button>
+				<button type="button" class="btn btn-outline-success category" data-category="challenge" id="challengeManagement">챌린지관리</button>
+			</div>
+		</div>
+	</form>
+</div>
+
 <div class="container" style="margin-top: 5px; margin-bottom: 5px;">
 	<div class="row row-cols-auto">
 		  <div class="col"></div>
 			  <div class="col">
 				  <select class="form-select" data-style="btn-info" id="inputGroupSelect01" 
 				  		  style="width: 145px; margin-right: -20px; margin-left: -24px;">
-					    <option selected disabled="disabled">카테고리</option>
+					    <option selected disabled hidden>카테고리</option>
 					    <option value="userid">아이디</option>
 					    <option value="username">이름</option>
 					    <option value="email">이메일</option>

@@ -11,25 +11,9 @@
 <script type="text/javascript">
 	$(document).ready(function () {
 		
-		/* $(".category").click(function() {
+		$(".category").click(function() {
 			let category = $(this).attr("data-category");
-			$.ajax({
-				type: "post",
-				url: "AdminCategoryServlet",
-				data: {
-					category:category
-				},
-				success: function(data) {
-					$("#adminContent").html(data);
-				},
-				error: function() {
-					alert("문제가 발생했습니다. 다시 시도해 주세요.");
-				}
-			});//ajax
-		}); */
-		
-		$("#productManagement").click(function() {
-			location.href="AdminProdServlet";
+			location.href="AdminCategoryServlet?category="+category;
 		});
 	
 	});//end ready
