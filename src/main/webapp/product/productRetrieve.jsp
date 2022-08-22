@@ -44,6 +44,11 @@
 			
 			$("form").attr("action", "addCartServlet");
 		})//cart  
+		
+	
+	$("#order").on("click", function() {
+		$("form").attr("action", "orderServlet");
+	}
  
 	})//end ready
 
@@ -220,7 +225,7 @@ System.out.println("productRetrieve.jsp에서 파싱한 ilist==" + ilist);
 
 					<tr >
 						
-						<td><button type="button" class="btn btn-success" >주문하기</button></td>
+						<td><button type="button" class="btn btn-success" id="order">주문하기</button></td>
 						<td></td>
 						<td><button type="submit" class="btn btn-success" id="cart">장바구니저장</button></td>
 					</tr>
