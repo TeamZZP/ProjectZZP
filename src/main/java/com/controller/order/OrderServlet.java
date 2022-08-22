@@ -26,9 +26,7 @@ public class OrderServlet extends HttpServlet {
 		
 		if(dto != null) {
 			ToOrderDTO odto = new ToOrderDTO();
-			odto.setP_image((String)request.getAttribute("p_name"));
 			
-			response.sendRedirect("order.jsp");
 			
 			
 		}else {
