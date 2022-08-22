@@ -150,8 +150,10 @@ function productChoice(n) {
    src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>	
 $("#addcart").on("shown.bs.modal", function (e) { //addcart라는 모달창이 열렸을 때 이 모달창을 아이콘 버튼 data-id 모달창에 사용할 수 있도록 전달.
-    var id = $(e.relatedTarget).data("id");
-    console.log(id);
+   
+	var id = $(e.relatedTarget).data("id");
+    $("#cart_title").text("확인 중");
+    //console.log(id);
  });//end fn
  
 $("#checkAddCart<%=p_id %>").on("click",function(){
