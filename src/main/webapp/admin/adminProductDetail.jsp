@@ -27,7 +27,6 @@
 		
 		$("#backList").click(function() {
 			$("form").attr("action","AdminCategoryServlet?category=product");
-			
 		});
 		
 		$(".category").click(function() {
@@ -52,8 +51,6 @@ ProductDTO pdto = (ProductDTO) request.getAttribute("ProductRetrieveDTO");
 	
 List<ImagesDTO> ilist = (List<ImagesDTO>) request.getAttribute("ImagesRetrieveList");
 
-System.out.println("productRetrieve.jsp에서 파싱한 pdto==" + pdto);
-System.out.println("productRetrieve.jsp에서 파싱한 ilist==" + ilist);
 %>
 
 <div class="container">
