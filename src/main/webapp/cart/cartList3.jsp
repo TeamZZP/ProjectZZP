@@ -1,11 +1,9 @@
-
 <%@ page import="com.dto.CartDTO"%>
 <%@ page import="java.util.List"%>
 <%@ page import="java.util.Map"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <style>
-
 .heading {
 	flex: 1;
 	text-align: center;
@@ -30,9 +28,7 @@ a:hover {
 	margin-bottom: 4px;
 	color: #F05522;
 } */
-
 .cart_list li {
-	
 	display: flex;
 	position: relative;
 	padding: 24px;
@@ -89,21 +85,18 @@ a:hover {
 	text-align: center;
 	justify-content: space-evenly;
 }
-
-
 </style>
 <script type="text/javascript"
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 	$(function() {
 		//체크박스 미선택시 alert창
-		$("#delAllCart").on("click", function() {
+		$("form").on("submit", function() {
 			if ($(".check").is(":checked") == false) {
 
 				alert("삭제할 상품을 선택하세요.");
 				event.preventDefault();
 			}
-			$("form").attr("action","CartDelAllServlet");
 		})//체크박스미선택
 
 		//전체선택
@@ -171,30 +164,6 @@ a:hover {
 				}
 			})//end ajax
 		})//end cart */
-		
-		$("#like").on("click" function() {
-		
-			$.ajax({
-				type: "get",
-				url:"ProductLikeListServlet",
-				data:{
-					userid : userid
-				},
-				dataType: String,
-				success  : function(data,status,xhr) {
-					//likeList.jsp에서 가져올 테이블
-				}error: function(xhr,status,error) {
-					console.log(error);
-				} 
-			})//end like ajax
-		})//end like
-		
-		
-		
-		
-		$("#order").on("click", function() {
-			$("form").attr("action", "OrderServlet");
-		})
 
 	})//end
 </script>
@@ -246,69 +215,53 @@ a:hover {
 	int sum_money = map.get("sum_money");
 	int fee = map.get("fee");
 	int total = map.get("total");
-
-	for (int i = 0; i < list.size(); i++) {
-		int cart_id = list.get(i).getCart_id();
-		String userid = list.get(i).getUserid();
-		int p_id = list.get(i).getP_id();
-		String p_name = list.get(i).getP_name();
-		int p_selling_price = list.get(i).getP_selling_price();
-		int p_amount = list.get(i).getP_amount();
-		String p_image = list.get(i).getP_image();
 	%>
 
-	<form action="#">
-		<div class="cart_content">
-
-			<ul class="cart_list" style="line-height: 50px; font-size: 20px;">
-				<li><input type="checkbox" name="check" id="check"
-					class="check" value="<%=cart_id%>"
-					style="width: 30px; position: relative; bottom: 100px; margin-right: 10px;">
-					<a href="ProductRetrieveServlet?p_id=<%=p_id%>"> <img
+	<form action="CartDelAllServlet">
+		<table>
+			<thead class="item_subject">
+				<tr>
+					<th class="item_checkbox">
+						<input type="checkbox" name="allCheck" id="allCheck">
+					</th>
+					<th class="item_info"><span>상품정보</span></th>
+					<th class="amount text-center"><span>수량</span></th>
+					<th class="price text-center"><span>주문금액</span></th>
+				</tr>
+			</thead>
+			<%
+			for (int i = 0; i < list.size(); i++) {
+				int cart_id = list.get(i).getCart_id();
+				String userid = list.get(i).getUserid();
+				int p_id = list.get(i).getP_id();
+				String p_name = list.get(i).getP_name();
+				int p_selling_price = list.get(i).getP_selling_price();
+				int p_amount = list.get(i).getP_amount();
+				String p_image = list.get(i).getP_image();
+			%>
+			<tbody>
+				<tr class="content" style="overflow: visible;">
+					<td>
+					<input type="checkbox" name="check" id="check" 
+					class="check" value="<%=cart_id%>" style="width: 30px; position: relative; bottom: 100px; margin-right: 10px;">
+					</td>
+					<td class="img">
+						<div class="cart_item_img">
+						<a href="ProductRetrieveServlet?p_id=<%=p_id%>"> <img
 						src="images/p_image/<%=p_image%>.png" width="200"
 						style="border: 10px;" height="200"></a>
-					<div class="cart_list_info">
-						주문번호: <span name="cart_id"><%=cart_id%></span><br> 상품명: <a
-							href="ProductRetrieveServlet?p_id=<%=p_id%>"> <span
-							name="p_name"
-							style="font-weight: bold; margin: 8px; display: line"><%=p_name%></span></a>
-						<br>
-						<div class="amount">
-							<label>수량:</label> <input type="text" id="cartAmount<%=cart_id%>"
-								class="p_amount" name="p_amount"
-								style="text-align: right; line-height: 0px;" maxlength="3"
-								size="2" value="<%=p_amount%>"> <input type="button"
-								value="수정" id="updBtn" class="updBtn" style="line-height: 28px;"
-								data-xxx="<%=cart_id%>" data-price="<%=p_selling_price%>"
-								data-id="<%=userid%>" data-sum_money="<%=sum_money%>" /> <br>
 						</div>
-						상품가격 :<span id="item_price<%=cart_id%>"
-							style="margin-bottom: 15px;"><%=p_selling_price * p_amount%></span><br>
-					</div> <span class="cart_item_del"> <img src="images/delete.png"
-						width="20" height="20" class="delBtn" data-xxx="<%=cart_id%>"></span>
-				</li>
-			</ul>
-		</div>
-		<%
-		}
-		%>
+					</td>
+				</tr>
+			</tbody>
+			<%
+			}
+			%>
 
-	<div class="cart_total">
-			<div class="shipping">
-				<p>상품금액</p>
-				<p>배송비</p>
-				<p>총주문금액</p>
-			</div>
-			<div class="total_price">
-				<span class="price" id="sum_money"><%=sum_money%></span>
-				<span class="price" id="fee"><%=fee%></span>
-				<span class="price" id="total"><%=total%></span>
-			</div>
-		</div>
-		<input type="submit" id=order value="주문하기">
-	 	<input type="submit" id=delAllCart value="선택상품삭제">
-		<%
-		}
-		%>
+
+			<%
+			}
+			%>
+		</table>
 	</form>
 </div>

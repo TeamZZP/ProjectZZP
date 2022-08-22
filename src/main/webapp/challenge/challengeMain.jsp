@@ -1,3 +1,4 @@
+<%@page import="com.dto.StampDTO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="com.dto.PageDTO"%>
@@ -17,7 +18,7 @@
       overflow: hidden;
       border-radius: 15px;
     }
-    .hover-zoomin img {
+    .hover-zoomin img:not(.stamp) {
       width: 100%;
       height: auto;
       -webkit-transition: all 0.2s ease-in-out;
@@ -26,7 +27,7 @@
       -ms-transition: all 0.2s ease-in-out;
       transition: all 0.2s ease-in-out;
     }
-    .hover-zoomin:hover img {
+    .hover-zoomin:hover img:not(.stamp) {
       -webkit-transform: scale(1.1);
       -moz-transform: scale(1.1);
       -o-transform: scale(1.1);
@@ -39,6 +40,11 @@
     	width: 150px;
     }
     
+    .stamp {
+    	position: absolute; 
+		left: 198px; 
+		top: -15px; 
+    }
 
 </style>
 <%
@@ -49,7 +55,14 @@
 	String sortBy = (String) request.getAttribute("sortBy");
 
 	//프로필 가져오기
-	ArrayList<HashMap<String, String>> profileList = (ArrayList<HashMap<String, String>>) request.getAttribute("profileList");
+	HashMap<String, String> profileMap = (HashMap<String, String>) request.getAttribute("profileMap");
+	
+	//이달의 챌린지 가져오기
+	ChallengeDTO challThisMonth = (ChallengeDTO) request.getAttribute("challThisMonth");
+	
+	//각 게시글마다 도장 가져오기
+	HashMap<String, String> stampListMap = (HashMap<String, String>) request.getAttribute("stampListMap");
+	System.out.println(stampListMap);
 	
 	//session에 저장된 메시지가 있는 경우 경고창 띄워주고 삭제하기
 	String mesg = (String) session.getAttribute("mesg");
@@ -75,7 +88,7 @@
 <div class="container">
    <div class="row">
      <div class="col-sm-6">
-       <a href="ChallengeDetailServlet?chall_id=1" class="">[이 달의 챌린지] 용기내! 챌린지</a>
+       <a href="ChallengeDetailServlet?chall_id=<%= challThisMonth.getChall_id() %>" class=""><%= challThisMonth.getChall_title() %></a>
      </div>
      <div class="col-sm-6">
        <div class="float-end">
@@ -104,8 +117,7 @@
 			String chall_img = dto.getChall_img();
 			int chall_comments = dto.getChall_comments();
 			
-			HashMap<String, String> map = profileList.get(i-1);
-			String profile_img = map.get("PROFILE_IMG");
+			String profile_img = profileMap.get(userid);
 	%>
 					
      <div class="col-lg-3 col-md-4 col-sm-6">
@@ -115,7 +127,11 @@
        </div>
        <div class="hover-zoomin">
 	       <a href="ChallengeDetailServlet?chall_id=<%=chall_id%>"> 
-			<img src="/eclipse/upload/<%=chall_img%>" border="0" onerror="this.src='images/uploadarea.png'"></a>
+			<img src="/eclipse/upload/<%=chall_img%>" border="0" onerror="this.src='images/uploadarea.png'">
+			<% if (stampListMap.containsKey(String.valueOf(chall_id))) { %>
+			<img src="/eclipse/upload/<%=stampListMap.get(String.valueOf(chall_id))%>" class="stamp" width="110" height="110">
+			<%} %>
+		   </a>
 	   </div>
 	   <div class="p-2 text-center">
 	       <img src="images/like.png" width="30" height="30"> <%=chall_liked%> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.dto.ChallengeDTO;
 import com.dto.PageDTO;
+import com.dto.StampDTO;
 import com.service.ChallengeService;
 
 /**
@@ -66,17 +67,32 @@ public class ChallengeListServlet extends HttpServlet {
 		List<ChallengeDTO> list = pDTO.getList();
 	
 		//각 게시글마다 프로필 가져오기
-		ArrayList<HashMap<String, String>> profileList = new ArrayList<HashMap<String,String>>();
+		HashMap<String, String> profileMap = new HashMap<String, String>();
+		
+		//각 게시글마다 도장 가져오기
+		HashMap<String, String> stampListMap = new HashMap<String, String>();
 		
 		for (ChallengeDTO c : list) {
-			profileList.add(service.selectProfile(c.getUserid()));
+			profileMap.put(c.getUserid(), service.selectProfileImg(c.getUserid()));
+			
+			HashMap<String, String> stampMap = service.selectMemberStamp(c.getChall_id());
+			if (stampMap != null) {
+				stampListMap.put(String.valueOf(stampMap.get("CHALL_ID")), stampMap.get("STAMP_IMG"));
+			}
+			
 		}
+		System.out.println(stampListMap);
+		
+		//이 달의 챌린지 가져오기
+		ChallengeDTO challThisMonth = service.selectChallThisMonth();
 		
 		request.setAttribute("pDTO", pDTO);
 		request.setAttribute("searchName", searchName);
 		request.setAttribute("searchValue", searchValue);
 		request.setAttribute("sortBy", sortBy);
-		request.setAttribute("profileList", profileList);
+		request.setAttribute("profileMap", profileMap);
+		request.setAttribute("challThisMonth", challThisMonth);
+		request.setAttribute("stampListMap", stampListMap);
 		
 		RequestDispatcher dis = request.getRequestDispatcher("challengeMain.jsp");
 		dis.forward(request, response);

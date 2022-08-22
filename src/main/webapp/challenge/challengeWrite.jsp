@@ -142,7 +142,6 @@
 <form action="UploadServlet?userid=<%= currUserid %>&operate=<%= operate %>" method="post" enctype="multipart/form-data">
 <input type="hidden" name="chall_id" value="<%= chall_id %>">
 <input type="hidden" name="userid" value="<%= currUserid %>">
-<input type="hidden" name="chall_this_month" value="0">
 
   <div class="row">
 	<div class="d-flex w-25">

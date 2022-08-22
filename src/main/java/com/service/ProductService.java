@@ -108,6 +108,17 @@ public class ProductService {
 		}
 		return list;
 	}
+
+	public List<Integer> selectLikeProduct(String userid) {
+		List<Integer> list = null;
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+        try {
+        	list = dao.selectLikeProduct(session, userid);
+        }finally {
+        	session.close();
+        }
+		return list;
+	}
 	
 
 	

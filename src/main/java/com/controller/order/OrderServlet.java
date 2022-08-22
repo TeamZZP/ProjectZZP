@@ -18,17 +18,20 @@ import com.dto.MemberDTO;
 public class OrderServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		System.out.println("OrderServlet실행됨");
 		HttpSession session = request.getSession();
 		MemberDTO dto = (MemberDTO)session.getAttribute("login");
-		
+		String mesg = "";
 		
 		if(dto != null) {
-			System.out.println("OrderServlet실행됨");
+			
 			response.sendRedirect("order.jsp");
 			
-		}else {
 			
+		}else {
+			mesg="회원전용 서비스입니다, 로그인이 필요합니다.";
+			session.setAttribute("mesg", mesg);
+			session.setMaxInactiveInterval(60*30);
 			response.sendRedirect("LoginUIServlet");
 		}
 		

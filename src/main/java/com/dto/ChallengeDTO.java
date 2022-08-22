@@ -11,12 +11,14 @@ public class ChallengeDTO {
 	private String chall_created;
 	private String chall_img;
 	private int chall_comments;
+	private int chall_this_month;
 	public ChallengeDTO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	public ChallengeDTO(int chall_id, String userid, String chall_title, String chall_content, String chall_category,
-			int chall_hits, int chall_liked, String chall_created, String chall_img, int chall_comments) {
+			int chall_hits, int chall_liked, String chall_created, String chall_img, int chall_comments,
+			int chall_this_month) {
 		super();
 		this.chall_id = chall_id;
 		this.userid = userid;
@@ -28,6 +30,7 @@ public class ChallengeDTO {
 		this.chall_created = chall_created;
 		this.chall_img = chall_img;
 		this.chall_comments = chall_comments;
+		this.chall_this_month = chall_this_month;
 	}
 	public int getChall_id() {
 		return chall_id;
@@ -89,12 +92,18 @@ public class ChallengeDTO {
 	public void setChall_comments(int chall_comments) {
 		this.chall_comments = chall_comments;
 	}
+	public int getChall_this_month() {
+		return chall_this_month;
+	}
+	public void setChall_this_month(int chall_this_month) {
+		this.chall_this_month = chall_this_month;
+	}
 	@Override
 	public String toString() {
 		return "ChallengeDTO [chall_id=" + chall_id + ", userid=" + userid + ", chall_title=" + chall_title
 				+ ", chall_content=" + chall_content + ", chall_category=" + chall_category + ", chall_hits="
 				+ chall_hits + ", chall_liked=" + chall_liked + ", chall_created=" + chall_created + ", chall_img="
-				+ chall_img + ", chall_comments=" + chall_comments + "]";
+				+ chall_img + ", chall_comments=" + chall_comments + ", chall_this_month=" + chall_this_month + "]";
 	}
 	
 	

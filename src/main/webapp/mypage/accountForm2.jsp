@@ -49,32 +49,32 @@
 <script>
 	$(document).ready(function() {
 		//$("#result1").css({"font-size":"13.5px", "font-weight":"bold"});
-		$("#result2").css({"font-size":"14px", "background-color":"lightgreen", "font-weight":"bold"});
+		$("#result2").css({"font-size":"14px", "color":"green", "font-weight":"bold"});
 		
 		//1. 비밀번호 입력 확인
-		$("#checkPasswd").on("focus", function () {
-			if ($("#changedPasswd").val().length == 0) {
+		$("#checkPasswd").on("keyup", function () {
+			if ($("#changedPasswd").val().length == 0) {//변경 데이터 없을 때
 				$("#result2").text("변경할 비밀번호를 입력하세요.");
+				$("#result2").css("visibility", "visible");
 				$("#checkPasswd").val("");
 				$("#changedPasswd").focus();
-			}
-		});//end fn
-		$("#changedPasswd").on("keyup", function() {
-			if ($(this).val().length != 0) {
-				$("#result2").text("");
-			} else {//2-1. 변경 데이터 삭제시 확인 데이터 삭제
-				$("#checkPasswd").val("");
-				$("#result2").text("");
-			}
-		});//end fn
-		
-		//2. 비밀번호 일치 확인
-		$("#checkPasswd").on("keyup", function() {
-			if ($("#changedPasswd").val().length != 0
-					&& $(this).val() == $("#changedPasswd").val()) {
+			} else if ($("#changedPasswd").val().length != 0
+					&& $(this).val() == $("#changedPasswd").val()) {//변경 데이터 있음, 일치
 				$("#result2").text("비밀번호 일치");
-			} else {
+				$("#result2").css("visibility", "visible");
+			} else {//변경 데이터 있음, 불일치
 				$("#result2").text("비밀번호 불일치");
+				$("#result2").css("visibility", "visible");
+			}
+		});//end fn
+  		$("#changedPasswd").on("keyup", function(event) {//event=keyup=if문의 event
+			if ($(this).val().length != 0) {//변경 데이터 있을 때
+				$("#result2").css("visibility", "hidden");//데이터 없을 때 출력한 안내 메세지 hidden
+			}
+			if (event.keyCode == 8) {//변경 데이터 Backspace
+				//console.log(event.keyCode);
+				$("#result2").css("visibility", "hidden");//일치, 불일치 안내 메세지 hidden
+				$("#checkPasswd").val("");
 			}
 		});//end fn
 		
@@ -98,15 +98,18 @@
 					alert("비밀번호를 형식에 맞게 입력해주세요 :<");
 					$("#changedPasswd").val("");
 					$("#checkPasswd").val("");
-					$("#result2").text("");
+					$("#result2").css("visibility", "hidden");
 					$("#changedPasswd").focus();
 					event.preventDefault();
-				} else if ($("#result2").text() == "비밀번호 불일치" || $("#result2").text().length == 0) {//비밀번호 미검증
+				} else if ($("#result2").text() == "비밀번호 확인"
+						|| $("#result2").text() == "비밀번호 불일치"
+						|| $("#result2").text() == "변경할 비밀번호를 입력하세요.") {//비밀번호 미검증//왜 .equals로 비교하면 안될까
 					event.preventDefault();
-					console.log("비번 체크");
+					console.log($("#result2").text());//비밀번호 확인//비밀번호 불일치//변경할 비밀번호를 입력하세요.
 					alert("변경할 비밀번호를 확인하세요.");
 					$("#checkPasswd").val("");
-					$("#result2").text("");
+					//$("#result2").text("");
+					$("#result2").css("visibility", "hidden");
 					$("#checkPasswd").focus();
 				} else {
 					console.log("유효성 검사 통과, 비밀번호 검증 완료, 비번, 이메일, 주소 update");
@@ -168,8 +171,8 @@
 								<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
 								<input type="password" class="form-control" name="checkPasswd" id="checkPasswd" placeholder="비밀번호를 한번 더 입력하세요."/>
 							</div>
-							<div style="text-align: right">
-								<span id="result2">비밀번호를 확인하세요 :)</span>
+							<div style="text-align: right; visibility: hidden;">
+								<span id="result2">비밀번호 확인</span>
 							</div>
 						</div>
 					</div>

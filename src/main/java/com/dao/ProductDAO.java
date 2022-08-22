@@ -53,4 +53,9 @@ public class ProductDAO {
 		return list;
 	}
 
+	public List<Integer> selectLikeProduct(SqlSession session, String userid) {
+		List<Integer> list = session.selectList("selectLikeProduct", userid);
+		return list;
+	}
+
 }

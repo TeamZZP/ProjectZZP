@@ -34,22 +34,12 @@ public class AdminProdDetailServlet extends HttpServlet {
 	      List <ImagesDTO> ilist = service.ImagesRetrieve(p_id);
 	      		
 	      String P_ID = String.valueOf(pdto.getP_id());
-			
-		  QuestionService Qservice = new QuestionService();
-		  List<QuestionDTO> prodQuestionList = Qservice.prodQuestion(P_ID);
-		  System.out.println("prodQuestionList--- " + prodQuestionList);
-		
-	      AnswerService Aservice = new AnswerService();
-		  AnswerDTO aDTO = Aservice.selectAnswer(P_ID);
-		  System.out.println(aDTO);
 		
 		  HttpSession session = request.getSession();
 		  request.setAttribute("ProductRetrieveDTO", pdto);
 	      request.setAttribute("ImagesRetrieveList", ilist);
 	    
-		  session.setAttribute("aDTO", aDTO);
-		  session.setAttribute("prodQuestionList", prodQuestionList);
-		  RequestDispatcher dis = request.getRequestDispatcher("admin/adminProductDetail.jsp");
+		  RequestDispatcher dis = request.getRequestDispatcher("adminProductDetail.jsp");
 		  dis.forward(request, response);
 	}
 

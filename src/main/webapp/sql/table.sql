@@ -161,7 +161,7 @@ CREATE TABLE review (
 CREATE TABLE challenge (	
 	chall_id 	NUMBER PRIMARY KEY,
  	userid 	VARCHAR2(30) NOT NULL REFERENCES member(userid) ON DELETE CASCADE,
- 	chall_title 	VARCHAR2(50) NOT NULL,
+ 	chall_title 	VARCHAR2(100) NOT NULL,
  	chall_content 	VARCHAR2(1000) NOT NULL,
  	chall_category 	VARCHAR2(30) NOT NULL,
  	chall_hits 		NUMBER	 DEFAULT 0 	  NOT NULL,
@@ -197,6 +197,14 @@ create table stamp (
   chall_id NUMBER NOT NULL REFERENCES challenge(chall_id) ON DELETE CASCADE,
   stamp_img VARCHAR2(300) NOT NULL,
   stamp_name VARCHAR2(50) NOT NULL
+);
+
+-- 챌린지 획득 도장
+create table member_stamp( 
+	userid VARCHAR2(30) NOT NULL REFERENCES member(userid) ON DELETE CASCADE,
+	stamp_id NUMBER     NOT NULL REFERENCES stamp(stamp_id) ON DELETE CASCADE,
+	chall_id NUMBER     NOT NULL REFERENCES challenge(chall_id) ON DELETE CASCADE,
+	stamp_created DATE   DEFAULT sysdate    NOT NULL
 );
 
 -- 큐엔에이 답변
