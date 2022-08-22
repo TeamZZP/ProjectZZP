@@ -338,6 +338,19 @@ public class ChallengeService {
 		return dto;
 	}
 
+	public HashMap<String, String> selectMemberStamp(int chall_id) {
+		HashMap<String, String> map = null;
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		try {
+			map = dao.selectMemberStamp(session, chall_id);
+		} finally {
+			session.close();
+		}
+		return map;
+	}
+
+
+
 
 
 
