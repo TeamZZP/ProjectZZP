@@ -17,10 +17,14 @@
 		<button type="button" class="btn btn-outline-success"
 			id="productDetail">제품상세</button>
 		<button type="button" class="btn btn-outline-success"
-			id="productReview">구매후기</button>
-		<button type="button" class="btn btn-outline-success" id="productQnA">QnA</button>
+			id="productReview"><a href="#prodReview" style="text-decoration: none; color: green;">구매후기</a></button>
+		<button type="button" class="btn btn-outline-success" id="productQnA"><a href="#prodQA" style="text-decoration: none; color: green;">QnA</a></button>
 	</div>
 </div>
+<div id="prodReview">
 <jsp:include page="product/prodReview.jsp" flush="true"></jsp:include><br>
+</div>
+<div id="prodQA">
 <jsp:include page="product/prodQA.jsp" flush="true"></jsp:include><br>
+</div>
 <jsp:include page="common/footer.jsp" flush="true"></jsp:include><br>
