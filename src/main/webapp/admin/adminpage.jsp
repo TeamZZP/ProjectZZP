@@ -11,7 +11,7 @@
 <script type="text/javascript">
 	$(document).ready(function () {
 		
-		$(".category").click(function() {
+		/* $(".category").click(function() {
 			let category = $(this).attr("data-category");
 			$.ajax({
 				type: "post",
@@ -26,8 +26,11 @@
 					alert("문제가 발생했습니다. 다시 시도해 주세요.");
 				}
 			});//ajax
-		});
+		}); */
 		
+		$("#productManagement").click(function() {
+			location.href="AdminProdServlet";
+		});
 	
 	});//end ready
 </script>
@@ -50,7 +53,7 @@
 			  <div class="col">
 				  <select class="form-select" data-style="btn-info" id="inputGroupSelect01" 
 				  		  style="width: 145px; margin-right: -20px; margin-left: -24px;">
-					    <option selected disabled="disabled">카테고리</option>
+					    <option selected disabled hidden>카테고리</option>
 					    <option value="userid">아이디</option>
 					    <option value="username">이름</option>
 					    <option value="email">이메일</option>
