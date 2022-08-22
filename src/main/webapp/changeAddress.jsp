@@ -21,6 +21,16 @@
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
+		if (<%= default_chk %> == 1) {//기본 배송지 체크 상태로 출력되도록
+			$("#gridCheck2").attr("checked","checked");
+			$("#gridCheck2").attr("disabled", "true");//체크 상태인데 서블릿에 데이터가 안 넘어가서 기본 해제됨//hidden 이용
+			//$("#gridCheck").prop("disabled", "true");//체크 상태인데 서블릿에 데이터가 안 넘어가서 기본 해제됨
+			$("#gridCheck").val("true");//check true 값 설정
+//			$("#mesg").text("기본 배송지 설정은 해제할 수 없습니다.");
+ 			$("#mesg").on("click", function() {//disabled여서 click 불가--checkbox 감싼 div에 설정함
+				alert("기본 배송지 설정은 해제할 수 없습니다.\n수정을 원하는 경우 다른 배송지를 기본으로 설정하세요.");
+			});
+		}
 		//완료 클릭, 서블릿에서 update, 배송지 목록으로
 		$("form").on("submit", function() {
 			var address_name=$("#inputAddressName").val();
@@ -41,6 +51,14 @@
 				$("#inputReceiverPhone").val("");
 				$("#inputReceiverPhone").focus();
 				event.preventDefault();
+			} else {//기본 배송지로 설정 체크한 경우 value true 설정
+				//event.preventDefault();
+				var checked=$("#gridCheck2").is(":checked");
+				if (checked) {//check trun면 val true
+					$("#gridCheck").val(checked);
+					console.log($("#gridCheck").val());
+				}
+				//check false면 val 그대로 false
 			}
 		});//end submit
 		$("#cancle").on("click", function() {
@@ -94,12 +112,12 @@
 						</div>
 				</div>
 			  <div class="col-12">
-			    <div class="form-check">
-			      <input class="form-check-input" type="checkbox" id="gridCheck" name="default_chk">
-			      <label class="form-check-label" for="gridCheck">
+			    <div class="form-check" id="mesg">
+			      <input class="form-check-input" type="checkbox" id="gridCheck2" name="default_chk2"><!-- 실제로 보여지는 체크박스 -->
+			      <label class="form-check-label" for="gridCheck" id="">
 			        기본 배송지로 설정
 			      </label>
-			      <input type="hidden">
+			      <input class="form-check-input" type="hidden" id="gridCheck" name="default_chk" value="false"><!-- 서블릿에서 데이터 파싱용 hidden -->
 			    </div>
 			  </div>
 			

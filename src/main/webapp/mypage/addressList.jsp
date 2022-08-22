@@ -23,6 +23,9 @@
 <div class="container">
 <div class="row">
 <div class="col-lg-2">
+	<div class="col">
+		<a href="MypageServlet">마이페이지 홈</a>
+	</div>
 	<div class="col">주문 내역</div>
 	<div class="col">반품/취소/교환 목록</div>
 	<div class="col">챌린지</div>
@@ -82,6 +85,10 @@
 %>
 <script type="text/javascript">
 	$(document).ready(function() {
+		if (<%= default_chk %> == "1") {
+			$("#check<%= address_id %>").text("기본 배송지");
+		}
+		
 		$("#addAddress").on("click", function() {
 			console.log("추가 버튼 클릭");
 			location.href="addAddress.jsp";
@@ -89,17 +96,26 @@
 		
 		//버튼 구분 userid->address_id로
 		$("#deleteAddress").on("shown.bs.modal", function (e) {
-		    var id = $(e.relatedTarget).data("id");
-		    $("#delete<%= address_id %>").val(id);
+			var id = $(e.relatedTarget).data("id");
+			var chk = $(e.relatedTarget).data("chk");//모달을 open한 버튼에 data-chk 설정
+			$("#delete<%= address_id %>").val(id);
+			$("#delete<%= address_id %>").attr("data-chk",chk);//모달창 data-chk 속성에 값 저장
+			<%-- console.log($("#delete<%= address_id %>").attr("data-chk")); --%>
 		});//end fn
 		
 		$("#delete<%= address_id %>").on("click", function() {
 			var id=$(this).val();
+			var chk=$(this).attr("data-chk");
 			console.log(id);
+			console.log(chk);
 			var size=$("#listSize").val();
-			if (size <= 1) {
+ 			if (size <= 1) {
 				console.log(size);
 				alert("배송지는 한 개 이상 있어야 합니다.");
+				$("#deleteAddress").modal("hide");
+				$(".modal-backdrop").hide();//모달창 닫고 백드롭 hide
+			} else if(chk == 1){//기본 배송지
+				alert("기본 배송지는 삭제할 수 없습니다.");
 				$("#deleteAddress").modal("hide");
 				$(".modal-backdrop").hide();//모달창 닫고 백드롭 hide
 			} else {
@@ -138,7 +154,7 @@
 		<td style="padding:5 0 0 10px;">
 			<span><%= address_name %></span><br>
 			<span><%= receiver_name %></span><br>
-			<span><%= default_chk %></span>
+			<span id="check<%= address_id %>" style="font-size: 12px; background-color: Gainsboro; font-weight: bold"></span>
 		</td>
 		<td>
 			<span style="font-size: 14px"><%= post_num %></span><br>
@@ -160,7 +176,7 @@
 			        선택한 배송지를 삭제하시겠습니까?
 			      </div>
 			      <div class="modal-footer">
-			        <button type="button" id="delete<%= address_id %>" class="btn btn-success">삭제</button>
+			        <button type="button" id="delete<%= address_id %>" data-chk="" class="btn btn-success">삭제</button>
 			        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
 			      </div>
 			    </div>
@@ -170,7 +186,7 @@
 			<div class="btns" style="display: inline-block">
 			<!-- Button trigger modal -->
 			<button type="button" id="change<%= address_id %>" data-edit="<%= address_id %>" class="btn btn-light btn-sm">수정</button>
-			<button type="button" id="checkDelete<%= address_id %>" data-id="<%= address_id %>" class="btn btn-light btn-sm" data-bs-toggle="modal" data-bs-target="#deleteAddress">
+			<button type="button" id="checkDelete<%= address_id %>" data-id="<%= address_id %>" data-chk="<%= default_chk %>" class="btn btn-light btn-sm" data-bs-toggle="modal" data-bs-target="#deleteAddress">
 				삭제
 			</button><!-- open modal -->
 			</div>
