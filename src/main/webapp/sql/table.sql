@@ -144,14 +144,17 @@ CREATE TABLE product_liked (
 
 -- 리뷰
 CREATE TABLE review (
-	review_id		NUMBER		PRIMARY KEY,
-	order_id	NUMBER		NOT NULL REFERENCES orders(order_id) ON DELETE CASCADE,
-	p_id	VARCHAR2(40)		NOT NULL REFERENCES product(p_id) ON DELETE CASCADE,
-	userid	VARCHAR2(30)		NOT NULL REFERENCES member(userid) ON DELETE CASCADE,
-	review_title	VARCHAR2(50)		NOT NULL,
-	review_content	VARCHAR2(1000)		NOT NULL,
-	review_rate	NUMBER		NOT NULL,
-	review_img	VARCHAR2(200)		NULL
+	review_id	NUMBER	PRIMARY KEY,
+	order_id	NUMBER,
+	p_id	NUMBER REFERENCES PRODUCT(P_ID) ON DELETE CASCADE,
+	userid	VARCHAR2(30) REFERENCES MEMBER(USERID) ON DELETE CASCADE,
+	review_title	VARCHAR2(200)	NOT NULL,
+	review_content	VARCHAR2(1000)	NOT NULL,
+	review_rate	varchar2(100),
+	review_img	VARCHAR2(200),
+    review_created date DEFAULT sysdate,
+    
+    FOREIGN KEY (ORDER_ID,USERID,P_ID) REFERENCES ORDERS(ORDER_ID,USERID,P_ID) ON DELETE CASCADE
 );
 
 -- 챌린지

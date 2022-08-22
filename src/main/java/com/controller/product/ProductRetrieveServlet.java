@@ -15,9 +15,11 @@ import com.dto.AnswerDTO;
 import com.dto.ImagesDTO;
 import com.dto.ProductDTO;
 import com.dto.QuestionDTO;
+import com.dto.ReviewDTO;
 import com.service.AnswerService;
 import com.service.ProductService;
 import com.service.QuestionService;
+import com.service.ReviewService;
 
 /**
  * Servlet implementation class productRetrieveServlet
@@ -32,19 +34,22 @@ public class ProductRetrieveServlet extends HttpServlet {
       System.out.println("ProductRetrieveServlet에서 파싱한 p_id=="+p_id);
       
       ProductService service = new ProductService();
-      ProductDTO pdto = service.productRetrieve(p_id);
-      List <ImagesDTO> ilist = service.ImagesRetrieve(p_id);
+      ProductDTO pdto = service.productRetrieve(p_id); //prodDetail
+      List <ImagesDTO> ilist = service.ImagesRetrieve(p_id); //prodImg
       		
       String P_ID = String.valueOf(pdto.getP_id());
 		
 		QuestionService Qservice = new QuestionService();
 		List<QuestionDTO> prodQuestionList = Qservice.prodQuestion(P_ID);
-		System.out.println("prodQuestionList--- " + prodQuestionList);
+		System.out.println("prodQuestionList--- " + prodQuestionList); //Question
 		
 		AnswerService Aservice = new AnswerService();
 		AnswerDTO aDTO = Aservice.selectAnswer(P_ID);
-		System.out.println(aDTO);
+		System.out.println("대답  " + aDTO); //Answer
 		
+		ReviewService Rservice = new ReviewService();  
+		List<ReviewDTO> ReviewList = Rservice.review(P_ID);
+		System.out.println("리뷰 " + ReviewList);
 		
 		HttpSession session = request.getSession();
 		request.setAttribute("ProductRetrieveDTO", pdto);
@@ -52,10 +57,9 @@ public class ProductRetrieveServlet extends HttpServlet {
 	    
 		session.setAttribute("aDTO", aDTO);
 		session.setAttribute("prodQuestionList", prodQuestionList);
+		
+		session.setAttribute("ReviewList", ReviewList);
 		 
-      
-      /* response.sendRedirect("productRetrieve.jsp"); */
-      
 		
 	RequestDispatcher dis = request.getRequestDispatcher("productRetrieve.jsp");
 	dis.forward(request, response);
