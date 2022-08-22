@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
 import com.dto.ChallengeDTO;
 import com.dto.CommentsDTO;
 import com.dto.MemberDTO;
+import com.dto.StampDTO;
 import com.service.ChallengeService;
 
 /**
@@ -74,12 +75,17 @@ public class ChallengeDetailServlet extends HttpServlet {
 		likedMap.put("userid", userid);
 		int likedIt = service.countLikedByMap(likedMap);
 		
+		//해당 게시글 도장 가져오기
+		HashMap<String, String> stampMap = service.selectMemberStamp(Integer.parseInt(chall_id));
+		System.out.println(stampMap);
+		
 		request.setAttribute("dto", dto);
 		request.setAttribute("commentsList", commentsList);
 		request.setAttribute("profileMap", profileMap);
 		request.setAttribute("profile_img", profile_img);
 		request.setAttribute("currProfile_img", currProfile_img);
 		request.setAttribute("likedIt", likedIt);
+		request.setAttribute("stampMap", stampMap);
 		
 		RequestDispatcher dis = request.getRequestDispatcher("challengeDetail.jsp");
 		dis.forward(request, response);

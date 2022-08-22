@@ -9,8 +9,8 @@ import com.dto.AddressDTO;
 
 public class AddressDAO {
 
-	public AddressDTO selectAddress(SqlSession session, String userid) {
-		AddressDTO address=session.selectOne("AddressMapper.selectAddress", userid);
+	public AddressDTO selectDefaultAddress(SqlSession session, String userid) {
+		AddressDTO address=session.selectOne("AddressMapper.selectDefaultAddress", userid);
 		return address;
 	}
 
@@ -37,6 +37,11 @@ public class AddressDAO {
 	public AddressDTO selectAddressId(SqlSession session, String address_id) {
 		AddressDTO address=session.selectOne("AddressMapper.selectAddressId", address_id);
 		return address;
+	}
+
+	public int changeNotDefaultAddress(SqlSession session, String userid) {
+		int num=session.update("AddressMapper.changeNotDefaultAddress", userid);
+		return num;
 	}
 
 	

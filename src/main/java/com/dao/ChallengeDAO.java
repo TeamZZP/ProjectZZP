@@ -167,6 +167,13 @@ public class ChallengeDAO {
 		return dto;
 	}
 
+	public HashMap<String, String> selectMemberStamp(SqlSession session, int chall_id) {
+		HashMap<String, String> map = session.selectOne("ChallengeMapper.selectMemberStamp", chall_id);
+		return map;
+	}
+
+	
+
 
 
 }

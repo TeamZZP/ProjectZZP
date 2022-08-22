@@ -52,18 +52,23 @@ public class AddressAddServlet extends HttpServlet {
 			System.out.println(addr2);
 //			System.out.println(default_chk);//기본 배송지 체크하면 on 출력, 안 하면 null 출력
 			
+			AddressService service=new AddressService();
 			AddressDTO address=null;
+			int num=0;
 			if (request.getParameter("default_chk") == null) {
 				System.out.println("기본 배송지 아님");
 				address=new AddressDTO(0, userid, address_name, receiver_name,
 						receiver_phone, post_num, addr1, addr2, 0);
+				num=service.addAddress(address);
 			} else {
 				System.out.println("기본 배송지 체크");
+				//다른 배송지의 default_chk=0으로 변경
+				int xxx=a_service.changeNotDefaultAddress(userid);
+				System.out.println("default_chk를 0으로 변경 : "+xxx);
 				address=new AddressDTO(0, userid, address_name, receiver_name,
 						receiver_phone, post_num, addr1, addr2, 1);
+				num=service.addAddress(address);
 			}
-			AddressService service=new AddressService();
-			int num=service.addAddress(address);
 			System.out.println("추가된 배송지 갯수 : "+num);
 
 //			session.setAttribute("addressMap", addressMap);//userid의 address 리스트

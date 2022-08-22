@@ -166,7 +166,31 @@ a:hover {
 				}
 			})//end ajax
 		})//end cart */
+<<<<<<< HEAD
 
+=======
+		
+		$("#like").on("click" function() {
+		
+			$.ajax({
+				type: "get",
+				url:"ProductLikeListServlet",
+				data:{
+					userid : userid
+				},
+				dataType: String,
+				success  : function(data,status,xhr) {
+					//likeList.jsp에서 가져올 테이블
+				}error: function(xhr,status,error) {
+					console.log(error);
+				} 
+			})//end like ajax
+		})//end like
+		
+		
+		
+		
+>>>>>>> 12065fe9bc7f0fc3323e4f926739f53da2a7af38
 		$("#order").on("click", function() {
 			$("form").attr("action", "OrderServlet");
 		})

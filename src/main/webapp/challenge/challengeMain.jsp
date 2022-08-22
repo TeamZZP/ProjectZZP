@@ -1,3 +1,4 @@
+<%@page import="com.dto.StampDTO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="com.dto.PageDTO"%>
@@ -17,7 +18,7 @@
       overflow: hidden;
       border-radius: 15px;
     }
-    .hover-zoomin img {
+    .hover-zoomin img:not(.stamp) {
       width: 100%;
       height: auto;
       -webkit-transition: all 0.2s ease-in-out;
@@ -26,7 +27,7 @@
       -ms-transition: all 0.2s ease-in-out;
       transition: all 0.2s ease-in-out;
     }
-    .hover-zoomin:hover img {
+    .hover-zoomin:hover img:not(.stamp) {
       -webkit-transform: scale(1.1);
       -moz-transform: scale(1.1);
       -o-transform: scale(1.1);
@@ -39,6 +40,11 @@
     	width: 150px;
     }
     
+    .stamp {
+    	position: absolute; 
+		left: 198px; 
+		top: -15px; 
+    }
 
 </style>
 <%
@@ -53,6 +59,10 @@
 	
 	//이달의 챌린지 가져오기
 	ChallengeDTO challThisMonth = (ChallengeDTO) request.getAttribute("challThisMonth");
+	
+	//각 게시글마다 도장 가져오기
+	HashMap<String, String> stampListMap = (HashMap<String, String>) request.getAttribute("stampListMap");
+	System.out.println(stampListMap);
 	
 	//session에 저장된 메시지가 있는 경우 경고창 띄워주고 삭제하기
 	String mesg = (String) session.getAttribute("mesg");
@@ -117,7 +127,11 @@
        </div>
        <div class="hover-zoomin">
 	       <a href="ChallengeDetailServlet?chall_id=<%=chall_id%>"> 
-			<img src="/eclipse/upload/<%=chall_img%>" border="0" onerror="this.src='images/uploadarea.png'"></a>
+			<img src="/eclipse/upload/<%=chall_img%>" border="0" onerror="this.src='images/uploadarea.png'">
+			<% if (stampListMap.containsKey(String.valueOf(chall_id))) { %>
+			<img src="/eclipse/upload/<%=stampListMap.get(String.valueOf(chall_id))%>" class="stamp" width="110" height="110">
+			<%} %>
+		   </a>
 	   </div>
 	   <div class="p-2 text-center">
 	       <img src="images/like.png" width="30" height="30"> <%=chall_liked%> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

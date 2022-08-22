@@ -40,12 +40,15 @@ public class AccountManagementServlet extends HttpServlet {
 			MemberDTO member=m_service.selectMember(userid);
 			
 			AddressService a_service=new AddressService();
-			List<AddressDTO> addressList=a_service.selectAllAddress(userid);
+//			List<AddressDTO> addressList=a_service.selectAllAddress(userid);//userid의 전체 address
+			//userid-default_chk=1
+			AddressDTO address=a_service.selectDefaultAddress(userid);//userid의 기본 배송지
+			System.out.println(address);
 			
 			session.setAttribute("login", member);
-			session.setAttribute("addressList", addressList);
-//			session.setAttribute("address", address);
-			response.sendRedirect("accountForm.jsp");//로그인 된 계정 정보 session 저장-마이페이지 오픈//mypage로 이름 바꿀까?
+//			session.setAttribute("addressList", addressList);
+			session.setAttribute("address", address);
+			response.sendRedirect("accountForm.jsp");//로그인 된 계정 정보 session 저장-마이페이지 오픈
 		} else {
 			//alert로 로그인 후 이용하세요 출력
 			String mesg="로그인이 필요합니다.";

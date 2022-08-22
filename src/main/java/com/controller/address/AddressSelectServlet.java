@@ -32,7 +32,7 @@ public class AddressSelectServlet extends HttpServlet {
 			System.out.println(userid);
 			AddressService a_service=new AddressService();
 			
-			if (request.getParameter("address_id") != null) {//address_id가 입력되었을 때 해당 데이터로 address select
+//			if (request.getParameter("address_id") != null) {//address_id가 입력되었을 때 해당 데이터로 address select
 				//데이터 파싱
 				String address_id=request.getParameter("address_id");
 				System.out.println(address_id);
@@ -41,10 +41,7 @@ public class AddressSelectServlet extends HttpServlet {
 				
 				session.setAttribute("addressidAddress", addressidAddress);
 				response.sendRedirect("changeAddress.jsp");
-			} else {
-				AddressDTO useridAddress=a_service.selectAddress(userid);//selectOne이어서 배송지 여러 개인 경우 err--사용하는 경우 수정 필요
-				System.out.println(userid+"의 배송지 : "+useridAddress);
-			}
+//			}
 		} else {
 			//alert로 로그인 후 이용하세요 출력
 			String mesg="로그인이 필요합니다.";

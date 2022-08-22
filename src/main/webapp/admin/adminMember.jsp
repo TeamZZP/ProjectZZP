@@ -5,6 +5,29 @@
 <%@page import="com.dto.MemberDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+$(document).ready(function () {
+	
+	$(".category").click(function() {
+		let category = $(this).attr("data-category");
+		location.href="AdminCategoryServlet?category="+category;
+	});
+	
+});//end ready
+</script>
+
+<div class="container">
+	<form action="" method="post">
+		<div class="row">
+			<div class="btn-group" role="group" aria-label="Basic example">
+				<button type="button" class="btn btn-outline-success category" data-category="member" id="memberManagement">회원관리</button>
+				<button type="button" class="btn btn-outline-success category" data-category="product" id="productManagement">상품관리</button>
+				<button type="button" class="btn btn-outline-success category" data-category="challenge" id="challengeManagement">챌린지관리</button>
+			</div>
+		</div>
+	</form>
+</div>
 
 <div class="container" style="margin-top: 5px; margin-bottom: 5px;">
 	<div class="row row-cols-auto">
@@ -12,7 +35,7 @@
 			  <div class="col">
 				  <select class="form-select" data-style="btn-info" id="inputGroupSelect01" 
 				  		  style="width: 145px; margin-right: -20px; margin-left: -24px;">
-					    <option selected disabled="disabled">카테고리</option>
+					    <option selected disabled hidden>카테고리</option>
 					    <option value="userid">아이디</option>
 					    <option value="username">이름</option>
 					    <option value="email">이메일</option>
@@ -75,6 +98,7 @@
 %>
 <script type="text/javascript">
 	$(document).ready(function() {
+		
 		$("#deleteMember").on("shown.bs.modal", function (e) {//#deleteMember modal 창을 열 때 선택한 버튼의 data-id를 가져옴(deleteID로 설정했더니 안돼서 다시 id로 바꿈)--modal창의 삭제 버튼에 저장
 		    var id = $(e.relatedTarget).data("id");
 		    $("#delete<%= userid %>").val(id);

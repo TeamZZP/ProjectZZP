@@ -144,14 +144,17 @@ CREATE TABLE product_liked (
 
 -- 리뷰
 CREATE TABLE review (
-	review_id		NUMBER		PRIMARY KEY,
-	order_id	NUMBER		NOT NULL REFERENCES orders(order_id) ON DELETE CASCADE,
-	p_id	VARCHAR2(40)		NOT NULL REFERENCES product(p_id) ON DELETE CASCADE,
-	userid	VARCHAR2(30)		NOT NULL REFERENCES member(userid) ON DELETE CASCADE,
-	review_title	VARCHAR2(50)		NOT NULL,
-	review_content	VARCHAR2(1000)		NOT NULL,
-	review_rate	NUMBER		NOT NULL,
-	review_img	VARCHAR2(200)		NULL
+	review_id	NUMBER	PRIMARY KEY,
+	order_id	NUMBER,
+	p_id	NUMBER REFERENCES PRODUCT(P_ID) ON DELETE CASCADE,
+	userid	VARCHAR2(30) REFERENCES MEMBER(USERID) ON DELETE CASCADE,
+	review_title	VARCHAR2(200)	NOT NULL,
+	review_content	VARCHAR2(1000)	NOT NULL,
+	review_rate	varchar2(100),
+	review_img	VARCHAR2(200),
+    review_created date DEFAULT sysdate,
+    
+    FOREIGN KEY (ORDER_ID,USERID,P_ID) REFERENCES ORDERS(ORDER_ID,USERID,P_ID) ON DELETE CASCADE
 );
 
 -- 챌린지
@@ -194,6 +197,14 @@ create table stamp (
   chall_id NUMBER NOT NULL REFERENCES challenge(chall_id) ON DELETE CASCADE,
   stamp_img VARCHAR2(300) NOT NULL,
   stamp_name VARCHAR2(50) NOT NULL
+);
+
+-- 챌린지 획득 도장
+create table member_stamp( 
+	userid VARCHAR2(30) NOT NULL REFERENCES member(userid) ON DELETE CASCADE,
+	stamp_id NUMBER     NOT NULL REFERENCES stamp(stamp_id) ON DELETE CASCADE,
+	chall_id NUMBER     NOT NULL REFERENCES challenge(chall_id) ON DELETE CASCADE,
+	stamp_created DATE   DEFAULT sysdate    NOT NULL
 );
 
 -- 큐엔에이 답변
