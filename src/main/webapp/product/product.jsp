@@ -160,7 +160,9 @@ function productChoice(n) {
 				p_id : id
 			},
 			success: function(data, status, xhr) {
-				//console.log(data);
+				console.log(data);
+				$("#header").empty();
+				$("#header").append(data);
 				//$("#addcart").modal("hide");
 				//$(".modal-backdrop").hide();//모달창 닫고 백드롭 hide
 			},
@@ -168,8 +170,6 @@ function productChoice(n) {
 				alert(error);
 			}
 		});//end ajax
-		$("#cart_title").text("확인 중");
-		//console.log(id);
 	});//end fn
 </script>
 			
@@ -210,7 +210,7 @@ function productChoice(n) {
 						aria-labelledby="staticBackdropLabel" aria-hidden="true">
 						<div class="modal-dialog">
 							<div class="modal-content">
-								<div class="modal-header">
+								<div class="modal-header" id="header">
 									<h5 class="modal-title" id="cart_title" style="text-align: center">
 										<%=p_name%>
 									</h5>

@@ -1,6 +1,7 @@
 package com.controller.product;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -31,14 +32,22 @@ public class ProductSelectServlet extends HttpServlet {
 		System.out.println("상품 출력 서블릿 실행");
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out=response.getWriter();
 		HttpSession session=request.getSession();
+		
 //		MemberDTO dto=(MemberDTO) session.getAttribute("login");
 		
 		int p_id=Integer.parseInt(request.getParameter("p_id"));
 		ProductService service=new ProductService();
-		ProductDTO p=service.productRetrieve(p_id);
-		System.out.println(p);
+		ProductDTO product=service.productRetrieve(p_id);
+		System.out.println(product);
 		
+		String result
+				="<div class='modal-header'>"
+				+ "<h5 class+'modal-title' id='cart_title' style='text-align: center'>"+product.getP_name()+"</h5>"
+				+ "<button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>"
+				+ "</div>";
+		out.print(result);
 /*		CategoryService category_service = new CategoryService(); // 카테고리 목록 조회
 		ProductService  product_service  = new ProductService(); //베스트 상품 조회
 		
@@ -47,10 +56,10 @@ public class ProductSelectServlet extends HttpServlet {
 		System.out.println(product_list);
 		
 		request.setAttribute("category_list", category_list);		    
-		request.setAttribute("product_list", product_list);	*/
-		
-//		RequestDispatcher dis=request.getRequestDispatcher("product/product.jsp");
-//		dis.forward(request, response);
+		request.setAttribute("product_list", product_list);
+
+		RequestDispatcher dis=request.getRequestDispatcher("product/product.jsp");
+		dis.forward(request, response);	*/
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
