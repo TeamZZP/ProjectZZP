@@ -5,6 +5,17 @@
 <%@page import="com.dto.MemberDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+$(document).ready(function () {
+	
+	$(".category").click(function() {
+		let category = $(this).attr("data-category");
+		location.href="AdminCategoryServlet?category="+category;
+	});
+	
+});//end ready
+</script>
 
 <div class="container">
 	<form action="" method="post">
@@ -87,6 +98,7 @@
 %>
 <script type="text/javascript">
 	$(document).ready(function() {
+		
 		$("#deleteMember").on("shown.bs.modal", function (e) {//#deleteMember modal 창을 열 때 선택한 버튼의 data-id를 가져옴(deleteID로 설정했더니 안돼서 다시 id로 바꿈)--modal창의 삭제 버튼에 저장
 		    var id = $(e.relatedTarget).data("id");
 		    $("#delete<%= userid %>").val(id);

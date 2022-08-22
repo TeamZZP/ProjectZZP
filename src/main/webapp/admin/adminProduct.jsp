@@ -4,7 +4,10 @@
     pageEncoding="UTF-8"%>
 <%
 List<CategoryProductDTO> product_list = (List<CategoryProductDTO>) request.getAttribute("product_list");
+System.out.println("adminProduct페이지");
 %>
+
+
 <div class="container">
 	<form action="" method="post">
 		<div class="row">
@@ -24,11 +27,11 @@ List<CategoryProductDTO> product_list = (List<CategoryProductDTO>) request.getAt
 				  <select class="form-select" data-style="btn-info" id="inputGroupSelect01" 
 				  		  style="width: 145px; margin-right: -20px; margin-left: -24px;">
 					    <option selected disabled hidden>카테고리</option>
-					    <option value="userid">아이디</option>
-					    <option value="username">이름</option>
-					    <option value="email">이메일</option>
-					    <option value="phone">전화번호</option>
-					    <option value="address">주소</option>
+					    <option value="c_id">카테고리</option>
+					    <option value="p_id">상품번호</option>
+					    <option value="p_name">상품명</option>
+					    <option value="p_selling_price">판매가</option>
+					    <option value="p_created">등록일</option>
 				  </select>
 			  </div>
 		  <div class="col"><input type="text" class="form-control" style="width: 150px; margin-right: -20px;"></div>
@@ -43,8 +46,8 @@ List<CategoryProductDTO> product_list = (List<CategoryProductDTO>) request.getAt
 		<th>카테고리</th>
 		<th>상품번호</th>
 		<th>상품명</th>
-		<th>가격</th>
-		<th>할인금액</th>
+		<th>판매가</th>
+		<th>할인</th>
 		<th>재고</th>
 		<th>등록일</th>
 		<th>관리</th>
@@ -76,46 +79,79 @@ for ( int i = 0 ; i < product_list.size() ; i++ ) {
 		<td class="productDetail" data-p_id="<%= p_id %>"><%= p_stock %>&nbsp;&nbsp;</td>
 		<td class="productDetail" data-p_id="<%= p_id %>"><%= p_created %></td>
 		<td>
+			<!-- Modal -->
+			<div class="modal fade" id="deleteProduct" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+			  <div class="modal-dialog">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h5 class="modal-title" id="staticBackdropLabel">상품 삭제</h5>
+			        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			      </div>
+			      <div class="modal-body">
+			        선택한 상품을 삭제하시겠습니까?
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" id="delProd<%= p_id %>" data_id="<%= p_id %>" class="btn btn-success">삭제</button>
+			        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+			      </div>
+			    </div> 
+			  </div>
+			</div>
+			<!-- 버튼 -->
+			<button type="button" id="prodDetail" data-p_id="<%= p_id %>" class="btn btn-outline-success btn-sm">상품보기</button>
+			<button type="button" id="delPopup" class="btn btn-outline-dark btn-sm" data-bs-toggle="modal" data-bs-target="#deleteProduct">
+				삭제
+			</button>
+		</td>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 $(document).ready(function () {
-	
-	$(".productDetail").click(function() {
-		location.href="AdminProdDetailServlet?p_id="+<%= p_id %>;
-	});
-	
+	//관리자페이지 카테고리
 	$(".category").click(function() {
 		let category = $(this).attr("data-category");
 		location.href="AdminCategoryServlet?category="+category;
 	});
+	//상품 상세페이지
+	$(".productDetail").click(function() {
+		let p_id = $(this).attr("data-p_id");
+		location.href="AdminProdDetailServlet?p_id="+p_id;
+	});
+	//상품보기 버튼
+	$("body").on("click", "#prodDetail", function () {
+		let p_id = $(this).attr("data-p_id");
+		console.log(p_id);
+		location.href="ProductRetrieveServlet?p_id="+p_id;
+	});
+	//상품삭제 버튼
+	$("#deleteProduct").on("shown.bs.modal", function (e) {//#deleteMember modal 창을 열 때 선택한 버튼의 data-id를 가져옴(deleteID로 설정했더니 안돼서 다시 id로 바꿈)--modal창의 삭제 버튼에 저장
+		    var id = $(e.relatedTarget).data("id");
+		    $("#delProd<%= p_id %>").val(id);
+	});
+	$("#delProd<%= p_id %>").on("click", function() {
+		var p_id = $(this).val();
+		console.log(p_id);
+		location.href="ProductDeleteServlet?p_id="+p_id;
+	});
+	
+	<%-- $("body").on("click", "#delProd<%= p_id %>", function () {
+		let p_id = $(this).val();
+		console.log(p_id);
+		location.href="ProductDeleteServlet?p_id="+p_id;
+	});  --%>
+	
+ 	<%-- $("#delProd<%= p_id %>").click(function() {
+ 		/* let p_id = $(this).attr("data_id");
+		console.log(p_id); */
+		
+		var p_id=$(this).val();
+		console.log(p_id);
+		location.href="ProductDeleteServlet?p_id="+p_id;
+	});  --%>
 	
 	
 });//end ready
+
 </script>
-			<!-- Modal -->
-			<div class="modal fade" id="deleteMember" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-			  <div class="modal-dialog">
-			    <div class="modal-content">
-			      <div class="modal-header">
-			        <h5 class="modal-title" id="staticBackdropLabel">회원 삭제</h5>
-			        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-			      </div>
-			      <div class="modal-body">
-			        선택한 회원을 삭제하시겠습니까?
-			      </div>
-			      <div class="modal-footer">
-			        <button type="button" id="" class="btn btn-success">삭제</button>
-			        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-			      </div>
-			    </div>
-			  </div>
-			</div>
-			<!-- Button trigger modal -->
-			<button type="button" id=""  class="btn btn-outline-success btn-sm">수정</button>
-			<button type="button" id=""  class="btn btn-outline-dark btn-sm" data-bs-toggle="modal" data-bs-target="#deleteMember">
-				삭제
-			</button><!-- open modal -->
-		</td>
 <%
 	}
 %>
@@ -124,3 +160,4 @@ $(document).ready(function () {
 </form>
 </div>
 </div>
+
