@@ -1,4 +1,15 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
 
+</body>
+</html>
 <%@ page import="com.dto.CartDTO"%>
 <%@ page import="java.util.List"%>
 <%@ page import="java.util.Map"%>
@@ -166,31 +177,7 @@ a:hover {
 				}
 			})//end ajax
 		})//end cart */
-<<<<<<< HEAD
 
-=======
-		
-		$("#like").on("click" function() {
-		
-			$.ajax({
-				type: "get",
-				url:"ProductLikeListServlet",
-				data:{
-					userid : userid
-				},
-				dataType: String,
-				success  : function(data,status,xhr) {
-					//likeList.jsp에서 가져올 테이블
-				}error: function(xhr,status,error) {
-					console.log(error);
-				} 
-			})//end like ajax
-		})//end like
-		
-		
-		
-		
->>>>>>> 12065fe9bc7f0fc3323e4f926739f53da2a7af38
 		$("#order").on("click", function() {
 			$("form").attr("action", "OrderServlet");
 		})
@@ -228,12 +215,11 @@ a:hover {
 	%>
 	<div>
 		<div class="no_item_cart" style="text-align: center; padding: 50px; line-height: 70px;"   > 
-			<img src="images/cart.png" width="150" height="150" ><br>
-			<span >장바구니에 담긴 상품이 없습니다.</span>
+			<img src="images/like.png" width="150" height="150" ><br>
+			<span >찜한 상품이 없습니다.</span>
 			<div>
 				<button type="button" onclick="location.href='StoreServlet';"
 					class="btn btn-success" >상품보러가기</button>
-				<hr>
 			</div>
 		</div>
 	</div>
@@ -303,10 +289,9 @@ a:hover {
 					id="total"><%=total%></span>
 			</div>
 		</div>
-		<div style="float: right;" >
+		<div style="float: right;">
 			<input type="submit" class="btn btn-success" id="order" value="주문하기">
-			<input type="submit" class="btn btn-success" id="delAllCart"
-				value="상품삭제">
+			<input type="submit" class="btn btn-success" id="delAllCart" value="상품삭제">
 		</div>
 
 		<%

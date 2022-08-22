@@ -59,11 +59,16 @@ public class AddressChangeServlet extends HttpServlet {
 			changedAddMap.put("post_num", post_num);
 			changedAddMap.put("addr1", addr1);
 			changedAddMap.put("addr2", addr2);
-			if (request.getParameter("default_chk") == null) {
+			if (request.getParameter("default_chk").equals("false")) {//기본 배송지 체크X
 				System.out.println("기본 배송지 아님");
 				changedAddMap.put("default_chk", "0");
 			} else {
 				System.out.println("기본 배송지 체크");
+				System.out.println(request.getParameter("default_chk"));
+				//다른 배송지의 default_chk=0으로 변경
+				int num=a_service.changeNotDefaultAddress(userid);
+				System.out.println("default_chk를 0으로 변경 : "+num);
+				//현재 수정 배송지 데이터를 default_chk=1로 설정
 				changedAddMap.put("default_chk", "1");
 			}
 			

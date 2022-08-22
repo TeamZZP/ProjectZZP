@@ -17,11 +17,11 @@ public class AddressService {
 		dao = new AddressDAO();
 	}
 
-	public AddressDTO selectAddress(String userid) {
+	public AddressDTO selectDefaultAddress(String userid) {
 		SqlSession session=MySqlSessionFactory.getSqlSession();
 		AddressDTO address=null;
 		try {
-			address=dao.selectAddress(session, userid);
+			address=dao.selectDefaultAddress(session, userid);
 		} finally {
 			session.close();
 		}
@@ -84,6 +84,18 @@ public class AddressService {
 			session.close();
 		}
 		return address;
+	}
+
+	public int changeNotDefaultAddress(String userid) {
+		SqlSession session=MySqlSessionFactory.getSqlSession();
+		int num=0;
+		try {
+			num=dao.changeNotDefaultAddress(session, userid);
+			session.commit();
+		} catch (Exception e) {
+			session.close();
+		}
+		return num;
 	}
 
 }

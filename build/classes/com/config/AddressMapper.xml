@@ -3,9 +3,10 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="AddressMapper">
-	<select id="selectAddress" parameterType="String" resultType="AddressDTO">
+	<select id="selectDefaultAddress" parameterType="String" resultType="AddressDTO">
 		select * from address
 		where userid = #{userid}
+		and default_chk = 1
 	</select>
 	<update id="changeAddress" parameterType="hashmap">
 		update address
@@ -36,4 +37,9 @@
 		select * from address
 		where address_id = #{address_id}
 	</select>
+	<update id="changeNotDefaultAddress">
+		update address
+		set default_chk = 0
+		where userid = #{userid}
+	</update>
 </mapper>
