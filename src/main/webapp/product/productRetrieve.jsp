@@ -47,8 +47,9 @@
 		
 	
 	$("#order").on("click", function() {
-		$("form").attr("action", "orderServlet");
-	}
+		
+		$("form").attr("action", "OrderServlet");
+	})//order
  
 	})//end ready
 
@@ -225,7 +226,7 @@ System.out.println("productRetrieve.jsp에서 파싱한 ilist==" + ilist);
 
 					<tr >
 						
-						<td><button type="button" class="btn btn-success" id="order">주문하기</button></td>
+						<td><button type="submit" class="btn btn-success" id="order">주문하기</button></td>
 						<td></td>
 						<td><button type="submit" class="btn btn-success" id="cart">장바구니저장</button></td>
 					</tr>
@@ -235,15 +236,5 @@ System.out.println("productRetrieve.jsp에서 파싱한 ilist==" + ilist);
 		</div>
 	</form>
 
-<div class="row">
-	<div class="btn-group" role="group" aria-label="Basic example">
-		<button type="button" class="btn btn-outline-success"
-			id="productDetail">제품상세</button>
-		<button type="button" class="btn btn-outline-success"
-			id="productReview">구매후기</button>
-		<button type="button" class="btn btn-outline-success" id="productQnA">QnA</button>
-	</div>
 
-
-</div>
 

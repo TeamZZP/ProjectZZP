@@ -116,6 +116,8 @@ public class UploadServlet extends HttpServlet {
 					
 				} catch (FileUploadException e) {
 					e.printStackTrace();
+				} finally {
+					
 				}
 				
 				ChallengeService service = new ChallengeService();

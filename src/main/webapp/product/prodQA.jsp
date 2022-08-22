@@ -23,7 +23,7 @@
 					console.log(data);
 					if (data != null) {
 						$("#answer"+qID).attr("display","none");
-						$("#answer"+qID).toggle().html(data + 
+						$("#answer"+qID).slideToggle("200").html(data + 
 						" &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <img alt='A' src='images/question/A.png' width='50px' height='55px'>");
 					} else {
 						alert("권한이 없습니다.");
@@ -58,6 +58,7 @@
 	}
 </style>
 <table style="border-spacing : 0">
+	<caption style="caption-side: top; text-align: center;">Q&A</caption>
 	<tr>
 		<td>
 		<%

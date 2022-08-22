@@ -3,20 +3,20 @@ package com.dto;
 public class ReviewDTO {
 	int REVIEW_ID;
 	int ORDER_ID;
-	String P_ID;
+	int P_ID;
 	String USERID;
 	String REVIEW_TITLE;
 	String REVIEW_CONTENT;
-	int REVIEW_RATE;
+	String REVIEW_RATE;
 	String REVIEW_IMG;
+	String REVIEW_CREATED;
 	
 	public ReviewDTO() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	public ReviewDTO(int rEVIEW_ID, int oRDER_ID, String p_ID, String uSERID, String rEVIEW_TITLE,
-			String rEVIEW_CONTENT, int rEVIEW_RATE, String rEVIEW_IMG) {
+	public ReviewDTO(int rEVIEW_ID, int oRDER_ID, int p_ID, String uSERID, String rEVIEW_TITLE, String rEVIEW_CONTENT,
+			String rEVIEW_RATE, String rEVIEW_IMG, String rEVIEW_CREATED) {
 		super();
 		REVIEW_ID = rEVIEW_ID;
 		ORDER_ID = oRDER_ID;
@@ -26,13 +26,7 @@ public class ReviewDTO {
 		REVIEW_CONTENT = rEVIEW_CONTENT;
 		REVIEW_RATE = rEVIEW_RATE;
 		REVIEW_IMG = rEVIEW_IMG;
-	}
-
-	@Override
-	public String toString() {
-		return "ReviewDTO [REVIEW_ID=" + REVIEW_ID + ", ORDER_ID=" + ORDER_ID + ", P_ID=" + P_ID + ", USERID=" + USERID
-				+ ", REVIEW_TITLE=" + REVIEW_TITLE + ", REVIEW_CONTENT=" + REVIEW_CONTENT + ", REVIEW_RATE="
-				+ REVIEW_RATE + ", REVIEW_IMG=" + REVIEW_IMG + "]";
+		REVIEW_CREATED = rEVIEW_CREATED;
 	}
 
 	public int getREVIEW_ID() {
@@ -51,11 +45,11 @@ public class ReviewDTO {
 		ORDER_ID = oRDER_ID;
 	}
 
-	public String getP_ID() {
+	public int getP_ID() {
 		return P_ID;
 	}
 
-	public void setP_ID(String p_ID) {
+	public void setP_ID(int p_ID) {
 		P_ID = p_ID;
 	}
 
@@ -83,11 +77,11 @@ public class ReviewDTO {
 		REVIEW_CONTENT = rEVIEW_CONTENT;
 	}
 
-	public int getREVIEW_RATE() {
+	public String getREVIEW_RATE() {
 		return REVIEW_RATE;
 	}
 
-	public void setREVIEW_RATE(int rEVIEW_RATE) {
+	public void setREVIEW_RATE(String rEVIEW_RATE) {
 		REVIEW_RATE = rEVIEW_RATE;
 	}
 
@@ -98,6 +92,20 @@ public class ReviewDTO {
 	public void setREVIEW_IMG(String rEVIEW_IMG) {
 		REVIEW_IMG = rEVIEW_IMG;
 	}
-	
-	
+
+	public String getREVIEW_CREATED() {
+		return REVIEW_CREATED;
+	}
+
+	public void setREVIEW_CREATED(String rEVIEW_CREATED) {
+		REVIEW_CREATED = rEVIEW_CREATED;
+	}
+
+	@Override
+	public String toString() {
+		return "ReviewDTO [REVIEW_ID=" + REVIEW_ID + ", ORDER_ID=" + ORDER_ID + ", P_ID=" + P_ID + ", USERID=" + USERID
+				+ ", REVIEW_TITLE=" + REVIEW_TITLE + ", REVIEW_CONTENT=" + REVIEW_CONTENT + ", REVIEW_RATE="
+				+ REVIEW_RATE + ", REVIEW_IMG=" + REVIEW_IMG + ", REVIEW_CREATED=" + REVIEW_CREATED + "]";
+	}
+
 }

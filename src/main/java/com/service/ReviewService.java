@@ -19,11 +19,11 @@ public class ReviewService {
 
 
 
-	public List<ReviewDTO> reviewAll() {
+	public List<ReviewDTO> review(String p_ID) {
 		List<ReviewDTO> list =null;
 		SqlSession session = MySqlSessionFactory.getSqlSession();
 		try {
-			list = dao.reviewAll(session);
+			list = dao.review(session, p_ID);
 		} finally {
 			session.close();
 		}

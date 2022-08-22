@@ -8,8 +8,8 @@ import com.dto.ReviewDTO;
 
 public class ReviewDAO {
 
-	public List<ReviewDTO> reviewAll(SqlSession session) {
-		List<ReviewDTO> list =session.selectList("reviewAll");
+	public List<ReviewDTO> review(SqlSession session, String p_ID) {
+		List<ReviewDTO> list =session.selectList("ReviewMapper.review", p_ID);
 		return list;
 	}
 

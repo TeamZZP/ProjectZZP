@@ -53,6 +53,9 @@
 				}
 			});//end ajax
 		});//
+		$("#uploadBtu").click(function () {
+			window.open("showImg.jsp", "", "width=400px height=500px");
+		});
 	});//end ready
 </script>
 <div style="text-align: center; display: flex; justify-content:center; height: 100px; margin-bottom: 10px;" >
@@ -107,8 +110,8 @@
 			<%} else { %>
 				<td>
 					<div>
-					  	<button type="button" class="btn btn-secondary" disabled style="padding: 2rem;">첨부파일</button>
-					  	<img alt="" src="/eclipse/upload/<%=qDTO.getQ_IMG()%>" width="100px" height="100px" style="border: 1px solid gray;">
+					  	<button type="button" class="btn btn-secondary" id="uploadBtu" style="padding: 2rem;">첨부파일</button>
+					  	<img id="upload" alt="" src="/eclipse/upload/<%=qDTO.getQ_IMG()%>" width="100px" height="100px" style="border: 1px solid gray;">
 					</div>
 				</td>
 			<%} %>

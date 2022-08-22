@@ -1,3 +1,4 @@
+
 <%@ page import="com.dto.CartDTO"%>
 <%@ page import="java.util.List"%>
 <%@ page import="java.util.Map"%>
@@ -5,32 +6,33 @@
 	pageEncoding="UTF-8"%>
 <style>
 
-
 .heading {
 	flex: 1;
 	text-align: center;
 }
 
-a{
-  color : black;
-  text-decoration: none;
+a {
+	color: black;
+	text-decoration: none;
 }
-a:hover{
-  color: black;
+
+a:hover {
+	color: black;
 }
+
 .cart_content {
 	padding: 0 19px;
 }
 
-.cart_content h3 {
+/* .cart_content h3 {
 	font-size: 13px;
 	font-family: bold;
 	margin-bottom: 4px;
 	color: #F05522;
-}
+} */
 
 .cart_list li {
-	/* border-top: 5px solid green; */
+	
 	display: flex;
 	position: relative;
 	padding: 24px;
@@ -55,7 +57,7 @@ a:hover{
 
 .cart_list li .cart_list_info {
 	flex: 1;
-	margin: 0px 20px ;
+	margin: 0px 20px;
 }
 
 .cart_list_info span {
@@ -82,27 +84,26 @@ a:hover{
 	text-align: center;
 }
 
-/* .cart_total {
-	padding: 24px 19px;
-	background: #f5d5d5;
-} */
-
 .cart_total>div {
 	display: flex;
-	justify-content: space-between;
+	text-align: center;
+	justify-content: space-evenly;
 }
+
+
 </style>
 <script type="text/javascript"
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 	$(function() {
 		//체크박스 미선택시 alert창
-		$("form").on("submit",function(){
-			if($(".check").is(":checked")==false){
-				
+		$("#delAllCart").on("click", function() {
+			if ($(".check").is(":checked") == false) {
+
 				alert("삭제할 상품을 선택하세요.");
-				 event.preventDefault();  
+				event.preventDefault();
 			}
+			$("form").attr("action","CartDelAllServlet");
 		})//체크박스미선택
 
 		//전체선택
@@ -170,6 +171,30 @@ a:hover{
 				}
 			})//end ajax
 		})//end cart */
+		
+		$("#like").on("click" function() {
+		
+			$.ajax({
+				type: "get",
+				url:"ProductLikeListServlet",
+				data:{
+					userid : userid
+				},
+				dataType: String,
+				success  : function(data,status,xhr) {
+					//likeList.jsp에서 가져올 테이블
+				}error: function(xhr,status,error) {
+					console.log(error);
+				} 
+			})//end like ajax
+		})//end like
+		
+		
+		
+		
+		$("#order").on("click", function() {
+			$("form").attr("action", "OrderServlet");
+		})
 
 	})//end
 </script>
@@ -191,7 +216,7 @@ a:hover{
 		<div class="btn-group" role="group" aria-label="Basic example">
 
 			<button type="button" class="btn btn-outline-success" id="cart">
-			<input type="checkbox" name="allCheck" id="allCheck">	 장바구니(<%=count%>)
+				<input type="checkbox" name="allCheck" id="allCheck"> 장바구니(<%=count%>)
 			</button>
 			<button type="button" class="btn btn-outline-success" id="like">찜한상품</button>
 		</div>
@@ -221,7 +246,7 @@ a:hover{
 	int sum_money = map.get("sum_money");
 	int fee = map.get("fee");
 	int total = map.get("total");
-	
+
 	for (int i = 0; i < list.size(); i++) {
 		int cart_id = list.get(i).getCart_id();
 		String userid = list.get(i).getUserid();
@@ -230,28 +255,27 @@ a:hover{
 		int p_selling_price = list.get(i).getP_selling_price();
 		int p_amount = list.get(i).getP_amount();
 		String p_image = list.get(i).getP_image();
-
-	
 	%>
 
-		<form action="CartDelAllServlet">
-		<div class="cart_content" >
-		
+	<form action="#">
+		<div class="cart_content">
+
 			<ul class="cart_list" style="line-height: 50px; font-size: 20px;">
-				<li>
-				<input type="checkbox" name="check" id="check" class="check" value="<%=cart_id%>"
+				<li><input type="checkbox" name="check" id="check"
+					class="check" value="<%=cart_id%>"
 					style="width: 30px; position: relative; bottom: 100px; margin-right: 10px;">
-					<a href="ProductRetrieveServlet?p_id=<%=p_id%>">
-					<img src="images/p_image/<%=p_image%>.png" width="200" style="border: 10px;" height="200"></a>
+					<a href="ProductRetrieveServlet?p_id=<%=p_id%>"> <img
+						src="images/p_image/<%=p_image%>.png" width="200"
+						style="border: 10px;" height="200"></a>
 					<div class="cart_list_info">
-						주문번호: <span name="cart_id"><%=cart_id%></span><br> 
-						상품명:
-						<a href="ProductRetrieveServlet?p_id=<%=p_id%>">
-						<span name="p_name"style="font-weight: bold; margin: 8px; display: line"><%=p_name%></span></a>
+						주문번호: <span name="cart_id"><%=cart_id%></span><br> 상품명: <a
+							href="ProductRetrieveServlet?p_id=<%=p_id%>"> <span
+							name="p_name"
+							style="font-weight: bold; margin: 8px; display: line"><%=p_name%></span></a>
 						<br>
 						<div class="amount">
-							<label>수량:</label> <input type="text"
-								id="cartAmount<%=cart_id%>" class="p_amount" name="p_amount"
+							<label>수량:</label> <input type="text" id="cartAmount<%=cart_id%>"
+								class="p_amount" name="p_amount"
 								style="text-align: right; line-height: 0px;" maxlength="3"
 								size="2" value="<%=p_amount%>"> <input type="button"
 								value="수정" id="updBtn" class="updBtn" style="line-height: 28px;"
@@ -268,23 +292,21 @@ a:hover{
 		<%
 		}
 		%>
-		<div class="cart_total">
+
+	<div class="cart_total">
 			<div class="shipping">
-				<h6>상품금액</h6>
-				<span class="price" id="sum_money"><%=sum_money%></span>
-				<h6>배송비</h6>
-				<span class="price" id="fee"><%=fee%></span>
+				<p>상품금액</p>
+				<p>배송비</p>
+				<p>총주문금액</p>
 			</div>
 			<div class="total_price">
-				<h6>총 주문금액</h6>
+				<span class="price" id="sum_money"><%=sum_money%></span>
+				<span class="price" id="fee"><%=fee%></span>
 				<span class="price" id="total"><%=total%></span>
 			</div>
 		</div>
-		<input type="submit" id="order" value="주문하기">
+		<input type="submit" id=order value="주문하기">
 	 	<input type="submit" id=delAllCart value="선택상품삭제">
-		<!-- <a class="a_black" href="javascript:orderAllConfirm(myForm)"> 전체주문하기 </a> -->
-		<!-- <a class="a_black" id=delAllCart>전체 삭제하기 </a>  -->
-		<!-- <a class="a_black" href="StoreServlet"> 계속 쇼핑하기 </a> -->
 		<%
 		}
 		%>
