@@ -31,9 +31,12 @@
 		});//end ready
 	</script>
 	
-	
+<%
+	List<ReviewDTO> ReviewList = (List<ReviewDTO>)session.getAttribute("ReviewList");
+	if(ReviewList != null){
+%>	
 	<table class="review" style="text-align: center;">
-	<caption style="caption-side: top; text-align: center;">리뷰</caption>
+	<caption style="caption-side: top; text-align: center;">구매후기</caption>
 		<tr>
 			<td colspan="6" style="background-color: #8FBC8F;"></td>
 		</tr>
@@ -46,7 +49,6 @@
 			<td>만족도</td>
 		</tr>
 		<%
-	   		List<ReviewDTO> ReviewList = (List<ReviewDTO>)session.getAttribute("ReviewList");
 			for(ReviewDTO rDTO : ReviewList){
 				String user = rDTO.getUSERID();
 				String created = rDTO.getREVIEW_CREATED().substring(0, 10);
@@ -72,4 +74,6 @@
 		</tr>
 		<%	} %>
 	</table>
-	
+<%
+	}
+%>
