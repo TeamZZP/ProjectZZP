@@ -1,6 +1,9 @@
 package com.controller.challenge;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.dto.ChallengeDTO;
 import com.dto.MemberDTO;
 import com.service.ChallengeService;
 
@@ -40,10 +44,40 @@ public class ChallengeDeleteServlet extends HttpServlet {
 		if (member!=null && member.getUserid().equals(userid)) {
 			String chall_id = request.getParameter("chall_id");
 			ChallengeService service = new ChallengeService();
-			int n = service.deleteChallenge(chall_id);
-			System.out.println(n+"개의 레코드 삭제");
+			
+			//현재 진행중인 이달의 챌린지 여부 검사
+			ChallengeDTO dto = service.selectOneChallenge(chall_id);
+			if (dto.getChall_this_month() == 1) {
+				
+				//관리자가 작성한 이달의 챌린지 게시글 가져오기
+				List<ChallengeDTO> list = service.selectChallengeByUserid("admin1");
+				
+				//유일한 이달의 챌린지 게시글인 경우 삭제 불가
+				if (list.size() == 1) {
+					session.setAttribute("mesg", "다른 챌린지 게시글을 작성한 후 삭제 가능합니다.");
+					
+				} else {
+					int n = service.deleteChallenge(chall_id);
+					System.out.println(n+"개의 레코드 삭제");
+					
+					//해당 게시글을 제외하고 가장 마지막에 작성한 게시글의 chall_this_month 값 1로 설정 
+					HashMap<String, Integer> updateMap = new HashMap<String, Integer>();
+					updateMap.put("before", 0);
+					updateMap.put("after", 1);
+					int updateNum = service.updateChallThisMonth(updateMap);
+					System.out.println(updateNum+"개의 이달의 챌린지 레코드 상태 변경");
+					
+				}
+				
+				
+			} else {
+				int n = service.deleteChallenge(chall_id);
+				System.out.println(n+"개의 레코드 삭제");
+				
+			}
 			
 			response.sendRedirect("ChallengeListServlet");
+			
 			
 		} else {
 			session.setAttribute("mesg", "잘못된 접근입니다.");

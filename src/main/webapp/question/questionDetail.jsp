@@ -19,7 +19,8 @@
 <script>
 	$(document).ready(function () {
 		$("#questionList").click(function () {
-			$("#detailForm").attr("action", "QuestionListServlet");
+			history.back();
+			event.preventDefault();
 		});//
 		$("#questionUpdate").click(function () {
 			$("#detailForm").attr("action", "questionUpdate.jsp");
@@ -154,7 +155,7 @@
 			</tr>
 			<tr>
 				<td>
-				 	<button id="questionList" class="btn btn-outline-success" >목록</button> 
+				 	<button type="button" id="questionList" class="btn btn-outline-success" >목록</button> 
 				</td>
 				<td style="text-align: right;">
 					<button id="questionDelete" class="btn btn-outline-success" >게시글 삭제</button>

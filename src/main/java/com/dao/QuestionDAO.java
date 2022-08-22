@@ -97,5 +97,23 @@ public class QuestionDAO {
 		return num;
 	}
 
+	public PageDTO MyQeustionList(SqlSession session, int curPage, String userid) {
+		PageDTO pDTO = new PageDTO();
+		pDTO.setPerPage(10);
+		int perPage = pDTO.getPerPage();
+		int offset = (curPage - 1) * perPage;
+		
+		List<QuestionProductDTO> list = session.selectList("QuestionMapper.MyQeustionList", userid, new RowBounds(offset, perPage));
+		
+		pDTO.setCurPage(curPage);
+		pDTO.setList(list);
+		pDTO.setTotalCount(myQuestionNum(session, userid));
+		
+		return pDTO;
+	}
+
+	private int myQuestionNum(SqlSession session, String userid) {
+		return session.selectOne("QuestionMapper.myQuestionNum", userid);
+	}
 
 }

@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import com.dto.ChallengeDTO;
 import com.dto.CommentsDTO;
 import com.dto.PageDTO;
+import com.dto.StampDTO;
 
 public class ChallengeDAO {
 
@@ -146,9 +147,24 @@ public class ChallengeDAO {
 		return n;
 	}
 
-	public int insertStamp(SqlSession session, HashMap<String, String> map) {
-		int n = session.delete("ChallengeMapper.insertStamp", map);
+	public StampDTO selectOneStamp(SqlSession session, String chall_id) {
+		StampDTO dto = session.selectOne("ChallengeMapper.selectOneStamp", chall_id);
+		return dto;
+	}
+
+	public int updateChallThisMonth(SqlSession session, HashMap<String, Integer> map) {
+		int n = session.update("ChallengeMapper.updateChallThisMonth", map);
 		return n;
+	}
+
+	public int insertAdminChallenge(SqlSession session, HashMap<String, String> map) {
+		int n = session.insert("ChallengeMapper.insertAdminChallenge", map);
+		return n;
+	}
+
+	public ChallengeDTO selectChallThisMonth(SqlSession session) {
+		ChallengeDTO dto = session.selectOne("ChallengeMapper.selectChallThisMonth");
+		return dto;
 	}
 
 
