@@ -133,7 +133,6 @@ function productChoice(n) {
 		
 				<%
 				 for ( int i = 0 ; i < product_list.size() ; i++ ) {
-					   
 					    int p_id = product_list.get(i).getP_id();
 					    String p_name =product_list.get(i).getP_name();
 						String p_content =product_list.get(i).getP_content();
@@ -149,18 +148,29 @@ function productChoice(n) {
 <script type="text/javascript"
    src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>	
-$("#addcart").on("shown.bs.modal", function (e) { //addcart라는 모달창이 열렸을 때 이 모달창을 아이콘 버튼 data-id 모달창에 사용할 수 있도록 전달.
-   
-	var id = $(e.relatedTarget).data("id");
-    $("#cart_title").text("확인 중");
-    //console.log(id);
- });//end fn
- 
-$("#checkAddCart<%=p_id %>").on("click",function(){
-	var id = $(this).attr("data-id");
-	console.log(id);
-	
-})//end 
+	$("#addcart").on("shown.bs.modal", function (e) { //addcart라는 모달창이 열렸을 때 이 모달창을 아이콘 버튼 data-id 모달창에 사용할 수 있도록 전달.
+		var id = $(e.relatedTarget).data("id");
+		console.log(id);
+		//modal open-상품 아이디로 정보 출력
+		$.ajax({
+			type : "post",
+			url : "ProductSelectServlet",
+			dataType : "text",
+			data : {
+				p_id : id
+			},
+			success: function(data, status, xhr) {
+				//console.log(data);
+				//$("#addcart").modal("hide");
+				//$(".modal-backdrop").hide();//모달창 닫고 백드롭 hide
+			},
+			error: function(xhr, status, error) {
+				alert(error);
+			}
+		});//end ajax
+		$("#cart_title").text("확인 중");
+		//console.log(id);
+	});//end fn
 </script>
 			
 			<div class="col-lg-3 col-md-4 col-sm-6">
