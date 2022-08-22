@@ -7,6 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
+<img src="../images/ordering.jpg" width="950" height="450">
+
 
 </body>
-</html>
+</html> 

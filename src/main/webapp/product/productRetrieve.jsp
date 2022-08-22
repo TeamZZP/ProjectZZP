@@ -47,6 +47,7 @@
 		
 	
 	$("#order").on("click", function() {
+		
 		$("form").attr("action", "OrderServlet");
 	})//order
  

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.dto.MemberDTO;
+import com.dto.ToOrderDTO;
 
 /**
  * Servlet implementation class OrderServlet
@@ -24,6 +25,8 @@ public class OrderServlet extends HttpServlet {
 		String mesg = "";
 		
 		if(dto != null) {
+			ToOrderDTO odto = new ToOrderDTO();
+			odto.setP_image((String)request.getAttribute("p_name"));
 			
 			response.sendRedirect("order.jsp");
 			
