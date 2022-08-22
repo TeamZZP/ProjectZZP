@@ -11,11 +11,13 @@
 
 <title>ZZP</title>
 <jsp:include page="common/header.jsp" flush="true"></jsp:include><br>
+<div id="productRetrieve">
 <jsp:include page="product/productRetrieve.jsp" flush="true"></jsp:include><br>
+</div>
 <div class="row">
 	<div class="btn-group" role="group" aria-label="Basic example">
 		<button type="button" class="btn btn-outline-success"
-			id="productDetail">제품상세</button>
+			id="productDetail"><a href="#productRetrieve" style="text-decoration: none; color: green;">제품상세</a></button>
 		<button type="button" class="btn btn-outline-success"
 			id="productReview"><a href="#prodReview" style="text-decoration: none; color: green;">구매후기</a></button>
 		<button type="button" class="btn btn-outline-success" id="productQnA"><a href="#prodQA" style="text-decoration: none; color: green;">QnA</a></button>
