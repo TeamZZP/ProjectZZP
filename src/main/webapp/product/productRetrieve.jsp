@@ -40,10 +40,12 @@
 
 		});//end down
 
-	 $("#cart").on("click", function() {
-			
+	  $("#cart").on("click", function() {
+		  $("#cartCkeck").trigger();
 			$("form").attr("action", "addCartServlet");
-		})//cart  
+			/* $("#cartCkeck").trigger(); */
+			$("form").submit(); 
+		})//cart   
 		
 	
 	$("#order").on("click", function() {
@@ -101,7 +103,7 @@ System.out.println("productRetrieve.jsp에서 파싱한 ilist==" + ilist);
 	
 </style>
 
-	<form  name="goodRetrieveForm" action="addCartServlet" method="get">
+	<form  name="goodRetrieveForm" action="#" method="get">
 		<div class="row">
 			<div class="col-md-1"></div>
 			<div class="col-md-5">
@@ -227,7 +229,30 @@ System.out.println("productRetrieve.jsp에서 파싱한 ilist==" + ilist);
 						
 						<td><button type="submit" class="btn btn-success" id="order">주문하기</button></td>
 						<td></td>
-						<td><button type="submit" class="btn btn-success" id="cart">장바구니저장</button></td>
+						<td>
+						<!-- Button trigger modal -->
+						<button  type="button" class="btn btn-success" id="cart" data-bs-toggle="modal" data-bs-target="#cartCkeck">
+						장바구니
+						</button>
+						
+						<!-- Modal -->
+						<div class="modal fade" id="cartCkeck" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+						  <div class="modal-dialog">
+						    <div class="modal-content">
+						      <div class="modal-header">
+						        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						      </div>
+						      <div class="modal-body" style="text-align: center;">
+						       	장바구니에 저장되었습니다.
+						      </div>
+						      <div class="modal-footer">
+						        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">쇼핑계속하기</button>
+						        <button type="button" class="btn btn-success" onclick="location.href='CartListServlet';" >장바구니보기</button>
+						      </div>
+						    </div>
+						  </div>
+						</div>
+						</td>
 					</tr>
 					
 				</table>
