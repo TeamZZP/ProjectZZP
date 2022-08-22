@@ -41,29 +41,10 @@
 		});//end down
 
 	  $("#cart").on("click", function() {
-		  var p_id = $("#p_id").val();
-		  var p_name= $("#p_name").val();
-		  var p_selling_price = $("#p_selling_price").val();
-		  var p_amount= $("#p_amount").val();
-		  var p_image= $("#p_image").val();
-		  $.ajax({
-			  type : "get",
-			  url : "addCartServlet",
-		  	  data : {
-		  		p_id : p_id,
-		  		p_name : p_name,
-		  		p_selling_price : p_selling_price,
-		  		p_amount:p_amount,
-		  		p_image:p_image
-		  	  },
-		  	  dataType : "text",
-		  	success : function(data, status, xhr) {
-				console.log("add성공");
-			},
-			error : function(xhr, status, error) {
-				console.log(error);
-			}
-		  })//end ajax
+		  $("#cartCkeck").trigger();
+			$("form").attr("action", "addCartServlet");
+			/* $("#cartCkeck").trigger(); */
+			$("form").submit(); 
 		})//cart   
 		
 	
@@ -109,7 +90,6 @@ List<ImagesDTO> ilist = (List<ImagesDTO>) request.getAttribute("ImagesRetrieveLi
 
 System.out.println("productRetrieve.jsp에서 파싱한 pdto==" + pdto);
 System.out.println("productRetrieve.jsp에서 파싱한 ilist==" + ilist);
-
 %>
 
 
@@ -129,9 +109,9 @@ System.out.println("productRetrieve.jsp에서 파싱한 ilist==" + ilist);
 			<div class="col-md-5">
 				<table>
 					<!-- 제품사진 -->
-					<input type="hidden" name="p_id" id="p_id" value="<%=p_id%>">	
-					<input type="hidden" name="p_name" id="p_name" value="<%=p_name%>">	
-					<input type="hidden" name="p_selling_price" id="p_selling_price" value="<%=p_selling_price%>">	
+					<input type="hidden" name="p_id" value="<%=p_id%>">	
+					<input type="hidden" name="p_name" value="<%=p_name%>">	
+					<input type="hidden" name="p_selling_price" value="<%=p_selling_price%>">	
 					
 					<%
 					for (int i = 0; i < ilist.size(); i++) {
@@ -149,7 +129,7 @@ System.out.println("productRetrieve.jsp에서 파싱한 ilist==" + ilist);
 						<img id="firstImage" name="p_image"
 							src="images/p_image/<%=image_route%>.png"
 							class="img-thumbnail" style="height: 500; width: 600; " ></td>
-							<input type="hidden" name="p_image" id="p_image" value="<%=ilist.get(0).getImage_route() %>">
+							<input type="hidden" name="p_image" value="<%=ilist.get(0).getImage_route() %>">
 					</tr>
 					<%
 					}
@@ -202,7 +182,7 @@ System.out.println("productRetrieve.jsp에서 파싱한 ilist==" + ilist);
 					<tr>
 						<th>상품가격</th>
 						<td></td>
-						<td><span id="p_selling_price" name="p_selling_price"><%=p_selling_price%></span>원</td>
+						<td><span id="sellingPrice" name="p_selling_price"><%=p_selling_price%></span>원</td>
 					</tr>
 
 					<tr>
@@ -254,6 +234,7 @@ System.out.println("productRetrieve.jsp에서 파싱한 ilist==" + ilist);
 						<button  type="button" class="btn btn-success" id="cart" data-bs-toggle="modal" data-bs-target="#cartCkeck">
 						장바구니
 						</button>
+						
 						<!-- Modal -->
 						<div class="modal fade" id="cartCkeck" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 						  <div class="modal-dialog">

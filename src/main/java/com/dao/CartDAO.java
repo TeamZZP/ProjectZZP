@@ -38,5 +38,10 @@ public class CartDAO {
 		int sum = session.selectOne("sum_money",userid);
 		return sum;
 	}
+
+	public int cartAllDel(SqlSession session, List<String> list) {
+		int n = session.delete("CartMapper.cartAllDel",list);
+		return n;
+	}
 	
 }

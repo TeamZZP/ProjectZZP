@@ -26,7 +26,7 @@ a{
    
 }
 
- .hover-zoomin a {
+	 .hover-zoomin a {
       display: block;
       position: relative;
       overflow: hidden;
@@ -119,13 +119,11 @@ function productChoice(n) {
         
 </script>
 
-  <div class="container ">
-     <!-- <div class="row">
-       <h1 class="display=3" align="center" style="font-family: 'GulimChe' "> </h1>
-      </div> -->
+<!--   <div class="container "> -->
+     
       
-     <% List<CategoryProductDTO> product_list = (List<CategoryProductDTO>)request.getAttribute("product_list"); 
-		
+     <% 
+     List<CategoryProductDTO> product_list = (List<CategoryProductDTO>)request.getAttribute("product_list"); 
      %>
    
 
