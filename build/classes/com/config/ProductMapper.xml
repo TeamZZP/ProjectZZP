@@ -102,4 +102,8 @@ insert into product_liked values (#{userid},#{p_id})
 select count(*) from product_liked where p_id= #{p_id} and userid = #{userid}
 </select>
 
+<select id="selectLikeProduct" parameterType="String" resultType="List">
+select * from  product_liked where userid = #{userid}
+</select>
+
 </mapper>
