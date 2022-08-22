@@ -103,7 +103,7 @@ select count(*) from product_liked where p_id= #{p_id} and userid = #{userid}
 </select>
 
 <select id="selectLikeProduct" parameterType="String" resultType="List">
-select * from  product_liked where userid = #{userid}
+select p_id from  product_liked where userid = #{userid}
 </select>
 
 </mapper>

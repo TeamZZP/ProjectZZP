@@ -147,35 +147,17 @@ a:hover {
 				}
 			}) //up end
 		})//end
-		//
-		/* $("#cart").on("click", function() {
-
-			$.ajax({
-				type : "get",
-				url : "CartListServlet",
-				data : {
-					userid : userid
-				},
-				dataType : "text",
-				success : function(data, status, xhr) {
-					$(".container").empty();
-					$("#outer").append(data);
-				},
-				error : function(xhr, status, error) {
-					console.log(error);
-				}
-			})//end ajax
-		})//end cart */
 		
-		$("#like").on("click" function() {
-		
+		$("#like").on("click",function() {
+			var userid = $("#userid").val();
+				
 			$.ajax({
 				type: "get",
 				url:"ProductLikeListServlet",
 				data:{
 					userid : userid
 				},
-				dataType: String,
+				dataType: "text",
 				success  : function(data,status,xhr) {
 					$(".container").empty();
 					$("#outer").append(data);
@@ -185,10 +167,7 @@ a:hover {
 				} 
 			})//end like ajax
 		})//end like
-		
-		
-		
-
+	
 		$("#order").on("click", function() {
 			$("form").attr("action", "OrderServlet");
 		})
@@ -256,7 +235,7 @@ a:hover {
 
 	<form action="#">
 		<div class="cart_content">
-
+			<input type="hidden" name="userid" id="userid" value="<%=userid %>">
 			<ul class="cart_list" style="line-height: 50px; font-size: 20px;">
 				<li><input type="checkbox" name="check" id="check"
 					class="check" value="<%=cart_id%>"
