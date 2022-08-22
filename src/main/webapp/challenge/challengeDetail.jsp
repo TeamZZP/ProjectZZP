@@ -90,6 +90,12 @@ a {
 	top: 15px; 
 	z-index: 9; 
 } */
+.stamp {
+	position: absolute; 
+	left: 458px; 
+	top: 146px; 
+	
+}
 </style>
 <% 
 	ChallengeDTO dto = (ChallengeDTO) request.getAttribute("dto");
@@ -124,6 +130,9 @@ a {
 	}
 	//현재 회원이 이 글의 좋아요를 눌렀는지 판단하기 
 	int likedIt = (int) request.getAttribute("likedIt");
+	//이 글 도장 가져오기
+	HashMap<String, String> stampMap = (HashMap<String, String>) request.getAttribute("stampMap");
+	System.out.println(stampMap);
 	
 %>
 
@@ -371,6 +380,9 @@ function displayedAt(createdAt) {
 			<div class="col">
 				<img src="/eclipse/upload/<%= chall_img %>" class="img"
 					onerror="this.src='images/uploadarea.png'" width="600" height="600">
+				<% if (stampMap != null) { %>
+				<img src="/eclipse/upload/<%= stampMap.get("STAMP_IMG") %>" class="stamp" width="200" height="200">
+				<% } %>
 			</div>
 		</div>
 		<div class="row p-2 text-center">
