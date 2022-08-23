@@ -28,6 +28,12 @@ public class OrderServlet extends HttpServlet {
 		int p_id= 0;
 
 		
+		
+		System.out.println(request.getParameterValues("p_id"));
+		String[] a = request.getParameterValues("p_id");
+		System.out.println("첫번쨰 : " +a[0]);
+	//	System.out.println("두번쟤 : " +a[1]);
+		
 		if(dto != null) {
 			
 		

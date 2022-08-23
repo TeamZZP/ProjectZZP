@@ -75,6 +75,7 @@ where p.c_id = #{c_id}
 	 	 
 </select>
 
+
 <select id="productRetrieve" parameterType="int" resultType="ProductDTO">
 	select * from product where p_id = #{p_id}
 </select>	
