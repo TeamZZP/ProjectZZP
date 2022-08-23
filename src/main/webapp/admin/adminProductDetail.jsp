@@ -24,16 +24,35 @@
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
 	$(function() {
-		
-		$("#backList").click(function() {
-			$("form").attr("action","AdminCategoryServlet?category=product");
-		});
-		
+		//관리자페이지 카테고리
 		$(".category").click(function() {
 			let category = $(this).attr("data-category");
 			location.href="AdminCategoryServlet?category="+category;
 		});
-		
+		//취소버튼 클릭 시 목록으로
+		$("#backList").click(function() {
+			$("form").attr("action","AdminCategoryServlet?category=product");
+		});
+		//정상가 수정 시 판매가 자동계산
+		$("#p_cost_price").keyup(function() {
+			let p_cost_price = $(this).val();
+			let p_discount = $("#p_discount").val();
+			if (p_cost_price - p_discount!=0) {
+				$("#p_selling_price").val(p_cost_price - p_discount);
+			} else {
+				$("#p_selling_price").val("금액을 확인하세요");
+			}
+		});
+		//할인가 수정 시 판매가 자동계산
+		$("#p_discount").keyup(function() {
+			let p_cost_price = $("#p_cost_price").val();
+			let p_discount = $(this).val();
+			if (p_cost_price - p_discount!=0) {
+				$("#p_selling_price").val(p_cost_price - p_discount);
+			} else {
+				$("#p_selling_price").val("금액을 확인하세요");
+			}
+		});
  
 	})//end ready
 </script>
@@ -71,8 +90,8 @@ List<ImagesDTO> ilist = (List<ImagesDTO>) request.getAttribute("ImagesRetrieveLi
 			<div class="card">
 			<div class="card-header" style="text-align: left; font-weight: bold; font-size: large;">상품상세보기</div>
 				<div class="card-body">
-					<!-- form 시작 -->
-					<form class="form-horizontal" method="post" action="#">
+					<!-- Update form 시작 -->
+					<form action="ProductUpdateServlet" class="form-horizontal" method="post">
 					<!-- 상품카테고리 -->
 					<div class="form-group">
 						<label for="c_id" class="cols-sm-2 control-label" style="font-weight: bold;">상품 카테고리</label>
@@ -97,7 +116,7 @@ List<ImagesDTO> ilist = (List<ImagesDTO>) request.getAttribute("ImagesRetrieveLi
 						<div class="cols-sm-10">
 							<div class="input-group">
 								<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-								<input type="text" class="form-control" name="p_id" id="p_id" value="<%= p_id %>" />
+								<input type="text" class="form-control" name="p_id" id="p_id" value="<%= p_id %>" readonly />
 							</div>
 						</div>
 					</div>
