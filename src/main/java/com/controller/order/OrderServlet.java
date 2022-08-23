@@ -3,6 +3,7 @@ package com.controller.order;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -24,15 +25,12 @@ public class OrderServlet extends HttpServlet {
 		MemberDTO dto = (MemberDTO)session.getAttribute("login");
 		String mesg = "";
 		int p_amount = 0;
-		List<Integer> plist = null;
 		int p_id= 0;
 
 		
 		if(dto != null) {
 			
-			/*for (int i = 0; i < request.getParameter("p_id"); i++) {
-				
-			}*/
+		
 			p_id = Integer.parseInt((String)request.getParameter("p_id"));
 			
 			if(Integer.parseInt((String)request.getParameter("p_amount"))==0||(String)request.getParameter("p_amount")==null) {
@@ -42,6 +40,12 @@ public class OrderServlet extends HttpServlet {
 			}
 			
 			System.out.println(p_id+" "+p_amount);
+			
+			request.setAttribute("p_id", p_id);
+			request.setAttribute("p_amount", p_amount);
+			
+			RequestDispatcher dis = request.getRequestDispatcher("order.jsp");
+			dis.forward(request, response);
 			
 			
 			

@@ -83,7 +83,6 @@ a:hover {
 
 .cart_total>div {
 	display: flex;
-	text-align: center;
 	justify-content: space-evenly;
 }
 </style>
@@ -169,6 +168,7 @@ a:hover {
 		})//end like
 	
 		$("#order").on("click", function() {
+			
 			$("form").attr("action", "OrderServlet");
 		})
 
@@ -222,6 +222,7 @@ a:hover {
 	int sum_money = map.get("sum_money");
 	int fee = map.get("fee");
 	int total = map.get("total");
+	List<Integer> pIdList = null;
 
 	for (int i = 0; i < list.size(); i++) {
 		int cart_id = list.get(i).getCart_id();
@@ -231,6 +232,7 @@ a:hover {
 		int p_selling_price = list.get(i).getP_selling_price();
 		int p_amount = list.get(i).getP_amount();
 		String p_image = list.get(i).getP_image();
+		pIdList.add(p_id);
 	%>
 
 	<form action="#">
@@ -286,7 +288,6 @@ a:hover {
 			<input type="submit" class="btn btn-success" id="delAllCart"
 				value="상품삭제">
 		</div>
-
 		<%
 		}
 		%>
