@@ -145,33 +145,7 @@ function productChoice(n) {
 						String userid =product_list.get(i).getUserid();
 						String p_image = product_list.get(i).getP_image();
 					%>
-<script type="text/javascript"
-   src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>	
-	$("#addcart").on("shown.bs.modal", function (e) { //addcart라는 모달창이 열렸을 때 이 모달창을 아이콘 버튼 data-id 모달창에 사용할 수 있도록 전달.
-		var id = $(e.relatedTarget).data("id");
-		console.log(id);
-		//modal open-상품 아이디로 정보 출력
-		$.ajax({
-			type : "post",
-			url : "ProductSelectServlet",
-			dataType : "text",
-			data : {
-				p_id : id
-			},
-			success: function(data, status, xhr) {
-				console.log(data);
-				$("#header").empty();
-				$("#header").append(data);
-				//$("#addcart").modal("hide");
-				//$(".modal-backdrop").hide();//모달창 닫고 백드롭 hide
-			},
-			error: function(xhr, status, error) {
-				alert(error);
-			}
-		});//end ajax
-	});//end fn
-</script>
+
 			
 			<div class="col-lg-3 col-md-4 col-sm-6">
 			<div class="hover-zoomin">
@@ -194,7 +168,7 @@ function productChoice(n) {
 
 				<!-- 장바구니 모달창-->
 				<!-- Button trigger modal -->
-				<button type="button" class="btn" data-bs-toggle="modal" id="checkAddCart<%=p_id %>" data-id="<%=p_id%>" data-bs-target="#addcart">
+				<button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#addcart<%=p_id %>">
 					<img src="images/cart.png" width="25" height="25">
 				</button>
 				
@@ -205,7 +179,7 @@ function productChoice(n) {
 						type="hidden" name="p_image" value="<%=p_image%>"> <input
 						type="hidden" name="p_name" value="<%=p_name%>">
 					
-					<div class="modal fade" id="addcart" data-bs-backdrop="static"
+					<div class="modal fade" id="addcart<%=p_id %>" data-bs-backdrop="static"
 						data-bs-keyboard="false" tabindex="-1"
 						aria-labelledby="staticBackdropLabel" aria-hidden="true">
 						<div class="modal-dialog">
