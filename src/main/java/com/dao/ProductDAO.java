@@ -57,4 +57,12 @@ public class ProductDAO {
 		List<Integer> list = session.selectList("selectLikeProduct", userid);
 		return list;
 	}
+
+	public int updateProduct(SqlSession session, ProductDTO dto) {
+		return session.update("updateProduct", dto);
+	}
+
+	public int deleteProduct(SqlSession session, int p_id) {
+		return session.delete("deleteProduct", p_id);
+	}
 }

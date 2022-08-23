@@ -8,7 +8,6 @@
 </head>
 <body>
 	<jsp:include page="common/header.jsp" flush="true"></jsp:include><br>
-	<h1>공지사항 게시물 등록 :></h1>
 	<jsp:include page="notice/noticeInsert.jsp" flush="true"></jsp:include><br>
 	<jsp:include page="common/footer.jsp" flush="true"></jsp:include>
 </body>
