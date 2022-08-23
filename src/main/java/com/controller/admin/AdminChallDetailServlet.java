@@ -42,7 +42,7 @@ public class AdminChallDetailServlet extends HttpServlet {
 		request.setAttribute("challDTO", challDTO);
 		request.setAttribute("stampDTO", stampDTO);
 		
-		RequestDispatcher dis = request.getRequestDispatcher("admin/adminChallengeDetail.jsp");
+		RequestDispatcher dis = request.getRequestDispatcher("adminChallengeDetail.jsp");
 		dis.forward(request, response);
 		
 	}

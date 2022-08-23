@@ -10,42 +10,35 @@ System.out.println("challList"+challList);
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 $(document).ready(function () {
-	$("body").on("click", ".writeBtn", function () {
-		location.href = "AdminUIServlet?operate=challengeWrite";
-		
-		/* $.ajax({
-			type: "post",
-			url: "AdminUIServlet",
-			data: {
-				operate:"challengeWrite"
-			},
-			success: function(data) {
-				$("#adminContent").html(data);
-			},
-			error: function() {
-				alert("문제가 발생했습니다. 다시 시도해 주세요.");
-			}
-		});//ajax */
+	
+	$(".category").click(function() {
+		let category = $(this).attr("data-category");
+		location.href="AdminCategoryServlet?category="+category;
 	});
 	
-	$("body").on("click", ".challengeDetail", function () {
-		console.log($(this).attr("data-id"))
-		$.ajax({
-			type: "post",
-			url: "AdminChallDetailServlet",
-			data: {
-				chall_id:$(this).attr("data-id")
-			},
-			success: function(data) {
-				$("#adminContent").html(data);
-			},
-			error: function() {
-				alert("문제가 발생했습니다. 다시 시도해 주세요.");
-			}
-		});//ajax
+	$(".writeBtn").on("click", function () {
+		location.href = "AdminUIServlet?operate=challengeWrite";
+	});
+	
+	$(".challengeDetail").on("click", function () {
+		location.href = "AdminChallDetailServlet?chall_id="+$(this).attr("data-id");
 	});
 });
 </script>
+
+
+<div class="container">
+	<form action="" method="post">
+		<div class="row">
+			<div class="btn-group" role="group" aria-label="Basic example">
+				<button type="button" class="btn btn-outline-success category" data-category="member" id="memberManagement">회원관리</button>
+				<button type="button" class="btn btn-outline-success category" data-category="product" id="productManagement">상품관리</button>
+				<button type="button" class="btn btn-outline-success category" data-category="challenge" id="challengeManagement">챌린지관리</button>
+			</div>
+		</div>
+	</form>
+</div>
+
 
 
 <div class="container col-md-auto">

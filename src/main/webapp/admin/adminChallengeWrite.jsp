@@ -3,11 +3,7 @@
 <%@page import="com.dto.ChallengeDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>ZZP</title>
+
 <style>
 #challDetailContent {
 	width: 700px;
@@ -73,22 +69,9 @@
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function () {
-		//카테고리
 		$(".category").click(function() {
 			let category = $(this).attr("data-category");
-			$.ajax({
-				type: "post",
-				url: "AdminCategoryServlet",
-				data: {
-					category:category
-				},
-				success: function(data) {
-					$("#adminContent").html(data);
-				},
-				error: function() {
-					alert("문제가 발생했습니다. 다시 시도해 주세요.");
-				}
-			});//ajax
+			location.href="AdminCategoryServlet?category="+category;
 		});
 		
 		
@@ -204,9 +187,6 @@
 	
 	});//end ready
 </script>
-</head>
-<body>
-<jsp:include page="../common/header.jsp" flush="true"></jsp:include><br>
 
 <div class="container">
 	<form action="" method="post">
@@ -307,6 +287,3 @@
 </div>
 
 
-<jsp:include page="../common/footer.jsp" flush="true"></jsp:include><br>
-</body>
-</html>
