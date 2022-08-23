@@ -51,6 +51,13 @@ a {
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function () {
+		
+		$(".category").click(function() {
+			let category = $(this).attr("data-category");
+			location.href="AdminCategoryServlet?category="+category;
+		});
+		
+		
 		//글 삭제시 컨펌창 띄우기 
 		$("#deleteChallenge").on("click", function () {
 			let mesg = "정말 삭제하시겠습니까? 한번 삭제한 글은 되돌릴 수 없습니다.";
@@ -62,8 +69,8 @@ a {
 		$(".backList").on("click", function () {
 			let preUrl = document.referrer;
 			//게시글 업데이트한 후 이동한 페이지에서는 글작성 페이지로 돌아가지 않도록 최신글 화면으로 이동한다.
-			if (preUrl.includes("ChallengeUIServlet")) {
-				location.href = "ChallengeListServlet";
+			if (preUrl.includes("AdminUIServlet")) {
+				location.href = "AdminCategoryServlet?category=challenge";
 			} else {
 				history.back();
 			}
@@ -71,6 +78,20 @@ a {
 		
 	});
 </script>
+
+
+<div class="container">
+	<form action="" method="post">
+		<div class="row">
+			<div class="btn-group" role="group" aria-label="Basic example">
+				<button type="button" class="btn btn-outline-success category" data-category="member" id="memberManagement">회원관리</button>
+				<button type="button" class="btn btn-outline-success category" data-category="product" id="productManagement">상품관리</button>
+				<button type="button" class="btn btn-outline-success category" data-category="challenge" id="challengeManagement">챌린지관리</button>
+			</div>
+		</div>
+	</form>
+</div>
+
 
 <div class="container pt-5">
 	<div id="challDetailContent">

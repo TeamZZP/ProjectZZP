@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="MemberMapper">
+
+		<insert id="addMember" parameterType="hashMap">
+			insert all
+			
+			into member
+			values (#{userid}, #{passwd}, #{username}, #{email1}, #{email2}, #{phone}, sysdate, 0)
+			
+			into address
+			values (address_address_id_seq.nextval, #{userid}, #{username}, #{username}, #{phone}, 
+					#{post_num}, #{addr1}, #{addr2}, 1 )
+			
+			into profile 
+			values (#{userid}, 'user.png', ' ')
+			
+			select * from dual
+		</insert>
+		
+		<select id="checkId" parameterType="String" resultType="int">
+			select count(*) from member where userid=#{userid}
+		</select>
+		
+		<select id="loginMember" parameterType="hashMap" resultType="MemberDTO">
+			select userid, passwd, username, email1, email2, phone, created_at, role
+			from member where userid=#{userid} and passwd=#{passwd}
+		</select>
+		
+		<select id="selectMember" parameterType="String" resultType="MemberDTO">
+			select * from member
+			where userid = #{userid}
+		</select>
+		
+		<update id="changePw" parameterType="hashmap">
+			update member
+			set passwd = #{changedPasswd} 
+			where userid = #{userid}
+		</update>
+		
+		<update id="changeEmail" parameterType="hashmap">
+			update member
+			set email1 = #{email1}, 
+				email2 = #{email2}
+			where userid = #{userid}
+		</update>
+		
+		<delete id="deleteMember">
+			delete from member
+			where userid = #{userid}
+		</delete>
+
+		<select id="selectAllMember" resultType="MemberDTO">
+			select * from member
+		</select>
+		
+		<select id="findId" parameterType="hashmap" resultType="MemberDTO">
+			select * from member
+			<where>
+				<if test='type=="phone"'>
+					username = #{username} and phone = #{phone}
+				</if>
+				<if test='type=="email"'>
+					username = #{username} and email1 = #{email1} and email2 = #{email2}
+				</if>
+			</where>
+		</select>
+		
+		<select id="findPw" parameterType="hashmap" resultType="MemberDTO">
+			select * from member
+			<where>
+				<if test='type=="phone"'>
+					userid = #{userid} and username = #{username} and phone = #{phone}
+				</if>
+				<if test='type=="email"'>
+					userid = #{userid} and username = #{username} and email1 = #{email1} and email2 = #{email2}
+				</if>
+			</where>
+		</select>
+		
+		<select id="checkPw" parameterType="String" resultType="MemberDTO">
+			select * from member
+			where userid = #{userid}
+		</select>
+		
+</mapper>

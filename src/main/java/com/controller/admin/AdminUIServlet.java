@@ -46,7 +46,7 @@ public class AdminUIServlet extends HttpServlet {
 			
 			//챌린지 작성 페이지
 			if (chall_id==null && operate.equals("challengeWrite")) {
-				RequestDispatcher dis = request.getRequestDispatcher("admin/adminChallengeWrite.jsp");
+				RequestDispatcher dis = request.getRequestDispatcher("adminChallengeWrite.jsp");
 				dis.forward(request, response);
 			
 			//챌린지 수정 페이지
@@ -56,7 +56,7 @@ public class AdminUIServlet extends HttpServlet {
 				
 				request.setAttribute("challDTO", challDTO);
 				
-				RequestDispatcher dis = request.getRequestDispatcher("admin/adminChallengeWrite.jsp");
+				RequestDispatcher dis = request.getRequestDispatcher("adminChallengeWrite.jsp");
 				dis.forward(request, response);
 			} 
 			

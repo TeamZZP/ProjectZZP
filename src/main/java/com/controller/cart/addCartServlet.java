@@ -58,7 +58,6 @@ public class addCartServlet extends HttpServlet {
 			String nextPage = null;
 			if(num == 1) {
 				nextPage = "CartListServlet";
-				session.setAttribute("mesg", p_name+"카트 저장 성공");
 			}else {
 				nextPage = "LoginUIServlet";
 				session.setAttribute("mesg", "로그인이 필요합니다.");
