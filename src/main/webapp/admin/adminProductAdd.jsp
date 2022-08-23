@@ -1,11 +1,6 @@
 <%@page import="org.apache.ibatis.reflection.SystemMetaObject"%>
 <%@page import="com.dto.ProductDTO"%>
-<%@page import="com.dto.MemberDTO"%>
-<%@page import="com.dto.ImagesDTO"%>
-<%@page import="java.util.List"%>
-<%@page import="com.dto.AnswerDTO"%>
 <%@page import="org.apache.ibatis.reflection.SystemMetaObject"%>
-<%@page import="com.dto.QuestionDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <style>
 	.prodContainer{
@@ -53,24 +48,22 @@
 				$("#p_selling_price").val("금액을 확인하세요");
 			}
 		});
+		//submit 시 값 확인
+		$("#addProd").submit(function() {
+			let c_id = $("#c_id").val();
+			let p_name = $("#p_name").val();
+			let p_cost_price = $("#p_cost_price").val();
+			let p_discount = $("#p_discount").val();
+			let p_selling_price = $("#p_selling_price").val();
+			let p_stock = $("#p_stock").val();
+			let image_route = $("#image_route").val();
+			let p_content = $("#p_content").val();
+			
+			
+		});
  
 	})//end ready
 </script>
-<%
-ProductDTO pdto = (ProductDTO) request.getAttribute("ProductRetrieveDTO");
-	int c_id = pdto.getC_id(); //카테고리 번호
-	String p_content = pdto.getP_content(); //상품설명
-	int p_cost_price = pdto.getP_cost_price(); //판매가
-	String p_created = pdto.getP_created(); //등록일
-	int p_discount = pdto.getP_discount(); //할인
-	int p_id = pdto.getP_id(); //상품번호
-	String p_name = pdto.getP_name(); //상품명
-	int p_selling_price = pdto.getP_selling_price(); //할인적용판매가
-	int p_stock = pdto.getP_stock(); //재고
-	
-List<ImagesDTO> ilist = (List<ImagesDTO>) request.getAttribute("ImagesRetrieveList");
-
-%>
 
 <div class="container">
 	<form action="" method="post">
@@ -88,10 +81,10 @@ List<ImagesDTO> ilist = (List<ImagesDTO>) request.getAttribute("ImagesRetrieveLi
 	<div class="row justify-content-center">
 		<div class="col-md-8">
 			<div class="card">
-			<div class="card-header" style="text-align: left; font-weight: bold; font-size: large;">상품상세보기</div>
+			<div class="card-header" style="text-align: left; font-weight: bold; font-size: large;">상품등록</div>
 				<div class="card-body">
-					<!-- Update form 시작 -->
-					<form action="ProductUpdateServlet" class="form-horizontal" method="post">
+					<!-- add form 시작 -->
+					<form action="ProductAddServlet" id="addForm" class="form-horizontal" method="post">
 					<!-- 상품카테고리 -->
 					<div class="form-group">
 						<label for="c_id" class="cols-sm-2 control-label" style="font-weight: bold;">상품 카테고리</label>
@@ -102,31 +95,31 @@ List<ImagesDTO> ilist = (List<ImagesDTO>) request.getAttribute("ImagesRetrieveLi
 								<label class="visually-hidden" for="autoSizingSelect">category</label>
 						    	 <select name="c_id" id="c_id" class="form-select" aria-label="Default select example">
 							        <option value="none" selected disabled hidden>카테고리 선택</option>
-							        <option <% if(6==c_id) {%>selected<%} %> value="6">sale</option>
-							        <option <% if(8==c_id) {%>selected<%} %> value="8">bath</option>
-							        <option <% if(9==c_id) {%>selected<%} %> value="9">kitchen</option>
-							        <option <% if(10==c_id) {%>selected<%} %> value="10">life</option>
+							        <option value="6">sale</option>
+							        <option value="8">bath</option>
+							        <option value="9">kitchen</option>
+							        <option value="10">life</option>
 						         </select>
 							</div>
 						</div>
 					</div>
 					<!-- 상품번호 -->
-					<div class="form-group">
+					<!-- <div class="form-group">
 						<label for="p_id" class="cols-sm-2 control-label" style="font-weight: bold;">상품번호</label>
 						<div class="cols-sm-10">
 							<div class="input-group">
 								<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-								<input type="text" class="form-control" name="p_id" id="p_id" value="<%= p_id %>" readonly />
+								<input type="text" class="form-control" name="p_id" id="p_id"  />
 							</div>
 						</div>
-					</div>
+					</div> -->
 					<!-- 상품명 -->
 					<div class="form-group">
 						<label for="p_name" class="cols-sm-2 control-label" style="font-weight: bold;">상품명</label>
 						<div class="cols-sm-10">
 							<div class="input-group">
 							    <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-							    <input type="text" class="form-control" name="p_name" id="p_name" value="<%= p_name %>" />
+							    <input type="text" class="form-control" name="p_name" id="p_name"  />
 							</div>
 						</div>
 					</div>
@@ -136,7 +129,7 @@ List<ImagesDTO> ilist = (List<ImagesDTO>) request.getAttribute("ImagesRetrieveLi
 					    <div class="cols-sm-10">
 					        <div class="input-group">
 					            <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
-					            <input type="text" class="form-control" name="p_cost_price" id="p_cost_price" value="<%= p_cost_price %>" />
+					            <input type="text" class="form-control" name="p_cost_price" id="p_cost_price"  />
 					        </div>
 					    </div>
 					</div>
@@ -146,7 +139,7 @@ List<ImagesDTO> ilist = (List<ImagesDTO>) request.getAttribute("ImagesRetrieveLi
 						<div class="cols-sm-10">
 						    <div class="input-group">
 						      <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
-						      <input type="text" name="p_discount" id="p_discount" class="form-control" value="<%= p_discount %>">
+						      <input type="text" name="p_discount" id="p_discount" class="form-control" >
 						    </div>
 						</div>
 					</div>
@@ -156,7 +149,7 @@ List<ImagesDTO> ilist = (List<ImagesDTO>) request.getAttribute("ImagesRetrieveLi
 					    <div class="cols-sm-10">
 					        <div class="input-group">
 					            <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
-					            <input type="text" class="form-control" name="p_selling_price" id="p_selling_price" value="<%= p_cost_price - p_discount %>" />
+					            <input type="text" class="form-control" name="p_selling_price" id="p_selling_price"  />
 					        </div>
 					    </div>
 					</div>
@@ -166,7 +159,7 @@ List<ImagesDTO> ilist = (List<ImagesDTO>) request.getAttribute("ImagesRetrieveLi
 					    <div class="cols-sm-10">
 					        <div class="input-group">
 					            <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
-					            <input type="text" class="form-control" name="p_stock" id="p_stock" value="<%= p_stock %>" />
+					            <input type="text" class="form-control" name="p_stock" id="p_stock" />
 					        </div>
 					    </div>
 					</div>
@@ -186,7 +179,7 @@ List<ImagesDTO> ilist = (List<ImagesDTO>) request.getAttribute("ImagesRetrieveLi
 					    <div class="cols-sm-10">
 					        <div class="input-group">
 					            <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
-					            <input type="text" class="form-control" name="p_content" id="p_content" value="<%= p_content %>" />
+					            <input type="text" class="form-control" name="p_content" id="p_content"  />
 					        </div>
 					    </div>
 					</div>
@@ -202,7 +195,7 @@ List<ImagesDTO> ilist = (List<ImagesDTO>) request.getAttribute("ImagesRetrieveLi
 					</div>
 					<!-- 상품등록or취소 버튼 -->
 					<div class="form-group" style="margin-top: 20px; text-align: center;">
-						<input type="submit" value="수정" id="updateProd" class="btn btn-success">
+						<input type="submit" value="등록" id="addProd" class="btn btn-success">
 						<button id="backList" class="btn btn-success">취소</button>
 					</div>
 				    </form>

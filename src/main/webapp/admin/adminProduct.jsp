@@ -44,7 +44,7 @@ if(mesg != null){
 		  	  </div>
 		  <div class="col"><input type="text" class="form-control" style="width: 150px; margin-right: -20px;"></div>
 	      <div class="col"><button type="button" class="btn btn-success">검색</button></div>
-	      <div class="col"><button type="button" class="btn btn-success" style="margin-left: 100%;">상품등록</button></div>
+	      <a href="adminProductAdd.jsp" class="btn btn-success">상품등록</a>
 	</div>
 </div>
 <div class="container col-md-auto">
@@ -119,6 +119,10 @@ $(document).ready(function () {
 	$(".category").click(function() {
 		let category = $(this).attr("data-category");
 		location.href="AdminCategoryServlet?category="+category;
+	});
+	//상품등록 버튼
+	$("#addProduct").click(function() {
+		location.href="../adminProductAdd.jsp";
 	});
 	//상품 상세페이지
 	$(".productDetail").click(function() {
