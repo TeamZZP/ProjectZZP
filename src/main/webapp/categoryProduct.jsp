@@ -32,7 +32,13 @@
     } 
   
   </style>
-    
+<script type="text/javascript"
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">    
+	$(function(){
+		
+	})//end function
+</script>
     <div class="row" align="center">
 				<%
 				 List<CategoryProductDTO> product_list = (List<CategoryProductDTO>)request.getAttribute("product_list"); 
@@ -73,25 +79,25 @@
 
 				<!-- 장바구니 모달창-->
 				<!-- Button trigger modal -->
-				<button type="button" class="btn" data-bs-toggle="modal"
-					data-bs-target="#addcart">
+				<button type="button" class="btn" id="cartimg" data-bs-toggle="modal"
+					data-bs-target="#addcart<%=p_id %>">
 					<img src="images/cart.png" width="25" height="25">
 				</button>
-				<div class="black_bg"></div>
+			
 				<!-- Modal -->
 				<form action="addCartServlet">
 					<input type="hidden" name="p_id" value="<%=p_id%>"> <input
 						type="hidden" name="p_image" value="<%=p_image%>"> <input
 						type="hidden" name="p_name" value="<%=p_name%>">
 					
-					<div class="modal fade" id="addcart" data-bs-backdrop="static"
+					<div class="modal fade" id="addcart<%=p_id %>" data-bs-backdrop="static"
 						data-bs-keyboard="false" tabindex="-1"
 						aria-labelledby="staticBackdropLabel" aria-hidden="true">
 						<div class="modal-dialog">
 							<div class="modal-content">
 								<div class="modal-header">
 									<h5 class="modal-title" id="cart_title"
-										style="text-align: center">
+										style=" text-align: center">
 										<%=p_name%>
 									</h5>
 									
@@ -108,7 +114,7 @@
 											<div class="area_count holder">
 												<div class="option_btn_wrap" style="top: 0;">
 													<div class="option_btn_tools" style="float: none;">
-														<input name="p_amount" id="quantity" value="1">
+														<input name="p_amount" id="quantity" value="1" style="text-align: center; ">
 														<button type="button" class="btn btn-outline-success"
 															id="up">+</button>
 														<button type="button" class="btn btn-outline-success"
@@ -135,4 +141,3 @@
 		}
 		%>
 	</div>
-</div>

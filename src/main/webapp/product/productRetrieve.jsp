@@ -46,6 +46,7 @@
 		  var p_selling_price = $("#p_selling_price").val();
 		  var p_amount= $("#p_amount").val();
 		  var p_image= $("#p_image").val();
+		  
 		  $.ajax({
 			  type : "get",
 			  url : "addCartServlet",
@@ -82,6 +83,8 @@
 	 $("#firstImage").attr(src,src2 )
 	
 	 } */
+	
+	 
 </script>
 
 

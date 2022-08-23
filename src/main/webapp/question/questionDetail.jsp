@@ -65,13 +65,9 @@
 	<div class="container justify-content-center">
 	<div class="row">
 		<table>
-			<caption style="caption-side: top;">문의 내용</caption>
-			<tr>
-				<td colspan="2" style="height: 10px;"></td>
-			</tr>
 			<tr>
 				<td colspan="2"> 
-					<div class="input-group mb-3">
+					<div class="input-group">
 					  <span class="input-group-text">제목</span>
 					  <input type="text" class="form-control shadow-none" value="<%= qDTO.getQ_TITLE() %>" readonly="readonly">
 					</div>
@@ -79,13 +75,13 @@
 			</tr>
 			<tr>
 				<td> 
-					<div class="input-group mb-3">
+					<div class="input-group">
 					  <span class="input-group-text">작성일</span>
 					  <input type="text" class="form-control shadow-none" value="<%=day %>" readonly="readonly">
 					</div>
 				</td>
 				<td> 
-					<div class="input-group mb-3">
+					<div class="input-group">
 					  <span class="input-group-text">작성자</span>
 					  <input type="text" class="form-control shadow-none" value="<%= qDTO.getUSERID() %> " readonly="readonly">
 					</div>

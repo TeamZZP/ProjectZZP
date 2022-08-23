@@ -9,11 +9,21 @@
 <div class="container">
 <div class="row">
 <div class="col-lg-2">
-	<div class="col">회원 관리</div>
-	<div class="col">주문 관리</div>
-	<div class="col">상품 관리</div>
-	<div class="col"> <a href="MyQuestionServlet" style="color: green; text-decoration: none;"> 상품 문의 </a> </div>
-	<div class="col">문의 게시판</div>
+	<div class="col">
+		<a href="MypageServlet" style="text-decoration: none; color: black;">마이페이지 홈</a>
+	</div>
+   <div class="col">주문 내역</div>
+   <div class="col">반품/취소/교환 목록</div>
+   <div class="col">챌린지</div>
+   <div class="col">
+      <a href="MyQuestionServlet" style="text-decoration: none; color: green; font-weight: bold;">문의 내역</a>
+   </div>
+   <div class="col">
+      <a href="AddressListServlet" style="text-decoration: none; color: black;">배송지 관리</a>
+   </div>
+   <div class="col">
+      <a href="checkPasswd.jsp" style="text-decoration: none; color: black;">계정 관리</a>
+   </div>
 </div>
 <div class="col-lg-10">
 <div id="addTableDiv">
@@ -30,6 +40,9 @@
 		PageDTO pDTO  = (PageDTO)session.getAttribute("myList");
 		List<QuestionProductDTO> myList = pDTO.getList();
 		for(QuestionProductDTO qDTO : myList){
+			String date = qDTO.getQ_CREATED();
+			String day = date.substring(0,10);
+			System.out.print("날짜 " + day);
 	%>
 	<tr>
 		<td> <%= qDTO.getQ_ID() %> </td>
@@ -45,7 +58,7 @@
 		  	<%= qDTO.getQ_TITLE() %> 
 		 	</a>
 		</td>
-		<td> <%= qDTO.getQ_CREATED() %> </td>
+		<td> <%= day %> </td>
 		<td> <%= qDTO.getQ_STATUS() %> </td>
 	</tr>
 	<%	} %>
