@@ -113,7 +113,7 @@ function productChoice(n) {
 			}
 		})//end down
 		
-		
+
 		
 	})//
         
@@ -133,7 +133,6 @@ function productChoice(n) {
 		
 				<%
 				 for ( int i = 0 ; i < product_list.size() ; i++ ) {
-					   
 					    int p_id = product_list.get(i).getP_id();
 					    String p_name =product_list.get(i).getP_name();
 						String p_content =product_list.get(i).getP_content();
@@ -146,6 +145,33 @@ function productChoice(n) {
 						String userid =product_list.get(i).getUserid();
 						String p_image = product_list.get(i).getP_image();
 					%>
+<script type="text/javascript"
+   src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>	
+	$("#addcart").on("shown.bs.modal", function (e) { //addcart라는 모달창이 열렸을 때 이 모달창을 아이콘 버튼 data-id 모달창에 사용할 수 있도록 전달.
+		var id = $(e.relatedTarget).data("id");
+		console.log(id);
+		//modal open-상품 아이디로 정보 출력
+		$.ajax({
+			type : "post",
+			url : "ProductSelectServlet",
+			dataType : "text",
+			data : {
+				p_id : id
+			},
+			success: function(data, status, xhr) {
+				console.log(data);
+				$("#header").empty();
+				$("#header").append(data);
+				//$("#addcart").modal("hide");
+				//$(".modal-backdrop").hide();//모달창 닫고 백드롭 hide
+			},
+			error: function(xhr, status, error) {
+				alert(error);
+			}
+		});//end ajax
+	});//end fn
+</script>
 			
 			<div class="col-lg-3 col-md-4 col-sm-6">
 			<div class="hover-zoomin">
@@ -168,10 +194,10 @@ function productChoice(n) {
 
 				<!-- 장바구니 모달창-->
 				<!-- Button trigger modal -->
-				<button type="button" class="btn" data-bs-toggle="modal"
-					data-bs-target="#addcart">
+				<button type="button" class="btn" data-bs-toggle="modal" id="checkAddCart<%=p_id %>" data-id="<%=p_id%>" data-bs-target="#addcart">
 					<img src="images/cart.png" width="25" height="25">
 				</button>
+				
 				<div class="black_bg"></div>
 				<!-- Modal -->
 				<form action="addCartServlet">
@@ -184,9 +210,8 @@ function productChoice(n) {
 						aria-labelledby="staticBackdropLabel" aria-hidden="true">
 						<div class="modal-dialog">
 							<div class="modal-content">
-								<div class="modal-header">
-									<h5 class="modal-title" id="cart_title"
-										style="text-align: center">
+								<div class="modal-header" id="header">
+									<h5 class="modal-title" id="cart_title" style="text-align: center">
 										<%=p_name%>
 									</h5>
 									
@@ -204,10 +229,8 @@ function productChoice(n) {
 												<div class="option_btn_wrap" style="top: 0;">
 													<div class="option_btn_tools" style="float: none;">
 														<input name="p_amount" id="quantity" value="1">
-														<button type="button" class="btn btn-outline-success"
-															id="up">+</button>
-														<button type="button" class="btn btn-outline-success"
-															id="down">-</button>
+														<button type="button" class="btn btn-outline-success" id="up">+</button>
+														<button type="button" class="btn btn-outline-success" id="down">-</button>
 															<br> <input type="hidden" id="price" name="p_selling_price" value="<%=p_selling_price%>">
 														<a>총 상품금액 : </a><span id="total"><%=p_selling_price%></span>원
 													</div>
