@@ -17,10 +17,13 @@
 		color : black;
 		text-decoration: none;
 	}
+	.modal {
+		overflow: auto;
+	}
 </style>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <div id="addContainer">
-<div class="container">
+<div class="container" id="divCon">
 <div class="row">
 <div class="col-lg-2">
 	<div class="col">
@@ -62,18 +65,20 @@
 	
 	String addr2=null;
 	int size=0;
+	int address_id=0;
+	int default_chk=0;
 	for (int i = 0; i < addressMap.size(); i++) {
 		List<AddressDTO> addressList=addressMap.get(userid);
 		for (int j = 0; j < addressList.size(); j++) {
 			AddressDTO address=addressList.get(j);
-			int address_id=address.getAddress_id();
+			address_id=address.getAddress_id();
 			String address_name=address.getAddress_name();
 			String receiver_name=address.getReceiver_name();
 			String receiver_phone=address.getReceiver_phone();
 			String post_num=address.getPost_num();
 			String addr1=address.getAddr1();
 			addr2=address.getAddr2();
-			int default_chk=address.getDefault_chk();
+			default_chk=address.getDefault_chk();
 			
 			size += 1;//회원의 배송지 갯수
 			
@@ -90,54 +95,71 @@
 		}
 		
 		$("#addAddress").on("click", function() {
-			console.log("추가 버튼 클릭");
+//			console.log("추가 버튼 클릭");
 			location.href="addAddress.jsp";
 		});//end fn
 		
-		//버튼 구분 userid->address_id로
-		$("#deleteAddress").on("shown.bs.modal", function (e) {
+<%--
+		$("#checkDelete<%= address_id %>").on("click", function() {
+			console.log("삭제 버튼 클릭");//클릭은 한 번 잘 됨
+		});//end fn
+ 		$("#deleteAddress<%= address_id %>").on("shown.bs.modal", function (e) {
+//		    if (!($("#deleteAddress").data('bs.modal') || {})._isShown){ 
+//		        $("#deleteAddress").modal('show');
+//		    }
+			console.log("open");
 			var id = $(e.relatedTarget).data("id");
 			var chk = $(e.relatedTarget).data("chk");//모달을 open한 버튼에 data-chk 설정
 			$("#delete<%= address_id %>").val(id);
 			$("#delete<%= address_id %>").attr("data-chk",chk);//모달창 data-chk 속성에 값 저장
-			<%-- console.log($("#delete<%= address_id %>").attr("data-chk")); --%>
+			console.log($("#delete<%= address_id %>").attr("data-chk"));
 		});//end fn
+--%>
 		
-		$("#delete<%= address_id %>").on("click", function() {
-			var id=$(this).val();
-			var chk=$(this).attr("data-chk");
+		//버튼 구분 userid->address_id로
+		$("#delete<%= address_id %>").on("click", function() {//모달 창에서 삭제 버튼 클릭
+			event.preventDefault();
+			var id = $("#checkDelete<%= address_id %>").data("id");
+			var chk = $("#checkDelete<%= address_id %>").data("chk");//모달을 open한 버튼에 data-chk 설정
 			console.log(id);
 			console.log(chk);
-			var size=$("#listSize").val();
- 			if (size <= 1) {
+			var xxx=$("#checkDelete<%= address_id %>");
+			$("#delete<%= address_id %>").val(id);
+			$("#delete<%= address_id %>").attr("data-chk",chk);//모달창 data-chk 속성에 값 저장
+			var size=$("#listSize").val();//회원의 배송지를 리스트로 담았는데요2개 이상
+  			if (size <= 1) {
 				console.log(size);
 				alert("배송지는 한 개 이상 있어야 합니다.");
-				$("#deleteAddress").modal("hide");
+				$("#deleteAddress<%= address_id %>").modal("hide");
 				$(".modal-backdrop").hide();//모달창 닫고 백드롭 hide
+				window.location.reload();//새로고침 자동-스크롤 멈춤 현상 때문에
 			} else if(chk == 1){//기본 배송지
 				alert("기본 배송지는 삭제할 수 없습니다.");
-				$("#deleteAddress").modal("hide");
+				$("#deleteAddress<%= address_id %>").modal("hide");
 				$(".modal-backdrop").hide();//모달창 닫고 백드롭 hide
+				window.location.reload();//새로고침 자동-스크롤 멈춤 현상 때문에
 			} else {
 				console.log(size);
-	 			$.ajax({
+ 	 			$.ajax({
 					type : "post",
 					url : "AddressDeleteServlet",//페이지 이동 없이 해당 url에서 작업 완료 후 데이터만 가져옴
 					dataType : "text",
 					data : {//서버에 전송할 데이터
-						"address_id" : id
+						address_id : id
 					},
 					success : function(data, status, xhr) {
 						alert("해당 배송지가 삭제되었습니다."); 
-						$("#deleteAddress").modal("hide");
+						$("#deleteAddress<%= address_id %>").modal("hide");
 						$(".modal-backdrop").hide();//모달창 닫고 백드롭 hide
-						$(".container").remove();
-						console.log(data);
-						$("#addContainer").append(data);
+						//$("#divCon").empty();
+						//$("#addContainer").append(data);
+						console.log("success");
+						xxx.parents().filter("tr").remove();
+						window.location.reload();//새로고침 자동-스크롤 멈춤 현상 때문에
 					},
 					error: function(xhr, status, error) {
 						console.log(error);
-					}						
+					}
 				});//end ajax
 			}
 		});//end fn
@@ -148,7 +170,6 @@
 			location.href="AddressSelectServlet?address_id=<%= address_id %>";
 		});//end fn
 	});//end ready
-	
 </script>
 	<tr>
 		<td style="padding:5 0 0 10px;">
@@ -165,7 +186,7 @@
 		</td>
 		<td style="text-align: center;">
 			<!-- Modal -->
-			<div class="modal fade" id="deleteAddress" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+			<div class="modal fade" id="deleteAddress<%= address_id %>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 			  <div class="modal-dialog">
 			    <div class="modal-content">
 			      <div class="modal-header">
@@ -186,7 +207,8 @@
 			<div class="btns" style="display: inline-block">
 			<!-- Button trigger modal -->
 			<button type="button" id="change<%= address_id %>" data-edit="<%= address_id %>" class="btn btn-light btn-sm">수정</button>
-			<button type="button" id="checkDelete<%= address_id %>" data-id="<%= address_id %>" data-chk="<%= default_chk %>" class="btn btn-light btn-sm" data-bs-toggle="modal" data-bs-target="#deleteAddress">
+			<button type="button" id="checkDelete<%= address_id %>" data-id="<%= address_id %>" data-chk="<%= default_chk %>"
+								 class="btn btn-light btn-sm" data-bs-toggle="modal" data-bs-target="#deleteAddress<%= address_id %>">
 				삭제
 			</button><!-- open modal -->
 			</div>
@@ -203,10 +225,9 @@
 </div>
 </div>
 	<div style="width : 95px; float : right;">
-		<input type="button" id="addAddress" class="btn btn-success btn-sm" value="배송지 추가"><!-- 두 번 실행됨 -->
+		<input type="button" id="addAddress" class="btn btn-success btn-sm" value="배송지 추가">
 	</div>
 </div>
-
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
