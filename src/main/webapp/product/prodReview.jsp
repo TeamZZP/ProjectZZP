@@ -26,7 +26,7 @@
 				var review = $(this).attr("data-review");
 				var show = $("#show"+review);
 				console.log(show);
-				$("#hiden"+review).slideToggle();
+				$("#hiden"+review).slideToggle("slow");
 			});
 		});//end ready
 	</script>

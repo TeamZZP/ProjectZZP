@@ -5,8 +5,16 @@
 <%
 List<CategoryProductDTO> product_list = (List<CategoryProductDTO>) request.getAttribute("product_list");
 System.out.println("adminProduct페이지");
+String mesg = (String)session.getAttribute("mesg");
+if(mesg != null){
 %>
-
+	<script>
+		alert("<%=mesg%>");
+	</script>
+<%
+	}
+	session.removeAttribute("mesg");
+%>
 
 <div class="container">
 	<form action="" method="post">
@@ -33,9 +41,10 @@ System.out.println("adminProduct페이지");
 					    <option value="p_selling_price">판매가</option>
 					    <option value="p_created">등록일</option>
 				  </select>
-			  </div>
+		  	  </div>
 		  <div class="col"><input type="text" class="form-control" style="width: 150px; margin-right: -20px;"></div>
 	      <div class="col"><button type="button" class="btn btn-success">검색</button></div>
+	      <div class="col"><button type="button" class="btn btn-success" style="margin-left: 100%;">상품등록</button></div>
 	</div>
 </div>
 <div class="container col-md-auto">
@@ -98,7 +107,7 @@ for ( int i = 0 ; i < product_list.size() ; i++ ) {
 			  </div>
 			</div>
 			<!-- 버튼 -->
-			<button type="button" id="prodDetail" class="btn btn-outline-success btn-sm">상품보기</button>
+			<button type="button" id="prodDetail" data-id="<%= p_id %>" class="btn btn-outline-success btn-sm">상품보기</button>
 			<button type="button" id="delPopup<%= p_id %>" data-id="<%= p_id %>" class="btn btn-outline-dark btn-sm" data-bs-toggle="modal" data-bs-target="#deleteProduct">
 				삭제
 			</button>
@@ -118,12 +127,12 @@ $(document).ready(function () {
 	});
 	//상품보기 버튼
 	$("body").on("click", "#prodDetail", function () {
-		let p_id = $(this).attr("data-p_id");
+		let p_id = $(this).attr("data-id");
 		console.log(p_id);
 		location.href="ProductRetrieveServlet?p_id="+p_id;
 	});
 	//상품삭제 버튼
-	$("#deleteProduct").on("shown.bs.modal", function (e) {//#deleteMember modal 창을 열 때 선택한 버튼의 data-id를 가져옴(deleteID로 설정했더니 안돼서 다시 id로 바꿈)--modal창의 삭제 버튼에 저장
+	$("#deleteProduct").on("shown.bs.modal", function (e){//#deleteMember modal 창을 열 때 선택한 버튼의 data-id를 가져옴(deleteID로 설정했더니 안돼서 다시 id로 바꿈)--modal창의 삭제 버튼에 저장
 		    var id = $(e.relatedTarget).data("id");
 		    $("#delProd<%= p_id %>").val(id);
 	});
