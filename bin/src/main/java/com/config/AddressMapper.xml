@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="AddressMapper">
+	<select id="selectDefaultAddress" parameterType="String" resultType="AddressDTO">
+		select * from address
+		where userid = #{userid}
+		and default_chk = 1
+	</select>
+	<update id="changeAddress" parameterType="hashmap">
+		update address
+		set userid = #{userid}, 
+			address_name = #{address_name}, 
+			receiver_name = #{receiver_name}, 
+			receiver_phone = #{receiver_phone}, 
+			post_num = #{post_num}, 
+			addr1 = #{addr1}, 
+			addr2 = #{addr2},
+			default_chk = #{default_chk}
+		where address_id = #{address_id}
+	</update>
+	<select id="selectAllAddress" resultType="AddressDTO">
+		select * from address
+		where userid = #{userid}
+	</select>
+	<delete id="deleteAddress">
+		delete from address
+		where address_id = #{address_id}
+	</delete>
+	<insert id="addAddress" parameterType="AddressDTO">
+		insert into address
+		values (address_address_id_seq.nextval, #{userid}, #{address_name}, #{receiver_name}, #{receiver_phone}, 
+				#{post_num}, #{addr1}, #{addr2}, #{default_chk})
+	</insert>
+	<select id="selectAddressId" resultType="AddressDTO">
+		select * from address
+		where address_id = #{address_id}
+	</select>
+	<update id="changeNotDefaultAddress">
+		update address
+		set default_chk = 0
+		where userid = #{userid}
+	</update>
+</mapper>

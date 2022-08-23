@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="CartMapper">
+
+<insert id="cartAdd" parameterType="CartDTO">
+		insert into cart 
+		values
+		(cart_cart_id_seq.nextval,#{userid},#{p_id},sysdate,#{p_amount})	
+	</insert>
+
+	<select id="cartList" parameterType="string" resultType="CartDTO">
+		select c.cart_id,p.p_name,c.p_amount,p.p_selling_price,p.p_id,c.userid, p_selling_price*p_amount money,
+		(select IMAGE_ROUTE from images where p_id = c.p_id and IMAGE_RNK = 1) as p_image 
+      	from cart c join product p 
+      	on c.p_id = p.p_id
+		where c.userid = #{userid} 
+		order by cart_id desc
+	</select>
+	
+	<delete id="cartDel" parameterType="int">
+		delete from cart where cart_id =#{cart_id}
+	</delete>
+	
+	<update id="cartUpdate" parameterType="hashmap">
+		update cart set p_amount = #{p_amount} where cart_id = #{cart_id}
+	</update>
+	<!-- 장바구니 비우기 -->
+	<delete id="cartAllDel" parameterType="arrayList">
+		delete from cart
+		where cart_id
+		in
+		<foreach collection="list" item="item" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+	
+	<select id="cartCount" parameterType="String" resultType="int">
+		select count(*) from cart where userid = #{userid}
+	</select>
+	<!-- 총금액 구하기 null인 경우 0 -->
+	<select id="sum_money" resultType="int">
+		select nvl(sum(p.p_selling_price*c.p_amount),0) money
+		from cart c, product p 
+		where c.p_id = p.p_id and c.userid = #{userid}
+	</select>  
+</mapper>
