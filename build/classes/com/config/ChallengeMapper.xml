@@ -326,6 +326,17 @@
 	where m.chall_id=#{chall_id}
 </select>
 
+<select id="selectMemberStampByUserid" resultType="string">
+	select stamp_id 
+	from member_stamp
+	where userid=#{userid}
+	order by stamp_id desc
+</select>
 
+<select id="selectStampImg" resultType="string">
+	select stamp_img
+	from stamp
+	where stamp_id=#{stamp_id}
+</select>
 
 </mapper>

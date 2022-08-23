@@ -1,3 +1,4 @@
+<%@page import="java.util.HashMap"%>
 <%@page import="com.dto.ChallengeDTO"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -6,6 +7,8 @@
 <% 
     //회원의 챌린지 목록 가져오기
  	List<ChallengeDTO> list = (List<ChallengeDTO>) request.getAttribute("challengeList");
+	//각 게시글마다 도장 가져오기
+	HashMap<String, String> stampListMap = (HashMap<String, String>) request.getAttribute("stampListMap");
 	//회원의 프로필 이미지 가져오기
 	String profile_img = (String) request.getAttribute("profile_img");
 %>
@@ -18,7 +21,7 @@
       overflow: hidden;
       border-radius: 15px;
     }
-    .hover-zoomin img {
+    .hover-zoomin img:not(.stamp) {
       width: 100%;
       height: auto;
       -webkit-transition: all 0.2s ease-in-out;
@@ -27,13 +30,18 @@
       -ms-transition: all 0.2s ease-in-out;
       transition: all 0.2s ease-in-out;
     }
-    .hover-zoomin:hover img {
+    .hover-zoomin:hover img:not(.stamp) {
       -webkit-transform: scale(1.1);
       -moz-transform: scale(1.1);
       -o-transform: scale(1.1);
       -ms-transform: scale(1.1);
       transform: scale(1.1);
     } 
+    .stamp {
+    	position: absolute; 
+		left: 198px; 
+		top: -15px; 
+    }
 </style>
 
 
@@ -62,7 +70,11 @@
        </div>
        <div class="hover-zoomin">
 	       <a href="ChallengeDetailServlet?chall_id=<%=chall_id%>"> 
-			<img src="/eclipse/upload/<%=chall_img%>" border="0" onerror="this.src='images/uploadarea.png'"></a>
+			<img src="/eclipse/upload/<%=chall_img%>" border="0" onerror="this.src='images/uploadarea.png'">
+			<% if (stampListMap.containsKey(String.valueOf(chall_id))) { %>
+			<img src="/eclipse/upload/<%=stampListMap.get(String.valueOf(chall_id))%>" class="stamp" width="110" height="110">
+			<%} %>
+		   </a>
 	   </div>
 	   <div class="p-2 text-center">
 	       <img src="images/like.png" width="30" height="30"> <%=chall_liked%> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

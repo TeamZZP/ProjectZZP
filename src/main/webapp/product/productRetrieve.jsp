@@ -70,6 +70,9 @@
 	
 	$("#order").on("click", function() {
 		
+		var pIdList = [];
+		pIdList= $("#p_id").val();
+	    $("#pIdList").val = pIdList;
 		$("form").attr("action", "OrderServlet");
 	})//order
  
@@ -251,7 +254,9 @@ System.out.println("productRetrieve.jsp에서 파싱한 ilist==" + ilist);
 
 					<tr >
 						
-						<td><button type="submit" class="btn btn-success" id="order">주문하기</button></td>
+						<td><button type="submit" class="btn btn-success" id="order">주문하기</button>
+						<p id="pIdList" name="pIdList" value=""></p>
+						</td>
 						<td></td>
 						<td>
 						<!-- Button trigger modal -->
