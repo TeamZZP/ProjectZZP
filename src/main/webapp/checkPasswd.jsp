@@ -34,16 +34,24 @@
 <body>
 <jsp:include page="common/header.jsp" flush="true"></jsp:include><br>
 
-<div style = "padding: 15px 5px 5px 20px;">
 <form action="AccountManagementServlet" method="post">
-<input type="hidden" name="userid" id="userid" value="<%= userid %>">
-<h2>비밀번호를 입력해 주십시오</h2>
-기존 비밀번호 확인: <input type="password" name="passwd" id="passwd">
-<br><br>
-<button id="check" class="btn btn-success">확인</button>
-<button type="button" id="cancle" class="btn btn-outline-success">취소</button>
+	<div class="row justify-content-center">
+		<div class="col-md-12">
+			<input type="hidden" name="userid" id="userid" value="<%= userid %>">
+			<h2>비밀번호를 입력해 주십시오</h2>
+			<div style="padding-bottom: 45px"></div>
+			기존 비밀번호 확인: <input type="password" name="passwd" id="passwd">
+			<div style="padding-bottom: 45px"></div>
+
+		</div>
+		<div class="col-md-2">
+			<div class="row justify-content-center">
+				<button id="check" class="btn btn-success">확인</button>
+				<button type="button" id="cancle" class="btn btn-outline-success">취소</button>
+			</div>
+		</div>
+	</div>
 </form>
-</div>
 
 <jsp:include page="common/footer.jsp" flush="true"></jsp:include><br>
 </body>

@@ -17,12 +17,8 @@
 		<button type="button" class="btn btn-outline-success" id="productDetail">
 			제품상세
 		</button>
-		<button type="button" class="btn btn-outline-success" id="productReview">
-			<a href="#prodReview" style="text-decoration: none; color: green;">구매후기</a>
-		</button>
-		<button type="button" class="btn btn-outline-success" id="productQnA">
-			<a href="#prodQA" style="text-decoration: none; color: green;">QnA</a>
-		</button>
+		<a class="btn btn-outline-success" href="#prodReview" role="button" style="text-decoration: none; color: green;">구매후기</a>
+		<a class="btn btn-outline-success" href="#prodQA" role="button" style="text-decoration: none; color: green;">QnA</a>
 	</div>
 </div>
 <div id="prodReview">
