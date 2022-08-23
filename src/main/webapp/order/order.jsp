@@ -15,5 +15,7 @@ int p_id =Integer.parseInt((String)request.getAttribute("p_id")) ;
 int p_amount = Integer.parseInt((String)request.getAttribute("p_amount")) ;
 %>
 
+
+
 </body>
 </html> 
