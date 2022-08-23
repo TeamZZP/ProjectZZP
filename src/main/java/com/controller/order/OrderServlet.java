@@ -25,8 +25,14 @@ public class OrderServlet extends HttpServlet {
 		String mesg = "";
 		
 		if(dto != null) {
-			ToOrderDTO odto = new ToOrderDTO();
+			int p_id = Integer.parseInt((String)request.getAttribute("p_id"));
+			int p_amount = Integer.parseInt((String)request.getAttribute("p_amount")) ;
 			
+			if(p_amount==0) {
+				p_amount = 1;
+			}
+			
+			System.out.println(p_id+" "+p_amount);
 			
 			
 		}else {
