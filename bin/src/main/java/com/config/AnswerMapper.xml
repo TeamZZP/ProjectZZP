@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="AnswerMapper">
+	<insert id="answerInsert" parameterType="AnswerDTO">
+		insert into ANSWER (ANSWER_ID, ANSWER_CONTENT, Q_ID, ANSWER_CREATED)
+			values (ANSWER_ANSWER_ID.nextval, #{ANSWER_CONTENT}, #{Q_ID}, sysdate)
+	</insert>
+	<select id="selectAnswer" parameterType="string" resultType="AnswerDTO">
+		select * from ANSWER where Q_ID = #{Q_ID}
+	</select>
+	<update id="answerUpdate" parameterType="AnswerDTO">
+		update ANSWER set ANSWER_CONTENT = #{ANSWER_CONTENT} where Q_ID = #{Q_ID}
+	</update>
+	<update id="questionStatus" parameterType="string">
+		update QUESTION set Q_STATUS = '답변완료' where Q_ID = #{Q_ID}
+	</update>
+</mapper>

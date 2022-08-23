@@ -51,7 +51,8 @@ public class AddressDeleteServlet extends HttpServlet {
 			System.out.println("addressDelete서블릿 안의 addressmap "+addressMap);
 			
 			session.setAttribute("addressMap", addressMap);
-			response.sendRedirect("mypage/addressList.jsp");//=data
+			//response.sendRedirect("addressList.jsp");//=data
+			response.sendRedirect("AddressListServlet");
 		} else {
 			//alert로 로그인 후 이용하세요 출력
 			String mesg="로그인이 필요합니다.";

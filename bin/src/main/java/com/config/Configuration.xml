@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+<!-- jdbc.properties 파일 등록 -->
+<properties resource="com/config/jdbc.properties"/> 
+<!-- typealias 등록 -->
+<typeAliases>
+   <typeAlias type="com.dto.MemberDTO" alias="MemberDTO"/> 
+   <typeAlias type="com.dto.NoticeDTO" alias="NoticeDTO"/> 
+   <typeAlias type="com.dto.ChallengeDTO" alias="ChallengeDTO"/> 
+   <typeAlias type="com.dto.ProductDTO" alias="ProductDTO"/> 
+   <typeAlias type="com.dto.CategoryProductDTO" alias="CategoryProductDTO"/> 
+   <typeAlias type="com.dto.AddressDTO" alias="AddressDTO"/> 
+   <typeAlias type="com.dto.QuestionDTO" alias="QuestionDTO"/> 
+   <typeAlias type="com.dto.ReviewDTO" alias="ReviewDTO"/> 
+   <typeAlias type="com.dto.OrderDTO" alias="OrderDTO"/> 
+   <typeAlias type="com.dto.CategoryDTO" alias="CategoryDTO"/> 
+   <typeAlias type="com.dto.ImagesDTO" alias="ImagesDTO"/> 
+	<typeAlias type="com.dto.CartDTO" alias="CartDTO"/> 
+	<typeAlias type="com.dto.AnswerDTO" alias="AnswerDTO"/> 
+	<typeAlias type="com.dto.QuestionProductDTO" alias="QuestionProductDTO"/> 
+
+</typeAliases>
+  <environments default="development">
+    <environment id="development">
+      <transactionManager type="JDBC"/>
+      <dataSource type="POOLED">
+        <property name="driver" value="${driver}" />
+        <property name="url" value="${url}" />
+        <property name="username" value="${username}" />
+        <property name="password" value="${password}" />
+      </dataSource>
+    </environment>
+  </environments>
+  <!-- Mapper 등록 -->
+  <mappers>
+    <mapper resource="com/config/MemberMapper.xml"/> 
+    <mapper resource="com/config/ChallengeMapper.xml"/> 
+    <mapper resource="com/config/NoticeMapper.xml"/> 
+    <mapper resource="com/config/ProductMapper.xml"/> 
+    <mapper resource="com/config/AddressMapper.xml"/> 
+    <mapper resource="com/config/AccountMapper.xml"/>
+    <mapper resource="com/config/QuestionMapper.xml"/>
+    <mapper resource="com/config/ReviewMapper.xml"/>
+    <mapper resource="com/config/CategoryMapper.xml"/>
+    <mapper resource="com/config/ImagesMapper.xml"/>
+	 <mapper resource="com/config/CartMapper.xml"/>
+    <mapper resource="com/config/AnswerMapper.xml"/>
+  </mappers> 
+</configuration>
+  

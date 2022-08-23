@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ProductMapper">
+
+<select id="bestProductList" resultType="CategoryProductDTO" >
+select *
+from (
+select p.P_ID
+,(select 
+IMAGE_ROUTE
+from images
+where p_id = p.p_id 
+and IMAGE_RNK = 1) as p_image
+,(select count(*) from Orders where p_id = p.p_id  ) as p_order
+,p.P_NAME
+,p.P_CONTENT
+,p.C_ID
+,p.P_COST_PRICE
+,p.P_SELLING_PRICE
+,p.P_DISCOUNT
+,p.P_CREATED
+,p.P_STOCK
+from product p
+) 
+order by p_order desc
+</select>
+
+<select id="ProductList" resultType="CategoryProductDTO" >
+select *
+from (
+select p.P_ID
+,(select 
+IMAGE_ROUTE
+from images
+where p_id = p.p_id 
+and IMAGE_RNK = 1) as p_image
+,(select count(*) from Orders where p_id = p.p_id  ) as p_order
+,p.P_NAME
+,p.P_CONTENT
+,p.C_ID
+,p.P_COST_PRICE
+,p.P_SELLING_PRICE
+,p.P_DISCOUNT
+,p.P_CREATED
+,p.P_STOCK
+from product p
+) 
+</select>
+
+<select id="productList" resultType="CategoryProductDTO" parameterType="int">
+	
+	 
+select p.P_ID
+,(select 
+
+IMAGE_ROUTE
+
+from images
+where p_id = p.p_id 
+and IMAGE_RNK = 1) as p_image
+,p.P_NAME
+,p.P_CONTENT
+,p.C_ID
+,p.P_COST_PRICE
+,p.P_SELLING_PRICE
+,p.P_DISCOUNT
+,p.P_CREATED
+,p.P_STOCK
+from product p
+
+where p.c_id = #{c_id} 
+	 
+	 	 
+</select>
+
+<select id="productRetrieve" parameterType="int" resultType="ProductDTO">
+	select * from product where p_id = #{p_id}
+</select>	
+
+<select id="ImagesRetrieve" parameterType="int" resultType="ImagesDTO">
+select * from images where p_id= #{p_id}
+</select>
+
+<!-- <select id="bestProduct" resultType="productDTO">
+select * from product
+</select> -->
+
+<select id="searchProduct" resultType="CategoryProductDTO" parameterType="String">
+	select p.P_ID,(select IMAGE_ROUTE from images where p_id = p.p_id and IMAGE_RNK = 1) as p_image, p.P_NAME, p.P_CONTENT
+	,p.C_ID,p.P_COST_PRICE,p.P_SELLING_PRICE,p.P_DISCOUNT,p.P_CREATED,p.P_STOCK
+	from product p where p.P_NAME like '%'||#{searchValue}||'%' or p.P_CONTENT like '%'||#{searchValue}||'%'
+</select>
+
+<insert id="addLike" parameterType="hashmap">
+insert into product_liked values (#{userid},#{p_id})
+</insert>
+
+
+<select id="likeCheck" parameterType="hashmap" resultType="int">
+select count(*) from product_liked where p_id= #{p_id} and userid = #{userid}
+</select>
+
+<select id="selectLikeProduct" parameterType="String" resultType="List">
+select p_id from  product_liked where userid = #{userid}
+</select>
+
+</mapper>

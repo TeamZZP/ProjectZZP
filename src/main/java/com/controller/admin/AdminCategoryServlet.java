@@ -67,7 +67,7 @@ public class AdminCategoryServlet extends HttpServlet {
 			List<ChallengeDTO> challList = challService.selectChallengeByUserid("admin1");
 			
 			request.setAttribute("challList", challList);
-			RequestDispatcher dis = request.getRequestDispatcher("admin/adminChallenge.jsp");
+			RequestDispatcher dis = request.getRequestDispatcher("adminChallenge.jsp");
 			dis.forward(request, response);
 		}
 		
