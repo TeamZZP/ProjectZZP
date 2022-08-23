@@ -1,3 +1,6 @@
+<%@page import="java.util.LinkedHashSet"%>
+<%@page import="java.util.Set"%>
+<%@page import="java.util.LinkedHashMap"%>
 <%@page import="java.util.List"%>
 <%@page import="com.dto.ChallengeDTO"%>
 <%@page import="com.dto.PageDTO"%>
@@ -17,6 +20,9 @@
 	if (challNum > 4) {
 		challNum = 4;
 	}
+	
+	//회원의 도장 목록 가져오기
+	LinkedHashMap<String, String> stampImgMap = (LinkedHashMap<String, String>) request.getAttribute("stampImgMap");
 	
 	//session에 저장된 userid 읽어오기 
 	MemberDTO member = (MemberDTO) session.getAttribute("login"); 
@@ -102,7 +108,7 @@
 	
 	
 		<div>
-		  <div class="row p-2 mx-4">
+		  <div class="row p-2 mx-4 mt-5">
 		    <div class="col">챌린지 <span class="text-success fw-bold"><%= challengeList.size() %></span></div>
 			 <div class="col"><div class="float-end"><small><a class="category" data-category="challenge">전체보기</a></small></div></div>
 		  </div>
@@ -125,6 +131,34 @@
 		        } %>
 	      </div>
 		</div><!-- end challenge -->
+		
+		
+		
+		<div>
+		  <div class="row p-2 mx-4 mt-5">
+		    <div class="col">도장 <span class="text-success fw-bold"><%= stampImgMap.size() %></span></div>
+			 <div class="col"><div class="float-end"><small><a class="category" data-category="stamp">전체보기</a></small></div></div>
+		  </div>
+		  <div class="text-center mt-2">
+		        <%  Set<String> keySet = stampImgMap.keySet();
+		        		System.out.println(keySet);
+		       		int count = 0;
+		        	for (String key : keySet) {
+		        		String stamp_img = stampImgMap.get(key);
+		        %>
+					<img src="/eclipse/upload/<%=stamp_img%>" border="0" align="middle" class="img"
+						width="200" height="200" onerror="this.src='images/uploadarea.png'">
+		        <%  	count++;
+		        		if (count==4) break;
+		        	} 
+		        if (stampImgMap.size() < 4) {
+		        	for (int i = 0; i < 4-stampImgMap.size(); i++) {
+		        %>
+		        	<img src="images/none.png" class="img" width="200" height="200" >
+		        <% }
+		        } %>
+	      </div>
+		</div><!-- end stamp -->
 		
 		
 		

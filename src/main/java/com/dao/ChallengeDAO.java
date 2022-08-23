@@ -172,6 +172,16 @@ public class ChallengeDAO {
 		return map;
 	}
 
+	public List<String> selectMemberStampByUserid(SqlSession session, String userid) {
+		List<String> list = session.selectList("ChallengeMapper.selectMemberStampByUserid", userid);
+		return list;
+	}
+
+	public String selectStampImg(SqlSession session, String stampId) {
+		String stampImg = session.selectOne("ChallengeMapper.selectStampImg", stampId);
+		return stampImg;
+	}
+
 	
 
 

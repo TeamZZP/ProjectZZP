@@ -349,6 +349,28 @@ public class ChallengeService {
 		return map;
 	}
 
+	public List<String> selectMemberStampByUserid(String userid) {
+		List<String> list = null;
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		try {
+			list = dao.selectMemberStampByUserid(session, userid);
+		} finally {
+			session.close();
+		}
+		return list;
+	}
+
+	public String selectStampImg(String stampId) {
+		String stampImg = null;
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		try {
+			stampImg = dao.selectStampImg(session, stampId);
+		} finally {
+			session.close();
+		}
+		return stampImg;
+	}
+
 
 
 
