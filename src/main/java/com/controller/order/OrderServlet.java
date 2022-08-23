@@ -1,6 +1,7 @@
 package com.controller.order;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.dto.MemberDTO;
-import com.dto.ToOrderDTO;
 
 /**
  * Servlet implementation class OrderServlet
@@ -23,16 +23,26 @@ public class OrderServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		MemberDTO dto = (MemberDTO)session.getAttribute("login");
 		String mesg = "";
+		int p_amount = 0;
+		List<Integer> plist = null;
+
 		
 		if(dto != null) {
-			int p_id = Integer.parseInt((String)request.getAttribute("p_id"));
-			int p_amount = Integer.parseInt((String)request.getAttribute("p_amount")) ;
 			
-			if(p_amount==0) {
+			/*for (int i = 0; i < request.getParameter("p_id"); i++) {
+				
+			}
+			plist = Integer.parseInt((String)request.getParameter("p_id"));*/
+			
+			if(Integer.parseInt((String)request.getParameter("p_amount"))==0||(String)request.getParameter("p_amount")==null) {
 				p_amount = 1;
+			}else {
+				p_amount = Integer.parseInt((String)request.getParameter("p_amount"));
 			}
 			
-			System.out.println(p_id+" "+p_amount);
+			//System.out.println(p_id+" "+p_amount);
+			
+			
 			
 			
 		}else {
