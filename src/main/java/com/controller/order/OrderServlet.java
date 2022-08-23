@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.dto.CategoryProductDTO;
 import com.dto.MemberDTO;
+import com.service.OrderService;
 
 /**
  * Servlet implementation class OrderServlet
@@ -31,13 +33,19 @@ public class OrderServlet extends HttpServlet {
 		
 		System.out.println(request.getParameterValues("p_id"));
 		String[] a = request.getParameterValues("p_id");
-		System.out.println("첫번쨰 : " +a[0]);
-	//	System.out.println("두번쟤 : " +a[1]);
 		
-		if(dto != null) {
+			if(dto != null) {
 			
 		
 			p_id = Integer.parseInt((String)request.getParameter("p_id"));
+			
+			OrderService service = new OrderService();
+			List<CategoryProductDTO> list =service.getProduct(p_id);
+			
+			for (int i = 0; i < list.size(); i++) {
+				System.out.println(list.get(i).getP_name()+" "+list.get(i).getP_selling_price());
+
+			}
 			
 			if(Integer.parseInt((String)request.getParameter("p_amount"))==0||(String)request.getParameter("p_amount")==null) {
 				p_amount = 1;
