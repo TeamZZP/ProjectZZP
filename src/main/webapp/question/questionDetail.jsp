@@ -65,10 +65,6 @@
 	<div class="container justify-content-center">
 	<div class="row">
 		<table>
-			<caption style="caption-side: top;">문의 내용</caption>
-			<tr>
-				<td colspan="2" style="height: 10px;"></td>
-			</tr>
 			<tr>
 				<td colspan="2"> 
 					<div class="input-group mb-3">
