@@ -25,14 +25,15 @@ public class OrderServlet extends HttpServlet {
 		String mesg = "";
 		int p_amount = 0;
 		List<Integer> plist = null;
+		int p_id= 0;
 
 		
 		if(dto != null) {
 			
 			/*for (int i = 0; i < request.getParameter("p_id"); i++) {
 				
-			}
-			plist = Integer.parseInt((String)request.getParameter("p_id"));*/
+			}*/
+			p_id = Integer.parseInt((String)request.getParameter("p_id"));
 			
 			if(Integer.parseInt((String)request.getParameter("p_amount"))==0||(String)request.getParameter("p_amount")==null) {
 				p_amount = 1;
@@ -40,7 +41,7 @@ public class OrderServlet extends HttpServlet {
 				p_amount = Integer.parseInt((String)request.getParameter("p_amount"));
 			}
 			
-			//System.out.println(p_id+" "+p_amount);
+			System.out.println(p_id+" "+p_amount);
 			
 			
 			
