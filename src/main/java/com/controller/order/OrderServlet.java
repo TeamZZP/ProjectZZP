@@ -3,6 +3,7 @@ package com.controller.order;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,7 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.dto.CategoryProductDTO;
 import com.dto.MemberDTO;
+import com.service.OrderService;
 
 /**
  * Servlet implementation class OrderServlet
@@ -24,16 +27,25 @@ public class OrderServlet extends HttpServlet {
 		MemberDTO dto = (MemberDTO)session.getAttribute("login");
 		String mesg = "";
 		int p_amount = 0;
-		List<Integer> plist = null;
 		int p_id= 0;
 
 		
-		if(dto != null) {
+		
+		System.out.println(request.getParameterValues("p_id"));
+		String[] a = request.getParameterValues("p_id");
+		
+			if(dto != null) {
 			
-			/*for (int i = 0; i < request.getParameter("p_id"); i++) {
-				
-			}*/
+		
 			p_id = Integer.parseInt((String)request.getParameter("p_id"));
+			
+			OrderService service = new OrderService();
+			List<CategoryProductDTO> list =service.getProduct(p_id);
+			
+			for (int i = 0; i < list.size(); i++) {
+				System.out.println(list.get(i).getP_name()+" "+list.get(i).getP_selling_price());
+
+			}
 			
 			if(Integer.parseInt((String)request.getParameter("p_amount"))==0||(String)request.getParameter("p_amount")==null) {
 				p_amount = 1;
@@ -42,6 +54,12 @@ public class OrderServlet extends HttpServlet {
 			}
 			
 			System.out.println(p_id+" "+p_amount);
+			
+			request.setAttribute("p_id", p_id);
+			request.setAttribute("p_amount", p_amount);
+			
+			RequestDispatcher dis = request.getRequestDispatcher("order.jsp");
+			dis.forward(request, response);
 			
 			
 			

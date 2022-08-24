@@ -120,6 +120,30 @@ public class ProductService {
 		return list;
 	}
 
+	public int updateProduct(ProductDTO dto) {
+		int num = 0;
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		try {
+			num = dao.updateProduct(session, dto);
+        	session.commit();
+        }finally {
+        	session.close();
+        }
+		return num;
+	}
+
+	public int deleteProduct(int p_id) {
+		int num = 0;
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		try {
+			num = dao.deleteProduct(session, p_id);
+        	session.commit();
+        }finally {
+        	session.close();
+        }
+		return num;
+	}
+
 
 
 }

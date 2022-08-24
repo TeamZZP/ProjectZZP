@@ -75,6 +75,7 @@ where p.c_id = #{c_id}
 	 	 
 </select>
 
+
 <select id="productRetrieve" parameterType="int" resultType="ProductDTO">
 	select * from product where p_id = #{p_id}
 </select>	
@@ -106,5 +107,16 @@ select count(*) from product_liked where p_id= #{p_id} and userid = #{userid}
 <select id="selectLikeProduct" parameterType="String" resultType="List">
 select p_id from  product_liked where userid = #{userid}
 </select>
+
+<update id="updateProduct" parameterType="ProductDTO">
+update product set p_name=#{p_name}, p_content=#{p_content}, c_id=#{c_id},
+p_cost_price=#{p_cost_price}, p_selling_price=#{p_selling_price},
+p_discount=#{p_discount}, p_stock=#{p_stock}, userid='admin1'
+where p_id=#{p_id}
+</update>
+
+<delete id="deleteProduct">
+delete from product where p_id=#{p_id}
+</delete>
 
 </mapper>

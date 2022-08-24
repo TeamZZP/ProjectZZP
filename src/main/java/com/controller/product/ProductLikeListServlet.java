@@ -1,6 +1,7 @@
 package com.controller.product;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -33,8 +34,9 @@ public class ProductLikeListServlet extends HttpServlet {
 			String userid = mdto.getUserid();
 			
 			ProductService service  = new ProductService();
-			List<Integer> liked_pId_List = service.selectLikeProduct(userid); //찜한 상품 p_id List
-			List<CategoryProductDTO> productList = null;
+			List<Integer> liked_pId_List = new ArrayList<Integer>();
+			liked_pId_List=	service.selectLikeProduct(userid); //찜한 상품 p_id List
+			List<CategoryProductDTO> productList = new ArrayList<CategoryProductDTO>();
 			
 			for (int i = 0; i <liked_pId_List.size() ; i++) {
 				productList = (List<CategoryProductDTO>) service.productList(liked_pId_List.get(i));
