@@ -75,6 +75,7 @@ where p.c_id = #{c_id}
 	 	 
 </select>
 
+
 <select id="productRetrieve" parameterType="int" resultType="ProductDTO">
 	select * from product where p_id = #{p_id}
 </select>	
@@ -102,6 +103,7 @@ insert into product_liked values (#{userid},#{p_id})
 select count(*) from product_liked where p_id= #{p_id} and userid = #{userid}
 </select>
 
+<!-- 찜 List  -->
 <select id="selectLikeProduct" parameterType="String" resultType="List">
 select p_id from  product_liked where userid = #{userid}
 </select>

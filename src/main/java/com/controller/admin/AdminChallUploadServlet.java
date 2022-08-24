@@ -108,7 +108,7 @@ public class AdminChallUploadServlet extends HttpServlet {
 									} else {
 										map.put("chall_img", old_file);
 									}
-									
+									System.out.println(map);
 								}catch (Exception e) {
 									e.printStackTrace();
 								}
@@ -156,14 +156,17 @@ public class AdminChallUploadServlet extends HttpServlet {
 					int n = service.insertAdminChallenge(map);
 					System.out.println(n+"개의 챌린지와 도장 레코드 추가");
 					
-					response.sendRedirect("AdminMainServlet");
+					response.sendRedirect("AdminCategoryServlet?category=challenge");
 					
 				//챌린지 게시글 업데이트
 				} else if ("update".equals(operate)) {
 					int n = service.updateChallenge(map);
 					System.out.println(n+"개의 챌린지 레코드 업데이트");
 					
-					response.sendRedirect("ChallengeDetailServlet?chall_id="+map.get("chall_id"));
+					int n2 = service.updateStamp(map);
+					System.out.println(n2+"개의 도장 레코드 업데이트");
+					
+					response.sendRedirect("AdminChallDetailServlet?chall_id="+map.get("chall_id"));
 					
 					
 				}

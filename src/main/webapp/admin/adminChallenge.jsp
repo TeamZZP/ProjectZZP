@@ -17,7 +17,7 @@ $(document).ready(function () {
 	});
 	
 	$(".writeBtn").on("click", function () {
-		location.href = "AdminUIServlet?operate=challengeWrite";
+		location.href = "AdminChallUIServlet";
 	});
 	
 	$(".challengeDetail").on("click", function () {

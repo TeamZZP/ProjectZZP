@@ -3,8 +3,15 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="CartMapper">
-
-<insert id="cartAdd" parameterType="CartDTO">
+	<!-- 장바구니에 동일한 상품있는지 확인  -->
+ 	<select id="checkCart" parameterType="hashmap" resultType="int" >
+ 		select count(*) from cart where userid = #{userid} and p_id = #{p_id}
+ 	</select>
+ 	<!-- 장바구니에 있는경우 구매수량 수정 -->
+ 	<update id="updateCart" parameterType="CartDTO">
+ 		update cart set p_amount = p_amount +#{p_amount}  where userid = #{userid} and p_id = #{p_id}
+ 	</update>
+    <insert id="cartAdd" parameterType="CartDTO">
 		insert into cart 
 		values
 		(cart_cart_id_seq.nextval,#{userid},#{p_id},sysdate,#{p_amount})	

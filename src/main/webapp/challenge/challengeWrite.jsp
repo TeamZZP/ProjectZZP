@@ -142,6 +142,7 @@
 <form action="UploadServlet?userid=<%= currUserid %>&operate=<%= operate %>" method="post" enctype="multipart/form-data">
 <input type="hidden" name="chall_id" value="<%= chall_id %>">
 <input type="hidden" name="userid" value="<%= currUserid %>">
+<input type="hidden" name="old_file" id="old_file" value="<%= chall_img %>">
 
   <div class="row">
 	<div class="d-flex w-25">
@@ -172,7 +173,6 @@
 	 		<img src="images/trash.png" class="deleteBtn" id="deleteBtn" width="50" title="사진 삭제하기">
 	 		<input type="file" accept="image/*" name="chall_img" id="chall_img" value="<%= chall_img %>" style="display: none;">
 	  <%} %>
-	 		<input type="hidden" name="old_file" id="old_file" value="<%= chall_img %>">
 	</div>
   </div>
   <div>

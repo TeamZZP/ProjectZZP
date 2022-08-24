@@ -69,7 +69,7 @@ a {
 		$(".backList").on("click", function () {
 			let preUrl = document.referrer;
 			//게시글 업데이트한 후 이동한 페이지에서는 글작성 페이지로 돌아가지 않도록 최신글 화면으로 이동한다.
-			if (preUrl.includes("AdminUIServlet")) {
+			if (preUrl.includes("AdminChallUIServlet")) {
 				location.href = "AdminCategoryServlet?category=challenge";
 			} else {
 				history.back();
@@ -102,7 +102,7 @@ a {
 			</div>
 			<div class="w-25">
 			  <div class="float-end">
-				<a href="ChallengeUIServlet?chall_id=<%= chall_id %>&userid=<%= currUserid %>" class="btn btn-outline-success">수정</a> 
+				<a href="AdminChallUIServlet?chall_id=<%= chall_id %>&userid=<%= currUserid %>" class="btn btn-outline-success">수정</a> 
 				<a href="ChallengeDeleteServlet?chall_id=<%= chall_id %>&userid=<%= currUserid %>" id="deleteChallenge" class="btn btn-outline-success">삭제</a>
 			   </div>
 			</div>

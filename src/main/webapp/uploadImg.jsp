@@ -47,7 +47,7 @@
 				<b>내 첨부파일</b>
 			</td>
 			<td style="text-align: right;">
-				<img alt="삭제" src="images/question/close.png" width="20px" height="20px" id="uploadDel" title="삭제">
+				<img alt="삭제" src="images/question/delete.png" width="30px" height="30px" id="uploadDel" title="삭제">
 			</td>
 		</tr>
 		<tr>
