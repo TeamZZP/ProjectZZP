@@ -23,4 +23,5 @@
 	<img alt="소개" src="images/introduction/int3.png"><br>
 	<br>
 	<img alt="소개" src="images/introduction/int4.png">
+	<br>
 </div>
