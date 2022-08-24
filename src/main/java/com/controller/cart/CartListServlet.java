@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
 import com.dto.CartDTO;
 import com.dto.MemberDTO;
 import com.service.CartService;
+import com.service.ProductService;
 
 @WebServlet("/CartListServlet")
 public class CartListServlet extends HttpServlet {
@@ -32,8 +33,13 @@ public class CartListServlet extends HttpServlet {
 			CartService service = new CartService();
 			
 			//장바구니count
-			int count = service.cartCount(userid);
-			System.out.println(count);
+			int cartCount = service.cartCount(userid);
+			System.out.println(cartCount);
+			
+			//찜Count
+			ProductService Pservice  = new ProductService();
+			int likeCount = Pservice.likeCount(userid);
+			
 			
 			List<CartDTO> list = service.cartList(userid); 
 			System.out.println("CartListServlet"+list);
@@ -48,7 +54,8 @@ public class CartListServlet extends HttpServlet {
 			map.put("total",total); 
 			
 			request.setAttribute("map", map);
-			request.setAttribute("cartCount", count);
+			request.setAttribute("cartCount", cartCount);
+			request.setAttribute("likeCount", likeCount);	
 			request.setAttribute("cartList", list);
 			
 			nextPage="cartList.jsp";

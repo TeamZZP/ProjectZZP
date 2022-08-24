@@ -10,6 +10,7 @@ import com.dao.ProductDAO;
 import com.dto.CategoryProductDTO;
 import com.dto.ImagesDTO;
 import com.dto.ProductDTO;
+import com.dto.product_likedDTO;
 
 public class ProductService {
 	
@@ -142,6 +143,28 @@ public class ProductService {
         	session.close();
         }
 		return num;
+	}
+
+	public int likeCount(String userid) {
+		int n = 0;
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		try {
+			n = dao.likeCount(session,userid);
+		} finally {
+			session.close();
+		}
+		return n;
+	}
+
+	public List<product_likedDTO> likeList(String userid) {
+		List<product_likedDTO> list = null;
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		try {
+			list = dao.likeList(session,userid);
+		} finally {
+			session.close();
+		}
+		return list;
 	}
 
 

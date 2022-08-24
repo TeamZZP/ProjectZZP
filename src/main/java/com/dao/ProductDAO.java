@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import com.dto.CategoryProductDTO;
 import com.dto.ImagesDTO;
 import com.dto.ProductDTO;
+import com.dto.product_likedDTO;
 
 public class ProductDAO {
 
@@ -64,5 +65,15 @@ public class ProductDAO {
 
 	public int deleteProduct(SqlSession session, int p_id) {
 		return session.delete("deleteProduct", p_id);
+	}
+
+	public int likeCount(SqlSession session, String userid) {
+		int n = session.selectOne("likeCount",userid);
+		return n;
+	}
+
+	public List<product_likedDTO> likeList(SqlSession session, String userid) {
+		List<product_likedDTO> list = session.selectList("ProductMapper.likeList",userid);
+		return list;
 	}
 }

@@ -21,6 +21,7 @@
 	<typeAlias type="com.dto.CartDTO" alias="CartDTO"/> 
 	<typeAlias type="com.dto.AnswerDTO" alias="AnswerDTO"/> 
 	<typeAlias type="com.dto.QuestionProductDTO" alias="QuestionProductDTO"/> 
+	<typeAlias type="com.dto.product_likedDTO" alias="product_likedDTO"/> 
 
 </typeAliases>
   <environments default="development">

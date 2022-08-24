@@ -77,7 +77,7 @@ function productChoice(n) {
                 },
                 dataType : "json",
                 success : function(data,status,xhr){
-                   //이미지 바뀌는부분
+                 	$("#likeimg").attr("src","images/liked.png");
                 },error : function (xhr,status,error){
                  console.log(error);
                 }
@@ -113,7 +113,7 @@ function productChoice(n) {
 			}
 		})//end down
 		
-
+	
 		
 	})//
         
@@ -163,7 +163,7 @@ function productChoice(n) {
 			<!-- 찜기능  -->
 			<div class="p-2 text-center">
 				<a id="productChoice" href="javascript:productChoice(<%=p_id%>)">
-					<img src="images/like.png" width="30" height="30">
+					<img id="likeimg" src="images/like.png" width="30" height="30">
 				</a>
 
 				<!-- 장바구니 모달창-->

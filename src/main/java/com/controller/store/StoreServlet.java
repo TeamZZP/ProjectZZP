@@ -9,9 +9,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.dto.CategoryDTO;
 import com.dto.CategoryProductDTO;
+import com.dto.MemberDTO;
+import com.service.CartService;
 import com.service.CategoryService;
 import com.service.ProductService;
 
@@ -30,6 +33,8 @@ public class StoreServlet extends HttpServlet {
 		
 		request.setAttribute("category_list", category_list);		    
 		request.setAttribute("product_list", product_list);
+			
+		
 		
 		RequestDispatcher dis = request.getRequestDispatcher("store.jsp");
 		dis.forward(request, response);

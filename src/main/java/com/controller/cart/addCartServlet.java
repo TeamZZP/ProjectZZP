@@ -1,6 +1,7 @@
 package com.controller.cart;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 
 import javax.servlet.ServletException;
@@ -24,11 +25,11 @@ public class addCartServlet extends HttpServlet {
    
    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
       System.out.println("addCartServlet===========");
-      
+     
       HttpSession session = request.getSession();
       MemberDTO dto = (MemberDTO)session.getAttribute("login");
       System.out.println(dto);
-    
+     
       if(dto == null) {
          
          session.setAttribute("mesg", "로그인이 필요합니다");
@@ -69,6 +70,7 @@ public class addCartServlet extends HttpServlet {
 	       }else{
 			service.updateCart(cart);
 			response.sendRedirect("CartListServlet");
+			
 		 }
          
         
