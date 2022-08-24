@@ -32,7 +32,7 @@
 	request에 저장된 dto가 있을 경우: 글 수정 페이지
 	저장된 dto가 없을 경우: 글쓰기 페이지
  */
-	ChallengeDTO dto = (ChallengeDTO) request.getAttribute("dto");
+	ChallengeDTO challDTO = (ChallengeDTO) request.getAttribute("challDTO");
 	int chall_id = 0;
 	String chall_category = null;
 	String chall_title = null;
@@ -46,12 +46,12 @@
 	//dto의 존재 유무에 따라 어떤 동작을 할 것인지 전송해 준다.
 	String operate = "upload";
 	
-	if (dto != null && stampDTO != null) {
-		chall_id = dto.getChall_id();
-		chall_category = dto.getChall_category();
-		chall_title = dto.getChall_title();
-		chall_img = dto.getChall_img();
-		chall_content = dto.getChall_content();
+	if (challDTO != null && stampDTO != null) {
+		chall_id = challDTO.getChall_id();
+		chall_category = challDTO.getChall_category();
+		chall_title = challDTO.getChall_title();
+		chall_img = challDTO.getChall_img();
+		chall_content = challDTO.getChall_content();
 		operate = "update";
 		
 		stamp_img = stampDTO.getStamp_img();
@@ -209,6 +209,8 @@
 <form action="AdminChallUploadServlet?userid=<%= currUserid %>&operate=<%= operate %>" method="post" enctype="multipart/form-data">
 <input type="hidden" name="chall_id" value="<%= chall_id %>">
 <input type="hidden" name="userid" value="<%= currUserid %>">
+<input type="hidden" name="old_file" id="old_file" value="<%= chall_img %>">
+<input type="hidden" name="old_stamp" id="old_stamp" value="<%= stamp_img %>">
 
   <div class="row pt-3 pl-5 pb-3">
   <b>이 달의 챌린지 등록하기</b>
@@ -232,14 +234,12 @@
 	  		<img src="images/uploadarea.png" class="thumb uploadBtn" id="uploadarea" width="600" height="600" />
 	  		<img src="images/reload.png" class="uploadBtn" id="updateBtn" width="50" title="사진 다시 올리기" style="display: none;">
 	 		<img src="images/trash.png" class="deleteBtn" id="deleteBtn" width="50" title="사진 삭제하기" style="display: none;">
-	  	    <input type="file" accept="image/*" name="chall_img" id="chall_img" style="display: none;">
 	  <%} else { %>
 	 		<img src="/eclipse/upload/<%= chall_img %>" class="thumb" id="uploadarea" width="600" height="600">
 	 		<img src="images/reload.png" class="uploadBtn" id="updateBtn" width="50" title="사진 다시 올리기">
 	 		<img src="images/trash.png" class="deleteBtn" id="deleteBtn" width="50" title="사진 삭제하기">
-	 		<input type="file" accept="image/*" name="chall_img" id="chall_img" value="<%= chall_img %>" style="display: none;">
 	  <%} %>
-	  		<input type="hidden" name="old_file" id="old_file" value="<%= chall_img %>">
+	  		<input type="file" accept="image/*" name="chall_img" id="chall_img" style="display: none;">
 	</div>
   </div>
   <div>
@@ -256,14 +256,14 @@
 	  <div class="col-6 m-0 text-center">
 	  <% if(stamp_img==null) {%>
 		<img src="images/stamp.png" class="thumb-stamp uploadBtn-stamp" id="uploadarea-stamp" width="300" height="300">
-		<input type="file" accept="image/*" name="stamp_img" id="stamp_img" style="display: none;">
 	  <%} else { %>
-	  
+	    <img src="/eclipse/upload/<%= stamp_img %>" class="thumb-stamp uploadBtn-stamp" id="uploadarea-stamp" width="300" height="300">
 	  <%} %>
-	    <input type="hidden" name="old_stamp" id="old_stamp" value="<%= stamp_img %>">
+	  	<input type="file" accept="image/*" name="stamp_img" id="stamp_img" style="display: none;">
 	  </div>
 	  <div class="col-6 m-0 my-auto">
-	    <input type="text" class="form-control" name="stamp_name" id="stamp_name" placeholder="도장 이름 입력">
+	    <input type="text" class="form-control" name="stamp_name" id="stamp_name" 
+	    		<% if(stamp_name!=null) {%>value="<%=stamp_name%>"<%} %> placeholder="도장 이름 입력">
 	  </div>
   </div>
 	  
@@ -273,7 +273,7 @@
 	</div>
 	<div class="col">
 	  <div class="float-end">
-	  <% if(dto==null) {%>
+	  <% if(challDTO==null) {%>
 	 	<input type="submit" class="btn btn-success" value="글쓰기">
 	  <%} else { %>
 	  	<input type="submit" class="btn btn-success" value="수정하기">
