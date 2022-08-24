@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 
 import com.dto.CategoryProductDTO;
+import com.dto.ImagesDTO;
 import com.dto.OrderDTO;
 
 public class OrderDAO {
@@ -15,9 +16,10 @@ public class OrderDAO {
 		return dto;
 	}
 
-	public List<CategoryProductDTO> getProduct(SqlSession session, int pIdList) {
-		List<CategoryProductDTO> list = session.selectList("OrderMapper.getProduct", pIdList);
+	
+	
+	public List<CategoryProductDTO> getProductList(SqlSession session,  List<Integer> pIdList) {
+		List<CategoryProductDTO> list = session.selectList("OrderMapper.getProductList", pIdList);
 		return list;
 	}
-
 }
