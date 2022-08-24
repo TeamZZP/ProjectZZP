@@ -43,5 +43,21 @@ public class CartDAO {
 		int n = session.delete("CartMapper.cartAllDel",list);
 		return n;
 	}
+
+
+	public int updateCart(SqlSession session, int p_id) {
+		int n = session.update("updateCart",p_id);
+		return n;
+	}
+	
+	public int checkCart(SqlSession session, HashMap<String, Object> map) {
+		int count = session.selectOne("checkCart",map);
+		return count;
+	}
+
+	public void updateCart(SqlSession session, CartDTO cart) {
+		session.update("updateCart",cart);
+		
+	}
 	
 }
