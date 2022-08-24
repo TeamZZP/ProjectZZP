@@ -149,25 +149,6 @@ a:hover {
       })//end
       
     
-      /* $("#like").on("click",function() {
-         var userid = $("#userid").val();
-            
-         $.ajax({
-            type: "get",
-            url:"ProductLikeListServlet",
-            data:{
-               userid : userid
-            },
-            dataType: "text",
-            success  : function(data,status,xhr) {
-               $(".container").empty();
-               $("#outer").append(data);
-            },
-            error: function(xhr,status,error) {
-               console.log(error);
-            } 
-         })//end like ajax
-      })//end like */
    
       $("#order").on("click", function() {
          $("form").attr("action", "OrderServlet");

@@ -6,33 +6,34 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <style>
-.container {
-	padding-right: 15px;
-	padding-left: 15px;
-	margin-right: auto;
-	margin-left: auto;
-}
+  .container {
+ 	
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+	}
 
-a {
-	color: #646464;
-	text-decoration: none;
-}
+	a{
+   color : #646464;
+   text-decoration: none;
+   
+	}
 
-.hover-zoomin a {
-	display: block;
-	position: relative;
-	overflow: hidden;
-	border-radius: 15px;
-}
-
- .hover-zoomin img {
-      width: 200px;
-      height: 200px;
+	 .hover-zoomin a {
+      display: block;
+      position: relative;
+      overflow: hidden;
+      border-radius: 15px;
+    }
+    .hover-zoomin img {
+      width: 250px;
+      height: 250px;
       -webkit-transition: all 0.2s ease-in-out;
       -moz-transition: all 0.2s ease-in-out;
       -o-transition: all 0.2s ease-in-out;
       -ms-transition: all 0.2s ease-in-out;
-      transition: all 0.2s ease-in-out;
+      transition: all 0.2s ease-in-out; 
     }
     .hover-zoomin:hover img {
       -webkit-transform: scale(1.1);
@@ -41,6 +42,7 @@ a {
       -ms-transform: scale(1.1);
       transform: scale(1.1);
     } 
+
 </style>
 <script type="text/javascript"
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -60,7 +62,7 @@ int cartCount = (int) request.getAttribute("cartCount");
 int likeCount = (int) request.getAttribute("likeCount");
 %>
 <div class="container">
-	<div class="row">
+	<div class="row"  align="center">
 		<div class="btn-group" role="group" aria-label="Basic example">
 
 			<button type="button" class="btn btn-outline-success" id="cart"
@@ -104,7 +106,7 @@ int likeCount = (int) request.getAttribute("likeCount");
 			<div class="p-3">
 				<div class="hover-zoomin">
 					<a href="ProductRetrieveServlet?p_id=<%=p_id%>"> 
-					<img src="images/p_image/<%=p_image%>.png "></a>
+					<img src="images/p_image/<%=p_image%>.png" width="200" height="200"></a>
 				</div>
 			</div>
 			<div>

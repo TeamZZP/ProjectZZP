@@ -77,7 +77,7 @@ function productChoice(n) {
                 },
                 dataType : "json",
                 success : function(data,status,xhr){
-                 	$("#likeimg").attr("src","images/liked.png");
+                  //이미지 바뀌는 부분
                 },error : function (xhr,status,error){
                  console.log(error);
                 }
@@ -113,7 +113,7 @@ function productChoice(n) {
 			}
 		})//end down
 		
-	
+
 		
 	})//
         
