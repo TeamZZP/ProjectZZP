@@ -2,7 +2,8 @@
     pageEncoding="UTF-8"%>
     
 <div id="back" style="text-align: center;">
-	<img alt="소개" src="images/introduction/int.png" width="130px" height="50px">
+	<img alt="소개" src="images/introduction/int.png" width="130px" height="50px"><br>
+	<br>
 	<hr>
 	<img alt="소개" src="images/introduction/int1.png"><br>
 	<br>
