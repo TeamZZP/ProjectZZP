@@ -122,8 +122,40 @@ where p_id=#{p_id}
 delete from product where p_id=#{p_id}
 </delete>
 
+<<<<<<< HEAD
 <!-- 찜 갯수  -->
 <select id="likeCount" parameterType="String" resultType="int">
 	select count(*) from product_liked where userid = #{userid}
 </select>
+=======
+<select id="selectProd" resultType="CategoryProductDTO" parameterType="hashmap">
+select (select C_NAME from category where c_id = p.c_id) as c_name, p.P_ID,(select IMAGE_ROUTE from images where p_id = p.p_id 
+and IMAGE_RNK = 1) as p_image,p.P_NAME,p.P_CONTENT,p.C_ID,p.P_COST_PRICE
+,p.P_SELLING_PRICE,p.P_DISCOUNT,p.P_CREATED,p.P_STOCK from product p
+
+<where>
+	<if test='searchName=="c_id"'>
+		upper((select C_NAME from category where c_id = p.c_id)) like upper('%${searchValue}%')
+	</if>
+	<if test='searchName=="p_id"'>
+		p_id like '%${searchValue}%'
+	</if>
+	<if test='searchName=="p_name"'>
+		p_name like '%${searchValue}%'
+	</if>
+	<if test='searchName=="p_selling_price"'>
+		p_selling_price like '%${searchValue}%'
+	</if>
+	<if test='searchName=="p_created"'>
+		p_created like '%${searchValue}%'
+	</if>
+</where>
+	 order by ${sortBy} desc
+</select>
+
+<select id="totalCount" parameterType="hashmap" resultType="int">
+	select count(*) from product
+</select>
+
+>>>>>>> bff258676ec47277ce368362d18c0eec6c338545
 </mapper>

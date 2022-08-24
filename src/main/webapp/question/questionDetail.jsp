@@ -116,9 +116,7 @@
 				<td colspan="2">
 					<div class="input-group">
 					  <span class="input-group-text">답변</span>
-					  <textarea class="form-control shadow-none" readonly="readonly" id="answerCheck"><%if(aDTO != null){ %>
-					  	<%= aDTO.getANSWER_CONTENT() %><%} else { %><%=qDTO.getQ_STATUS() %><%} %>
-					  </textarea>
+					  <textarea class="form-control shadow-none" readonly="readonly" id="answerCheck"><%if(aDTO != null){ %><%= aDTO.getANSWER_CONTENT() %><%} else { %><%=qDTO.getQ_STATUS() %><%} %></textarea>
 					</div>
 				</td>
 			</tr>
@@ -145,9 +143,7 @@
 			<tr>
 				<td colspan="2">
 					<div class="input-group">
-					  <textarea class="form-control" id="answer"><%if(aDTO != null){ %>
-					  	<%=aDTO.getANSWER_CONTENT() %>
-					  	<%} %></textarea>
+					  <textarea class="form-control" id="answer"><%if(aDTO != null){ %><%=aDTO.getANSWER_CONTENT() %><%} %></textarea>
 					  <button class="btn btn-outline-secondary" type="button" id="answerBtn" data-qid="<%=qDTO.getQ_ID()%>">답글 올리기</button>
 					</div>
 				</td>

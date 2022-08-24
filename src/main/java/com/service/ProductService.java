@@ -9,6 +9,7 @@ import com.config.MySqlSessionFactory;
 import com.dao.ProductDAO;
 import com.dto.CategoryProductDTO;
 import com.dto.ImagesDTO;
+import com.dto.PageDTO;
 import com.dto.ProductDTO;
 import com.dto.product_likedDTO;
 
@@ -145,6 +146,7 @@ public class ProductService {
 		return num;
 	}
 
+<<<<<<< HEAD
 	public int likeCount(String userid) {
 		int n = 0;
 		SqlSession session = MySqlSessionFactory.getSqlSession();
@@ -165,6 +167,17 @@ public class ProductService {
 			session.close();
 		}
 		return list;
+=======
+	public PageDTO selectProduct(HashMap<String, String> map, int curPage) {
+		PageDTO pDTO = null;
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		try {
+			pDTO = dao.selectProduct(session, map, curPage);
+		} finally {
+			session.close();
+		}
+		return pDTO;
+>>>>>>> bff258676ec47277ce368362d18c0eec6c338545
 	}
 
 

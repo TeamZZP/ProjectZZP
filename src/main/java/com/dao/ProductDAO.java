@@ -3,10 +3,12 @@ package com.dao;
 import java.util.HashMap;
 import java.util.List;
 
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 
 import com.dto.CategoryProductDTO;
 import com.dto.ImagesDTO;
+import com.dto.PageDTO;
 import com.dto.ProductDTO;
 import com.dto.product_likedDTO;
 
@@ -67,6 +69,7 @@ public class ProductDAO {
 		return session.delete("deleteProduct", p_id);
 	}
 
+<<<<<<< HEAD
 	public int likeCount(SqlSession session, String userid) {
 		int n = session.selectOne("likeCount",userid);
 		return n;
@@ -75,5 +78,23 @@ public class ProductDAO {
 	public List<product_likedDTO> likeList(SqlSession session, String userid) {
 		List<product_likedDTO> list = session.selectList("ProductMapper.likeList",userid);
 		return list;
+=======
+	public PageDTO selectProduct(SqlSession session, HashMap<String, String> map, int curPage) {
+		PageDTO pDTO = new PageDTO();
+		pDTO.setPerPage(10);//한 페이지 당 10개 씩
+		int perPage = pDTO.getPerPage(); //10
+		int offset = (curPage-1)*perPage; //페이지 시작 idx
+		
+		List<CategoryProductDTO> list = session.selectList("ProductMapper.selectProd", map, new RowBounds(offset, perPage));
+		
+		pDTO.setCurPage(curPage);
+		pDTO.setList(list); //현재 페이지에 해당하는 데이터
+		pDTO.setTotalCount(totalCount(session,map)); //전체 레코드 갯수
+		
+		return pDTO;
+	}
+	private int totalCount(SqlSession session, HashMap<String, String> map) {
+		return session.selectOne("ProductMapper.totalCount", map);
+>>>>>>> bff258676ec47277ce368362d18c0eec6c338545
 	}
 }

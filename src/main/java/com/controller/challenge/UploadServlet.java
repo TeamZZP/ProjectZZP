@@ -103,9 +103,10 @@ public class UploadServlet extends HttpServlet {
 									map.put("chall_img", saveName);
 								} else {
 									map.put("chall_img", old_file);
+									System.out.println("올드파일저장");
 								}
 								
-								
+								System.out.println(map);
 								
 							}catch (Exception e) {
 								e.printStackTrace();

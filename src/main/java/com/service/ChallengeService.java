@@ -371,6 +371,18 @@ public class ChallengeService {
 		return stampImg;
 	}
 
+	public int updateStamp(HashMap<String, String> map) {
+		int n = 0;
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		try {
+			n = dao.updateStamp(session, map);
+			session.commit();
+		} finally {
+			session.close();
+		}
+		return n;
+	}
+
 
 
 

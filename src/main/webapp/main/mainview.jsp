@@ -27,15 +27,18 @@
   <div class="carousel-inner">
   	<!-- ZZP소개 -->
     <div class="carousel-item active" data-bs-interval="3000" onclick="javascrip:location.href='IntroductionUIServlet';">
-      <img src="images/main/banner_zzp.png" class="d-block w-100" alt="...">
+      <img src="images/main/banner_zzp.png" class="d-block w-100" alt="ZZP소개">
     </div>
     <!-- 타임세일 -->
     <div class="carousel-item" data-bs-interval="3000" onclick="javascrip:location.href='ProductSearchServlet?c_id=6';">
-      <img src="images/main/banner_time.png" class="d-block w-100" alt="...">
+      <img src="images/main/banner_time.png" class="d-block w-100" alt="타임세일">
     </div>
+    <%
+    	ChallengeDTO challThisMonth = (ChallengeDTO) request.getAttribute("challThisMonth");
+    %>
     <!-- 이달의챌린지 -->
-    <div class="carousel-item" data-bs-interval="3000" onclick="javascrip:location.href='ChallengeDetailServlet?chall_id=1';">
-      <img src="images/main/banner_monthchall.png" class="d-block w-100" alt="...">
+    <div class="carousel-item" data-bs-interval="3000" onclick="javascrip:location.href='ChallengeDetailServlet?chall_id=<%= challThisMonth.getChall_id() %>';">
+      <img src="images/main/banner_monthchall.png" class="d-block w-100" alt="이달의챌린진">
     </div>
   </div>
   <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
@@ -172,7 +175,7 @@
 </div>
 
 <!-- middle banner -->
-<img src="images/main/banner_middle.png" class="d-block w-100" alt="...">
+<img src="images/main/banner_middle.png" class="d-block w-100" alt="중간배너">
 
 
 <!-- 뉴챌린지 -->
@@ -198,7 +201,7 @@
 	%>
 		<div class="col-lg-3 col-md-6" style="margin-bottom: 5px;">
 			<a href="ChallengeDetailServlet?chall_id=<%=chall_id%>">
-				<img src="/eclipse/upload/<%=chall_img%>" width="250" height="250" class=" mx-auto d-block" alt="..." onerror="this.src='images/uploadarea.png'">
+				<img src="/eclipse/upload/<%=chall_img%>" width="250" height="250" class=" mx-auto d-block" alt="챌린지" onerror="this.src='images/uploadarea.png'">
 			</a>
 		</div>
 	<%
