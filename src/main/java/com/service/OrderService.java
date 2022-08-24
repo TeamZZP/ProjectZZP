@@ -27,11 +27,11 @@ public class OrderService {
 		System.out.println(dto);
 		return dto;
 	}
-	public List<CategoryProductDTO> getProduct(int p_id) {
+	public List<CategoryProductDTO> getProduct(int pIdList) {
 		SqlSession session=MySqlSessionFactory.getSqlSession();
         List<CategoryProductDTO> list = null;
         try {
-        	list = dao.getProduct(session, p_id);
+        	list = dao.getProduct(session, pIdList);
         }finally {
         	session.close();
         }

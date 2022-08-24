@@ -15,8 +15,8 @@ public class OrderDAO {
 		return dto;
 	}
 
-	public List<CategoryProductDTO> getProduct(SqlSession session, int p_id) {
-		List<CategoryProductDTO> list = session.selectList("OrderMapper.getProduct", p_id);
+	public List<CategoryProductDTO> getProduct(SqlSession session, int pIdList) {
+		List<CategoryProductDTO> list = session.selectList("OrderMapper.getProduct", pIdList);
 		return list;
 	}
 
