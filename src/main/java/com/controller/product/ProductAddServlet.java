@@ -23,8 +23,6 @@ public class ProductAddServlet extends HttpServlet {
 		String image_route = request.getParameter("image_route"); 
 		String p_content_detail = request.getParameter("p_content_detail");
 		
-		System.out.println(c_id+" "+p_name);
-		System.out.println("ProductAddServlet");
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

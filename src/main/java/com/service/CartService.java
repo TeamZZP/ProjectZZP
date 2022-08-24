@@ -97,6 +97,33 @@ public class CartService {
 		}
 		return n;
 	}
+
+
+
+	public int checkCart(HashMap<String, Object> map) {
+		int count = 0;
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		 try {
+			 count = dao.checkCart(session,map);
+		} finally {
+			session.close();
+		}
+		return count;
+	}
+
+	public void updateCart(CartDTO cart) {
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		 try {
+			dao.updateCart(session,cart);
+			session.commit();
+		} finally {
+			session.close();
+		}
+	
+		
+	}
+
+	
 	
 	
 }

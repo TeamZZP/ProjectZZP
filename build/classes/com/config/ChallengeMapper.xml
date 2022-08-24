@@ -305,6 +305,13 @@
 	where chall_id=#{chall_id}
 </select>
 
+<update id="updateStamp" parameterType="hashmap">
+	update stamp
+	set stamp_img=#{stamp_img},
+		stamp_name=#{stamp_name}
+	where chall_id=#{chall_id}
+</update>
+
 <update id="updateChallThisMonth" parameterType="hashmap">
 	update challenge
 	set chall_this_month=${after}

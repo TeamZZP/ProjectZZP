@@ -182,6 +182,11 @@ public class ChallengeDAO {
 		return stampImg;
 	}
 
+	public int updateStamp(SqlSession session, HashMap<String, String> map) {
+		int n = session.update("ChallengeMapper.updateStamp", map);
+		return n;
+	}
+
 	
 
 

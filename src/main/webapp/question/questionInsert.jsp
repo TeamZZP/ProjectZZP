@@ -24,6 +24,7 @@
     %>
 	<script type="text/javascript">
 		$(document).ready(function() {
+			$("#qTittle").focus();
 			$("#QuestionInsert").click(function() {
 				var qtittle = $("#qTittle").val();
 				var qContent = $("#qContent").val();

@@ -16,6 +16,7 @@ import com.dto.AddressDTO;
 import com.dto.CategoryProductDTO;
 import com.dto.ChallengeDTO;
 import com.dto.MemberDTO;
+import com.dto.PageDTO;
 import com.service.AddressService;
 import com.service.ChallengeService;
 import com.service.MemberService;
@@ -27,11 +28,11 @@ public class AdminCategoryServlet extends HttpServlet {
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String category = request.getParameter("category");
+		System.out.println("AdminCategoryServlet========" +category);
 		
 		HttpSession session=request.getSession();
 		MemberDTO dto=(MemberDTO) session.getAttribute("login");
 		
-		System.out.println(category);
 		if (category.equals("member")) {
 			MemberService m_service=new MemberService();
 			AddressService a_service=new AddressService();
@@ -53,14 +54,34 @@ public class AdminCategoryServlet extends HttpServlet {
 			request.setAttribute("addressMap", addressMap);//userid의 address 리스트
 			RequestDispatcher dis = request.getRequestDispatcher("adminMember.jsp");
 			dis.forward(request, response);
+			
 		} else if(category.equals("product")) {
 			//전체 상품 목록
+			String curPage = request.getParameter("curPage");//현재페이지
+			if (curPage==null) { curPage = "1"; }//시작 시 1페이지로 시작
+			
+			//검색기준, 검색어
+			String searchName = request.getParameter("searchName");
+			String searchValue = request.getParameter("searchValue");
+			String sortBy = request.getParameter("sortBy");
+			if (sortBy==null) { sortBy = "p_id"; }
+			System.out.println(curPage+" "+searchName+" "+searchValue+" "+sortBy);
+			HashMap<String, String> map = new HashMap<String, String>();
+			map.put("searchName", searchName);
+			map.put("searchValue", searchValue);
+			map.put("sortBy", sortBy);
+			
 			ProductService  product_service  = new ProductService();
-			List<CategoryProductDTO> product_list = product_service.ProductList();
-
-			request.setAttribute("product_list", product_list);
+			PageDTO pDTO = product_service.selectProduct(map, Integer.parseInt(curPage));
+			
+			request.setAttribute("pDTO", pDTO);
+			request.setAttribute("searchName", searchName);
+			request.setAttribute("searchValue", searchValue);
+			request.setAttribute("sortBy", sortBy);
+			
 			RequestDispatcher dis = request.getRequestDispatcher("adminProduct.jsp");
 			dis.forward(request, response);
+			
 		} else if(category.equals("challenge")) {
 			//관리자가 작성한 챌린지 목록
 			ChallengeService challService = new ChallengeService();

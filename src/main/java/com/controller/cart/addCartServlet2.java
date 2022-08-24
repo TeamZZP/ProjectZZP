@@ -1,8 +1,6 @@
 package com.controller.cart;
 
 import java.io.IOException;
-import java.util.HashMap;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,8 +15,8 @@ import com.service.CartService;
 /**
  * Servlet implementation class productCartServlet
  */
-@WebServlet("/addCartServlet")
-public class addCartServlet extends HttpServlet {
+@WebServlet("/addCartServlet2")
+public class addCartServlet2 extends HttpServlet {
    private static final long serialVersionUID = 1L;
        
    
@@ -28,7 +26,7 @@ public class addCartServlet extends HttpServlet {
       HttpSession session = request.getSession();
       MemberDTO dto = (MemberDTO)session.getAttribute("login");
       System.out.println(dto);
-    
+      
       if(dto == null) {
          
          session.setAttribute("mesg", "로그인이 필요합니다");
@@ -54,24 +52,17 @@ public class addCartServlet extends HttpServlet {
          System.out.println(cart);
          
          CartService service = new CartService();
-         HashMap<String, Object> map = new HashMap<String, Object>() ;
-         map.put("p_id", p_id);
-         map.put("userid", userid);
+         int num = service.cartAdd(cart);
+         System.out.println("insert갯수======"+num);
          
-		 int count = service.checkCart(map); 
-		 System.out.println("동일한상품 확인 "+count);
-		 
-		 if(count==0) {
-			 int num = service.cartAdd(cart);
-	         System.out.println("insert갯수======"+num);
-	         response.sendRedirect("CartListServlet");
-	         
-	       }else{
-			service.updateCart(cart);
-			response.sendRedirect("CartListServlet");
-		 }
-         
-        
+         String nextPage = null;
+         if(num == 1) {
+            nextPage = "CartListServlet";
+         }else {
+            nextPage = "LoginUIServlet";
+            session.setAttribute("mesg", "로그인이 필요합니다.");
+         }
+         response.sendRedirect(nextPage);
          
          }
    }
