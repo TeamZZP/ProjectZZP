@@ -19,6 +19,17 @@
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 	$(document).ready(function () {
+		$("#questionUpdate").click(function() {
+			var qtittle = $("#qTittle").val();
+			var qContent = $("#qContent").val();
+			if (qtittle.length == 0) {
+				alert("제목을 입력하십시오");
+				event.preventDefault();
+			} else if (qContent.length == 0) {
+				alert("내용을 입력하십시오");
+				event.preventDefault();
+			}
+		});
 		if ($("#pId").val() == "null") {
 			$("#pId").val("");
 		}
@@ -26,7 +37,7 @@
 			var operate = $("#questionUpdate").attr("data-operate");
 			var userid = $("#questionUpdate").attr("data-userid");
 			$("#questionForm").attr("action", "QuestionUploadServlet?USERID="+userid+"&operate="+operate);  
-		})
+		});
 		$("#pID").click(function () {
 			window.open("questionproductSelect.jsp","","width=400px height=500px");
 		});
