@@ -102,11 +102,19 @@ insert into product_liked values (#{userid},#{p_id})
 <select id="likeCheck" parameterType="hashmap" resultType="int">
 select count(*) from product_liked where p_id= #{p_id} and userid = #{userid}
 </select>
-
-<!-- 찜 List  -->
-<select id="selectLikeProduct" parameterType="String" resultType="List">
-select p_id from  product_liked where userid = #{userid}
+ 
+<!-- 찜 갯수  -->
+<select id="likeCount" parameterType="String" resultType="int">
+	select count(*) from product_liked where userid = #{userid}
 </select>
+
+<select id="likeList" parameterType="String" resultType="product_likedDTO">
+	select pl.p_id, p.p_name,p.p_selling_price,pl.userid,(select IMAGE_ROUTE from images where p_id = pl.p_id and IMAGE_RNK = 1) as p_image 
+	from product_liked pl join product p 
+	on pl.p_id = p.p_id
+	where pl.userid = #{userid}
+	order by p_id 
+</select> 
 
 <update id="updateProduct" parameterType="ProductDTO">
 update product set p_name=#{p_name}, p_content=#{p_content}, c_id=#{c_id},
@@ -118,6 +126,9 @@ where p_id=#{p_id}
 <delete id="deleteProduct">
 delete from product where p_id=#{p_id}
 </delete>
+
+
+
 
 <select id="selectProd" resultType="CategoryProductDTO" parameterType="hashmap">
 select (select C_NAME from category where c_id = p.c_id) as c_name, p.P_ID,(select IMAGE_ROUTE from images where p_id = p.p_id 
@@ -147,5 +158,6 @@ and IMAGE_RNK = 1) as p_image,p.P_NAME,p.P_CONTENT,p.C_ID,p.P_COST_PRICE
 <select id="totalCount" parameterType="hashmap" resultType="int">
 	select count(*) from product
 </select>
+
 
 </mapper>

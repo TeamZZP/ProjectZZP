@@ -31,11 +31,11 @@ public class ProductLikeServlet extends HttpServlet {
 		
 		ProductService service = new ProductService();
 		
+		int likecheck = service.likeCheck(map);
 		
-		if(service.likeCheck(map) == 0) {
+		if(likecheck== 0) {
 			int n = service.addLike(map);
-			
-		}
+		  }
 		
 		
 		

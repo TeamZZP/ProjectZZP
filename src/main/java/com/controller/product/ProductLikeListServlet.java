@@ -15,6 +15,8 @@ import javax.servlet.http.HttpSession;
 import com.dto.CategoryProductDTO;
 import com.dto.MemberDTO;
 import com.dto.ProductDTO;
+import com.dto.product_likedDTO;
+import com.service.CartService;
 import com.service.ProductService;
 
 /**
@@ -25,6 +27,7 @@ public class ProductLikeListServlet extends HttpServlet {
 	
   
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("ProductLikeListServlet====");
 		HttpSession session = request.getSession();
 		MemberDTO mdto = new MemberDTO();
 		mdto = (MemberDTO) session.getAttribute("login");
@@ -32,24 +35,32 @@ public class ProductLikeListServlet extends HttpServlet {
 		if(mdto != null) {
 
 			String userid = mdto.getUserid();
-			
 			ProductService service  = new ProductService();
-			List<Integer> liked_pId_List = new ArrayList<Integer>();
-			liked_pId_List=	service.selectLikeProduct(userid); //찜한 상품 p_id List
-			List<CategoryProductDTO> productList = new ArrayList<CategoryProductDTO>();
 			
-			for (int i = 0; i <liked_pId_List.size() ; i++) {
-				productList = (List<CategoryProductDTO>) service.productList(liked_pId_List.get(i));
-			}
+			//찜 count
+			int count = service.likeCount(userid);
+			System.out.println("likeCount==="+count);
+			//장바구니 count
+			CartService Cservice = new CartService();
+			int cartCount = Cservice.cartCount(userid);
+			System.out.println(cartCount);
 			
-			request.setAttribute("productList", productList);
-			RequestDispatcher dis = request.getRequestDispatcher("likeList.jsp");
 			
+			List<product_likedDTO> list = service.likeList(userid);
+			System.out.println("ProductLikeListServlet"+list);
+			 
+			
+			request.setAttribute("likeCount", count);
+			request.setAttribute("cartCount", cartCount);
+			request.setAttribute("list", list);
+				
 		}else {
 			request.setAttribute("mesg", "로그인이 필요합니다.");
 			response.sendRedirect("LoginUIServlet");
 		}
-		
+		RequestDispatcher dis = request.getRequestDispatcher("likeList.jsp");
+		dis.forward(request, response);		
+	
 	}
 
 	/**

@@ -148,25 +148,7 @@ a:hover {
          }) //up end
       })//end
       
-      $("#like").on("click",function() {
-         var userid = $("#userid").val();
-            
-         $.ajax({
-            type: "get",
-            url:"ProductLikeListServlet",
-            data:{
-               userid : userid
-            },
-            dataType: "text",
-            success  : function(data,status,xhr) {
-               $(".container").empty();
-               $("#outer").append(data);
-            },
-            error: function(xhr,status,error) {
-               console.log(error);
-            } 
-         })//end like ajax
-      })//end like
+    
    
       $("#order").on("click", function() {
          $("form").attr("action", "OrderServlet");
@@ -186,16 +168,17 @@ a:hover {
 
 <div class="container">
    <%
-   int count = (int) request.getAttribute("cartCount");
+   int cartCount = (int) request.getAttribute("cartCount"); 
+   int likeCount = (int) request.getAttribute("likeCount"); 
    %>
    <div class="row">
       <div class="btn-group" role="group" aria-label="Basic example">
 
          <button type="button" class="btn btn-outline-success" id="cart">
-            <input type="checkbox" name="allCheck" id="allCheck"> 장바구니(<%=count%>)
+            <input type="checkbox" name="allCheck" id="allCheck"> 장바구니(<%=cartCount%>)
          </button>
-         <button type="button" class="btn btn-outline-success" id="like">
-         <input type="checkbox" name="allCheck" id="allCheck">찜한상품()</button>
+         <button type="button" class="btn btn-outline-success" id="like" onclick="location.href='ProductLikeListServlet';">
+         <input type="checkbox" name="allCheck" id="allCheck">찜한상품(<%=likeCount%>)</button>
       </div>
    </div>
    <%
