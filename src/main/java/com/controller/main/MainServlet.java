@@ -23,11 +23,18 @@ public class MainServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		
-		ProductService  product_service  = new ProductService(); //베스트 상품 조회
+		//배너-이달의 챌린지
+		ChallengeService cservice = new ChallengeService(); 
+		ChallengeDTO challThisMonth = cservice.selectChallThisMonth();
+		request.setAttribute("challThisMonth", challThisMonth);
+		
+		//베스트 상품
+		ProductService  product_service  = new ProductService(); 
 		List<CategoryProductDTO> product_list = product_service.bestProductList();
 		System.out.println(product_list);
 		request.setAttribute("bestprod", product_list);
 		
+		//챌린지 리스트
 		ChallengeService service = new ChallengeService();
 		List<ChallengeDTO> callenge_list = service.selectNewChallenge();
 		System.out.println(callenge_list);

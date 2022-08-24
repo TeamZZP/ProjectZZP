@@ -9,6 +9,7 @@ import com.config.MySqlSessionFactory;
 import com.dao.ProductDAO;
 import com.dto.CategoryProductDTO;
 import com.dto.ImagesDTO;
+import com.dto.PageDTO;
 import com.dto.ProductDTO;
 
 public class ProductService {
@@ -142,6 +143,17 @@ public class ProductService {
         	session.close();
         }
 		return num;
+	}
+
+	public PageDTO selectProduct(HashMap<String, String> map, int curPage) {
+		PageDTO pDTO = null;
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		try {
+			pDTO = dao.selectProduct(session, map, curPage);
+		} finally {
+			session.close();
+		}
+		return pDTO;
 	}
 
 
