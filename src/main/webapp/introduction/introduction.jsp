@@ -13,6 +13,14 @@
     	background-attachment: scroll;
 	}
 </style>
-<div id="back">
-<img alt="소개" src="images/introduction/introduction.png" id="backImg">
+<div id="back" style="text-align: center;">
+	<b style="font-size: 30px;">zzp 소개</b>
+	<hr>
+	<img alt="소개" src="images/introduction/int1.png"><br>
+	<br>
+	<img alt="소개" src="images/introduction/int2.png"><br>
+	<br>
+	<img alt="소개" src="images/introduction/int3.png"><br>
+	<br>
+	<img alt="소개" src="images/introduction/int4.png">
 </div>
