@@ -42,6 +42,7 @@
 	StampDTO stampDTO = (StampDTO) request.getAttribute("stampDTO");
 	String stamp_img = null;
 	String stamp_name = null;
+	String stamp_content = null;
 	
 	//dto의 존재 유무에 따라 어떤 동작을 할 것인지 전송해 준다.
 	String operate = "upload";
@@ -56,6 +57,7 @@
 		
 		stamp_img = stampDTO.getStamp_img();
 		stamp_name = stampDTO.getStamp_name();
+		stamp_content = stampDTO.getStamp_content();
 	}
 	
 	//session에 저장된 userid 읽어오기 
@@ -101,7 +103,13 @@
 			} else if ($("#chall_content").val().length == 0) {
 				event.preventDefault();
 				alert("본문을 입력해 주세요.");
-			} 
+			} else if ($("#stamp_name").val().length == 0) {
+				event.preventDefault();
+				alert("도장 이름을 입력해 주세요.");
+			} else if ($("#stamp_content").val().length == 0) {
+				event.preventDefault();
+				alert("도장 설명을 입력해 주세요.");
+			}
 		});
 		//파일업로드 이미지 클릭시 input type="file" 클릭
 		$("#challDetailContent").on("click", ".uploadBtn", function () {
@@ -213,7 +221,7 @@
 <input type="hidden" name="old_stamp" id="old_stamp" value="<%= stamp_img %>">
 
   <div class="row pt-3 pl-5 pb-3">
-  <b>이 달의 챌린지 등록하기</b>
+  <span style="text-align: left; font-weight: bold; font-size: large;">이 달의 챌린지 등록하기</span>
   <hr>
   </div>
   
@@ -249,7 +257,7 @@
   
   <br>
   <div class="row pt-5 pl-5 pb-3">
-  <b>도장 등록하기</b>
+  <span style="text-align: left; font-weight: bold; font-size: large;">도장 등록하기</span>
   <hr>
   </div>
   <div class="row pt-2 pl-5 pb-5">
@@ -264,6 +272,8 @@
 	  <div class="col-6 m-0 my-auto">
 	    <input type="text" class="form-control" name="stamp_name" id="stamp_name" 
 	    		<% if(stamp_name!=null) {%>value="<%=stamp_name%>"<%} %> placeholder="도장 이름 입력">
+	    <textarea class="form-control mt-3" rows="5" name="stamp_content" id="stamp_content" placeholder="도장 설명 입력"
+	    	><% if(stamp_content!=null) {%><%=stamp_content%><%} %></textarea>
 	  </div>
   </div>
 	  
