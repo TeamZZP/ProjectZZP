@@ -182,13 +182,14 @@ a {
 			let group = $(this).attr("data-group");
 			let parent = $(this).attr("data-parent");
 			let content = $("#reply_content"+cid);
+			let comment_content = content.val().substring(parent.length+3);
+			console.log(comment_content)
+			
 			if ("<%= currUserid %>" == "null") {
 				alert("로그인이 필요합니다.");
-			} else if (content.val().length == 0) {
+			} else if (comment_content.trim().length == 0) {
 				content.focus();
 			} else {
-				let comment_content = content.val().substring(parent.length+3);
-				console.log(comment_content)
 				$.ajax({
 					type:"post",
 					url:"CommentsAddServlet",
