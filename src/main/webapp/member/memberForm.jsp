@@ -36,7 +36,7 @@
 	
 	//이름 유효성 검사
 	var nameChk = /^(?=.*[가-힣a-zA-Z]).{2,30}$/;
-	if (!nameChk.test(username)) {
+	if (!nameChk.test(username) || username.length>3) {
 		alert("이름을 확인해주세요 :)");
 		$("#username").val("");
 		$("#username").focus();

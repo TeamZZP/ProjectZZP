@@ -282,12 +282,14 @@
 	into stamp (stamp_id,
 			chall_id,
 			stamp_img,
-			stamp_name)
+			stamp_name,
+			stamp_content)
 		values
 			(stamp_stamp_id_seq.NEXTVAL,
 			challenge_chall_id_seq.NEXTVAL,
 			#{stamp_img},
-			#{stamp_name})
+			#{stamp_name},
+			#{stamp_content})
 	into member_stamp (userid,
 			stamp_id,
 			chall_id,
@@ -308,7 +310,8 @@
 <update id="updateStamp" parameterType="hashmap">
 	update stamp
 	set stamp_img=#{stamp_img},
-		stamp_name=#{stamp_name}
+		stamp_name=#{stamp_name},
+		stamp_content=#{stamp_content}
 	where chall_id=#{chall_id}
 </update>
 

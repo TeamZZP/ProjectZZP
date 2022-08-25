@@ -21,6 +21,7 @@
 	int stamp_id = stampDTO.getStamp_id();
 	String stamp_img = stampDTO.getStamp_img();
 	String stamp_name = stampDTO.getStamp_name();
+	String stamp_content = stampDTO.getStamp_content();
 	
 	//session에 저장된 userid 읽어오기 
 	MemberDTO member = (MemberDTO) session.getAttribute("login"); 
@@ -154,7 +155,8 @@ a {
 		  
 		  </div>
 		  <div class="col-6 m-0 my-auto">
-		    <%= stamp_name %>
+		    <div><%= stamp_name %></div>
+		    <div class="mt-3"><%= stamp_content %></div>
 		  </div>
 		</div>
 		
