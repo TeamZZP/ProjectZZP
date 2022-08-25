@@ -111,4 +111,15 @@ public class NoticeService {
 		return num;
 	}
 
+	public NoticeDTO nextNotice(int nextID) {
+		NoticeDTO dto = null;
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		try {
+			dto = dao.nextNotice(session, nextID);
+		} finally {
+			session.close();
+		}
+		return dto;
+	}
+
 }
