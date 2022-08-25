@@ -45,9 +45,9 @@ public class AccountDeleteServlet extends HttpServlet {
 			
 			mesg="회원 탈퇴가 완료되었습니다.";
 			
-			if (dto.getRole() == 1) {//관리자가 회원 삭제한 경우
-				mesg="해당 회원이 삭제되었습니다.";
-			}
+			/*
+			 * if (dto.getRole() == 1) {//관리자가 회원 삭제한 경우 mesg="해당 회원이 삭제되었습니다."; }
+			 */
 			
 			out.print(mesg);
 			//ajax--redirectX
