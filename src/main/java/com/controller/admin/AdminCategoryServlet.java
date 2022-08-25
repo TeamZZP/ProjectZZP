@@ -49,11 +49,11 @@ public class AdminCategoryServlet extends HttpServlet {
 				AddressDTO address=a_service.selectDefaultAddress(userid);
 				addMap.put(userid, address);//userid의 기본 주소 출력
 			}
-			for (MemberDTO memberDTO : memberList) {
-				String id=memberDTO.getUserid();
-				System.out.println(id+"의 주소지 : "+addMap.get(id));
-			}
-			System.out.println(addMap);
+//			for (MemberDTO memberDTO : memberList) {
+//				String id=memberDTO.getUserid();
+//				System.out.println(id+"의 주소지 : "+addMap.get(id));
+//			}
+//			System.out.println(addMap);
 			request.setAttribute("memberList", memberList);
 			request.setAttribute("addMap", addMap);//userid의 address 리스트
 			RequestDispatcher dis = request.getRequestDispatcher("adminMember.jsp");

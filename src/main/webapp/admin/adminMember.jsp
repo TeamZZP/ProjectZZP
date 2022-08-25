@@ -66,11 +66,11 @@ $(document).ready(function () {
 	List<MemberDTO> memberList=(List<MemberDTO>) request.getAttribute("memberList");
 	HashMap<String, AddressDTO> addMap=(HashMap<String, AddressDTO>) request.getAttribute("addMap");
 
-	System.out.println("jsp에서 회원 리스트 : "+memberList);
-	System.out.println("jsp에서 회원 기본 주소 map : "+addMap);
+//	System.out.println("jsp에서 회원 리스트 : "+memberList);
+//	System.out.println("jsp에서 회원 기본 주소 map : "+addMap);
 	
 	for (MemberDTO member : memberList) {
-		System.out.println(member);
+//		System.out.println(member);
 		String userid=member.getUserid();
 		String passwd=member.getPasswd();
 		String username=member.getUsername();
@@ -82,7 +82,7 @@ $(document).ready(function () {
 //		for (int i = 0; i < addressMap.size(); i++) {
 //			AddressDTO address=addressList.get(i);//addressMap의 size만큼 for문 반복 중//userid로 뽑아온 addressList의 size와 for문의 size가 다름//indexOutOfBounds 발생
 		AddressDTO address=addMap.get(userid);
-		System.out.println(userid+"의 기본 주소지 : "+address);
+//		System.out.println(userid+"의 기본 주소지 : "+address);
 		
 		String address_name=address.getAddress_name();
 		String receiver_name=address.getReceiver_name();
@@ -140,8 +140,16 @@ $(document).ready(function () {
 		<td><%= userid %></td>
 		<td><%= username %></td>
 		<td><%= email1+"@"+email2 %></td>
-		<td><%= phone %></td>
-		<td><%= post_num + "&nbsp;&nbsp;&nbsp;" + addr1+ "&nbsp;" + addr2 %></td>
+		<td><span style="font-size: 14px">
+			<%= phone.substring(0, 3)+"-"
+				+ phone.substring(3, 7)+"-"
+				+ phone.substring(7, 11) %>
+			</span>
+		</td>
+		<td>
+			<span style="font-size: 14px"><%= post_num %></span>
+			<%= "&nbsp;&nbsp;&nbsp;" + addr1+ "&nbsp;" + addr2 %>
+		</td>
 		<td>
 			<!-- Modal -->
 			<div class="modal fade" id="deleteMember" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
