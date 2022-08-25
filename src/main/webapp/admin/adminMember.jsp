@@ -63,8 +63,8 @@ $(document).ready(function () {
 		<th>관리</th>
 	</tr>
 <%
-	List<MemberDTO> memberList=(List<MemberDTO>) session.getAttribute("memberList");
-	HashMap<String, AddressDTO> addMap=(HashMap<String, AddressDTO>) session.getAttribute("addMap");
+	List<MemberDTO> memberList=(List<MemberDTO>) request.getAttribute("memberList");
+	HashMap<String, AddressDTO> addMap=(HashMap<String, AddressDTO>) request.getAttribute("addMap");
 
 	System.out.println("jsp에서 회원 리스트 : "+memberList);
 	System.out.println("jsp에서 회원 기본 주소 map : "+addMap);

@@ -61,35 +61,43 @@
 			let p_content = $("#p_content").val();
 			
 			if (c_id=='none') {
-				alert("카테고리를 선택하세요");
+				$("#modalBtn").click();
+				/* alert("카테고리를 선택하세요"); */
 				$("#c_id").focus();
 				event.preventDefault();
 			} else if (p_name.length==0) {
-				alert("상품명을 입력하세요");
+				$("#modalBtn").click();
+				/* alert("상품명을 입력하세요"); */
 				$("#p_name").focus();
 				event.preventDefault();
 			} else if (p_cost_price.length==0) {
-				alert("정상가를 입력하세요");
+				$("#modalBtn").click();
+				/* alert("정상가를 입력하세요"); */
 				$("#p_cost_price").focus();
 				event.preventDefault();
 			} else if (p_discount.length==0) {
-				alert("할인가를 입력하세요");
+				$("#modalBtn").click();
+				/* alert("할인가를 입력하세요"); */
 				$("#p_discount").focus();
 				event.preventDefault();
 			} else if (p_selling_price.length==0) {
-				alert("판매가를 입력하세요");
+				$("#modalBtn").click();
+				/* alert("판매가를 입력하세요"); */
 				$("#p_selling_price").focus();
 				event.preventDefault();
 			} else if (p_stock.length==0) {
-				alert("재고를 입력하세요");
+				$("#modalBtn").click();
+				/* alert("재고를 입력하세요"); */
 				$("#p_stock").focus();
 				event.preventDefault();
 			} else if (image_route.length==0) {
-				alert("상품 이미지를 등록하세요");
+				$("#modalBtn").click();
+				/* alert("상품 이미지를 등록하세요"); */
 				$("#image_route").focus();
 				event.preventDefault();
 			} else if (p_content.length==0) {
-				alert("상품 설명을 등록하세요");
+				$("#modalBtn").click();
+				/* alert("상품 설명을 등록하세요"); */
 				$("#p_content").focus();
 				event.preventDefault();
 			}
@@ -136,16 +144,6 @@
 							</div>
 						</div>
 					</div>
-					<!-- 상품번호 -->
-					<!-- <div class="form-group">
-						<label for="p_id" class="cols-sm-2 control-label" style="font-weight: bold;">상품번호</label>
-						<div class="cols-sm-10">
-							<div class="input-group">
-								<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-								<input type="text" class="form-control" name="p_id" id="p_id"  />
-							</div>
-						</div>
-					</div> -->
 					<!-- 상품명 -->
 					<div class="form-group">
 						<label for="p_name" class="cols-sm-2 control-label" style="font-weight: bold;">상품명</label>
@@ -236,4 +234,23 @@
 			</div>
 		</div>
 	</div>
+</div>
+
+
+<button id="modalBtn" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop" style="display: none;">modal</button>
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-center">
+        모든 항목을 입력하였는지 확인해 주세요
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" data-bs-dismiss="modal" onclick="">확인</button>
+      </div>
+    </div>
+  </div>
 </div>
