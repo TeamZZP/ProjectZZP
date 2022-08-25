@@ -1,4 +1,4 @@
-package com.controller.challenge;
+package com.controller.profile;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.dto.ChallengeDTO;
+import com.dto.StampDTO;
 import com.service.ChallengeService;
 
 /**
@@ -44,16 +45,16 @@ public class ProfileMainServlet extends HttpServlet {
 		List<ChallengeDTO> challengeList = service.selectChallengeByUserid(userid);
 		
 		//회원의 도장 목록 가져오기
-		List<String> stampList = service.selectMemberStampByUserid(userid);
+		List<StampDTO> stampList = service.selectMemberStampByUserid(userid);
 		//이미지와 함께 hashmap에 담기 (중복 stamp_id 제거 위해 LinkedHashMap 사용)
-		LinkedHashMap<String, String> stampImgMap = new LinkedHashMap<String, String>();
-		for (String stampId : stampList) {
-			stampImgMap.put(stampId, service.selectStampImg(stampId));
+		LinkedHashMap<Integer, StampDTO> stampMap = new LinkedHashMap<Integer, StampDTO>();
+		for (StampDTO dto : stampList) {
+			stampMap.put(dto.getStamp_id(), dto);
 		}
 		
 		request.setAttribute("profileMap", profileMap);
 		request.setAttribute("challengeList", challengeList);
-		request.setAttribute("stampImgMap", stampImgMap);
+		request.setAttribute("stampMap", stampMap);
 		
 		RequestDispatcher dis = request.getRequestDispatcher("profileMain.jsp");
 		dis.forward(request, response);

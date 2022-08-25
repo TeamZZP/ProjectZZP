@@ -336,9 +336,9 @@
 	where m.chall_id=#{chall_id}
 </select>
 
-<select id="selectMemberStampByUserid" resultType="string">
-	select stamp_id 
-	from member_stamp
+<select id="selectMemberStampByUserid" resultType="com.dto.StampDTO">
+	select stamp_id, stamp_img, stamp_name, stamp_content 
+	from member_stamp join stamp using(stamp_id)
 	where userid=#{userid}
 	order by stamp_id desc
 </select>
@@ -348,5 +348,7 @@
 	from stamp
 	where stamp_id=#{stamp_id}
 </select>
+
+
 
 </mapper>
