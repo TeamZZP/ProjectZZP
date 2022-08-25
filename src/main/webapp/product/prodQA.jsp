@@ -36,7 +36,7 @@
 		}); //
 		
 		$("#QuestionInsert").click(function () {
-			var qID = $("#qID").val();
+			var qID = $("#pID").val();
 			var pName = $("#pName").val();
 			location.href = "questionInsert.jsp?P_ID="+qID+"&P_Name="+pName;
 		});//
