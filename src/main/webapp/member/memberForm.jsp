@@ -16,43 +16,12 @@
 	var sample4_roadAddress = $("#sample4_roadAddress").val();
 	var sample4_jibunAddress = $("#sample4_jibunAddress").val();
 	
-	//아이디 유효성 검사
 	var idChk = /^(?=.*[a-zA-Z])(?=.*[0-9]).{4,12}$/; 
-	if (!idChk.test(userid)) {
-		alert("아이디를 형식에 맞게 입력해주세요 :)");
-		$("#userid").val("");
-		$("#userid").focus();
-		event.preventDefault();
-	}
-	
-	//비밀번호 유효성 검사
 	var pwChk = /^(?=.*[a-zA-Z])(?=.*[!@#$%^&*+=-_])(?=.*[0-9]).{8,25}$/;
-	if (!pwChk.test(passwd)) {
-		alert("비밀번호를 형식에 맞게 입력해주세요 :)");
-		$("#passwd").val("");
-		$("#passwd").focus();
-		event.preventDefault();
-	}
-	
-	//이름 유효성 검사
 	var nameChk = /^(?=.*[가-힣a-zA-Z]).{2,30}$/;
-	if (!nameChk.test(username) || username.length>3) {
-		alert("이름을 확인해주세요 :)");
-		$("#username").val("");
-		$("#username").focus();
-		event.preventDefault();
-	}
-	
-	//전화번호 유효성 검사
 	var numChk = /^[0-9]*.{11}$/; 
-	if (!numChk.test(phone)) {
-		alert("전화번호를 형식에 맞게 입력해주세요 :)");
-		$("#phone").val("");
-		$("#phone").focus();
-		event.preventDefault();
-	}
 	
-	else if (userid.length==0) {
+	if (userid.length==0) {
 		alert("아이디를 입력해주세요 :)");
 		$("#userid").focus();
 		event.preventDefault();
@@ -81,8 +50,34 @@
 		$("#sample4_postcode").focus();
 		event.preventDefault();
 	}
- 	
- 	
+	//아이디 유효성 검사
+	else if (!idChk.test(userid)) {
+		alert("아이디를 형식에 맞게 입력해주세요 :)");
+		$("#userid").val("");
+		$("#userid").focus();
+		event.preventDefault();
+	}
+	//비밀번호 유효성 검사
+	else if (!pwChk.test(passwd)) {
+		alert("비밀번호를 형식에 맞게 입력해주세요 :)");
+		$("#passwd").val("");
+		$("#passwd").focus();
+		event.preventDefault();
+	}
+	//이름 유효성 검사
+	else if (!nameChk.test(username) || username.length>3) {
+		alert("이름을 확인해주세요 :)");
+		$("#username").val("");
+		$("#username").focus();
+		event.preventDefault();
+	}
+	//전화번호 유효성 검사
+	else if (!numChk.test(phone)) {
+		alert("전화번호를 형식에 맞게 입력해주세요 :)");
+		$("#phone").val("");
+		$("#phone").focus();
+		event.preventDefault();
+	}
  });
 	
 //비번확인//키 이벤트 발생시 패스워드 일치여부 검사 
@@ -138,7 +133,7 @@ $("#addMember").click(function() {
                                         <div class="cols-sm-10">
                                             <div class="input-group">
                                                 <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-                                                <input type="text" class="form-control" name="userid" id="userid" placeholder="영문자와 숫자로 이루어진 4~12자리를 입력하세요" />
+                                                <input type="text" oninput="chkInfo(this.value)" class="form-control" name="userid" id="userid" placeholder="영문자와 숫자로 이루어진 4~12자리를 입력하세요" />
                                                 <button id="idCheck" class="btn btn-outline-success">중복확인</button>
                                             </div>
                                         </div>

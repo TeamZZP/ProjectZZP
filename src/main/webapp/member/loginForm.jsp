@@ -126,7 +126,7 @@ body {
 $(document).ready(function() {
 	
 	//아이디 비밀번호 필수
-	$("form").submit(function() {
+	$("#loginForm").submit(function() {
 		if ($("#userid").val().length == 0) {
 			alert("아이디를 입력해주세요!");
 			$("#userid").focus();
@@ -143,7 +143,7 @@ $(document).ready(function() {
 
 <div class="login-page">
   <div class="form">
-    <form class="login-form" action="LoginServlet" method="post">
+    <form id="loginForm" class="login-form" action="LoginServlet" method="post">
       <input type="text" name="userid" id="userid" placeholder="아이디" autofocus />
       <input type="password" name="passwd" id="passwd" placeholder="비밀번호"/>
       <button type="submit">로그인</button><br>
