@@ -23,6 +23,7 @@
 	<select id="selectAllAddress" resultType="AddressDTO">
 		select * from address
 		where userid = #{userid}
+		order by address_id
 	</select>
 	<delete id="deleteAddress">
 		delete from address

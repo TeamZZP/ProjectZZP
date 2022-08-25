@@ -35,7 +35,8 @@
 <jsp:include page="common/header.jsp" flush="true"></jsp:include><br>
 
 <form action="AccountManagementServlet" method="post">
-	<div class="row justify-content-center">
+<div class="container col-md-4">
+	<div class="justify-content-center">
 		<div class="col-md-12">
 			<input type="hidden" name="userid" id="userid" value="<%= userid %>">
 			<h2>비밀번호를 입력해 주십시오</h2>
@@ -44,13 +45,14 @@
 			<div style="padding-bottom: 45px"></div>
 
 		</div>
-		<div class="col-md-2">
-			<div class="row justify-content-center">
+		<div class="col-md-4">
+			<div class=""><!-- 확인, 취소 버튼을 가운데로 -->
 				<button id="check" class="btn btn-success">확인</button>
 				<button type="button" id="cancle" class="btn btn-outline-success">취소</button>
 			</div>
 		</div>
 	</div>
+</div>
 </form>
 
 <jsp:include page="common/footer.jsp" flush="true"></jsp:include><br>

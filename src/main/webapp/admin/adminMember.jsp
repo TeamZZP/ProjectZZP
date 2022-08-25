@@ -64,10 +64,13 @@ $(document).ready(function () {
 	</tr>
 <%
 	List<MemberDTO> memberList=(List<MemberDTO>) session.getAttribute("memberList");
-	HashMap<String, List<AddressDTO>> addressMap=(HashMap<String, List<AddressDTO>>) session.getAttribute("addressMap");
+	HashMap<String, AddressDTO> addMap=(HashMap<String, AddressDTO>) session.getAttribute("addMap");
+
+	System.out.println("jsp에서 회원 리스트 : "+memberList);
+	System.out.println("jsp에서 회원 기본 주소 map : "+addMap);
 	
 	for (MemberDTO member : memberList) {
-		//System.out.println(member);
+		System.out.println(member);
 		String userid=member.getUserid();
 		String passwd=member.getPasswd();
 		String username=member.getUsername();
@@ -77,20 +80,18 @@ $(document).ready(function () {
 		String created_at=member.getCreated_at();
 		
 //		for (int i = 0; i < addressMap.size(); i++) {
-			List<AddressDTO> addressList=addressMap.get(userid);
 //			AddressDTO address=addressList.get(i);//addressMap의 size만큼 for문 반복 중//userid로 뽑아온 addressList의 size와 for문의 size가 다름//indexOutOfBounds 발생
-			
-			for (int j = 0; j < addressList.size(); j++) {
-				AddressDTO address=addressList.get(j);
-				String address_name=address.getAddress_name();
-				String receiver_name=address.getReceiver_name();
-				String receiver_phone=address.getReceiver_phone();
-				String post_num=address.getPost_num();
-				String addr1=address.getAddr1();
-				String addr2=address.getAddr2();
-				int default_chk=address.getDefault_chk();
-				
-				//System.out.println("출력 확인 : "+address);
+		AddressDTO address=addMap.get(userid);
+		System.out.println(userid+"의 기본 주소지 : "+address);
+		
+		String address_name=address.getAddress_name();
+		String receiver_name=address.getReceiver_name();
+		String receiver_phone=address.getReceiver_phone();
+		String post_num=address.getPost_num();
+		String addr1=address.getAddr1();
+		String addr2=address.getAddr2();
+		int default_chk=address.getDefault_chk();
+		
 /* 	if (addr2 == null) {
 		addr2="상세 주소를 입력하세요.";
 	} */
@@ -168,7 +169,6 @@ $(document).ready(function () {
 			</button><!-- open modal -->
 		</td>
 <%
-			}
 //		}
 	}
 %>

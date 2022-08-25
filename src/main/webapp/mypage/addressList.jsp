@@ -95,7 +95,7 @@
 		}
 		
 		$("#addAddress").on("click", function() {
-//			console.log("추가 버튼 클릭");
+			console.log("추가 버튼 클릭");
 			location.href="addAddress.jsp";
 		});//end fn
 		
@@ -126,7 +126,7 @@
 			var xxx=$("#checkDelete<%= address_id %>");
 			$("#delete<%= address_id %>").val(id);
 			$("#delete<%= address_id %>").attr("data-chk",chk);//모달창 data-chk 속성에 값 저장
-			var size=$("#listSize").val();//회원의 배송지를 리스트로 담았는데요2개 이상
+			var size=$("#listSize").val();
   			if (size <= 1) {
 				console.log(size);
 				alert("배송지는 한 개 이상 있어야 합니다.");
@@ -182,7 +182,9 @@
 			<%=  addr1+ "<br>" + addr2 %>
 		</td>
 		<td style="text-align: center;">
-			<span><%= receiver_phone %></span>
+			<span><%= receiver_phone.substring(0, 3)+"-"
+					+ receiver_phone.substring(3, 7)+"-"
+					+ receiver_phone.substring(7, 11) %></span>
 		</td>
 		<td style="text-align: center;">
 			<!-- Modal -->
