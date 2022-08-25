@@ -50,6 +50,21 @@
 			$("#pID").click(function () {
 				window.open("questionproductSelect.jsp","","width=400px height=500px");
 			});
+			$("#QuestionCancel").click(function () {
+				if (confirm("이전 페이지로 돌아가시겠습니까?")) {
+					history.back();
+				}
+			});
+			function checkFileExtension(){ 
+				let fileValue = $("#qFile").val(); 
+				let reg = /(.*?)\.(jpg|jpeg|png|gif)$/;
+				if (fileValue.match(reg)) {
+					return true;
+				} else {
+					alert("jpg, jpeg, png, gif 파일만 업로드 가능합니다.");
+					return false;
+				}
+			}
 		});//end ready
 	</script>
 <div style="text-align: center; display: flex; justify-content:center; height: 100px; margin-bottom: 10px;" >
@@ -126,7 +141,7 @@
 				<td> <button id="QuestionList" class="btn btn-success">목록</button> </td>
 				<td style="text-align: right;">
 					<button id="QuestionInsert" data-userid="<%=userid %>" data-operate="<%=operate %>" class="btn btn-success">등록</button>
-					<button type="reset" class="btn btn-success">취소</button>
+					<button id="QuestionCancel" type="reset" class="btn btn-success">취소</button>
 				</td>
 			</tr>
 		</table>

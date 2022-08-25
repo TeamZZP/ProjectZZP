@@ -47,6 +47,16 @@
 		$("#uploadBtu").click(function () {
 			window.open("uploadImg.jsp", "", "width=400px height=500px");
 		});
+		function checkFileExtension(){ 
+			let fileValue = $("#qFile").val(); 
+			let reg = /(.*?)\.(jpg|jpeg|png|gif)$/;
+			if (fileValue.match(reg)) {
+				return true;
+			} else {
+				alert("jpg, jpeg, png, gif 파일만 업로드 가능합니다.");
+				return false;
+			}
+		}
 	});//end ready
 </script>
 <div style="text-align: center; display: flex; justify-content:center; height: 100px; margin-bottom: 10px;" >
@@ -72,7 +82,7 @@
 					<div class="input-group">
 					  <button id="pID" class="btn btn-outline-secondary" type="button">상품 정보</button>
 					  <input type="text" class="form-control shadow-none"  <%if(qDTO.getP_NAME() != null){ %> value="<%=qDTO.getP_NAME() %>" <% }%> readonly="readonly" name="P_Name" id="P_Name">
-					  <input type="hidden" class="form-control" <%if(qDTO.getP_ID() != 0){ %> value="<%=qDTO.getP_ID()%>" <%} %>  name="P_ID" id="pId">
+					  <input type="hidden" class="form-control" <%if(qDTO.getP_ID() != 0){ %> value="<%=qDTO.getP_ID()%>" <%} %> name="P_ID" id="pId">
 					</div>
 				</td>
 			</tr>
@@ -109,7 +119,7 @@
 			<tr>
 				<%if(qDTO.getQ_IMG() == null || qDTO.getQ_IMG().equals("null")){ %>
 				<td colspan="2">
-					<input class="form-control" type="file" accept="image/*" name="qFile">
+					<input class="form-control" type="file" accept="image/*" name="qFile" id="qFile">
 				</td>
 				<%} else { %>
 				<td colspan="2">
