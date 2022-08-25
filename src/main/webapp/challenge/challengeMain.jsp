@@ -42,8 +42,11 @@
     
     .stamp {
     	position: absolute; 
-		left: 198px; 
-		top: -15px; 
+		/* left: 198px;  
+		top: -15px; */
+		left: 62%;
+		top: -6%; 
+		width: 40%;
     }
 
 </style>
@@ -82,6 +85,7 @@
 			$("form").submit();
 		});
 	}); 
+ 	
 </script>
 
 <form action="ChallengeListServlet">
@@ -129,7 +133,7 @@
 	       <a href="ChallengeDetailServlet?chall_id=<%=chall_id%>"> 
 			<img src="/eclipse/upload/<%=chall_img%>" border="0" onerror="this.src='images/uploadarea.png'">
 			<% if (stampListMap.containsKey(String.valueOf(chall_id))) { %>
-			<img src="/eclipse/upload/<%=stampListMap.get(String.valueOf(chall_id))%>" class="stamp" width="110" height="110">
+			<img src="/eclipse/upload/<%=stampListMap.get(String.valueOf(chall_id))%>" class="stamp">
 			<%} %>
 		   </a>
 	   </div>
@@ -180,5 +184,6 @@
    </div>
 </div> 	
 </form>    
+    
     
     

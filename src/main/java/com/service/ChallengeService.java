@@ -349,8 +349,8 @@ public class ChallengeService {
 		return map;
 	}
 
-	public List<String> selectMemberStampByUserid(String userid) {
-		List<String> list = null;
+	public List<StampDTO> selectMemberStampByUserid(String userid) {
+		List<StampDTO> list = null;
 		SqlSession session = MySqlSessionFactory.getSqlSession();
 		try {
 			list = dao.selectMemberStampByUserid(session, userid);
@@ -382,6 +382,8 @@ public class ChallengeService {
 		}
 		return n;
 	}
+
+
 
 
 
