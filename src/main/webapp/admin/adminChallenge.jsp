@@ -1,3 +1,4 @@
+<%@page import="com.dto.MemberDTO"%>
 <%@page import="com.dto.ChallengeDTO"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -5,6 +6,23 @@
 <%
 List<ChallengeDTO> challList = (List<ChallengeDTO>) request.getAttribute("challList");
 System.out.println("challList"+challList);
+
+//session에 저장된 userid 읽어오기 
+MemberDTO member = (MemberDTO) session.getAttribute("login"); 
+String currUserid = null;
+if (member != null) {
+	currUserid = member.getUserid();
+}
+
+//session에 저장된 메시지가 있는 경우 경고창 띄워주고 삭제하기
+	String mesg = (String) session.getAttribute("mesg");
+	if (mesg != null) {
+%>
+	<script type="text/javascript">
+		alert("<%= mesg %>");
+	</script>
+<% } 
+	session.removeAttribute("mesg");
 %>
 
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -16,14 +34,19 @@ $(document).ready(function () {
 		location.href="AdminCategoryServlet?category="+category;
 	});
 	
+	//챌린지 작성
 	$(".writeBtn").on("click", function () {
 		location.href = "AdminChallUIServlet";
 	});
-	
+	//챌린지 상세보기
 	$(".challengeDetail").on("click", function () {
 		location.href = "AdminChallDetailServlet?chall_id="+$(this).attr("data-id");
 	});
+	
+	
 });
+
+
 </script>
 
 
@@ -39,29 +62,34 @@ $(document).ready(function () {
 	</form>
 </div>
 
+<div class="container" style="margin-top: 5px; margin-bottom: 5px;">
+	<div class="row">
+		  <div class="col">
+				  <select class="form-select" data-style="btn-info" id="inputGroupSelect01" 
+				  		  style="width: 145px; margin-right: -20px; margin-left: -24px; display: inline;">
+					    <option selected disabled hidden>카테고리</option>
+					    <option value="c_id">카테고리</option>
+					    <option value="p_id">상품번호</option>
+					    <option value="p_name">상품명</option>
+					    <option value="p_selling_price">판매가</option>
+					    <option value="p_created">등록일</option>
+				  </select>
+		  	<input type="text" class="form-control" style="width: 150px; margin-right: -20px; display: inline;">
+	      	<button type="button" class="btn btn-success">검색</button>
+	      </div>
+	      <div class="col">
+	      	<div class="float-end">
+	      	<button class="writeBtn btn btn-success">이 달의 챌린지 등록하기</button>
+	      	</div>
+	      </div>
+	</div>
+</div>
+
 
 
 <div class="container col-md-auto">
-
-<div class="p-4 text-end">
-<button class="writeBtn btn btn-success">이 달의 챌린지 등록하기</button>
-</div>
 <div class="row justify-content-md-center">
-<div class="dropdown">
-  <button class="btn btn-success btn-sm dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-    카테고리
-  </button>
-  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-    <li><a class="dropdown-item" href="#">아이디</a></li>
-    <li><a class="dropdown-item" href="#">이름</a></li>
-    <li><a class="dropdown-item" href="#">이메일</a></li>
-    <li><a class="dropdown-item" href="#">전화번호</a></li>
-    <li><a class="dropdown-item" href="#">주소</a></li>
-  </ul>
-  <input type="text"/>
-</div>
-<br>
-<table class="table table-sm">
+<table class="table table-hover table-sm">
 	<tr>
 		<th>게시글 번호</th>
 		<th>아이디</th>
@@ -84,7 +112,6 @@ $(document).ready(function () {
 		int chall_comments = dto.getChall_comments();
 %>
 
-<form>
 	<tr id="list">
 		<td class="challengeDetail" data-id="<%= chall_id %>"><%= chall_id %></td>
 		<td class="challengeDetail" data-id="<%= chall_id %>"><%= userid %></td>
@@ -93,36 +120,45 @@ $(document).ready(function () {
 		<td><%= chall_created %></td>
 		<td>
 			<!-- Modal -->
-			<div class="modal fade" id="deleteMember" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+			<div id="deleteModal<%= chall_id %>" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 			  <div class="modal-dialog">
 			    <div class="modal-content">
 			      <div class="modal-header">
-			        <h5 class="modal-title" id="staticBackdropLabel">회원 삭제</h5>
+			        <h5 class="modal-title" id="staticBackdropLabel">게시글 삭제</h5>
 			        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 			      </div>
 			      <div class="modal-body">
-			        <%-- 회원 <%= userid %>님을 삭제하시겠습니까?--첫번째 데이터가 출력됨 --%>
-			        선택한 회원을 삭제하시겠습니까?
+			        선택한 게시글을 삭제하시겠습니까?
 			      </div>
 			      <div class="modal-footer">
-			        <button type="button" id="delete<%= userid %>" class="btn btn-success">삭제</button>
+			        <button type="button" id="del<%= chall_id %>" class="btn btn-success">삭제</button>
 			        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
 			      </div>
-			    </div>
+			    </div> 
 			  </div>
 			</div>
-			<!-- Button trigger modal -->
-			<button type="button" id="change<%= userid %>" data-edit="<%= userid %>" class="btn btn-outline-success btn-sm">수정</button>
-			<button type="button" id="checkDelete<%= userid %>" data-id="<%= userid %>" class="btn btn-outline-dark btn-sm" data-bs-toggle="modal" data-bs-target="#deleteMember">
-				삭제
-			</button><!-- open modal -->
+			<!-- 버튼 -->
+			<button type="button" class="updateChallBtn btn btn-outline-success btn-sm" data-cid="<%= chall_id %>" >수정</button>
+			<button type="button" class="btn btn-outline-dark btn-sm" data-cid="<%= chall_id %>" 
+					data-bs-toggle="modal" data-bs-target="#deleteModal<%= chall_id %>">삭제</button>
+				<script>
+				//챌린지 삭제 모달창 
+			 	$("#deleteModal<%= chall_id %>").on("shown.bs.modal", function (e) {
+					let cid = $(e.relatedTarget).attr("data-cid");
+					$("#del"+cid).val(cid);
+				});
+				//챌린지 삭제
+				$("#del<%= chall_id %>").on("click", function (e) {
+					let cid = $(this).val();
+					location.href = "ChallengeDeleteServlet?chall_id=<%= chall_id %>&userid=<%= currUserid %>";
+				});
+				</script>
 		</td>
 <%
 	}
 %>
 
 	</tr>
-</form>
 </table>
 </div>
 </div>
