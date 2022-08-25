@@ -8,13 +8,6 @@
 		text-decoration: none;
 		color: black;
 	}
-	/*ZoomIn Hover Effect*/  
-     .hover-zoomin a {
-      display: block;
-      position: relative;
-      overflow: hidden;
-      border-radius: 15px;
-    }
 </style>
 <%
 String mesg = (String)session.getAttribute("mesg");
@@ -50,24 +43,39 @@ if(mesg != null){
 <form action="AdminCategoryServlet" id="prodForm">
 <input type="hidden" name="category" value="product">
 	<div class="container" style="margin-top: 5px; margin-bottom: 5px;">
-		<div class="row row-cols-auto">
-			  <div class="col"></div>
-				  <div class="col">
-				  	  <!-- 검색 -->
-					  <select class="form-select sortBy" name="searchName" data-style="btn-info" id="inputGroupSelect01" 
-					  		  style="width: 145px; margin-right: -20px; margin-left: -24px;">
-						    <!-- <option selected disabled hidden>카테고리</option> -->
-						    <option value="c_id" <% if("c_id".equals(searchName)){%>selected<%}%>>카테고리</option>
-						    <option value="p_id" <% if("p_id".equals(searchName)){%>selected<%}%>>상품번호</option>
-						    <option value="p_name" <% if("p_name".equals(searchName)){%>selected<%}%>>상품명</option>
-						    <option value="p_selling_price" <% if("p_selling_price".equals(searchName)){%>selected<%}%>>판매가</option>
-						    <option value="p_created" <% if("p_created".equals(searchName)){%>selected<%}%>>등록일</option>
-					  </select>
-			  	  </div>
-			  <div class="col"><input type="text" name="searchValue" class="form-control" style="width: 150px; margin-right: -20px;"
-			  			<% if(searchValue!=null && !searchValue.equals("null")) {%>value="<%= searchValue %>"<% } %>></div>
-		      <div class="col"><button type="button" class="btn btn-success" id="searchProd">검색</button></div>
-		      <a href="adminProductAdd.jsp" class="btn btn-success">상품등록</a>
+		<div class="row">
+		  	<div class="col">
+		  	  <!-- 검색 -->
+				<select class="form-select sortBy" name="searchName" data-style="btn-info" id="inputGroupSelect01" style="width: 140px; display: inline;">
+					<option value="c_id" <% if("c_id".equals(searchName)){%> selected
+						<%}%>>카테고리</option>
+					<option value="p_id" <% if("p_id".equals(searchName)){%> selected
+						<%}%>>상품번호</option>
+					<option value="p_name" <% if("p_name".equals(searchName)){%>
+						selected <%}%>>상품명</option>
+					<option value="p_selling_price"
+						<% if("p_selling_price".equals(searchName)){%> selected <%}%>>판매가</option>
+					<option value="p_created" <% if("p_created".equals(searchName)){%>
+						selected <%}%>>등록일</option>
+				</select> 
+				<input type="text" name="searchValue" class="form-control" style="width: 150px; display: inline;"
+	  				<% if(searchValue!=null && !searchValue.equals("null")) {%>value="<%= searchValue %>"<% } %>>
+	  			<button type="button" class="btn btn-success" id="searchProd" style="margin-top: -5px;">검색</button>
+	  	  	</div>
+      	  	<div class="col">
+      	  		<div class="float-end">
+			  	  <!-- 정렬 -->
+				  <select class="form-select sortBy" name="sortBy" id="sortBy" data-style="btn-info" 
+				  		  style="width: 145px; margin-left: -24px; display: inline;">
+					    <option value="p_id" selected>정렬</option>
+					    <option value="p_id" <% if("p_id".equals(sortBy)){%>selected<%}%>>최신상품순</option>
+					    <option value="p_selling_price" <% if("p_selling_price".equals(sortBy)){%>selected<%}%>>판매가순</option>
+					    <option value="p_name" <% if("p_name".equals(sortBy)){%>selected<%}%>>상품명순</option>
+					    <option value="p_stock" <% if("p_stock".equals(sortBy)){%>selected<%}%>>재고순</option>
+				  </select>
+				  <a href="adminProductAdd.jsp" class="btn btn-success" style="margin-top: -5px;">상품등록</a>
+			  </div>
+	    	</div>
 		</div>
 	</div>
 	<div class="container col-md-auto">
@@ -151,6 +159,10 @@ if(mesg != null){
 		});
 		//상품검색
 		$("#searchProd").click(function() {
+			$("#prodForm").submit();
+		});
+		//정렬 기준 선택시 form 제출
+		$("#sortBy").on("change", function () {
 			$("#prodForm").submit();
 		});
 		//상품등록 버튼
