@@ -53,6 +53,7 @@ public class AdminCategoryServlet extends HttpServlet {
 				String id=memberDTO.getUserid();
 				System.out.println(id+"의 주소지 : "+addMap.get(id));
 			}
+			System.out.println(addMap);
 			request.setAttribute("memberList", memberList);
 			request.setAttribute("addMap", addMap);//userid의 address 리스트
 			RequestDispatcher dis = request.getRequestDispatcher("adminMember.jsp");
