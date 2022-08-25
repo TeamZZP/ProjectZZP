@@ -13,8 +13,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.catalina.startup.PasswdUserDatabase;
+import org.apache.tomcat.util.buf.StringCache;
 
 import com.dto.NoticeDTO;
+import com.dto.PageDTO;
 import com.service.NoticeService;
 
 /**
@@ -34,23 +36,27 @@ public class NoticeOneSelectServlet extends HttpServlet {
 		
 		NoticeService service = new NoticeService();
 		NoticeDTO nDTO = service.noticeOneSelect(noticeID);
-		System.out.println("NoticeOneSelectServlet" + nDTO);
+		System.out.println("NoticeOneSelectServlet" + nDTO);//상세정보 내용
 		
 		HttpSession session = request.getSession();
 		
 		if (nDTO != null) {
-			session.setAttribute("noticeOne", nDTO);//상세정보 내용
+			String category = nDTO.getNOTICE_CATEGORY();
+			System.out.println("카테고리 " + category);
 			
 			int nextID = noticeID - 1;
 			NoticeDTO nextDTO = service.noticeOneSelect(nextID);
 			System.out.println("nextDTO" + nextDTO); //다음 게시물
-			if (nextDTO == null) {
-				nextID = nextID - 1;
+			int num = 1;
+			while (nextDTO == null) {
+				num++;
+				nextID = nextID - num;
 				nextDTO = service.noticeOneSelect(nextID);
 				System.out.println("nextDTO" + nextDTO); //다음 게시물
-			} 
+			}
 			
-			session.setAttribute("nextDTO", nextDTO);
+			session.setAttribute("noticeOne", nDTO);//상세정보 내용
+			session.setAttribute("nextDTO", nextDTO); //다음게시물
 			
 			Map<String, Integer> map = new HashMap<String, Integer>();
 			map.put("noticeID", nDTO.getNOTICE_ID());

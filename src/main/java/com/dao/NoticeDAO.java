@@ -59,5 +59,9 @@ public class NoticeDAO {
 		int num = session.insert("NoticeMapper.NoticeInsert", nDTO);
 		return num;
 	}
+	public NoticeDTO nextNotice(SqlSession session, int nextID) {
+		NoticeDTO dto = session.selectOne("NoticeMapper.nextNotice", nextID);
+		return dto;
+	}
 	
 }
