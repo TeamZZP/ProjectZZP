@@ -44,16 +44,15 @@ public class AdminReportListServlet extends HttpServlet {
 		String searchName = request.getParameter("searchName");
 		String searchValue = request.getParameter("searchValue");
 		String sortBy = request.getParameter("sortBy");
-		if (sortBy == null) {
-			sortBy = "report_id";
-		}
+		String status = request.getParameter("status");
 		
-		System.out.println(curPage+" "+searchName+" "+searchValue+" "+sortBy);
+		System.out.println(curPage+" "+searchName+" "+searchValue+" "+sortBy+" "+status);
 		
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("searchName", searchName);
 		map.put("searchValue", searchValue);
 		map.put("sortBy", sortBy);
+		map.put("status", status);
 		System.out.println(">>>>>>>"+map);
 		
 		PageDTO pDTO = service.selectAllReport(map, Integer.parseInt(curPage));
@@ -63,6 +62,7 @@ public class AdminReportListServlet extends HttpServlet {
 		request.setAttribute("searchName", searchName);
 		request.setAttribute("searchValue", searchValue);
 		request.setAttribute("sortBy", sortBy);
+		request.setAttribute("status", status);
 		
 		RequestDispatcher dis = request.getRequestDispatcher("adminReport.jsp");
 		dis.forward(request, response);

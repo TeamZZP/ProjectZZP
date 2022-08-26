@@ -9,10 +9,11 @@
 	String searchName = (String) request.getAttribute("searchName");
 	String searchValue = (String) request.getAttribute("searchValue");
 	String sortBy = (String) request.getAttribute("sortBy");
+	String status = (String) request.getAttribute("status");
 %>
 
 <style>
-	.searchName, .searchValue {
+	.searchName, .searchValue, .form-select {
 		width: 140px; 
 		display: inline;
 	}
@@ -31,6 +32,10 @@ $(document).ready(function () {
 		location.href="AdminCategoryServlet?category="+category;
 	});
 	
+	//정렬 기준 선택시 form 제출
+	$("#status").on("change", function () {
+		$("form").submit();
+	});
 	
 });
 
@@ -54,28 +59,31 @@ $(document).ready(function () {
 
 
 <div class="container mt-2 mb-2">
-	<div class="row">
+	<form action="AdminReportListServlet">
+		<div class="row">
 		  <div class="col">
-		  	<form action="AdminCategoryServlet">
 		  		<input type="hidden" name="category" value="report">
-				  <select class="form-select searchName" data-style="btn-info" id="inputGroupSelect01">
-					    <option selected disabled hidden>카테고리</option>
-					    <option value="chall_id">게시글 번호</option>
-					    <option value="chall_title">제목</option>
-					    <option value="chall_content">내용</option>
-					    <option value="stamp_name">도장 이름</option>
-					    <option value="chall_created">등록일</option>
+				  <select name="searchName" class="form-select searchName" data-style="btn-info" id="inputGroupSelect01">
+					    <option selected disabled hidden>검색 기준</option>
+					    <option value="userid" <% if("userid".equals(searchName)) {%>selected<%} %>>신고자</option>
+					    <option value="reported_userid" <% if("reported_userid".equals(searchName)) {%>selected<%} %>>작성자</option>
+					    <option value="report_created" <% if("report_created".equals(searchName)) {%>selected<%} %>>신고일</option>
 				  </select>
-		  		<input type="text" class="form-control searchValue">
-	      		<button type="button" class="btn btn-success" style="margin-top: -5px;">검색</button>
-	      	</form>
+		  		<input type="text" class="form-control searchValue" name="searchValue" <% if(searchValue!=null && !searchValue.equals("null")) {%>value="<%=searchValue%>"<%} %>>
+	      		<input type="submit" class="btn btn-success" style="margin-top: -5px;" value="검색"></input>
+	      	
 	      </div>
 	      <div class="col">
 	      	<div class="float-end">
-	      	<button class="writeBtn btn btn-success">이 달의 챌린지 등록하기</button>
-	      	</div>
+				<select name="status" id="status" class="form-select">
+					<option selected disabled hidden>상태</option>
+					<option value="0" <%if ("0".equals(status)) {%>selected <%}%>>처리 대기</option>
+					<option value="1" <%if ("1".equals(status)) {%>selected <%}%>>처리 완료</option>
+				</select> 
+			</div>
 	      </div>
-	</div>
+		</div>
+	 </form>
 </div>
 
 

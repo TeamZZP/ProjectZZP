@@ -61,7 +61,11 @@
  	  	chall_content like '%${searchValue}%'
 	  </if>
 	</where> 
-	order by ${sortBy} desc
+	order by 
+	<if test="sortBy!=null">
+		${sortBy} desc,
+	</if>
+	chall_id desc
 </select>
 
 <select id="selectChallengeByUserid" resultType="ChallengeDTO">
@@ -422,24 +426,37 @@
 	where r.chall_id=ch.chall_id (+)
 	and r.comment_id=co.comment_id (+)
  	  <if test='searchName=="userid"'> 
- 	  	and userid like '%${searchValue}%'
+ 	  	and r.userid like '%${searchValue}%'
+	  </if>
+	  <if test='searchName=="reported_userid"'> 
+ 	  	and COALESCE(ch.userid, co.userid) like '%${searchValue}%'
 	  </if>
 	  <if test='searchName=="report_created"'> 
  	  	and report_created like '%${searchValue}%'
 	  </if>
-	order by ${sortBy} desc
+	  <if test='status!=null'> 
+ 	  	and report_status=${status}
+	  </if>
+	order by report_id desc
 </select>
 
 <select id="countTotalReport" parameterType="hashmap" resultType="int">
-	select count(*) from challenge
- 	<where>
+	select count(*) 
+	from report r, challenge ch, comments co 
+	where r.chall_id=ch.chall_id (+)
+	and r.comment_id=co.comment_id (+)
  	  <if test='searchName=="userid"'> 
- 	  	userid like '%${searchValue}%'
+ 	  	and r.userid like '%${searchValue}%'
+	  </if>
+	  <if test='searchName=="reported_userid"'> 
+ 	  	and COALESCE(ch.userid, co.userid) like '%${searchValue}%'
 	  </if>
 	  <if test='searchName=="report_created"'> 
- 	  	report_created like '%${searchValue}%'
+ 	  	and report_created like '%${searchValue}%'
 	  </if>
-	</where> 
+	  <if test='status!=null'> 
+ 	  	and report_status=${status}
+	  </if>
 </select>
 
 

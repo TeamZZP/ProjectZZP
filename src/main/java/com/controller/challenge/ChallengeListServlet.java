@@ -50,9 +50,9 @@ public class ChallengeListServlet extends HttpServlet {
 		String searchName = request.getParameter("searchName");
 		String searchValue = request.getParameter("searchValue");
 		String sortBy = request.getParameter("sortBy");
-		if (sortBy == null) {
-			sortBy = "chall_id";
-		}
+//		if (sortBy == null) {
+//			sortBy = "chall_id";
+//		}
 		
 		System.out.println(curPage+" "+searchName+" "+searchValue+" "+sortBy);
 		
