@@ -9,6 +9,27 @@
 		color: black;
 	}
 </style>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+ 	$(document).ready(function () {
+
+ 		//관리자페이지 카테고리
+		$(".category").click(function() {
+			let category = $(this).attr("data-category");
+			location.href="AdminCategoryServlet?category="+category;
+		});
+		//상품검색
+		$("#searchProd").click(function() {
+			$("#prodForm").submit();
+		});
+		//정렬 기준 선택시 form 제출
+		$("#sortBy").on("change", function () {
+			$("#prodForm").submit();
+		});
+ 		
+ 		
+	}); 
+</script>
 <%
 String mesg = (String)session.getAttribute("mesg");
 if(mesg != null){
@@ -60,7 +81,7 @@ if(mesg != null){
 				</select> 
 				<input type="text" name="searchValue" class="form-control" style="width: 150px; display: inline;"
 	  				<% if(searchValue!=null && !searchValue.equals("null")) {%>value="<%= searchValue %>"<% } %>>
-	  			<button type="button" class="btn btn-success" id="searchProd" style="margin-top: -5px;">검색</button>
+	  			<button type="button" class="btn btn-success" id="searchProd" style="margin-top: -5px; display: inline;r">검색</button>
 	  	  	</div>
       	  	<div class="col">
       	  		<div class="float-end">
