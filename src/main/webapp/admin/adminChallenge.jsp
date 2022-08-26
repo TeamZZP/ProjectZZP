@@ -83,12 +83,13 @@ $(document).ready(function () {
 
 
 
-<input type="hidden" name="category" value="challenge">
+
 
 <div class="container mt-2 mb-2">
 	<div class="row">
 		  <div class="col">
 		  	<form action="AdminCategoryServlet">
+		  		<input type="hidden" name="category" value="challenge">
 				  <select class="form-select searchName" data-style="btn-info" id="inputGroupSelect01">
 					    <option selected disabled hidden>카테고리</option>
 					    <option value="chall_id">게시글 번호</option>

@@ -394,32 +394,50 @@
 </select>
 
 <select id="selectAllReport" parameterType="hashmap" resultType="com.dto.ReportDTO">
-	select * from report
-	<where>
+	select r.report_id,
+			r.userid,
+			case r.report_category 
+				when 1 then '게시글'
+       			when 2 then '댓글'
+        		end report_category,
+			r.chall_id,
+			r.comment_id,
+			case r.report_reason 
+		        when 1 then '지나친 광고성 글'
+		        when 2 then '스팸홍보/도배 글'
+		        when 3 then '욕설/비방이 심함'
+		        when 4 then '외설적인 글'
+		        when 5 then '개인정보 노출'
+		        when 6 then '저작권 침해가 우려됨'
+		        when 7 then '기타'
+		        end report_reason,
+			case r.report_status 
+		        when 0 then '처리 대기'
+		        when 1 then '처리 완료'
+		        end report_status,
+			r.report_created,
+			COALESCE(ch.userid, co.userid) reported_userid, 
+			COALESCE(ch.chall_title, co.comment_content) content
+	from report r, challenge ch, comments co 
+	where r.chall_id=ch.chall_id (+)
+	and r.comment_id=co.comment_id (+)
  	  <if test='searchName=="userid"'> 
- 	  	userid like '%${searchValue}%'
+ 	  	and userid like '%${searchValue}%'
 	  </if>
-	  <if test='searchName=="report_reason"'> 
- 	  	report_reason like '%${searchValue}%'
+	  <if test='searchName=="report_created"'> 
+ 	  	and report_created like '%${searchValue}%'
 	  </if>
-	  <if test='searchName=="chall_content"'> 
- 	  	chall_content like '%${searchValue}%'
-	  </if>
-	</where> 
 	order by ${sortBy} desc
 </select>
 
 <select id="countTotalReport" parameterType="hashmap" resultType="int">
 	select count(*) from challenge
  	<where>
-	  <if test='searchName=="userid"'> 
+ 	  <if test='searchName=="userid"'> 
  	  	userid like '%${searchValue}%'
 	  </if>
-	  <if test='searchName=="chall_title"'> 
- 	  	chall_title like '%${searchValue}%'
-	  </if>
-	  <if test='searchName=="chall_content"'> 
- 	  	chall_content like '%${searchValue}%'
+	  <if test='searchName=="report_created"'> 
+ 	  	report_created like '%${searchValue}%'
 	  </if>
 	</where> 
 </select>

@@ -192,6 +192,10 @@ public class ChallengeDAO {
 		int n = session.insert("ChallengeMapper.insertReport", map);
 		return n;
 	}
+	
+	public int checkReportExist(SqlSession session, HashMap<String, String> map) {
+		return session.selectOne("ChallengeMapper.checkReportExist", map);
+	}
 
 	public PageDTO selectAllReport(SqlSession session, HashMap<String, String> map, int curPage) {
 		PageDTO pDTO = new PageDTO();
@@ -212,9 +216,7 @@ public class ChallengeDAO {
 		return session.selectOne("ChallengeMapper.countTotalReport", map);
 	}
 
-	public int checkReportExist(SqlSession session, HashMap<String, String> map) {
-		return session.selectOne("ChallengeMapper.checkReportExist", map);
-	}
+	
 
 
 	

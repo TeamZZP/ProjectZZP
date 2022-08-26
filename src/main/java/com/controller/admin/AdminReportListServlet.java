@@ -3,6 +3,7 @@ package com.controller.admin;
 import java.io.IOException;
 import java.util.HashMap;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -56,7 +57,15 @@ public class AdminReportListServlet extends HttpServlet {
 		System.out.println(">>>>>>>"+map);
 		
 		PageDTO pDTO = service.selectAllReport(map, Integer.parseInt(curPage));
+		System.out.println(pDTO);
 		
+		request.setAttribute("pDTO", pDTO);
+		request.setAttribute("searchName", searchName);
+		request.setAttribute("searchValue", searchValue);
+		request.setAttribute("sortBy", sortBy);
+		
+		RequestDispatcher dis = request.getRequestDispatcher("adminReport.jsp");
+		dis.forward(request, response);
 	}
 
 	/**
