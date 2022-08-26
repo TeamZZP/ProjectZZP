@@ -337,9 +337,13 @@ a {
 						report_reason:report_reason,
 						userid:"<%= currUserid %>"
 					},
-					dataType:"html",
+					dataType:"text",
 					success: function (data) {
-						alert("신고가 완료되었습니다.")
+						if (data=="true") {
+							alert("신고가 완료되었습니다.")
+						} else {
+							alert("이미 신고한 글입니다.")
+						}
 						$("#reportModal").modal("toggle");
 					},
 					error: function () {

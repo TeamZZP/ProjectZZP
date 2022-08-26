@@ -8,12 +8,13 @@ public class ReportDTO {
 	private int comment_id;
 	private String report_reason;
 	private String report_status;
+	private String report_created;
 	public ReportDTO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	public ReportDTO(int report_id, String userid, String report_category, int chall_id, int comment_id,
-			String report_reason, String report_status) {
+			String report_reason, String report_status, String report_created) {
 		super();
 		this.report_id = report_id;
 		this.userid = userid;
@@ -22,6 +23,7 @@ public class ReportDTO {
 		this.comment_id = comment_id;
 		this.report_reason = report_reason;
 		this.report_status = report_status;
+		this.report_created = report_created;
 	}
 	public int getReport_id() {
 		return report_id;
@@ -65,11 +67,18 @@ public class ReportDTO {
 	public void setReport_status(String report_status) {
 		this.report_status = report_status;
 	}
+	public String getReport_created() {
+		return report_created;
+	}
+	public void setReport_created(String report_created) {
+		this.report_created = report_created;
+	}
 	@Override
 	public String toString() {
 		return "ReportDTO [report_id=" + report_id + ", userid=" + userid + ", report_category=" + report_category
 				+ ", chall_id=" + chall_id + ", comment_id=" + comment_id + ", report_reason=" + report_reason
-				+ ", report_status=" + report_status + "]";
+				+ ", report_status=" + report_status + ", report_created=" + report_created + "]";
 	}
+	
 	
 }

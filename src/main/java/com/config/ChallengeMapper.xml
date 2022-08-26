@@ -364,7 +364,8 @@
 		comment_id,
 		</if>
 		report_reason,
-		report_status)
+		report_status,
+		report_created)
 	values
 		(report_report_id_seq.NEXTVAL,
 		#{userid},
@@ -376,8 +377,52 @@
 		#{comment_id},
 		</if>
 		#{report_reason},
-		0)
+		0,
+		CURRENT_TIMESTAMP)
 </insert>
+
+<select id="checkReportExist" parameterType="hashmap" resultType="int">
+	select count(*) from report
+	where userid=#{userid} 
+	and
+	<if test="chall_id != null">
+		chall_id=#{chall_id}
+	</if>
+	<if test="comment_id != null">
+		comment_id=#{comment_id}
+	</if>
+</select>
+
+<select id="selectAllReport" parameterType="hashmap" resultType="com.dto.ReportDTO">
+	select * from report
+	<where>
+ 	  <if test='searchName=="userid"'> 
+ 	  	userid like '%${searchValue}%'
+	  </if>
+	  <if test='searchName=="report_reason"'> 
+ 	  	report_reason like '%${searchValue}%'
+	  </if>
+	  <if test='searchName=="chall_content"'> 
+ 	  	chall_content like '%${searchValue}%'
+	  </if>
+	</where> 
+	order by ${sortBy} desc
+</select>
+
+<select id="countTotalReport" parameterType="hashmap" resultType="int">
+	select count(*) from challenge
+ 	<where>
+	  <if test='searchName=="userid"'> 
+ 	  	userid like '%${searchValue}%'
+	  </if>
+	  <if test='searchName=="chall_title"'> 
+ 	  	chall_title like '%${searchValue}%'
+	  </if>
+	  <if test='searchName=="chall_content"'> 
+ 	  	chall_content like '%${searchValue}%'
+	  </if>
+	</where> 
+</select>
 
 
 </mapper>

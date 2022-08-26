@@ -215,7 +215,8 @@ create table report(
     chall_id NUMBER,
     comment_id NUMBER,
     report_reason NUMBER NOT NULL,
-    report_status NUMBER NOT NULL
+    report_status NUMBER NOT NULL,
+    report_created DATE  NOT NULL
 );
 
 -- 큐엔에이 답변

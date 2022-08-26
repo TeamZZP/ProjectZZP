@@ -37,8 +37,9 @@ if (member != null) {
 $(document).ready(function () {
 	
 	$(".category").click(function() {
-		let category = $(this).attr("data-category");
-		location.href="AdminCategoryServlet?category="+category;
+		location.href="AdminReportListServlet"
+		//let category = $(this).attr("data-category");
+		//location.href="AdminCategoryServlet?category="+category;
 	});
 	
 	//챌린지 작성
