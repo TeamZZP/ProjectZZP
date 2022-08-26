@@ -89,7 +89,7 @@
 	    <!-- carousel_1 -->
 	      <div class="col retrieve" onclick="javascrip:location.href='ProductRetrieveServlet?p_id=<%=p_id%>';">
 	        <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" 
-	        	style="background-image: url('images/p_image/<%=p_image%>.png'); background-size:cover;">
+	        	style="background-image: url('images/p_image/<%=p_image%>'); background-size:cover;">
 	          <div class="d-flex flex-column h-100 p-5 pb-3 text-white fw-bold text-shadow-1">
 	            <h2 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold text-shadow-1"><%= p_content %></h2>
 	            <ul class="d-flex list-unstyled mt-auto">

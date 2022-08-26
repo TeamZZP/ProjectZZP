@@ -34,6 +34,19 @@ public class AdminCategoryServlet extends HttpServlet {
 		MemberDTO dto=(MemberDTO) session.getAttribute("login");
 		
 		if (category.equals("member")) {
+			//페이징
+			String curPage=request.getParameter("curPage");//현재 페이지
+			if (curPage == null) {
+				curPage="1";//1페이지 시작
+			}
+			//검색 기준, 검색어
+			String searchName=request.getParameter("searchName");
+			String searchValue=request.getParameter("searchValue");
+			String sortBy=request.getParameter("sortBy");
+			System.out.println(searchName);
+			System.out.println(searchValue);
+			System.out.println(sortBy);
+			
 			MemberService m_service=new MemberService();
 			AddressService a_service=new AddressService();
 //			HashMap<String, List<AddressDTO>> addressMap=new HashMap<String, List<AddressDTO>>();
@@ -42,7 +55,6 @@ public class AdminCategoryServlet extends HttpServlet {
 			List<MemberDTO> memberList=m_service.selectAllMember();
 			
 			String userid=null;
-			
 			//전체 회원 주소 목록--회원별 주소
 			for (int i = 0; i < memberList.size(); i++) {
 				userid=memberList.get(i).getUserid();
@@ -54,8 +66,13 @@ public class AdminCategoryServlet extends HttpServlet {
 //				System.out.println(id+"의 주소지 : "+addMap.get(id));
 //			}
 //			System.out.println(addMap);
+			
+			HashMap<String, String> map=new HashMap<String, String>();
+			map.put("searchName", searchName);
+			
 			request.setAttribute("memberList", memberList);
 			request.setAttribute("addMap", addMap);//userid의 address 리스트
+			
 			RequestDispatcher dis = request.getRequestDispatcher("adminMember.jsp");
 			dis.forward(request, response);
 			
