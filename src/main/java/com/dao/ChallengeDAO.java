@@ -172,8 +172,8 @@ public class ChallengeDAO {
 		return map;
 	}
 
-	public List<String> selectMemberStampByUserid(SqlSession session, String userid) {
-		List<String> list = session.selectList("ChallengeMapper.selectMemberStampByUserid", userid);
+	public List<StampDTO> selectMemberStampByUserid(SqlSession session, String userid) {
+		List<StampDTO> list = session.selectList("ChallengeMapper.selectMemberStampByUserid", userid);
 		return list;
 	}
 
@@ -186,6 +186,7 @@ public class ChallengeDAO {
 		int n = session.update("ChallengeMapper.updateStamp", map);
 		return n;
 	}
+
 
 	
 

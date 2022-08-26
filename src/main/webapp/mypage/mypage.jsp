@@ -19,13 +19,14 @@
 		
 	});//end ready
 </script>
-<div class="container">
+<div class="container col-md-8">
+<div class="justify-content-center">
 <div class="row">
-<div class="col-lg-4">
+<div class="col-md-5">
 <%-- <img alt="" src="mypage/user.png" width="30px" height="30px">
 	<input type="text" name="username" value="<%= username %>" readonly="readonly"/><br><!-- 수정 불가 or 퍼센트로 데이터 가져옴 -->
 <br> --%>
-	<div class="card" style="width: 15rem;">
+	<div class="card" style="width: 16rem;">
 	  <div style = "padding: 30px 30px 30px 30px;">
 	  	<img src="mypage/user.png" class="card-img-top" alt="..."><!-- 이미지 작게 조절 -->
 	  </div>
@@ -35,7 +36,7 @@
 	  </div>
 	</div>
 </div>
-<div class="col-lg-8">
+<div class="col-md-7">
 	<div style="padding-bottom: 70px;">
 		<a href="#" class="btn btn-outline-success">입금, 결제</a>
 		<a href="#" class="btn btn-outline-success">배송중</a>

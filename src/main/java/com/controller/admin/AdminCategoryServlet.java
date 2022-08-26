@@ -36,7 +36,8 @@ public class AdminCategoryServlet extends HttpServlet {
 		if (category.equals("member")) {
 			MemberService m_service=new MemberService();
 			AddressService a_service=new AddressService();
-			HashMap<String, List<AddressDTO>> addressMap=new HashMap<String, List<AddressDTO>>();
+//			HashMap<String, List<AddressDTO>> addressMap=new HashMap<String, List<AddressDTO>>();
+			HashMap<String, AddressDTO> addMap=new HashMap<String, AddressDTO>();
 			//전체 회원 목록
 			List<MemberDTO> memberList=m_service.selectAllMember();
 			
@@ -45,13 +46,16 @@ public class AdminCategoryServlet extends HttpServlet {
 			//전체 회원 주소 목록--회원별 주소
 			for (int i = 0; i < memberList.size(); i++) {
 				userid=memberList.get(i).getUserid();
-				List<AddressDTO> addressList=a_service.selectAllAddress(userid);
-				addressMap.put(userid, addressList);//userid로 해당 주소 리스트 출력
+				AddressDTO address=a_service.selectDefaultAddress(userid);
+				addMap.put(userid, address);//userid의 기본 주소 출력
 			}
-			System.out.println("memberList"+memberList);
-			System.out.println("addressMap"+addressMap);
+//			for (MemberDTO memberDTO : memberList) {
+//				String id=memberDTO.getUserid();
+//				System.out.println(id+"의 주소지 : "+addMap.get(id));
+//			}
+//			System.out.println(addMap);
 			request.setAttribute("memberList", memberList);
-			request.setAttribute("addressMap", addressMap);//userid의 address 리스트
+			request.setAttribute("addMap", addMap);//userid의 address 리스트
 			RequestDispatcher dis = request.getRequestDispatcher("adminMember.jsp");
 			dis.forward(request, response);
 			

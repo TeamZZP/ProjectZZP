@@ -39,6 +39,14 @@
 			<tr>
 				<td colspan="2">
 					<div class="input-group shadow-none">
+						 <span class="input-group-text">글번호</span>
+						 <input type="text" class="form-control shadow-none"  value="<%=nDTO.getNOTICE_ID()%>" readonly="readonly">
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<div class="input-group shadow-none">
 						 <span class="input-group-text">제목</span>
 						 <input type="text" class="form-control shadow-none"  value="<%=nDTO.getNOTICE_TITTLE()%>" readonly="readonly">
 					</div>
@@ -66,11 +74,13 @@
 			<tr>
 				<td colspan="2">
 					<div class="input-group col-mb-3">
-					  <button class="btn btn-outline-success col-md-2" onclick="NoticeList()">목록</button>
-					  <button class="btn btn-outline-success col-md-2" type="button" onclick="location.href=href='NoticeOneSelectServlet?NOTICE_ID=<%=nextDTO.getNOTICE_ID()%>'">다음글</button>
-					  <a class="col-md-8" href="NoticeOneSelectServlet?NOTICE_ID=<%=nextDTO.getNOTICE_ID()%>" style="text-decoration: none;">
-						 <input style="text-align: center;" type="url" class="form-control shadow-none" value="<%= nextDTO.getNOTICE_TITTLE() %>" readonly="readonly">
-					  </a>
+						 <button class="btn btn-outline-success col-md-2" onclick="NoticeList()">목록</button>
+						  <% if(nextDTO != null) { %>
+							  <button class="btn btn-outline-success col-md-2" type="button" onclick="location.href=href='NoticeOneSelectServlet?NOTICE_ID=<%=nextDTO.getNOTICE_ID()%>'">다음글</button>
+							  <a class="col-md-8" href="NoticeOneSelectServlet?NOTICE_ID=<%=nextDTO.getNOTICE_ID()%>" style="text-decoration: none;">
+								 <input style="text-align: center;" type="url" class="form-control shadow-none" value="<%= nextDTO.getNOTICE_TITTLE() %>" readonly="readonly">
+							  </a>
+						  <% } %>
 					</div>
 				</td>
 			</tr>

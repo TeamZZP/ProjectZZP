@@ -57,17 +57,20 @@ $(document).ready(function () {
 	<tr>
 		<th>아이디</th>
 		<th>이름</th>
-		<th>이메일</th>
 		<th>전화번호</th>
-		<th>주소</th>
+		<th>기본 주소</th>
+		<th>가입일자</th>
 		<th>관리</th>
 	</tr>
 <%
-	List<MemberDTO> memberList=(List<MemberDTO>) session.getAttribute("memberList");
-	HashMap<String, List<AddressDTO>> addressMap=(HashMap<String, List<AddressDTO>>) session.getAttribute("addressMap");
+	List<MemberDTO> memberList=(List<MemberDTO>) request.getAttribute("memberList");
+	HashMap<String, AddressDTO> addMap=(HashMap<String, AddressDTO>) request.getAttribute("addMap");
+
+//	System.out.println("jsp에서 회원 리스트 : "+memberList);
+//	System.out.println("jsp에서 회원 기본 주소 map : "+addMap);
 	
 	for (MemberDTO member : memberList) {
-		//System.out.println(member);
+//		System.out.println(member);
 		String userid=member.getUserid();
 		String passwd=member.getPasswd();
 		String username=member.getUsername();
@@ -77,20 +80,18 @@ $(document).ready(function () {
 		String created_at=member.getCreated_at();
 		
 //		for (int i = 0; i < addressMap.size(); i++) {
-			List<AddressDTO> addressList=addressMap.get(userid);
 //			AddressDTO address=addressList.get(i);//addressMap의 size만큼 for문 반복 중//userid로 뽑아온 addressList의 size와 for문의 size가 다름//indexOutOfBounds 발생
-			
-			for (int j = 0; j < addressList.size(); j++) {
-				AddressDTO address=addressList.get(j);
-				String address_name=address.getAddress_name();
-				String receiver_name=address.getReceiver_name();
-				String receiver_phone=address.getReceiver_phone();
-				String post_num=address.getPost_num();
-				String addr1=address.getAddr1();
-				String addr2=address.getAddr2();
-				int default_chk=address.getDefault_chk();
-				
-				//System.out.println("출력 확인 : "+address);
+		AddressDTO address=addMap.get(userid);
+//		System.out.println(userid+"의 기본 주소지 : "+address);
+		
+		String address_name=address.getAddress_name();
+		String receiver_name=address.getReceiver_name();
+		String receiver_phone=address.getReceiver_phone();
+		String post_num=address.getPost_num();
+		String addr1=address.getAddr1();
+		String addr2=address.getAddr2();
+		int default_chk=address.getDefault_chk();
+		
 /* 	if (addr2 == null) {
 		addr2="상세 주소를 입력하세요.";
 	} */
@@ -98,15 +99,14 @@ $(document).ready(function () {
 %>
 <script type="text/javascript">
 	$(document).ready(function() {
-		
-		$("#deleteMember").on("shown.bs.modal", function (e) {//#deleteMember modal 창을 열 때 선택한 버튼의 data-id를 가져옴(deleteID로 설정했더니 안돼서 다시 id로 바꿈)--modal창의 삭제 버튼에 저장
+<%-- 		$("#deleteMember").on("shown.bs.modal", function (e) {//#deleteMember modal 창을 열 때 선택한 버튼의 data-id를 가져옴(deleteID로 설정했더니 안돼서 다시 id로 바꿈)--modal창의 삭제 버튼에 저장
 		    var id = $(e.relatedTarget).data("id");
 		    $("#delete<%= userid %>").val(id);
-		});//end fn
+		});//end fn --%>
 		$("#delete<%= userid %>").on("click", function() {//모달의 삭제 버튼 클릭시 회원 삭제
-			var userid=$(this).val();
+			var userid=$("#checkDelete<%= userid %>").data("id");
 			console.log(userid);
-			//*****ajax
+ 			//*****ajax
 			$.ajax({
 				type : "post",
 				url : "AccountDeleteServlet",//페이지 이동 없이 해당 url에서 작업 완료 후 데이터만 가져옴
@@ -115,11 +115,14 @@ $(document).ready(function () {
 					userid : userid
 				},
 				success : function(data, status, xhr) {
-					alert(data);
-					//location.href="memberList.jsp";//수정 후 페이지 이동--새로운 목록으로 출력하도록 수정
+					alert("해당 회원이 삭제되었습니다.");
+					$("#deleteMember<%= userid %>").modal("hide");
+					$(".modal-backdrop").hide();//모달창 닫고 백드롭 hide
+					console.log("success");
+					$("#checkDelete<%= userid %>").parents("tr").remove();
 				},
 				error: function(xhr, status, error) {
-					console.log(error);
+					alert(error);
 				}						
 			});//end ajax
 		});//end fn
@@ -128,9 +131,9 @@ $(document).ready(function () {
 			var id = $(this).attr("data-xxx");
 		});//end fn --%>
 		$("#change<%= userid %>").on("click", function() {//회원 정보 출력 페이지로 이동
-			var userid=$(this).attr("data-edit");
+			var userid=$(this).attr("data-id");
 			console.log(userid);
-			
+			location.href="AccountManagementServlet?admin=true";
 		});//end fn
 	});//end ready
 </script>
@@ -138,12 +141,18 @@ $(document).ready(function () {
 	<tr id="list">
 		<td><%= userid %></td>
 		<td><%= username %></td>
-		<td><%= email1+"@"+email2 %></td>
-		<td><%= phone %></td>
-		<td><%= post_num + "&nbsp;&nbsp;&nbsp;" + addr1+ "&nbsp;" + addr2 %></td>
+		<td><%= phone.substring(0, 3)+"-"
+				+ phone.substring(3, 7)+"-"
+				+ phone.substring(7, 11) %>
+		</td>
+		<td>
+			<span style="font-size: 14px;"><%= post_num %></span>
+			<%= "&nbsp;&nbsp;&nbsp;" + addr1+ "&nbsp;" + addr2 %>
+		</td>
+		<td><%= created_at %></td>
 		<td>
 			<!-- Modal -->
-			<div class="modal fade" id="deleteMember" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+			<div class="modal fade" id="deleteMember<%= userid %>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 			  <div class="modal-dialog">
 			    <div class="modal-content">
 			      <div class="modal-header">
@@ -162,13 +171,12 @@ $(document).ready(function () {
 			  </div>
 			</div>
 			<!-- Button trigger modal -->
-			<button type="button" id="change<%= userid %>" data-edit="<%= userid %>" class="btn btn-outline-success btn-sm">수정</button>
-			<button type="button" id="checkDelete<%= userid %>" data-id="<%= userid %>" class="btn btn-outline-dark btn-sm" data-bs-toggle="modal" data-bs-target="#deleteMember">
+			<button type="button" id="change<%= userid %>" data-id="<%= userid %>" class="btn btn-outline-success btn-sm">수정</button>
+			<button type="button" id="checkDelete<%= userid %>" data-id="<%= userid %>" class="btn btn-outline-dark btn-sm" data-bs-toggle="modal" data-bs-target="#deleteMember<%= userid %>">
 				삭제
 			</button><!-- open modal -->
 		</td>
 <%
-			}
 //		}
 	}
 %>

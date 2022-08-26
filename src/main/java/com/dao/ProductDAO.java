@@ -97,4 +97,8 @@ public class ProductDAO {
 		return session.selectOne("ProductMapper.totalCount", map);
 
 	}
+
+	public int insertProduct(SqlSession session, ProductDTO dto) {
+		return session.insert("insertProduct", dto);
+	}
 }
