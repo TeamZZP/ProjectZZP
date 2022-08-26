@@ -61,11 +61,8 @@ public class ProductRetrieveServlet extends HttpServlet {
 		
 		session.setAttribute("ReviewList", ReviewList);
 		 
-		
-	RequestDispatcher dis = request.getRequestDispatcher("productRetrieve.jsp");
-	dis.forward(request, response);
-		 
-       
+	 RequestDispatcher dis = request.getRequestDispatcher("productRetrieve.jsp");
+	 dis.forward(request, response);
       
    }
 

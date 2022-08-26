@@ -1,3 +1,4 @@
+<%@page import="com.dto.ReviewProfileDTO"%>
 <%@page import="com.dto.ReviewDTO"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -32,24 +33,25 @@
 	</script>
 	
 <%
-	List<ReviewDTO> ReviewList = (List<ReviewDTO>)session.getAttribute("ReviewList");
+	List<ReviewProfileDTO> ReviewList = (List<ReviewProfileDTO>)session.getAttribute("ReviewList");
 	if(ReviewList != null){
 %>	
 	<table class="review" style="text-align: center;">
 	<caption style="caption-side: top; text-align: center;">구매후기</caption>
 		<tr>
-			<td colspan="6" style="background-color: #8FBC8F;"></td>
+			<td colspan="7" style="background-color: #8FBC8F;"></td>
 		</tr>
 		<tr>
 			<td></td>
 			<td>번호</td>
+			<td>프로필</td>
 			<td>작성자</td>
 			<td>작성일</td>
 			<td>제목</td>
 			<td>만족도</td>
 		</tr>
 		<%
-			for(ReviewDTO rDTO : ReviewList){
+			for(ReviewProfileDTO rDTO : ReviewList){
 				String user = rDTO.getUSERID();
 				String created = rDTO.getREVIEW_CREATED().substring(0, 10);
 		%>
@@ -57,20 +59,17 @@
 			<td><img alt="리뷰" src="images/review/review.png" width="50px" height="50px"></td>
 			<td><%=rDTO.getREVIEW_ID()%></td>
 			<td>
-				<%
-					String use = "";
-					for (int j = 0; j < user.substring(5).length(); j++) {
-						use += "*";
-				%> <%
-					}
-				%> <%=user.substring(0, 5).concat(use)%>
+				<a href="ProfileMainServlet?userid=<%=rDTO.getUSERID()%>"> 
+				<img alt="프로필" src="images/<%=rDTO.getPROFILE_IMG() %>" width="50px" height="50px">
+				</a> 
 			</td>
+			<td><%=rDTO.getUSERID()%></td>
 			<td><%=created%></td>
 			<td><%=rDTO.getREVIEW_TITLE()%></td>
 			<td><%=rDTO.getREVIEW_RATE() %></td>
 		</tr>
 		<tr id="hiden<%=rDTO.getREVIEW_ID()%>" style="display: none;">
-			<td colspan="6" style="text-align: right; padding-right: 50px;"><%=rDTO.getREVIEW_CONTENT() %></td>
+			<td colspan="7" style="text-align: right; padding-right: 50px;"><%=rDTO.getREVIEW_CONTENT() %></td>
 		</tr>
 		<%	} %>
 	</table>
