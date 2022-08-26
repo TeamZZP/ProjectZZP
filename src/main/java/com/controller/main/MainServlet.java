@@ -31,7 +31,6 @@ public class MainServlet extends HttpServlet {
 		//베스트 상품
 		ProductService  product_service  = new ProductService(); 
 		List<CategoryProductDTO> product_list = product_service.bestProductList();
-		System.out.println(product_list);
 		request.setAttribute("bestprod", product_list);
 		
 		//챌린지 리스트

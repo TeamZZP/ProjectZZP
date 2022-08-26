@@ -249,7 +249,7 @@
 </select>
 
 <select id="selectNewChallenge" resultType="ChallengeDTO">
-	select * from challenge where rownum <![CDATA[<=]]> 8 order by chall_id desc
+	select * from challenge order by chall_id desc
 </select>
 
 

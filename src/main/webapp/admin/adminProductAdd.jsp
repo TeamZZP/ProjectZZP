@@ -27,7 +27,7 @@
 		});
 		//취소버튼 클릭 시 목록으로
 		$("#backList").click(function() {
-			$("form").attr("action","AdminCategoryServlet?category=product");
+			$("#categoryForm").attr("action","AdminCategoryServlet?category=product");
 		});
 		//정상가 수정 시 판매가 자동계산
 		$("#p_cost_price").keyup(function() {
@@ -107,7 +107,7 @@
 </script>
 
 <div class="container">
-	<form action="" method="post">
+	<form id="categoryForm" action="" method="post">
 		<div class="row">
 			<div class="btn-group" role="group" aria-label="Basic example">
 				<button type="button" class="btn btn-outline-success category" data-category="member" id="memberManagement">회원관리</button>
@@ -227,7 +227,7 @@
 					<!-- 상품등록or취소 버튼 -->
 					<div class="form-group" style="margin-top: 20px; text-align: center;">
 						<input type="submit" value="등록" id="addProd" class="btn btn-success">
-						<button id="backList" class="btn btn-success">취소</button>
+						<button id="backList" class="btn btn-success" onclick="location.href='AdminCategoryServlet?category=product';">취소</button>
 					</div>
 				    </form>
 				</div>
@@ -237,9 +237,9 @@
 </div>
 
 
-<button id="modalBtn" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop" style="display: none;">modal</button>
+<button id="modalBtn" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop2" style="display: none;">modal</button>
 <!-- Modal -->
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">

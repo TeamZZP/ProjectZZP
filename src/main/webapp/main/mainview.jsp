@@ -38,7 +38,7 @@
     %>
     <!-- 이달의챌린지 -->
     <div class="carousel-item" data-bs-interval="3000" onclick="javascrip:location.href='ChallengeDetailServlet?chall_id=<%= challThisMonth.getChall_id() %>';">
-      <img src="images/main/banner_monthchall.png" class="d-block w-100" alt="이달의챌린진">
+      <img src="images/main/banner_monthchall.png" class="d-block w-100" alt="이달의챌린지">
     </div>
   </div>
   <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
@@ -173,6 +173,7 @@
   </button>
 </div>
 </div>
+
 
 <!-- middle banner -->
 <img src="images/main/banner_middle.png" class="d-block w-100" alt="중간배너">
