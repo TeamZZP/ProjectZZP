@@ -289,6 +289,13 @@ CREATE SEQUENCE stamp_stamp_id_seq
   NOCYCLE
   NOCACHE;
   
+-- 신고 시퀀스
+create SEQUENCE report_report_id_seq
+  START WITH 1
+  INCREMENT BY 1
+  NOCYCLE
+  NOCACHE;
+  
 -- 공지 글 번호 시퀀스
 CREATE SEQUENCE notice_notice_id_seq
   START WITH 1

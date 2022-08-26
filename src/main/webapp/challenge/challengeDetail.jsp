@@ -346,9 +346,12 @@ a {
 				});
 			}
 		});
-		//신고 모달 체크 해제
+		//신고 모달 저장 데이터 삭제
 		$('#reportModal').on('hidden.bs.modal', function(e) {
   			$("#reportModal .modal-body").find('input:radio').prop('checked', false);
+  			$("#report_category").val("")
+			$("#report_chall_id").val("")
+			$("#report_comment_id").val("")
 		})
 		
 	});
