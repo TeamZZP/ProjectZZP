@@ -19,14 +19,17 @@
 <script>
 	$(document).ready(function () {
 		$("#questionList").click(function () {
-			history.back();
-			event.preventDefault();
+			$("#detailForm").attr("action", "QuestionListServlet");
 		});//
 		$("#questionUpdate").click(function () {
 			$("#detailForm").attr("action", "questionUpdate.jsp");
 		});//
 		$("#questionDelete").click(function () {
 			$("#detailForm").attr("action", "QuestionDeleteServlet?Q_ID=<%=qDTO.getQ_ID()%>");
+		});//
+		$("#before").click(function () {
+			history.back();
+			event.preventDefault();
 		});//
 		if ($("#pId").val() == "null") {
 			$("#pId").val("");
@@ -124,11 +127,23 @@
 				<% 
 					MemberDTO mDTO = (MemberDTO)session.getAttribute("login");
 					String userid = (String)session.getAttribute("userid");
+					String before = (String)session.getAttribute("before");
 					if(mDTO.getUserid().equals(userid)){
+						System.out.print("///////////" + before + "///////////");
+						if(before.equals("myQuestion")){
 				%>
-				<td>
-				 	<button id="questionList" class="btn btn-outline-success" >목록</button> 
-				</td>
+					<td>
+						 <button class="btn btn-outline-success" id="before">이전</button> 
+					</td>
+					<%
+						} else {
+					%>
+					<td>
+					 	<button id="questionList" class="btn btn-outline-success" >목록</button> 
+					</td>
+					<%
+						}
+					%>
 				<td style="text-align: right;">
 					<button id="questionUpdate" class="btn btn-outline-success" >수정</button> 
 				 	<button id="questionDelete" class="btn btn-outline-success" >삭제</button>
@@ -150,7 +165,7 @@
 			</tr>
 			<tr>
 				<td>
-				 	<button type="button" id="questionList" class="btn btn-outline-success" >목록</button> 
+				 	<button id="questionList" class="btn btn-outline-success" >목록</button> 
 				</td>
 				<td style="text-align: right;">
 					<button id="questionDelete" class="btn btn-outline-success" >게시글 삭제</button>
