@@ -187,6 +187,11 @@ public class ChallengeDAO {
 		return n;
 	}
 
+	public int insertReport(SqlSession session, HashMap<String, String> map) {
+		int n = session.insert("ChallengeMapper.insertReport", map);
+		return n;
+	}
+
 
 	
 

@@ -351,4 +351,33 @@
 
 
 
+
+<insert id="insertReport" parameterType="hashmap">
+	insert into report
+		(report_id,
+		userid,
+		report_category,
+		<if test="chall_id != null">
+		chall_id,
+		</if>
+		<if test="comment_id != null">
+		comment_id,
+		</if>
+		report_reason,
+		report_status)
+	values
+		(report_report_id_seq.NEXTVAL,
+		#{userid},
+		#{category},
+		<if test="chall_id != null">
+		#{chall_id},
+		</if>
+		<if test="comment_id != null">
+		#{comment_id},
+		</if>
+		#{report_reason},
+		0)
+</insert>
+
+
 </mapper>
