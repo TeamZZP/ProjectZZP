@@ -59,7 +59,7 @@
 			<td><%=rDTO.getREVIEW_ID()%></td>
 			<td>
 				<a href="ProfileMainServlet?userid=<%=rDTO.getUSERID()%>"> 
-				<img alt="프로필" src="images/<%=rDTO.getPROFILE_IMG() %>" width="50px" height="50px"></a>
+				<img alt="프로필" src="images/<%=rDTO.getPROFILE_IMG() %>" width="40px" height="40px"></a>
 				&nbsp;&nbsp; <%=rDTO.getUSERID()%>
 			</td>
 			<td><%=created%></td>
