@@ -71,7 +71,7 @@ HashMap<String, Integer> map = (HashMap<String, Integer>)request.getAttribute("m
          <ul class="orderProduct_list" style="line-height: 50px; font-size: 20px;">
             <li>
                <a href="ProductRetrieveServlet?p_id=<%=p_id%>"> <img
-                  src="images/p_image/<%=p_image%>.png" width="150"
+                  src="images/p_image/<%=p_image%>" width="150"
                   style="border: 10px;" height="150"></a>
               
                <div class="cart_list_info">

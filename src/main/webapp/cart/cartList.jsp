@@ -230,7 +230,7 @@ a:hover {
                class="check" value="<%=cart_id%>"
                style="width: 30px; position: relative; bottom: 100px; margin-right: 10px;">
                <a href="ProductRetrieveServlet?p_id=<%=p_id%>"> <img
-                  src="images/p_image/<%=p_image%>.png" width="200"
+                  src="images/p_image/<%=p_image%>" width="200"
                   style="border: 10px;" height="200"></a>
                <div class="cart_list_info">
                

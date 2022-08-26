@@ -151,7 +151,7 @@ System.out.println("productRetrieve.jsp에서 파싱한 ilist==" + ilist);
 					<tr>
 						<td colspan="4">
 						<img id="firstImage" name="p_image"
-							src="images/p_image/<%=image_route%>.png"
+							src="images/p_image/<%=image_route%>"
 							class="img-thumbnail" style="height: 500; width: 600; " ></td>
 							<input type="hidden" name="p_image" id="p_image" value="<%=ilist.get(0).getImage_route() %>">
 					</tr>
@@ -165,7 +165,7 @@ System.out.println("productRetrieve.jsp에서 파싱한 ilist==" + ilist);
 									if (image_rnk != 1) {
 									%> 
 									<img
-									src="images/p_image/<%=image_route%>.png"
+									src="images/p_image/<%=image_route%>"
 									class="img-thumbnail" style="height: 100; width: 100;  "
 									onmouseover="imageChange(this)"> <%
  }
