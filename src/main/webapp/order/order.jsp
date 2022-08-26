@@ -4,6 +4,36 @@
     <%@ page import="com.dto.CategoryProductDTO" %>
     <%@ page import="java.util.List" %>
     <%@ page import="java.util.HashMap" %>
+    <style>
+.heading {
+   flex: 1;
+   text-align: center;
+}
+
+a {
+   color: black;
+   text-decoration: none;
+}
+
+a:hover {
+   color: black;
+}
+
+
+ li {
+   display: flex;
+   position: relative;
+   padding: 24px;
+   border-bottom: 5px solid green;
+}
+
+hr{
+border-bottom: 2.5px solid green;
+
+}
+
+
+</style>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,14 +41,18 @@
 <title>Insert title here</title>
 </head>
 <body>
-<img src="images/ordering.jpg" width="850" height="350">
+<img src="images/ordering.png" width="900" height="200">
+
+<h3>주문하실 상품</h3>
+<hr>
+
+
+
 <%
 MemberDTO mdto = (MemberDTO)session.getAttribute("login");
 List<CategoryProductDTO> list = (List<CategoryProductDTO>)request.getAttribute("list");
 HashMap<String, Integer> map = (HashMap<String, Integer>)request.getAttribute("map");
-%>
 
-<% 
    for (int i = 0; i < list.size(); i++) {
       String userid = list.get(i).getUserid();
       int p_id = list.get(i).getP_id();
@@ -39,24 +73,17 @@ HashMap<String, Integer> map = (HashMap<String, Integer>)request.getAttribute("m
                <a href="ProductRetrieveServlet?p_id=<%=p_id%>"> <img
                   src="images/p_image/<%=p_image%>.png" width="150"
                   style="border: 10px;" height="150"></a>
+              
                <div class="cart_list_info">
-               
                 <input type="hidden" id="p_id" name="p_id" value="<%=p_id%>">
                
-                  <br> 상품명: 
+                  상품명: 
                   <a href="ProductRetrieveServlet?p_id=<%=p_id%>"> 
                   <span name="p_name" style="font-weight: bold; margin: 8px; display: line"><%=p_name%></span>
                   </a>
                   <br>
-                  
-                  <div class="amount">
-                     <label>수량:</label> <input type="text" id="orderAmount"
-                        class="p_amount" name="p_amount"
-                        style="text-align: right; line-height: 0px;" maxlength="3"
-                        size="2" value="<%=p_amount%>"><br>
-                  </div>
-                  상품가격 :<span id="item_price"
-                     style="margin-bottom: 15px;"><%=p_selling_price%></span><br>
+                  <label>수량:</label><%=p_amount%><br>
+                  상품가격 :<span id="item_price" style="margin-bottom: 15px;"><%=p_selling_price%></span>
                </div> 
             </li>
          </ul>
