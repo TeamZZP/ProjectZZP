@@ -36,11 +36,12 @@ public class AccountManagementServlet extends HttpServlet {
 		if (dto != null) {
 			String userid=dto.getUserid();
 			System.out.println(userid);
-//			if (request.getParameter("admin").equals("true")) {
-//				System.out.println("관리자가 회원 계정 접근");
-//				RequestDispatcher dis=request.getRequestDispatcher("admin/adminMemberDetail.jsp");
-//				dis.forward(request, response);
-//			} else {
+			if (request.getParameter("admin")=="true") {
+				System.out.println("관리자가 회원 계정 접근");
+				RequestDispatcher dis=request.getRequestDispatcher("admin/adminMemberDetail.jsp");
+				dis.forward(request, response);
+			} else {
+				System.out.println("회원이 계정 접근");
 				MemberService m_service=new MemberService();
 				MemberDTO member=m_service.selectMember(userid);
 				
@@ -54,7 +55,7 @@ public class AccountManagementServlet extends HttpServlet {
 //				session.setAttribute("addressList", addressList);
 				session.setAttribute("address", address);
 				response.sendRedirect("accountForm.jsp");//로그인 된 계정 정보 session 저장-마이페이지 오픈
-//			}
+			}
 		} else {
 			//alert로 로그인 후 이용하세요 출력
 			String mesg="로그인이 필요합니다.";

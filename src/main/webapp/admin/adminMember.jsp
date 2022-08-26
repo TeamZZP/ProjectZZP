@@ -5,18 +5,10 @@
 <%@page import="com.dto.MemberDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>
-$(document).ready(function () {
-	
-	$(".category").click(function() {
-		let category = $(this).attr("data-category");
-		location.href="AdminCategoryServlet?category="+category;
-	});
-	
-});//end ready
-</script>
-
+<%
+	String searchName=(String) request.getAttribute("searchName");
+%>
+<!-- 관리자 페이지 헤더 -->
 <div class="container">
 	<form action="" method="post">
 		<div class="row">
@@ -28,21 +20,21 @@ $(document).ready(function () {
 		</div>
 	</form>
 </div>
-
+<!-- 관리자 페이지 회원 관리 -->
+<form action="AdminCategoryServlet" id="memberForm">
 <div class="container" style="margin-top: 5px; margin-bottom: 5px;">
 	<div class="row row-cols-auto">
-		  <div class="col"></div>
-			  <div class="col">
-				  <select class="form-select" data-style="btn-info" id="inputGroupSelect01" 
-				  		  style="width: 145px; margin-right: -20px; margin-left: -24px;">
-					    <option selected disabled hidden>카테고리</option>
-					    <option value="userid">아이디</option>
-					    <option value="username">이름</option>
-					    <option value="email">이메일</option>
-					    <option value="phone">전화번호</option>
-					    <option value="address">주소</option>
-				  </select>
-			  </div>
+		  <div class="col">
+		  <!-- 검색 searchName 같으면 selected -->
+			  <select class="form-select" name="searchName" data-style="btn-info" id="inputGroupSelect01" style="width: 145px; margin-right: -20px; margin-left: -24px;">
+				    <option selected disabled hidden>카테고리</option>
+				    <option value="userid" <% if("userid".equals(searchName)){ %>selected<% } %>>아이디</option>
+				    <option value="username"<% if("username".equals(searchName)){ %>selected<% } %>>이름</option>
+				    <option value="email"<% if("email".equals(searchName)){ %>selected<% } %>>이메일</option>
+				    <option value="phone"<% if("phone".equals(searchName)){ %>selected<% } %>>전화번호</option>
+				    <option value="address"<% if("address".equals(searchName)){ %>selected<% } %>>주소</option>
+			  </select>
+		  </div>
 		  <div class="col"><input type="text" class="form-control" style="width: 150px; margin-right: -20px;"></div>
 	      <div class="col"><button type="button" class="btn btn-success">검색</button></div>
 	</div>
@@ -176,13 +168,24 @@ $(document).ready(function () {
 				삭제
 			</button><!-- open modal -->
 		</td>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+$(document).ready(function () {
+	
+	$(".category").click(function() {
+		let category = $(this).attr("data-category");
+		location.href="AdminCategoryServlet?category="+category;
+	});
+	
+});//end ready
+</script>
 <%
 //		}
 	}
 %>
-
 	</tr>
 </form>
 </table>
 </div>
 </div>
+</form>
