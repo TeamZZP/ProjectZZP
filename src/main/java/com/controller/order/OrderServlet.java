@@ -2,6 +2,7 @@ package com.controller.order;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -28,6 +29,8 @@ public class OrderServlet extends HttpServlet {
 		MemberDTO dto = (MemberDTO)session.getAttribute("login");
 		String mesg = "";
 		int p_amount = 0;
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		
 		//int p_id= 0;
 
 		
@@ -39,6 +42,7 @@ public class OrderServlet extends HttpServlet {
 					 System.out.println("String"+ pIdListString[i]);
 					 pIdList.add(Integer.parseInt(pIdListString[i]));
 					 System.out.println("Int"+pIdList.get(i));
+					
 					 
 			    }
 					OrderService service = new OrderService();
@@ -52,14 +56,16 @@ public class OrderServlet extends HttpServlet {
 				}
 			
 			if(Integer.parseInt((String)request.getParameter("p_amount"))==0||(String)request.getParameter("p_amount")==null) {
-				p_amount = 1;
+				 map.put("p_id",Integer.parseInt((String)request.getParameter("p_id")));
+				 map.put("p_amount",1);
 			}else {
-				p_amount = Integer.parseInt((String)request.getParameter("p_amount"));
-			}
+				 map.put("p_id",Integer.parseInt((String)request.getParameter("p_id")));
+				 map.put("p_amount",Integer.parseInt((String)request.getParameter("p_amount")));
+				 }
 			
 			
 			request.setAttribute("list", list);
-			request.setAttribute("p_amount", p_amount);
+			request.setAttribute("map", map);
 			
 			RequestDispatcher dis = request.getRequestDispatcher("order.jsp");
 			dis.forward(request, response);
