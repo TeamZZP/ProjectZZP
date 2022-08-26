@@ -55,12 +55,12 @@
 				String created = rDTO.getREVIEW_CREATED().substring(0, 10);
 		%>
 		<tr class="show" id="show<%=rDTO.getREVIEW_ID()%>" data-review="<%=rDTO.getREVIEW_ID()%>">
-			<td><img alt="리뷰" src="images/review/review.png" width="50px" height="50px"></td>
+			<td><img alt="리뷰" src="images/review/review.png" width="45px" height="45px"></td>
 			<td><%=rDTO.getREVIEW_ID()%></td>
 			<td>
-				<a href="ProfileMainServlet?userid=<%=rDTO.getUSERID()%>"> 
-				<img alt="프로필" src="images/<%=rDTO.getPROFILE_IMG() %>" width="40px" height="40px"></a>
-				&nbsp;&nbsp; <%=rDTO.getUSERID()%>
+				<a style="text-decoration: none; color: black;" href="ProfileMainServlet?userid=<%=rDTO.getUSERID()%>"> 
+				<img alt="프로필" src="images/<%=rDTO.getPROFILE_IMG() %>" width="40px" height="40px">
+				&nbsp;&nbsp; <%=rDTO.getUSERID()%> </a>
 			</td>
 			<td><%=created%></td>
 			<td><%=rDTO.getREVIEW_TITLE()%></td>
