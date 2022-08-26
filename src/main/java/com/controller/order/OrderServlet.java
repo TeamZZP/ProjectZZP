@@ -56,16 +56,22 @@ public class OrderServlet extends HttpServlet {
 				}
 			
 			if(Integer.parseInt((String)request.getParameter("p_amount"))==0||(String)request.getParameter("p_amount")==null) {
+				
 				 map.put("p_id",Integer.parseInt((String)request.getParameter("p_id")));
 				 map.put("p_amount",1);
+				 
 			}else {
+				
 				 map.put("p_id",Integer.parseInt((String)request.getParameter("p_id")));
 				 map.put("p_amount",Integer.parseInt((String)request.getParameter("p_amount")));
+				
 				 }
 			
 			
 			request.setAttribute("list", list);
 			request.setAttribute("map", map);
+			
+		
 			
 			RequestDispatcher dis = request.getRequestDispatcher("order.jsp");
 			dis.forward(request, response);

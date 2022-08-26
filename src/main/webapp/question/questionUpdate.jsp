@@ -135,7 +135,25 @@
 				<td> <button id="QuestionList" class="btn btn-outline-success" >목록</button> </td>
 				<td style="text-align: right;">
 					<button type="submit" id="questionUpdate" class="btn btn-outline-success" data-userid="<%=userid %>" data-operate="<%=operate %>" >등록</button>
-					<button type="reset" class="btn btn-outline-success" >취소</button>
+					<button type="reset" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#aa">취소</button>
+					
+					<div class="modal fade" id="aa" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+					  <div class="modal-dialog">
+					    <div class="modal-content">
+					      <div class="modal-header">
+					        <h5 class="modal-title" id="staticBackdropLabel">취소</h5>
+					        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					      </div>
+					      <div class="modal-body" style="text-align: left;">
+					        Q&A게시판으로 이동하시겠습니까?
+					      </div>
+					      <div class="modal-footer">
+					        <button type="button" class="btn btn-success" onclick="location.href='QuestionListServlet'">확인</button>
+					        <button type="button" class="btn btn-success" data-bs-dismiss="modal">취소</button>
+					      </div>
+					    </div>
+					  </div>
+					</div>
 				</td>
 			</tr>
 		</table>
