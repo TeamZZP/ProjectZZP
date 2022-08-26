@@ -19,7 +19,7 @@
 	margin-right: auto;
 }
 
-input[type="text"] {
+.container input[type="text"] {
 	width: 80%;
 	padding: 10px 20px;
 	margin: 5px 0;
@@ -40,21 +40,23 @@ a {
     background-color: #fff;
     border: none;
 }
-.form-color {
+.container .form-color {
     background-color: #fafafa
 }
-.form-control {
+.container .form-control {
     height: 48px;
     border-radius: 15px;
-    text-indent: 10px;
     display: inline;
 }
-.form-control:focus {
+.container .form-control:focus {
     color: #495057;
     background-color: #fff;
     border-color: #35b69f;
     outline: 0;
     box-shadow: none;
+}
+.comment_content {
+	text-indent: 10px;
 }
 .user-feed {
     font-size: 14px;
@@ -403,6 +405,9 @@ function displayedAt(createdAt) {
 				<% if (userid.equals(currUserid)) { %>
 				<a href="ChallengeUIServlet?chall_id=<%= chall_id %>&userid=<%= currUserid %>" class="btn btn-outline-success">수정</a> 
 				<a href="ChallengeDeleteServlet?chall_id=<%= chall_id %>&userid=<%= currUserid %>" id="deleteChallenge" class="btn btn-outline-success">삭제</a>
+				<!-- 관리자인 경우 -->
+				<% } else if ("admin1".equals(currUserid)) { %>
+				<a href="ChallengeDeleteServlet?chall_id=<%= chall_id %>&userid=<%= currUserid %>" id="deleteChallenge" class="btn btn-outline-success">삭제</a>
 				<!-- 그외의 경우 -->
 				<% } else { %>
 				<a class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#reportModal" 
@@ -518,6 +523,9 @@ function displayedAt(createdAt) {
                             	<a class="reply ml-3" data-cid="<%= comment_id %>" data-user="<%= commentUserid %>">답글 달기</a> &nbsp;&nbsp;&nbsp;
                             	<!-- 해당 댓글의 작성자인 경우 -->
                             	<% if (commentUserid!=null && commentUserid.equals(currUserid)) { %>
+								<a class="ml-3 commentDelBtn" data-cid="<%= comment_id %>">삭제</a> 
+								<!-- 관리자인 경우 -->
+								<% } else if ("admin1".equals(currUserid)) { %>
 								<a class="ml-3 commentDelBtn" data-cid="<%= comment_id %>">삭제</a> 
 								<!-- 그외의 경우 --> 
 								<% } else { %> 
