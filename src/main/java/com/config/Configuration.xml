@@ -22,6 +22,7 @@
 	<typeAlias type="com.dto.AnswerDTO" alias="AnswerDTO"/> 
 	<typeAlias type="com.dto.QuestionProductDTO" alias="QuestionProductDTO"/> 
 	<typeAlias type="com.dto.product_likedDTO" alias="product_likedDTO"/> 
+	<typeAlias type="com.dto.ReviewProfileDTO" alias="ReviewProfileDTO"/> 
 
 </typeAliases>
   <environments default="development">
