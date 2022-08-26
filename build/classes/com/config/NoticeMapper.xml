@@ -15,10 +15,10 @@
 		select NOTICE_ID, NOTICE_TITTLE, NOTICE_CONTENT, to_char(NOTICE_CREATED, 'YYYY/MM/DD') NOTICE_CREATED, 
 			USERID, NOTICE_CATEGORY, NOTICE_HITS from notice where NOTICE_ID = #{noticeID}
 	</select>
-	<select id="nextNotice" parameterType="int" resultType="NoticeDTO">
-		select NOTICE_ID, NOTICE_TITTLE, NOTICE_CONTENT, to_char(NOTICE_CREATED, 'YYYY/MM/DD') NOTICE_CREATED, 
-			USERID, NOTICE_CATEGORY, NOTICE_HITS from notice 
-			where notice_id = (select max(notice_id) from notice #{NOTICE_ID} &lt; NOTICE_ID )
+	<select id="nextNoticeID" parameterType="map" resultType="int">
+		select max(notice_id) from notice where notice_id
+    		in (select max(notice_id) from question where #{noticeID} &gt; notice_id and NOTICE_CATEGORY = #{category}) 
+    		order by notice_id desc
 	</select>
 	<update id="noticeUpdate" parameterType="NoticeDTO">
 		update notice set NOTICE_TITTLE = #{NOTICE_TITTLE}, NOTICE_CONTENT = #{NOTICE_CONTENT}
