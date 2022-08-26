@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ReviewMapper">
-	<select id="review" resultType="ReviewDTO" parameterType="string">
-		select * from review where P_ID = #{p_ID}
+	<select id="review" resultType="ReviewProfileDTO" parameterType="string">
+		select * from profile join review USING(userid) where P_ID = #{p_ID}
 	</select>
 </mapper>

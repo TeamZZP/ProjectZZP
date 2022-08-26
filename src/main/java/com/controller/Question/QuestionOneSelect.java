@@ -32,6 +32,8 @@ public class QuestionOneSelect extends HttpServlet {
 		
 		String Q_ID = request.getParameter("Q_ID");
 		String userid = request.getParameter("USERID");
+		String before = request.getParameter("before");
+		System.out.println("before -- " + before);
 		System.out.println("detailservlet " + Q_ID + userid);
 
 		MemberDTO mDTO = (MemberDTO) session.getAttribute("login");
@@ -50,6 +52,8 @@ public class QuestionOneSelect extends HttpServlet {
 				session.setAttribute("aDTO", aDTO);
 				session.setAttribute("questionOneSelect", dto);
 				session.setAttribute("userid", userid);
+				session.setAttribute("before", before);
+				
 				response.sendRedirect("questionDetail.jsp");
 			} else {
 				session.setAttribute("mesg", "다른 사용자의 글입니다");

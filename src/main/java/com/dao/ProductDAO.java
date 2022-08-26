@@ -61,8 +61,8 @@ public class ProductDAO {
 		return list;
 	}
 
-	public int updateProduct(SqlSession session, ProductDTO dto) {
-		return session.update("updateProduct", dto);
+	public int updateProduct(SqlSession session, HashMap<String, String> map) {
+		return session.update("updateProduct", map);
 	}
 
 	public int deleteProduct(SqlSession session, int p_id) {
@@ -98,7 +98,7 @@ public class ProductDAO {
 
 	}
 
-	public int insertProduct(SqlSession session, ProductDTO dto) {
-		return session.insert("insertProduct", dto);
+	public int insertProduct(SqlSession session, HashMap<String, String> map) {
+		return session.insert("insertProduct", map);
 	}
 }

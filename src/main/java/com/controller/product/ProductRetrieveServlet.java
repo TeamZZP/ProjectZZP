@@ -16,6 +16,7 @@ import com.dto.ImagesDTO;
 import com.dto.ProductDTO;
 import com.dto.QuestionDTO;
 import com.dto.ReviewDTO;
+import com.dto.ReviewProfileDTO;
 import com.service.AnswerService;
 import com.service.ProductService;
 import com.service.QuestionService;
@@ -48,8 +49,8 @@ public class ProductRetrieveServlet extends HttpServlet {
 		System.out.println("대답  " + aDTO); //Answer
 		
 		ReviewService Rservice = new ReviewService();  
-		List<ReviewDTO> ReviewList = Rservice.review(P_ID);
-		System.out.println("리뷰 " + ReviewList);
+		List<ReviewProfileDTO> ReviewList = Rservice.review(P_ID);
+		System.out.println("리뷰 " + ReviewList); //리뷰
 		
 		HttpSession session = request.getSession();
 		request.setAttribute("ProductRetrieveDTO", pdto);
@@ -60,11 +61,8 @@ public class ProductRetrieveServlet extends HttpServlet {
 		
 		session.setAttribute("ReviewList", ReviewList);
 		 
-		
-	RequestDispatcher dis = request.getRequestDispatcher("productRetrieve.jsp");
-	dis.forward(request, response);
-		 
-       
+	 RequestDispatcher dis = request.getRequestDispatcher("productRetrieve.jsp");
+	 dis.forward(request, response);
       
    }
 

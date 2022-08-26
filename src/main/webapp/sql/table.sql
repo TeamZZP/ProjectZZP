@@ -207,6 +207,17 @@ create table member_stamp(
 	stamp_created DATE   DEFAULT sysdate    NOT NULL
 );
 
+-- 신고
+create table report( 
+    report_id NUMBER PRIMARY KEY,
+    userid VARCHAR2(30) REFERENCES member(userid) ON DELETE CASCADE,
+    report_category NUMBER NOT NULL,
+    chall_id NUMBER,
+    comment_id NUMBER,
+    report_reason NUMBER NOT NULL,
+    report_status NUMBER NOT NULL
+);
+
 -- 큐엔에이 답변
 CREATE TABLE answer (
 	answer_id	number CONSTRAINT pk_answer_answer_id PRIMARY key,

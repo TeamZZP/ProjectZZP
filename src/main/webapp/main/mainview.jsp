@@ -38,7 +38,7 @@
     %>
     <!-- 이달의챌린지 -->
     <div class="carousel-item" data-bs-interval="3000" onclick="javascrip:location.href='ChallengeDetailServlet?chall_id=<%= challThisMonth.getChall_id() %>';">
-      <img src="images/main/banner_monthchall.png" class="d-block w-100" alt="이달의챌린진">
+      <img src="images/main/banner_monthchall.png" class="d-block w-100" alt="이달의챌린지">
     </div>
   </div>
   <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
@@ -89,7 +89,7 @@
 	    <!-- carousel_1 -->
 	      <div class="col retrieve" onclick="javascrip:location.href='ProductRetrieveServlet?p_id=<%=p_id%>';">
 	        <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" 
-	        	style="background-image: url('images/p_image/<%=p_image%>.png'); background-size:cover;">
+	        	style="background-image: url('images/p_image/<%=p_image%>'); background-size:cover;">
 	          <div class="d-flex flex-column h-100 p-5 pb-3 text-white fw-bold text-shadow-1">
 	            <h2 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold text-shadow-1"><%= p_content %></h2>
 	            <ul class="d-flex list-unstyled mt-auto">
@@ -173,6 +173,7 @@
   </button>
 </div>
 </div>
+
 
 <!-- middle banner -->
 <img src="images/main/banner_middle.png" class="d-block w-100" alt="중간배너">

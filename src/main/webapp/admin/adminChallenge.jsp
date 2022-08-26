@@ -25,6 +25,13 @@ if (member != null) {
 	session.removeAttribute("mesg");
 %>
 
+<style>
+	.searchName, .searchValue {
+		width: 140px; 
+		display: inline;
+	}
+</style>
+
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 $(document).ready(function () {
@@ -51,31 +58,32 @@ $(document).ready(function () {
 
 
 <div class="container">
-	<form action="" method="post">
-		<div class="row">
-			<div class="btn-group" role="group" aria-label="Basic example">
-				<button type="button" class="btn btn-outline-success category" data-category="member" id="memberManagement">회원관리</button>
-				<button type="button" class="btn btn-outline-success category" data-category="product" id="productManagement">상품관리</button>
-				<button type="button" class="btn btn-outline-success category" data-category="challenge" id="challengeManagement">챌린지관리</button>
-			</div>
+	<div class="row">
+		<div class="btn-group" role="group" aria-label="Basic example">
+			<button type="button" class="btn btn-outline-success category" data-category="member" id="memberManagement">회원관리</button>
+			<button type="button" class="btn btn-outline-success category" data-category="product" id="productManagement">상품관리</button>
+			<button type="button" class="btn btn-outline-success category" data-category="challenge" id="challengeManagement">챌린지관리</button>
 		</div>
-	</form>
+	</div>
 </div>
 
-<div class="container" style="margin-top: 5px; margin-bottom: 5px;">
+
+<form action="AdminCategoryServlet">
+<input type="hidden" name="category" value="challenge">
+
+<div class="container mt-2 mb-2">
 	<div class="row">
 		  <div class="col">
-				  <select class="form-select" data-style="btn-info" id="inputGroupSelect01" 
-				  		  style="width: 145px; margin-right: -20px; margin-left: -24px; display: inline;">
+				  <select class="form-select searchName" data-style="btn-info" id="inputGroupSelect01">
 					    <option selected disabled hidden>카테고리</option>
-					    <option value="c_id">카테고리</option>
-					    <option value="p_id">상품번호</option>
-					    <option value="p_name">상품명</option>
-					    <option value="p_selling_price">판매가</option>
-					    <option value="p_created">등록일</option>
+					    <option value="chall_id">게시글 번호</option>
+					    <option value="chall_title">제목</option>
+					    <option value="chall_content">내용</option>
+					    <option value="stamp_name">도장 이름</option>
+					    <option value="chall_created">등록일</option>
 				  </select>
-		  	<input type="text" class="form-control" style="width: 150px; margin-right: -20px; display: inline;">
-	      	<button type="button" class="btn btn-success">검색</button>
+		  	<input type="text" class="form-control searchValue">
+	      	<button type="button" class="btn btn-success" style="margin-top: -5px;">검색</button>
 	      </div>
 	      <div class="col">
 	      	<div class="float-end">
@@ -162,3 +170,5 @@ $(document).ready(function () {
 </table>
 </div>
 </div>
+
+</form>

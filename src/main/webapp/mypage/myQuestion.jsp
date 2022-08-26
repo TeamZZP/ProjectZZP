@@ -5,6 +5,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
+<% String before = "myQuestion"; %>
+
 <div id="addContainer">
 <div class="container">
 <div class="row">
@@ -54,7 +56,7 @@
 		<td> <%= qDTO.getQ_CATEGORY() %> </td>
 		<td>
 			<a style="text-decoration: none; color: black;" 
-    			href="QuestionOneSelect?Q_ID=<%= qDTO.getQ_ID() %>&USERID=<%=qDTO.getUSERID()%>">
+    			href="QuestionOneSelect?Q_ID=<%= qDTO.getQ_ID() %>&USERID=<%=qDTO.getUSERID()%>&before=<%=before%>">
 		  	<%= qDTO.getQ_TITLE() %> 
 		 	</a>
 		</td>
