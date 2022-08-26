@@ -30,16 +30,16 @@ public class ProductUpdateServlet extends HttpServlet {
 		ProductDTO dto = new ProductDTO(p_id, p_name, p_content, c_id, p_cost_price, p_selling_price, p_discount, null, p_stock, null);
 		
 		ProductService service = new ProductService();
-		int num = service.updateProduct(dto);
-		System.out.println(num);
-		HttpSession session = request.getSession();
-		if (num == 1) {
-			response.sendRedirect("AdminCategoryServlet?category=product");
-			session.setAttribute("mesg", "상품이 수정되었습니다.");
-		} else {
-			response.sendRedirect("AdminCategoryServlet?category=product");
-			session.setAttribute("mesg", "상품 수정에 실패하였습니다. 다시 확인해주세요.");
-		}
+//		int num = service.updateProduct(dto);
+//		System.out.println(num);
+//		HttpSession session = request.getSession();
+//		if (num == 1) {
+//			response.sendRedirect("AdminCategoryServlet?category=product");
+//			session.setAttribute("mesg", "상품이 수정되었습니다.");
+//		} else {
+//			response.sendRedirect("AdminCategoryServlet?category=product");
+//			session.setAttribute("mesg", "상품 수정에 실패하였습니다. 다시 확인해주세요.");
+//		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

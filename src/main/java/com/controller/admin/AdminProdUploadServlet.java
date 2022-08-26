@@ -1,4 +1,4 @@
-package com.controller.Question;
+package com.controller.admin;
 
 import java.io.File;
 import java.io.IOException;
@@ -21,15 +21,17 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import com.dto.MemberDTO;
-import com.service.ChallengeService;
+import com.service.ImagesService;
+import com.service.ProductService;
 import com.service.QuestionService;
 
-@WebServlet("/QuestionUploadServlet")
-public class QuestionUploadServlet extends HttpServlet {
+@WebServlet("/AdminProdUploadServlet")
+public class AdminProdUploadServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
+
+	@SuppressWarnings("unused")
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
+request.setCharacterEncoding("utf-8");
 		
 		//회원전용처리
 		HttpSession session = request.getSession();
@@ -97,7 +99,7 @@ public class QuestionUploadServlet extends HttpServlet {
 								
 								try {
 									item.write(new File(dir, saveName));
-									map.put("question_img", saveName);
+									map.put("image_route", saveName);
 									
 								}catch (Exception e) {
 									e.printStackTrace();
@@ -121,9 +123,9 @@ public class QuestionUploadServlet extends HttpServlet {
 								
 								try {
 									if (oldFile.length() != 0 || oldFile != null ) {
-										map.put("question_img", oldFile);
+										map.put("image_route", oldFile);
 									} else {
-										map.put("question_img", fileName);
+										map.put("image_route", fileName);
 									} 
 										
 									
@@ -140,32 +142,35 @@ public class QuestionUploadServlet extends HttpServlet {
 					e.printStackTrace();
 				}
 				
-				QuestionService service = new QuestionService();
+				ProductService service = new ProductService();
+				ImagesService service2 = new ImagesService();
 				String operate = request.getParameter("operate");
 				System.out.println("상태 "+ operate);
 				
 				if ("upload".equals(operate)) {
-					int n = service.questionInsert(map);
-					System.out.println(n+"개의 레코드 추가");
+					int n = service.insertProduct(map);
+					System.out.println("product : "+n+"개의 레코드 추가");
+					int n2 = service2.insertImage(map);
+					System.out.println("product : "+n2+"개의 레코드 추가");
 					
 					if (n != 0) {
-						session.setAttribute("mesg", "게시물이 등록되었습니다.");
-						response.sendRedirect("QuestionListServlet");
+						session.setAttribute("mesg", "상품이 등록되었습니다.");
+						response.sendRedirect("AdminCategoryServlet?category=product");
 					} else {
-						session.setAttribute("mesg", "게시물이 등록 실패하였습니다. 다시 시도하세요.");
-						response.sendRedirect("QuestionListServlet");
+						session.setAttribute("mesg", "상품이 등록되지 않았습니다. 다시 시도하세요.");
+						response.sendRedirect("AdminCategoryServlet?category=product");
 					}
 					
 				} else if ("update".equals(operate)) {
-					int n = service.questionUpdate(map);
+					int n = service.updateProduct(map);
 					System.out.println(n+"개의 레코드 업데이트");
 					
 					if (n != 0) {
-						session.setAttribute("mesg", "게시물이 업데이트 되었습니다.");
-						response.sendRedirect("QuestionListServlet");
+						session.setAttribute("mesg", "상품이 수정되었습니다.");
+						response.sendRedirect("AdminCategoryServlet?category=product");
 					} else {
-						session.setAttribute("mesg", "게시물 업데이트를 실패하였습니다. 다시 시도하세요.");
-						response.sendRedirect("QuestionListServlet");
+						session.setAttribute("mesg", "상품 수정에 실패하였습니다. 다시 시도하세요.");
+						response.sendRedirect("AdminCategoryServlet?category=product");
 					}
 				}
 			}
@@ -173,17 +178,13 @@ public class QuestionUploadServlet extends HttpServlet {
 			session.setAttribute("mesg", "로그인이 필요합니다.");
 			response.sendRedirect("LoginUIServlet");
 		}
-	
 	}
 	
 	private String getTodayString() {
 		return new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss").format(System.currentTimeMillis());
 	}
 
-	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
-
 }

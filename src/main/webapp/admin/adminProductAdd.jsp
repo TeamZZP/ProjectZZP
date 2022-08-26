@@ -1,5 +1,6 @@
 <%@page import="org.apache.ibatis.reflection.SystemMetaObject"%>
 <%@page import="com.dto.ProductDTO"%>
+<%@page import="com.dto.MemberDTO"%>
 <%@page import="org.apache.ibatis.reflection.SystemMetaObject"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <style>
@@ -16,8 +17,27 @@
 		background-color: white;
 	}
 </style>
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<%
+    	MemberDTO mDTO = (MemberDTO)session.getAttribute("login");
+    	String userid = "";
+    	if(mDTO == null){
+    %>
+    <script>
+    $(function() {
+    	alert("로그인이 필요합니다");
+    	$("#addForm").attr("action", "LoginUIServlet");
+    	$("#addForm").submit();
+	});//
+    </script>
+    <%
+    	} else {
+    		userid = mDTO.getUserid();
+    	}
+    %>
+    <%
+  	 	String operate = "upload";
+    %>
 <script type="text/javascript">
 	$(function() {
 		//관리자페이지 카테고리
@@ -59,6 +79,7 @@
 			let p_stock = $("#p_stock").val();
 			let image_route = $("#image_route").val();
 			let p_content = $("#p_content").val();
+			let reg = /(.*?)\.(jpg|jpeg|png|gif)$/;
 			
 			if (c_id=='none') {
 				$("#modalBtn").click();
@@ -100,7 +121,16 @@
 				/* alert("상품 설명을 등록하세요"); */
 				$("#p_content").focus();
 				event.preventDefault();
+			} else if (!image_route.match(reg)) {
+				alert("jpg, jpeg, png, gif 파일만 업로드 가능합니다.");
+				event.preventDefault();
 			}
+			
+			var operate = $("#addProd").attr("data-operate");
+			var userid = $("#addProd").attr("data-userid");
+			var qFile = $("#image_route").val();
+			console.log(qFile);
+			$("#addForm").attr("action", "AdminProdUploadServlet?USERID="+userid+"&operate="+operate);
 		});
  
 	})//end ready
@@ -125,7 +155,10 @@
 			<div class="card-header" style="text-align: left; font-weight: bold; font-size: large;">상품등록</div>
 				<div class="card-body">
 					<!-- add form 시작 -->
-					<form action="ProductAddServlet" id="addForm" class="form-horizontal" method="post">
+					<form action="" id="addForm" class="form-horizontal" enctype="multipart/form-data" method="post">
+					<input type="hidden" name="USERID" value="<%=userid%>">
+					<input type="hidden" name="oldFile" value="">
+					<!-- <form action="ProductAddServlet" id="addForm" class="form-horizontal" method="post"> -->
 					<!-- 상품카테고리 -->
 					<div class="form-group">
 						<label for="c_id" class="cols-sm-2 control-label" style="font-weight: bold;">상품 카테고리</label>
@@ -200,10 +233,21 @@
 					    <div class="cols-sm-10">
 					        <div class="input-group">
 					            <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
-								<input class="form-control" type="file" name="image_route" id="image_route">
+								<!-- <input class="form-control" type="file" name="image_route" id="image_route">
+					        	
+					        	<img src="images/uploadarea.png" class="thumb uploadBtn" id="uploadarea" width="600" height="600" />
+								<img src="images/reload.png" class="uploadBtn" id="updateBtn" width="50" title="사진 다시 올리기" style="display: none;">
+								<img src="images/trash.png" class="deleteBtn" id="deleteBtn" width="50" title="사진 삭제하기" style="display: none;"> -->
+								<input class="form-control" type="file" accept="image/*" name="image_route" id="image_route" multiple>
+					        
+					        
+					        
 					        </div>
 					    </div>
 					</div>
+					
+					
+					
 					<!-- 상품설명 -->
 					<div class="form-group">
 					    <label for="p_content" class="cols-sm-2 control-label" style="font-weight: bold;">상품설명</label>
@@ -226,7 +270,7 @@
 					</div>
 					<!-- 상품등록or취소 버튼 -->
 					<div class="form-group" style="margin-top: 20px; text-align: center;">
-						<input type="submit" value="등록" id="addProd" class="btn btn-success">
+						<input type="submit" value="등록" id="addProd" data-userid="<%=userid %>" data-operate="<%=operate %>" class="btn btn-success">
 						<button id="backList" class="btn btn-success" onclick="location.href='AdminCategoryServlet?category=product';">취소</button>
 					</div>
 				    </form>
@@ -237,6 +281,7 @@
 </div>
 
 
+<!-- Modal -->
 <button id="modalBtn" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop2" style="display: none;">modal</button>
 <!-- Modal -->
 <div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -246,7 +291,8 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body text-center">
-        모든 항목을 입력하였는지 확인해 주세요
+        <b>모든 항목을 입력하였는지 확인해 주세요.</b><br>
+        ( 파일 확장자 확인 : jpg, jpeg, png, gif 파일만 업로드 가능 )
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-success" data-bs-dismiss="modal" onclick="">확인</button>

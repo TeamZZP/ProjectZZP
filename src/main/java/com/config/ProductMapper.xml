@@ -116,7 +116,7 @@ select count(*) from product_liked where p_id= #{p_id} and userid = #{userid}
 	order by p_id 
 </select> 
 
-<update id="updateProduct" parameterType="ProductDTO">
+<update id="updateProduct" parameterType="hashmap">
 update product set p_name=#{p_name}, p_content=#{p_content}, c_id=#{c_id},
 p_cost_price=#{p_cost_price}, p_selling_price=#{p_selling_price},
 p_discount=#{p_discount}, p_stock=#{p_stock}, userid='admin1'
@@ -126,9 +126,6 @@ where p_id=#{p_id}
 <delete id="deleteProduct">
 delete from product where p_id=#{p_id}
 </delete>
-
-
-
 
 <select id="selectProd" resultType="CategoryProductDTO" parameterType="hashmap">
 select (select C_NAME from category where c_id = p.c_id) as c_name, p.P_ID,(select IMAGE_ROUTE from images where p_id = p.p_id 
@@ -159,7 +156,7 @@ and IMAGE_RNK = 1) as p_image,p.P_NAME,p.P_CONTENT,p.C_ID,p.P_COST_PRICE
 	select count(*) from product
 </select>
 
-<insert id="insertProduct" parameterType="ProductDTO">
+<insert id="insertProduct" parameterType="hashmap">
 	insert into product (p_id,p_name,p_content,c_id,p_cost_price,p_selling_price,p_discount,p_created,p_stock,userid)
 	values (product_p_id_seq.NEXTVAL,#{p_name},#{p_content},#{c_id},#{p_cost_price},#{p_selling_price},#{p_discount},sysdate,#{p_stock},#{userid})
 </insert>
