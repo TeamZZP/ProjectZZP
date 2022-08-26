@@ -122,11 +122,11 @@ public class ProductService {
 		return list;
 	}
 
-	public int updateProduct(ProductDTO dto) {
+	public int updateProduct(HashMap<String, String> map) {
 		int num = 0;
 		SqlSession session = MySqlSessionFactory.getSqlSession();
 		try {
-			num = dao.updateProduct(session, dto);
+			num = dao.updateProduct(session, map);
         	session.commit();
         }finally {
         	session.close();
@@ -180,11 +180,11 @@ public class ProductService {
 
 	}
 
-	public int insertProduct(ProductDTO dto) {
+	public int insertProduct(HashMap<String, String> map) {
 		int num = 0;
 		SqlSession session = MySqlSessionFactory.getSqlSession();
 		try {
-			num = dao.insertProduct(session, dto);
+			num = dao.insertProduct(session, map);
 			session.commit();
 		} finally {
 			session.close();

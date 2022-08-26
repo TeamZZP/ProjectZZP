@@ -30,6 +30,7 @@
     		<td>답변상태</td>
     	</tr>
     <%
+    		String before = "QuesrionList";
 	 		PageDTO pDTO = (PageDTO)session.getAttribute("pDTO");
 	 		List<QuestionProductDTO> list = pDTO.getList();
 	 		for(int i = 0; i < list.size(); i++){
@@ -47,7 +48,7 @@
     		<%} %>
     		<td> <%= qDTO.getQ_CATEGORY() %> </td>
     		<td> <a style="text-decoration: none; color: black;" 
-    			href="QuestionOneSelect?Q_ID=<%= qDTO.getQ_ID() %>&USERID=<%=qDTO.getUSERID()%>"> <%= qDTO.getQ_TITLE() %> </a> </td>
+    			href="QuestionOneSelect?Q_ID=<%= qDTO.getQ_ID() %>&USERID=<%=qDTO.getUSERID()%>&before=<%=before %>"> <%= qDTO.getQ_TITLE() %> </a> </td>
     		<td> <%= crete %> </td>
     		<td> 
     			<% 

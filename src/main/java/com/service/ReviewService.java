@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import com.config.MySqlSessionFactory;
 import com.dao.ReviewDAO;
 import com.dto.ReviewDTO;
+import com.dto.ReviewProfileDTO;
 
 public class ReviewService {
 	
@@ -19,8 +20,8 @@ public class ReviewService {
 
 
 
-	public List<ReviewDTO> review(String p_ID) {
-		List<ReviewDTO> list =null;
+	public List<ReviewProfileDTO> review(String p_ID) {
+		List<ReviewProfileDTO> list =null;
 		SqlSession session = MySqlSessionFactory.getSqlSession();
 		try {
 			list = dao.review(session, p_ID);
