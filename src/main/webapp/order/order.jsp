@@ -29,7 +29,6 @@ a:hover {
 
 hr{
 border-bottom: 2.5px solid green;
-
 }
 
 
@@ -41,9 +40,12 @@ border-bottom: 2.5px solid green;
 <title>Insert title here</title>
 </head>
 <body>
-<img src="images/ordering.png" width="900" height="200">
 
-<h3>주문하실 상품</h3>
+<div style="text-align : center;">
+<img src="images/ordering.png" width="900" height="200" >
+</div>
+
+<h3 style="font-weight: bold; color: green;">&emsp;주문하실 상품</h3>
 <hr id="orderHr">
 
 
@@ -79,11 +81,12 @@ HashMap<String, Integer> map = (HashMap<String, Integer>)request.getAttribute("m
                
                   상품명: 
                   <a href="ProductRetrieveServlet?p_id=<%=p_id%>"> 
-                  <span name="p_name" style="font-weight: bold; margin: 8px; display: line"><%=p_name%></span>
+                  <span name="p_name" style=" margin: 8px; display: line"><%=p_name%></span>
                   </a>
                   <br>
-                  <label>수량:</label><%=p_amount%><br>
-                  상품가격 :<span id="item_price" style="margin-bottom: 15px;"><%=p_selling_price%></span>
+                  수량: <span style=" margin: 8px; display: line"><%=p_amount%></span>
+                  <br>
+                  상품가격:<span id="item_price" style="margin-bottom: 15px; margin: 8px; display: line "><%=p_selling_price * p_amount %></span>
                </div> 
             </li>
          </ul>
