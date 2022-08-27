@@ -1,5 +1,6 @@
 package com.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -53,6 +54,20 @@ public class CategoryService {
 		return list;
 	}
 
-	
 
-}
+
+	public int likeCheck(HashMap<String, String> map) {
+		int n = 0;
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+        try {
+        	n = dao.likeCheck(session, map);
+        	session.commit();
+        }finally {
+        	session.close();
+        }
+		
+		return n;
+	}
+	}
+
+

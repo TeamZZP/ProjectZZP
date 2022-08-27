@@ -26,6 +26,7 @@ public class StoreServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		MemberDTO mdto = (MemberDTO)session.getAttribute("login");
+		
 		CategoryService category_service = new CategoryService(); // 카테고리 목록 조회
 		ProductService  product_service  = new ProductService(); //베스트 상품 조회
 		
@@ -37,8 +38,11 @@ public class StoreServlet extends HttpServlet {
 			
 			HashMap<String,String> map = new HashMap<String, String>();
 			ProductService service = new ProductService();
+			
 			//int [] likecheck = null ; 
+			
 			List<Integer> likecheck = new ArrayList<Integer>();
+			
 			for (int i = 0; i < product_list.size(); i++) {
 
 				map.put("p_id",  Integer.toString(product_list.get(i).getP_id()));
@@ -49,7 +53,9 @@ public class StoreServlet extends HttpServlet {
 			
 
 			System.out.println("찜 갯수 확인"+likecheck);
+			
 			request.setAttribute("likecheck", likecheck);
+			
 		}
 		
 		

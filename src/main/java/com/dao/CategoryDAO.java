@@ -1,5 +1,6 @@
 package com.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -23,6 +24,11 @@ public class CategoryDAO {
 	public List<CategoryDTO> allCategory(SqlSession session) {
 		List<CategoryDTO> list = session.selectList("allCategory");
 		return list;
+	}
+
+	public int likeCheck(SqlSession session, HashMap<String, String> map) {
+		return session.selectOne("likeCheck",map);
+		 
 	}
 
 }

@@ -18,7 +18,7 @@
 	pageEncoding="UTF-8"%>
 
 
-<div class="likeContainer">
+<div class="Container">
 	<%
 	int count = (int) request.getAttribute("cartCount");
 	%>
@@ -29,7 +29,7 @@
 				<input type="checkbox" name="allCheck" id="allCheck"> 장바구니(<%=count%>)
 			</button>
 			<button type="button" class="btn btn-outline-success" id="like">
-			<input type="checkbox" name="allCheck" id="allCheck">찜한상품()</button>
+			찜한상품()</button>
 		</div>
 	</div>
 	<%
@@ -68,31 +68,16 @@
 		<div class="cart_content">
 
 			<ul class="cart_list" style="line-height: 50px; font-size: 20px;">
-				  <li>  <!--<input type="checkbox" name="check" id="check"
-					class="check" value=""
-					style="width: 30px; position: relative; bottom: 100px; margin-right: 10px;">-->
+				  <li>  
 					<a href="ProductRetrieveServlet?p_id=<%=p_id%>"> <img
 						src="images/p_image/<%=p_image%>.png" width="200"
 						style="border: 10px;" height="200"></a>
-					<div class="cart_list_info">
 						 상품명: <a
 							href="ProductRetrieveServlet?p_id=<%=p_id%>"> <span
 							name="p_name"
 							style="font-weight: bold; margin: 8px; display: line"><%=p_name%></span></a>
 						<br>
-						<%--<div class="amount">
-							<label>수량:</label>  <input type="text" id="cartAmount<%=cart_id%>"
-								class="p_amount" name="p_amount"
-								style="text-align: right; line-height: 0px;" maxlength="3"
-								size="2" value="<%=p_amount%>"> <input type="button"
-								value="수정" id="updBtn" class="updBtn" style="line-height: 28px;"
-								data-xxx="<%=cart_id%>" data-price="<%=p_selling_price%>"
-								data-id="<%=%>" data-sum_money="<%=sum_money%>" /> <br> 
-						</div>
-						상품가격 :<span id="item_price<%=%>"
-							style="margin-bottom: 15px;"><%=%></span><br>
-					</div> <span class="cart_item_del"> <img src="images/delete.png"
-						width="20" height="20" class="delBtn" data-xxx="<%=%>"></span>--%>
+					
 				</li>
 			</ul>
 		</div>

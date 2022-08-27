@@ -42,8 +42,8 @@
     <div class="row" align="center">
 				<%
 				 List<CategoryProductDTO> product_list = (List<CategoryProductDTO>)request.getAttribute("product_list"); 
-				
-				 int likecheck = (int)request.getAttribute("likecheck"); 
+				   MemberDTO mdto = (MemberDTO)session.getAttribute("login");
+
 				 for ( int i = 0 ; i < product_list.size() ; i++ ) {
 					    int p_id = product_list.get(i).getP_id();
 					    String p_name =product_list.get(i).getP_name();
@@ -57,6 +57,13 @@
 						String userid =product_list.get(i).getUserid();
 						String p_image = product_list.get(i).getP_image();
 						int p_liked = product_list.get(i).getP_liked();
+						int likecheck =0;
+						if(mdto != null){
+							List<Integer> likecheckList = (List<Integer>)request.getAttribute("likecheck");
+							likecheck = likecheckList.get(i);
+						}else{
+							likecheck = 0;
+						}
 					%>
 	<div class="col-lg-3 col-md-4 col-sm-6">
 			<div class="hover-zoomin">
@@ -74,7 +81,7 @@
 			<!-- 찜기능  -->
 			<div class="p-2 text-center">
 				<a id="productChoice" href="javascript:productChoice(<%=p_id%>)">
-					 <div id="liked_area">
+					 
 					<% if(likecheck==1){ %>
 					 <img src="images/liked.png" width="30" height="30" class="liked"> 
 				 	<%=p_liked %>
@@ -83,7 +90,7 @@
 				
 				  <%=p_liked %>
 					<% } %> 
-					</div> 
+					
 				</a>
 
 				<!-- 장바구니 모달창-->

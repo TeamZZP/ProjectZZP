@@ -179,7 +179,7 @@ function productChoice(n) {
 			<div class="p-2 text-center">
 			
 				<a id="productChoice" href="javascript:productChoice(<%=p_id%>)">
-				 <div id="liked_area">
+				
 					<% if(likecheck==1){ %>
 					 <img src="images/liked.png" width="30" height="30" class="liked"> 
 				 	<%=p_liked %>
@@ -188,7 +188,7 @@ function productChoice(n) {
 				
 				  <%=p_liked %>
 					<% } %> 
-					</div> 
+					
 				</a>
 			
 				<!-- 장바구니 모달창-->

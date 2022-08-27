@@ -67,9 +67,10 @@ public class ProductListServlet extends HttpServlet {
 			HashMap<String,String> map = new HashMap<String, String>();
 			map.put("p_id", p_id);
 			map.put("userid", userid);
+			
 			int likecheck = service.likeCheck(map);
 			
-			request.setAttribute("likecheck", likecheck);
+			request.setAttribute("p_likecheck", likecheck);
 	        request.setAttribute("best", plist);		    
 			request.setAttribute("productList", list);
 			

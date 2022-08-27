@@ -54,6 +54,7 @@ public class ProductLikeListServlet extends HttpServlet {
 			
 			request.setAttribute("likeCount", count);
 			request.setAttribute("cartCount", cartCount);
+			
 			request.setAttribute("list", list);
 				
 		}else {
