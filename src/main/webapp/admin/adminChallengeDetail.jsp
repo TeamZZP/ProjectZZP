@@ -53,12 +53,6 @@ a {
 <script type="text/javascript">
 	$(document).ready(function () {
 		
-		$(".category").click(function() {
-			let category = $(this).attr("data-category");
-			location.href="AdminCategoryServlet?category="+category;
-		});
-		
-		
 		//글 삭제시 컨펌창 띄우기 
 		$("#deleteChallenge").on("click", function () {
 			let mesg = "정말 삭제하시겠습니까? 한번 삭제한 글은 되돌릴 수 없습니다.";
@@ -81,18 +75,6 @@ a {
 </script>
 
 
-<div class="container">
-	<form action="" method="post">
-		<div class="row">
-			<div class="btn-group" role="group" aria-label="Basic example">
-				<button type="button" class="btn btn-outline-success category" data-category="member" id="memberManagement">회원관리</button>
-				<button type="button" class="btn btn-outline-success category" data-category="report" id="reportManagement">신고관리</button>
-				<button type="button" class="btn btn-outline-success category" data-category="product" id="productManagement">상품관리</button>
-				<button type="button" class="btn btn-outline-success category" data-category="challenge" id="challengeManagement">챌린지관리</button>
-			</div>
-		</div>
-	</form>
-</div>
 
 
 <div class="container pt-5">
