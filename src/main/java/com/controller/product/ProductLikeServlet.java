@@ -47,25 +47,25 @@ public class ProductLikeServlet extends HttpServlet {
 		if(likecheck== 0) {
 			int n = service.addLike(map);
 			System.out.println(n+"찜 추가");
-			/*
-			 * if(n==1) { //찜 수 올리기 int result = service.upProdcutLiked(p_id);
-			 * 
-			 * out.print("<img src='images/liked.png' width='30' height='30' class='liked'>"
-			 * ); }
-			 */
+			
+			  /*if(n==1) { //찜 수 올리기 int result = service.upProdcutLiked(p_id);
+			  
+			  out.print("<img src='images/liked.png' width='30' height='30' class='liked'>"
+			  ); }*/
+			 
 			 
 		
 		  }else if(likecheck == 1) {
-			  int n = service.deleteLike(map);
-			  System.out.println("찜 삭제"+n);
+			  int n2 = service.deleteLike(map);
+			  System.out.println("찜 삭제"+n2);
 				
-				/*
-				 * if(n==1) { int result = service.downProductLiked(p_id);
-				 * System.out.println(result+"찜 수 업데이트");
-				 * 
-				 * out.print("<img src='images/like.png' width='30' height='30' class='liked'>"
-				 * );}
-				 */
+				
+				/*  if(n==1) { int result = service.downProductLiked(p_id);
+				  System.out.println(result+"찜 수 업데이트");
+				  
+				  out.print("<img src='images/like.png' width='30' height='30' class='liked'>"
+				  );}*/
+				 
 				 
 		  }
 	}else {
