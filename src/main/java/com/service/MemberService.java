@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import com.config.MySqlSessionFactory;
 import com.dao.MemberDAO;
 import com.dto.MemberDTO;
+import com.dto.PageDTO;
 
 public class MemberService {
 	
@@ -139,6 +140,17 @@ public class MemberService {
 			dto = dao.checkPw(session, userid);
 		} finally {
 			session.close();
+		}
+		return dto;
+	}
+
+	public PageDTO selectAllMember2(HashMap<String, String> map, int curPage) {
+		SqlSession sessioin=MySqlSessionFactory.getSqlSession();
+		PageDTO dto=null;
+		try {
+			dto=dao.selectAllMember2(sessioin, map, curPage);
+		} finally {
+			sessioin.close();
 		}
 		return dto;
 	}
