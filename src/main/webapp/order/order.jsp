@@ -40,9 +40,12 @@ border-bottom: 2.5px solid green;
 <title>Insert title here</title>
 </head>
 <body>
-<img src="images/ordering.png" width="900" height="200">
 
-<h3 style="font-weight: bold; font-color: green;">&emsp;주문하실 상품</h3>
+<div style="text-align : center;">
+<img src="images/ordering.png" width="900" height="200" >
+</div>
+
+<h3 style="font-weight: bold; color: green;">&emsp;주문하실 상품</h3>
 <hr id="orderHr">
 
 
