@@ -90,7 +90,57 @@ a:hover {
 <script type="text/javascript"
    src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
+/* function setTotalInfo(){
+	
+	var sum_money = 0;				// 총 가격
+	var fee = 0;			// 배송비
+	var total = 0; 		// 최종 가격(총 가격 + 배송비)
+
+	
+	$(".cart_info_div").each(function(index, element){
+		if($(element).find(#check).is("checked")==true){
+			sum_money += sum_money.val());	
+		}
+		}
+		
+		});
+	
+	
+	/* 배송비 결정 */
+	if(sum_money >= 50000){
+		fee = 0;
+	} else if(sum_money == 0){
+		fee = 0;
+	} else {
+		fee = 3000;	
+	}
+	
+	total = sum_money + fee;
+	
+	/* ※ 세자리 컴마 Javscript Number 객체의 toLocaleString() */
+	
+	// 총 가격
+	$("#sum_money").text(sum_money);
+	// 배송비
+	$("#fee").text(fee);	
+	// 최종 가격(총 가격 + 배송비)
+	$("#total").text(total); */	
+	
    $(function() {
+	   /* 
+	   //종합정보섹션정보삽입
+	   setTotalInfo();
+	
+	   $(".individual_cart_checkbox").on("change", function(){
+			setTotalInfo($(".cart_info_div"));
+		});
+	      $("#order").on("click", function() {
+	    	 
+	       $("form").attr("action", "OrderServlet");
+	            */
+	        
+	      }) 
+	      
       //체크박스 미선택시 alert창
       $("#delAllCart").on("click", function() {
          if ($(".check").is(":checked") == false) {
@@ -113,6 +163,7 @@ a:hover {
          var cart_id = $(this).attr("data-xxx");
          location.href = "CartDelServlet?cart_id=" + cart_id;
       })//end
+      
       //장바구니 수량 수정
       $(".updBtn").on("click", function() {
          var cart_id = $(this).attr("data-xxx"); //cart_id
@@ -150,9 +201,6 @@ a:hover {
       
     
    
-      $("#order").on("click", function() {
-         $("form").attr("action", "OrderServlet");
-      })
 
    })//end
 </script>
@@ -224,10 +272,16 @@ a:hover {
 
  
       <div class="cart_content">
-         <input type="hidden" name="userid" id="userid" value="<%=userid %>">
+       <input type="hidden" name="userid" id="userid" value="<%=userid %>">
+      	<div class="cart_info_div">
+  		<input type="hidden" class="sum_money_input" value="<%=sum_money %>">
+         <input type="hidden" class="fee_input" value="<%=fee %>">
+		 <input type="hidden" class="total_input" value="<%=total%>">
+		 </div>
          <ul class="cart_list" style="line-height: 50px; font-size: 20px;">
-            <li><input type="checkbox" name="check" id="check"
-               class="check" value="<%=cart_id%>"
+            <li>
+            <input type="checkbox" name="check" id="check" checked="checked"
+               class="check" value="<%=cart_id%>" 
                style="width: 30px; position: relative; bottom: 100px; margin-right: 10px;">
                <a href="ProductRetrieveServlet?p_id=<%=p_id%>"> <img
                   src="images/p_image/<%=p_image%>" width="200"
@@ -262,6 +316,7 @@ a:hover {
       %>
 
       <div class="cart_total">
+  
          <div class="shipping">
             <p>상품금액</p>
             <p>배송비</p>

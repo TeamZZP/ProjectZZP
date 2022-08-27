@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.dto.AddressDTO;
-import com.dto.CategoryProductDTO;
 import com.dto.ChallengeDTO;
 import com.dto.MemberDTO;
 import com.dto.PageDTO;

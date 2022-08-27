@@ -215,7 +215,8 @@ create table report(
     chall_id NUMBER,
     comment_id NUMBER,
     report_reason NUMBER NOT NULL,
-    report_status NUMBER NOT NULL
+    report_status NUMBER NOT NULL,
+    report_created DATE  NOT NULL
 );
 
 -- 큐엔에이 답변
@@ -284,6 +285,13 @@ CREATE SEQUENCE comments_comment_id_seq
 
 -- 챌린지 도장 시퀀스
 CREATE SEQUENCE stamp_stamp_id_seq
+  START WITH 1
+  INCREMENT BY 1
+  NOCYCLE
+  NOCACHE;
+  
+-- 신고 시퀀스
+create SEQUENCE report_report_id_seq
   START WITH 1
   INCREMENT BY 1
   NOCYCLE

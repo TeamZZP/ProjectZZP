@@ -94,16 +94,31 @@ select * from product
 	from product p where p.P_NAME like '%'||#{searchValue}||'%' or p.P_CONTENT like '%'||#{searchValue}||'%'
 </select>
 
+<update id="updateProduct" parameterType="hashmap">
+
+update product set p_name=#{p_name}, p_content=#{p_content}, c_id=#{c_id},
+p_cost_price=#{p_cost_price}, p_selling_price=#{p_selling_price},
+p_discount=#{p_discount}, p_stock=#{p_stock}, userid='admin1'
+where p_id=#{p_id}
+</update>
+
+<delete id="deleteProduct">
+delete from product where p_id=#{p_id}
+</delete>
+
+<!-- 찜 갯수  -->
+
 <insert id="addLike" parameterType="hashmap">
 insert into product_liked values (#{userid},#{p_id})
 </insert>
 
 
 <select id="likeCheck" parameterType="hashmap" resultType="int">
-select count(*) from product_liked where p_id= #{p_id} and userid = #{userid}
+select count(*) from product_liked 
+where p_id= #{p_id} and userid = #{userid}
 </select>
  
-<!-- 찜 갯수  -->
+ 
 <select id="likeCount" parameterType="String" resultType="int">
 	select count(*) from product_liked where userid = #{userid}
 </select>
@@ -116,16 +131,25 @@ select count(*) from product_liked where p_id= #{p_id} and userid = #{userid}
 	order by p_id 
 </select> 
 
-<update id="updateProduct" parameterType="hashmap">
-update product set p_name=#{p_name}, p_content=#{p_content}, c_id=#{c_id},
-p_cost_price=#{p_cost_price}, p_selling_price=#{p_selling_price},
-p_discount=#{p_discount}, p_stock=#{p_stock}, userid='admin1'
-where p_id=#{p_id}
+<update id="upProdcutLiked">
+	update product set p_liked = p_liked +1
+	where p_id = #{p_id}
 </update>
 
-<delete id="deleteProduct">
-delete from product where p_id=#{p_id}
+<select id="p_likedNum" resultType="int">
+	select p_liked from product
+	where p_id = #{p_id}
+</select>
+
+<delete id="deleteLike" parameterType="hashmap">
+	delete from product_liked
+	where p_id = #{p_id} and userid = #{userid}
 </delete>
+
+<update id="downProductLiked" >
+	update product set p_liked = p_liked-1
+	where p_id = #{p_id}
+</update>
 
 <select id="selectProd" resultType="CategoryProductDTO" parameterType="hashmap">
 select (select C_NAME from category where c_id = p.c_id) as c_name, p.P_ID,(select IMAGE_ROUTE from images where p_id = p.p_id 

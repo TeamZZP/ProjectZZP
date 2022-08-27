@@ -106,7 +106,7 @@ int likeCount = (int) request.getAttribute("likeCount");
 			<div class="p-3">
 				<div class="hover-zoomin">
 					<a href="ProductRetrieveServlet?p_id=<%=p_id%>"> 
-					<img src="images/p_image/<%=p_image%>.png" width="200" height="200"></a>
+					<img src="images/p_image/<%=p_image%>" width="200" height="200"></a>
 				</div>
 			</div>
 			<div>

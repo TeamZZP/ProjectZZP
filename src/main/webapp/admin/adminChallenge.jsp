@@ -36,9 +36,8 @@ if (member != null) {
 <script>
 $(document).ready(function () {
 	
-	$(".category").click(function() {
-		let category = $(this).attr("data-category");
-		location.href="AdminCategoryServlet?category="+category;
+	$("#reportGo").click(function() {
+		location.href="AdminReportListServlet"
 	});
 	
 	//챌린지 작성
@@ -50,6 +49,18 @@ $(document).ready(function () {
 		location.href = "AdminChallDetailServlet?chall_id="+$(this).attr("data-id");
 	});
 	
+	//챌린지 삭제 모달
+ 	$("#deleteModal").on("shown.bs.modal", function (e) {
+ 		let button = e.relatedTarget;
+		let cid = button.getAttribute("data-bs-cid")
+		console.log(cid)
+		$("#delchall_id").val(cid);
+	});
+	//챌린지 삭제
+	$(".delChallBtn").on("click", function (e) {
+		let chall_id = $("#delchall_id").val()
+		location.href = "ChallengeDeleteServlet?chall_id="+chall_id+"&userid=<%= currUserid %>";
+	});
 	
 });
 
@@ -57,23 +68,16 @@ $(document).ready(function () {
 </script>
 
 
-<div class="container">
-	<div class="row">
-		<div class="btn-group" role="group" aria-label="Basic example">
-			<button type="button" class="btn btn-outline-success category" data-category="member" id="memberManagement">회원관리</button>
-			<button type="button" class="btn btn-outline-success category" data-category="product" id="productManagement">상품관리</button>
-			<button type="button" class="btn btn-outline-success category" data-category="challenge" id="challengeManagement">챌린지관리</button>
-		</div>
-	</div>
-</div>
+
+<button id="reportGo">버튼</button>
 
 
-<form action="AdminCategoryServlet">
-<input type="hidden" name="category" value="challenge">
 
 <div class="container mt-2 mb-2">
 	<div class="row">
 		  <div class="col">
+		  	<form action="AdminCategoryServlet">
+		  		<input type="hidden" name="category" value="challenge">
 				  <select class="form-select searchName" data-style="btn-info" id="inputGroupSelect01">
 					    <option selected disabled hidden>카테고리</option>
 					    <option value="chall_id">게시글 번호</option>
@@ -82,8 +86,9 @@ $(document).ready(function () {
 					    <option value="stamp_name">도장 이름</option>
 					    <option value="chall_created">등록일</option>
 				  </select>
-		  	<input type="text" class="form-control searchValue">
-	      	<button type="button" class="btn btn-success" style="margin-top: -5px;">검색</button>
+		  		<input type="text" class="form-control searchValue">
+	      		<button type="button" class="btn btn-success" style="margin-top: -5px;">검색</button>
+	      	</form>
 	      </div>
 	      <div class="col">
 	      	<div class="float-end">
@@ -127,40 +132,9 @@ $(document).ready(function () {
 		<td></td>
 		<td><%= chall_created %></td>
 		<td>
-			<!-- Modal -->
-			<div id="deleteModal<%= chall_id %>" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-			  <div class="modal-dialog">
-			    <div class="modal-content">
-			      <div class="modal-header">
-			        <h5 class="modal-title" id="staticBackdropLabel">게시글 삭제</h5>
-			        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-			      </div>
-			      <div class="modal-body">
-			        선택한 게시글을 삭제하시겠습니까?
-			      </div>
-			      <div class="modal-footer">
-			        <button type="button" id="del<%= chall_id %>" class="btn btn-success">삭제</button>
-			        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-			      </div>
-			    </div> 
-			  </div>
-			</div>
-			<!-- 버튼 -->
 			<button type="button" class="updateChallBtn btn btn-outline-success btn-sm" data-cid="<%= chall_id %>" >수정</button>
-			<button type="button" class="btn btn-outline-dark btn-sm" data-cid="<%= chall_id %>" 
-					data-bs-toggle="modal" data-bs-target="#deleteModal<%= chall_id %>">삭제</button>
-				<script>
-				//챌린지 삭제 모달창 
-			 	$("#deleteModal<%= chall_id %>").on("shown.bs.modal", function (e) {
-					let cid = $(e.relatedTarget).attr("data-cid");
-					$("#del"+cid).val(cid);
-				});
-				//챌린지 삭제
-				$("#del<%= chall_id %>").on("click", function (e) {
-					let cid = $(this).val();
-					location.href = "ChallengeDeleteServlet?chall_id=<%= chall_id %>&userid=<%= currUserid %>";
-				});
-				</script>
+			<button type="button" class="btn btn-outline-dark btn-sm" 
+					data-bs-toggle="modal" data-bs-target="#deleteModal" data-bs-cid="<%= chall_id %>">삭제</button>
 		</td>
 <%
 	}
@@ -171,4 +145,27 @@ $(document).ready(function () {
 </div>
 </div>
 
-</form>
+
+
+
+
+
+		<!-- Modal -->
+			<div id="deleteModal" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+			  <div class="modal-dialog">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h5 class="modal-title" id="staticBackdropLabel">게시글 삭제</h5>
+			        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			      </div>
+			      <div class="modal-body">
+			        선택한 게시글을 삭제하시겠습니까?
+			      </div>
+			      <div class="modal-footer">
+			        <input type="hidden" id="delchall_id">
+			        <button type="button" class="delChallBtn btn btn-success">삭제</button>
+			        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+			      </div>
+			    </div> 
+			  </div>
+			</div>

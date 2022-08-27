@@ -71,11 +71,6 @@
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function () {
-		$(".category").click(function() {
-			let category = $(this).attr("data-category");
-			location.href="AdminCategoryServlet?category="+category;
-		});
-		
 		
 		//글쓰기 취소
 		$(".cancelBtn").on("click", function () {
@@ -196,17 +191,6 @@
 	});//end ready
 </script>
 
-<div class="container">
-	<form action="" method="post">
-		<div class="row">
-			<div class="btn-group" role="group" aria-label="Basic example">
-				<button type="button" class="btn btn-outline-success category" data-category="member" id="memberManagement">회원관리</button>
-				<button type="button" class="btn btn-outline-success category" data-category="product" id="productManagement">상품관리</button>
-				<button type="button" class="btn btn-outline-success category" data-category="challenge" id="challengeManagement">챌린지관리</button>
-			</div>
-		</div>
-	</form>
-</div>
 
 
 

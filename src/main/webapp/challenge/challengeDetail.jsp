@@ -19,7 +19,7 @@
 	margin-right: auto;
 }
 
-input[type="text"] {
+.container input[type="text"] {
 	width: 80%;
 	padding: 10px 20px;
 	margin: 5px 0;
@@ -40,21 +40,23 @@ a {
     background-color: #fff;
     border: none;
 }
-.form-color {
+.container .form-color {
     background-color: #fafafa
 }
-.form-control {
+.container .form-control {
     height: 48px;
     border-radius: 15px;
-    text-indent: 10px;
     display: inline;
 }
-.form-control:focus {
+.container .form-control:focus {
     color: #495057;
     background-color: #fff;
     border-color: #35b69f;
     outline: 0;
     box-shadow: none;
+}
+.comment_content {
+	text-indent: 10px;
 }
 .user-feed {
     font-size: 14px;
@@ -335,9 +337,13 @@ a {
 						report_reason:report_reason,
 						userid:"<%= currUserid %>"
 					},
-					dataType:"html",
+					dataType:"text",
 					success: function (data) {
-						alert("신고가 완료되었습니다.")
+						if (data=="true") {
+							alert("신고가 완료되었습니다.")
+						} else {
+							alert("이미 신고한 글입니다.")
+						}
 						$("#reportModal").modal("toggle");
 					},
 					error: function () {
@@ -346,9 +352,12 @@ a {
 				});
 			}
 		});
-		//신고 모달 체크 해제
+		//신고 모달 저장 데이터 삭제
 		$('#reportModal').on('hidden.bs.modal', function(e) {
   			$("#reportModal .modal-body").find('input:radio').prop('checked', false);
+  			$("#report_category").val("")
+			$("#report_chall_id").val("")
+			$("#report_comment_id").val("")
 		})
 		
 	});
@@ -399,6 +408,9 @@ function displayedAt(createdAt) {
 				<!-- 해당 게시글의 글쓴이인 경우 -->
 				<% if (userid.equals(currUserid)) { %>
 				<a href="ChallengeUIServlet?chall_id=<%= chall_id %>&userid=<%= currUserid %>" class="btn btn-outline-success">수정</a> 
+				<a href="ChallengeDeleteServlet?chall_id=<%= chall_id %>&userid=<%= currUserid %>" id="deleteChallenge" class="btn btn-outline-success">삭제</a>
+				<!-- 관리자인 경우 -->
+				<% } else if ("admin1".equals(currUserid)) { %>
 				<a href="ChallengeDeleteServlet?chall_id=<%= chall_id %>&userid=<%= currUserid %>" id="deleteChallenge" class="btn btn-outline-success">삭제</a>
 				<!-- 그외의 경우 -->
 				<% } else { %>
@@ -515,6 +527,9 @@ function displayedAt(createdAt) {
                             	<a class="reply ml-3" data-cid="<%= comment_id %>" data-user="<%= commentUserid %>">답글 달기</a> &nbsp;&nbsp;&nbsp;
                             	<!-- 해당 댓글의 작성자인 경우 -->
                             	<% if (commentUserid!=null && commentUserid.equals(currUserid)) { %>
+								<a class="ml-3 commentDelBtn" data-cid="<%= comment_id %>">삭제</a> 
+								<!-- 관리자인 경우 -->
+								<% } else if ("admin1".equals(currUserid)) { %>
 								<a class="ml-3 commentDelBtn" data-cid="<%= comment_id %>">삭제</a> 
 								<!-- 그외의 경우 --> 
 								<% } else { %> 

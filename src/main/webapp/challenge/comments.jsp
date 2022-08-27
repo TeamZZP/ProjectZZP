@@ -53,9 +53,13 @@
                 	<!-- 해당 댓글의 작성자인 경우 -->
                 	<% if (commentUserid!=null && commentUserid.equals(currUserid)) { %>
 					<a class="ml-3 commentDelBtn" data-cid="<%= comment_id %>">삭제</a> 
+					<!-- 관리자인 경우 -->
+					<% } else if ("admin1".equals(currUserid)) { %>
+					<a class="ml-3 commentDelBtn" data-cid="<%= comment_id %>">삭제</a> 
 					<!-- 그외의 경우 --> 
 					<% } else { %> 
-					<a class="ml-3">신고</a> 
+					<a class="ml-3" data-bs-toggle="modal" data-bs-target="#reportModal" 
+									data-bs-category="2" data-bs-cid="<%= comment_id %>">신고</a> 
 					<% } %>
                 </div>
             </div>
