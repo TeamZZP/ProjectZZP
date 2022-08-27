@@ -1,10 +1,7 @@
-package com.controller.challenge;
+package com.controller.admin;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,22 +10,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.dto.ChallengeDTO;
 import com.dto.PageDTO;
-import com.dto.StampDTO;
 import com.service.ChallengeService;
 
 /**
- * Servlet implementation class ChallengeListServlet
+ * Servlet implementation class AdminReportListServlet
  */
-@WebServlet("/ChallengeListServlet")
-public class ChallengeListServlet extends HttpServlet {
+@WebServlet("/AdminReportListServlet")
+public class AdminReportListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ChallengeListServlet() {
+    public AdminReportListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -37,7 +32,6 @@ public class ChallengeListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		request.setCharacterEncoding("utf-8");
 		
 		ChallengeService service = new ChallengeService(); 
@@ -50,53 +44,28 @@ public class ChallengeListServlet extends HttpServlet {
 		String searchName = request.getParameter("searchName");
 		String searchValue = request.getParameter("searchValue");
 		String sortBy = request.getParameter("sortBy");
-//		if (sortBy == null) {
-//			sortBy = "chall_id";
-//		}
+		String status = request.getParameter("status");
 		
-		System.out.println(curPage+" "+searchName+" "+searchValue+" "+sortBy);
+		System.out.println(curPage+" "+searchName+" "+searchValue+" "+sortBy+" "+status);
 		
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("searchName", searchName);
 		map.put("searchValue", searchValue);
 		map.put("sortBy", sortBy);
+		map.put("status", status);
 		System.out.println(">>>>>>>"+map);
 		
-		PageDTO pDTO = service.selectAllChallenge(map, Integer.parseInt(curPage));
-		
-		List<ChallengeDTO> list = pDTO.getList();
-	
-		//각 게시글마다 프로필 가져오기
-		HashMap<String, String> profileMap = new HashMap<String, String>();
-		
-		//각 게시글마다 도장 가져오기
-		HashMap<String, String> stampListMap = new HashMap<String, String>();
-		
-		for (ChallengeDTO c : list) {
-			profileMap.put(c.getUserid(), service.selectProfileImg(c.getUserid()));
-			
-			HashMap<String, String> stampMap = service.selectMemberStamp(c.getChall_id());
-			if (stampMap != null) {
-				stampListMap.put(String.valueOf(stampMap.get("CHALL_ID")), stampMap.get("STAMP_IMG"));
-			}
-			
-		}
-		System.out.println(stampListMap);
-		
-		//이 달의 챌린지 가져오기
-		ChallengeDTO challThisMonth = service.selectChallThisMonth();
+		PageDTO pDTO = service.selectAllReport(map, Integer.parseInt(curPage));
+		System.out.println(pDTO);
 		
 		request.setAttribute("pDTO", pDTO);
 		request.setAttribute("searchName", searchName);
 		request.setAttribute("searchValue", searchValue);
 		request.setAttribute("sortBy", sortBy);
-		request.setAttribute("profileMap", profileMap);
-		request.setAttribute("challThisMonth", challThisMonth);
-		request.setAttribute("stampListMap", stampListMap);
+		request.setAttribute("status", status);
 		
-		RequestDispatcher dis = request.getRequestDispatcher("challengeMain.jsp");
+		RequestDispatcher dis = request.getRequestDispatcher("adminReport.jsp");
 		dis.forward(request, response);
-	
 	}
 
 	/**

@@ -1,6 +1,7 @@
 package com.controller.challenge;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 
 import javax.servlet.ServletException;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.dto.ReportDTO;
 import com.service.ChallengeService;
 
 /**
@@ -38,8 +40,18 @@ public class ReportAddServlet extends HttpServlet {
 		map.put("userid", userid);
 		
 		ChallengeService service = new ChallengeService();
-		int n = service.insertReport(map);
-		System.out.println(n+"개의 신고 레코드 추가");
+		PrintWriter out = response.getWriter();
+		
+		//중복 신고 확인
+		int count = service.checkReportExist(map);
+		
+		if (count == 0) {
+			int n = service.insertReport(map);
+			System.out.println(n+"개의 신고 레코드 추가");
+			out.print(true);
+		} else {
+			out.print(false);
+		}
 		
 		
 	}
