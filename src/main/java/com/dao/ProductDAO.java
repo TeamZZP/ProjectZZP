@@ -97,4 +97,24 @@ public class ProductDAO {
 		return session.selectOne("ProductMapper.totalCount", map);
 
 	}
+
+	public int upProdcutLiked(SqlSession session, String p_id) {
+		int n = session.update("upProdcutLiked",p_id);
+		return n;
+	}
+
+	public int p_likedNum(SqlSession session, String p_id) {
+		int n = session.selectOne("ProductMapper.p_likedNum", p_id);
+		return n;
+	}
+
+	public int deleteLike(SqlSession session, HashMap<String, String> map) {
+		int n = session.delete("ProductMapper.deleteLike",map);
+		return n;
+	}
+
+	public int downProductLiked(SqlSession session, String p_id) {
+		int n = session.update("downProductLiked",p_id);
+		return n;
+	}
 }

@@ -180,6 +180,53 @@ public class ProductService {
 
 	}
 
+	public int upProdcutLiked(String p_id) {
+		int n = 0;
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		try {
+			n = dao.upProdcutLiked(session, p_id);
+			session.commit();
+		} finally {
+			session.close();
+		}
+		return n;
+	}
+
+	public int p_likedNum(String p_id) {
+		int n = 0;
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		try {
+			n = dao.p_likedNum(session, p_id);
+		} finally {
+			session.close();
+		}
+		return n;
+	}
+
+	public int deleteLike(HashMap<String, String> map) {
+		int n = 0;
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		try {
+			n = dao.deleteLike(session,map);
+			session.commit();
+		} finally {
+			session.close();
+		}
+		return n;
+	}
+
+	public int downProductLiked(String p_id) {
+		int n = 0;
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		try {
+			n = dao.downProductLiked(session,p_id);
+			session.commit();
+		} finally {
+			session.close();
+		}
+		return n;
+	}
+
 
 
 }

@@ -75,12 +75,11 @@ function productChoice(n) {
                 "p_id":n ,
                 "userid":userid
                 },
-                dataType : "html",
+                dataType : "json",
                 success : function(data,status,xhr){
-                	/* $("#like_area").html(data); */
- 				 console.log("성공");
+                  //이미지 바뀌는 부분
                 },error : function (xhr,status,error){
-                 alert(error);
+                 console.log(error);
                 }
 
 
@@ -119,9 +118,11 @@ function productChoice(n) {
 	})//
         
 </script>
-   
+
+<!--   <div class="container "> -->
+     
+      
      <% 
-    /*  int likecheck = (int) request.getAttribute("likedIt"); */
      List<CategoryProductDTO> product_list = (List<CategoryProductDTO>)request.getAttribute("product_list"); 
      %>
    
@@ -143,7 +144,6 @@ function productChoice(n) {
 						int p_stock =product_list.get(i).getP_stock();
 						String userid =product_list.get(i).getUserid();
 						String p_image = product_list.get(i).getP_image();
-						int p_liked = product_list.get(i).getP_liked();
 					%>
 
 			
@@ -162,17 +162,10 @@ function productChoice(n) {
 			</div>
 			<!-- 찜기능  -->
 			<div class="p-2 text-center">
-			<div id="like_area">
 				<a id="productChoice" href="javascript:productChoice(<%=p_id%>)">
-					<%-- <% if(likecheck==1){ %>
-					<img src="images/liked.png" width="30" height="30" class="liked">
-					<%=p_liked %>
-					<% }else{ %> --%>
-					<img src="images/like.png" width="30" height="30" class="liked">
-					 <%-- <%=p_liked %>
-					<% } %>  --%>
+					<img id="likeimg" src="images/like.png" width="30" height="30">
 				</a>
-			</div>
+
 				<!-- 장바구니 모달창-->
 				<!-- Button trigger modal -->
 				<button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#addcart<%=p_id %>">

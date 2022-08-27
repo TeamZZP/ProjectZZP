@@ -54,45 +54,36 @@ a{
 <script type="text/javascript"
    src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-var productLike = 0;
+<%
 
-function productChoice(n) {
-      console.log(n);
+List<CategoryProductDTO> product_list = (List<CategoryProductDTO>)request.getAttribute("product_list"); 
+ for ( int i = 0 ; i < product_list.size() ; i++ ) {
+	    int p_id = product_list.get(i).getP_id();
+	    String p_name =product_list.get(i).getP_name();
+		String p_content =product_list.get(i).getP_content();
+		int c_id =product_list.get(i).getC_id();
+		int p_cost_price =product_list.get(i).getP_cost_price();
+		int p_selling_price =product_list.get(i).getP_selling_price();
+		int p_discount =product_list.get(i).getP_discount();
+		String p_created=product_list.get(i).getP_created();
+		int p_stock =product_list.get(i).getP_stock();
+		String userid =product_list.get(i).getUserid();
+		String p_image = product_list.get(i).getP_image();
+		int p_liked = product_list.get(i).getP_liked();
+	
 
-     
-     <%
-     
-   MemberDTO mdto = (MemberDTO)session.getAttribute("login");
-   if(mdto != null){%>
+	MemberDTO mdto = (MemberDTO)session.getAttribute("login");
+	String memberuserid = null;
+	
+	if(mdto != null){
+	 memberuserid = mdto.getUserid();
+	 }
+	 
+	//현재 회원이 이 글의 찜 눌렀는지 판단하기 
+	int likecheck = (int) request.getAttribute("likecheck");
+	 %>
 
-      var userid =  '<%=mdto.getUserid()%>'; 
-
-	 $.ajax({
-        
-          type: "get",
-          url: "ProductLikeServlet",
-          data:  {
-                "p_id":n ,
-                "userid":userid
-                },
-                dataType : "html",
-                success : function(data,status,xhr){
-                	/* $("#like_area").html(data); */
- 				 console.log("성공");
-                },error : function (xhr,status,error){
-                 alert(error);
-                }
-
-
-     }); //end ajax
-
-   <%}else{%>
-    alert("로그인이 필요합니다.");
-    event.preventDefault();
-   <%}%>
-
-
-     } 
+    
    $(function() {
       $("#up").on("click",function(){
          //input태그 수량변화
@@ -114,38 +105,40 @@ function productChoice(n) {
 			}
 		})//end down
 		
+	//찜
+	$("#productChoice").on("click",".liked",function(){
+		var p_id = 
+		if("<%=memberuserid%>"=="null"){
+			alert("로그인이 필요합니다.");
+		}else{
+			 $.ajax({
+			        
+		          type: "get",
+		          url: "ProductLikeServlet",
+		          data:  {
+		                "p_id": "<%=p_id%>",
+		                "userid":"<%=memberuserid%>"
+		                },
+		                dataType : "html",
+		                success : function(data,status,xhr){
+		                	$("#productChoice").html(data);	
+		                },error : function (xhr,status,error){
+		                 console.log(error);
+		                }
 
+
+		     }); //end ajax
+		}
+	})
 		
 	})//
         
 </script>
-   
-     <% 
-    /*  int likecheck = (int) request.getAttribute("likedIt"); */
-     List<CategoryProductDTO> product_list = (List<CategoryProductDTO>)request.getAttribute("product_list"); 
-     %>
-   
+
 
 
  <div id = "categoryProductContainer" class="container "  >
 		<div class="row " align="center">
-		
-				<%
-				 for ( int i = 0 ; i < product_list.size() ; i++ ) {
-					    int p_id = product_list.get(i).getP_id();
-					    String p_name =product_list.get(i).getP_name();
-						String p_content =product_list.get(i).getP_content();
-						int c_id =product_list.get(i).getC_id();
-						int p_cost_price =product_list.get(i).getP_cost_price();
-						int p_selling_price =product_list.get(i).getP_selling_price();
-						int p_discount =product_list.get(i).getP_discount();
-						String p_created=product_list.get(i).getP_created();
-						int p_stock =product_list.get(i).getP_stock();
-						String userid =product_list.get(i).getUserid();
-						String p_image = product_list.get(i).getP_image();
-						int p_liked = product_list.get(i).getP_liked();
-					%>
-
 			
 			<div class="col-lg-3 col-md-4 col-sm-6">
 			<div class="hover-zoomin">
@@ -162,17 +155,15 @@ function productChoice(n) {
 			</div>
 			<!-- 찜기능  -->
 			<div class="p-2 text-center">
-			<div id="like_area">
-				<a id="productChoice" href="javascript:productChoice(<%=p_id%>)">
-					<%-- <% if(likecheck==1){ %>
+				<div id="productChoice">
+					<% if(likecheck==1){ %>
 					<img src="images/liked.png" width="30" height="30" class="liked">
 					<%=p_liked %>
-					<% }else{ %> --%>
+					<% }else{ %>
 					<img src="images/like.png" width="30" height="30" class="liked">
-					 <%-- <%=p_liked %>
-					<% } %>  --%>
-				</a>
-			</div>
+					<%=p_liked %>
+					<% } %>
+				</div>
 				<!-- 장바구니 모달창-->
 				<!-- Button trigger modal -->
 				<button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#addcart<%=p_id %>">

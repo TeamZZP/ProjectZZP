@@ -94,28 +94,6 @@ select * from product
 	from product p where p.P_NAME like '%'||#{searchValue}||'%' or p.P_CONTENT like '%'||#{searchValue}||'%'
 </select>
 
-<insert id="addLike" parameterType="hashmap">
-insert into product_liked values (#{userid},#{p_id})
-</insert>
-
-
-<select id="likeCheck" parameterType="hashmap" resultType="int">
-select count(*) from product_liked where p_id= #{p_id} and userid = #{userid}
-</select>
- 
-<!-- 찜 갯수  -->
-<select id="likeCount" parameterType="String" resultType="int">
-	select count(*) from product_liked where userid = #{userid}
-</select>
-
-<select id="likeList" parameterType="String" resultType="product_likedDTO">
-	select pl.p_id, p.p_name,p.p_selling_price,pl.userid,(select IMAGE_ROUTE from images where p_id = pl.p_id and IMAGE_RNK = 1) as p_image 
-	from product_liked pl join product p 
-	on pl.p_id = p.p_id
-	where pl.userid = #{userid}
-	order by p_id 
-</select> 
-
 <update id="updateProduct" parameterType="ProductDTO">
 update product set p_name=#{p_name}, p_content=#{p_content}, c_id=#{c_id},
 p_cost_price=#{p_cost_price}, p_selling_price=#{p_selling_price},
@@ -128,6 +106,53 @@ delete from product where p_id=#{p_id}
 </delete>
 
 
+
+
+
+<!-- 찜 갯수  -->
+
+<insert id="addLike" parameterType="hashmap">
+insert into product_liked values (#{userid},#{p_id})
+</insert>
+
+
+<select id="likeCheck" parameterType="hashmap" resultType="int">
+select count(*) from product_liked 
+where p_id= #{p_id} and userid = #{userid}
+</select>
+ 
+ 
+<select id="likeCount" parameterType="String" resultType="int">
+	select count(*) from product_liked where userid = #{userid}
+</select>
+
+<select id="likeList" parameterType="String" resultType="product_likedDTO">
+	select pl.p_id, p.p_name,p.p_selling_price,pl.userid,(select IMAGE_ROUTE from images where p_id = pl.p_id and IMAGE_RNK = 1) as p_image 
+	from product_liked pl join product p 
+	on pl.p_id = p.p_id
+	where pl.userid = #{userid}
+	order by p_id 
+</select> 
+
+<update id="upProdcutLiked">
+	update product set p_liked = p_liked +1
+	where p_id = #{p_id}
+</update>
+
+<select id="p_likedNum" resultType="int">
+	select p_liked from product
+	where p_id = #{p_id}
+</select>
+
+<delete id="deleteLike" parameterType="hashmap">
+	delete from product_liked
+	where p_id = #{p_id} and userid = #{userid}
+</delete>
+
+<update id="downProductLiked" >
+	update product set p_liked = p_liked-1
+	where p_id = #{p_id}
+</update>
 
 
 <select id="selectProd" resultType="CategoryProductDTO" parameterType="hashmap">
