@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 
 import com.dto.CategoryProductDTO;
 import com.dto.MemberDTO;
+import com.service.AddressService;
 import com.service.OrderService;
 
 /**
@@ -26,7 +27,7 @@ public class OrderServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("OrderServlet실행됨");
 		HttpSession session = request.getSession();
-		MemberDTO dto = (MemberDTO)session.getAttribute("login");
+		MemberDTO mdto = (MemberDTO)session.getAttribute("login");
 		String mesg = "";
 		int p_amount = 0;
 		HashMap<String, Integer> map = new HashMap<String, Integer>();
@@ -34,7 +35,7 @@ public class OrderServlet extends HttpServlet {
 		//int p_id= 0;
 
 		
-			if(dto != null) {
+			if(mdto != null) {
 				String[] pIdListString = request.getParameterValues("p_id");  //String []로 데이터 파싱해옴
 				List<Integer> pIdList = new ArrayList<Integer>();
 				
@@ -48,14 +49,14 @@ public class OrderServlet extends HttpServlet {
 					OrderService service = new OrderService();
 					List<CategoryProductDTO> list = new ArrayList<CategoryProductDTO>();
 				
-					list = service.getProductList(pIdList);
+					list = service.getProductList(pIdList); //p_id List로 상품List<상품DTO> 저장
 					
 					
 				for (int i = 0; i < pIdList.size(); i++) {
 					System.out.println(list.get(i));
 				}
 			
-			if(Integer.parseInt((String)request.getParameter("p_amount"))==0||(String)request.getParameter("p_amount")==null) {
+			if(Integer.parseInt((String)request.getParameter("p_amount"))==0||(String)request.getParameter("p_amount")==null) { //p_amount 저장
 				
 				 map.put("p_id",Integer.parseInt((String)request.getParameter("p_id")));
 				 map.put("p_amount",1);
@@ -66,6 +67,9 @@ public class OrderServlet extends HttpServlet {
 				 map.put("p_amount",Integer.parseInt((String)request.getParameter("p_amount")));
 				
 				 }
+			//배송지
+			AddressService add_service = new AddressService();
+			add_service.selectAllAddress(mdto.getUserid());
 			
 			
 			request.setAttribute("list", list);
