@@ -41,6 +41,7 @@ border-bottom: 2.5px solid green;
 </head>
 <body>
 
+ <div class="container">
 <div style="text-align : center;">
 <img src="images/ordering.png" width="900" height="200" >
 </div>
@@ -67,7 +68,6 @@ HashMap<String, Integer> map = (HashMap<String, Integer>)request.getAttribute("m
       System.out.println("상품번호 :" + p_id);
    %>
 
- 
       <div class="order_content">
          <input type="hidden" name="userid" id="userid" value="<%=userid %>">
          <ul class="orderProduct_list" style="line-height: 50px; font-size: 20px;">
@@ -92,7 +92,7 @@ HashMap<String, Integer> map = (HashMap<String, Integer>)request.getAttribute("m
          </ul>
       </div>
       <%} %>
-
+</div>
 
 </body>
 </html> 
