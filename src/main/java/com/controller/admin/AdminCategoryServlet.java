@@ -36,23 +36,28 @@ public class AdminCategoryServlet extends HttpServlet {
 		if (category.equals("member")) {
 			//페이징
 			String curPage=request.getParameter("curPage");//현재 페이지
-			if (curPage == null) {
-				curPage="1";//1페이지 시작
-			}
+			if (curPage == null) {curPage="1";}//1페이지 시작
+			
 			//검색 기준, 검색어
 			String searchName=request.getParameter("searchName");
 			String searchValue=request.getParameter("searchValue");
 			String sortBy=request.getParameter("sortBy");
-			System.out.println(searchName);
-			System.out.println(searchValue);
-			System.out.println(sortBy);
+			if (sortBy == null) {sortBy="created_at";}//최초 정렬 기준
+			System.out.println(curPage+"\t"+searchName+"\t"+searchValue+"\t"+sortBy);
+			
+			//위 데이터를 map에 저장
+			HashMap<String, String> map=new HashMap<String, String>();
+			map.put("searchName", searchName);
+			map.put("searchValue", searchValue);
+			map.put("sortBy", sortBy);
 			
 			MemberService m_service=new MemberService();
 			AddressService a_service=new AddressService();
-//			HashMap<String, List<AddressDTO>> addressMap=new HashMap<String, List<AddressDTO>>();
 			HashMap<String, AddressDTO> addMap=new HashMap<String, AddressDTO>();
-			//전체 회원 목록
+			
+			//전체 회원 목록 --->> 검색 기준, 검색어, 정렬 기준, 현재 페이지를 매개변수로 받음
 			List<MemberDTO> memberList=m_service.selectAllMember();
+			//PageDTO pDTO=m_service.selectAllMember2(map, Integer.parseInt(curPage));
 			
 			String userid=null;
 			//전체 회원 주소 목록--회원별 주소
@@ -61,14 +66,6 @@ public class AdminCategoryServlet extends HttpServlet {
 				AddressDTO address=a_service.selectDefaultAddress(userid);
 				addMap.put(userid, address);//userid의 기본 주소 출력
 			}
-//			for (MemberDTO memberDTO : memberList) {
-//				String id=memberDTO.getUserid();
-//				System.out.println(id+"의 주소지 : "+addMap.get(id));
-//			}
-//			System.out.println(addMap);
-			
-			HashMap<String, String> map=new HashMap<String, String>();
-			map.put("searchName", searchName);
 			
 			request.setAttribute("memberList", memberList);
 			request.setAttribute("addMap", addMap);//userid의 address 리스트
@@ -111,6 +108,8 @@ public class AdminCategoryServlet extends HttpServlet {
 			request.setAttribute("challList", challList);
 			RequestDispatcher dis = request.getRequestDispatcher("adminChallenge.jsp");
 			dis.forward(request, response);
+		} else if (category.equals("report")) {
+			
 		}
 		
 	}
