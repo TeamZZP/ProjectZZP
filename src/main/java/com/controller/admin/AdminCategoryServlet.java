@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.dto.AddressDTO;
-import com.dto.CategoryProductDTO;
 import com.dto.ChallengeDTO;
 import com.dto.MemberDTO;
 import com.dto.PageDTO;
@@ -34,24 +33,45 @@ public class AdminCategoryServlet extends HttpServlet {
 		MemberDTO dto=(MemberDTO) session.getAttribute("login");
 		
 		if (category.equals("member")) {
+			//페이징
+			String curPage=request.getParameter("curPage");//현재 페이지
+			if (curPage == null) {
+				curPage="1";//1페이지 시작
+			}
+			//검색 기준, 검색어
+			String searchName=request.getParameter("searchName");
+			String searchValue=request.getParameter("searchValue");
+			String sortBy=request.getParameter("sortBy");
+			System.out.println(searchName);
+			System.out.println(searchValue);
+			System.out.println(sortBy);
+			
 			MemberService m_service=new MemberService();
 			AddressService a_service=new AddressService();
-			HashMap<String, List<AddressDTO>> addressMap=new HashMap<String, List<AddressDTO>>();
+//			HashMap<String, List<AddressDTO>> addressMap=new HashMap<String, List<AddressDTO>>();
+			HashMap<String, AddressDTO> addMap=new HashMap<String, AddressDTO>();
 			//전체 회원 목록
 			List<MemberDTO> memberList=m_service.selectAllMember();
 			
 			String userid=null;
-			
 			//전체 회원 주소 목록--회원별 주소
 			for (int i = 0; i < memberList.size(); i++) {
 				userid=memberList.get(i).getUserid();
-				List<AddressDTO> addressList=a_service.selectAllAddress(userid);
-				addressMap.put(userid, addressList);//userid로 해당 주소 리스트 출력
+				AddressDTO address=a_service.selectDefaultAddress(userid);
+				addMap.put(userid, address);//userid의 기본 주소 출력
 			}
-			System.out.println("memberList"+memberList);
-			System.out.println("addressMap"+addressMap);
+//			for (MemberDTO memberDTO : memberList) {
+//				String id=memberDTO.getUserid();
+//				System.out.println(id+"의 주소지 : "+addMap.get(id));
+//			}
+//			System.out.println(addMap);
+			
+			HashMap<String, String> map=new HashMap<String, String>();
+			map.put("searchName", searchName);
+			
 			request.setAttribute("memberList", memberList);
-			request.setAttribute("addressMap", addressMap);//userid의 address 리스트
+			request.setAttribute("addMap", addMap);//userid의 address 리스트
+			
 			RequestDispatcher dis = request.getRequestDispatcher("adminMember.jsp");
 			dis.forward(request, response);
 			

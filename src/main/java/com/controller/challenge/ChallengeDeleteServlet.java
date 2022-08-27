@@ -68,15 +68,15 @@ public class ChallengeDeleteServlet extends HttpServlet {
 					System.out.println(updateNum+"개의 이달의 챌린지 레코드 상태 변경");
 					
 				}
-				
+				response.sendRedirect("AdminCategoryServlet?category=challenge");
 				
 			} else {
 				int n = service.deleteChallenge(chall_id);
 				System.out.println(n+"개의 레코드 삭제");
 				
+				response.sendRedirect("ChallengeListServlet");
+				
 			}
-			
-			response.sendRedirect("ChallengeListServlet");
 			
 			
 		} else {

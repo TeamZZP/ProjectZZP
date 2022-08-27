@@ -1,3 +1,4 @@
+<%@page import="com.dto.StampDTO"%>
 <%@page import="java.util.Set"%>
 <%@page import="java.util.LinkedHashMap"%>
 <%@page import="java.util.HashMap"%>
@@ -15,7 +16,7 @@
 		challNum = 4;
 	}
 	//회원의 도장 목록 가져오기
-	LinkedHashMap<String, String> stampImgMap = (LinkedHashMap<String, String>) request.getAttribute("stampImgMap");
+	LinkedHashMap<Integer, StampDTO> stampMap = (LinkedHashMap<Integer, StampDTO>) request.getAttribute("stampMap");
 	
 %>
 
@@ -48,25 +49,48 @@
 		
 		
 		
+		
 		<div>
 		  <div class="row p-2 mx-4 mt-5">
-		    <div class="col">도장 <span class="text-success fw-bold"><%= stampImgMap.size() %></span></div>
+		    <div class="col">도장 <span class="text-success fw-bold"><%= stampMap.size() %></span></div>
 			 <div class="col"><div class="float-end"><small><a class="category" data-category="stamp">전체보기</a></small></div></div>
 		  </div>
 		  <div class="text-center mt-2">
-		        <%  Set<String> keySet = stampImgMap.keySet();
+		        <%  Set<Integer> keySet = stampMap.keySet();
 		        		System.out.println(keySet);
 		       		int count = 0;
-		        	for (String key : keySet) {
-		        		String stamp_img = stampImgMap.get(key);
+		        	for (Integer key : keySet) {
+		        		StampDTO dto = stampMap.get(key);
+		    			int stamp_id = dto.getStamp_id();
+		    			String stamp_img = dto.getStamp_img();
+		    			String stamp_name = dto.getStamp_name();
+		    			String stamp_content = dto.getStamp_content();
 		        %>
 					<img src="/eclipse/upload/<%=stamp_img%>" border="0" align="middle" class="img"
-						width="200" height="200" onerror="this.src='images/uploadarea.png'">
+						width="200" height="200" onerror="this.src='images/uploadarea.png'"
+						 data-bs-toggle="modal" data-bs-target="#stampModal<%=stamp_id%>">
+						<!-- Modal -->
+							<div class="modal fade" id="stampModal<%=stamp_id%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+							  <div class="modal-dialog">
+							    <div class="modal-content">
+							      <div class="modal-header">
+							        <h5 class="modal-title" id="exampleModalLabel"><%= stamp_name %></h5>
+							        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+							      </div>
+							      <div class="modal-body text-center">
+							      <img src="/eclipse/upload/<%=stamp_img%>" width="400">
+							      </div>
+							      <div class="modal-footer mb-3 text-center">
+							       <%= stamp_content %>
+							      </div>
+							    </div>
+							  </div>
+							</div>
 		        <%  	count++;
 		        		if (count==4) break;
 		        	} 
-		        if (stampImgMap.size() < 4) {
-		        	for (int i = 0; i < 4-stampImgMap.size(); i++) {
+		        if (stampMap.size() < 4) {
+		        	for (int i = 0; i < 4-stampMap.size(); i++) {
 		        %>
 		        	<img src="images/none.png" class="img" width="200" height="200" >
 		        <% }

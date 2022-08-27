@@ -8,4 +8,11 @@
 select * from images where p_id= #{p_id}
 </select>
 
+<insert id="insertImage" parameterType="hashmap">
+	insert into images (p_id, image_rnk, image_route, userid, update_date)
+	
+</insert>
+
+
+
 </mapper>

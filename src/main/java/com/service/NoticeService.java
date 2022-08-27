@@ -111,4 +111,16 @@ public class NoticeService {
 		return num;
 	}
 
+	public int nextNoticeID(Map<String, String> map) {
+		int num = 0;
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		try {
+			num = dao.nextNoticeID(session, map);
+		} finally {
+			session.close();
+		}
+		return num;
+	}
+
+
 }

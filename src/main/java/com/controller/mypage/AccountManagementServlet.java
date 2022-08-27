@@ -3,6 +3,7 @@ package com.controller.mypage;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -35,20 +36,26 @@ public class AccountManagementServlet extends HttpServlet {
 		if (dto != null) {
 			String userid=dto.getUserid();
 			System.out.println(userid);
-			
-			MemberService m_service=new MemberService();
-			MemberDTO member=m_service.selectMember(userid);
-			
-			AddressService a_service=new AddressService();
-//			List<AddressDTO> addressList=a_service.selectAllAddress(userid);//userid의 전체 address
-			//userid-default_chk=1
-			AddressDTO address=a_service.selectDefaultAddress(userid);//userid의 기본 배송지
-			System.out.println(address);
-			
-			session.setAttribute("login", member);
-//			session.setAttribute("addressList", addressList);
-			session.setAttribute("address", address);
-			response.sendRedirect("accountForm.jsp");//로그인 된 계정 정보 session 저장-마이페이지 오픈
+			if (request.getParameter("admin")=="true") {
+				System.out.println("관리자가 회원 계정 접근");
+				RequestDispatcher dis=request.getRequestDispatcher("admin/adminMemberDetail.jsp");
+				dis.forward(request, response);
+			} else {
+				System.out.println("회원이 계정 접근");
+				MemberService m_service=new MemberService();
+				MemberDTO member=m_service.selectMember(userid);
+				
+				AddressService a_service=new AddressService();
+//				List<AddressDTO> addressList=a_service.selectAllAddress(userid);//userid의 전체 address
+				//userid-default_chk=1
+				AddressDTO address=a_service.selectDefaultAddress(userid);//userid의 기본 배송지
+				System.out.println(address);
+				
+				session.setAttribute("login", member);
+//				session.setAttribute("addressList", addressList);
+				session.setAttribute("address", address);
+				response.sendRedirect("accountForm.jsp");//로그인 된 계정 정보 session 저장-마이페이지 오픈
+			}
 		} else {
 			//alert로 로그인 후 이용하세요 출력
 			String mesg="로그인이 필요합니다.";

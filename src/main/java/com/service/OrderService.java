@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import com.config.MySqlSessionFactory;
 import com.dao.OrderDAO;
 import com.dto.CategoryProductDTO;
+import com.dto.ImagesDTO;
 import com.dto.OrderDTO;
 
 public class OrderService {
@@ -27,15 +28,20 @@ public class OrderService {
 		System.out.println(dto);
 		return dto;
 	}
-	public List<CategoryProductDTO> getProduct(int pIdList) {
+
+
+	
+	public List<CategoryProductDTO>  getProductList(List<Integer> pIdList) {
 		SqlSession session=MySqlSessionFactory.getSqlSession();
-        List<CategoryProductDTO> list = null;
+		List<CategoryProductDTO> list = null;
         try {
-        	list = dao.getProduct(session, pIdList);
+        	list = dao.getProductList(session, pIdList);
         }finally {
         	session.close();
         }
 		return list;
 	}
-
+	
+	
+	
 }

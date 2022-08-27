@@ -98,7 +98,7 @@ public class AccountChangeServlet extends HttpServlet {
 				System.out.println("회원 비밀번호 수정 갯수 : "+p_num);
 			}
 			session.setAttribute("mesg", "회원 정보가 수정되었습니다.");
-			response.sendRedirect("main.jsp");
+			response.sendRedirect("MainServlet");
 		} else {
 			//alert로 로그인 후 이용하세요 출력
 			String mesg="로그인이 필요합니다.";

@@ -54,6 +54,7 @@
 
 		<select id="selectAllMember" resultType="MemberDTO">
 			select * from member
+			order by created_at
 		</select>
 		
 		<select id="findId" parameterType="hashmap" resultType="MemberDTO">

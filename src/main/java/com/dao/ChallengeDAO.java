@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import com.dto.ChallengeDTO;
 import com.dto.CommentsDTO;
 import com.dto.PageDTO;
+import com.dto.ReportDTO;
 import com.dto.StampDTO;
 
 public class ChallengeDAO {
@@ -172,8 +173,8 @@ public class ChallengeDAO {
 		return map;
 	}
 
-	public List<String> selectMemberStampByUserid(SqlSession session, String userid) {
-		List<String> list = session.selectList("ChallengeMapper.selectMemberStampByUserid", userid);
+	public List<StampDTO> selectMemberStampByUserid(SqlSession session, String userid) {
+		List<StampDTO> list = session.selectList("ChallengeMapper.selectMemberStampByUserid", userid);
 		return list;
 	}
 
@@ -186,6 +187,37 @@ public class ChallengeDAO {
 		int n = session.update("ChallengeMapper.updateStamp", map);
 		return n;
 	}
+
+	public int insertReport(SqlSession session, HashMap<String, String> map) {
+		int n = session.insert("ChallengeMapper.insertReport", map);
+		return n;
+	}
+	
+	public int checkReportExist(SqlSession session, HashMap<String, String> map) {
+		return session.selectOne("ChallengeMapper.checkReportExist", map);
+	}
+
+	public PageDTO selectAllReport(SqlSession session, HashMap<String, String> map, int curPage) {
+		PageDTO pDTO = new PageDTO();
+		pDTO.setPerPage(10);
+		int perPage = pDTO.getPerPage();
+		int offset = (curPage - 1)*perPage;
+		
+		List<ReportDTO> list = session.selectList("ChallengeMapper.selectAllReport", map, new RowBounds(offset, perPage));
+		
+		pDTO.setCurPage(curPage);
+		pDTO.setList(list);
+		pDTO.setTotalCount(countTotalReport(session, map));
+		
+		return pDTO;
+	}
+
+	private int countTotalReport(SqlSession session, HashMap<String, String> map) {
+		return session.selectOne("ChallengeMapper.countTotalReport", map);
+	}
+
+	
+
 
 	
 

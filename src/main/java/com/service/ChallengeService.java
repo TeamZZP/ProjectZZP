@@ -349,8 +349,8 @@ public class ChallengeService {
 		return map;
 	}
 
-	public List<String> selectMemberStampByUserid(String userid) {
-		List<String> list = null;
+	public List<StampDTO> selectMemberStampByUserid(String userid) {
+		List<StampDTO> list = null;
 		SqlSession session = MySqlSessionFactory.getSqlSession();
 		try {
 			list = dao.selectMemberStampByUserid(session, userid);
@@ -382,6 +382,44 @@ public class ChallengeService {
 		}
 		return n;
 	}
+
+	public int insertReport(HashMap<String, String> map) {
+		int n = 0;
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		try {
+			n = dao.insertReport(session, map);
+			session.commit();
+		} finally {
+			session.close();
+		}
+		return n;
+	}
+	
+	public int checkReportExist(HashMap<String, String> map) {
+		int n = 0;
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		try {
+			n = dao.checkReportExist(session, map);
+		} finally {
+			session.close();
+		}
+		return n;
+	}
+
+	public PageDTO selectAllReport(HashMap<String, String> map, int curPage) {
+		PageDTO pDTO = null;
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		try {
+			pDTO = dao.selectAllReport(session, map, curPage);
+		} finally {
+			session.close();
+		}
+		return pDTO;
+	}
+
+	
+
+
 
 
 

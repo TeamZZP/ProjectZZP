@@ -19,7 +19,7 @@
 	margin-right: auto;
 }
 
-input {
+.container input[type="text"] {
 	width: 80%;
 	padding: 10px 20px;
 	margin: 5px 0;
@@ -40,21 +40,23 @@ a {
     background-color: #fff;
     border: none;
 }
-.form-color {
+.container .form-color {
     background-color: #fafafa
 }
-.form-control {
+.container .form-control {
     height: 48px;
     border-radius: 15px;
-    text-indent: 10px;
     display: inline;
 }
-.form-control:focus {
+.container .form-control:focus {
     color: #495057;
     background-color: #fff;
     border-color: #35b69f;
     outline: 0;
     box-shadow: none;
+}
+.comment_content {
+	text-indent: 10px;
 }
 .user-feed {
     font-size: 14px;
@@ -182,13 +184,14 @@ a {
 			let group = $(this).attr("data-group");
 			let parent = $(this).attr("data-parent");
 			let content = $("#reply_content"+cid);
+			let comment_content = content.val().substring(parent.length+3);
+			console.log(comment_content)
+			
 			if ("<%= currUserid %>" == "null") {
 				alert("로그인이 필요합니다.");
-			} else if (content.val().length == 0) {
+			} else if (comment_content.trim().length == 0) {
 				content.focus();
 			} else {
-				let comment_content = content.val().substring(parent.length+3);
-				console.log(comment_content)
 				$.ajax({
 					type:"post",
 					url:"CommentsAddServlet",
@@ -242,7 +245,7 @@ a {
 				type:"post",
 				url:"CommentsCountServlet",
 				data: {
-					"chall_id":"<%= chall_id %>",
+					chall_id:"<%= chall_id %>",
 				},
 				dataType:"text",
 				success: function (data) {
@@ -276,8 +279,8 @@ a {
 					type:"post",
 					url:"LikeServlet",
 					data: {
-						"chall_id":"<%= chall_id %>",
-						"userid":"<%= currUserid %>"
+						chall_id:"<%= chall_id %>",
+						userid:"<%= currUserid %>"
 					},
 					dataType:"html",
 					success: function (data) {
@@ -299,7 +302,63 @@ a {
 				history.back();
 			}
 		});
-		
+		//신고 모달
+		$("#reportModal").on("show.bs.modal", function (e) {
+			let button = e.relatedTarget;
+			let cid = button.getAttribute("data-bs-cid")
+			let category = button.getAttribute("data-bs-category")
+			if (category == 1) {
+				$("#report_category").val("1")
+				$("#report_chall_id").val(cid)
+			} else {
+				$("#report_category").val("2")
+				$("#report_comment_id").val(cid)
+			}
+		});
+		//신고 버튼
+		$(".reportBtn").on("click", function () {
+			if ("<%= currUserid %>" == "null") {
+				alert("로그인이 필요합니다.");
+			} else if ($("input[type='radio']:checked").length == 0) {
+				alert("신고 사유를 선택해 주세요.");
+			} else {
+				let category = $("#report_category").val()
+				let chall_id = $("#report_chall_id").val()
+				let comment_id = $("#report_comment_id").val()
+				let report_reason = $("input[type='radio']:checked").val()
+				
+				$.ajax({
+					type:"post",
+					url:"ReportAddServlet",
+					data: {
+						category:category,
+						chall_id:chall_id,
+						comment_id:comment_id,
+						report_reason:report_reason,
+						userid:"<%= currUserid %>"
+					},
+					dataType:"text",
+					success: function (data) {
+						if (data=="true") {
+							alert("신고가 완료되었습니다.")
+						} else {
+							alert("이미 신고한 글입니다.")
+						}
+						$("#reportModal").modal("toggle");
+					},
+					error: function () {
+						alert("문제가 발생했습니다. 다시 시도해 주세요.");
+					}
+				});
+			}
+		});
+		//신고 모달 저장 데이터 삭제
+		$('#reportModal').on('hidden.bs.modal', function(e) {
+  			$("#reportModal .modal-body").find('input:radio').prop('checked', false);
+  			$("#report_category").val("")
+			$("#report_chall_id").val("")
+			$("#report_comment_id").val("")
+		})
 		
 	});
 	
@@ -350,9 +409,13 @@ function displayedAt(createdAt) {
 				<% if (userid.equals(currUserid)) { %>
 				<a href="ChallengeUIServlet?chall_id=<%= chall_id %>&userid=<%= currUserid %>" class="btn btn-outline-success">수정</a> 
 				<a href="ChallengeDeleteServlet?chall_id=<%= chall_id %>&userid=<%= currUserid %>" id="deleteChallenge" class="btn btn-outline-success">삭제</a>
+				<!-- 관리자인 경우 -->
+				<% } else if ("admin1".equals(currUserid)) { %>
+				<a href="ChallengeDeleteServlet?chall_id=<%= chall_id %>&userid=<%= currUserid %>" id="deleteChallenge" class="btn btn-outline-success">삭제</a>
 				<!-- 그외의 경우 -->
 				<% } else { %>
-				<a href="" class="btn btn-outline-success">신고</a>
+				<a class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#reportModal" 
+												data-bs-category="1" data-bs-cid="<%= chall_id %>">신고</a>
 				<% } %>
 			   </div>
 			</div>
@@ -465,9 +528,13 @@ function displayedAt(createdAt) {
                             	<!-- 해당 댓글의 작성자인 경우 -->
                             	<% if (commentUserid!=null && commentUserid.equals(currUserid)) { %>
 								<a class="ml-3 commentDelBtn" data-cid="<%= comment_id %>">삭제</a> 
+								<!-- 관리자인 경우 -->
+								<% } else if ("admin1".equals(currUserid)) { %>
+								<a class="ml-3 commentDelBtn" data-cid="<%= comment_id %>">삭제</a> 
 								<!-- 그외의 경우 --> 
 								<% } else { %> 
-								<a class="ml-3">신고</a> 
+								<a class="ml-3" data-bs-toggle="modal" data-bs-target="#reportModal" 
+												data-bs-category="2" data-bs-cid="<%= comment_id %>">신고</a> 
 								<% } %>
                             </div>
                         </div>
@@ -528,3 +595,56 @@ function displayedAt(createdAt) {
 
 		
 
+
+<!-- modal -->
+<div class="modal fade" id="reportModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+   
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">신고 사유를 선택해 주세요</h5>
+      </div>
+      <div class="modal-body">
+          <div class="mb-3">
+            <div class="form-check mb-2">
+  				<input class="form-check-input" type="radio" name="report_reason" value="1">
+  				<label class="form-check-label" for="report_reason">지나친 광고성 글</label>
+			</div>
+			<div class="form-check mb-2">
+  				<input class="form-check-input" type="radio" name="report_reason" value="2">
+  				<label class="form-check-label" for="report_reason">스팸홍보/도배 글</label>
+			</div>
+			<div class="form-check mb-2">
+  				<input class="form-check-input" type="radio" name="report_reason" value="3">
+  				<label class="form-check-label" for="report_reason">욕설/비방이 심함</label>
+			</div>
+			<div class="form-check mb-2">
+  				<input class="form-check-input" type="radio" name="report_reason" value="4">
+  				<label class="form-check-label" for="report_reason">외설적인 글</label>
+			</div>
+			<div class="form-check mb-2">
+  				<input class="form-check-input" type="radio" name="report_reason" value="5">
+  				<label class="form-check-label" for="report_reason">개인정보 노출</label>
+			</div>
+			<div class="form-check mb-2">
+  				<input class="form-check-input" type="radio" name="report_reason" value="6">
+  				<label class="form-check-label" for="report_reason">저작권 침해가 우려됨</label>
+			</div>
+			<div class="form-check mb-2">
+  				<input class="form-check-input" type="radio" name="report_reason" value="7">
+  				<label class="form-check-label" for="report_reason">기타</label>
+			</div>
+          </div>
+        
+      </div>
+      <div class="modal-footer">
+        <input type="hidden" name="report_category" id="report_category">
+        <input type="hidden" name="report_chall_id" id="report_chall_id">
+        <input type="hidden" name="report_comment_id" id="report_comment_id">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+        <button type="button" class="reportBtn btn btn-success">신고하기</button>
+      </div>
+    </div>
+  
+  </div>
+</div>

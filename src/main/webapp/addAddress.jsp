@@ -32,6 +32,11 @@
 				$("#inputReceiverPhone").val("");
 				$("#inputReceiverPhone").focus();
 				event.preventDefault();
+			} else if (receiver_name.length > 3){
+				alert("수령인은 3글자 이내로 입력해주세요.");
+				$("#inputReceiverName").val("");
+				$("#inputReceiverName").focus();
+				event.preventDefault();
 			} else {
 				//기본 배송지 체크
 /* 				check = "0";

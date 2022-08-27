@@ -17,6 +17,7 @@
 li{
 display: block;
 list-style: none;
+
 }
 #category{
 float: left;

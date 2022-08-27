@@ -21,6 +21,7 @@
 	int stamp_id = stampDTO.getStamp_id();
 	String stamp_img = stampDTO.getStamp_img();
 	String stamp_name = stampDTO.getStamp_name();
+	String stamp_content = stampDTO.getStamp_content();
 	
 	//session에 저장된 userid 읽어오기 
 	MemberDTO member = (MemberDTO) session.getAttribute("login"); 
@@ -85,6 +86,7 @@ a {
 		<div class="row">
 			<div class="btn-group" role="group" aria-label="Basic example">
 				<button type="button" class="btn btn-outline-success category" data-category="member" id="memberManagement">회원관리</button>
+				<button type="button" class="btn btn-outline-success category" data-category="report" id="reportManagement">신고관리</button>
 				<button type="button" class="btn btn-outline-success category" data-category="product" id="productManagement">상품관리</button>
 				<button type="button" class="btn btn-outline-success category" data-category="challenge" id="challengeManagement">챌린지관리</button>
 			</div>
@@ -154,7 +156,8 @@ a {
 		  
 		  </div>
 		  <div class="col-6 m-0 my-auto">
-		    <%= stamp_name %>
+		    <div><%= stamp_name %></div>
+		    <div class="mt-3"><%= stamp_content %></div>
 		  </div>
 		</div>
 		

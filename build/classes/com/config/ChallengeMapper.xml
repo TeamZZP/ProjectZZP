@@ -61,7 +61,11 @@
  	  	chall_content like '%${searchValue}%'
 	  </if>
 	</where> 
-	order by ${sortBy} desc
+	order by 
+	<if test="sortBy!=null">
+		${sortBy} desc,
+	</if>
+	chall_id desc
 </select>
 
 <select id="selectChallengeByUserid" resultType="ChallengeDTO">
@@ -249,7 +253,7 @@
 </select>
 
 <select id="selectNewChallenge" resultType="ChallengeDTO">
-	select * from challenge where rownum <![CDATA[<=]]> 8 order by chall_id desc
+	select * from challenge order by chall_id desc
 </select>
 
 
@@ -282,12 +286,14 @@
 	into stamp (stamp_id,
 			chall_id,
 			stamp_img,
-			stamp_name)
+			stamp_name,
+			stamp_content)
 		values
 			(stamp_stamp_id_seq.NEXTVAL,
 			challenge_chall_id_seq.NEXTVAL,
 			#{stamp_img},
-			#{stamp_name})
+			#{stamp_name},
+			#{stamp_content})
 	into member_stamp (userid,
 			stamp_id,
 			chall_id,
@@ -308,7 +314,8 @@
 <update id="updateStamp" parameterType="hashmap">
 	update stamp
 	set stamp_img=#{stamp_img},
-		stamp_name=#{stamp_name}
+		stamp_name=#{stamp_name},
+		stamp_content=#{stamp_content}
 	where chall_id=#{chall_id}
 </update>
 
@@ -333,9 +340,9 @@
 	where m.chall_id=#{chall_id}
 </select>
 
-<select id="selectMemberStampByUserid" resultType="string">
-	select stamp_id 
-	from member_stamp
+<select id="selectMemberStampByUserid" resultType="com.dto.StampDTO">
+	select stamp_id, stamp_img, stamp_name, stamp_content 
+	from member_stamp join stamp using(stamp_id)
 	where userid=#{userid}
 	order by stamp_id desc
 </select>
@@ -345,5 +352,112 @@
 	from stamp
 	where stamp_id=#{stamp_id}
 </select>
+
+
+
+
+<insert id="insertReport" parameterType="hashmap">
+	insert into report
+		(report_id,
+		userid,
+		report_category,
+		<if test="chall_id != null">
+		chall_id,
+		</if>
+		<if test="comment_id != null">
+		comment_id,
+		</if>
+		report_reason,
+		report_status,
+		report_created)
+	values
+		(report_report_id_seq.NEXTVAL,
+		#{userid},
+		#{category},
+		<if test="chall_id != null">
+		#{chall_id},
+		</if>
+		<if test="comment_id != null">
+		#{comment_id},
+		</if>
+		#{report_reason},
+		0,
+		CURRENT_TIMESTAMP)
+</insert>
+
+<select id="checkReportExist" parameterType="hashmap" resultType="int">
+	select count(*) from report
+	where userid=#{userid} 
+	and
+	<if test="chall_id != null">
+		chall_id=#{chall_id}
+	</if>
+	<if test="comment_id != null">
+		comment_id=#{comment_id}
+	</if>
+</select>
+
+<select id="selectAllReport" parameterType="hashmap" resultType="com.dto.ReportDTO">
+	select r.report_id,
+			r.userid,
+			case r.report_category 
+				when 1 then '게시글'
+       			when 2 then '댓글'
+        		end report_category,
+			r.chall_id,
+			r.comment_id,
+			case r.report_reason 
+		        when 1 then '지나친 광고성 글'
+		        when 2 then '스팸홍보/도배 글'
+		        when 3 then '욕설/비방이 심함'
+		        when 4 then '외설적인 글'
+		        when 5 then '개인정보 노출'
+		        when 6 then '저작권 침해가 우려됨'
+		        when 7 then '기타'
+		        end report_reason,
+			case r.report_status 
+		        when 0 then '처리 대기'
+		        when 1 then '처리 완료'
+		        end report_status,
+			r.report_created,
+			COALESCE(ch.userid, co.userid) reported_userid, 
+			COALESCE(ch.chall_title, co.comment_content) content
+	from report r, challenge ch, comments co 
+	where r.chall_id=ch.chall_id (+)
+	and r.comment_id=co.comment_id (+)
+ 	  <if test='searchName=="userid"'> 
+ 	  	and r.userid like '%${searchValue}%'
+	  </if>
+	  <if test='searchName=="reported_userid"'> 
+ 	  	and COALESCE(ch.userid, co.userid) like '%${searchValue}%'
+	  </if>
+	  <if test='searchName=="report_created"'> 
+ 	  	and report_created like '%${searchValue}%'
+	  </if>
+	  <if test='status!=null'> 
+ 	  	and report_status=${status}
+	  </if>
+	order by report_id desc
+</select>
+
+<select id="countTotalReport" parameterType="hashmap" resultType="int">
+	select count(*) 
+	from report r, challenge ch, comments co 
+	where r.chall_id=ch.chall_id (+)
+	and r.comment_id=co.comment_id (+)
+ 	  <if test='searchName=="userid"'> 
+ 	  	and r.userid like '%${searchValue}%'
+	  </if>
+	  <if test='searchName=="reported_userid"'> 
+ 	  	and COALESCE(ch.userid, co.userid) like '%${searchValue}%'
+	  </if>
+	  <if test='searchName=="report_created"'> 
+ 	  	and report_created like '%${searchValue}%'
+	  </if>
+	  <if test='status!=null'> 
+ 	  	and report_status=${status}
+	  </if>
+</select>
+
 
 </mapper>

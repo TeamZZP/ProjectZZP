@@ -5,16 +5,18 @@ public class StampDTO {
 	private int chall_id;
 	private String stamp_img;
 	private String stamp_name;
+	private String stamp_content;
 	public StampDTO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public StampDTO(int stamp_id, int chall_id, String stamp_img, String stamp_name) {
+	public StampDTO(int stamp_id, int chall_id, String stamp_img, String stamp_name, String stamp_content) {
 		super();
 		this.stamp_id = stamp_id;
 		this.chall_id = chall_id;
 		this.stamp_img = stamp_img;
 		this.stamp_name = stamp_name;
+		this.stamp_content = stamp_content;
 	}
 	public int getStamp_id() {
 		return stamp_id;
@@ -40,10 +42,16 @@ public class StampDTO {
 	public void setStamp_name(String stamp_name) {
 		this.stamp_name = stamp_name;
 	}
+	public String getStamp_content() {
+		return stamp_content;
+	}
+	public void setStamp_content(String stamp_content) {
+		this.stamp_content = stamp_content;
+	}
 	@Override
 	public String toString() {
 		return "StampDTO [stamp_id=" + stamp_id + ", chall_id=" + chall_id + ", stamp_img=" + stamp_img
-				+ ", stamp_name=" + stamp_name + "]";
+				+ ", stamp_name=" + stamp_name + ", stamp_content=" + stamp_content + "]";
 	}
 
 }

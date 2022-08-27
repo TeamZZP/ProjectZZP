@@ -150,7 +150,7 @@ function productChoice(n) {
 			<div class="col-lg-3 col-md-4 col-sm-6">
 			<div class="hover-zoomin">
 				<a href="ProductRetrieveServlet?p_id=<%=p_id%>"> <img
-					src="images/p_image/<%=p_image%>.png "></a>
+					src="images/p_image/<%=p_image%> "></a>
 			</div>
 			<div class="p-2 text-center">
 				<a href="ProductRetrieveServlet?p_id=<%=p_id%>"> <span

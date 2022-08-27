@@ -50,6 +50,16 @@
 			$("#pID").click(function () {
 				window.open("questionproductSelect.jsp","","width=400px height=500px");
 			});
+			function checkFileExtension(){ 
+				let fileValue = $("#qFile").val(); 
+				let reg = /(.*?)\.(jpg|jpeg|png|gif)$/;
+				if (fileValue.match(reg)) {
+					return true;
+				} else {
+					alert("jpg, jpeg, png, gif 파일만 업로드 가능합니다.");
+					return false;
+				}
+			}
 		});//end ready
 	</script>
 <div style="text-align: center; display: flex; justify-content:center; height: 100px; margin-bottom: 10px;" >
@@ -126,7 +136,25 @@
 				<td> <button id="QuestionList" class="btn btn-success">목록</button> </td>
 				<td style="text-align: right;">
 					<button id="QuestionInsert" data-userid="<%=userid %>" data-operate="<%=operate %>" class="btn btn-success">등록</button>
-					<button type="reset" class="btn btn-success">취소</button>
+					<button id="QuestionCancel" type="reset" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#aa">취소</button>
+					
+					<div class="modal fade" id="aa" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+					  <div class="modal-dialog">
+					    <div class="modal-content">
+					      <div class="modal-header">
+					        <h5 class="modal-title" id="staticBackdropLabel">취소</h5>
+					        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					      </div>
+					      <div class="modal-body" style="text-align: left;">
+					        이전 페이지로 돌아가시겠습니까?
+					      </div>
+					      <div class="modal-footer">
+					        <button type="button" class="btn btn-success" onclick="history.back()">확인</button>
+					        <button type="button" class="btn btn-success" data-bs-dismiss="modal">취소</button>
+					      </div>
+					    </div>
+					  </div>
+					</div>
 				</td>
 			</tr>
 		</table>

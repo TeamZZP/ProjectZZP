@@ -1,6 +1,8 @@
 package com.controller.order;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -27,39 +29,49 @@ public class OrderServlet extends HttpServlet {
 		MemberDTO dto = (MemberDTO)session.getAttribute("login");
 		String mesg = "";
 		int p_amount = 0;
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		
 		//int p_id= 0;
 
 		
-		
-		System.out.println(request.getParameterValues("p_id"));
-		
 			if(dto != null) {
 				String[] pIdListString = request.getParameterValues("p_id");  //String []로 데이터 파싱해옴
-				int [] pIdList = null;
-				 for (int i = 0; i < pIdListString.length; i++) {             //int[] 형태로 형변환
-					 System.out.println( pIdListString[i]);
-					 pIdList[i] = Integer.parseInt(pIdListString[i]);
-					 System.out.println(pIdList[i]);
-			        }
-		        
-				OrderService service = new OrderService();
-				List<CategoryProductDTO> list = null;
+				List<Integer> pIdList = new ArrayList<Integer>();
 				
-				for (int i = 0; i < pIdList.length; i++) {
-					list =service.getProduct(pIdList[i]);
+				for (int i = 0; i < pIdListString.length; i++) {             //int[] 형태로 형변환
+					 System.out.println("String"+ pIdListString[i]);
+					 pIdList.add(Integer.parseInt(pIdListString[i]));
+					 System.out.println("Int"+pIdList.get(i));
+					
+					 
+			    }
+					OrderService service = new OrderService();
+					List<CategoryProductDTO> list = new ArrayList<CategoryProductDTO>();
+				
+					list = service.getProductList(pIdList);
+					
+					
+				for (int i = 0; i < pIdList.size(); i++) {
 					System.out.println(list.get(i));
 				}
-						
 			
 			if(Integer.parseInt((String)request.getParameter("p_amount"))==0||(String)request.getParameter("p_amount")==null) {
-				p_amount = 1;
+				
+				 map.put("p_id",Integer.parseInt((String)request.getParameter("p_id")));
+				 map.put("p_amount",1);
+				 
 			}else {
-				p_amount = Integer.parseInt((String)request.getParameter("p_amount"));
-			}
+				
+				 map.put("p_id",Integer.parseInt((String)request.getParameter("p_id")));
+				 map.put("p_amount",Integer.parseInt((String)request.getParameter("p_amount")));
+				
+				 }
 			
 			
 			request.setAttribute("list", list);
-			request.setAttribute("p_amount", p_amount);
+			request.setAttribute("map", map);
+			
+		
 			
 			RequestDispatcher dis = request.getRequestDispatcher("order.jsp");
 			dis.forward(request, response);

@@ -27,7 +27,7 @@ public class StoreServlet extends HttpServlet {
 		CategoryService category_service = new CategoryService(); // 카테고리 목록 조회
 		ProductService  product_service  = new ProductService(); //베스트 상품 조회
 		
-		List<CategoryDTO> category_list = category_service.allCategory();
+		List<CategoryDTO> category_list = category_service.allCategory();//
 		List<CategoryProductDTO> product_list = product_service.bestProductList();
 		System.out.println(product_list);
 		
