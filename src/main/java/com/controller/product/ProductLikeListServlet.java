@@ -28,6 +28,8 @@ public class ProductLikeListServlet extends HttpServlet {
   
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("ProductLikeListServlet====");
+		request.setCharacterEncoding("utf-8");
+		
 		HttpSession session = request.getSession();
 		MemberDTO mdto = new MemberDTO();
 		mdto = (MemberDTO) session.getAttribute("login");

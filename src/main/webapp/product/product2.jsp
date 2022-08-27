@@ -66,27 +66,20 @@ function productChoice(n) {
    if(mdto != null){%>
 
       var userid =  '<%=mdto.getUserid()%>'; 
-	  /* var p_id = $("#p_id").val(); */
+
 	 $.ajax({
         
           type: "get",
           url: "ProductLikeServlet",
           data:  {
-               "p_id":n  ,
+                "p_id":n ,
                 "userid":userid
-	 },
-                dataType : "html",
-                success : function(data){
-                	 var like_img = '';
-                	 if(data.likecheck==0){
-                		 like_img = "images/like.png";
-                	}else{
-                		like_img = "images/liked.png";
-                	}
-                	 $("#like_img"+n).attr('src', like_img);
- 				 console.log("성공");
+                },
+                dataType : "json",
+                success : function(data,status,xhr){
+                  //이미지 바뀌는 부분
                 },error : function (xhr,status,error){
-                 alert(error);
+                 console.log(error);
                 }
 
 
@@ -125,9 +118,11 @@ function productChoice(n) {
 	})//
         
 </script>
-   
+
+<!--   <div class="container "> -->
+     
+      
      <% 
-  
      List<CategoryProductDTO> product_list = (List<CategoryProductDTO>)request.getAttribute("product_list"); 
      %>
    
@@ -137,7 +132,6 @@ function productChoice(n) {
 		<div class="row " align="center">
 		
 				<%
-				/*  int likecheck = (int)request.getAttribute("likecheck"); */
 				 for ( int i = 0 ; i < product_list.size() ; i++ ) {
 					    int p_id = product_list.get(i).getP_id();
 					    String p_name =product_list.get(i).getP_name();
@@ -150,14 +144,13 @@ function productChoice(n) {
 						int p_stock =product_list.get(i).getP_stock();
 						String userid =product_list.get(i).getUserid();
 						String p_image = product_list.get(i).getP_image();
-						int p_liked = product_list.get(i).getP_liked();
 					%>
 
 			
 			<div class="col-lg-3 col-md-4 col-sm-6">
 			<div class="hover-zoomin">
 				<a href="ProductRetrieveServlet?p_id=<%=p_id%>"> <img
-					src="images/p_image/<%=p_image%> "></a>
+					src="images/p_image/<%=p_image%>.png "></a>
 			</div>
 			<div class="p-2 text-center">
 				<a href="ProductRetrieveServlet?p_id=<%=p_id%>"> <span
@@ -169,20 +162,10 @@ function productChoice(n) {
 			</div>
 			<!-- 찜기능  -->
 			<div class="p-2 text-center">
-			
 				<a id="productChoice" href="javascript:productChoice(<%=p_id%>)">
-				<%-- <div id="liked_area">
-					<% if(likecheck==1){ %>
-					 <img src="images/liked.png" width="30" height="30" class="liked"> 
-				 	<%=p_liked %>
-					<% }else{ %>  --%>
-					<img id="like_img<%=p_id%>" src="images/like.png" width="30" height="30" class="liked">
-				<%-- 	<input type="hidden" id="p_id" value="<%=p_id %>">
-				  <%=p_liked %>
-					<% } %> 
-					</div> --%>
+					<img id="likeimg" src="images/like.png" width="30" height="30">
 				</a>
-			
+
 				<!-- 장바구니 모달창-->
 				<!-- Button trigger modal -->
 				<button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#addcart<%=p_id %>">
