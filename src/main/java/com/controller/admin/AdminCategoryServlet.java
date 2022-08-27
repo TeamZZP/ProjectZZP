@@ -56,7 +56,10 @@ public class AdminCategoryServlet extends HttpServlet {
 			
 			//전체 회원 목록 --->> 검색 기준, 검색어, 정렬 기준, 현재 페이지를 매개변수로 받음
 			List<MemberDTO> memberList=m_service.selectAllMember();
-			//PageDTO pDTO=m_service.selectAllMember2(map, Integer.parseInt(curPage));
+//			PageDTO pDTO=m_service.selectAllMember2(map, Integer.parseInt(curPage));
+			PageDTO pDTO=m_service.selectAllMember2(map, Integer.parseInt(curPage));
+			//List<AddressDTO> test=a_service.selectAllMember3(admin);
+			System.out.println(pDTO);
 			
 			String userid=null;
 			//전체 회원 주소 목록--회원별 주소
@@ -68,6 +71,10 @@ public class AdminCategoryServlet extends HttpServlet {
 			
 			request.setAttribute("memberList", memberList);
 			request.setAttribute("addMap", addMap);//userid의 address 리스트
+			request.setAttribute("pDTO", pDTO);
+			request.setAttribute("searchName", searchName);
+			request.setAttribute("searchValue", searchValue);
+			request.setAttribute("sortBy", sortBy);
 			
 			RequestDispatcher dis = request.getRequestDispatcher("adminMember.jsp");
 			dis.forward(request, response);
