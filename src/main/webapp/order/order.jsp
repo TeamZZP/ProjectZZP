@@ -20,7 +20,7 @@ a:hover {
 }
 
 
- li {
+ #orderLi {
    display: flex;
    position: relative;
    padding: 24px;
@@ -44,7 +44,7 @@ border-bottom: 2.5px solid green;
 <img src="images/ordering.png" width="900" height="200">
 
 <h3>주문하실 상품</h3>
-<hr>
+<hr id="orderHr">
 
 
 
@@ -69,7 +69,7 @@ HashMap<String, Integer> map = (HashMap<String, Integer>)request.getAttribute("m
       <div class="order_content">
          <input type="hidden" name="userid" id="userid" value="<%=userid %>">
          <ul class="orderProduct_list" style="line-height: 50px; font-size: 20px;">
-            <li>
+            <li id="orderLi">
                <a href="ProductRetrieveServlet?p_id=<%=p_id%>"> <img
                   src="images/p_image/<%=p_image%>" width="150"
                   style="border: 10px;" height="150"></a>
