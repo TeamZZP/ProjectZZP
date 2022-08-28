@@ -35,14 +35,56 @@
 <script type="text/javascript"
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">    
-	$(function(){
-		
-	})//end function
+var productLike = 0;
+
+function productChoice(n) {
+      console.log(n);
+
+     
+     <%
+     
+   MemberDTO mdto = (MemberDTO)session.getAttribute("login");
+   if(mdto != null){%>
+
+      var userid =  '<%=mdto.getUserid()%>'; 
+	 
+	 $.ajax({
+        
+          type: "get",
+          url: "ProductLikeServlet",
+          data:  {
+               "p_id":n  ,
+                "userid":userid
+	      },
+          dataType : "text",
+          success : function(data){
+               var like_img = '';
+                 if(data.likecheck==0){
+                		 like_img = "images/like.png";
+                	}else{
+                		 like_img = "images/liked.png";
+                	}
+               $("#like_img"+n).attr('src', like_img);
+ 				 console.log("성공");
+           },error : function (xhr,status,error){
+              alert(error);
+           }
+
+
+     }); //end ajax
+
+   <%}else{%>
+    alert("로그인이 필요합니다.");
+   	location.href = "LoginUIServlet";
+    event.preventDefault();
+   <%}%>
+
+
 </script>
     <div class="row" align="center">
 				<%
 				 List<CategoryProductDTO> product_list = (List<CategoryProductDTO>)request.getAttribute("product_list"); 
-				   MemberDTO mdto = (MemberDTO)session.getAttribute("login");
+				  
 
 				 for ( int i = 0 ; i < product_list.size() ; i++ ) {
 					    int p_id = product_list.get(i).getP_id();
@@ -81,14 +123,11 @@
 			<!-- 찜기능  -->
 			<div class="p-2 text-center">
 				<a id="productChoice" href="javascript:productChoice(<%=p_id%>)">
-					 
-					<% if(likecheck==1){ %>
-					 <img src="images/liked.png" width="30" height="30" class="liked"> 
-				 	<%=p_liked %>
-					<% }else{ %>
-					<img id="like_img<%=p_id%>" src="images/like.png" width="30" height="30" class="liked">
 				
-				  <%=p_liked %>
+					<% if(likecheck==1){ %>
+					 <img id="like_img<%=p_id%>" src="images/liked.png" width="30" height="30" class="liked"> 
+				 	<% }else{ %>
+					<img id="like_img<%=p_id%>" src="images/like.png" width="30" height="30" class="liked">
 					<% } %> 
 					
 				</a>

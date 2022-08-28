@@ -90,60 +90,18 @@ a:hover {
 <script type="text/javascript"
    src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-/* function setTotalInfo(){
-	
-	var sum_money = 0;				// 총 가격
-	var fee = 0;			// 배송비
-	var total = 0; 		// 최종 가격(총 가격 + 배송비)
-
-	
-	$(".cart_info_div").each(function(index, element){
-		if($(element).find(#check).is("checked")==true){
-			sum_money += sum_money.val());	
-		}
-		}
+ 		 
+ 			
 		
-		});
-	
-	
-	/* 배송비 결정 */
-	if(sum_money >= 50000){
-		fee = 0;
-	} else if(sum_money == 0){
-		fee = 0;
-	} else {
-		fee = 3000;	
-	}
-	
-	total = sum_money + fee;
-	
-	/* ※ 세자리 컴마 Javscript Number 객체의 toLocaleString() */
-	
-	// 총 가격
-	$("#sum_money").text(sum_money);
-	// 배송비
-	$("#fee").text(fee);	
-	// 최종 가격(총 가격 + 배송비)
-	$("#total").text(total); */	
-	
+		
+	 
+	 
    $(function() {
-	   /* 
-	   //종합정보섹션정보삽입
-	   setTotalInfo();
-	
-	   $(".individual_cart_checkbox").on("change", function(){
-			setTotalInfo($(".cart_info_div"));
-		});
-	      $("#order").on("click", function() {
-	    	 
-	       $("form").attr("action", "OrderServlet");
-	            */
-	        
-	      }) 
-	      
+
+	   
       //체크박스 미선택시 alert창
       $("#delAllCart").on("click", function() {
-         if ($(".check").is(":checked") == false) {
+         if ($(".individual_cart_checkbox").is(":checked") == false) {
 
             alert("삭제할 상품을 선택하세요.");
             event.preventDefault();
@@ -154,7 +112,7 @@ a:hover {
       //전체선택
       $("#allCheck").on("click", function() {
          var result = this.checked;
-         $(".check").each(function(idx, data) {
+         $(".individual_cart_checkbox").each(function(idx, data) {
             data.checked = result;
          })
       })//end allcheck
@@ -166,11 +124,13 @@ a:hover {
       
       //장바구니 수량 수정
       $(".updBtn").on("click", function() {
+    	  
          var cart_id = $(this).attr("data-xxx"); //cart_id
          var p_selling_price = $(this).attr("data-price");
          var p_amount = $("#cartAmount" + cart_id).val();
          var sum_money = $(this).attr("data-sum_money")
          console.log(cart_id, p_selling_price, p_amount, sum_money)
+         
          var userid = $(this).attr("data-id");
          $.ajax({
             type : "get",
@@ -274,14 +234,14 @@ a:hover {
       <div class="cart_content">
        <input type="hidden" name="userid" id="userid" value="<%=userid %>">
       	<div class="cart_info_div">
-  		<input type="hidden" class="sum_money_input" value="<%=sum_money %>">
-         <input type="hidden" class="fee_input" value="<%=fee %>">
-		 <input type="hidden" class="total_input" value="<%=total%>">
+  		<input type="hidden" class="individual_sum_money_input" value="<%=sum_money %>">
+         <input type="hidden" class="individual_fee_input" value="<%=fee %>">
+		 <input type="hidden" class="individual_total_input" value="<%=total%>">
 		 </div>
          <ul class="cart_list" style="line-height: 50px; font-size: 20px;">
             <li>
             <input type="checkbox" name="check" id="check" checked="checked"
-               class="check" value="<%=cart_id%>" 
+               class="individual_cart_checkbox" value="<%=cart_id%>" 
                style="width: 30px; position: relative; bottom: 100px; margin-right: 10px;">
                <a href="ProductRetrieveServlet?p_id=<%=p_id%>"> <img
                   src="images/p_image/<%=p_image%>" width="200"
@@ -300,12 +260,12 @@ a:hover {
                         class="p_amount" name="p_amount"
                         style="text-align: right; line-height: 0px;" maxlength="3"
                         size="2" value="<%=p_amount%>"> <input type="button"
-                        value="수정" id="updBtn" class="updBtn" style="line-height: 28px;"
+                        value="변경" id="updBtn" class="updBtn" style="line-height: 28px;"
                         data-xxx="<%=cart_id%>" data-price="<%=p_selling_price%>"
                         data-id="<%=userid%>" data-sum_money="<%=sum_money%>" /> <br>
                   </div>
                   상품가격 :<span id="item_price<%=cart_id%>"
-                     style="margin-bottom: 15px;"><%=p_selling_price * p_amount%></span><br>
+                     style="margin-bottom: 15px;" ><%=p_selling_price * p_amount%></span><br>
                </div> <span class="cart_item_del"> <img src="images/delete.png"
                   width="20" height="20" class="delBtn" data-xxx="<%=cart_id%>"></span>
             </li>
@@ -322,7 +282,7 @@ a:hover {
             <p>배송비</p>
             <p>총주문금액</p>
          </div>
-         <div class="total_price">
+         <div class="cart_info_div">
             <span class="price" id="sum_money"><%=sum_money%></span> <span
                class="price" id="fee"><%=fee%></span> <span class="price"
                id="total"><%=total%></span>
@@ -339,3 +299,8 @@ a:hover {
       %>
    </form>
 </div>
+<script type="text/javascript"
+   src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+	
+</script>

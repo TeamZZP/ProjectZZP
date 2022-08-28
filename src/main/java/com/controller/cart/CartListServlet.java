@@ -48,7 +48,9 @@ public class CartListServlet extends HttpServlet {
 			int fee = sum_money >= 50000? 0: 3000; //배송비 계산
 			int total = sum_money+fee; //총금액 + 배송비
 			
-			Map<String,Integer> map = new HashMap<>();
+			Map<String,Object> map = new HashMap<>();
+			map.put("list", list);
+			map.put("cartCount", cartCount);
 			map.put("sum_money",sum_money); 
 			map.put("fee",fee); 
 			map.put("total",total); 

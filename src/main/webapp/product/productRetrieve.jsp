@@ -207,6 +207,7 @@ System.out.println("productRetrieve.jsp에서 파싱한 ilist==" + ilist);
 						<th>상품가격</th>
 						<td></td>
 						<td><span id="p_selling_price" name="p_selling_price"><%=p_selling_price%></span>원</td>
+						
 					</tr>
 
 					<tr>

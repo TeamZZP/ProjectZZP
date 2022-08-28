@@ -94,6 +94,7 @@ function productChoice(n) {
 
    <%}else{%>
     alert("로그인이 필요합니다.");
+   	location.href = "LoginUIServlet";
     event.preventDefault();
    <%}%>
 
@@ -181,12 +182,9 @@ function productChoice(n) {
 				<a id="productChoice" href="javascript:productChoice(<%=p_id%>)">
 				
 					<% if(likecheck==1){ %>
-					 <img src="images/liked.png" width="30" height="30" class="liked"> 
-				 	<%=p_liked %>
-					<% }else{ %>
+					 <img id="like_img<%=p_id%>" src="images/liked.png" width="30" height="30" class="liked"> 
+				 	<% }else{ %>
 					<img id="like_img<%=p_id%>" src="images/like.png" width="30" height="30" class="liked">
-				
-				  <%=p_liked %>
 					<% } %> 
 					
 				</a>
@@ -231,7 +229,7 @@ function productChoice(n) {
 														<button type="button" class="btn btn-outline-success" id="up">+</button>
 														<button type="button" class="btn btn-outline-success" id="down">-</button>
 															<br> <input type="hidden" id="price" name="p_selling_price" value="<%=p_selling_price%>">
-														<a>총 상품금액 : </a><span id="total"><%=p_selling_price%></span>원
+														<a>총 상품금액 : </a><span id="total" ><%=p_selling_price%></span>원
 													</div>
 												</div>
 											</div>

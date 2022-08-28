@@ -23,6 +23,7 @@ public class CartUpdateServlet extends HttpServlet {
 		int cart_id = Integer.parseInt(request.getParameter("cart_id"));
 		int p_amount = Integer.parseInt(request.getParameter("p_amount"));
 		int sum_money = Integer.parseInt(request.getParameter("sum_money"));
+		
 		System.out.println(cart_id + " " + p_amount+" "+sum_money);
 
 		String nextPage = null;

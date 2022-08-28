@@ -70,7 +70,7 @@ public class ProductListServlet extends HttpServlet {
 			
 			int likecheck = service.likeCheck(map);
 			
-			request.setAttribute("p_likecheck", likecheck);
+			request.setAttribute("likecheck", likecheck);
 	        request.setAttribute("best", plist);		    
 			request.setAttribute("productList", list);
 			
