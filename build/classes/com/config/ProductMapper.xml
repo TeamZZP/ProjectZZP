@@ -229,9 +229,7 @@ from product p
 
 where p.c_id = #{c_id} 
 	 
-<<<<<<< HEAD
 order by ${sortBy} desc
-=======
 <where>
 	<if test='searchName=="c_id"'>
 		upper((select C_NAME from category where c_id = p.c_id)) like upper('%${searchValue}%')
@@ -251,7 +249,6 @@ order by ${sortBy} desc
 </where>
 	 order by ${sortBy} desc
 
->>>>>>> 8cc63f2ee31de903942252e4be651b6971e7cfce
 </select>
 
 <insert id="insertProduct" parameterType="hashmap">
