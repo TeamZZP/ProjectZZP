@@ -36,10 +36,9 @@ public class CategoryServlet extends HttpServlet {
 		if(member != null) {
 			userid = member.getUserid();
 		}	
-		
 		int c_id = Integer.parseInt( request.getParameter("c_id"));
 		String p_id = request.getParameter("p_id");
-		
+
 		CategoryService service = new CategoryService();
 		
 		List<CategoryProductDTO> product_list  = null; //베스트상품
@@ -65,8 +64,9 @@ public class CategoryServlet extends HttpServlet {
 		 */
 		
         request.setAttribute("product_list", product_list);
-        System.out.println("카테고리서블릿========="+product_list);
-		
+
+        System.out.println("상품 출력=============="+product_list);
+
 		RequestDispatcher dis = request.getRequestDispatcher("categoryProduct.jsp");
 		dis.forward(request, response);
 		 
