@@ -282,9 +282,10 @@ a {
 						chall_id:"<%= chall_id %>",
 						userid:"<%= currUserid %>"
 					},
-					dataType:"html",
+					dataType:"text",
 					success: function (data) {
-						$("#liked_area").html(data);
+						$("#liked_area .liked").attr("src", data);
+						countLikes();
 					},
 					error: function () {
 						alert("문제가 발생했습니다. 다시 시도해 주세요.");
@@ -292,6 +293,23 @@ a {
 				});
 			}
 		});
+		//좋아요 개수 구해오기
+		function countLikes() {
+			$.ajax({
+				type:"post",
+				url:"LikeCountServlet",
+				data: {
+					chall_id:"<%= chall_id %>",
+				},
+				dataType:"text",
+				success: function (data) {
+					$("#likeNum").text(data);
+				},
+				error: function () {
+					alert("문제가 발생했습니다. 다시 시도해 주세요.");
+				}
+			});
+		}
 		//목록으로 돌아가기
 		$(".backList").on("click", function () {
 			let preUrl = document.referrer;
@@ -453,16 +471,15 @@ function displayedAt(createdAt) {
 				<!-- 해당 게시글을 현재 로그인한 회원이 좋아요했던 경우 -->
 				<% if (likedIt == 1) { %>
 				<img src="images/liked.png" width="40" height="40" class="liked">
-				<%= chall_liked %>
 				<!-- 그외의 경우 -->
 				<% } else { %>
 				<img src="images/like.png" width="40" height="40" class="liked">
-				<%= chall_liked %>
 				<% } %>
+				<span id="likeNum"><%= chall_liked %></span>
 			</div>
 			<div class="col">
-				<img src="images/bubble.png" width="37" height="35"> <span
-					id="commentsNum"><%= chall_comments %></span>
+				<img src="images/bubble.png" width="37" height="35"> 
+				<span id="commentsNum"><%= chall_comments %></span>
 			</div>
 		</div>
 

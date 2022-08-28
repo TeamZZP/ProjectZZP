@@ -56,6 +56,15 @@
 			select * from member
 			order by created_at
 		</select>
+		<select id="selectAllMember2" resultType="AddressDTO" parameterType="hashmap">
+			select m.userid, m.username, m.phone,a.post_num, a.addr1, a.addr2, m.created_at
+			from member m join address a
+			on m.userid = a.userid
+			where a.default_chk = 1
+		</select>
+		<select id="totalCount" parameterType="hashmap" resultType="int">
+			select count(*) from member
+		</select>
 		
 		<select id="findId" parameterType="hashmap" resultType="MemberDTO">
 			select * from member

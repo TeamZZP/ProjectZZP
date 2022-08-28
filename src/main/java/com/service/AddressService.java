@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import com.config.MySqlSessionFactory;
 import com.dao.AddressDAO;
 import com.dto.AddressDTO;
+import com.dto.PageDTO;
 
 public class AddressService {
 	AddressDAO dao;
@@ -97,5 +98,5 @@ public class AddressService {
 		}
 		return num;
 	}
-
+	
 }

@@ -12,8 +12,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.dto.ChallengeDTO;
+import com.dto.MemberDTO;
 import com.dto.PageDTO;
 import com.dto.StampDTO;
 import com.service.ChallengeService;
@@ -40,6 +42,14 @@ public class ChallengeListServlet extends HttpServlet {
 		
 		request.setCharacterEncoding("utf-8");
 		
+		//로그인 정보 가져오기
+		HttpSession session = request.getSession();
+		MemberDTO member = (MemberDTO) session.getAttribute("login");
+		String userid = "";
+		if (member != null) {
+			userid = member.getUserid();
+		}
+		
 		ChallengeService service = new ChallengeService(); 
 		
 		//페이징 처리
@@ -50,10 +60,6 @@ public class ChallengeListServlet extends HttpServlet {
 		String searchName = request.getParameter("searchName");
 		String searchValue = request.getParameter("searchValue");
 		String sortBy = request.getParameter("sortBy");
-//		if (sortBy == null) {
-//			sortBy = "chall_id";
-//		}
-		
 		System.out.println(curPage+" "+searchName+" "+searchValue+" "+sortBy);
 		
 		HashMap<String, String> map = new HashMap<String, String>();
@@ -63,25 +69,37 @@ public class ChallengeListServlet extends HttpServlet {
 		System.out.println(">>>>>>>"+map);
 		
 		PageDTO pDTO = service.selectAllChallenge(map, Integer.parseInt(curPage));
-		
 		List<ChallengeDTO> list = pDTO.getList();
 	
 		//각 게시글마다 프로필 가져오기
 		HashMap<String, String> profileMap = new HashMap<String, String>();
 		
+		//현재 로그인한 회원이 각 게시글에 좋아요를 눌렀는지 판단하기
+		HashMap<String, String> likedMap = new HashMap<String, String>();
+		likedMap.put("userid", userid);
+		HashMap<Integer, Integer> resultLikedMap = new HashMap<Integer, Integer>();
+		
 		//각 게시글마다 도장 가져오기
 		HashMap<String, String> stampListMap = new HashMap<String, String>();
 		
 		for (ChallengeDTO c : list) {
+			//각 게시글마다 프로필 가져오기
 			profileMap.put(c.getUserid(), service.selectProfileImg(c.getUserid()));
 			
+			//현재 로그인한 회원이 각 게시글에 좋아요를 눌렀는지 판단하기
+			likedMap.put("chall_id", String.valueOf(c.getChall_id()));
+			int likedIt = service.countLikedByMap(likedMap);
+			if (likedIt == 1) {
+				resultLikedMap.put(c.getChall_id(), likedIt);
+			}
+			
+			//각 게시글마다 도장 가져오기
 			HashMap<String, String> stampMap = service.selectMemberStamp(c.getChall_id());
 			if (stampMap != null) {
 				stampListMap.put(String.valueOf(stampMap.get("CHALL_ID")), stampMap.get("STAMP_IMG"));
 			}
 			
 		}
-		System.out.println(stampListMap);
 		
 		//이 달의 챌린지 가져오기
 		ChallengeDTO challThisMonth = service.selectChallThisMonth();
@@ -91,6 +109,7 @@ public class ChallengeListServlet extends HttpServlet {
 		request.setAttribute("searchValue", searchValue);
 		request.setAttribute("sortBy", sortBy);
 		request.setAttribute("profileMap", profileMap);
+		request.setAttribute("resultLikedMap", resultLikedMap);
 		request.setAttribute("challThisMonth", challThisMonth);
 		request.setAttribute("stampListMap", stampListMap);
 		

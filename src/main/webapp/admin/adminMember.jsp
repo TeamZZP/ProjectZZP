@@ -1,3 +1,4 @@
+<%@page import="com.dto.PageDTO"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.Set"%>
@@ -5,8 +6,17 @@
 <%@page import="com.dto.MemberDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<style>
+	a {
+		text-decoration: none;
+		color: black;
+	}
+</style>
 <%
+	PageDTO pDTO=(PageDTO) request.getAttribute("pDTO");
 	String searchName=(String) request.getAttribute("searchName");
+	String searchValue=(String) request.getAttribute("searchValue");
+	String sortBy=(String) request.getAttribute("sortBy");
 %>
 <!-- 관리자 페이지 헤더 -->
 <div class="container">
@@ -23,21 +33,38 @@
 <!-- 관리자 페이지 회원 관리 -->
 <form action="AdminCategoryServlet" id="memberForm">
 <div class="container" style="margin-top: 5px; margin-bottom: 5px;">
-	<div class="row row-cols-auto">
-		  <div class="col">
-		  <!-- 검색 searchName 같으면 selected -->
-			  <select class="form-select" name="searchName" data-style="btn-info" id="inputGroupSelect01" style="width: 145px; margin-right: -20px; margin-left: -24px;">
-				    <option selected disabled hidden>카테고리</option>
-				    <option value="userid" <% if("userid".equals(searchName)){ %>selected<% } %>>아이디</option>
-				    <option value="username"<% if("username".equals(searchName)){ %>selected<% } %>>이름</option>
-				    <option value="email"<% if("email".equals(searchName)){ %>selected<% } %>>이메일</option>
-				    <option value="phone"<% if("phone".equals(searchName)){ %>selected<% } %>>전화번호</option>
-				    <option value="address"<% if("address".equals(searchName)){ %>selected<% } %>>주소</option>
-			  </select>
-		  </div>
-		  <div class="col"><input type="text" class="form-control" style="width: 150px; margin-right: -20px;"></div>
-	      <div class="col"><button type="button" class="btn btn-success">검색</button></div>
+	<div class="row row-cols-auto" style="justify-content: space-between;">
+			<div class="row row-cols-auto">
+			  <div class="col">
+			  <!-- 검색 searchName 같으면 selected -->
+				  <select class="form-select" name="searchName" data-style="btn-info" id="inputGroupSelect01" style="width: 145px; margin-right: -20px; margin-left: 0px;">
+					    <option selected disabled hidden>카테고리</option>
+					    <option value="userid" <% if("userid".equals(searchName)){ %>selected<% } %>>아이디</option>
+					    <option value="username"<% if("username".equals(searchName)){ %>selected<% } %>>이름</option>
+					    <option value="email"<% if("email".equals(searchName)){ %>selected<% } %>>이메일</option>
+					    <option value="phone"<% if("phone".equals(searchName)){ %>selected<% } %>>전화번호</option>
+					    <option value="address"<% if("address".equals(searchName)){ %>selected<% } %>>주소</option>
+				  </select>
+			  </div>
+			  <div class="col"><input type="text" name="searchValue" class="form-control" style="width: 150px; margin-right: -20px;"
+			  			<% if(searchValue != null && !searchValue.equals("null")){ %>value="<%= searchValue %>"<% } %>></div>
+		      <div class="col"><button type="button" id="searchMember" class="btn btn-success">검색</button></div>
+	      </div>
+		<div class="col">
+	    	<div class="float-end">
+			<!-- 정렬 -->
+			<select class="form-select sortBy" name="sortBy" id="sortBy" data-style="btn-info" 
+					style="width: 145px; margin-left: -24px; display: inline;">
+				<option value="created_at" selected>정렬</option>
+				<option value="created_at" <% if("created_at".equals(sortBy)){%>selected<%}%>>가입일자</option>
+				<option value="userid" <% if("userid".equals(sortBy)){%>selected<%}%>>아이디</option>
+				<option value="username" <% if("username".equals(sortBy)){%>selected<%}%>>이름</option>
+				<option value="address" <% if("address".equals(sortBy)){%>selected<%}%>>주소</option>
+			</select>
+			</div>
+		</div>
 	</div>
+
 </div>
 
 <div class="container col-md-auto">
@@ -55,39 +82,15 @@
 		<th>관리</th>
 	</tr>
 <%
-	List<MemberDTO> memberList=(List<MemberDTO>) request.getAttribute("memberList");
-	HashMap<String, AddressDTO> addMap=(HashMap<String, AddressDTO>) request.getAttribute("addMap");
-
-//	System.out.println("jsp에서 회원 리스트 : "+memberList);
-//	System.out.println("jsp에서 회원 기본 주소 map : "+addMap);
-	
-	for (MemberDTO member : memberList) {
-//		System.out.println(member);
-		String userid=member.getUserid();
-		String passwd=member.getPasswd();
-		String username=member.getUsername();
-		String email1=member.getEmail1();
-		String email2=member.getEmail2();
-		String phone=member.getPhone();
-		String created_at=member.getCreated_at();
-		
-//		for (int i = 0; i < addressMap.size(); i++) {
-//			AddressDTO address=addressList.get(i);//addressMap의 size만큼 for문 반복 중//userid로 뽑아온 addressList의 size와 for문의 size가 다름//indexOutOfBounds 발생
-		AddressDTO address=addMap.get(userid);
-//		System.out.println(userid+"의 기본 주소지 : "+address);
-		
-		String address_name=address.getAddress_name();
-		String receiver_name=address.getReceiver_name();
-		String receiver_phone=address.getReceiver_phone();
-		String post_num=address.getPost_num();
-		String addr1=address.getAddr1();
-		String addr2=address.getAddr2();
-		int default_chk=address.getDefault_chk();
-		
-/* 	if (addr2 == null) {
-		addr2="상세 주소를 입력하세요.";
-	} */
-
+	List<AddressDTO> list=pDTO.getList();
+	for(int i=0; i<list.size(); i++){
+		String userid=list.get(i).getUserid();
+		String username=list.get(i).getUsername();
+		String phone=list.get(i).getPhone();
+		String post_num=list.get(i).getPost_num();
+		String addr1=list.get(i).getAddr1();
+		String addr2=list.get(i).getAddr2();
+		String created_at=list.get(i).getCreated_at();
 %>
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -180,12 +183,30 @@ $(document).ready(function () {
 });//end ready
 </script>
 <%
-//		}
 	}
 %>
 	</tr>
 </form>
 </table>
+	<!-- 페이징 -->
+	 <div class="p-2 text-center">
+	<%
+		int curPage = pDTO.getCurPage();
+		int perPage = pDTO.getPerPage();
+		int totalCount = pDTO.getTotalCount();
+		int totalPage = totalCount/perPage;
+		if(totalCount % perPage != 0) totalPage++;
+		for(int p=1; p<=totalPage; p++){
+			if(p==curPage){
+				out.print("<b>"+p+"</b>&nbsp;&nbsp;");
+			} else {
+				out.print("<a id='search' href='AdminCategoryServlet?curPage="+p
+	    				+"&searchName="+searchName+"&searchValue="+searchValue
+	    				+"&sortBy="+sortBy+"&category=member'>"+p+"</a>&nbsp;&nbsp;");
+			}
+		} 
+	%>
+	</div>
 </div>
 </div>
 </form>

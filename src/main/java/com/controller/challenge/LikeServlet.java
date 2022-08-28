@@ -51,10 +51,7 @@ request.setCharacterEncoding("utf-8");
 					int result = service.upChallLiked(chall_id);
 					System.out.println(result+"개의 레코드 좋아요수 업데이트");
 					
-					//좋아요 수 올린 후 해당 게시글의 좋아요 수 가져오기
-					int likedNum = service.countLiked(chall_id);
-					
-					out.print("<img src='images/liked.png' width='40' height='40' class='liked'> "+likedNum);
+					out.print("images/liked.png");
 				}
 			
 			//좋아요 삭제
@@ -67,9 +64,7 @@ request.setCharacterEncoding("utf-8");
 					int result = service.downChallLiked(chall_id);
 					System.out.println(result+"개의 레코드 좋아요수 업데이트");
 					
-					//좋아요 수 올린 후 해당 게시글의 좋아요 수 가져오기
-					int likedNum = service.countLiked(chall_id);
-					out.print("<img src='images/like.png' width='40' height='40' class='liked'> "+likedNum);
+					out.print("images/like.png");
 				}
 			}
 			

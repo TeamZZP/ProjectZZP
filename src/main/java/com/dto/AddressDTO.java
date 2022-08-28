@@ -12,6 +12,34 @@ public class AddressDTO {
 	private String addr2;	
 	private int default_chk;
 	
+	private String username;
+	private String phone; 
+	private String created_at;
+	
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public String getCreated_at() {
+		return created_at;
+	}
+
+	public void setCreated_at(String created_at) {
+		this.created_at = created_at;
+	}
+
 	public AddressDTO() {
 		super();
 	}
@@ -106,7 +134,9 @@ public class AddressDTO {
 	public String toString() {
 		return "AddressDTO [address_id=" + address_id + ", userid=" + userid + ", address_name=" + address_name
 				+ ", receiver_name=" + receiver_name + ", receiver_phone=" + receiver_phone + ", post_num=" + post_num
-				+ ", addr1=" + addr1 + ", addr2=" + addr2 + ", default_chk=" + default_chk + "]";
+				+ ", addr1=" + addr1 + ", addr2=" + addr2 + ", default_chk=" + default_chk + ", username=" + username
+				+ ", phone=" + phone + ", created_at=" + created_at + "]";
 	}
+
 	
 }
