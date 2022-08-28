@@ -45,15 +45,12 @@ function getCategoryProduct(id){  //category.jsp에서 비동기처리로 produc
          url: "CategoryServlet",
          dataType : "text",
          success : function(data,status,xhr){
-                 
-        	 
-        	 $("#categoryProductContainer").empty();
+         	 $("#categoryProductContainer").empty();
         	
         	 $("#categoryProductContainer").append(data);
         	 
-        	 
                },error : function (xhr,status,error){
-                console.log(error);
+            	   alert(error);
                }
 
 

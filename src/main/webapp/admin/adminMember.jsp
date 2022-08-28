@@ -94,10 +94,6 @@
 %>
 <script type="text/javascript">
 	$(document).ready(function() {
-<%-- 		$("#deleteMember").on("shown.bs.modal", function (e) {//#deleteMember modal 창을 열 때 선택한 버튼의 data-id를 가져옴(deleteID로 설정했더니 안돼서 다시 id로 바꿈)--modal창의 삭제 버튼에 저장
-		    var id = $(e.relatedTarget).data("id");
-		    $("#delete<%= userid %>").val(id);
-		});//end fn --%>
 		$("#delete<%= userid %>").on("click", function() {//모달의 삭제 버튼 클릭시 회원 삭제
 			var userid=$("#checkDelete<%= userid %>").data("id");
 			console.log(userid);
@@ -121,10 +117,6 @@
 				}						
 			});//end ajax
 		});//end fn
-<%--  		$("#checkDelete<%= userid %>").on("click", function() {//첫번째 선택자만 이벤트 실행됨//userid 추가해서 버튼 구분함--ok
-			event.preventDefault();
-			var id = $(this).attr("data-xxx");
-		});//end fn --%>
 		$("#change<%= userid %>").on("click", function() {//회원 정보 출력 페이지로 이동
 			var userid=$(this).attr("data-id");
 			console.log(userid);
