@@ -41,11 +41,13 @@ public class StoreServlet extends HttpServlet {
 				String searchName=request.getParameter("searchName");
 				String searchValue=request.getParameter("searchValue");
 				String sortBy=request.getParameter("sortBy");
+				
 				if (sortBy == null) {sortBy="p_id";}//최초 정렬 기준
+				
 				System.out.println(curPage+"\t"+searchName+"\t"+searchValue+"\t"+sortBy);
 				
 				//위 데이터를 map에 저장
-				HashMap<String, String> p_map = new HashMap<String, String>();
+				HashMap<String, Object> p_map = new HashMap<String, Object>();
 				p_map.put("searchName", searchName);
 				p_map.put("searchValue", searchValue);
 				p_map.put("sortBy", sortBy);

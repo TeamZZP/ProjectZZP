@@ -80,8 +80,7 @@ function productChoice(n) {
    <%}%>
 }
 
-
-$(function() {
+	$(function() {
 	
 	//정렬 기준 선택시 form 제출
 	$("#sortBy").on("change", function () {
@@ -109,7 +108,6 @@ $(function() {
 
 	})//
 })
-
 </script>
 <form action="" id="prodForm">	
 <%
@@ -122,6 +120,7 @@ List<CategoryProductDTO> pDTO_list = pDTO.getList();
 
 List<CategoryProductDTO> product_list = (List<CategoryProductDTO>) request.getAttribute("product_list");
 %>
+   	
 <div id="categoryProductContainer" class="container ">
 	<div class="row " align="center">
 		<div class="row">
@@ -139,34 +138,34 @@ List<CategoryProductDTO> product_list = (List<CategoryProductDTO>) request.getAt
 			  </div>
 	    	</div>
 		</div>
-		
-				<%
-				for (int i = 0; i < pDTO_list.size(); i++) {
-					
-					
-					
-					int p_id = pDTO_list.get(i).getP_id();
-					String p_name = pDTO_list.get(i).getP_name();
-					String p_content = pDTO_list.get(i).getP_content();
-					int c_id = pDTO_list.get(i).getC_id();
-					int p_cost_price = pDTO_list.get(i).getP_cost_price();
-					int p_selling_price = pDTO_list.get(i).getP_selling_price();
-					int p_discount = pDTO_list.get(i).getP_discount();
-					String p_created = pDTO_list.get(i).getP_created();
-					int p_stock = pDTO_list.get(i).getP_stock();
-					String userid = pDTO_list.get(i).getUserid();
-					String p_image = pDTO_list.get(i).getP_image();
-					int p_liked = pDTO_list.get(i).getP_liked();
-					
-					int likecheck = 0;
-					
-					if (mdto != null) {
-						List<Integer> likecheckList = (List<Integer>) request.getAttribute("likecheck");
-						likecheck = likecheckList.get(i);
-					} else {
-						likecheck = 0;
-					}
-					%>
+				
+		<%
+		for (int i = 0; i < pDTO_list.size(); i++) {
+			
+			
+			
+			int p_id = pDTO_list.get(i).getP_id();
+			String p_name = pDTO_list.get(i).getP_name();
+			String p_content = pDTO_list.get(i).getP_content();
+			int c_id = pDTO_list.get(i).getC_id();
+			int p_cost_price = pDTO_list.get(i).getP_cost_price();
+			int p_selling_price = pDTO_list.get(i).getP_selling_price();
+			int p_discount = pDTO_list.get(i).getP_discount();
+			String p_created = pDTO_list.get(i).getP_created();
+			int p_stock = pDTO_list.get(i).getP_stock();
+			String userid = pDTO_list.get(i).getUserid();
+			String p_image = pDTO_list.get(i).getP_image();
+			int p_liked = pDTO_list.get(i).getP_liked();
+			
+			int likecheck = 0;
+			
+			if (mdto != null) {
+				List<Integer> likecheckList = (List<Integer>) request.getAttribute("likecheck");
+				likecheck = likecheckList.get(i);
+			} else {
+				likecheck = 0;
+			}
+		%>
 	<div class="col-lg-3 col-md-4 col-sm-6">
 			<div class="hover-zoomin">
 				<a href="ProductRetrieveServlet?p_id=<%=p_id%>"> <img
@@ -255,8 +254,9 @@ List<CategoryProductDTO> product_list = (List<CategoryProductDTO>) request.getAt
 		<%
 		}
 		%>
-	</div>
-		 <div class="p-2 text-center">
+			
+			<!-- 페이징 -->
+	 <div class="p-2 text-center">
 	<%
 		int curPage = pDTO.getCurPage();
 		int perPage = pDTO.getPerPage();
@@ -275,4 +275,5 @@ List<CategoryProductDTO> product_list = (List<CategoryProductDTO>) request.getAt
 	%>
 	</div>
 	</div>
+</div>
 </form>

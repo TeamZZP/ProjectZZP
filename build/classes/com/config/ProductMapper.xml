@@ -182,10 +182,27 @@ and IMAGE_RNK = 1) as p_image,p.P_NAME,p.P_CONTENT,p.C_ID,p.P_COST_PRICE
 
 <!-- 스토어 목록 페이징 -->
 <select id="selectAllProduct" resultType="CategoryProductDTO" parameterType="hashmap">
-select (select C_NAME from category where c_id = p.c_id) as c_name, p.P_ID,(select IMAGE_ROUTE from images where p_id = p.p_id 
-and IMAGE_RNK = 1) as p_image,p.P_NAME,p.P_CONTENT,p.C_ID,p.P_COST_PRICE
-,p.P_SELLING_PRICE,p.P_DISCOUNT,p.P_CREATED,p.P_STOCK from product p
+	 
+select p.P_ID
+,(select 
 
+IMAGE_ROUTE
+
+from images
+where p_id = p.p_id 
+and IMAGE_RNK = 1) as p_image
+,p.P_NAME
+,p.P_CONTENT
+,p.C_ID
+,p.P_COST_PRICE
+,p.P_SELLING_PRICE
+,p.P_DISCOUNT
+,p.P_CREATED
+,p.P_STOCK
+from product p
+
+where p.c_id = #{c_id} 
+	 
 <where>
 	<if test='searchName=="c_id"'>
 		upper((select C_NAME from category where c_id = p.c_id)) like upper('%${searchValue}%')
@@ -205,6 +222,10 @@ and IMAGE_RNK = 1) as p_image,p.P_NAME,p.P_CONTENT,p.C_ID,p.P_COST_PRICE
 </where>
 	 order by ${sortBy} desc
 
+</select>
+
+<select id="totalCount" parameterType="hashmap" resultType="int">
+	select count(*) from product
 </select>
 
 <insert id="insertProduct" parameterType="hashmap">

@@ -9,15 +9,6 @@
 <%@page import="com.dto.MemberDTO"%>
 
 
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-	crossorigin="anonymous">
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
-	integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
-	crossorigin="anonymous"></script>
 <style>
 .container {
 	padding-right: 15px;
@@ -287,21 +278,8 @@ List<CategoryProductDTO> product_list = (List<CategoryProductDTO>) request.getAt
 		<%
 		}
 		%>
-		<div>
-	<%-- 	<div class="col">
-		  	  <!-- 검색 -->
-				<select class="form-select sortBy" name="searchName" data-style="btn-info" id="inputGroupSelect01" style="width: 140px; display: inline;">
-					<option value="c_id" <% if("c_id".equals(searchName)){%> selected
-						<%}%>>카테고리</option>
-					<option value="p_id" <% if("p_id".equals(searchName)){%> selected
-						<%}%>>상품번호</option>
-					<option value="p_name" <% if("p_name".equals(searchName)){%>
-						selected <%}%>>상품명</option>
-				</select> 
-				<input type="text" name="searchValue" class="form-control" style="width: 150px; display: inline;"
-	  				<% if(searchValue!=null && !searchValue.equals("null")) {%>value="<%= searchValue %>"<% } %>>
-	  			<button type="button" class="btn btn-success" id="searchProd" style="margin-top: -5px; display: inline;r">검색</button>
-	  	  	</div> --%>
+		
+
 			<!-- 페이징 -->
 	 <div class="p-2 text-center">
 	<%
@@ -320,7 +298,6 @@ List<CategoryProductDTO> product_list = (List<CategoryProductDTO>) request.getAt
 			}
 		} 
 	%>
-	</div>
 	</div>
 	</div>
 </div>

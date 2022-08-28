@@ -17,6 +17,8 @@ select c_name from category where c_rnk = #{i}
 select * from category
 </select>
 
+
+
 <!-- <select id="likeCheck" parameterType="hashmap" resultType="int">
 select count(*) from product_liked 
 where p_id= #{p_id} and userid = #{userid}

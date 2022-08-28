@@ -96,7 +96,7 @@ public class ProductDAO {
 	}
 	
 	//스토어페이징
-		public PageDTO selectAllProduct(SqlSession sessioin, HashMap<String, String> map, int curPage) {
+		public PageDTO selectAllProduct(SqlSession session, HashMap<String, Object> map, int curPage) {
 			PageDTO pDTO=new PageDTO();
 			pDTO.setCurPage(curPage);
 			pDTO.setPerPage(12);//한 페이지에 12개 출력
@@ -104,13 +104,17 @@ public class ProductDAO {
 			int offset=(curPage-1)*perPage;//페이지 시작 idx
 			
 			//map에 검색 조건, 검색어, 정렬 저장된 상태
-			List<CategoryProductDTO> list=sessioin.selectList("ProductMapper.selectAllProduct", map, new RowBounds(offset, perPage));
+			List<CategoryProductDTO> list=session.selectList("ProductMapper.selectAllProduct", map, new RowBounds(offset, perPage));
 			
 			pDTO.setList(list);//현재 페이지에 해당하는 데이터 리스트
-			pDTO.setTotalCount(totalCount(sessioin, map));//전체 레코드 갯수
+			pDTO.setTotalCount(totalCount2(session, map));//전체 레코드 갯수
 			return pDTO;
 		}
 		
+	private int totalCount2(SqlSession session, HashMap<String, Object> map) {
+		return session.selectOne("ProductMapper.totalCount", map);
+		}
+
 	private int totalCount(SqlSession session, HashMap<String, String> map) {
 		return session.selectOne("ProductMapper.totalCount", map);
 
