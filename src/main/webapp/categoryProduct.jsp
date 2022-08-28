@@ -84,7 +84,9 @@ function productChoice(n) {
 	
 	//정렬 기준 선택시 form 제출
 	$("#sortBy").on("change", function () {
-		$("#prodForm").submit();
+		
+		console.log(c_id+"카테고리프로덕트!");
+		 $("#prodForm2").submit(); 
 	});
 	
 	
@@ -109,18 +111,17 @@ function productChoice(n) {
 	})//
 })
 </script>
-<form action="" id="prodForm">	
+<form action="CategoryServlet" id="prodForm2">	
 <%
 PageDTO pDTO=(PageDTO) request.getAttribute("pDTO");
-String searchName=(String) request.getAttribute("searchName");
-String searchValue=(String) request.getAttribute("searchValue");
+
 String sortBy=(String) request.getAttribute("sortBy");
 
 List<CategoryProductDTO> pDTO_list = pDTO.getList();
 
 List<CategoryProductDTO> product_list = (List<CategoryProductDTO>) request.getAttribute("product_list");
 %>
-   	
+
 <div id="categoryProductContainer" class="container ">
 	<div class="row " align="center">
 		<div class="row">
@@ -133,7 +134,6 @@ List<CategoryProductDTO> product_list = (List<CategoryProductDTO>) request.getAt
 					    <option value="p_id" <% if("p_id".equals(sortBy)){%>selected<%}%>>최신상품순</option>
 					    <option value="p_selling_price" <% if("p_selling_price".equals(sortBy)){%>selected<%}%>>판매가순</option>
 					    <option value="p_name" <% if("p_name".equals(sortBy)){%>selected<%}%>>상품명순</option>
-					    <option value="p_stock" <% if("p_stock".equals(sortBy)){%>selected<%}%>>재고순</option>
 				  </select>
 			  </div>
 	    	</div>
@@ -166,6 +166,7 @@ List<CategoryProductDTO> product_list = (List<CategoryProductDTO>) request.getAt
 				likecheck = 0;
 			}
 		%>
+		   <input type="hidden" id="c_id" name="c_id" value="<%=c_id%>">	
 	<div class="col-lg-3 col-md-4 col-sm-6">
 			<div class="hover-zoomin">
 				<a href="ProductRetrieveServlet?p_id=<%=p_id%>"> <img
@@ -268,7 +269,6 @@ List<CategoryProductDTO> product_list = (List<CategoryProductDTO>) request.getAt
 				out.print("<b>"+p+"</b>&nbsp;&nbsp;");
 			} else {
 				out.print("<a id='search' href='StoreServlet?curPage="+p
-	    				+"&searchName="+searchName+"&searchValue="+searchValue
 	    				+"&sortBy="+sortBy+"&category=product'>"+p+"</a>&nbsp;&nbsp;");
 			}
 		} 

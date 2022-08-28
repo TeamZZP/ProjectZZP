@@ -75,19 +75,18 @@ public class CategoryServlet extends HttpServlet {
 		System.out.println(curPage+"\t"+searchName+"\t"+searchValue+"\t"+sortBy);
 		
 		//위 데이터를 map에 저장
-		HashMap<String, Object> p_map = new HashMap<String, Object>();
-		p_map.put("c_id", Integer.parseInt(request.getParameter("c_id")));
-		p_map.put("searchName", searchName);
-		p_map.put("searchValue", searchValue);
+		HashMap<String, String> p_map = new HashMap<String, String>();
+		
+		p_map.put("c_id", request.getParameter("c_id"));
 		p_map.put("sortBy", sortBy);
+		
 		System.out.println("카테고리서블릿!!!!!!"+p_map);
-		PageDTO pDTO = product_service.selectAllProduct(p_map,Integer.parseInt(curPage));
 		
-		System.out.println("카테고리서블릿!!!!!!"+pDTO);
+		PageDTO pDTO2 = product_service.selectC_Product(p_map,Integer.parseInt(curPage));
 		
-       	request.setAttribute("pDTO", pDTO);
-		request.setAttribute("searchName", searchName);
-		request.setAttribute("searchValue", searchValue);
+		System.out.println("카테고리서블릿!!!!!!"+pDTO2);
+		
+       	request.setAttribute("pDTO", pDTO2);
 		request.setAttribute("sortBy", sortBy);
         request.setAttribute("product_list", product_list);
 

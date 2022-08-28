@@ -37,7 +37,7 @@ function getCategoryProduct(id){  //category.jsp에서 비동기처리로 produc
 	
 	 $.ajax({
 	        
-         type: "get",
+         type: "post",
          
          data:  {
              "c_id":id 

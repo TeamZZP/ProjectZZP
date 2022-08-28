@@ -239,11 +239,22 @@ public class ProductService {
 		return n;
 	}
 
-	public PageDTO selectAllProduct(HashMap<String, Object> map, int curPage) {
+	public PageDTO selectAllProduct(HashMap<String, String> map, int curPage) {
 		SqlSession session=MySqlSessionFactory.getSqlSession();
 		PageDTO dto=null;
 		try {
 			dto=dao.selectAllProduct(session, map, curPage);
+		} finally {
+			session.close();
+		}
+		return dto;
+	}
+
+	public PageDTO selectC_Product(HashMap<String, String> p_map, int curPage) {
+		SqlSession session=MySqlSessionFactory.getSqlSession();
+		PageDTO dto=null;
+		try {
+			dto=dao.selectC_Product(session, p_map, curPage);
 		} finally {
 			session.close();
 		}

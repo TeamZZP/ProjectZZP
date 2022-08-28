@@ -47,7 +47,7 @@ public class StoreServlet extends HttpServlet {
 				System.out.println(curPage+"\t"+searchName+"\t"+searchValue+"\t"+sortBy);
 				
 				//위 데이터를 map에 저장
-				HashMap<String, Object> p_map = new HashMap<String, Object>();
+				HashMap<String, String> p_map = new HashMap<String, String>();
 				p_map.put("searchName", searchName);
 				p_map.put("searchValue", searchValue);
 				p_map.put("sortBy", sortBy);

@@ -19,7 +19,77 @@ public class CategoryProductDTO extends ProductDTO {
 				+ ", p_id=" + p_id + ", p_created=" + p_created + ", c_id=" + c_id + "]";
 	}
 
-	
+
+
+
+	public String getP_image() {
+		return p_image;
+	}
+
+
+
+
+	public void setP_image(String p_image) {
+		this.p_image = p_image;
+	}
+
+
+
+
+	public String getP_name() {
+		return p_name;
+	}
+
+
+
+
+	public void setP_name(String p_name) {
+		this.p_name = p_name;
+	}
+
+
+
+
+	public int getP_selling_price() {
+		return p_selling_price;
+	}
+
+
+
+
+	public void setP_selling_price(int p_selling_price) {
+		this.p_selling_price = p_selling_price;
+	}
+
+
+
+
+	public int getP_id() {
+		return p_id;
+	}
+
+
+
+
+	public void setP_id(int p_id) {
+		this.p_id = p_id;
+	}
+
+
+
+
+	public String getP_created() {
+		return p_created;
+	}
+
+
+
+
+	public void setP_created(String p_created) {
+		this.p_created = p_created;
+	}
+
+
 
 
 	public int getC_id() {
@@ -33,60 +103,7 @@ public class CategoryProductDTO extends ProductDTO {
 		this.c_id = c_id;
 	}
 
-
-
-
-	public int getP_id() {
-		return p_id;
-	}
-
-
-
-	public void setP_id(int p_id) {
-		this.p_id = p_id;
-	}
-
-
-
-	public String getP_created() {
-		return p_created;
-	}
-
-
-
-	public void setP_created(String p_created) {
-		this.p_created = p_created;
-	}
-
-
-
-	public int getP_selling_price() {
-		return p_selling_price;
-	}
-
-
-
-	public void setP_selling_price(int p_selling_price) {
-		this.p_selling_price = p_selling_price;
-	}
-
-
-
-	public String getP_image() {
-		return p_image;
-	}
-
-	public void setP_image(String p_image) {
-		this.p_image = p_image;
-	}
-
-	public String getP_name() {
-		return p_name;
-	}
-
-	public void setP_name(String p_name) {
-		this.p_name = p_name;
-	}
 	
+
 	
 }

@@ -146,7 +146,6 @@ List<CategoryProductDTO> product_list = (List<CategoryProductDTO>) request.getAt
 					    <option value="p_id" <% if("p_id".equals(sortBy)){%>selected<%}%>>최신상품순</option>
 					    <option value="p_selling_price" <% if("p_selling_price".equals(sortBy)){%>selected<%}%>>판매가순</option>
 					    <option value="p_name" <% if("p_name".equals(sortBy)){%>selected<%}%>>상품명순</option>
-					    <option value="p_stock" <% if("p_stock".equals(sortBy)){%>selected<%}%>>재고순</option>
 				  </select>
 			  </div>
 	    	</div>
