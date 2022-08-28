@@ -42,7 +42,6 @@
 					    <option selected disabled hidden>카테고리</option>
 					    <option value="userid" <% if("userid".equals(searchName)){ %>selected<% } %>>아이디</option>
 					    <option value="username"<% if("username".equals(searchName)){ %>selected<% } %>>이름</option>
-					    <option value="email"<% if("email".equals(searchName)){ %>selected<% } %>>이메일</option>
 					    <option value="phone"<% if("phone".equals(searchName)){ %>selected<% } %>>전화번호</option>
 					    <option value="address"<% if("address".equals(searchName)){ %>selected<% } %>>주소</option>
 				  </select>
@@ -93,42 +92,7 @@
 		String addr2=list.get(i).getAddr2();
 		String created_at=list.get(i).getCreated_at();
 %>
-<script type="text/javascript">
-	$(document).ready(function() {
-		$("#sortBy").on("change", function() {
-			$("form").submit();
-		});//end fn
-		
-		$("#delete<%= userid %>").on("click", function() {//모달의 삭제 버튼 클릭시 회원 삭제
-			var userid=$("#checkDelete<%= userid %>").data("id");
-			console.log(userid);
- 			//*****ajax
-			$.ajax({
-				type : "post",
-				url : "AccountDeleteServlet",//페이지 이동 없이 해당 url에서 작업 완료 후 데이터만 가져옴
-				dataType : "text",
-				data : {//서버에 전송할 데이터
-					userid : userid
-				},
-				success : function(data, status, xhr) {
-					alert("해당 회원이 삭제되었습니다.");
-					$("#deleteMember<%= userid %>").modal("hide");
-					$(".modal-backdrop").hide();//모달창 닫고 백드롭 hide
-					console.log("success");
-					$("#checkDelete<%= userid %>").parents("tr").remove();
-				},
-				error: function(xhr, status, error) {
-					alert(error);
-				}						
-			});//end ajax
-		});//end fn
-		$("#change<%= userid %>").on("click", function() {//회원 정보 출력 페이지로 이동
-			var userid=$(this).attr("data-id");
-			console.log(userid);
-			location.href="AccountManagementServlet?admin=true";
-		});//end fn
-	});//end ready
-</script>
+<input type="hidden" id="userid" value="<%= userid %>">
 <form>
 	<tr id="list">
 		<td><%= userid %></td>
@@ -179,6 +143,7 @@ $(document).ready(function () {
 	
 });//end ready
 </script>
+
 <%
 	}
 %>
@@ -207,3 +172,46 @@ $(document).ready(function () {
 </div>
 </div>
 </form>
+<script type="text/javascript">
+	$(document).ready(function() {
+		var id=$("#userid").val();
+		
+		$("#sortBy").on("change", function() {
+			$("#memberForm").submit();
+		});//end fn
+		
+		$("#searchMember").on("click", function() {
+			console.log("click===");
+			$("memberForm").submit();
+		});//end fn
+		
+		$("#delete"+id).on("click", function() {//모달의 삭제 버튼 클릭시 회원 삭제
+			var userid=$("#checkDelete"+id).data("id");
+			console.log(userid);
+ 			//*****ajax
+			$.ajax({
+				type : "post",
+				url : "AccountDeleteServlet",//페이지 이동 없이 해당 url에서 작업 완료 후 데이터만 가져옴
+				dataType : "text",
+				data : {//서버에 전송할 데이터
+					userid : userid
+				},
+				success : function(data, status, xhr) {
+					alert("해당 회원이 삭제되었습니다.");
+					$("#deleteMember"+id).modal("hide");
+					$(".modal-backdrop").hide();//모달창 닫고 백드롭 hide
+					console.log("success");
+					$("#checkDelete"+id).parents("tr").remove();
+				},
+				error: function(xhr, status, error) {
+					alert(error);
+				}						
+			});//end ajax
+		});//end fn
+		$("#change"+id).on("click", function() {//회원 정보 출력 페이지로 이동
+			var userid=$(this).attr("data-id");
+			console.log(userid);
+			location.href="AccountManagementServlet?admin=true";
+		});//end fn
+	});//end ready
+</script>
