@@ -1,3 +1,4 @@
+<%@page import="com.dto.MemberDTO"%>
 <%@page import="com.dto.StampDTO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.HashMap"%>
@@ -56,17 +57,22 @@
 	String searchName = (String) request.getAttribute("searchName");
 	String searchValue = (String) request.getAttribute("searchValue");
 	String sortBy = (String) request.getAttribute("sortBy");
-
+	
+	//session에 저장된 userid 읽어오기 
+	MemberDTO member = (MemberDTO) session.getAttribute("login"); 
+	String currUserid = null;
+	if (member != null) {
+		currUserid = member.getUserid();
+	}
 	//프로필 가져오기
 	HashMap<String, String> profileMap = (HashMap<String, String>) request.getAttribute("profileMap");
-	
 	//이달의 챌린지 가져오기
 	ChallengeDTO challThisMonth = (ChallengeDTO) request.getAttribute("challThisMonth");
-	
+	//현재 회원이 좋아요 누른 목록 가져오기
+	HashMap<Integer, Integer> resultLikedMap = (HashMap<Integer, Integer>) request.getAttribute("resultLikedMap");
 	//각 게시글마다 도장 가져오기
 	HashMap<String, String> stampListMap = (HashMap<String, String>) request.getAttribute("stampListMap");
 	System.out.println(stampListMap);
-	
 	//session에 저장된 메시지가 있는 경우 경고창 띄워주고 삭제하기
 	String mesg = (String) session.getAttribute("mesg");
 	if (mesg != null) {
@@ -84,6 +90,48 @@
 		$("#sortBy").on("change", function () {
 			$("form").submit();
 		});
+		//좋아요 추가/삭제
+		$(".liked_area").on("click", ".liked", function () {
+			if ("<%= currUserid %>" == "null") {
+				alert("로그인이 필요합니다.");
+			} else {
+				let cid = $(this).attr("data-cid");
+				$.ajax({
+					type:"post",
+					url:"LikeServlet",
+					data: {
+						chall_id:cid,
+						userid:"<%= currUserid %>"
+					},
+					dataType:"text",
+					success: function (data) {
+						$("#liked_area"+cid+" .liked").attr("src", data);
+						countLikes(cid);
+					},
+					error: function () {
+						alert("문제가 발생했습니다. 다시 시도해 주세요.");
+					}
+				}); 
+			}
+		});
+		//좋아요 개수 구해오기
+		function countLikes(cid) {
+			$.ajax({
+				type:"post",
+				url:"LikeCountServlet",
+				data: {
+					chall_id:cid,
+				},
+				dataType:"text",
+				success: function (data) {
+					$("#likeNum"+cid).text(data);
+				},
+				error: function () {
+					alert("문제가 발생했습니다. 다시 시도해 주세요.");
+				}
+			});
+		}
+		
 	}); 
  	
 </script>
@@ -137,8 +185,15 @@
 			<%} %>
 		   </a>
 	   </div>
-	   <div class="p-2 text-center">
-	       <img src="images/like.png" width="30" height="30"> <%=chall_liked%> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	   <div class="p-2 text-center liked_area" id="liked_area<%=chall_id%>">
+	   	   <!-- 해당 게시글을 현재 로그인한 회원이 좋아요했던 경우 -->
+	   	   <% if (resultLikedMap.containsKey(chall_id)) { %>
+	   	   <img src="images/liked.png" width="30" height="30" class="liked" data-cid="<%=chall_id%>">
+	   	   <!-- 그외의 경우 -->
+	   	   <% } else { %>
+	       <img src="images/like.png" width="30" height="30" class="liked" data-cid="<%=chall_id%>">
+		   <% } %>
+		   <span id="likeNum<%=chall_id%>"><%=chall_liked%></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		   <img src="images/bubble.png" width="30" height="25"> <%=chall_comments%>
 	   </div>
 	   <div class="pb-5 text-center">
