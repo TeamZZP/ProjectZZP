@@ -224,10 +224,6 @@ where p.c_id = #{c_id}
 
 </select>
 
-<select id="totalCount" parameterType="hashmap" resultType="int">
-	select count(*) from product
-</select>
-
 <insert id="insertProduct" parameterType="hashmap">
 	insert into product (p_id,p_name,p_content,c_id,p_cost_price,p_selling_price,p_discount,p_created,p_stock,userid)
 	values (product_p_id_seq.NEXTVAL,#{p_name},#{p_content},#{c_id},#{p_cost_price},#{p_selling_price},#{p_discount},sysdate,#{p_stock},#{userid})

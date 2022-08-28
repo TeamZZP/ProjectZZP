@@ -65,7 +65,15 @@
 				<if test="searchName=='userid'">
 					upper(select userid from member) like upper('%${searchValue}%')
 				</if>
-				<if test="searchName=='username'"></if>
+				<if test="searchName=='username'">
+				
+				</if>
+				<if test="searchName=='phone'">
+				
+				</if>
+				<if test="searchName=='address'">
+				
+				</if>
 			</where>
 			order by ${sortBy}
 		</select>
