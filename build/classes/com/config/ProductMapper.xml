@@ -229,7 +229,29 @@ from product p
 
 where p.c_id = #{c_id} 
 	 
+<<<<<<< HEAD
 order by ${sortBy} desc
+=======
+<where>
+	<if test='searchName=="c_id"'>
+		upper((select C_NAME from category where c_id = p.c_id)) like upper('%${searchValue}%')
+	</if>
+	<if test='searchName=="p_id"'>
+		p_id like '%${searchValue}%'
+	</if>
+	<if test='searchName=="p_name"'>
+		p_name like '%${searchValue}%'
+	</if>
+	<if test='searchName=="p_selling_price"'>
+		p_selling_price like '%${searchValue}%'
+	</if>
+	<if test='searchName=="p_created"'>
+		p_created like '%${searchValue}%'
+	</if>
+</where>
+	 order by ${sortBy} desc
+
+>>>>>>> 8cc63f2ee31de903942252e4be651b6971e7cfce
 </select>
 
 <insert id="insertProduct" parameterType="hashmap">
