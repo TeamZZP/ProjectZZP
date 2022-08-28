@@ -3,6 +3,7 @@ package com.controller.mypage;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -41,9 +42,10 @@ public class MypageServlet extends HttpServlet {
 			List<AddressDTO> addressList=a_service.selectAllAddress(userid);//회원별 주소--userid로 select
 //			AddressDTO address=a_service.selectAddress(userid);//배송지 관리 추가--배송지가 2개 이상인 경우에 TooManyResultsException->리스트로 가져옴
 			System.out.println(addressList);
-			session.setAttribute("login", member);
-			session.setAttribute("addressList", addressList);
-			response.sendRedirect("mypage.jsp");//로그인 된 계정 정보 session 저장-마이페이지 오픈
+			request.setAttribute("login", member);
+			request.setAttribute("addressList", addressList);
+			RequestDispatcher dis=request.getRequestDispatcher("mypage.jsp");//로그인 된 계정 정보 session 저장-마이페이지 오픈
+			dis.forward(request, response);
 		} else {
 			//alert로 로그인 후 이용하세요 출력
 			String mesg="로그인이 필요합니다.";

@@ -9,9 +9,8 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <%
-	MemberDTO member=(MemberDTO) session.getAttribute("login");
-//	List<AddressDTO> addressList=(List<AddressDTO>) session.getAttribute("addressList");
-	AddressDTO address=(AddressDTO) session.getAttribute("address");//기본 배송지 출력
+	MemberDTO member=(MemberDTO) request.getAttribute("login");
+	AddressDTO address=(AddressDTO) request.getAttribute("address");//기본 배송지 출력
 	
 	String userid=member.getUserid();
 	String passwd=member.getPasswd();
@@ -21,7 +20,6 @@
 	String phone=member.getPhone();
 	String created_at=member.getCreated_at();
 	
-//	AddressDTO address=null;
 	int address_id=address.getAddress_id();
 	String address_name=address.getAddress_name();
 	String receiver_name=address.getReceiver_name();
@@ -30,20 +28,6 @@
 	String addr1=address.getAddr1();
 	String addr2=address.getAddr2();
 	int default_chk=address.getDefault_chk();
-/* 	for (int j = 0; j < addressList.size(); j++) {
-		address=addressList.get(j);//첫번째로 입력한 기본 주소지만 출력되도록 설정하는 방법은?--default_chk 이용해보기
-		address_id=address.getAddress_id();
-		address_name=address.getAddress_name();
-		receiver_name=address.getReceiver_name();
-		receiver_phone=address.getReceiver_phone();
-		post_num=address.getPost_num();
-		addr1=address.getAddr1();
-		addr2=address.getAddr2();
-		default_chk=address.getDefault_chk();
-	} */
-	if (addr2 == null) {
-		addr2="상세 주소를 입력하세요.";
-	}
 %>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>

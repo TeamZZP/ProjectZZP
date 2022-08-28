@@ -60,20 +60,20 @@
 			select m.userid, m.username, m.phone,a.post_num, a.addr1, a.addr2, m.created_at
 			from member m join address a
 			on m.userid = a.userid
-			where a.default_chk = 1
 			<where>
-				<if test="searchName=='userid'">
-					upper(select userid from member) like upper('%${searchValue}%')
+				a.default_chk = 1
+				<if test="searchName=='userid'"><!-- searchName은 어떻게 인식? -->
+					and	upper(m.userid) like upper('%${searchValue}%')
 				</if>
 				<if test="searchName=='username'">
-				
+					and upper(m.username) like upper('%${searchValue}%')
 				</if>
 				<if test="searchName=='phone'">
-				
+					and m.phone like '%${searchValue}%'
 				</if>
 				<if test="searchName=='address'">
-				
-				</if>
+					and upper(a.addr1) like upper('%${searchValue}%')
+				</if>				
 			</where>
 			order by ${sortBy}
 		</select>

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -34,14 +35,12 @@ public class AddressListServlet extends HttpServlet {
 			String userid=dto.getUserid();
 			System.out.println(userid);
 			AddressService a_service=new AddressService();
-			HashMap<String, List<AddressDTO>> addressMap=new HashMap<String, List<AddressDTO>>();
 			
 			List<AddressDTO> addressList=a_service.selectAllAddress(userid);//회원별 주소--userid로 select
-			addressMap.put(userid, addressList);//userid로 해당 주소 리스트 출력
-//			System.out.println(addressMap);
 			
-			session.setAttribute("addressMap", addressMap);//userid의 address 리스트
-			response.sendRedirect("addressList.jsp");
+			request.setAttribute("addressList", addressList);//userid의 address 리스트
+			RequestDispatcher dis=request.getRequestDispatcher("addressList.jsp");
+			dis.forward(request, response);
 		} else {
 			//alert로 로그인 후 이용하세요 출력
 			String mesg="로그인이 필요합니다.";

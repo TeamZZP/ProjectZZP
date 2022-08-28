@@ -80,7 +80,41 @@
 		String addr2=list.get(i).getAddr2();
 		String created_at=list.get(i).getCreated_at();
 %>
-<input type="hidden" id="userid" value="<%= userid %>">
+<%-- <input type="hidden" id="userid" value="<%= userid %>"> --%>
+<script type="text/javascript">
+	$(document).ready(function() {
+		//var id=$("#userid").val();
+		$("#delete<%= userid %>").on("click", function() {//모달의 삭제 버튼 클릭시 회원 삭제
+			var userid=$("#checkDelete<%= userid %>").data("id");
+			console.log(userid);
+ 			//*****ajax
+			$.ajax({
+				type : "post",
+				url : "AccountDeleteServlet",//페이지 이동 없이 해당 url에서 작업 완료 후 데이터만 가져옴
+				dataType : "text",
+				data : {//서버에 전송할 데이터
+					userid : userid
+				},
+				success : function(data, status, xhr) {
+					alert("해당 회원이 삭제되었습니다.");
+					$("#deleteMember"+id).modal("hide");
+					$(".modal-backdrop").hide();//모달창 닫고 백드롭 hide
+					console.log("success");
+					$("#checkDelete<%= userid %>").parents("tr").remove();
+				},
+				error: function(xhr, status, error) {
+					alert(error);
+				}						
+			});//end ajax
+		});//end fn
+		$("#change<%= userid %>").on("click", function() {//회원 정보 출력 페이지로 이동
+			console.log("click=====");
+			var userid=$(this).attr("data-id");
+			console.log(userid);
+			location.href="AccountManagementServlet?memberid=<%= userid %>";
+		});//end fn
+	});//end ready
+</script>
 <form>
 	<tr id="list">
 		<td><%= userid %></td>
@@ -151,44 +185,14 @@
 </form>
 <script type="text/javascript">
 	$(document).ready(function() {
-		var id=$("#userid").val();
-		
 		$("#sortBy").on("change", function() {
+//			console.log("click===");
 			$("#memberForm").submit();
 		});//end fn
 		
 		$("#searchMember").on("click", function() {
-			console.log("click===");
-			$("memberForm").submit();
-		});//end fn
-		
-		$("#delete"+id).on("click", function() {//모달의 삭제 버튼 클릭시 회원 삭제
-			var userid=$("#checkDelete"+id).data("id");
-			console.log(userid);
- 			//*****ajax
-			$.ajax({
-				type : "post",
-				url : "AccountDeleteServlet",//페이지 이동 없이 해당 url에서 작업 완료 후 데이터만 가져옴
-				dataType : "text",
-				data : {//서버에 전송할 데이터
-					userid : userid
-				},
-				success : function(data, status, xhr) {
-					alert("해당 회원이 삭제되었습니다.");
-					$("#deleteMember"+id).modal("hide");
-					$(".modal-backdrop").hide();//모달창 닫고 백드롭 hide
-					console.log("success");
-					$("#checkDelete"+id).parents("tr").remove();
-				},
-				error: function(xhr, status, error) {
-					alert(error);
-				}						
-			});//end ajax
-		});//end fn
-		$("#change"+id).on("click", function() {//회원 정보 출력 페이지로 이동
-			var userid=$(this).attr("data-id");
-			console.log(userid);
-			location.href="AccountManagementServlet?admin=true";
+//			console.log("click===");
+			$("#memberForm").submit();
 		});//end fn
 	});//end ready
 </script>

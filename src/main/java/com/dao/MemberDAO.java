@@ -64,7 +64,6 @@ public class MemberDAO {
 
 	public PageDTO selectAllMember2(SqlSession sessioin, HashMap<String, String> map, int curPage) {
 		PageDTO pDTO=new PageDTO();
-		//pDTO.setCurPage(curPage);
 		pDTO.setCurPage(curPage);
 		pDTO.setPerPage(5);//한 페이지에 5개 출력
 		int perPage=pDTO.getPerPage();//한 페이지에 출력 갯수

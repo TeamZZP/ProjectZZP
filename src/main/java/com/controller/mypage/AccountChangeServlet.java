@@ -43,18 +43,14 @@ public class AccountChangeServlet extends HttpServlet {
 		String addr2=request.getParameter("addr2");
 		String default_chk=request.getParameter("default_chk");
 
-		System.out.println(userid);
-		System.out.println(passwd);
-		System.out.println(email1);
-		System.out.println(email2);
-		System.out.println(address_id);
-		System.out.println(address_name);
-		System.out.println(receiver_name);
-		System.out.println(receiver_phone);
-		System.out.println(post_num);
-		System.out.println(addr1);
-		System.out.println(addr2);
-		System.out.println(default_chk);
+		/*
+		 * System.out.println(userid); System.out.println(passwd);
+		 * System.out.println(email1); System.out.println(email2);
+		 * System.out.println(address_id); System.out.println(address_name);
+		 * System.out.println(receiver_name); System.out.println(receiver_phone);
+		 * System.out.println(post_num); System.out.println(addr1);
+		 * System.out.println(addr2); System.out.println(default_chk);
+		 */
 		
 		String changedPasswd=request.getParameter("changedPasswd");
 		System.out.println("changedPasswd : "+changedPasswd.length()+"개");

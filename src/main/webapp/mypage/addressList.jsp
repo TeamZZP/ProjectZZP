@@ -53,7 +53,8 @@
 	</tr>
 <%
 	MemberDTO member=(MemberDTO) session.getAttribute("login");
-	HashMap<String, List<AddressDTO>> addressMap=(HashMap<String, List<AddressDTO>>) session.getAttribute("addressMap");
+//	HashMap<String, List<AddressDTO>> addressMap=(HashMap<String, List<AddressDTO>>) request.getAttribute("addressMap");
+	List<AddressDTO> addressList=(List<AddressDTO>) request.getAttribute("addressList");
 	
 	String userid=member.getUserid();
 //	String passwd=member.getPasswd();
@@ -67,8 +68,8 @@
 	int size=0;
 	int address_id=0;
 	int default_chk=0;
-	for (int i = 0; i < addressMap.size(); i++) {
-		List<AddressDTO> addressList=addressMap.get(userid);
+//	for (int i = 0; i < addressMap.size(); i++) {
+//		List<AddressDTO> addressList=addressMap.get(userid);
 		for (int j = 0; j < addressList.size(); j++) {
 			AddressDTO address=addressList.get(j);
 			address_id=address.getAddress_id();
@@ -82,9 +83,6 @@
 			
 			size += 1;//회원의 배송지 갯수
 			
-			if (addr2 == null){
-				addr2="상세 주소를 입력하세요.";
-			}
 //			System.out.println("출력 확인 : "+address);
 //			System.out.println("회원의 배송지 갯수 : "+size);
 %>
@@ -217,7 +215,7 @@
 		</td>
 <%
 		}
-	}
+//	}
 %>
 	</tr>
 	
