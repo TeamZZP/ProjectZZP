@@ -61,6 +61,7 @@
 			from member m join address a
 			on m.userid = a.userid
 			where a.default_chk = 1
+			order by ${sortBy}
 		</select>
 		<select id="totalCount" parameterType="hashmap" resultType="int">
 			select count(*) from member

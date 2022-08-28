@@ -36,7 +36,7 @@ public class AccountManagementServlet extends HttpServlet {
 		if (dto != null) {
 			String userid=dto.getUserid();
 			System.out.println(userid);
-			if (request.getParameter("admin")=="true") {
+			if (request.getParameter("admin").equals("true")) {
 				System.out.println("관리자가 회원 계정 접근");
 				RequestDispatcher dis=request.getRequestDispatcher("admin/adminMemberDetail.jsp");
 				dis.forward(request, response);

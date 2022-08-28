@@ -128,10 +128,10 @@ function productChoice(n) {
 				$("#total").text((quantity - 1) * price);
 			}
 
-	})//
-	
+		})//
+	})
 </script>
-
+<form action="" id="prodForm">	
 <%
 PageDTO pDTO=(PageDTO) request.getAttribute("pDTO");
 String searchName=(String) request.getAttribute("searchName");
@@ -142,7 +142,7 @@ List<CategoryProductDTO> pDTO_list = pDTO.getList();
 
 List<CategoryProductDTO> product_list = (List<CategoryProductDTO>) request.getAttribute("product_list");
 %>
-<form action="StoreServlet" id="prodForm">		
+	
 <div id="categoryProductContainer" class="container ">
 	<div class="row " align="center">
 		<div class="row">

@@ -78,7 +78,7 @@ function productChoice(n) {
    	location.href = "LoginUIServlet";
     event.preventDefault();
    <%}%>
-
+}
 
 </script>
 

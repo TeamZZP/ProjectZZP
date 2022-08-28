@@ -32,6 +32,7 @@
 </div>
 <!-- 관리자 페이지 회원 관리 -->
 <form action="AdminCategoryServlet" id="memberForm">
+<input type="hidden" name="category" value="member">
 <div class="container" style="margin-top: 5px; margin-bottom: 5px;">
 	<div class="row row-cols-auto" style="justify-content: space-between;">
 			<div class="row row-cols-auto">
@@ -59,7 +60,7 @@
 				<option value="created_at" <% if("created_at".equals(sortBy)){%>selected<%}%>>가입일자</option>
 				<option value="userid" <% if("userid".equals(sortBy)){%>selected<%}%>>아이디</option>
 				<option value="username" <% if("username".equals(sortBy)){%>selected<%}%>>이름</option>
-				<option value="address" <% if("address".equals(sortBy)){%>selected<%}%>>주소</option>
+				<option value="addr1" <% if("addr1".equals(sortBy)){%>selected<%}%>>주소</option>
 			</select>
 			</div>
 		</div>
@@ -94,6 +95,10 @@
 %>
 <script type="text/javascript">
 	$(document).ready(function() {
+		$("#sortBy").on("change", function() {
+			$("form").submit();
+		});//end fn
+		
 		$("#delete<%= userid %>").on("click", function() {//모달의 삭제 버튼 클릭시 회원 삭제
 			var userid=$("#checkDelete<%= userid %>").data("id");
 			console.log(userid);

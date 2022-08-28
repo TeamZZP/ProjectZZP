@@ -36,7 +36,6 @@ public class CategoryServlet extends HttpServlet {
 		if(member != null) {
 			userid = member.getUserid();
 		}	
-		int c_id = Integer.parseInt( request.getParameter("c_id"));
 		String p_id = request.getParameter("p_id");
 
 		CategoryService service = new CategoryService();
@@ -45,11 +44,9 @@ public class CategoryServlet extends HttpServlet {
 		
 		ProductService pservice = new ProductService();
 		
-       if (request.getParameter("c_id")== null ||"".equals(request.getParameter("c_id"))) {
-    	   
+       if (request.getParameter("c_id") == null ||"".equals(request.getParameter("c_id"))) {
 			
     	   product_list= pservice.bestProductList();  //베스트 상품 가져오기(이미지,productDTO)
-			
 			
 		}else {
 			product_list= pservice.productList(Integer.parseInt(request.getParameter("c_id"))); 
