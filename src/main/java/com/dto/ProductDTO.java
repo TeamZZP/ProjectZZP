@@ -20,8 +20,6 @@ public class ProductDTO {
 		// TODO Auto-generated constructor stub
 	}
 
-
-
 	public ProductDTO(int p_id, String p_name, String p_content, int c_id, int p_cost_price, int p_selling_price,
 			int p_discount, String p_created, int p_stock, int p_liked, String userid) {
 		super();

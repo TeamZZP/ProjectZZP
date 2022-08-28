@@ -180,6 +180,33 @@ and IMAGE_RNK = 1) as p_image,p.P_NAME,p.P_CONTENT,p.C_ID,p.P_COST_PRICE
 	select count(*) from product
 </select>
 
+<!-- 스토어 목록 페이징 -->
+<select id="selectAllProduct" resultType="CategoryProductDTO" parameterType="hashmap">
+select (select C_NAME from category where c_id = p.c_id) as c_name, p.P_ID,(select IMAGE_ROUTE from images where p_id = p.p_id 
+and IMAGE_RNK = 1) as p_image,p.P_NAME,p.P_CONTENT,p.C_ID,p.P_COST_PRICE
+,p.P_SELLING_PRICE,p.P_DISCOUNT,p.P_CREATED,p.P_STOCK from product p
+
+<where>
+	<if test='searchName=="c_id"'>
+		upper((select C_NAME from category where c_id = p.c_id)) like upper('%${searchValue}%')
+	</if>
+	<if test='searchName=="p_id"'>
+		p_id like '%${searchValue}%'
+	</if>
+	<if test='searchName=="p_name"'>
+		p_name like '%${searchValue}%'
+	</if>
+	<if test='searchName=="p_selling_price"'>
+		p_selling_price like '%${searchValue}%'
+	</if>
+	<if test='searchName=="p_created"'>
+		p_created like '%${searchValue}%'
+	</if>
+</where>
+	 order by ${sortBy} desc
+
+</select>
+
 <insert id="insertProduct" parameterType="hashmap">
 	insert into product (p_id,p_name,p_content,c_id,p_cost_price,p_selling_price,p_discount,p_created,p_stock,userid)
 	values (product_p_id_seq.NEXTVAL,#{p_name},#{p_content},#{c_id},#{p_cost_price},#{p_selling_price},#{p_discount},sysdate,#{p_stock},#{userid})

@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 
+import com.dto.AddressDTO;
 import com.dto.CategoryProductDTO;
 import com.dto.ImagesDTO;
 import com.dto.PageDTO;
@@ -93,6 +94,23 @@ public class ProductDAO {
 		
 		return pDTO;
 	}
+	
+	//스토어페이징
+		public PageDTO selectAllProduct(SqlSession sessioin, HashMap<String, String> map, int curPage) {
+			PageDTO pDTO=new PageDTO();
+			pDTO.setCurPage(curPage);
+			pDTO.setPerPage(12);//한 페이지에 12개 출력
+			int perPage=pDTO.getPerPage();//한 페이지에 출력 갯수
+			int offset=(curPage-1)*perPage;//페이지 시작 idx
+			
+			//map에 검색 조건, 검색어, 정렬 저장된 상태
+			List<CategoryProductDTO> list=sessioin.selectList("ProductMapper.selectAllProduct", map, new RowBounds(offset, perPage));
+			
+			pDTO.setList(list);//현재 페이지에 해당하는 데이터 리스트
+			pDTO.setTotalCount(totalCount(sessioin, map));//전체 레코드 갯수
+			return pDTO;
+		}
+		
 	private int totalCount(SqlSession session, HashMap<String, String> map) {
 		return session.selectOne("ProductMapper.totalCount", map);
 
@@ -121,4 +139,7 @@ public class ProductDAO {
 	public int insertProduct(SqlSession session, HashMap<String, String> map) {
 		return session.insert("insertProduct", map);
 	}
+	
+	
+	
 }

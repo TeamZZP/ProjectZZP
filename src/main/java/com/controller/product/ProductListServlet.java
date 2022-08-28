@@ -16,7 +16,7 @@ import javax.servlet.http.HttpSession;
 import com.dto.CategoryDTO;
 import com.dto.CategoryProductDTO;
 import com.dto.MemberDTO;
-import com.dto.ProductDTO;
+import com.dto.PageDTO;
 import com.service.CategoryService;
 import com.service.ProductService;
 
@@ -24,13 +24,33 @@ import com.service.ProductService;
 public class ProductListServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		System.out.println("프로덕트리스트서블릿=====");
+		
 		HttpSession session = request.getSession();
 		MemberDTO member = (MemberDTO) session.getAttribute("login");
+		ProductService service = new ProductService();
 		
 		//페이징
 		String curPage=request.getParameter("curPage");//현재 페이지
 		if (curPage == null) {curPage="1";}//1페이지 시작
+		
+		//검색 기준, 검색어
+		String searchName=request.getParameter("searchName");
+		String searchValue=request.getParameter("searchValue");
+		String sortBy=request.getParameter("sortBy");
+		if (sortBy == null) {sortBy="created_at";}//최초 정렬 기준
+		System.out.println(curPage+"\t"+searchName+"\t"+searchValue+"\t"+sortBy);
+		
+		//위 데이터를 map에 저장
+		HashMap<String, String> p_map = new HashMap<String, String>();
+		p_map.put("searchName", searchName);
+		p_map.put("searchValue", searchValue);
+		p_map.put("sortBy", sortBy);
+		
+		PageDTO pDTO = service.selectAllProduct(p_map,Integer.parseInt(curPage));
+		System.out.println("프로덕트리스트!!!!!!"+pDTO);
+		
+		
 		
 		String userid = "";
 		if(member != null) {
@@ -46,7 +66,7 @@ public class ProductListServlet extends HttpServlet {
 		
 		request.setAttribute("categoryList", ca_list);
 		
-		ProductService service = new ProductService();
+		
 		
 		List<CategoryProductDTO> list  = null;
 		

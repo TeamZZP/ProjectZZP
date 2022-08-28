@@ -104,6 +104,12 @@ function productChoice(n) {
 	
 	$(function() {
 		
+		//정렬 기준 선택시 form 제출
+		$("#sortBy").on("change", function () {
+			$("#prodForm").submit();
+		});
+		
+		
 		$("#up").on("click", function() {
 			//input태그 수량변화
 			var quantity = parseInt($("#quantity").val());
@@ -111,7 +117,6 @@ function productChoice(n) {
 
 			var price = $("#price").val();
 			//총합 구하기
-			$("#total").text((quantity + 1) * price);
 		})//end up
 
 		$("#down").on("click", function() {
@@ -122,36 +127,61 @@ function productChoice(n) {
 				var price = $("#price").val();
 				$("#total").text((quantity - 1) * price);
 			}
-		})//end down
 
 	})//
 	
 </script>
 
 <%
+PageDTO pDTO=(PageDTO) request.getAttribute("pDTO");
+String searchName=(String) request.getAttribute("searchName");
+String searchValue=(String) request.getAttribute("searchValue");
+String sortBy=(String) request.getAttribute("sortBy");
+
+List<CategoryProductDTO> pDTO_list = pDTO.getList();
+
 List<CategoryProductDTO> product_list = (List<CategoryProductDTO>) request.getAttribute("product_list");
 %>
-
-
-
+<form action="StoreServlet" id="prodForm">		
 <div id="categoryProductContainer" class="container ">
 	<div class="row " align="center">
+		<div class="row">
+		  <div class="col">
+      	  		<div class="float-end">
+			  	  <!-- 정렬 -->
+				  <select class="form-select sortBy" name="sortBy" id="sortBy" data-style="btn-info" 
+				  		  style="width: 145px; margin-left: -24px; display: inline;">
+					    <option value="p_id" selected>정렬</option>
+					    <option value="p_id" <% if("p_id".equals(sortBy)){%>selected<%}%>>최신상품순</option>
+					    <option value="p_selling_price" <% if("p_selling_price".equals(sortBy)){%>selected<%}%>>판매가순</option>
+					    <option value="p_name" <% if("p_name".equals(sortBy)){%>selected<%}%>>상품명순</option>
+					    <option value="p_stock" <% if("p_stock".equals(sortBy)){%>selected<%}%>>재고순</option>
+				  </select>
+			  </div>
+	    	</div>
+		</div>
+		
 
 		<%
-		for (int i = 0; i < product_list.size(); i++) {
-			int p_id = product_list.get(i).getP_id();
-			String p_name = product_list.get(i).getP_name();
-			String p_content = product_list.get(i).getP_content();
-			int c_id = product_list.get(i).getC_id();
-			int p_cost_price = product_list.get(i).getP_cost_price();
-			int p_selling_price = product_list.get(i).getP_selling_price();
-			int p_discount = product_list.get(i).getP_discount();
-			String p_created = product_list.get(i).getP_created();
-			int p_stock = product_list.get(i).getP_stock();
-			String userid = product_list.get(i).getUserid();
-			String p_image = product_list.get(i).getP_image();
-			int p_liked = product_list.get(i).getP_liked();
+		for (int i = 0; i < pDTO_list.size(); i++) {
+			
+			
+			
+			int p_id = pDTO_list.get(i).getP_id();
+			String p_name = pDTO_list.get(i).getP_name();
+			String p_content = pDTO_list.get(i).getP_content();
+			int c_id = pDTO_list.get(i).getC_id();
+			int p_cost_price = pDTO_list.get(i).getP_cost_price();
+			int p_selling_price = pDTO_list.get(i).getP_selling_price();
+			int p_discount = pDTO_list.get(i).getP_discount();
+			String p_created = pDTO_list.get(i).getP_created();
+			int p_stock = pDTO_list.get(i).getP_stock();
+			String userid = pDTO_list.get(i).getUserid();
+			String p_image = pDTO_list.get(i).getP_image();
+			int p_liked = pDTO_list.get(i).getP_liked();
+			
 			int likecheck = 0;
+			
 			if (mdto != null) {
 				List<Integer> likecheckList = (List<Integer>) request.getAttribute("likecheck");
 				likecheck = likecheckList.get(i);
@@ -257,5 +287,41 @@ List<CategoryProductDTO> product_list = (List<CategoryProductDTO>) request.getAt
 		<%
 		}
 		%>
+		<div>
+	<%-- 	<div class="col">
+		  	  <!-- 검색 -->
+				<select class="form-select sortBy" name="searchName" data-style="btn-info" id="inputGroupSelect01" style="width: 140px; display: inline;">
+					<option value="c_id" <% if("c_id".equals(searchName)){%> selected
+						<%}%>>카테고리</option>
+					<option value="p_id" <% if("p_id".equals(searchName)){%> selected
+						<%}%>>상품번호</option>
+					<option value="p_name" <% if("p_name".equals(searchName)){%>
+						selected <%}%>>상품명</option>
+				</select> 
+				<input type="text" name="searchValue" class="form-control" style="width: 150px; display: inline;"
+	  				<% if(searchValue!=null && !searchValue.equals("null")) {%>value="<%= searchValue %>"<% } %>>
+	  			<button type="button" class="btn btn-success" id="searchProd" style="margin-top: -5px; display: inline;r">검색</button>
+	  	  	</div> --%>
+			<!-- 페이징 -->
+	 <div class="p-2 text-center">
+	<%
+		int curPage = pDTO.getCurPage();
+		int perPage = pDTO.getPerPage();
+		int totalCount = pDTO.getTotalCount();
+		int totalPage = totalCount/perPage;
+		if(totalCount%perPage!=0) totalPage++;
+		for(int p=1; p<=totalPage; p++){
+			if(p==curPage){
+				out.print("<b>"+p+"</b>&nbsp;&nbsp;");
+			} else {
+				out.print("<a id='search' href='StoreServlet?curPage="+p
+	    				+"&searchName="+searchName+"&searchValue="+searchValue
+	    				+"&sortBy="+sortBy+"&category=product'>"+p+"</a>&nbsp;&nbsp;");
+			}
+		} 
+	%>
+	</div>
+	</div>
 	</div>
 </div>
+</form>

@@ -66,7 +66,7 @@ public class MemberDAO {
 		PageDTO pDTO=new PageDTO();
 		//pDTO.setCurPage(curPage);
 		pDTO.setCurPage(curPage);
-		pDTO.setPerPage(5);//한 페이지에 7개 출력
+		pDTO.setPerPage(5);//한 페이지에 5개 출력
 		int perPage=pDTO.getPerPage();//한 페이지에 출력 갯수
 		int offset=(curPage-1)*perPage;//페이지 시작 idx
 		
