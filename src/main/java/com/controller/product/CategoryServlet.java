@@ -29,7 +29,10 @@ public class CategoryServlet extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		MemberDTO member = (MemberDTO) session.getAttribute("login");
+		
 		String userid = "";
+		
+		
 		if(member != null) {
 			userid = member.getUserid();
 		}	
@@ -40,6 +43,7 @@ public class CategoryServlet extends HttpServlet {
 		CategoryService service = new CategoryService();
 		
 		List<CategoryProductDTO> product_list  = null; //베스트상품
+		
 		ProductService pservice = new ProductService();
 		
        if (request.getParameter("c_id")== null ||"".equals(request.getParameter("c_id"))) {
@@ -61,9 +65,11 @@ public class CategoryServlet extends HttpServlet {
 		 */
 		
         request.setAttribute("product_list", product_list);
-	
+        System.out.println("카테고리서블릿========="+product_list);
+		
 		RequestDispatcher dis = request.getRequestDispatcher("categoryProduct.jsp");
 		dis.forward(request, response);
+		 
 		
 		
 	}

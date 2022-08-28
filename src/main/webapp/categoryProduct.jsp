@@ -81,6 +81,7 @@ function productChoice(n) {
 
 
 </script>
+
     <div class="row" align="center">
 				<%
 				 List<CategoryProductDTO> product_list = (List<CategoryProductDTO>)request.getAttribute("product_list"); 
@@ -100,6 +101,7 @@ function productChoice(n) {
 						String p_image = product_list.get(i).getP_image();
 						int p_liked = product_list.get(i).getP_liked();
 						int likecheck =0;
+						
 						if(mdto != null){
 							List<Integer> likecheckList = (List<Integer>)request.getAttribute("likecheck");
 							likecheck = likecheckList.get(i);

@@ -27,6 +27,11 @@ public class ProductListServlet extends HttpServlet {
 
 		HttpSession session = request.getSession();
 		MemberDTO member = (MemberDTO) session.getAttribute("login");
+		
+		//페이징
+		String curPage=request.getParameter("curPage");//현재 페이지
+		if (curPage == null) {curPage="1";}//1페이지 시작
+		
 		String userid = "";
 		if(member != null) {
 			userid = member.getUserid();
@@ -36,13 +41,13 @@ public class ProductListServlet extends HttpServlet {
 		String p_id = request.getParameter("p_id");
 		
 		CategoryService caservice = new CategoryService();
+		
 		List<CategoryDTO> ca_list  = caservice.allCategory(); //카테고리 전체 데이터
-		
-		
 		
 		request.setAttribute("categoryList", ca_list);
 		
 		ProductService service = new ProductService();
+		
 		List<CategoryProductDTO> list  = null;
 		
 		 
@@ -62,8 +67,6 @@ public class ProductListServlet extends HttpServlet {
 			List<CategoryProductDTO> plist  = null; //베스트상품
 			plist = new ArrayList<CategoryProductDTO>();
 			
-			
-
 			HashMap<String,String> map = new HashMap<String, String>();
 			map.put("p_id", p_id);
 			map.put("userid", userid);
