@@ -31,6 +31,9 @@ a:hover {
 hr{
 border-bottom: 2.5px solid green;
 }
+ #addLi {
+  list-style:none;
+}
 
 
 </style>
@@ -93,9 +96,10 @@ HashMap<String, Integer> map = (HashMap<String, Integer>)request.getAttribute("m
          </ul>
       </div>
       <%} %>
+      <br><br><br>
       
-      
-
+<h3 style="font-weight: bold; color: green;">&emsp;배송지 선택</h3>
+<hr id="orderHr">
       <%
       List<AddressDTO> add_list = (List<AddressDTO>)request.getAttribute("add_list");
       
@@ -106,16 +110,16 @@ HashMap<String, Integer> map = (HashMap<String, Integer>)request.getAttribute("m
     	%>
     	
     	<div class="addressContent">
-    	<h3 style="font-weight: bold; color: green;">&emsp;배송지 선택</h3>
-    	<ul class="orderAddress_list" style="line-height: 50px; font-size: 20px;">
-    	<li  id="orderLi">
+
+    	<ul class="orderAddress_list" >
+    	<li id="addLi">
     	<%= add_dto.getAddress_name()%><br>
     	받으시는 분 : <%= add_dto.getReceiver_name()%><br>
     	
     	배송지: <%=add_dto.getPost_num() %><br>
     	<%=add_dto.getAddr1() %>&nbsp;<%=add_dto.getAddr2() %>
-
     	</li>
+    	<button type="submit" class="btn btn-success"  id="selectAdd" style="float: right;">다른배송지</button>
     	</ul>
     	</div>
     	
