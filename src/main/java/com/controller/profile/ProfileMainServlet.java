@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.dto.ChallengeDTO;
+import com.dto.PageDTO;
 import com.dto.StampDTO;
 import com.service.ChallengeService;
 
@@ -42,7 +43,12 @@ public class ProfileMainServlet extends HttpServlet {
 		HashMap<String, String> profileMap = service.selectProfile(userid);
 		
 		//회원의 챌린지 목록 가져오기
-		List<ChallengeDTO> challengeList = service.selectChallengeByUserid(userid);
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("userid", userid);
+		PageDTO pDTO = service.selectChallengeByUserid(map, 1, 4);
+		
+		//회원의 챌린지 개수 가져오기
+		int num = service.countTotalUserChallenge(map);
 		
 		//회원의 도장 목록 가져오기
 		List<StampDTO> stampList = service.selectMemberStampByUserid(userid);
@@ -52,9 +58,10 @@ public class ProfileMainServlet extends HttpServlet {
 			stampMap.put(dto.getStamp_id(), dto);
 		}
 		
+		request.setAttribute("pDTO", pDTO);
 		request.setAttribute("profileMap", profileMap);
-		request.setAttribute("challengeList", challengeList);
 		request.setAttribute("stampMap", stampMap);
+		request.setAttribute("num", num);
 		
 		RequestDispatcher dis = request.getRequestDispatcher("profileMain.jsp");
 		dis.forward(request, response);

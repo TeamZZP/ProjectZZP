@@ -142,7 +142,7 @@ public class ChallengeDAO {
 		return pDTO;
 	}
 	
-	private int countTotalUserChallenge(SqlSession session, HashMap<String, String> map) {
+	public int countTotalUserChallenge(SqlSession session, HashMap<String, String> map) {
 		return session.selectOne("ChallengeMapper.countTotalUserChallenge", map);
 	}
 

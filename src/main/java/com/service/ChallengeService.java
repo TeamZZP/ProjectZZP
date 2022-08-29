@@ -254,6 +254,17 @@ public class ChallengeService {
 		}
 		return pDTO;
 	}
+	
+	public int countTotalUserChallenge(HashMap<String, String> map) {
+		int n = 0;
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		try {
+			n = dao.countTotalUserChallenge(session, map);
+		} finally {
+			session.close();
+		}
+		return n;
+	}
 
 	public int insertReply(CommentsDTO dto) {
 		int n = 0;
@@ -418,7 +429,6 @@ public class ChallengeService {
 
 	
 
-	
 	
 
 

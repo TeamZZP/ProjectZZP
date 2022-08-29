@@ -68,13 +68,6 @@
 	</where> 
 </select>
 
-
-<!-- <select id="selectChallengeByUserid" resultType="ChallengeDTO">
-	select * from challenge 
-	where userid=#{userid}
-	order by chall_id desc
-</select> -->
-
 <select id="selectChallengeByUserid" parameterType="hashmap" resultType="ChallengeDTO">
 	select * from challenge
 	where userid=#{userid}

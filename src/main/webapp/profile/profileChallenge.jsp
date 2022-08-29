@@ -1,3 +1,4 @@
+<%@page import="com.dto.PageDTO"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="com.dto.ChallengeDTO"%>
 <%@page import="java.util.List"%>
@@ -5,8 +6,9 @@
     pageEncoding="UTF-8"%>
 
 <% 
-    //회원의 챌린지 목록 가져오기
- 	List<ChallengeDTO> list = (List<ChallengeDTO>) request.getAttribute("challengeList");
+	//회원의 챌린지 목록 가져오기
+	PageDTO pDTO = (PageDTO) request.getAttribute("pDTO");
+	List<ChallengeDTO> challengeList = pDTO.getList();
 	//각 게시글마다 도장 가져오기
 	HashMap<String, String> stampListMap = (HashMap<String, String>) request.getAttribute("stampListMap");
 	//회원의 프로필 이미지 가져오기
@@ -50,8 +52,8 @@
 <div class="row">
 
 <%
-		for (int i=1; i<= list.size(); i++) {
-			ChallengeDTO dto = list.get(i-1);
+		for (int i=1; i<= challengeList.size(); i++) {
+			ChallengeDTO dto = challengeList.get(i-1);
 			int chall_id = dto.getChall_id();
 			String userid = dto.getUserid();
 			String chall_title = dto.getChall_title();

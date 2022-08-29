@@ -44,27 +44,19 @@ public class ProfileCategoryServlet extends HttpServlet {
 		
 		ChallengeService service = new ChallengeService();
 		
-		if (category.equals("all")) {
+		if (category.equals("challenge")) {
+			
+			//페이징 처리
+			String curPage = request.getParameter("curPage"); //현재페이지
+			if (curPage == null) { curPage = "1"; } //시작 시 1페이지로 시작
+			
+			HashMap<String, String> map = new HashMap<String, String>();
+			map.put("userid", userid);
+			
 			//회원의 챌린지 목록 가져오기
-			List<ChallengeDTO> challengeList = service.selectChallengeByUserid(userid);
+			PageDTO pDTO = service.selectChallengeByUserid(map, Integer.parseInt(curPage), 6);
+			List<ChallengeDTO> challengeList = pDTO.getList();
 			
-			//회원의 도장 목록 가져오기
-			List<StampDTO> stampList = service.selectMemberStampByUserid(userid);
-			//이미지와 함께 hashmap에 담기 (중복 stamp_id 제거 위해 LinkedHashMap 사용)
-			LinkedHashMap<Integer, StampDTO> stampMap = new LinkedHashMap<Integer, StampDTO>();
-			for (StampDTO dto : stampList) {
-				stampMap.put(dto.getStamp_id(), dto);
-			}
-			
-			request.setAttribute("userid", userid);
-			request.setAttribute("challengeList", challengeList);
-			request.setAttribute("stampMap", stampMap);
-			RequestDispatcher dis = request.getRequestDispatcher("profile/profileAll.jsp");
-			dis.forward(request, response);
-			
-		} else if (category.equals("challenge")) {
-			//회원의 챌린지 목록 가져오기
-			List<ChallengeDTO> challengeList = service.selectChallengeByUserid(userid);
 			//각 게시글마다 도장 가져오기
 			HashMap<String, String> stampListMap = new HashMap<String, String>();
 			for (ChallengeDTO c : challengeList) {
@@ -78,7 +70,8 @@ public class ProfileCategoryServlet extends HttpServlet {
 			
 			request.setAttribute("profile_img", profile_img);
 			request.setAttribute("stampListMap", stampListMap);
-			request.setAttribute("challengeList", challengeList);
+			request.setAttribute("pDTO", pDTO);
+			
 			RequestDispatcher dis = request.getRequestDispatcher("profile/profileChallenge.jsp");
 			dis.forward(request, response);
 			

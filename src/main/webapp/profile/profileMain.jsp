@@ -16,11 +16,12 @@
 	String profile_txt = profileMap.get("PROFILE_TXT");
 	
 	//회원의 챌린지 목록 가져오기
-	List<ChallengeDTO> challengeList = (List<ChallengeDTO>) request.getAttribute("challengeList");
+	PageDTO pDTO = (PageDTO) request.getAttribute("pDTO");
+	List<ChallengeDTO> challengeList = pDTO.getList();
 	int challNum = challengeList.size();
-	if (challNum > 4) {
-		challNum = 4;
-	}
+	
+	//회원의 챌린지 개수 가져오기
+	int num = (Integer) request.getAttribute("num");
 	
 	//회원의 도장 목록 가져오기
 	LinkedHashMap<Integer, StampDTO> stampMap = (LinkedHashMap<Integer, StampDTO>) request.getAttribute("stampMap");
@@ -53,23 +54,26 @@
 <script type="text/javascript">
 	$(document).ready(function () {
 		$("body").on("click", ".category", function () {
-			let category = $(this).attr("data-category");
-			$.ajax({
-				type:"get",
-				url:"ProfileCategoryServlet",
-				data: {
-					userid:"<%=userid%>",
-					category:category
-				},
-				dataType:"html",
-				success: function (data) {
-					$("#profileContent").html(data);
-				},
-				error: function () {
-					alert("문제가 발생했습니다. 다시 시도해 주세요.");
-				}
-			});
-			
+			let category = $(this).attr("data-category")
+			if (category == 'all') {
+				location.href = 'ProfileMainServlet?userid=<%=userid%>'
+			} else {
+				$.ajax({
+					type:"get",
+					url:"ProfileCategoryServlet",
+					data: {
+						userid:"<%=userid%>",
+						category:category
+					},
+					dataType:"html",
+					success: function (data) {
+						$("#profileContent").html(data);
+					},
+					error: function () {
+						alert("문제가 발생했습니다. 다시 시도해 주세요.");
+					}
+				});
+			}
 		});
 	});
 </script>
@@ -110,7 +114,7 @@
 	
 		<div>
 		  <div class="row p-2 mx-4 mt-5">
-		    <div class="col">챌린지 <span class="text-success fw-bold"><%= challengeList.size() %></span></div>
+		    <div class="col">챌린지 <span class="text-success fw-bold"><%= num %></span></div>
 			 <div class="col"><div class="float-end"><small><a class="category" data-category="challenge">전체보기</a></small></div></div>
 		  </div>
 		  <div class="text-center mt-2">
