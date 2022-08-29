@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.dto.AddressDTO;
 import com.dto.CategoryProductDTO;
 import com.dto.MemberDTO;
 import com.service.AddressService;
@@ -69,11 +70,14 @@ public class OrderServlet extends HttpServlet {
 				 }
 			//배송지
 			AddressService add_service = new AddressService();
-			add_service.selectAllAddress(mdto.getUserid());
+			List<AddressDTO> add_list = add_service.selectAllAddress(mdto.getUserid());
+			
+			
 			
 			
 			request.setAttribute("list", list);
 			request.setAttribute("map", map);
+			request.setAttribute("add_list", add_list);
 			
 		
 			

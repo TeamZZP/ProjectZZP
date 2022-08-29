@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
     <%@ page import="com.dto.MemberDTO" %>
     <%@ page import="com.dto.CategoryProductDTO" %>
+    <%@ page import="com.dto.AddressDTO" %>
     <%@ page import="java.util.List" %>
     <%@ page import="java.util.HashMap" %>
     <style>
@@ -92,6 +93,37 @@ HashMap<String, Integer> map = (HashMap<String, Integer>)request.getAttribute("m
          </ul>
       </div>
       <%} %>
+      
+      
+
+      <%
+      List<AddressDTO> add_list = (List<AddressDTO>)request.getAttribute("add_list");
+      
+      for(int i = 0; i<add_list.size(); i++){
+    	if(  add_list.get(i).getDefault_chk()==1){
+    	      
+    		AddressDTO add_dto =  add_list.get(i);
+    	%>
+    	
+    	<div class="addressContent">
+    	<h3 style="font-weight: bold; color: green;">&emsp;배송지 선택</h3>
+    	<ul class="orderAddress_list" style="line-height: 50px; font-size: 20px;">
+    	<li  id="orderLi">
+    	<%= add_dto.getAddress_name()%><br>
+    	받으시는 분 : <%= add_dto.getReceiver_name()%><br>
+    	
+    	배송지: <%=add_dto.getPost_num() %><br>
+    	<%=add_dto.getAddr1() %>&nbsp;<%=add_dto.getAddr2() %>
+
+    	</li>
+    	</ul>
+    	</div>
+    	
+    		
+    	<% }
+    	  
+      }
+      %>
 </div>
 
 </body>
