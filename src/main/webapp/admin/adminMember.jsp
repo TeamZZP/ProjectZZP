@@ -193,7 +193,7 @@
 			console.log("click=====");
 			var id=$(this).attr("data-id");
 			console.log(id);
-			//location.href="AccountManagementServlet?memberid=id";
+			location.href="AccountManagementServlet?memberid="+id;
 		});//end fn
 	});//end ready
 </script>
