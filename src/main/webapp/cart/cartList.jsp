@@ -90,15 +90,15 @@ a:hover {
 <script type="text/javascript"
    src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
- 		 
- 			
-		
-		
-	 
+ 		  
 	 
    $(function() {
-
-	   
+	  //주문 버튼
+	  $("#order").on("click", function() {
+      
+      $("form").attr("action", "OrderServlet");
+   })//order
+   
       //체크박스 미선택시 alert창
       $("#delAllCart").on("click", function() {
          if ($(".individual_cart_checkbox").is(":checked") == false) {
@@ -115,6 +115,7 @@ a:hover {
          $(".individual_cart_checkbox").each(function(idx, data) {
             data.checked = result;
          })
+         
       })//end allcheck
       //개별선택
       $(".delBtn").on("click", function() {
@@ -133,6 +134,7 @@ a:hover {
          console.log(cart_id, p_selling_price, p_amount, sum_money)
          
          var userid = $(this).attr("data-id");
+      
          $.ajax({
             type : "get",
             url : "CartUpdateServlet",
@@ -157,11 +159,51 @@ a:hover {
             error : function(xhr, status, error) {
                console.log(error);
             }
-         }) //up end
-      })//end
+         }) // end ajax
+         
+      })//end updBtn
       
-    
+      //개별체크박스 선택시 가격 변동
+      $(".individual_cart_checkbox").on("click",function(){
+     	 var n = $(this).val();
+     	 console.log(n);
+     	  
+         var cart_id = $(this).attr("data-xxx"); //cart_id
+         var p_selling_price = $(this).attr("data-price");
+         var p_amount = $("#cartAmount" + cart_id).val();
+         var sum_money = $(this).attr("data-sum_money"); //총금액
+         
+        if($(this).is(":checked")==true){
+        	 console.log("체크됨!");
+        	 sum_money = $("#sum_money").text();
+         	var item_price = $("#item_price" + n).text();
+         	console.log(item_price);
+         	sum_money = parseInt(sum_money) + parseInt(item_price);
+         	
+         	 var fee = sum_money >= 50000 ? 0 : 3000;
+             var total = sum_money + fee;
+             
+             $("#sum_money").text(sum_money);
+             $("#fee").text(fee);
+             $("#total").text(total);
+         	
+        }else{
+        	console.log("체크안됨!");
+        	sum_money = $("#sum_money").text();
+        	var item_price = $("#item_price" + n).text();
+        	console.log(item_price);
+        	sum_money =  parseInt(sum_money) - parseInt(item_price);
+        	
+        	 var fee = sum_money >= 50000 ? 0 : 3000;
+             var total = sum_money + fee;
+             
+             $("#sum_money").text();
+             $("#fee").text();
+             $("#total").text();
+        }
+      })//end individual_cart_checkbox
    
+ 
 
    })//end
 </script>
@@ -184,7 +226,7 @@ a:hover {
       <div class="btn-group" role="group" aria-label="Basic example">
 
          <button type="button" class="btn btn-outline-success" id="cart">
-            <input type="checkbox" name="allCheck" id="allCheck"> 장바구니(<%=cartCount%>)
+            <input type="checkbox" name="allCheck" id="allCheck" > 장바구니(<%=cartCount%>)
          </button>
          <button type="button" class="btn btn-outline-success" id="like" onclick="location.href='ProductLikeListServlet';">
          <input type="checkbox" name="allCheck" id="allCheck">찜한상품(<%=likeCount%>)</button>
