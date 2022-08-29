@@ -41,33 +41,29 @@ request.setCharacterEncoding("utf-8");
 			//해당 게시글에 현재 회원이 좋아요를 눌렀는지 확인
 			int likedIt = service.countLikedByMap(map);
 			 
+			int n = 0;
+			String img = null;
+			
 			//좋아요 추가
 			if (likedIt == 0) {
-				int n = service.insertLike(map);
+				n = service.insertLike(map);
 				System.out.println(n+"개의 레코드 좋아요 추가");
-				
-				if (n == 1) {
-					//해당 게시글의 좋아요 수 올리기
-					int result = service.upChallLiked(chall_id);
-					System.out.println(result+"개의 레코드 좋아요수 업데이트");
-					
-					out.print("images/liked.png");
-				}
+				img = "images/liked.png";
 			
 			//좋아요 삭제
 			} else if (likedIt == 1) {
-				int n = service.deleteLike(map);
+				n = service.deleteLike(map);
 				System.out.println(n+"개의 레코드 좋아요 삭제");
-				
-				if (n == 1) {
-					//해당 게시글의 좋아요 수 내리기
-					int result = service.downChallLiked(chall_id);
-					System.out.println(result+"개의 레코드 좋아요수 업데이트");
-					
-					out.print("images/like.png");
-				}
+				img = "images/like.png";
 			}
 			
+			if (n == 1) {
+				//해당 게시글의 좋아요 수 변경
+				int result = service.updateChallLiked(chall_id);
+				System.out.println(result+"개의 레코드 좋아요수 업데이트");
+				
+				out.print(img);
+			}
 			
 		} else {
 			session.setAttribute("mesg", "잘못된 접근입니다.");

@@ -185,23 +185,16 @@
 </delete>
 
 <select id="countComments" resultType="int">
-	select count(*) from comments
+	select chall_comments from challenge
 	where chall_id=#{chall_id}
 </select>
 
-<update id="upChallComments">
+<update id="updateChallComments">
 	update challenge
-	set chall_comments=chall_comments+1
+	set chall_comments=(select count(*) from comments
+						where chall_id=#{chall_id})
 	where chall_id=#{chall_id}
 </update>
-
-<update id="downChallComments" parameterType="hashmap">
-	update challenge
-	set chall_comments=chall_comments-${num}
-	where chall_id=#{chall_id}
-</update>
-
-
 
 
 <select id="selectAllLikedUserid" resultType="string">
@@ -214,9 +207,10 @@
 	values (#{chall_id}, #{userid})
 </insert>
 
-<update id="upChallLiked">
+<update id="updateChallLiked">
 	update challenge
-	set chall_liked=chall_liked+1
+	set chall_liked=(select count(*) from chall_liked 
+					where chall_id=#{chall_id})
 	where chall_id=#{chall_id}
 </update>
 
@@ -234,12 +228,6 @@
 	delete from chall_liked
 	where chall_id=#{chall_id} and userid=#{userid}
 </delete>
-
-<update id="downChallLiked">
-	update challenge
-	set chall_liked=chall_liked-1
-	where chall_id=#{chall_id}
-</update>
 
 
 <select id="selectProfile" resultType="hashmap">

@@ -163,12 +163,12 @@ public class ChallengeService {
 		}
 		return n;
 	}
-
-	public int upChallLiked(String chall_id) {
+	
+	public int updateChallLiked(String chall_id) {
 		int n = 0;
 		SqlSession session = MySqlSessionFactory.getSqlSession();
 		try {
-			n = dao.upChallLiked(session, chall_id);
+			n = dao.updateChallLiked(session, chall_id);
 			session.commit();
 		} finally {
 			session.close();
@@ -199,18 +199,6 @@ public class ChallengeService {
 		return n;
 	}
 
-	public int downChallLiked(String chall_id) {
-		int n = 0;
-		SqlSession session = MySqlSessionFactory.getSqlSession();
-		try {
-			n = dao.downChallLiked(session, chall_id);
-			session.commit();
-		} finally {
-			session.close();
-		}
-		return n;
-	}
-
 	public int countLikedByMap(HashMap<String, String> map) {
 		int n = 0;
 		SqlSession session = MySqlSessionFactory.getSqlSession();
@@ -221,30 +209,18 @@ public class ChallengeService {
 		}
 		return n;
 	}
-
-	public int upChallComments(String chall_id) {
+	
+	public int updateChallComments(String chall_id) {
 		int n = 0;
 		SqlSession session = MySqlSessionFactory.getSqlSession();
 		try {
-			n = dao.upChallComments(session, chall_id);
+			n = dao.updateChallComments(session, chall_id);
 			session.commit();
 		} finally {
 			session.close();
 		}
 		return n;
-	}
-
-	public int downChallComments(HashMap<String, String> map) {
-		int n = 0;
-		SqlSession session = MySqlSessionFactory.getSqlSession();
-		try {
-			n = dao.downChallComments(session, map);
-			session.commit();
-		} finally {
-			session.close();
-		}
-		return n;
-	}
+	}	
 
 	public String selectProfileImg(String userid) {
 		String profile_img = null;
@@ -418,12 +394,6 @@ public class ChallengeService {
 	}
 
 	
-
-
-
-
-
-
 
 
 

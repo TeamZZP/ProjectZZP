@@ -54,20 +54,14 @@ public class CommentsAddServlet extends HttpServlet {
 			dto.setUserid(userid);
 			
 			ChallengeService service = new ChallengeService();
+			int n = 0;
 			
 			//댓글인 경우 해당 게시글의 최대 group_order+1, step=0으로 insert
 			if (parent_id == null) {
 				
 				//댓글 테이블에 레코드 추가
-				int n = service.insertComment(dto);
+				n = service.insertComment(dto);
 				System.out.println(n+"개의 댓글 레코드 추가");
-				
-				if (n == 1) {
-					//챌린지 테이블에 댓글수 컬럼 증가
-					int n2 = service.upChallComments(chall_id);
-					System.out.println(n2+"개의 게시글 댓글수 변경");
-				}
-				
 				
 			//답글인 경우 부모댓글의 group_order로 insert, 해당 group_order내 MAX(step)+1하여 insert
 			} else {
@@ -77,16 +71,14 @@ public class CommentsAddServlet extends HttpServlet {
 				dto.setGroup_order(Integer.parseInt(group_order));
 				
 				//댓글 테이블에 레코드 추가
-				int n = service.insertReply(dto);
+				n = service.insertReply(dto);
 				System.out.println(n+"개의 댓글 레코드 추가");
-				
-				if (n == 1) {
-					//챌린지 테이블에 댓글수 컬럼 증가
-					int n2 = service.upChallComments(chall_id);
-					System.out.println(n2+"개의 게시글 댓글수 변경");
-				}
-				
-				
+			}
+			
+			if (n == 1) {
+				//챌린지 테이블에 댓글수 컬럼 변경
+				int n2 = service.updateChallComments(chall_id);
+				System.out.println(n2+"개의 게시글 댓글수 변경");
 			}
 			
 			//해당 게시글의 전체 댓글 목록 가져오기

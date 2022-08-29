@@ -72,6 +72,11 @@ public class ChallengeDAO {
 		int n = session.selectOne("ChallengeMapper.countComments", chall_id);
 		return n;
 	}
+	
+	public int updateChallComments(SqlSession session, String chall_id) {
+		int n = session.update("ChallengeMapper.updateChallComments", chall_id);
+		return n;
+	}
 
 	public HashMap<String, String> selectProfile(SqlSession session, String userid) {
 		HashMap<String, String> map = session.selectOne("ChallengeMapper.selectProfile", userid);
@@ -91,9 +96,9 @@ public class ChallengeDAO {
 		int n = session.insert("ChallengeMapper.insertLike", map);
 		return n;
 	}
-
-	public int upChallLiked(SqlSession session, String chall_id) {
-		int n = session.update("ChallengeMapper.upChallLiked", chall_id);
+	
+	public int updateChallLiked(SqlSession session, String chall_id) {
+		int n = session.update("ChallengeMapper.updateChallLiked", chall_id);
 		return n;
 	}
 
@@ -107,23 +112,8 @@ public class ChallengeDAO {
 		return n;
 	}
 
-	public int downChallLiked(SqlSession session, String chall_id) {
-		int n = session.update("ChallengeMapper.downChallLiked", chall_id);
-		return n;
-	}
-
 	public int countLikedByMap(SqlSession session, HashMap<String, String> map) {
 		int n = session.selectOne("ChallengeMapper.countLikedByMap", map);
-		return n;
-	}
-
-	public int upChallComments(SqlSession session, String chall_id) {
-		int n = session.update("ChallengeMapper.upChallComments", chall_id);
-		return n;
-	}
-
-	public int downChallComments(SqlSession session, HashMap<String, String> map) {
-		int n = session.update("ChallengeMapper.downChallComments", map);
 		return n;
 	}
 
@@ -215,9 +205,6 @@ public class ChallengeDAO {
 	private int countTotalReport(SqlSession session, HashMap<String, String> map) {
 		return session.selectOne("ChallengeMapper.countTotalReport", map);
 	}
-
-	
-
 
 	
 
