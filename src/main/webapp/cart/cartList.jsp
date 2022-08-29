@@ -128,7 +128,8 @@ a:hover {
          var cart_id = $(this).attr("data-xxx"); //cart_id
          var p_selling_price = $(this).attr("data-price");
          var p_amount = $("#cartAmount" + cart_id).val();
-         var sum_money = $(this).attr("data-sum_money")
+         var sum_money = $(this).attr("data-sum_money"); //총금액
+         
          console.log(cart_id, p_selling_price, p_amount, sum_money)
          
          var userid = $(this).attr("data-id");
