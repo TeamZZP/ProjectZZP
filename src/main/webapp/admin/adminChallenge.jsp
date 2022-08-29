@@ -38,6 +38,9 @@ if (member != null) {
 		text-decoration: none;
 		color: black;
 	}
+	.challengeDetail {
+		cursor: pointer;
+	}
 </style>
 
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -125,7 +128,7 @@ $(document).ready(function () {
 		<td class="challengeDetail" data-id="<%= chall_id %>"><%= chall_id %></td>
 		<td class="challengeDetail" data-id="<%= chall_id %>"><%= userid %></td>
 		<td class="challengeDetail" data-id="<%= chall_id %>"><%= chall_title %></td>
-		<td><%= chall_created %></td>
+		<td class="challengeDetail" data-id="<%= chall_id %>"><%= chall_created %></td>
 		<td>
 			<button type="button" class="updateChallBtn btn btn-outline-success btn-sm" data-cid="<%= chall_id %>" >수정</button>
 			<button type="button" class="btn btn-outline-dark btn-sm" 

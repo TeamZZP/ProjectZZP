@@ -21,6 +21,9 @@
 		text-decoration: none;
 		color: black;
 	}
+	.oneReport {
+		cursor: pointer;
+	}
 </style>
 
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -31,6 +34,15 @@ $(document).ready(function () {
 	$("#status").on("change", function () {
 		$("#sortForm").submit();
 	});
+	//해당 신고글로 이동
+	$('.oneReport').on('click', function () {
+		let id = $(this).attr('data-id')
+		if ($("#content"+id).text()=='(삭제된 글입니다)') {
+			alert('이미 삭제된 글입니다.')
+		} else {
+			location.href = 'ReportUIServlet?report_id='+id
+		}
+	})
 	//신고 삭제 모달
  	$("#deleteModal").on("shown.bs.modal", function (e) {
  		let button = e.relatedTarget
@@ -122,25 +134,25 @@ $(document).ready(function () {
 
 	<tr id="list">
 		<td><input type="checkbox" class="delCheck" name="report_id" value="<%= report_id %>"></td>
-		<td class="challengeDetail" data-id="<%= report_id %>"><%= report_id %></td>
-		<td class="challengeDetail" data-id="<%= report_id %>"><%= userid %></td>
-		<td class="challengeDetail" data-id="<%= report_id %>"><%= report_category %></td>
+		<td class="oneReport" data-id="<%= report_id %>"><%= report_id %></td>
+		<td class="oneReport" data-id="<%= report_id %>"><%= userid %></td>
+		<td class="oneReport" data-id="<%= report_id %>"><%= report_category %></td>
 		<%-- <td><% if(chall_id!=0) {%><%=chall_id%><%} else{%><%=comment_id%><%} %></td> --%>
-		<td><%= reported_userid %></td>
-		<td><%= content %></td>
-		<td><%= report_reason %></td>
-		<td><%= report_created %></td>
-		<td><%= report_status %></td>
+		<td class="oneReport" data-id="<%= report_id %>"><%= reported_userid %></td>
+		<td class="oneReport" data-id="<%= report_id %>" id="content<%= report_id %>"><%= content %></td>
+		<td class="oneReport" data-id="<%= report_id %>"><%= report_reason %></td>
+		<td class="oneReport" data-id="<%= report_id %>"><%= report_created %></td>
+		<td class="oneReport" data-id="<%= report_id %>"><%= report_status %></td>
 		<td>
 			<button type="button" class="updateChallBtn btn btn-outline-success btn-sm" data-cid="<%= chall_id %>" >수정</button>
 			<button type="button" class="btn btn-outline-dark btn-sm" 
 					data-bs-toggle="modal" data-bs-target="#deleteModal" data-bs-id="<%= report_id %>">삭제</button>
 		</td>
+	</tr>
 <%
 	}
 %>
-
-	</tr>
+	
 </table>
 </form>
 
