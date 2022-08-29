@@ -1,11 +1,15 @@
+<%@page import="com.dto.PageDTO"%>
 <%@page import="com.dto.MemberDTO"%>
 <%@page import="com.dto.ChallengeDTO"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-List<ChallengeDTO> challList = (List<ChallengeDTO>) request.getAttribute("challList");
-System.out.println("challList"+challList);
+PageDTO pDTO = (PageDTO) request.getAttribute("pDTO");
+List<ChallengeDTO> list = pDTO.getList();
+String searchName = (String) request.getAttribute("searchName");
+String searchValue = (String) request.getAttribute("searchValue");
+String sortBy = (String) request.getAttribute("sortBy");
 
 //session에 저장된 userid 읽어오기 
 MemberDTO member = (MemberDTO) session.getAttribute("login"); 
@@ -29,6 +33,10 @@ if (member != null) {
 	.searchName, .searchValue {
 		width: 140px; 
 		display: inline;
+	}
+	a {
+		text-decoration: none;
+		color: black;
 	}
 </style>
 
@@ -60,7 +68,6 @@ $(document).ready(function () {
 	
 });
 
-
 </script>
 
 
@@ -68,19 +75,17 @@ $(document).ready(function () {
 <div class="container mt-2 mb-2">
 	<div class="row">
 		  <div class="col">
-		  	<form action="AdminCategoryServlet">
+		    <form action="AdminCategoryServlet">
 		  		<input type="hidden" name="category" value="challenge">
-				  <select class="form-select searchName" data-style="btn-info" id="inputGroupSelect01">
+				  <select name="searchName" class="form-select searchName" data-style="btn-info" id="inputGroupSelect01">
 					    <option selected disabled hidden>카테고리</option>
-					    <option value="chall_id">게시글 번호</option>
-					    <option value="chall_title">제목</option>
-					    <option value="chall_content">내용</option>
-					    <option value="stamp_name">도장 이름</option>
-					    <option value="chall_created">등록일</option>
+					    <option value="chall_title" <% if("chall_title".equals(searchName)) {%>selected<%} %>>제목</option>
+					    <option value="chall_content" <% if("chall_content".equals(searchName)) {%>selected<%} %>>내용</option>
+					    <option value="chall_created" <% if("chall_created".equals(searchName)) {%>selected<%} %>>등록일</option>
 				  </select>
-		  		<input type="text" class="form-control searchValue">
-	      		<button type="button" class="btn btn-success" style="margin-top: -5px;">검색</button>
-	      	</form>
+		  		<input type="text" class="form-control searchValue" name="searchValue" <% if(searchValue!=null && !searchValue.equals("null")) {%>value="<%=searchValue%>"<%} %>>
+	      		<input type="submit" class="btn btn-success" value="검색" style="margin-top: -5px;"></input>
+	         </form>
 	      </div>
 	      <div class="col">
 	      	<div class="float-end">
@@ -99,12 +104,11 @@ $(document).ready(function () {
 		<th>게시글 번호</th>
 		<th>아이디</th>
 		<th>챌린지 제목</th>
-		<th>도장 이름</th>
 		<th>등록일</th>
 		<th>관리</th>
 	</tr>
 <%
-	for (ChallengeDTO dto : challList) {
+	for (ChallengeDTO dto : list) {
 		int chall_id = dto.getChall_id();
 		String userid = dto.getUserid();
 		String chall_title = dto.getChall_title();
@@ -121,7 +125,6 @@ $(document).ready(function () {
 		<td class="challengeDetail" data-id="<%= chall_id %>"><%= chall_id %></td>
 		<td class="challengeDetail" data-id="<%= chall_id %>"><%= userid %></td>
 		<td class="challengeDetail" data-id="<%= chall_id %>"><%= chall_title %></td>
-		<td></td>
 		<td><%= chall_created %></td>
 		<td>
 			<button type="button" class="updateChallBtn btn btn-outline-success btn-sm" data-cid="<%= chall_id %>" >수정</button>
@@ -137,7 +140,26 @@ $(document).ready(function () {
 </div>
 </div>
 
-
+	<!-- 페이징 -->
+	  <div class="p-2 text-center">
+	  <% 
+		    int curPage = pDTO.getCurPage(); 
+		    int perPage = pDTO.getPerPage(); 
+		    int totalCount = pDTO.getTotalCount();
+		    int totalPage = totalCount/perPage;
+		    if (totalCount%perPage!=0) totalPage++;
+		    for (int p=1; p<=totalPage; p++) {
+		    	if (p==curPage) {
+		    		out.print("<b>"+p+"</b>&nbsp;&nbsp;");
+		    	} else {
+		    		out.print("<a href='AdminCategoryServlet?curPage="+p
+		    				+"&searchName="+searchName+"&searchValue="+searchValue
+		    				+"&sortBy="+sortBy+"&category=challenge'>"+p+"</a>&nbsp;&nbsp;");
+		    	} 
+		    }
+	  %>
+	  </div>
+	  
 
 
 

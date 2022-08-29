@@ -58,7 +58,7 @@ $(document).ready(function () {
 		  <div class="col">
 			  <select name="searchName" class="form-select searchName" data-style="btn-info" id="inputGroupSelect01">
 				   <option selected disabled hidden>검색 기준</option>
-				   <option value="userid" <% if("userid".equals(searchName)) {%>selected<%} %>>신고자</option>
+				   <option value="r.userid" <% if("r.userid".equals(searchName)) {%>selected<%} %>>신고자</option>
 				   <option value="reported_userid" <% if("reported_userid".equals(searchName)) {%>selected<%} %>>작성자</option>
 				   <option value="report_created" <% if("report_created".equals(searchName)) {%>selected<%} %>>신고일</option>
 			  </select>

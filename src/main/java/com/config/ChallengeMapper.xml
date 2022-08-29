@@ -48,17 +48,8 @@
 <select id="selectAllChallenge" parameterType="hashmap" resultType="ChallengeDTO">
 	select * from challenge
 	<where>
-	  <!-- <if test='!"".equals(searchValue) and searchValue!=null'> -->
-<!--  	  <if test='searchName!=null and searchValue!=null'>  -->
- 	  <if test='searchName=="userid"'> 
- 	  	userid like '%${searchValue}%'
-		<!-- ${searchName} like '%${searchValue}%' -->
-	  </if>
-	  <if test='searchName=="chall_title"'> 
- 	  	chall_title like '%${searchValue}%'
-	  </if>
-	  <if test='searchName=="chall_content"'> 
- 	  	chall_content like '%${searchValue}%'
+	  <if test='searchName!=null and !searchName.equals("null")'>
+	 	${searchName} like '%${searchValue}%'
 	  </if>
 	</where> 
 	order by 
@@ -68,29 +59,41 @@
 	chall_id desc
 </select>
 
-<select id="selectChallengeByUserid" resultType="ChallengeDTO">
-	select * from challenge 
-	where userid=#{userid}
-	order by chall_id desc
-</select>
-
 <select id="countTotal" parameterType="hashmap" resultType="int">
 	select count(*) from challenge
  	<where>
- 	 <!--  <if test='!"".equals(searchValue) and searchValue!=null'> -->
-<!--  	  <if test='searchName!=null and searchValue!=null'> 
-		${searchName} like '%${searchValue}%'
-	  </if> -->
-	  <if test='searchName=="userid"'> 
- 	  	userid like '%${searchValue}%'
-	  </if>
-	  <if test='searchName=="chall_title"'> 
- 	  	chall_title like '%${searchValue}%'
-	  </if>
-	  <if test='searchName=="chall_content"'> 
- 	  	chall_content like '%${searchValue}%'
+ 	  <if test='searchName!=null and !searchName.equals("null")'>
+	 	${searchName} like '%${searchValue}%'
 	  </if>
 	</where> 
+</select>
+
+
+<!-- <select id="selectChallengeByUserid" resultType="ChallengeDTO">
+	select * from challenge 
+	where userid=#{userid}
+	order by chall_id desc
+</select> -->
+
+<select id="selectChallengeByUserid" parameterType="hashmap" resultType="ChallengeDTO">
+	select * from challenge
+	where userid=#{userid}
+	<if test='searchName!=null and !searchName.equals("null")'>
+	and ${searchName} like '%${searchValue}%'
+	</if>
+	order by 
+	<if test="sortBy!=null">
+		${sortBy} desc,
+	</if>
+	chall_id desc
+</select>
+
+<select id="countTotalUserChallenge" resultType="int">
+	select count(*) from challenge
+	where userid=#{userid}
+	<if test='searchName!=null and !searchName.equals("null")'>
+	and ${searchName} like '%${searchValue}%'
+	</if>
 </select>
 
 <select id="selectOneChallenge" resultType="ChallengeDTO">
@@ -414,14 +417,8 @@
 	from report r, challenge ch, comments co 
 	where r.chall_id=ch.chall_id (+)
 	and r.comment_id=co.comment_id (+)
- 	  <if test='searchName=="userid"'> 
- 	  	and r.userid like '%${searchValue}%'
-	  </if>
-	  <if test='searchName=="reported_userid"'> 
- 	  	and reported_userid like '%${searchValue}%'
-	  </if>
-	  <if test='searchName=="report_created"'> 
- 	  	and report_created like '%${searchValue}%'
+ 	  <if test='searchName!=null and !searchName.equals("null")'>
+	 	and ${searchName} like '%${searchValue}%'
 	  </if>
 	  <if test='status!=null and !status.equals("null")'> 
  	  	and report_status=${status}
@@ -434,14 +431,8 @@
 	from report r, challenge ch, comments co 
 	where r.chall_id=ch.chall_id (+)
 	and r.comment_id=co.comment_id (+)
- 	  <if test='searchName=="userid"'> 
- 	  	and r.userid like '%${searchValue}%'
-	  </if>
-	  <if test='searchName=="reported_userid"'> 
- 	  	and reported_userid like '%${searchValue}%'
-	  </if>
-	  <if test='searchName=="report_created"'> 
- 	  	and report_created like '%${searchValue}%'
+ 	  <if test='searchName!=null and !searchName.equals("null")'>
+	 	and ${searchName} like '%${searchValue}%'
 	  </if>
 	  <if test='status!=null and !status.equals("null")'> 
  	  	and report_status=${status}

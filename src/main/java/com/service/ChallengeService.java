@@ -233,15 +233,26 @@ public class ChallengeService {
 		return profile_img;
 	}
 
-	public List<ChallengeDTO> selectChallengeByUserid(String userid) {
-		List<ChallengeDTO> list = null;
+//	public List<ChallengeDTO> selectChallengeByUserid(String userid) {
+//		List<ChallengeDTO> list = null;
+//		SqlSession session = MySqlSessionFactory.getSqlSession();
+//		try {
+//			list = dao.selectChallengeByUserid(session, userid);
+//		} finally {
+//			session.close();
+//		}
+//		return list;
+//	}
+	
+	public PageDTO selectChallengeByUserid(HashMap<String, String> map, int curPage, int perPage) {
+		PageDTO pDTO = null;
 		SqlSession session = MySqlSessionFactory.getSqlSession();
 		try {
-			list = dao.selectChallengeByUserid(session, userid);
+			pDTO = dao.selectChallengeByUserid(session, map, curPage, perPage);
 		} finally {
 			session.close();
 		}
-		return list;
+		return pDTO;
 	}
 
 	public int insertReply(CommentsDTO dto) {
@@ -405,6 +416,9 @@ public class ChallengeService {
 		return n;
 	}
 
+	
+
+	
 	
 
 

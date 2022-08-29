@@ -123,9 +123,27 @@ public class ChallengeDAO {
 	}
 
 
-	public List<ChallengeDTO> selectChallengeByUserid(SqlSession session, String userid) {
-		List<ChallengeDTO> list = session.selectList("ChallengeMapper.selectChallengeByUserid", userid);
-		return list;
+//	public List<ChallengeDTO> selectChallengeByUserid(SqlSession session, String userid) {
+//		List<ChallengeDTO> list = session.selectList("ChallengeMapper.selectChallengeByUserid", userid);
+//		return list;
+//	}
+	
+	public PageDTO selectChallengeByUserid(SqlSession session, HashMap<String, String> map, int curPage, int perPage) {
+		PageDTO pDTO = new PageDTO();
+		pDTO.setPerPage(perPage);
+		int offset = (curPage - 1)*perPage;
+		
+		List<ChallengeDTO> list = session.selectList("ChallengeMapper.selectChallengeByUserid", map, new RowBounds(offset, perPage));
+		
+		pDTO.setCurPage(curPage);
+		pDTO.setList(list);
+		pDTO.setTotalCount(countTotalUserChallenge(session, map));
+		
+		return pDTO;
+	}
+	
+	private int countTotalUserChallenge(SqlSession session, HashMap<String, String> map) {
+		return session.selectOne("ChallengeMapper.countTotalUserChallenge", map);
 	}
 
 	public int insertReply(SqlSession session, CommentsDTO dto) {
@@ -209,6 +227,8 @@ public class ChallengeDAO {
 	public int deleteReport(SqlSession session, List<String> ids) {
 		return session.delete("ChallengeMapper.deleteReport", ids);
 	}
+
+	
 
 	
 

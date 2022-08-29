@@ -55,7 +55,6 @@ public class AdminCategoryServlet extends HttpServlet {
 		
 		//전체 회원 목록
 		if (category.equals("member")) {
-			
 			if (sortBy == null) {sortBy="created_at";}//최초 정렬 기준
 			System.out.println(curPage+"\t"+searchName+"\t"+searchValue+"\t"+sortBy);
 			
@@ -86,7 +85,6 @@ public class AdminCategoryServlet extends HttpServlet {
 			
 		//전체 상품 목록
 		} else if(category.equals("product")) {
-			
 			if (sortBy==null) { sortBy = "p_id"; }
 			System.out.println(curPage+" "+searchName+" "+searchValue+" "+sortBy);
 			
@@ -100,18 +98,17 @@ public class AdminCategoryServlet extends HttpServlet {
 			
 		//관리자가 작성한 챌린지 목록
 		} else if(category.equals("challenge")) {
+			map.put("userid", "admin1");
 			
 			ChallengeService challService = new ChallengeService();
-			List<ChallengeDTO> challList = challService.selectChallengeByUserid("admin1");
-			
-			request.setAttribute("challList", challList);
+			pDTO = challService.selectChallengeByUserid(map, Integer.parseInt(curPage), 10);
+			System.out.println(pDTO);
 			
 			url = "adminChallenge.jsp";
 			
 			
 		//전체 신고 목록
 		} else if (category.equals("report")) {
-			
 			String status = request.getParameter("status");
 			System.out.println(curPage+" "+searchName+" "+searchValue+" "+sortBy+" "+status);
 			
