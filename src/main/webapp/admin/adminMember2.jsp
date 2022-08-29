@@ -80,7 +80,41 @@
 		String addr2=list.get(i).getAddr2();
 		String created_at=list.get(i).getCreated_at();
 %>
-<input type="hidden" id="id" value="<%= userid %>">
+<%-- <input type="hidden" id="userid" value="<%= userid %>"> --%>
+<script type="text/javascript">
+	$(document).ready(function() {
+		//var id=$("#userid").val();
+		$("#delete<%= userid %>").on("click", function() {//모달의 삭제 버튼 클릭시 회원 삭제
+			var userid=$("#checkDelete<%= userid %>").data("id");
+			console.log(userid);
+ 			//*****ajax
+			$.ajax({
+				type : "post",
+				url : "AccountDeleteServlet",//페이지 이동 없이 해당 url에서 작업 완료 후 데이터만 가져옴
+				dataType : "text",
+				data : {//서버에 전송할 데이터
+					userid : userid
+				},
+				success : function(data, status, xhr) {
+					alert("해당 회원이 삭제되었습니다.");
+					$("#deleteMember"+id).modal("hide");
+					$(".modal-backdrop").hide();//모달창 닫고 백드롭 hide
+					console.log("success");
+					$("#checkDelete<%= userid %>").parents("tr").remove();
+				},
+				error: function(xhr, status, error) {
+					alert(error);
+				}						
+			});//end ajax
+		});//end fn
+		$("#change<%= userid %>").on("click", function() {//회원 정보 출력 페이지로 이동
+			console.log("click=====");
+			var userid=$(this).attr("data-id");
+			console.log(userid);
+			location.href="AccountManagementServlet?memberid=<%= userid %>";
+		});//end fn
+	});//end ready
+</script>
 <form>
 	<tr id="list">
 		<td><%= userid %></td>
@@ -108,15 +142,15 @@
 			        선택한 회원을 삭제하시겠습니까?
 			      </div>
 			      <div class="modal-footer">
-			        <button type="button" id="delete<%= userid %>" data-id="<%= userid %>" name="delete" class="btn btn-success">삭제</button>
+			        <button type="button" id="delete<%= userid %>" class="btn btn-success">삭제</button>
 			        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
 			      </div>
 			    </div>
 			  </div>
 			</div>
 			<!-- Button trigger modal -->
-			<button type="button" id="change<%= userid %>" data-id="<%= userid %>" class="btn btn-outline-success btn-sm" name="change">수정</button>
-			<button type="button" id="checkDelete<%= userid %>" class="btn btn-outline-dark btn-sm" name="checkDelete" data-bs-toggle="modal" data-bs-target="#deleteMember<%= userid %>">
+			<button type="button" id="change<%= userid %>" data-id="<%= userid %>" class="btn btn-outline-success btn-sm">수정</button>
+			<button type="button" id="checkDelete<%= userid %>" data-id="<%= userid %>" class="btn btn-outline-dark btn-sm" data-bs-toggle="modal" data-bs-target="#deleteMember<%= userid %>">
 				삭제
 			</button><!-- open modal -->
 		</td>
@@ -159,41 +193,6 @@
 		$("#searchMember").on("click", function() {
 //			console.log("click===");
 			$("#memberForm").submit();
-		});//end fn
-	});//end ready
-</script>
-<script type="text/javascript">
-	$(document).ready(function() {
-		
-		$("button[name=delete]").on("click", function() {//모달의 삭제 버튼 클릭시 회원 삭제
-			var userid=$(this).data("id");
-			console.log(userid);
- 			//*****ajax
-			$.ajax({
-				type : "post",
-				url : "AccountDeleteServlet",//페이지 이동 없이 해당 url에서 작업 완료 후 데이터만 가져옴
-				dataType : "text",
-				data : {//서버에 전송할 데이터
-					userid : userid
-				},
-				success : function(data, status, xhr) {
-					alert("해당 회원이 삭제되었습니다.");
-					$("#deleteMember"+userid).modal("hide");
-					$(".modal-backdrop").hide();//모달창 닫고 백드롭 hide
-					console.log("success");
-					$("#checkDelete"+userid).parents("tr").remove();
-				},
-				error: function(xhr, status, error) {
-					alert(error);
-				}						
-			});//end ajax
-		});//end fn
-		
-		$("button[name=change]").on("click", function() {//수정 버튼 클릭//회원 정보 출력 페이지로 이동
-			console.log("click=====");
-			var id=$(this).attr("data-id");
-			console.log(id);
-			//location.href="AccountManagementServlet?memberid=id";
 		});//end fn
 	});//end ready
 </script>
