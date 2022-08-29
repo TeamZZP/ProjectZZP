@@ -78,7 +78,24 @@
 			order by ${sortBy}
 		</select>
 		<select id="totalCount" parameterType="hashmap" resultType="int">
-			select count(*) from member
+			select count(*)
+			from member m join address a
+			on m.userid = a.userid
+			<where>
+				a.default_chk = 1
+				<if test="searchName=='userid'"><!-- searchName은 어떻게 인식? -->
+					and upper(m.userid) like upper('%${searchValue}%')
+				</if>
+				<if test="searchName=='username'">
+					and upper(m.username) like upper('%${searchValue}%')
+				</if>
+				<if test="searchName=='phone'">
+					and m.phone like '%${searchValue}%'
+				</if>
+				<if test="searchName=='address'">
+					and upper(a.addr1) like upper('%${searchValue}%')
+				</if>
+			</where>
 		</select>
 		
 		<select id="findId" parameterType="hashmap" resultType="MemberDTO">
