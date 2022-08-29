@@ -393,6 +393,18 @@ public class ChallengeService {
 		return pDTO;
 	}
 
+	public int deleteReport(List<String> ids) {
+		int n = 0;
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		try {
+			n = dao.deleteReport(session, ids);
+			session.commit();
+		} finally {
+			session.close();
+		}
+		return n;
+	}
+
 	
 
 

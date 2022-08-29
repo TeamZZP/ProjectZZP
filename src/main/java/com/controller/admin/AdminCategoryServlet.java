@@ -26,28 +26,39 @@ public class AdminCategoryServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
 		String category = request.getParameter("category");
 		System.out.println("AdminCategoryServlet========" +category);
 		
 		HttpSession session=request.getSession();
 		MemberDTO dto=(MemberDTO) session.getAttribute("login");
 		
+		//페이징 처리
+		String curPage = request.getParameter("curPage"); //현재페이지
+		if (curPage == null) { curPage = "1"; } //시작 시 1페이지로 시작
+		
+		//검색기준, 검색어
+		String searchName = request.getParameter("searchName");
+		String searchValue = request.getParameter("searchValue");
+		String sortBy = request.getParameter("sortBy");
+		System.out.println(curPage+" "+searchName+" "+searchValue+" "+sortBy);
+		
+		//위 데이터를 map에 저장
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("searchName", searchName);
+		map.put("searchValue", searchValue);
+		map.put("sortBy", sortBy);
+		
+		PageDTO pDTO = null;
+		String url = null;
+		
+		
+		//전체 회원 목록
 		if (category.equals("member")) {
-			//페이징
-			String curPage=request.getParameter("curPage");//현재 페이지
-			if (curPage == null) {curPage="1";}//1페이지 시작
 			
-			//검색 기준, 검색어
-			String searchName=request.getParameter("searchName");
-			String searchValue=request.getParameter("searchValue");
-			String sortBy=request.getParameter("sortBy");
 			if (sortBy == null) {sortBy="created_at";}//최초 정렬 기준
 			System.out.println(curPage+"\t"+searchName+"\t"+searchValue+"\t"+sortBy);
 			
-			//위 데이터를 map에 저장
-			HashMap<String, String> map=new HashMap<String, String>();
-			map.put("searchName", searchName);
-			map.put("searchValue", searchValue);
 			map.put("sortBy", sortBy);
 			
 			MemberService m_service=new MemberService();
@@ -56,7 +67,7 @@ public class AdminCategoryServlet extends HttpServlet {
 			
 			//전체 회원 목록 --->> 검색 기준, 검색어, 정렬 기준, 현재 페이지를 매개변수로 받음
 			List<MemberDTO> memberList=m_service.selectAllMember();
-			PageDTO pDTO=m_service.selectAllMember2(map, Integer.parseInt(curPage));
+			pDTO=m_service.selectAllMember2(map, Integer.parseInt(curPage));
 			System.out.println(pDTO);
 			
 			String userid=null;
@@ -69,52 +80,61 @@ public class AdminCategoryServlet extends HttpServlet {
 			
 			request.setAttribute("memberList", memberList);
 			request.setAttribute("addMap", addMap);//userid의 address 리스트
-			request.setAttribute("pDTO", pDTO);
-			request.setAttribute("searchName", searchName);
-			request.setAttribute("searchValue", searchValue);
-			request.setAttribute("sortBy", sortBy);
 			
-			RequestDispatcher dis = request.getRequestDispatcher("adminMember.jsp");
-			dis.forward(request, response);
+			url = "adminMember.jsp";
 			
+			
+		//전체 상품 목록
 		} else if(category.equals("product")) {
-			//전체 상품 목록
-			String curPage = request.getParameter("curPage");//현재페이지
-			if (curPage==null) { curPage = "1"; }//시작 시 1페이지로 시작
 			
-			//검색기준, 검색어
-			String searchName = request.getParameter("searchName");
-			String searchValue = request.getParameter("searchValue");
-			String sortBy = request.getParameter("sortBy");
 			if (sortBy==null) { sortBy = "p_id"; }
 			System.out.println(curPage+" "+searchName+" "+searchValue+" "+sortBy);
-			HashMap<String, String> map = new HashMap<String, String>();
-			map.put("searchName", searchName);
-			map.put("searchValue", searchValue);
+			
 			map.put("sortBy", sortBy);
 			
 			ProductService  product_service  = new ProductService();
-			PageDTO pDTO = product_service.selectProduct(map, Integer.parseInt(curPage));
+			pDTO = product_service.selectProduct(map, Integer.parseInt(curPage));
 			
-			request.setAttribute("pDTO", pDTO);
-			request.setAttribute("searchName", searchName);
-			request.setAttribute("searchValue", searchValue);
-			request.setAttribute("sortBy", sortBy);
+			url = "adminProduct.jsp";
 			
-			RequestDispatcher dis = request.getRequestDispatcher("adminProduct.jsp");
-			dis.forward(request, response);
 			
+		//관리자가 작성한 챌린지 목록
 		} else if(category.equals("challenge")) {
-			//관리자가 작성한 챌린지 목록
+			
 			ChallengeService challService = new ChallengeService();
 			List<ChallengeDTO> challList = challService.selectChallengeByUserid("admin1");
 			
 			request.setAttribute("challList", challList);
-			RequestDispatcher dis = request.getRequestDispatcher("adminChallenge.jsp");
-			dis.forward(request, response);
+			
+			url = "adminChallenge.jsp";
+			
+			
+		//전체 신고 목록
 		} else if (category.equals("report")) {
 			
+			String status = request.getParameter("status");
+			System.out.println(curPage+" "+searchName+" "+searchValue+" "+sortBy+" "+status);
+			
+			map.put("status", status);
+			
+			ChallengeService service = new ChallengeService(); 
+			pDTO = service.selectAllReport(map, Integer.parseInt(curPage));
+			
+			request.setAttribute("status", status);
+			
+			url = "adminReport.jsp";
+			
+			
 		}
+		
+		
+		request.setAttribute("pDTO", pDTO);
+		request.setAttribute("searchName", searchName);
+		request.setAttribute("searchValue", searchValue);
+		request.setAttribute("sortBy", sortBy);
+		
+		RequestDispatcher dis = request.getRequestDispatcher(url);
+		dis.forward(request, response);
 		
 	}
 

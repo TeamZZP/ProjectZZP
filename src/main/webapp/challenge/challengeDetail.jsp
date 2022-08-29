@@ -322,25 +322,22 @@ a {
 		});
 		//신고 모달
 		$("#reportModal").on("show.bs.modal", function (e) {
-			let button = e.relatedTarget;
+			let button = e.relatedTarget
 			let cid = button.getAttribute("data-bs-cid")
 			let category = button.getAttribute("data-bs-category")
 			if (category == 1) {
-				$("#report_category").val("1")
 				$("#report_chall_id").val(cid)
 			} else {
-				$("#report_category").val("2")
 				$("#report_comment_id").val(cid)
 			}
 		});
 		//신고 버튼
 		$(".reportBtn").on("click", function () {
 			if ("<%= currUserid %>" == "null") {
-				alert("로그인이 필요합니다.");
+				alert("로그인이 필요합니다.")
 			} else if ($("input[type='radio']:checked").length == 0) {
-				alert("신고 사유를 선택해 주세요.");
+				alert("신고 사유를 선택해 주세요.")
 			} else {
-				let category = $("#report_category").val()
 				let chall_id = $("#report_chall_id").val()
 				let comment_id = $("#report_comment_id").val()
 				let report_reason = $("input[type='radio']:checked").val()
@@ -349,7 +346,6 @@ a {
 					type:"post",
 					url:"ReportAddServlet",
 					data: {
-						category:category,
 						chall_id:chall_id,
 						comment_id:comment_id,
 						report_reason:report_reason,
@@ -362,18 +358,17 @@ a {
 						} else {
 							alert("이미 신고한 글입니다.")
 						}
-						$("#reportModal").modal("toggle");
+						$("#reportModal").modal("toggle")
 					},
 					error: function () {
-						alert("문제가 발생했습니다. 다시 시도해 주세요.");
+						alert("문제가 발생했습니다. 다시 시도해 주세요.")
 					}
 				});
 			}
 		});
 		//신고 모달 저장 데이터 삭제
 		$('#reportModal').on('hidden.bs.modal', function(e) {
-  			$("#reportModal .modal-body").find('input:radio').prop('checked', false);
-  			$("#report_category").val("")
+  			$("#reportModal .modal-body").find('input:radio').prop('checked', false)
 			$("#report_chall_id").val("")
 			$("#report_comment_id").val("")
 		})
@@ -655,7 +650,6 @@ function displayedAt(createdAt) {
         
       </div>
       <div class="modal-footer">
-        <input type="hidden" name="report_category" id="report_category">
         <input type="hidden" name="report_chall_id" id="report_chall_id">
         <input type="hidden" name="report_comment_id" id="report_comment_id">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>

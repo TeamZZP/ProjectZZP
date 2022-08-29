@@ -29,32 +29,41 @@ $(document).ready(function () {
 	
 	//정렬 기준 선택시 form 제출
 	$("#status").on("change", function () {
-		$("form").submit();
+		$("#sortForm").submit();
 	});
+	//신고 삭제 모달
+ 	$("#deleteModal").on("shown.bs.modal", function (e) {
+ 		let button = e.relatedTarget
+		let id = button.getAttribute("data-bs-id")
+		$("#delreport_id").val(id);
+	});
+	//신고 삭제
+	$(".delReportBtn").on("click", function (e) {
+		$('#delForm').attr('action', 'ReportDeleteServlet').submit()
+	});
+	//전체 선택 체크박스
+	$('#checkAll').on('click', function () {
+		$('.delCheck').prop('checked', $(this).prop('checked'))
+	})
 	
 });
-
-
 </script>
 
 
 
-
-
 <div class="container mt-2 mb-2">
-	<form action="AdminReportListServlet">
+	<form id="sortForm" action="AdminCategoryServlet">
+	<input type="hidden" name="category" value="report">
 		<div class="row">
 		  <div class="col">
-		  		<input type="hidden" name="category" value="report">
-				  <select name="searchName" class="form-select searchName" data-style="btn-info" id="inputGroupSelect01">
-					    <option selected disabled hidden>검색 기준</option>
-					    <option value="userid" <% if("userid".equals(searchName)) {%>selected<%} %>>신고자</option>
-					    <option value="reported_userid" <% if("reported_userid".equals(searchName)) {%>selected<%} %>>작성자</option>
-					    <option value="report_created" <% if("report_created".equals(searchName)) {%>selected<%} %>>신고일</option>
-				  </select>
-		  		<input type="text" class="form-control searchValue" name="searchValue" <% if(searchValue!=null && !searchValue.equals("null")) {%>value="<%=searchValue%>"<%} %>>
-	      		<input type="submit" class="btn btn-success" style="margin-top: -5px;" value="검색"></input>
-	      	
+			  <select name="searchName" class="form-select searchName" data-style="btn-info" id="inputGroupSelect01">
+				   <option selected disabled hidden>검색 기준</option>
+				   <option value="userid" <% if("userid".equals(searchName)) {%>selected<%} %>>신고자</option>
+				   <option value="reported_userid" <% if("reported_userid".equals(searchName)) {%>selected<%} %>>작성자</option>
+				   <option value="report_created" <% if("report_created".equals(searchName)) {%>selected<%} %>>신고일</option>
+			  </select>
+		  	  <input type="text" class="form-control searchValue" name="searchValue" <% if(searchValue!=null && !searchValue.equals("null")) {%>value="<%=searchValue%>"<%} %>>
+	      	  <input type="submit" class="btn btn-success" style="margin-top: -5px;" value="검색"></input>
 	      </div>
 	      <div class="col">
 	      	<div class="float-end">
@@ -73,8 +82,19 @@ $(document).ready(function () {
 
 <div class="container col-md-auto">
 <div class="row justify-content-md-center">
+
+<form id="delForm">
+<input type="hidden" name="curPage" value="<%= pDTO.getCurPage() %>">
+<input type="hidden" name="searchName" value="<%= searchName %>">
+<input type="hidden" name="searchValue" value="<%= searchValue %>">
+<input type="hidden" name="sortBy" value="<%= sortBy %>">
+<input type="hidden" name="status" value="<%= status %>">
+<input type="hidden" name="category" value="report">
+<input type="hidden" name="report_id" id="delreport_id">
+
 <table class="table table-hover table-sm">
 	<tr>
+		<th><input type="checkbox" id="checkAll"></th>
 		<th>신고 번호</th>
 		<th>신고자</th>
 		<th>구분</th>
@@ -101,6 +121,7 @@ $(document).ready(function () {
 %>
 
 	<tr id="list">
+		<td><input type="checkbox" class="delCheck" name="report_id" value="<%= report_id %>"></td>
 		<td class="challengeDetail" data-id="<%= report_id %>"><%= report_id %></td>
 		<td class="challengeDetail" data-id="<%= report_id %>"><%= userid %></td>
 		<td class="challengeDetail" data-id="<%= report_id %>"><%= report_category %></td>
@@ -113,7 +134,7 @@ $(document).ready(function () {
 		<td>
 			<button type="button" class="updateChallBtn btn btn-outline-success btn-sm" data-cid="<%= chall_id %>" >수정</button>
 			<button type="button" class="btn btn-outline-dark btn-sm" 
-					data-bs-toggle="modal" data-bs-target="#deleteModal" data-bs-cid="<%= chall_id %>">삭제</button>
+					data-bs-toggle="modal" data-bs-target="#deleteModal" data-bs-id="<%= report_id %>">삭제</button>
 		</td>
 <%
 	}
@@ -121,6 +142,14 @@ $(document).ready(function () {
 
 	</tr>
 </table>
+</form>
+
+	<div>
+	  <div class="float-end me-3" style="margin-top: -8px;">
+		<button type="button" class="delCheckBtn btn btn-outline-dark btn-sm" style="width: 80px;"
+						data-bs-toggle="modal" data-bs-target="#deleteModal" data-bs-id="">선택삭제</button>
+	  </div>
+	</div>
 </div>
 </div>
 
@@ -136,10 +165,31 @@ $(document).ready(function () {
 		    	if (p==curPage) {
 		    		out.print("<b>"+p+"</b>&nbsp;&nbsp;");
 		    	} else {
-		    		out.print("<a href='AdminReportListServlet?curPage="+p
+		    		out.print("<a href='AdminCategoryServlet?curPage="+p
 		    				+"&searchName="+searchName+"&searchValue="+searchValue
-		    				+"&sortBy="+sortBy+"&category=report'>"+p+"</a>&nbsp;&nbsp;");
+		    				+"&sortBy="+sortBy+"&status="+status+"&category=report'>"+p+"</a>&nbsp;&nbsp;");
 		    	} 
 		    }
 	  %>
 	  </div>
+	  
+	  
+	  
+	  <!-- Modal -->
+			<div id="deleteModal" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+			  <div class="modal-dialog">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h5 class="modal-title" id="staticBackdropLabel">신고 삭제</h5>
+			        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			      </div>
+			      <div class="modal-body">
+			        선택한 신고 기록을 삭제하시겠습니까? <br>(게시글은 삭제되지 않습니다.)
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="delReportBtn btn btn-success">삭제</button>
+			        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+			      </div>
+			    </div> 
+			  </div>
+			</div>

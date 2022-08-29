@@ -36,10 +36,6 @@ if (member != null) {
 <script>
 $(document).ready(function () {
 	
-	$("#reportGo").click(function() {
-		location.href="AdminReportListServlet"
-	});
-	
 	//챌린지 작성
 	$(".writeBtn").on("click", function () {
 		location.href = "AdminChallUIServlet";
@@ -66,10 +62,6 @@ $(document).ready(function () {
 
 
 </script>
-
-
-
-<button id="reportGo">버튼</button>
 
 
 

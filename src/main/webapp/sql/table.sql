@@ -211,7 +211,7 @@ create table member_stamp(
 create table report( 
     report_id NUMBER PRIMARY KEY,
     userid VARCHAR2(30) REFERENCES member(userid) ON DELETE CASCADE,
-    report_category NUMBER NOT NULL,
+    reported_userid VARCHAR2(30),
     chall_id NUMBER,
     comment_id NUMBER,
     report_reason NUMBER NOT NULL,

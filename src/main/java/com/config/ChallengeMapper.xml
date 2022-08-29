@@ -348,12 +348,13 @@
 	insert into report
 		(report_id,
 		userid,
-		report_category,
 		<if test="chall_id != null">
 		chall_id,
+		reported_userid,
 		</if>
 		<if test="comment_id != null">
 		comment_id,
+		reported_userid,
 		</if>
 		report_reason,
 		report_status,
@@ -361,12 +362,13 @@
 	values
 		(report_report_id_seq.NEXTVAL,
 		#{userid},
-		#{category},
 		<if test="chall_id != null">
 		#{chall_id},
+		(select userid from challenge where chall_id=#{chall_id}),
 		</if>
 		<if test="comment_id != null">
 		#{comment_id},
+		(select userid from comments where comment_id=#{comment_id}),
 		</if>
 		#{report_reason},
 		0,
@@ -388,9 +390,8 @@
 <select id="selectAllReport" parameterType="hashmap" resultType="com.dto.ReportDTO">
 	select r.report_id,
 			r.userid,
-			case r.report_category 
-				when 1 then '게시글'
-       			when 2 then '댓글'
+			case when r.chall_id is not null then '게시글'
+       			when r.comment_id is not null then '댓글'
         		end report_category,
 			r.chall_id,
 			r.comment_id,
@@ -408,8 +409,8 @@
 		        when 1 then '처리 완료'
 		        end report_status,
 			r.report_created,
-			COALESCE(ch.userid, co.userid) reported_userid, 
-			COALESCE(ch.chall_title, co.comment_content) content
+			r.reported_userid, 
+			COALESCE(ch.chall_title, co.comment_content, '(삭제된 글입니다)') content
 	from report r, challenge ch, comments co 
 	where r.chall_id=ch.chall_id (+)
 	and r.comment_id=co.comment_id (+)
@@ -417,12 +418,12 @@
  	  	and r.userid like '%${searchValue}%'
 	  </if>
 	  <if test='searchName=="reported_userid"'> 
- 	  	and COALESCE(ch.userid, co.userid) like '%${searchValue}%'
+ 	  	and reported_userid like '%${searchValue}%'
 	  </if>
 	  <if test='searchName=="report_created"'> 
  	  	and report_created like '%${searchValue}%'
 	  </if>
-	  <if test='status!=null'> 
+	  <if test='status!=null and !status.equals("null")'> 
  	  	and report_status=${status}
 	  </if>
 	order by report_id desc
@@ -437,15 +438,23 @@
  	  	and r.userid like '%${searchValue}%'
 	  </if>
 	  <if test='searchName=="reported_userid"'> 
- 	  	and COALESCE(ch.userid, co.userid) like '%${searchValue}%'
+ 	  	and reported_userid like '%${searchValue}%'
 	  </if>
 	  <if test='searchName=="report_created"'> 
  	  	and report_created like '%${searchValue}%'
 	  </if>
-	  <if test='status!=null'> 
+	  <if test='status!=null and !status.equals("null")'> 
  	  	and report_status=${status}
 	  </if>
 </select>
+
+<delete id="deleteReport" parameterType="list">
+	delete from report
+	where report_id in
+	<foreach item="id" collection="list" open="(" separator="," close=")">
+		#{id}
+	</foreach>
+</delete>
 
 
 </mapper>

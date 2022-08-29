@@ -206,6 +206,10 @@ public class ChallengeDAO {
 		return session.selectOne("ChallengeMapper.countTotalReport", map);
 	}
 
+	public int deleteReport(SqlSession session, List<String> ids) {
+		return session.delete("ChallengeMapper.deleteReport", ids);
+	}
+
 	
 
 

@@ -22,21 +22,19 @@ public class ReportAddServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		
-		String category = request.getParameter("category");
 		String chall_id = request.getParameter("chall_id");
 		String comment_id = request.getParameter("comment_id");
 		String report_reason = request.getParameter("report_reason");
 		String userid = request.getParameter("userid");
 		
-		System.out.println(category+" "+chall_id+" "+comment_id+" "+report_reason+" "+userid);
+		System.out.println(chall_id+" "+comment_id+" "+report_reason+" "+userid);
 		HashMap<String, String> map = new HashMap<String, String>();
-		map.put("category", category);
-		if (category.equals("1")) {
+		
+		if (chall_id.length() != 0) {
 			map.put("chall_id", chall_id);
 		} else {
 			map.put("comment_id", comment_id);
 		}
-		map.put("report_reason", report_reason);
 		map.put("userid", userid);
 		
 		ChallengeService service = new ChallengeService();
@@ -46,9 +44,11 @@ public class ReportAddServlet extends HttpServlet {
 		int count = service.checkReportExist(map);
 		
 		if (count == 0) {
+			map.put("report_reason", report_reason);
 			int n = service.insertReport(map);
 			System.out.println(n+"개의 신고 레코드 추가");
 			out.print(true);
+			
 		} else {
 			out.print(false);
 		}
