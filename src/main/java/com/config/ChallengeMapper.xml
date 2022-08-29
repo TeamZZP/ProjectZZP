@@ -440,5 +440,15 @@
 	</foreach>
 </delete>
 
+<select id="selectOneReport" resultType="com.dto.ReportDTO">
+	select * from report
+	where report_id=#{report_id}
+</select>
+
+<select id="selectChallIdFromComment" resultType="int">
+	select chall_id from comments
+	where comment_id=#{comment_id}
+</select>
+
 
 </mapper>

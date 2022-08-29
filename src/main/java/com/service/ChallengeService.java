@@ -11,6 +11,7 @@ import com.dao.ChallengeDAO;
 import com.dto.ChallengeDTO;
 import com.dto.CommentsDTO;
 import com.dto.PageDTO;
+import com.dto.ReportDTO;
 import com.dto.StampDTO;
 
 public class ChallengeService {
@@ -427,10 +428,29 @@ public class ChallengeService {
 		return n;
 	}
 
-	
+	public ReportDTO selectOneReport(String report_id) {
+		ReportDTO dto = null;
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		try {
+			dto = dao.selectOneReport(session, report_id);
+		} finally {
+			session.close();
+		}
+		return dto;
+	}
+
+	public int selectChallIdFromComment(int comment_id) {
+		int n = 0;
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		try {
+			n = dao.selectChallIdFromComment(session, comment_id);
+		} finally {
+			session.close();
+		}
+		return n;
+	}
 
 	
-
 
 
 }

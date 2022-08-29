@@ -228,6 +228,14 @@ public class ChallengeDAO {
 		return session.delete("ChallengeMapper.deleteReport", ids);
 	}
 
+	public ReportDTO selectOneReport(SqlSession session, String report_id) {
+		return session.selectOne("ChallengeMapper.selectOneReport", report_id);
+	}
+
+	public int selectChallIdFromComment(SqlSession session, int comment_id) {
+		return session.selectOne("ChallengeMapper.selectChallIdFromComment", comment_id);
+	}
+
 	
 
 	
