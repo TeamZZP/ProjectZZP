@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
     <%@ page import="com.dto.MemberDTO" %>
     <%@ page import="com.dto.CategoryProductDTO" %>
+    <%@ page import="com.dto.AddressDTO" %>
     <%@ page import="java.util.List" %>
     <%@ page import="java.util.HashMap" %>
     <style>
@@ -29,6 +30,9 @@ a:hover {
 
 hr{
 border-bottom: 2.5px solid green;
+}
+ #addLi {
+  list-style:none;
 }
 
 
@@ -92,6 +96,38 @@ HashMap<String, Integer> map = (HashMap<String, Integer>)request.getAttribute("m
          </ul>
       </div>
       <%} %>
+      <br><br><br>
+      
+<h3 style="font-weight: bold; color: green;">&emsp;배송지 선택</h3>
+<hr id="orderHr">
+      <%
+      List<AddressDTO> add_list = (List<AddressDTO>)request.getAttribute("add_list");
+      
+      for(int i = 0; i<add_list.size(); i++){
+    	if(  add_list.get(i).getDefault_chk()==1){
+    	      
+    		AddressDTO add_dto =  add_list.get(i);
+    	%>
+    	
+    	<div class="addressContent">
+
+    	<ul class="orderAddress_list" >
+    	<li id="addLi">
+    	<%= add_dto.getAddress_name()%><br>
+    	받으시는 분 : <%= add_dto.getReceiver_name()%><br>
+    	
+    	배송지: <%=add_dto.getPost_num() %><br>
+    	<%=add_dto.getAddr1() %>&nbsp;<%=add_dto.getAddr2() %>
+    	</li>
+    	<button type="submit" class="btn btn-success"  id="selectAdd" style="float: right;">다른배송지</button>
+    	</ul>
+    	</div>
+    	
+    		
+    	<% }
+    	  
+      }
+      %>
 </div>
 
 </body>
