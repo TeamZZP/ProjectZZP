@@ -116,7 +116,41 @@ a:hover {
             data.checked = result;
          })
          
+         var n = $(this).val();
+     	 console.log(n);
+     	  
+         var cart_id = $(this).attr("data-xxx"); //cart_id
+         var p_selling_price = $(this).attr("data-price");
+         var p_amount = $("#cartAmount" + cart_id).val();
+         var sum_money = $(this).attr("data-sum_money"); //총금액
+         var fee = sum_money >= 50000 ? 0 : 3000;
+         var total = sum_money + fee;
+         
+        if($(this).is(":checked")==true){
+        	 console.log("체크됨!");
+        	 sum_money = $("#sum_money").text();
+         	var item_price = $("#item_price" + n).text();
+         	console.log(item_price);
+         	sum_money = parseInt(sum_money) + parseInt(item_price);
+         	
+         	 $("#sum_money").text(sum_money);
+             $("#fee").text(fee);
+             $("#total").text(total);
+         	
+        }else{
+        	console.log("체크안됨!");
+        	sum_money = $("#sum_money").text();
+        	var item_price = $("#item_price" + n).text();
+        	console.log(item_price);
+        	sum_money =  parseInt(sum_money) - parseInt(item_price);
+        	
+             $("#sum_money").text("0");
+             $("#fee").text("0");
+             $("#total").text("0");
+        }
+    
       })//end allcheck
+      
       //개별선택
       $(".delBtn").on("click", function() {
          var cart_id = $(this).attr("data-xxx");

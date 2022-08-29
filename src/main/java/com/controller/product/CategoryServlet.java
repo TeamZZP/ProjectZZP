@@ -25,6 +25,7 @@ public class CategoryServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("카테고리서블릿======");
+		
 		HttpSession session = request.getSession();
 		MemberDTO member = (MemberDTO) session.getAttribute("login");
 		ProductService  product_service  = new ProductService(); 
@@ -85,6 +86,31 @@ public class CategoryServlet extends HttpServlet {
 		PageDTO pDTO2 = product_service.selectC_Product(p_map,Integer.parseInt(curPage));
 		
 		System.out.println("카테고리서블릿!!!!!!"+pDTO2);
+		
+		
+			if(member != null) {
+			
+			HashMap<String,String> map = new HashMap<String, String>();
+			
+			//int [] likecheck = null ; 
+			
+			List<Integer> likecheck = new ArrayList<Integer>();
+			
+			for (int i = 0; i < product_list.size(); i++) {
+
+				map.put("p_id",  Integer.toString(product_list.get(i).getP_id()));
+				map.put("userid", member.getUserid());
+				likecheck.add(product_service.likeCheck(map));
+				
+			}
+			
+
+			System.out.println("찜 갯수 확인"+likecheck);
+			
+			request.setAttribute("likecheck", likecheck);
+			
+		}
+		
 		
        	request.setAttribute("pDTO", pDTO2);
 		request.setAttribute("sortBy", sortBy);
