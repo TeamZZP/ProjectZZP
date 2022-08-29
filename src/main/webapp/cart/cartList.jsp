@@ -197,9 +197,9 @@ a:hover {
         	 var fee = sum_money >= 50000 ? 0 : 3000;
              var total = sum_money + fee;
              
-             $("#sum_money").text();
-             $("#fee").text();
-             $("#total").text();
+             $("#sum_money").text(sum_money);
+             $("#fee").text(fee);
+             $("#total").text(total);
         }
       })//end individual_cart_checkbox
    
