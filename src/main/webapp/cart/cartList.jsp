@@ -111,43 +111,49 @@ a:hover {
 
       //전체선택
       $("#allCheck").on("click", function() {
-         var result = this.checked;
+      	 var result = this.checked;
+         
          $(".individual_cart_checkbox").each(function(idx, data) {
             data.checked = result;
          })
+          
+       
          
-         var n = $(this).val();
+         var n = $(".individual_cart_checkbox").val();
      	 console.log(n);
      	  
-         var cart_id = $(this).attr("data-xxx"); //cart_id
+        var cart_id = $(this).attr("data-xxx"); //cart_id
          var p_selling_price = $(this).attr("data-price");
          var p_amount = $("#cartAmount" + cart_id).val();
-         var sum_money = $(this).attr("data-sum_money"); //총금액
-         var fee = sum_money >= 50000 ? 0 : 3000;
-         var total = sum_money + fee;
+         var sum_money = $("#sum_money").text();
+      	 var item_price = $("#item_price" + n).text();
          
         if($(this).is(":checked")==true){
         	 console.log("체크됨!");
-        	 sum_money = $("#sum_money").text();
-         	var item_price = $("#item_price" + n).text();
+        	
          	console.log(item_price);
          	sum_money = parseInt(sum_money) + parseInt(item_price);
          	
-         	 $("#sum_money").text(sum_money);
+         	 var fee = sum_money >= 50000 ? 0 : 3000;
+             var total = sum_money + fee;
+             
+             $("#sum_money").text(sum_money);
              $("#fee").text(fee);
              $("#total").text(total);
          	
         }else{
         	console.log("체크안됨!");
-        	sum_money = $("#sum_money").text();
-        	var item_price = $("#item_price" + n).text();
+        
         	console.log(item_price);
         	sum_money =  parseInt(sum_money) - parseInt(item_price);
         	
-             $("#sum_money").text("0");
-             $("#fee").text("0");
-             $("#total").text("0");
-        }
+        	 var fee = sum_money >= 50000 ? 0 : 3000;
+             var total = sum_money + fee;
+             
+             $("#sum_money").text(sum_money);
+             $("#fee").text(fee);
+             $("#total").text(total);
+        } 
     
       })//end allcheck
       
@@ -205,12 +211,12 @@ a:hover {
          var cart_id = $(this).attr("data-xxx"); //cart_id
          var p_selling_price = $(this).attr("data-price");
          var p_amount = $("#cartAmount" + cart_id).val();
-         var sum_money = $(this).attr("data-sum_money"); //총금액
+         var sum_money = $("#sum_money").text();
+      	 var item_price = $("#item_price" + n).text();
          
         if($(this).is(":checked")==true){
         	 console.log("체크됨!");
-        	 sum_money = $("#sum_money").text();
-         	var item_price = $("#item_price" + n).text();
+        	
          	console.log(item_price);
          	sum_money = parseInt(sum_money) + parseInt(item_price);
          	
@@ -223,8 +229,7 @@ a:hover {
          	
         }else{
         	console.log("체크안됨!");
-        	sum_money = $("#sum_money").text();
-        	var item_price = $("#item_price" + n).text();
+        
         	console.log(item_price);
         	sum_money =  parseInt(sum_money) - parseInt(item_price);
         	
@@ -260,7 +265,7 @@ a:hover {
       <div class="btn-group" role="group" aria-label="Basic example">
 
          <button type="button" class="btn btn-outline-success" id="cart">
-            <input type="checkbox" name="allCheck" id="allCheck" > 장바구니(<%=cartCount%>)
+            <input type="checkbox" name="allCheck" id="allCheck" value="" > 장바구니(<%=cartCount%>)
          </button>
          <button type="button" class="btn btn-outline-success" id="like" onclick="location.href='ProductLikeListServlet';">
          <input type="checkbox" name="allCheck" id="allCheck">찜한상품(<%=likeCount%>)</button>
