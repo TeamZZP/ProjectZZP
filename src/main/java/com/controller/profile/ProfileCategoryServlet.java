@@ -65,8 +65,13 @@ public class ProfileCategoryServlet extends HttpServlet {
 			for (ReviewDTO r : reviewList) {
 				prodMap.put(r.getP_ID(), reviewService.selectOneProduct(r.getP_ID()));
 			}
+			
+			//회원의 리뷰 개수 가져오기
+			int reviewNum = reviewService.countTotalUserReview(map);
+			
 			request.setAttribute("reviewPageDTO", reviewPageDTO);
 			request.setAttribute("prodMap", prodMap);
+			request.setAttribute("reviewNum", reviewNum);
 			
 			RequestDispatcher dis = request.getRequestDispatcher("profile/profileReview.jsp");
 			dis.forward(request, response);
@@ -85,6 +90,9 @@ public class ProfileCategoryServlet extends HttpServlet {
 			PageDTO pDTO = service.selectChallengeByUserid(map, Integer.parseInt(curPage), 6);
 			List<ChallengeDTO> challengeList = pDTO.getList();
 			
+			//회원의 챌린지 개수 가져오기
+			int challNum = service.countTotalUserChallenge(map);
+			
 			//각 게시글마다 도장 가져오기
 			HashMap<String, String> stampListMap = new HashMap<String, String>();
 			for (ChallengeDTO c : challengeList) {
@@ -99,6 +107,7 @@ public class ProfileCategoryServlet extends HttpServlet {
 			request.setAttribute("profile_img", profile_img);
 			request.setAttribute("stampListMap", stampListMap);
 			request.setAttribute("pDTO", pDTO);
+			request.setAttribute("challNum", challNum);
 			
 			RequestDispatcher dis = request.getRequestDispatcher("profile/profileChallenge.jsp");
 			dis.forward(request, response);
