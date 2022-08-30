@@ -76,9 +76,6 @@
 	
 	$(".imageChange").mouseover(function () {
 		var src2 = $(this).attr("src");
-		var img = $(this).attr("data-image");
-		console.log(img)
-		console.log(src2);
 		 $("#firstImage").attr("src", src2);
 	});
 		
@@ -149,7 +146,7 @@ System.out.println("productRetrieve.jsp에서 파싱한 ilist==" + ilist);
 					if (image_rnk == 1) {
 					%>
 					<tr>
-						<td colspan="4">
+						<td colspan="5">
 						<img id="firstImage" name="p_image"
 							src="images/p_image/<%=image_route%>"
 							class="img-thumbnail" style="height: 500; width: 600; " ></td>
@@ -160,16 +157,11 @@ System.out.println("productRetrieve.jsp에서 파싱한 ilist==" + ilist);
 					%>
 						
 					<tr>
-								<td>
-									<%-- <%
-									if (image_rnk != 1) {
-									%>  --%>
-									<img class="imageChange" data-image="<%=image_route%>";
-									src="images/p_image/<%=image_route%>"
-									class="img-thumbnail" style="height: 100; width: 100;"  
-									> 
-									<%-- <% } %> --%>
-								</td>
+						<td colspan="5">
+							<img class="imageChange"
+								src="images/p_image/<%=image_route%>"
+								class="img-thumbnail" style="height: 100; width: 100;" > 
+						</td>
 					</tr>
 				</table>
 				<%
