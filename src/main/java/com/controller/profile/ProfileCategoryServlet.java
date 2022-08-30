@@ -15,8 +15,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.dto.ChallengeDTO;
 import com.dto.PageDTO;
+import com.dto.ReviewDTO;
 import com.dto.StampDTO;
 import com.service.ChallengeService;
+import com.service.ReviewService;
 
 /**
  * Servlet implementation class ProfileCategoryServlet
@@ -44,7 +46,33 @@ public class ProfileCategoryServlet extends HttpServlet {
 		
 		ChallengeService service = new ChallengeService();
 		
-		if (category.equals("challenge")) {
+		if (category.equals("review")) {
+			
+			//페이징 처리
+			String curPage = request.getParameter("curPage"); //현재페이지
+			if (curPage == null) { curPage = "1"; } //시작 시 1페이지로 시작
+			
+			HashMap<String, String> map = new HashMap<String, String>();
+			map.put("userid", userid);
+			
+			//회원의 리뷰 가져오기
+			ReviewService reviewService = new ReviewService();
+			PageDTO reviewPageDTO = reviewService.selectUserReview(map, Integer.parseInt(curPage), 2);
+			
+			//리뷰에 해당하는 상품 정보 가져오기
+			List<ReviewDTO> reviewList = reviewPageDTO.getList();
+			HashMap<Integer, HashMap<String, String>> prodMap = new HashMap<Integer, HashMap<String,String>>();
+			for (ReviewDTO r : reviewList) {
+				prodMap.put(r.getP_ID(), reviewService.selectOneProduct(r.getP_ID()));
+			}
+			request.setAttribute("reviewPageDTO", reviewPageDTO);
+			request.setAttribute("prodMap", prodMap);
+			
+			RequestDispatcher dis = request.getRequestDispatcher("profile/profileReview.jsp");
+			dis.forward(request, response);
+			
+			
+		} else if (category.equals("challenge")) {
 			
 			//페이징 처리
 			String curPage = request.getParameter("curPage"); //현재페이지

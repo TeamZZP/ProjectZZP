@@ -14,8 +14,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.dto.ChallengeDTO;
 import com.dto.PageDTO;
+import com.dto.ProductDTO;
+import com.dto.ReviewDTO;
 import com.dto.StampDTO;
 import com.service.ChallengeService;
+import com.service.ReviewService;
 
 /**
  * Servlet implementation class ProfileMainServlet
@@ -40,15 +43,29 @@ public class ProfileMainServlet extends HttpServlet {
 		String userid = request.getParameter("userid");
 		
 		ChallengeService service = new ChallengeService();
+		
+		//회원의 프로필 가져오기
 		HashMap<String, String> profileMap = service.selectProfile(userid);
 		
-		//회원의 챌린지 목록 가져오기
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("userid", userid);
-		PageDTO pDTO = service.selectChallengeByUserid(map, 1, 4);
 		
+		//회원의 리뷰 가져오기
+		ReviewService reviewService = new ReviewService();
+		PageDTO reviewPageDTO = reviewService.selectUserReview(map, 1, 4);
+		//리뷰에 해당하는 상품 정보 가져오기
+		List<ReviewDTO> reviewList = reviewPageDTO.getList();
+		HashMap<Integer, HashMap<String, String>> prodMap = new HashMap<Integer, HashMap<String,String>>();
+		for (ReviewDTO r : reviewList) {
+			prodMap.put(r.getP_ID(), reviewService.selectOneProduct(r.getP_ID()));
+		}
+		//회원의 리뷰 개수 가져오기
+		int reviewNum = reviewService.countTotalUserReview(map);
+		
+		//회원의 챌린지 목록 가져오기
+		PageDTO pDTO = service.selectChallengeByUserid(map, 1, 4);
 		//회원의 챌린지 개수 가져오기
-		int num = service.countTotalUserChallenge(map);
+		int challNum = service.countTotalUserChallenge(map);
 		
 		//회원의 도장 목록 가져오기
 		List<StampDTO> stampList = service.selectMemberStampByUserid(userid);
@@ -58,10 +75,13 @@ public class ProfileMainServlet extends HttpServlet {
 			stampMap.put(dto.getStamp_id(), dto);
 		}
 		
+		request.setAttribute("reviewPageDTO", reviewPageDTO);
+		request.setAttribute("prodMap", prodMap);
+		request.setAttribute("reviewNum", reviewNum);
 		request.setAttribute("pDTO", pDTO);
+		request.setAttribute("challNum", challNum);
 		request.setAttribute("profileMap", profileMap);
 		request.setAttribute("stampMap", stampMap);
-		request.setAttribute("num", num);
 		
 		RequestDispatcher dis = request.getRequestDispatcher("profileMain.jsp");
 		dis.forward(request, response);
