@@ -34,6 +34,11 @@ public class OrderServlet extends HttpServlet {
 		HashMap<String, Integer> map = new HashMap<String, Integer>();
 		
 		//int p_id= 0;
+		
+		
+		
+		
+		
 
 		
 			if(mdto != null) {
@@ -73,7 +78,7 @@ public class OrderServlet extends HttpServlet {
 			List<AddressDTO> add_list = add_service.selectAllAddress(mdto.getUserid());
 			
 			
-			
+		
 			
 			request.setAttribute("list", list);
 			request.setAttribute("map", map);
