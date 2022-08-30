@@ -162,6 +162,14 @@ public class ProductDAO {
 		return session.insert("insertProduct", map);
 	}
 
+	public int updateProduct(SqlSession session, ProductDTO dto) {
+		return session.update("updateProduct2", dto);
+	}
+
+	public int insertProduct(SqlSession session, ProductDTO dto) {
+		return  session.insert("insertProduct2", dto);
+	}
+
 	
 	
 	

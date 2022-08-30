@@ -11,7 +11,6 @@ public class ProductDTO {
 	private int p_discount;
 	private String p_created;
 	private int p_stock;
-	private int p_liked;
 	private String userid; //관리자 아이디
 	
 	
@@ -21,7 +20,7 @@ public class ProductDTO {
 	}
 
 	public ProductDTO(int p_id, String p_name, String p_content, int c_id, int p_cost_price, int p_selling_price,
-			int p_discount, String p_created, int p_stock, int p_liked, String userid) {
+			int p_discount, String p_created, int p_stock, String userid) {
 		super();
 		this.p_id = p_id;
 		this.p_name = p_name;
@@ -32,7 +31,6 @@ public class ProductDTO {
 		this.p_discount = p_discount;
 		this.p_created = p_created;
 		this.p_stock = p_stock;
-		this.p_liked = p_liked;
 		this.userid = userid;
 	}
 
@@ -118,22 +116,12 @@ public class ProductDTO {
 		this.userid = userid;
 	}
 
-	public int getP_liked() {
-		return p_liked;
-	}
-
-
-
-	public void setP_liked(int p_liked) {
-		this.p_liked = p_liked;
-	}
-
 
 	@Override
 	public String toString() {
 		return "ProductDTO [p_id=" + p_id + ", p_name=" + p_name + ", p_content=" + p_content + ", c_id=" + c_id
 				+ ", p_cost_price=" + p_cost_price + ", p_selling_price=" + p_selling_price + ", p_discount="
-				+ p_discount + ", p_created=" + p_created + ", p_stock=" + p_stock + ", p_liked=" + p_liked
+				+ p_discount + ", p_created=" + p_created + ", p_stock=" + p_stock 
 				+ ", userid=" + userid + "]";
 	}
 

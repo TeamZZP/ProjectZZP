@@ -261,6 +261,30 @@ public class ProductService {
 		return dto;
 	}
 
+	public int updateProduct(ProductDTO dto) {
+		int num = 0;
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		try {
+			num = dao.updateProduct(session, dto);
+        	session.commit();
+        }finally {
+        	session.close();
+        }
+		return num;
+	}
+
+	public int insertProduct(ProductDTO dto) {
+		int num = 0;
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		try {
+			num = dao.insertProduct(session, dto);
+			session.commit();
+		} finally {
+			session.close();
+		}
+		return num;
+	}
+
 
 
 }

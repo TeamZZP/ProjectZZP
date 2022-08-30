@@ -13,12 +13,7 @@
 <script type="text/javascript">
  	$(document).ready(function () {
 
- 		//관리자페이지 카테고리
-		$(".category").click(function() {
-			let category = $(this).attr("data-category");
-			location.href="AdminCategoryServlet?category="+category;
-		});
-		//상품검색
+ 		//상품검색
 		$("#searchProd").click(function() {
 			$("#prodForm").submit();
 		});
@@ -46,20 +41,6 @@ if(mesg != null){
 	String searchValue = (String) request.getAttribute("searchValue");
 	String sortBy = (String) request.getAttribute("sortBy");
 %>
-
-<!-- 관리자페이지 헤더 -->
-<div class="container">
-	<form action="" method="post">
-		<div class="row">
-			<div class="btn-group" role="group" aria-label="Basic example">
-				<button type="button" class="btn btn-outline-success category" data-category="member" id="memberManagement">회원관리</button>
-				<button type="button" class="btn btn-outline-success category" data-category="report" id="reportManagement">신고관리</button>
-				<button type="button" class="btn btn-outline-success category" data-category="product" id="productManagement">상품관리</button>
-				<button type="button" class="btn btn-outline-success category" data-category="challenge" id="challengeManagement">챌린지관리</button>
-			</div>
-		</div>
-	</form>
-</div>
 
 <!-- 관리자페이지 상품관리 -->
 <form action="AdminCategoryServlet" id="prodForm">

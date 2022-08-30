@@ -40,11 +40,6 @@
     %>
 <script type="text/javascript">
 	$(function() {
-		//관리자페이지 카테고리
-		$(".category").click(function() {
-			let category = $(this).attr("data-category");
-			location.href="AdminCategoryServlet?category="+category;
-		});
 		//취소버튼 클릭 시 목록으로
 		$("#backList").click(function() {
 			$("#categoryForm").attr("action","AdminCategoryServlet?category=product");
@@ -135,19 +130,6 @@
  
 	})//end ready
 </script>
-
-<div class="container">
-	<form id="categoryForm" action="" method="post">
-		<div class="row">
-			<div class="btn-group" role="group" aria-label="Basic example">
-				<button type="button" class="btn btn-outline-success category" data-category="member" id="memberManagement">회원관리</button>
-				<button type="button" class="btn btn-outline-success category" data-category="report" id="reportManagement">신고관리</button>
-				<button type="button" class="btn btn-outline-success category" data-category="product" id="productManagement">상품관리</button>
-				<button type="button" class="btn btn-outline-success category" data-category="challenge" id="challengeManagement">챌린지관리</button>
-			</div>
-		</div>
-	</form>
-</div>
 
 <div class="container prodContainer">
 	<div class="row justify-content-center">
