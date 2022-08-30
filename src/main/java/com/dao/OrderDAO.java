@@ -22,4 +22,11 @@ public class OrderDAO {
 		List<CategoryProductDTO> list = session.selectList("OrderMapper.getProductList", pIdList);
 		return list;
 	}
+
+
+
+	public int addOrder(SqlSession session, OrderDTO orderdto) {
+		int n = session.insert("OrderMapper.addOrder",orderdto);
+		return n;
+	}
 }

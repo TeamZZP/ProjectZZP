@@ -41,6 +41,17 @@ public class OrderService {
         }
 		return list;
 	}
+	public int addOrder(OrderDTO orderdto) {
+		SqlSession session=MySqlSessionFactory.getSqlSession();
+		int n = 0;
+		try {
+			n = dao.addOrder(session, orderdto);
+			session.commit();
+		}finally {
+			session.close();
+		}
+		return n;
+	}
 	
 	
 	

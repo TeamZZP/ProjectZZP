@@ -113,6 +113,7 @@ HashMap<String, Integer> map = (HashMap<String, Integer>)request.getAttribute("m
          </ul>
       </div>
       <%} %>
+      총금액: 
       <br><br><br>
       
 <h3 style="font-weight: bold; color: green;">&emsp;배송지 선택</h3><button type="submit" class="btn btn-success"  id="selectAdd" style="float: right;" >다른배송지</button><br>
@@ -130,6 +131,7 @@ HashMap<String, Integer> map = (HashMap<String, Integer>)request.getAttribute("m
     	<ul class="orderAddress_list" >
     	<li id="addLi">
     	<input type="hidden" name="AddressName" id="AddressName" value="<%= add_dto.getAddress_name()%>"> <br>
+    	<input type="hidden" name="delivery_address" id="delivery_address" value="<%= add_dto.getAddr1()+" "+add_dto.getAddr2()%>"> <br>
     	<%= add_dto.getAddress_name()%><br>
     	받으시는 분 : <%= add_dto.getReceiver_name()%><br>
     	
@@ -162,8 +164,6 @@ HashMap<String, Integer> map = (HashMap<String, Integer>)request.getAttribute("m
     	<option>경비실</option>
     	<option>택배함</option>
     	</select>
-    	<br><br>
-    	공동현관 비밀번호:&emsp; <input id="entrance_passwd">
     	<br><br>
     	배송 요청사항 :&emsp;<input id="delievery_req"  id="delievery_req">
     	<br><br>
