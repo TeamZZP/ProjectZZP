@@ -55,6 +55,11 @@ $(document).ready(function () {
 	$(".challengeDetail").on("click", function () {
 		location.href = "AdminChallDetailServlet?chall_id="+$(this).attr("data-id");
 	});
+	//챌린지 수정
+	$(".updateChallBtn").on("click", function () {
+		let cid = $(this).attr("data-cid")
+		location.href = "AdminChallUIServlet?chall_id="+cid+"&userid=<%= currUserid %>"
+	})
 	
 	//챌린지 삭제 모달
  	$("#deleteModal").on("shown.bs.modal", function (e) {

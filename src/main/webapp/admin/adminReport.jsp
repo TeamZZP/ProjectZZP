@@ -46,8 +46,10 @@ $(document).ready(function () {
 	//신고 삭제 모달
  	$("#deleteModal").on("shown.bs.modal", function (e) {
  		let button = e.relatedTarget
-		let id = button.getAttribute("data-bs-id")
-		$("#delreport_id").val(id);
+ 		if (button) {
+ 			let id = button.getAttribute("data-bs-id")
+ 			$("#delreport_id").val(id);
+		}
 	});
 	//신고 삭제
 	$(".delReportBtn").on("click", function (e) {
@@ -56,6 +58,16 @@ $(document).ready(function () {
 	//전체 선택 체크박스
 	$('#checkAll').on('click', function () {
 		$('.delCheck').prop('checked', $(this).prop('checked'))
+	})
+	//체크박스 선택 검사
+	$('.delCheckBtn').on('click', function () {
+		//data-bs-toggle="modal" 
+		if ($('.delCheck:checked').length == 0) {
+			alert('삭제할 신고를 선택해 주세요.')
+		} else {
+			$('#deleteModal').modal('toggle')
+		}
+		
 	})
 	
 });
@@ -144,7 +156,6 @@ $(document).ready(function () {
 		<td class="oneReport" data-id="<%= report_id %>"><%= report_created %></td>
 		<td class="oneReport" data-id="<%= report_id %>"><%= report_status %></td>
 		<td>
-			<button type="button" class="updateChallBtn btn btn-outline-success btn-sm" data-cid="<%= chall_id %>" >수정</button>
 			<button type="button" class="btn btn-outline-dark btn-sm" 
 					data-bs-toggle="modal" data-bs-target="#deleteModal" data-bs-id="<%= report_id %>">삭제</button>
 		</td>
@@ -159,7 +170,7 @@ $(document).ready(function () {
 	<div>
 	  <div class="float-end me-3" style="margin-top: -8px;">
 		<button type="button" class="delCheckBtn btn btn-outline-dark btn-sm" style="width: 80px;"
-						data-bs-toggle="modal" data-bs-target="#deleteModal" data-bs-id="">선택삭제</button>
+						data-bs-target="#deleteModal" data-bs-id="">선택삭제</button>
 	  </div>
 	</div>
 </div>
