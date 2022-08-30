@@ -106,23 +106,59 @@ a:hover {
             alert("삭제할 상품을 선택하세요.");
             event.preventDefault();
          }
+         
          $("form").attr("action", "CartDelAllServlet");
       })//체크박스미선택
 
+      
+      
+      /* 
+      $("#allCheck").click(function() {
+    	  
+    	  var chk_arr = [];
+    	  
+  		if($("#allCheck").is(":checked")){
+  			
+  			$("input[name=check]").prop("checked", true);
+  				console.log("체크됨");
+  				var chk = $(this).val();
+  				console.log(chk);
+  				/* chk_arr.push(chk); */
+  		}
+  		else{
+  			
+  			$("input[name=check]").prop("checked", false);
+  			console.log("체크안됨");
+  		}
+  	});  */
+      
+      
+      
       //전체선택
-      $("#allCheck").on("click", function() {
-      	 var result = this.checked;
+       $("#allCheck").on("click", function() {
+        var result = this.checked;
          
          $(".individual_cart_checkbox").each(function(idx, data) {
             data.checked = result;
-         })
+         })*/
           
-       
+          
+          
+          //체크박스 체크 /해제 
+         if( $("#allCheck").prop("checked")){
+        	 $(".individual_cart_checkbox").attr("checked",true);
+        	 var n = $("#allCheck").val();
+        	 cols
+         }else{
+        	 $(".individual_cart_checkbox").attr("checked",false);
+         } 
          
-         var n = $(".individual_cart_checkbox").val();
-     	 console.log(n);
+         
+         
+     	
      	  
-        var cart_id = $(this).attr("data-xxx"); //cart_id
+     	    
+         var cart_id = $(this).attr("data-xxx"); //cart_id
          var p_selling_price = $(this).attr("data-price");
          var p_amount = $("#cartAmount" + cart_id).val();
          var sum_money = $("#sum_money").text();
@@ -155,7 +191,7 @@ a:hover {
              $("#total").text(total);
         } 
     
-      })//end allcheck
+       })//end allcheck  
       
       //개별선택
       $(".delBtn").on("click", function() {
@@ -242,9 +278,10 @@ a:hover {
         }
       })//end individual_cart_checkbox
    
- 
+   
 
    })//end
+   
 </script>
 
 <div id="outer">
@@ -265,7 +302,7 @@ a:hover {
       <div class="btn-group" role="group" aria-label="Basic example">
 
          <button type="button" class="btn btn-outline-success" id="cart">
-            <input type="checkbox" name="allCheck" id="allCheck" value="" > 장바구니(<%=cartCount%>)
+            <input type="checkbox" name="allCheck" id="allCheck" checked="checked"   > 장바구니(<%=cartCount%>)
          </button>
          <button type="button" class="btn btn-outline-success" id="like" onclick="location.href='ProductLikeListServlet';">
          <input type="checkbox" name="allCheck" id="allCheck">찜한상품(<%=likeCount%>)</button>
@@ -322,9 +359,15 @@ a:hover {
 		 </div>
          <ul class="cart_list" style="line-height: 50px; font-size: 20px;">
             <li>
+            
+            
             <input type="checkbox" name="check" id="check" checked="checked"
                class="individual_cart_checkbox" value="<%=cart_id%>" 
                style="width: 30px; position: relative; bottom: 100px; margin-right: 10px;">
+               
+               
+               
+               
                <a href="ProductRetrieveServlet?p_id=<%=p_id%>"> <img
                   src="images/p_image/<%=p_image%>" width="200"
                   style="border: 10px;" height="200"></a>
