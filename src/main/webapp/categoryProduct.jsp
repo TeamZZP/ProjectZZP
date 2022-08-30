@@ -178,8 +178,7 @@ if (mdto != null) {%>
 				int p_stock = pDTO_list.get(i).getP_stock();
 				String userid = pDTO_list.get(i).getUserid();
 				String p_image = pDTO_list.get(i).getP_image();
-				int p_liked = pDTO_list.get(i).getP_liked();
-
+				
 				int likecheck = 0;
 
 				if (mdto != null) {

@@ -184,7 +184,7 @@ List<CategoryProductDTO> product_list = (List<CategoryProductDTO>) request.getAt
 			int p_stock = pDTO_list.get(i).getP_stock();
 			String userid = pDTO_list.get(i).getUserid();
 			String p_image = pDTO_list.get(i).getP_image();
-			int p_liked = pDTO_list.get(i).getP_liked();
+			
 			
 			int likecheck = 0;
 			

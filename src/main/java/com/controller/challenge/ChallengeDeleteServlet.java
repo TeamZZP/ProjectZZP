@@ -49,11 +49,13 @@ public class ChallengeDeleteServlet extends HttpServlet {
 			ChallengeDTO dto = service.selectOneChallenge(chall_id);
 			if (dto.getChall_this_month() == 1) {
 				
-				//관리자가 작성한 이달의 챌린지 게시글 가져오기
-				List<ChallengeDTO> list = service.selectChallengeByUserid("admin1");
+				//관리자가 작성한 이달의 챌린지 개수 가져오기
+				HashMap<String, String> map = new HashMap<String, String>();
+				map.put("userid", "admin1");
+				int challNum = service.countTotalUserChallenge(map);
 				
 				//유일한 이달의 챌린지 게시글인 경우 삭제 불가
-				if (list.size() == 1) {
+				if (challNum == 1) {
 					session.setAttribute("mesg", "다른 챌린지 게시글을 작성한 후 삭제 가능합니다.");
 					
 				} else {
