@@ -9,9 +9,8 @@
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-----관리자 회원 계정 접근
 <%
-	MemberDTO member=(MemberDTO) request.getAttribute("login");
+/* 	MemberDTO member=(MemberDTO) request.getAttribute("login");
 	AddressDTO address=(AddressDTO) request.getAttribute("address");//기본 배송지 출력
 	
 	List<AddressDTO> addressList=(List<AddressDTO>) request.getAttribute("addressList");
@@ -45,7 +44,7 @@
 		addr1=address.getAddr1();
 		addr2=address.getAddr2();
 		default_chk=address.getDefault_chk();
-	}
+	} */
 %>
-<jsp:include page="../mypage/accountForm2.jsp" flush="true"></jsp:include><br>
+<jsp:include page="../admin/accountForm_admin.jsp" flush="true"></jsp:include><br>
 <jsp:include page="../mypage/addressList.jsp" flush="true"></jsp:include><br>
