@@ -37,6 +37,19 @@ border-bottom: 2.5px solid green;
 
 
 </style>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+
+$(function() {
+	
+	$("#AddOrder").on("click", function() {	
+		 $("form").attr("action", "AddOrderServlet");		
+	})
+	 
+});
+
+</script>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -46,6 +59,7 @@ border-bottom: 2.5px solid green;
 <body>
 
  <div class="container">
+ <form action="orderForm">
 <div style="text-align : center;">
 <img src="images/ordering.png" width="900" height="200" >
 </div>
@@ -73,7 +87,10 @@ HashMap<String, Integer> map = (HashMap<String, Integer>)request.getAttribute("m
    %>
 
       <div class="order_content">
+         <input type="hidden" name="p_id" id="p_id" value="<%=p_id %>">
          <input type="hidden" name="userid" id="userid" value="<%=userid %>">
+         <input type="hidden" name="total_price" id="total_price" value="<%=userid %>">
+
          <ul class="orderProduct_list" style="line-height: 50px; font-size: 20px;">
             <li id="orderLi">
                <a href="ProductRetrieveServlet?p_id=<%=p_id%>"> <img
@@ -98,7 +115,7 @@ HashMap<String, Integer> map = (HashMap<String, Integer>)request.getAttribute("m
       <%} %>
       <br><br><br>
       
-<h3 style="font-weight: bold; color: green;">&emsp;배송지 선택</h3>
+<h3 style="font-weight: bold; color: green;">&emsp;배송지 선택</h3><button type="submit" class="btn btn-success"  id="selectAdd" style="float: right;" >다른배송지</button><br>
 <hr id="orderHr">
       <%
       List<AddressDTO> add_list = (List<AddressDTO>)request.getAttribute("add_list");
@@ -110,16 +127,17 @@ HashMap<String, Integer> map = (HashMap<String, Integer>)request.getAttribute("m
     	%>
     	
     	<div class="addressContent">
-
     	<ul class="orderAddress_list" >
     	<li id="addLi">
+    	<input type="hidden" name="AddressName" id="AddressName" value="<%= add_dto.getAddress_name()%>"> <br>
     	<%= add_dto.getAddress_name()%><br>
     	받으시는 분 : <%= add_dto.getReceiver_name()%><br>
     	
     	배송지: <%=add_dto.getPost_num() %><br>
-    	<%=add_dto.getAddr1() %>&nbsp;<%=add_dto.getAddr2() %>
+    	<%=add_dto.getAddr1() %>&nbsp;<%=add_dto.getAddr2() %><br>
+    	
     	</li>
-    	<button type="submit" class="btn btn-success"  id="selectAdd" style="float: right;">다른배송지</button>
+    	
     	</ul>
     	</div>
     	
@@ -128,6 +146,37 @@ HashMap<String, Integer> map = (HashMap<String, Integer>)request.getAttribute("m
     	  
       }
       %>
+      <hr id="orderHr">
+      <h3 style="font-weight: bold; color: green;">&emsp;배송 요청</h3>
+        <div class="addressContent">
+    	<ul class="orderAddress_list" >
+    	<li id="addLi">
+
+         <input type="hidden" name="orderdate" id="orderdate" value="<%= (new java.util.Date()).toLocaleString()%>">
+         <input type="hidden" name="order_state" id="order_state" value="주문완료">
+    	 
+      받으실 장소 :&emsp; &nbsp;
+    	<select id="delievery_loc" name="delievery_loc">
+    	<option>문앞</option>
+    	<option>직접받고 부재 시 문앞</option>
+    	<option>경비실</option>
+    	<option>택배함</option>
+    	</select>
+    	<br><br>
+    	배송 요청사항 :&emsp;<input id="delievery_req"  id="delievery_req">
+    	<br><br>
+    	
+      </li>
+      </ul>
+     </div> 
+      <br>
+      
+        
+         
+        <button type="submit" class="btn btn-success" id="AddOrder" >주문하기</button>
+        <button type="submit" class="btn btn-success" id="cancel" >돌아가기</button>
+  
+    </form>  
 </div>
 
 </body>
