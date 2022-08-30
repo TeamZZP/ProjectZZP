@@ -73,16 +73,16 @@
 		$("form").attr("action", "OrderServlet");
 	})//order
  
+	
+	$(".imageChange").mouseover(function () {
+		var src2 = $(this).attr("src");
+		var img = $(this).attr("data-image");
+		console.log(img)
+		console.log(src2);
+		 $("#firstImage").attr("src", src2);
+	});
+		
 	})//end ready
-
-	/* function imageChange(this) {
-	
-	 //수정
-	 String src2 = this.src;
-	
-	 $("#firstImage").attr(src,src2 )
-	
-	 } */
 	
 	 
 </script>
@@ -161,15 +161,14 @@ System.out.println("productRetrieve.jsp에서 파싱한 ilist==" + ilist);
 						
 					<tr>
 								<td>
-									<%
+									<%-- <%
 									if (image_rnk != 1) {
-									%> 
-									<img
+									%>  --%>
+									<img class="imageChange" data-image="<%=image_route%>";
 									src="images/p_image/<%=image_route%>"
-									class="img-thumbnail" style="height: 100; width: 100;  "
-									onmouseover="imageChange(this)"> <%
- }
- %>
+									class="img-thumbnail" style="height: 100; width: 100;"  
+									> 
+									<%-- <% } %> --%>
 								</td>
 					</tr>
 				</table>
