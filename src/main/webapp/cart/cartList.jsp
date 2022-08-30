@@ -124,7 +124,7 @@ a:hover {
   				var chk = $(this).val();
   				console.log(chk);
   				/* chk_arr.push(chk); */
-  		}
+  			  /*}
   		else{
   			
   			$("input[name=check]").prop("checked", false);
@@ -137,14 +137,69 @@ a:hover {
       //전체선택
        $("#allCheck").on("click", function() {
         var result = this.checked;
-         
+        var item_price = "";
          $(".individual_cart_checkbox").each(function(idx, data) {
+        	 /* var n = $(this).val(); */
+        	 console.log(data);
+        	
+        	 
+        	 item_price = $(".item_price");
+        	 
+        	 console.log(item_price);
+        	$.each(item_price,function(idx,data){
+        		console.log(data.innerText);
+        		
+        		var chk =data.innerText+",";
+        		console.log(chk);
+        		
+        	})//
             data.checked = result;
-         })*/
+           
+           
+         })
           
           
-          
-          //체크박스 체크 /해제 
+        /* 	var chk =[];
+        	
+        	chk += item_price;
+        	console.log(chk);
+        	
+           var totalprice = 0;
+        	 totalprice += item_price;
+        	 console.log(totalprice); */
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         /*  //체크박스 체크 /해제 
          if( $("#allCheck").prop("checked")){
         	 $(".individual_cart_checkbox").attr("checked",true);
         	 var n = $("#allCheck").val();
@@ -152,9 +207,9 @@ a:hover {
          }else{
         	 $(".individual_cart_checkbox").attr("checked",false);
          } 
+          */
          
-         
-         
+      /*    
      	
      	  
      	    
@@ -189,7 +244,7 @@ a:hover {
              $("#sum_money").text(sum_money);
              $("#fee").text(fee);
              $("#total").text(total);
-        } 
+        }  */
     
        })//end allcheck  
       
@@ -390,7 +445,7 @@ a:hover {
                         data-id="<%=userid%>" data-sum_money="<%=sum_money%>" /> <br>
                   </div>
                   상품가격 :<span id="item_price<%=cart_id%>"
-                     style="margin-bottom: 15px;" ><%=p_selling_price * p_amount%></span><br>
+                     style="margin-bottom: 15px;" class="item_price" ><%=p_selling_price * p_amount%></span><br>
                </div> <span class="cart_item_del"> <img src="images/delete.png"
                   width="20" height="20" class="delBtn" data-xxx="<%=cart_id%>"></span>
             </li>
