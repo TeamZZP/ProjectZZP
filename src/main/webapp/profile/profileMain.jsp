@@ -1,3 +1,4 @@
+<%@page import="com.dto.ReviewDTO"%>
 <%@page import="com.dto.StampDTO"%>
 <%@page import="java.util.LinkedHashSet"%>
 <%@page import="java.util.Set"%>
@@ -15,13 +16,21 @@
 	String profile_img = profileMap.get("PROFILE_IMG");
 	String profile_txt = profileMap.get("PROFILE_TXT");
 	
+	//회원의 리뷰 목록 가져오기
+	PageDTO reviewPageDTO = (PageDTO) request.getAttribute("reviewPageDTO");
+	List<ReviewDTO> reviewList = reviewPageDTO.getList();
+	int reviewListSize = reviewList.size();
+	//회원의 리뷰 개수 가져오기
+	int reviewNum = (Integer) request.getAttribute("reviewNum");
+	//리뷰에 해당하는 상품 정보 가져오기
+	HashMap<Integer, HashMap<String, String>> prodMap = (HashMap<Integer, HashMap<String, String>>) request.getAttribute("prodMap");
+	
 	//회원의 챌린지 목록 가져오기
 	PageDTO pDTO = (PageDTO) request.getAttribute("pDTO");
 	List<ChallengeDTO> challengeList = pDTO.getList();
-	int challNum = challengeList.size();
-	
+	int challListSize = challengeList.size();
 	//회원의 챌린지 개수 가져오기
-	int num = (Integer) request.getAttribute("num");
+	int challNum = (Integer) request.getAttribute("challNum");
 	
 	//회원의 도장 목록 가져오기
 	LinkedHashMap<Integer, StampDTO> stampMap = (LinkedHashMap<Integer, StampDTO>) request.getAttribute("stampMap");
@@ -112,13 +121,42 @@
 	<div id="profileContent" class="col-lg-9 p-5">
 	
 	
+	
+		<div>
+		  <div class="row p-2 mx-4">
+		    <div class="col">구매후기 <span class="text-success fw-bold"><%= reviewNum %></span></div>
+			 <div class="col"><div class="float-end"><small><a class="category" data-category="review">전체보기</a></small></div></div>
+		  </div>
+		  <div class="text-center mt-2">
+		        <% for (int i = 0; i < reviewListSize; i++) { 
+		        	ReviewDTO reviewDTO = reviewList.get(i);
+		        	int review_id = reviewDTO.getREVIEW_ID();
+		        	int p_id = reviewDTO.getP_ID();
+		        	HashMap<String, String> map = prodMap.get(p_id);
+		        	String image_route = map.get("IMAGE_ROUTE");
+		        %>
+		        <a href="ProductRetrieveServlet?p_id=<%=p_id%>"> 
+					<img src="images/p_image/<%=image_route%>" border="0" align="middle" class="img"
+						width="200" height="200" onerror="this.src='images/uploadarea.png'"></a>
+		        <% } 
+		        if (reviewListSize < 4) {
+		        	for (int i = 0; i < 4-reviewListSize; i++) {
+		        %>
+		        	<img src="images/none.png" class="img" width="200" height="200" >
+		        <% }
+		        } %>
+	      </div>
+		</div><!-- end review -->
+		
+		
+	
 		<div>
 		  <div class="row p-2 mx-4 mt-5">
-		    <div class="col">챌린지 <span class="text-success fw-bold"><%= num %></span></div>
+		    <div class="col">챌린지 <span class="text-success fw-bold"><%= challNum %></span></div>
 			 <div class="col"><div class="float-end"><small><a class="category" data-category="challenge">전체보기</a></small></div></div>
 		  </div>
 		  <div class="text-center mt-2">
-		        <% for (int i = 0; i < challNum; i++) { 
+		        <% for (int i = 0; i < challListSize; i++) { 
 		        	ChallengeDTO challDTO = challengeList.get(i);
 		        	int chall_id = challDTO.getChall_id();
 		        	String chall_img = challDTO.getChall_img();
@@ -127,9 +165,8 @@
 					<img src="/eclipse/upload/<%=chall_img%>" border="0" align="middle" class="img"
 						width="200" height="200" onerror="this.src='images/uploadarea.png'"></a>
 		        <% } 
-		        if (challNum < 4) {
-		        	System.out.println(challNum);
-		        	for (int i = 0; i < 4-challNum; i++) {
+		        if (challListSize < 4) {
+		        	for (int i = 0; i < 4-challListSize; i++) {
 		        %>
 		        	<img src="images/none.png" class="img" width="200" height="200" >
 		        <% }
