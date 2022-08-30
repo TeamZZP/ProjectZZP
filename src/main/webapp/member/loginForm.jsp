@@ -160,6 +160,11 @@ $(document).ready(function() {
 			<img src="//k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg"
 				width="222" alt="카카오 로그인 버튼" />
 		</a>
+		<form id="form-kakao-login" method="post" action="KakaoLoginServlet">
+		    			<input type="hidden" name="email" id="kakaoEmail"/>
+		    			<input type="hidden" name="nickname" id="kakaoNickname"/>
+		    			<!-- <input type="hidden" name="img"/> -->
+		</form>
 	  </div>
 	  <div id="naver">
 		<a id="naver-login-btn" href="#">
@@ -172,9 +177,11 @@ $(document).ready(function() {
 
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script type="text/javascript">
-	window.Kakao.init("6967e0449063c04f2ba9d396e18a25a6"); //js key세팅
+	//window.Kakao.init("6967e0449063c04f2ba9d396e18a25a6"); //js key세팅
 	
 	function kakaoLogin() {
+		window.Kakao.init("6967e0449063c04f2ba9d396e18a25a6");
+		
 		window.Kakao.Auth.login({
 			scope: 'profile_nickname, profile_image, account_email',
 			success: function(authObj) {
@@ -182,8 +189,23 @@ $(document).ready(function() {
 				window.Kakao.API.request({
 					url: '/v2/user/me',/* 로그인한 사용자의 정보 가져오기 */
 					success: res => {
+						
+						var accessToken = Kakao.Auth.getAccessToken();
+						Kakao.Auth.setAccessToken(accessToken);
+						console.log("accessToken===="+accessToken);
+						
 						const kakao_account = res.kakao_account;
 						console.log(kakao_account);
+						console.log(kakao_account.email);
+						console.log(kakao_account.profile.nickname);
+						
+						document.getElementById("kakaoEmail").value = kakao_account.email;
+						document.getElementById("kakaoNickname").value = kakao_account.profile.nickname;
+						
+						document.querySelector("#form-kakao-login").submit();
+					},
+					fail: function(error) {
+						console.log('카카오톡과 연결되지 않습니다. 다시 시도해주시기 바랍니다.');
 					}
 				});
 			}
