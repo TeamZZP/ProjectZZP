@@ -155,19 +155,21 @@ System.out.println("productRetrieve.jsp에서 파싱한 ilist==" + ilist);
 					<%
 					}
 					%>
-						
 					<tr>
-						<td colspan="5">
-							<img class="imageChange"
-								src="images/p_image/<%=image_route%>"
-								class="img-thumbnail" style="height: 100; width: 100;" > 
-						</td>
+						<table style="display: inline;">
+							<tr>
+								<td colspan="5">
+									<img class="imageChange"
+										src="images/p_image/<%=image_route%>"
+										class="img-thumbnail" style="height: 100; width: 100;" > 
+								</td>
+							</tr>
+						</table>
 					</tr>
-				</table>
 				<%
 				}
 				%>
-				
+				</table>
 			</div>
 			<div class="col-md-1"></div>
 			<div class="col-md-5" >
