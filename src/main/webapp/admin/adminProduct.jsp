@@ -35,6 +35,8 @@ if(mesg != null){
 <%
 	}
 	session.removeAttribute("mesg");
+%>
+<%
 	PageDTO pDTO = (PageDTO) request.getAttribute("pDTO");
 	List<CategoryProductDTO> product_list = pDTO.getList();
 	String searchName = (String) request.getAttribute("searchName");

@@ -61,7 +61,7 @@
 		 	</a>
 		</td>
 		<td> <%= day %> </td>
-		<td> <%= qDTO.getQ_STATUS() %> </td>
+		<td <%if(qDTO.getQ_STATUS().equals("답변완료")){ %> style="color: green;" <%} %>> <%= qDTO.getQ_STATUS() %> </td>
 	</tr>
 	<%	} %>
 	<tr>
