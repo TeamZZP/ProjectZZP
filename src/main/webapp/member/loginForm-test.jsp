@@ -4,6 +4,7 @@
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
+	
 	Kakao.init("6967e0449063c04f2ba9d396e18a25a6");
 	Kakao.isInitialized();
 	console.log(Kakao.Auth.getAccessToken());
