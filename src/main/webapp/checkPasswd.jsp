@@ -26,7 +26,7 @@
 			}
 		});//end fn
 		$("#cancle").on("click", function() {
-			location.href="mypage.jsp";
+			location.href="MypageServlet";
 		});//end fn
 	});//end ready
 </script>
