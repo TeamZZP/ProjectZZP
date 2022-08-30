@@ -163,6 +163,8 @@ HashMap<String, Integer> map = (HashMap<String, Integer>)request.getAttribute("m
     	<option>택배함</option>
     	</select>
     	<br><br>
+    	공동현관 비밀번호:&emsp; <input id="entrance_passwd">
+    	<br><br>
     	배송 요청사항 :&emsp;<input id="delievery_req"  id="delievery_req">
     	<br><br>
     	

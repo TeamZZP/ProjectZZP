@@ -73,16 +73,13 @@
 		$("form").attr("action", "OrderServlet");
 	})//order
  
+	
+	$(".imageChange").mouseover(function () {
+		var src2 = $(this).attr("src");
+		 $("#firstImage").attr("src", src2);
+	});
+		
 	})//end ready
-
-	/* function imageChange(this) {
-	
-	 //수정
-	 String src2 = this.src;
-	
-	 $("#firstImage").attr(src,src2 )
-	
-	 } */
 	
 	 
 </script>
@@ -149,7 +146,7 @@ System.out.println("productRetrieve.jsp에서 파싱한 ilist==" + ilist);
 					if (image_rnk == 1) {
 					%>
 					<tr>
-						<td colspan="4">
+						<td colspan="5">
 						<img id="firstImage" name="p_image"
 							src="images/p_image/<%=image_route%>"
 							class="img-thumbnail" style="height: 500; width: 600; " ></td>
@@ -158,25 +155,21 @@ System.out.println("productRetrieve.jsp에서 파싱한 ilist==" + ilist);
 					<%
 					}
 					%>
-						
 					<tr>
-								<td>
-									<%
-									if (image_rnk != 1) {
-									%> 
-									<img
-									src="images/p_image/<%=image_route%>"
-									class="img-thumbnail" style="height: 100; width: 100;  "
-									onmouseover="imageChange(this)"> <%
- }
- %>
+						<table style="display: inline;">
+							<tr>
+								<td colspan="5">
+									<img class="imageChange"
+										src="images/p_image/<%=image_route%>"
+										class="img-thumbnail" style="height: 100; width: 100;" > 
 								</td>
+							</tr>
+						</table>
 					</tr>
-				</table>
 				<%
 				}
 				%>
-				
+				</table>
 			</div>
 			<div class="col-md-1"></div>
 			<div class="col-md-5" >

@@ -4,7 +4,7 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+    
 <% String before = "myQuestion"; %>
 
 <div id="addContainer">
@@ -61,7 +61,7 @@
 		 	</a>
 		</td>
 		<td> <%= day %> </td>
-		<td> <%= qDTO.getQ_STATUS() %> </td>
+		<td <%if(qDTO.getQ_STATUS().equals("답변완료")){ %> style="color: green;" <%} %>> <%= qDTO.getQ_STATUS() %> </td>
 	</tr>
 	<%	} %>
 	<tr>

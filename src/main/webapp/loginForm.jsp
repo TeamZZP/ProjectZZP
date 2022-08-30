@@ -20,6 +20,5 @@
 <body>
 <jsp:include page="common/header.jsp" flush="true"></jsp:include><br>
 <jsp:include page="member/loginForm.jsp" flush="true"></jsp:include> 
-<%-- <jsp:include page="common/footer.jsp" flush="true"></jsp:include><br> --%>
 </body>
 </html>

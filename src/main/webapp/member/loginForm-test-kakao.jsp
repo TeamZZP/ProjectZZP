@@ -107,7 +107,7 @@
   color: #EF3B3A;
 }
 body {
-   background: #76b852;   *//* fallback for old browsers */
+   background: #76b852; 
    background: rgb(141,194,111); 
    background: linear-gradient(90deg, rgba(141,194,111,1) 0%, rgba(118,184,82,1) 50%); */
   font-family: "Roboto", sans-serif;
@@ -156,7 +156,7 @@ $(document).ready(function() {
       </p>
     </form>
       <div id="kko">
-	    <a id="custom-login-btn" href="javascript:kakaoLogin();">
+	    <a id="kakao-login-btn" >
 			<img src="//k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg"
 				width="222" alt="카카오 로그인 버튼" />
 		</a>
@@ -170,10 +170,33 @@ $(document).ready(function() {
   </div>
 </div>
 
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script type="text/javascript">
+$(document).ready(function() {
 	window.Kakao.init("6967e0449063c04f2ba9d396e18a25a6"); //js key세팅
 	
+	$("#kko").click(function() {
+		Kakao.Auth.login({
+			success: function(authObj) {
+				Kakao.API.request({
+					url: 'v2/user/me',
+					success: function(res) {
+						console.log(res);
+						var id = res.id;
+						scope : 'account_email';
+						alert('로그인성공');
+						location.href="MainServlet";
+					}
+				})
+				console.log(authObj);
+				var token = authObj.access_token;
+			},
+			fail: function(err) {
+				alert(JSON.stringify(err));
+			}
+		})
+	});
 	
-
+}
 </script>
