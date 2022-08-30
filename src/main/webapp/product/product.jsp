@@ -101,25 +101,41 @@ function productChoice(n) {
 		});
 		
 		
-		$("#up").on("click", function() {
+		
+		$("button[name=up]").on("click", function() {
+			var p_id = $(this).attr("data-p_id");
+			console.log(p_id +" up클릭");
+			
 			//input태그 수량변화
-			var quantity = parseInt($("#quantity").val());
-			$("#quantity").val(parseInt(quantity) + 1);
+			var quantity = parseInt($("#quantity"+p_id).val());
+			$("#quantity"+p_id).val(parseInt(quantity) + 1);
 
-			var price = $("#price").val();
+			var price = parseInt($("#price"+p_id).val());
+			
+			$("#total"+p_id).text((quantity+1)*price);
 			//총합 구하기
 		})//end up
 
-		$("#down").on("click", function() {
-			var quantity = parseInt($("#quantity").val());
+		$("button[name=down]").on("click", function() {
+			var p_id = $(this).attr("data-p_id");
+			console.log(p_id +" down클릭");
+			
+			//input태그 수량변화
+			var quantity = parseInt($("#quantity"+p_id).val());
+			
+			if(quantity !=1){
+			$("#quantity"+p_id).val(parseInt(quantity) - 1);
 
-			if (quantity != 1) {
-				$("#quantity").val(parseInt(quantity) - 1);
-				var price = $("#price").val();
-				$("#total").text((quantity - 1) * price);
+			var price = parseInt($("#price"+p_id).val());
+			
+			$("#total"+p_id).text((quantity-1)*price);
+			
 			}
-
-		})//
+			
+			
+		})//end down
+		
+		
 	})
 </script>
 <form action="" id="prodForm">	
@@ -248,19 +264,18 @@ List<CategoryProductDTO> product_list = (List<CategoryProductDTO>) request.getAt
 												style="margin-bottom: 7px">수량</span>
 										</div>
 										<div class="area_count holder">
-											<div class="option_btn_wrap" style="top: 0;">
-												<div class="option_btn_tools" style="float: none;">
-													<input name="p_amount" id="quantity" value="1">
-													<button type="button" class="btn btn-outline-success"
-														id="up">+</button>
-													<button type="button" class="btn btn-outline-success"
-														id="down">-</button>
-													<br> <input type="hidden" id="price"
-														name="p_selling_price" value="<%=p_selling_price%>">
-													<a>총 상품금액 : </a><span id="total"><%=p_selling_price%></span>원
+												<div class="option_btn_wrap" style="top: 0;">
+													<div class="option_btn_tools" style="float: none;">
+														<input name="p_amount" id="quantity<%=p_id %>" value="1" style="text-align: center; ">
+														<button type="button" class="btn btn-outline-success"
+															id="up<%=p_id %>" name="up" data-p_id="<%=p_id %>" >+</button>
+														<button type="button" class="btn btn-outline-success"
+															id="down<%=p_id %>"  name="down"  data-p_id="<%=p_id %>" >-</button>
+															<br> <input type="hidden" id="price<%=p_id %>" name="p_selling_price" value="<%=p_selling_price%>">
+														<a>총 상품금액 : </a><span id="total<%=p_id %>"><%=p_selling_price%></span>원
+													</div>
 												</div>
 											</div>
-										</div>
 									</div>
 								</div>
 								<div class="modal-footer">
