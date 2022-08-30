@@ -12,7 +12,9 @@
 	
 	//리뷰에 해당하는 상품 정보 가져오기
 	HashMap<Integer, HashMap<String, String>> prodMap = (HashMap<Integer, HashMap<String, String>>) request.getAttribute("prodMap");
-
+	//회원의 리뷰 개수 가져오기
+	int reviewNum = (Integer) request.getAttribute("reviewNum");
+	
 	//session에 저장된 userid 읽어오기 
 	MemberDTO member = (MemberDTO) session.getAttribute("login"); 
 	String currUserid = null;
@@ -23,8 +25,13 @@
 %>
 
 <style>
--
+
 </style>
+
+
+<div class="row p-2 mx-4 mb-2">
+	<div class="col">구매후기 <span class="text-success fw-bold"><%= reviewNum %></span></div>
+</div>
 
 <div class="row">
 <table id="reviewTable" class="table table-hover table-borderless" style="table-layout: fixed">
@@ -45,20 +52,18 @@
 %>
 	<tr>
 		<td style="padding:5 0 0 10px;" width="30%" class="text-center">
-			<span> <a href="ProductRetrieveServlet?p_id=<%=p_id%>"> 
-					<img src="images/p_image/<%=image_route%>" border="0" align="middle" class="img"
-					 style="width: 70%;"	onerror="this.src='images/uploadarea.png'"></a></span><br>
-			<span><%= p_name %></span>
+			<a href="ProductRetrieveServlet?p_id=<%=p_id%>"> 
+			<img src="images/p_image/<%=image_route%>" border="0" align="middle" class="img pb-1"
+					 style="width: 70%;"	onerror="this.src='images/uploadarea.png'"><br>
+			<%= p_name %></a>
 		</td>
-		<td width="50%">
-			<table>
-			  <tr height="20%"><td><%= review_title %></td></tr>
-			  <tr height="60%"><td><%= review_content %></td></tr>
-			  <tr height="20%"><td><%= review_rate %></td></tr>
-			</table>
+		<td width="50%" class="align-middle">
+			  <b><%= review_title %></b><br><br>
+			  <%= review_content %><br>
+			  <%= review_rate %>
 		</td>
-		<td width="20%" style="text-align: center;">
-			<span><%= review_created %></span>
+		<td width="20%" class="align-middle">
+			<div><%= review_created %></div>
 		</td>
 <%
 		}

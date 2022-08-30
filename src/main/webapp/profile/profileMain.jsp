@@ -91,7 +91,7 @@
 <div class="col-lg-1 float-md-start">
 	   <ul class="list-group justify-content-center mt-5">
 	     <li class="list-group-item border-0"><a class="category" data-category="all">모두보기</a></li>
-	     <li class="list-group-item border-0"><a class="category" data-category="review">상품리뷰</a></li>
+	     <li class="list-group-item border-0"><a class="category" data-category="review">구매후기</a></li>
 	     <li class="list-group-item border-0"><a class="category" data-category="challenge">챌린지</a></li>
 	     <li class="list-group-item border-0"><a class="category" data-category="stamp">도장</a></li>
 	   </ul>
@@ -103,9 +103,9 @@
   <div class="row">
   
     <div class="col-lg-3 p-5">
-		<div class="card" style="width: 18rem; height: 22rem;">
+		<div class="card" style="width: 100%; height: 22rem;">
 		  <div class="text-center">
-	      <img class="card-img-top w-50 pt-4" src="images/<%= profile_img %>" width="400"><br>
+	      <img class="card-img-top w-50 pt-4" src="images/<%= profile_img %>" ><br>
 	      </div>
 	        <div class="card-body mt-4">
 		      <h3 class="card-title text-center fw-bold"><%= userid %></h3>

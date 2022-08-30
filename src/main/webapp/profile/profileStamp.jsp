@@ -34,7 +34,12 @@
 </style>
 
 
-<div class="row">
+<div class="row p-2 mx-4 mb-2">
+	<div class="col">도장 <span class="text-success fw-bold"><%= stampMap.size() %></span></div>
+</div>
+
+
+<div class="row ms-3">
 
 <%
 
@@ -49,7 +54,7 @@
 			String stamp_content = dto.getStamp_content();
 	%>
 					
-     <div class="col-lg-4 col-sm-6">
+     <div class="col-xl-4 col-md-6">
        <div class="hover-zoomin">
 			<img src="/eclipse/upload/<%=stamp_img%>" border="0" onerror="this.src='images/uploadarea.png'"
 					 data-bs-toggle="modal" data-bs-target="#stampModal<%=stamp_id%>">

@@ -9,6 +9,8 @@
 	//회원의 챌린지 목록 가져오기
 	PageDTO pDTO = (PageDTO) request.getAttribute("pDTO");
 	List<ChallengeDTO> challengeList = pDTO.getList();
+	//회원의 챌린지 개수 가져오기
+	int challNum = (Integer) request.getAttribute("challNum");
 	//각 게시글마다 도장 가져오기
 	HashMap<String, String> stampListMap = (HashMap<String, String>) request.getAttribute("stampListMap");
 	//회원의 프로필 이미지 가져오기
@@ -48,8 +50,11 @@
 </style>
 
 
+<div class="row p-2 mx-4 mb-2">
+	<div class="col">챌린지 <span class="text-success fw-bold"><%= challNum %></span></div>
+</div>
 
-<div class="row">
+<div class="row ms-3">
 
 <%
 		for (int i=1; i<= challengeList.size(); i++) {
@@ -66,7 +71,7 @@
 			int chall_comments = dto.getChall_comments();
 	%>
 					
-     <div class="col-lg-4 col-sm-6">
+     <div class="col-xl-4 col-md-6">
        <div class="p-3">
 	       <a href="ProfileMainServlet?userid=<%=userid%>"><img src="images/<%=profile_img%>" width="30" height="30"></a>&nbsp;&nbsp;
 	       <a href="ProfileMainServlet?userid=<%=userid%>"><%=userid%></a><br>
