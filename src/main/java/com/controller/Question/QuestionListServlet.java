@@ -36,7 +36,6 @@ public class QuestionListServlet extends HttpServlet {
 		if (curPage == null) { //선택된 페이지가 없으면 null -> 1페이지 출력
 			curPage = "1";
 		}
-		
 		QuestionService service = new QuestionService(); 
 		pDTO = service.page(Integer.parseInt(curPage));
 		System.out.println("pDTO " + pDTO);//나머지

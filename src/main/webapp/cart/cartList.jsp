@@ -106,50 +106,147 @@ a:hover {
             alert("삭제할 상품을 선택하세요.");
             event.preventDefault();
          }
+         
          $("form").attr("action", "CartDelAllServlet");
       })//체크박스미선택
 
+      
+      
+      /* 
+      $("#allCheck").click(function() {
+    	  
+    	  var chk_arr = [];
+    	  
+  		if($("#allCheck").is(":checked")){
+  			
+  			$("input[name=check]").prop("checked", true);
+  				console.log("체크됨");
+  				var chk = $(this).val();
+  				console.log(chk);
+  				/* chk_arr.push(chk); */
+  			  /*}
+  		else{
+  			
+  			$("input[name=check]").prop("checked", false);
+  			console.log("체크안됨");
+  		}
+  	});  */
+      
+      
+      
       //전체선택
-      $("#allCheck").on("click", function() {
-         var result = this.checked;
+       $("#allCheck").on("click", function() {
+        var result = this.checked;
+        var item_price = "";
          $(".individual_cart_checkbox").each(function(idx, data) {
+        	 /* var n = $(this).val(); */
+        	 console.log(data);
+        	
+        	 
+        	 item_price = $(".item_price");
+        	 
+        	 console.log(item_price);
+        	$.each(item_price,function(idx,data){
+        		console.log(data.innerText);
+        		
+        		var chk =data.innerText+",";
+        		console.log(chk);
+        		
+        	})//
             data.checked = result;
+           
+           
          })
+          
+          
+        /* 	var chk =[];
+        	
+        	chk += item_price;
+        	console.log(chk);
+        	
+           var totalprice = 0;
+        	 totalprice += item_price;
+        	 console.log(totalprice); */
          
-         var n = $(this).val();
-     	 console.log(n);
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         /*  //체크박스 체크 /해제 
+         if( $("#allCheck").prop("checked")){
+        	 $(".individual_cart_checkbox").attr("checked",true);
+        	 var n = $("#allCheck").val();
+        	 cols
+         }else{
+        	 $(".individual_cart_checkbox").attr("checked",false);
+         } 
+          */
+         
+      /*    
+     	
      	  
+     	    
          var cart_id = $(this).attr("data-xxx"); //cart_id
          var p_selling_price = $(this).attr("data-price");
          var p_amount = $("#cartAmount" + cart_id).val();
-         var sum_money = $(this).attr("data-sum_money"); //총금액
-         var fee = sum_money >= 50000 ? 0 : 3000;
-         var total = sum_money + fee;
+         var sum_money = $("#sum_money").text();
+      	 var item_price = $("#item_price" + n).text();
          
         if($(this).is(":checked")==true){
         	 console.log("체크됨!");
-        	 sum_money = $("#sum_money").text();
-         	var item_price = $("#item_price" + n).text();
+        	
          	console.log(item_price);
          	sum_money = parseInt(sum_money) + parseInt(item_price);
          	
-         	 $("#sum_money").text(sum_money);
+         	 var fee = sum_money >= 50000 ? 0 : 3000;
+             var total = sum_money + fee;
+             
+             $("#sum_money").text(sum_money);
              $("#fee").text(fee);
              $("#total").text(total);
          	
         }else{
         	console.log("체크안됨!");
-        	sum_money = $("#sum_money").text();
-        	var item_price = $("#item_price" + n).text();
+        
         	console.log(item_price);
         	sum_money =  parseInt(sum_money) - parseInt(item_price);
         	
-             $("#sum_money").text("0");
-             $("#fee").text("0");
-             $("#total").text("0");
-        }
+        	 var fee = sum_money >= 50000 ? 0 : 3000;
+             var total = sum_money + fee;
+             
+             $("#sum_money").text(sum_money);
+             $("#fee").text(fee);
+             $("#total").text(total);
+        }  */
     
-      })//end allcheck
+       })//end allcheck  
       
       //개별선택
       $(".delBtn").on("click", function() {
@@ -205,12 +302,12 @@ a:hover {
          var cart_id = $(this).attr("data-xxx"); //cart_id
          var p_selling_price = $(this).attr("data-price");
          var p_amount = $("#cartAmount" + cart_id).val();
-         var sum_money = $(this).attr("data-sum_money"); //총금액
+         var sum_money = $("#sum_money").text();
+      	 var item_price = $("#item_price" + n).text();
          
         if($(this).is(":checked")==true){
         	 console.log("체크됨!");
-        	 sum_money = $("#sum_money").text();
-         	var item_price = $("#item_price" + n).text();
+        	
          	console.log(item_price);
          	sum_money = parseInt(sum_money) + parseInt(item_price);
          	
@@ -223,8 +320,7 @@ a:hover {
          	
         }else{
         	console.log("체크안됨!");
-        	sum_money = $("#sum_money").text();
-        	var item_price = $("#item_price" + n).text();
+        
         	console.log(item_price);
         	sum_money =  parseInt(sum_money) - parseInt(item_price);
         	
@@ -237,9 +333,10 @@ a:hover {
         }
       })//end individual_cart_checkbox
    
- 
+   
 
    })//end
+   
 </script>
 
 <div id="outer">
@@ -260,7 +357,7 @@ a:hover {
       <div class="btn-group" role="group" aria-label="Basic example">
 
          <button type="button" class="btn btn-outline-success" id="cart">
-            <input type="checkbox" name="allCheck" id="allCheck" > 장바구니(<%=cartCount%>)
+            <input type="checkbox" name="allCheck" id="allCheck" checked="checked"   > 장바구니(<%=cartCount%>)
          </button>
          <button type="button" class="btn btn-outline-success" id="like" onclick="location.href='ProductLikeListServlet';">
          <input type="checkbox" name="allCheck" id="allCheck">찜한상품(<%=likeCount%>)</button>
@@ -317,9 +414,15 @@ a:hover {
 		 </div>
          <ul class="cart_list" style="line-height: 50px; font-size: 20px;">
             <li>
+            
+            
             <input type="checkbox" name="check" id="check" checked="checked"
                class="individual_cart_checkbox" value="<%=cart_id%>" 
                style="width: 30px; position: relative; bottom: 100px; margin-right: 10px;">
+               
+               
+               
+               
                <a href="ProductRetrieveServlet?p_id=<%=p_id%>"> <img
                   src="images/p_image/<%=p_image%>" width="200"
                   style="border: 10px;" height="200"></a>
@@ -342,7 +445,7 @@ a:hover {
                         data-id="<%=userid%>" data-sum_money="<%=sum_money%>" /> <br>
                   </div>
                   상품가격 :<span id="item_price<%=cart_id%>"
-                     style="margin-bottom: 15px;" ><%=p_selling_price * p_amount%></span><br>
+                     style="margin-bottom: 15px;" class="item_price" ><%=p_selling_price * p_amount%></span><br>
                </div> <span class="cart_item_del"> <img src="images/delete.png"
                   width="20" height="20" class="delBtn" data-xxx="<%=cart_id%>"></span>
             </li>
