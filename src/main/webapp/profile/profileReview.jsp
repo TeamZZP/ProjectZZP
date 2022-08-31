@@ -44,7 +44,7 @@
 	String review_content = dto.getREVIEW_CONTENT();
 	String review_rate = dto.getREVIEW_RATE();
 	String review_img = dto.getREVIEW_IMG();
-	String review_created = dto.getREVIEW_CREATED();
+	String review_created = dto.getREVIEW_CREATED().substring(0,10);;
 	
 	HashMap<String, String> map = prodMap.get(p_id);
 	String p_name = map.get("P_NAME");
