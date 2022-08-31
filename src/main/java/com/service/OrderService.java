@@ -31,6 +31,8 @@ public class OrderService {
 
 
 	
+	
+	
 	public List<CategoryProductDTO>  getProductList(List<Integer> pIdList) {
 		SqlSession session=MySqlSessionFactory.getSqlSession();
 		List<CategoryProductDTO> list = null;
@@ -50,6 +52,16 @@ public class OrderService {
 		}finally {
 			session.close();
 		}
+		return n;
+	}
+	public int getOrderid() {
+		SqlSession session=MySqlSessionFactory.getSqlSession();
+        int n = 0;
+        try {
+        	n = dao.getOrderid(session);
+        }finally {
+        	session.close();
+        }
 		return n;
 	}
 	

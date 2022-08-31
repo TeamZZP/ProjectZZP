@@ -45,7 +45,13 @@ $(function() {
 	
 	$("#AddOrder").on("click", function() {	
 		 $("form").attr("action", "AddOrderServlet");		
-	})
+	});
+	
+	$("#delivery_loc").on("change", function() {
+		console.log($("#delivery_loc").val());
+	});
+	
+	
 	 
 });
 
@@ -162,15 +168,15 @@ int total_price = 0;
          <input type="hidden" name="orderdate" id="orderdate" value="<%= (new java.util.Date()).toLocaleString()%>">
          <input type="hidden" name="order_state" id="order_state" value="주문완료">
     	 
-      받으실 장소 :&emsp; &nbsp;
-    	<select id="delievery_loc" name="delievery_loc">
-    	<option>문앞</option>
-    	<option>직접받고 부재 시 문앞</option>
-    	<option>경비실</option>
-    	<option>택배함</option>
+        받으실 장소 :&emsp; &nbsp;
+    	<select id="delivery_loc" name="delivery_loc">
+    	<option value="frontDoor">문앞</option>
+    	<option value="directly_or_frontDoor">직접받고 부재 시 문앞</option>
+    	<option value="security">경비실</option>
+    	<option value="delievery_box">택배함</option>
     	</select>
     	<br><br>
-    	배송 요청사항 :&emsp;<input id="delievery_req"  name="delievery_req">
+    	배송 요청사항 :&emsp;<input id="delivery_req"  name="delivery_req">
     	<br><br>
     	
       </li>

@@ -50,11 +50,15 @@ public class ProductLikeServlet extends HttpServlet {
 		if(likecheck== 0) {
 			int n = service.addLike(map);
 			System.out.println(n+"찜 추가");
+			//이부분 추가함
+			out.print(likecheck);
 			
 		
 		}else{
 			  int n2 = service.deleteLike(map);
 		  System.out.println("찜 삭제"+n2);
+			out.print(likecheck);
+
 		
 		}
 		

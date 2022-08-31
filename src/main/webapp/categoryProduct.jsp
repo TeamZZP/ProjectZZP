@@ -59,8 +59,9 @@ if (mdto != null) {%>
 			},
 			dataType : "text",
 			success : function(data) {
+				alert(data);
 				var like_img = '';
-				if (data.likecheck == 0) {
+				if (likecheck == 0) {
 					like_img = "images/like.png";
 				} else {
 					like_img = "images/liked.png";
@@ -204,6 +205,7 @@ if (mdto != null) {%>
 				<!-- 찜기능  -->
 				<div class="p-2 text-center">
 					<a id="productChoice" href="javascript:productChoice(<%=p_id%>)">
+					
 
 						<%
 						if (likecheck == 1) {
