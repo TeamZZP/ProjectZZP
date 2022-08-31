@@ -17,6 +17,7 @@
 	  padding: 10px;
 	  vertical-align: top;
 	  border-bottom: 1px solid #8FBC8F;
+	  vertical-align: middle;
 	}
 	</style>
 	
@@ -36,8 +37,8 @@
 	List<ReviewProfileDTO> ReviewList = (List<ReviewProfileDTO>)session.getAttribute("ReviewList");
 	if(ReviewList != null){
 %>	
+<div style="text-align: center; color: gray;"> 구매후기 </div>
 	<table class="review" style="text-align: center;">
-	<caption style="caption-side: top; text-align: center;">구매후기</caption>
 		<tr>
 			<td colspan="6" style="background-color: #8FBC8F;"></td>
 		</tr>
@@ -45,8 +46,8 @@
 			<td></td>
 			<td>번호</td>
 			<td>작성자</td>
-			<td>작성일</td>
 			<td>제목</td>
+			<td>작성일</td>
 			<td>만족도</td>
 		</tr>
 		<%
@@ -62,8 +63,8 @@
 				<img alt="프로필" src="images/<%=rDTO.getPROFILE_IMG() %>" width="40px" height="40px">
 				&nbsp;&nbsp; <%=rDTO.getUSERID()%> </a>
 			</td>
-			<td><%=created%></td>
 			<td><%=rDTO.getREVIEW_TITLE()%></td>
+			<td><%=created%></td>
 			<td><%=rDTO.getREVIEW_RATE() %></td>
 		</tr>
 		<tr id="hiden<%=rDTO.getREVIEW_ID()%>" style="display: none;">

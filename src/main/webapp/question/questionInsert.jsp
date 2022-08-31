@@ -86,6 +86,7 @@
 					<% 
 						String P_ID = request.getParameter("P_ID");		
 						String P_Name = request.getParameter("P_Name");	
+						System.out.print(P_Name);
 					%>
 					  <button id="pID" class="btn btn-outline-secondary" type="button">상품 정보</button>
 					  <input type="text" class="form-control shadow-none" name="P_Name" id="P_Name" readonly="readonly" <%if(P_Name != null){ %>value="<%=P_Name%>"<%} %>>

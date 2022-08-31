@@ -155,7 +155,7 @@ a:hover {
         var result = this.checked;
         var item_price = "";
          $(".individual_cart_checkbox").each(function(idx, data) {
-        	 /* var n = $(this).val(); */
+        	  var n = $(this).val(); 
         	 console.log(data);
         	
         	 
@@ -168,9 +168,39 @@ a:hover {
         		var chk =data.innerText+",";
         		console.log(chk);
         		
+
+        		 var cart_id = $(this).attr("data-xxx"); //cart_id
+                 var p_selling_price = $(this).attr("data-price");
+                 var p_amount = $("#cartAmount" + cart_id).val();
+                 var sum_money = $("#sum_money").text();
+              	 var item_price = $("#item_price" + n).text();
+                 
+                if($(this).is(":checked")==true){
+                	 console.log("체크됨!");
+                	
+                 	console.log(item_price);
+                 	
+                 	sum_money = parseInt(sum_money) + parseInt(item_price);
+                 	
+                 	 var fee = sum_money >= 50000 ? 0 : 3000;
+                     var total = sum_money + fee;
+                     
+                     $("#sum_money").text(sum_money);
+                     $("#fee").text(fee);
+                     $("#total").text(total);
+                 	
+                }else{
+                	console.log("체크안됨!");
+                
+         
+                     $("#sum_money").text("0");
+                     $("#fee").text("0");
+                     $("#total").text("0");
+                }  
+        	})//
+
         	})
-            data.checked = result;
-         })
+
          
         /* 	var chk =[];
         	
@@ -220,17 +250,8 @@ a:hover {
          	
         }else{
         	console.log("체크안됨!");
-        
-        	console.log(item_price);
-        	sum_money =  parseInt(sum_money) - parseInt(item_price);
-        	
-        	 var fee = sum_money >= 50000 ? 0 : 3000;
-             var total = sum_money + fee;
-             
-             $("#sum_money").text(sum_money);
-             $("#fee").text(fee);
-             $("#total").text(total);
-        }  */
+
+        	 */
     
        })//end allcheck  
       
@@ -418,7 +439,7 @@ a:hover {
                
                <a href="ProductRetrieveServlet?p_id=<%=p_id%>"> <img
                   src="images/p_image/<%=p_image%>" width="200"
-                  style="border: 10px;" height="200"></a>
+                  style="border: 10px;" height="200" ></a>
                <div class="cart_list_info">
                
                 <input type="hidden" id="p_id" name="p_id" value="<%=p_id%>">

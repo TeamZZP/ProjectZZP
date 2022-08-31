@@ -20,7 +20,7 @@
 		
 		$("#n").on("click", function() {
 			alert("메인 페이지로 돌아갑니다.");
-			location.href="main.jsp";//취소 후 메인페이지 이동
+			location.href="MainServlet";//취소 후 메인페이지 이동
 		});//end fn
 		
 		$("form").on("submit", function() {

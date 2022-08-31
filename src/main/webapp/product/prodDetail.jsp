@@ -20,3 +20,4 @@
 <div class="prodDetail">   
     <img alt="제품상세" src="images/prodDetail/003.png">
 </div>
+<hr>

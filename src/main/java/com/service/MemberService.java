@@ -155,4 +155,15 @@ public class MemberService {
 		return dto;
 	}
 
+	public MemberDTO selectMemberBykakao(HashMap<String, String> map) {
+		SqlSession session=MySqlSessionFactory.getSqlSession();
+		MemberDTO dto = null;
+		try {
+			dto = dao.selectMemberBykakao(session,map);
+		} finally {
+			session.close();
+		}
+		return dto;
+	}
+
 }

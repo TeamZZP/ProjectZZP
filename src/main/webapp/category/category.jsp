@@ -4,18 +4,27 @@
     <%@page import="java.util.List" %>
     <%@page import="com.dto.CategoryDTO" %>
    <style>
-  #category_a:hover{
+  .categorycss:hover{
   		color: green;
 		font-weight: bold;
 		cursor: pointer;
   	}
    </style>
-   
+<script type="text/javascript"
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+	$(function() {
+/*  		$("#category_best").on("click", function() {
+			console.log("베스트 클릭");
+			location.href="CategoryServlet";
+		});//end fn */
+	});//end ready
+</script>
 	<div class="row float-md-start" >
 	 
 	<div id="category">
 			<ul  >
-				<li class="nav-link px-2 link-dark"><a id="category_a" class="categorycss" onclick="getCategoryProduct()" >베스트</a></li>
+				<li class="nav-link px-2 link-dark"><a id="category_best" class="categorycss" onclick="getCategoryProduct()">BEST</a></li>
 			
     <%
     List<CategoryDTO> category_list = (List<CategoryDTO>)request.getAttribute("category_list");

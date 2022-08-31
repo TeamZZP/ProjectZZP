@@ -86,7 +86,7 @@
 					String imgs = iDTO.getImage_route();
 		%>
 		<tr>
-			<td> <img alt="상품사진" src="images/p_image/<%=imgs%>.png" width="100px" height="100px"></td>
+			<td> <img alt="상품사진" src="images/p_image/<%=imgs%>" width="100px" height="100px"></td>
 			<td> <%=pName %> <br> <%=pContent %> <br> <%=pPrice %> </td>
 			<td> <button class="btn btn-outline-success check" data-pID="<%=pDTO.getP_id()%>" data-pName="<%=pName %>" >선택</button> </td>
 		</tr>

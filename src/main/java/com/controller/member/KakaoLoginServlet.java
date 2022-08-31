@@ -3,6 +3,8 @@ package com.controller.member;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -25,7 +27,26 @@ public class KakaoLoginServlet extends HttpServlet {
 		String nickname = request.getParameter("nickname");
 		System.out.println(email+" "+nickname);
 		
+		//카카오 데이터로 기존 회원 여부 확인
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("email", email);
+		map.put("username", nickname);
+		MemberService mService = new MemberService();
+		MemberDTO dto = mService.selectMemberBykakao(map);
+		System.out.println(dto);
 		
+		//회원아닌 경우 회원가입
+		HttpSession session = request.getSession();
+		if (dto==null) {
+			session.setAttribute("kakaoInfo", map);
+			response.sendRedirect("MemberUIServlet");
+		} 
+		//회원인 경우 로그인 처리
+		else {
+			session.setAttribute("login", dto);
+			session.setMaxInactiveInterval(60*60);
+			response.sendRedirect("MainServlet");
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
