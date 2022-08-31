@@ -24,7 +24,7 @@
 					if (data != null) {
 						$("#answer"+qID).attr("display","none");
 						$("#answer"+qID).slideToggle("200").html(data + 
-						" &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <img alt='A' src='images/question/A.png' width='50px' height='55px'>");
+						" &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <img alt='A' src='images/question/A.png' width='50px' height='55px'>").css({'font-weight':'bold', 'background':'#F0FFF0'});
 					} else {
 						alert("권한이 없습니다.");
 					}
@@ -58,8 +58,12 @@
 	  border-bottom: 1px solid #8FBC8F;
 	}
 </style>
+
+<div style="text-align: center; color: gray;"> Q&A </div>
 <table style="border-spacing : 0">
-	<caption style="caption-side: top; text-align: center;">Q&A</caption>
+	<tr>
+		<td colspan="5" style="background-color: #8FBC8F; padding: 10px;"></td>
+	</tr>
 	<tr>
 		<td>
 		<%
@@ -75,11 +79,7 @@
 		%>
 			<table class="questionDetail" data-qID="<%=qDTO.getQ_ID()%>" title="더블클릭">
 				<tr>
-					<td colspan="5" style="background-color: #8FBC8F;"></td>
-				</tr>
-				<tr>
-					<td rowspan="2" style="text-align: center;"><img alt="Q" src="images/question/Q.png" width="50px" height="55px">
-					</td>
+					<td style="text-align: center;"><img alt="Q" src="images/question/Q.png" width="50px" height="55px"></td>
 					<td><%=qDTO.getQ_STATUS()%></td>
 					<td>
 						<%
@@ -92,15 +92,13 @@
 						%> 
 						<%=user.substring(0, 5).concat(use)%>
 					</td>
+					<td><%=qDTO.getQ_TITLE()%></td>
 					<td><%=created%></td>
 					<td style="text-align: center;"> <img alt="문의 답변 보기" src="images/question/down.png" width="20px" height="20px"> </td>
 				</tr>
 				<tr>
-					<td colspan="5"><%=qDTO.getQ_TITLE()%></td>
-				</tr>
-				<tr>
-					<td colspan="6" style="border: none;">
-						<div style="text-align: right; margin-right: 70px;" id="answer<%=qDTO.getQ_ID()%>"> <span class="answer<%=qDTO.getQ_ID()%>"> </span> </div> 
+					<td colspan="6">
+						<div style="text-align: right; margin: 0px 70px; border-radius: 15%;" id="answer<%=qDTO.getQ_ID()%>"> <span class="answer<%=qDTO.getQ_ID()%>"> </span> </div> 
 					</td>
 				</tr>
 			</table>
@@ -109,9 +107,7 @@
 		%>
 		</td>
 	</tr>
-	<tr>
-		<td style="text-align: right; padding-right: 50px;">
-			<button type="submit" class="btn btn-outline-success" id="QuestionInsert">문의하기</button>
-		</td>
-	</tr>
 </table>
+	<div style="text-align: right; padding-right: 50px;" >
+		<button type="submit" class="btn btn-outline-success" id="QuestionInsert">문의하기</button>
+	</div>

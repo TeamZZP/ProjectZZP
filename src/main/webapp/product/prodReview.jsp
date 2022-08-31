@@ -36,8 +36,8 @@
 	List<ReviewProfileDTO> ReviewList = (List<ReviewProfileDTO>)session.getAttribute("ReviewList");
 	if(ReviewList != null){
 %>	
+<div style="text-align: center; color: gray;"> 구매후기 </div>
 	<table class="review" style="text-align: center;">
-	<caption style="caption-side: top; text-align: center;">구매후기</caption>
 		<tr>
 			<td colspan="6" style="background-color: #8FBC8F;"></td>
 		</tr>
