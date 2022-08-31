@@ -131,11 +131,27 @@ a:hover {
   			console.log("체크안됨");
   		}
   	});  */
-      
-      
+	
+	//전체선택-빈수차
+/* 	$("#allCheck").on("click", function() {
+		console.log("click====");
+		if ($(this).is(":checked")) {
+			$("input[name=check]").prop("checked", true);
+			
+		} else {
+			$("input[name=check]").prop("checked", false);
+		}
+	})//end fn
+	$("input[name=check]").click(function() {
+		var total = $("input[name=check]").length;
+		var checked = $("input[name=check]:checked").length;
+
+		if(total != checked) $("#allCheck").prop("checked", false);
+		else $("#allCheck").prop("checked", true); 
+	}); */
       
       //전체선택
-       $("#allCheck").on("click", function() {
+        $("#allCheck").on("click", function() {//#allCheck
         var result = this.checked;
         var item_price = "";
          $(".individual_cart_checkbox").each(function(idx, data) {
@@ -152,6 +168,7 @@ a:hover {
         		var chk =data.innerText+",";
         		console.log(chk);
         		
+
         		 var cart_id = $(this).attr("data-xxx"); //cart_id
                  var p_selling_price = $(this).attr("data-price");
                  var p_amount = $("#cartAmount" + cart_id).val();
@@ -181,13 +198,60 @@ a:hover {
                      $("#total").text("0");
                 }  
         	})//
-            data.checked = result;
-           
-           
-         })
-          
-       
-        
+
+        	})
+
+         
+        /* 	var chk =[];
+        	
+        	chk += item_price;
+        	console.log(chk);
+        	
+           var totalprice = 0;
+        	 totalprice += item_price;
+        	 console.log(totalprice); */
+         
+         
+         
+         
+         
+         /*  //체크박스 체크 /해제 
+         if( $("#allCheck").prop("checked")){
+        	 $(".individual_cart_checkbox").attr("checked",true);
+        	 var n = $("#allCheck").val();
+        	 cols
+         }else{
+        	 $(".individual_cart_checkbox").attr("checked",false);
+         } 
+          */
+         
+      /*    
+     	
+     	  
+     	    
+         var cart_id = $(this).attr("data-xxx"); //cart_id
+         var p_selling_price = $(this).attr("data-price");
+         var p_amount = $("#cartAmount" + cart_id).val();
+         var sum_money = $("#sum_money").text();
+      	 var item_price = $("#item_price" + n).text();
+         
+        if($(this).is(":checked")==true){
+        	 console.log("체크됨!");
+        	
+         	console.log(item_price);
+         	sum_money = parseInt(sum_money) + parseInt(item_price);
+         	
+         	 var fee = sum_money >= 50000 ? 0 : 3000;
+             var total = sum_money + fee;
+             
+             $("#sum_money").text(sum_money);
+             $("#fee").text(fee);
+             $("#total").text(total);
+         	
+        }else{
+        	console.log("체크안됨!");
+
+        	 */
     
        })//end allcheck  
       
@@ -205,7 +269,10 @@ a:hover {
          var p_amount = $("#cartAmount" + cart_id).val();
          var sum_money = $(this).attr("data-sum_money"); //총금액
          
-         console.log(cart_id, p_selling_price, p_amount, sum_money)
+         
+         $("#cartAmount" + cart_id).val(p_amount);
+         console.log("ss: " + $("#cartAmount" + cart_id).val());
+         console.log(cart_id, p_selling_price, p_amount, sum_money);
          
          var userid = $(this).attr("data-id");
       
@@ -234,6 +301,10 @@ a:hover {
                console.log(error);
             }
          }) // end ajax
+         
+       
+         
+         
          
       })//end updBtn
       

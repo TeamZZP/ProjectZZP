@@ -50,7 +50,7 @@
 		});//end submit
 		$("#cancle").on("click", function() {
 			alert("배송지 추가를 취소합니다.");
-			location.href="addressList.jsp";
+			location.href="AddressListServlet";
 		});
 	});//end ready
 </script>

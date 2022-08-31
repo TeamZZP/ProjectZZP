@@ -31,17 +31,19 @@ public class OrderServlet extends HttpServlet {
 		MemberDTO mdto = (MemberDTO)session.getAttribute("login");
 		String mesg = "";
 		int p_amount = 0;
-		HashMap<String, Integer> map = new HashMap<String, Integer>();
 		
-		//int p_id= 0;
-
 		
 			if(mdto != null) {
 				String[] pIdListString = request.getParameterValues("p_id");  //String []로 데이터 파싱해옴
+				String[] pAmountListString = request.getParameterValues("p_amount");
+				
+						
+				
 				List<Integer> pIdList = new ArrayList<Integer>();
 				
 				for (int i = 0; i < pIdListString.length; i++) {             //int[] 형태로 형변환
-					 System.out.println("String"+ pIdListString[i]);
+					 System.out.println("상품 : "+ pIdListString[i]);
+					 System.out.println("수량 : "+ pAmountListString[i]);
 					 pIdList.add(Integer.parseInt(pIdListString[i]));
 					 System.out.println("Int"+pIdList.get(i));
 					
@@ -56,28 +58,39 @@ public class OrderServlet extends HttpServlet {
 				for (int i = 0; i < pIdList.size(); i++) {
 					System.out.println(list.get(i));
 				}
-			
-			if(Integer.parseInt((String)request.getParameter("p_amount"))==0||(String)request.getParameter("p_amount")==null) { //p_amount 저장
 				
-				 map.put("p_id",Integer.parseInt((String)request.getParameter("p_id")));
-				 map.put("p_amount",1);
-				 
-			}else {
 				
-				 map.put("p_id",Integer.parseInt((String)request.getParameter("p_id")));
-				 map.put("p_amount",Integer.parseInt((String)request.getParameter("p_amount")));
+				ArrayList<HashMap<String, String>> PList = new ArrayList<HashMap<String, String>>();
+
+				for ( int i = 0; i < pIdListString.length; i++ ) {
+					
+					HashMap<String, String> p = new HashMap<String, String>();
+					p.put("p_id", pIdListString[i] );
+					if(pAmountListString[i].equals("0")||pAmountListString[i]==null) {
+						p.put("p_amount", "1" );
+
+					}else {
+						p.put("p_amount", pAmountListString[i] );
+					}
+					
+					
+					PList.add(p);
+					
+				}
+
 				
-				 }
+				
 			//배송지
 			AddressService add_service = new AddressService();
 			List<AddressDTO> add_list = add_service.selectAllAddress(mdto.getUserid());
 			
 			
-			
+		
 			
 			request.setAttribute("list", list);
-			request.setAttribute("map", map);
 			request.setAttribute("add_list", add_list);
+			request.setAttribute("pAmountListString", pAmountListString);
+			request.setAttribute("PList", PList);
 			
 		
 			

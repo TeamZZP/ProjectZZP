@@ -120,7 +120,6 @@
 				삭제
 			</button><!-- open modal -->
 		</td>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <%
 	}
 %>
@@ -149,27 +148,22 @@
 </div>
 </div>
 </form>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
 		$("#sortBy").on("change", function() {
-//			console.log("click===");
 			$("#memberForm").submit();
 		});//end fn
 		
 		$("#searchMember").on("click", function() {
-//			console.log("click===");
 			$("#memberForm").submit();
 		});//end fn
-	});//end ready
-</script>
-<script type="text/javascript">
-	$(document).ready(function() {
 		
 		$("button[name=delete]").on("click", function() {//모달의 삭제 버튼 클릭시 회원 삭제
 			var userid=$(this).data("id");
 			console.log(userid);
  			//*****ajax
-			$.ajax({
+ 			$.ajax({
 				type : "post",
 				url : "AccountDeleteServlet",//페이지 이동 없이 해당 url에서 작업 완료 후 데이터만 가져옴
 				dataType : "text",

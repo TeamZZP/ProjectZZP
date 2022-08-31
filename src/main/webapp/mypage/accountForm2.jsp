@@ -8,6 +8,11 @@
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<style>
+	label {
+		padding: 5px 0 5px 0;
+	}
+</style>
 <%
 	MemberDTO member=(MemberDTO) request.getAttribute("login");
 	AddressDTO address=(AddressDTO) request.getAttribute("address");//기본 배송지 출력
@@ -106,7 +111,8 @@
 		
 		//5. 취소
 		$("#cancle").on("click", function() {
-			location.href="mypage.jsp";
+			alert("회원 정보 변경을 취소합니다.");
+			location.href="MypageServlet";
 		});//
 		//6. 회원 탈퇴
 		$("#delAccount").on("click", function() {

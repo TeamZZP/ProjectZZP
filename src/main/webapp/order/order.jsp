@@ -4,6 +4,7 @@
     <%@ page import="com.dto.CategoryProductDTO" %>
     <%@ page import="com.dto.AddressDTO" %>
     <%@ page import="java.util.List" %>
+    <%@ page import="java.util.ArrayList" %>
     <%@ page import="java.util.HashMap" %>
     <style>
 .heading {
@@ -73,15 +74,18 @@ $(function() {
 MemberDTO mdto = (MemberDTO)session.getAttribute("login");
 List<CategoryProductDTO> list = (List<CategoryProductDTO>)request.getAttribute("list");
 HashMap<String, Integer> map = (HashMap<String, Integer>)request.getAttribute("map");
+ArrayList<HashMap<String, String>> PList = (ArrayList<HashMap<String, String>>)request.getAttribute("PList");
+String[] pAmountListString = (String[])request.getAttribute("pAmountListString");
 
+int total_price = 0;
    for (int i = 0; i < list.size(); i++) {
       String userid = list.get(i).getUserid();
       int p_id = list.get(i).getP_id();
       String p_name = list.get(i).getP_name();
       int p_selling_price = list.get(i).getP_selling_price();
       String p_image = list.get(i).getP_image();
-      int p_amount = map.get("p_amount");
-      
+      int p_amount= Integer.parseInt(pAmountListString[i]);
+     
       System.out.println("상품명 :" + p_name);
       System.out.println("상품번호 :" + p_id);
    %>
@@ -89,7 +93,8 @@ HashMap<String, Integer> map = (HashMap<String, Integer>)request.getAttribute("m
       <div class="order_content">
          <input type="hidden" name="p_id" id="p_id" value="<%=p_id %>">
          <input type="hidden" name="userid" id="userid" value="<%=userid %>">
-         <input type="hidden" name="total_price" id="total_price" value="<%=userid %>">
+         <input type="hidden" name="total_price" id="p_amount" value="<%=p_amount %>">
+        
 
          <ul class="orderProduct_list" style="line-height: 50px; font-size: 20px;">
             <li id="orderLi">
@@ -112,9 +117,12 @@ HashMap<String, Integer> map = (HashMap<String, Integer>)request.getAttribute("m
             </li>
          </ul>
       </div>
-      <%} %>
+      <%
+      total_price += p_selling_price * p_amount;
+   } %>
+      총금액: <%= total_price%>
       <br><br><br>
-      
+       <input type="hidden" name="total_price" id="total_price" value="<%=total_price %>">
 <h3 style="font-weight: bold; color: green;">&emsp;배송지 선택</h3><button type="submit" class="btn btn-success"  id="selectAdd" style="float: right;" >다른배송지</button><br>
 <hr id="orderHr">
       <%
@@ -130,6 +138,7 @@ HashMap<String, Integer> map = (HashMap<String, Integer>)request.getAttribute("m
     	<ul class="orderAddress_list" >
     	<li id="addLi">
     	<input type="hidden" name="AddressName" id="AddressName" value="<%= add_dto.getAddress_name()%>"> <br>
+    	<input type="hidden" name="delivery_address" id="delivery_address" value="<%= add_dto.getAddr1()+" "+add_dto.getAddr2()%>"> <br>
     	<%= add_dto.getAddress_name()%><br>
     	받으시는 분 : <%= add_dto.getReceiver_name()%><br>
     	
@@ -162,8 +171,6 @@ HashMap<String, Integer> map = (HashMap<String, Integer>)request.getAttribute("m
     	<option>경비실</option>
     	<option>택배함</option>
     	</select>
-    	<br><br>
-    	공동현관 비밀번호:&emsp; <input id="entrance_passwd">
     	<br><br>
     	배송 요청사항 :&emsp;<input id="delievery_req"  id="delievery_req">
     	<br><br>
