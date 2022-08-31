@@ -26,7 +26,44 @@ public class AddOrderServlet extends HttpServlet {
 		MemberDTO mdto = (MemberDTO)session.getAttribute("login");
 		
 		String AddressName = (String)request.getAttribute("AddressName");
+		
+		
 		String[] pIdListString = request.getParameterValues("p_id");
+		System.out.println("사이즈 1: " + pIdListString.length);
+		String[] pAmountListString = request.getParameterValues("p_amount");
+		String[] pPriceListString = request.getParameterValues("p_price");
+		
+		System.out.println("사이즈 2: " + pAmountListString.length);
+		System.out.println("사이즈 3: " + pPriceListString.length);
+		
+		//서비스 호출 ( 주문 시퀀스 얻어오는 메서드)
+		//int order_id = service.getOrderid();
+		
+	
+		
+		for ( int  i = 0 ; i < pIdListString.length ; i++) {
+			
+			OrderDTO orderdto = new OrderDTO();
+			
+			//orderdto.setOrder_id(order_id);
+			orderdto.setUserid(mdto.getUserid());
+			orderdto.setP_id(Integer.parseInt(pIdListString[i]));
+			orderdto.setOrder_quantity(Integer.parseInt(pAmountListString[i]));
+			
+			orderdto.setTotal_price(Integer.parseInt(pPriceListString[i]));
+			orderdto.setDelivery_address((String)request.getParameter("delivery_address"));
+			orderdto.setDelivery_loc((String)request.getParameter("delivery_loc"));
+			orderdto.setDelivery_req((String)request.getParameter("delivery_req"));
+			
+			System.out.println("<" + (i+1) + "> = " + orderdto.toString());
+			
+		}
+		
+		
+		/*
+		
+		
+		
 		
 		OrderDTO orderdto = new OrderDTO();
 		orderdto.setOrder_id(0);
@@ -36,7 +73,7 @@ public class AddOrderServlet extends HttpServlet {
 		orderdto.setDelivery_address((String)request.getAttribute("delivery_address"));
 		orderdto.setDelivery_loc((String)request.getAttribute("delivery_loc"));
 		orderdto.setDelivery_req((String)request.getAttribute("delivery_req"));
-		//orderdto.setOrder_amount(request.getAttribute("p_amount"));
+	//	orderdto.setOrder_amount(Integer.parseInt((String)request.getAttribute("p_amount")));
 		orderdto.setOrder_date("");
 		
 		OrderService service = new OrderService();
@@ -46,7 +83,7 @@ public class AddOrderServlet extends HttpServlet {
 		
 		request.setAttribute("orderdto", orderdto);
 		RequestDispatcher dis = request.getRequestDispatcher("orderSheet.jsp");
-		dis.forward(request, response);
+		dis.forward(request, response);*/
 		
 	}
 

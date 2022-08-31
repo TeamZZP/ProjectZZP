@@ -92,9 +92,8 @@ int total_price = 0;
 
       <div class="order_content">
          <input type="hidden" name="p_id" id="p_id" value="<%=p_id %>">
-         <input type="hidden" name="userid" id="userid" value="<%=userid %>">
-         <input type="hidden" name="total_price" id="p_amount" value="<%=p_amount %>">
-        
+      	 <input type="hidden" name="p_amount" id="p_amount" value="<%=p_amount %>">
+         <input type="hidden" name="p_price" id="p_price" value="<%=p_selling_price * p_amount %>">
 
          <ul class="orderProduct_list" style="line-height: 50px; font-size: 20px;">
             <li id="orderLi">
@@ -103,8 +102,7 @@ int total_price = 0;
                   style="border: 10px;" height="150"></a>
               
                <div class="cart_list_info">
-                <input type="hidden" id="p_id" name="p_id" value="<%=p_id%>">
-               
+              
                   상품명: 
                   <a href="ProductRetrieveServlet?p_id=<%=p_id%>"> 
                   <span name="p_name" style=" margin: 8px; display: line"><%=p_name%></span>
@@ -172,7 +170,7 @@ int total_price = 0;
     	<option>택배함</option>
     	</select>
     	<br><br>
-    	배송 요청사항 :&emsp;<input id="delievery_req"  id="delievery_req">
+    	배송 요청사항 :&emsp;<input id="delievery_req"  name="delievery_req">
     	<br><br>
     	
       </li>

@@ -71,6 +71,8 @@ function productChoice(n) {
 			},
 			dataType : "text",
 			success : function(data) {
+				
+				alert(data);
 				var like_img = '';
 				if (data.likecheck == 0) {
 					like_img = "images/like.png";
