@@ -59,7 +59,7 @@ function productChoice(n) {
  	MemberDTO mdto = (MemberDTO) session.getAttribute("login");
 	if (mdto != null) {%>
 
-      var userid =  '<%=mdto.getUserid()%>';
+      var userid =  <%=mdto.getUserid()%>;
 
 		$.ajax({
 

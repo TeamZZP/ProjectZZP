@@ -28,13 +28,36 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <script>
 	$(document).ready(function() {
-		//4. 폼 제출, db 업데이트
-		
-		//5. 취소
+		//폼 제출, db 업데이트
+		$("form").on("submit", function() {
+			var username=$("#username").val();
+			var phone=$("#phone").val();
+			console.log(username+"의 연락처 : "+phone);
+			
+			var numChk = /^[0-9]*.{11}$/; 
+			if (username.length == 0 || phone.length == 0) {
+				event.preventDefault();
+				alert("변경할 회원 정보를 입력하세요.");
+				$("#username").focus();
+			} else if (username.length > 3) {
+				event.preventDefault();
+				alert("이름은 한글 3글자 이내로 입력하세요.");
+				$("#username").val("");
+				$("#username").focus();
+			} else if (!numChk.test(phone)) {
+				event.preventDefault();
+				alert("전화번호를 형식에 맞게 입력하세요.");
+				$("#phone").val("");
+				$("#phone").focus();
+			} else {
+				console.log("공백 확인, 이름 3글자 이내, 전화번호 유효성 검사 완료--update");
+			}
+		})
+		//취소
 		$("#cancle").on("click", function() {
-			location.href="";
+			location.href="AdminMainServlet";
 		});//
-		//6. 회원 삭제
+		//회원 삭제
 		$("#delAccount").on("click", function() {
 			console.log("회원 삭제 버튼 클릭");
 			location.href="";
@@ -49,14 +72,13 @@
 			<div class="card-body">
 				<form class="form-horizontal" method="post" action="AccountChangeServlet">
 				<input type="hidden" name="userid" id="userid" value="<%= userid %>"/>
-				<input type="hidden" name="passwd" id="passwd" value="<%= passwd %>"/>
 					<!-- username -->
 					<div class="form-group">
 						<label for="username" class="cols-sm-2 control-label" style="font-weight: bold;">이름</label>
 						<div class="cols-sm-10">
 							<div class="input-group">
 								<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-								<input type="text" class="form-control" name="username" value="<%= username %>"/>
+								<input type="text" class="form-control" name="username" id="username" value="<%= username %>"/>
 							</div>
 						</div>
 					</div>

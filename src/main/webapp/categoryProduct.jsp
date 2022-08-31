@@ -47,8 +47,7 @@ function productChoice(n) {
 
 if (mdto != null) {%>
 
-      var userid =  '<%=mdto.getUserid()%>
-	';
+      var userid =  <%=mdto.getUserid()%>;
 
 		$.ajax({
 
