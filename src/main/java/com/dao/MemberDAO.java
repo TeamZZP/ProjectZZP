@@ -80,4 +80,8 @@ public class MemberDAO {
 		return session.selectOne("MemberMapper.totalCount", map);
 	}
 
+	public MemberDTO selectMemberBykakao(SqlSession session, HashMap<String, String> map) {
+		return session.selectOne("selectMemberBykakao", map);
+	}
+
 }
