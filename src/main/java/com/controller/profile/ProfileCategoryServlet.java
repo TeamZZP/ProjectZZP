@@ -78,7 +78,7 @@ public class ProfileCategoryServlet extends HttpServlet {
 			
 			if (category.equals("myreview")) {
 				url = "myReview.jsp";
-			}
+			} 
 			
 			
 		} else if (category.contains("challenge")) {
@@ -117,6 +117,8 @@ public class ProfileCategoryServlet extends HttpServlet {
 			
 			if (category.equals("mychallenge")) {
 				url = "myChallenge.jsp";
+			} else if (category.equals("scrollchallenge")) {
+				url = "profile/scrollchallenge.jsp";
 			}
 			
 			

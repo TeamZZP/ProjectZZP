@@ -8,7 +8,13 @@
 <% 
 	//회원의 챌린지 목록 가져오기
 	PageDTO pDTO = (PageDTO) request.getAttribute("pDTO");
+	//페이징
+	int perPage = pDTO.getPerPage(); 
+	int totalCount = pDTO.getTotalCount();
+	int totalPage = totalCount/perPage;
+	if (totalCount%perPage!=0) totalPage++;
 	int curPage = pDTO.getCurPage();
+	
 	List<ChallengeDTO> challengeList = pDTO.getList();
 	String userid = null;
 	if(challengeList.size()>0) {
@@ -20,17 +26,19 @@
 	HashMap<String, String> stampListMap = (HashMap<String, String>) request.getAttribute("stampListMap");
 	//회원의 프로필 이미지 가져오기
 	String profile_img = (String) request.getAttribute("profile_img");
+	
+	
 %>
 
 <style>
 	/*ZoomIn Hover Effect*/
-     .hover-zoomin a {
+     .hover-zoomin a, .img {
       display: block;
       position: relative;
       overflow: hidden;
       border-radius: 15px;
     }
-    .hover-zoomin img:not(.stamp) {
+    .hover-zoomin img:not(.stamp), .img {
       width: 100%;
       height: auto;
       -webkit-transition: all 0.2s ease-in-out;
@@ -52,6 +60,9 @@
 		top: -6%; 
 		width: 40%;
     }
+    .img {
+    	border-radius: 15px;
+    }
 </style>
 
 <script type="text/javascript"
@@ -59,6 +70,50 @@
 <script type="text/javascript">
 	$(document).ready(function () {
 		
+		//무한 스크롤
+		$('.back-drop').hide()
+		let curPage = 1
+		let isLoading = false
+		$(window).on('scroll', function () {
+			let scrollTop = $(window).scrollTop() //위로 스크롤된 길이
+			let windowHeight = $(window).height() //웹브라우저 창의 높이
+			let documentHeight = $(document).height() //문서 전체 높이
+			let isBottom = scrollTop + windowHeight + 200 >= documentHeight //바닥까지 스크롤 여부
+			
+			if (isBottom) {
+				if (curPage == '<%=totalPage%>' || isLoading) {
+					console.log('끝!')
+					return;
+				}
+				isLoading = true //로딩중 true
+				$('.back-drop').show() //로딩 이미지 띄우기
+				curPage++ //요청할 페이지 증가
+				getList(curPage) //추가 페이지 요청 함수
+			}
+		})
+		function getList(curPage) {
+			console.log('inscroll '+curPage)
+			$.ajax({
+				type:'get',
+				url:'ProfileCategoryServlet',
+				data: {
+					userid:'<%=userid%>',
+					category:'scrollchallenge',
+					curPage:curPage
+				},
+				dataType:'html',
+				success: function (data) {
+					console.log(data)
+					$('.challengeAll:last').append(data) //응답받은 데이터 추가
+					$('.back-drop').hide() //로딩 이미지 숨기기
+					isLoading = false //로딩중 false
+				},
+				error: function () {
+					alert('문제가 발생했습니다. 다시 시도해 주세요.');
+				}
+			})
+			
+		}
 	});
 </script>
 
@@ -108,7 +163,10 @@
 	%>
 	
 
-	
-	
-	
+</div>
+
+<div class="row back-drop ms-3">
+  <div class="col-xl-4 col-md-6"><img class="img" src="images/none.png"></div>
+  <div class="col-xl-4 col-md-6"><img class="img" src="images/none.png"></div>
+  <div class="col-xl-4 col-md-6"><img class="img" src="images/none.png"></div>
 </div>
