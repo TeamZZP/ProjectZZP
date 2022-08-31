@@ -45,8 +45,9 @@ public class ProfileCategoryServlet extends HttpServlet {
 		System.out.println(userid+" "+category);
 		
 		ChallengeService service = new ChallengeService();
+		String url = null;
 		
-		if (category.equals("review")) {
+		if (category.contains("review")) {
 			
 			//페이징 처리
 			String curPage = request.getParameter("curPage"); //현재페이지
@@ -73,11 +74,14 @@ public class ProfileCategoryServlet extends HttpServlet {
 			request.setAttribute("prodMap", prodMap);
 			request.setAttribute("reviewNum", reviewNum);
 			
-			RequestDispatcher dis = request.getRequestDispatcher("profile/profileReview.jsp");
-			dis.forward(request, response);
+			url = "profile/profileReview.jsp";
+			
+			if (category.equals("myreview")) {
+				url = "myReview.jsp";
+			}
 			
 			
-		} else if (category.equals("challenge")) {
+		} else if (category.contains("challenge")) {
 			
 			//페이징 처리
 			String curPage = request.getParameter("curPage"); //현재페이지
@@ -109,10 +113,14 @@ public class ProfileCategoryServlet extends HttpServlet {
 			request.setAttribute("pDTO", pDTO);
 			request.setAttribute("challNum", challNum);
 			
-			RequestDispatcher dis = request.getRequestDispatcher("profile/profileChallenge.jsp");
-			dis.forward(request, response);
+			url = "profile/profileChallenge.jsp";
 			
-		} else if (category.equals("stamp")) {
+			if (category.equals("mychallenge")) {
+				url = "myChallenge.jsp";
+			}
+			
+			
+		} else if (category.contains("stamp")) {
 			//회원의 도장 목록 가져오기
 			List<StampDTO> stampList = service.selectMemberStampByUserid(userid);
 			//이미지와 함께 hashmap에 담기 (중복 stamp_id 제거 위해 LinkedHashMap 사용)
@@ -122,12 +130,17 @@ public class ProfileCategoryServlet extends HttpServlet {
 			}
 			
 			request.setAttribute("stampMap", stampMap);
-			RequestDispatcher dis = request.getRequestDispatcher("profile/profileStamp.jsp");
-			dis.forward(request, response);
+
+			url = "profile/profileStamp.jsp";
+			
+			if (category.equals("mystamp")) {
+				url = "myStamp.jsp";
+			}
 			
 		}
-		
-		
+
+		RequestDispatcher dis = request.getRequestDispatcher(url);
+		dis.forward(request, response);
 		
 	}
 
