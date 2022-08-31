@@ -23,8 +23,8 @@
 					console.log(data);
 					if (data != null) {
 						$("#answer"+qID).attr("display","none");
-						$("#answer"+qID).slideToggle("200").html(data + 
-						" &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <img alt='A' src='images/question/A.png' width='50px' height='55px'>").css({'font-weight':'bold', 'background':'#F0FFF0'});
+						$("#answer"+qID).slideToggle("slow").html(data + 
+						" &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <img alt='A' src='images/question/A.png' width='50px' height='55px'>").css({'font-weight':'bold'});
 					} else {
 						alert("권한이 없습니다.");
 					}
@@ -44,14 +44,14 @@
 	}); //end ready
 </script>
 <style>
-	table.questionDetail {
+	table#prodQATable {
 	  border-collapse: separate;
 	  border-spacing: 0px;
 	  text-align: left;
 	  line-height: 1.5;
 	  margin : 20px 10px;
 	}
-	table.questionDetail td {
+	table#prodQATable td {
 	  width: 350px; 
 	  padding: 10px;
 	  vertical-align: top;
@@ -60,53 +60,49 @@
 </style>
 
 <div style="text-align: center; color: gray;"> Q&A </div>
-<table style="border-spacing : 0">
+<table id="prodQATable">
 	<tr>
-		<td colspan="5" style="background-color: #8FBC8F; padding: 10px;"></td>
+		<td colspan="6" style="background-color: #8FBC8F; padding: 10px;"></td>
 	</tr>
-	<tr>
-		<td>
 		<%
 			ProductDTO pdto = (ProductDTO) request.getAttribute("ProductRetrieveDTO");
 		%>
+	<tr>
+		<td colspan="6" style="display: none;">
 			<input type="hidden" id="P_name" value="<%=pdto.getP_name()%>">
 			<input type="hidden" id="pID" value="<%=pdto.getP_id()%>">
+		</td>
+	</tr>
 		<%
 			List<QuestionDTO> prodQuestionList = (List<QuestionDTO>) session.getAttribute("prodQuestionList");
 			for (QuestionDTO qDTO : prodQuestionList) {
 				String user = qDTO.getUSERID();
 				String created = qDTO.getQ_CREATED().substring(0, 10);
 		%>
-			<table class="questionDetail" data-qID="<%=qDTO.getQ_ID()%>" title="더블클릭">
-				<tr>
-					<td style="text-align: center;"><img alt="Q" src="images/question/Q.png" width="50px" height="55px"></td>
-					<td><%=qDTO.getQ_STATUS()%></td>
-					<td>
-						<%
-						String use = "";
-						for (int j = 0; j < user.substring(5).length(); j++) {
-							use += "*";
-						%> 
-						<%
-						 }
-						%> 
-						<%=user.substring(0, 5).concat(use)%>
-					</td>
-					<td><%=qDTO.getQ_TITLE()%></td>
-					<td><%=created%></td>
-					<td style="text-align: center;"> <img alt="문의 답변 보기" src="images/question/down.png" width="20px" height="20px"> </td>
-				</tr>
-				<tr>
-					<td colspan="6">
-						<div style="text-align: right; margin: 0px 70px; border-radius: 15%;" id="answer<%=qDTO.getQ_ID()%>"> <span class="answer<%=qDTO.getQ_ID()%>"> </span> </div> 
-					</td>
-				</tr>
-			</table>
+	<tr class="questionDetail" data-qID="<%=qDTO.getQ_ID()%>" title="더블클릭">
+		<td style="text-align: center;"><img alt="Q" src="images/question/Q.png" width="50px" height="55px"></td>
+		<td><%=qDTO.getQ_STATUS()%></td>
+		<td>
+			<%
+				String use = "";
+				for (int j = 0; j < user.substring(5).length(); j++) {
+					use += "*";
+				 }
+			%> 
+			<%=user.substring(0, 5).concat(use)%>
+		</td>
+		<td><%=qDTO.getQ_TITLE()%></td>
+		<td><%=created%></td>
+		<td style="text-align: center;"> <img alt="문의 답변 보기" src="images/question/down.png" width="20px" height="20px"> </td>
+	</tr>
+	<tr>
+		<td colspan="6">
+			<div style="text-align: right; margin: 0px 70px; border-radius: 15%;" id="answer<%=qDTO.getQ_ID()%>"> <span class="answer<%=qDTO.getQ_ID()%>"> </span> </div> 
+		</td>
+	</tr>
 		<%
 		 		}
 		%>
-		</td>
-	</tr>
 </table>
 	<div style="text-align: right; padding-right: 50px;" >
 		<button type="submit" class="btn btn-outline-success" id="QuestionInsert">문의하기</button>
