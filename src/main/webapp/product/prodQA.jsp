@@ -60,7 +60,7 @@
 </style>
 
 <div style="text-align: center; color: gray;"> Q&A </div>
-<table id="prodQATable">
+<table id="prodQATable" style="text-align: center;">
 	<tr>
 		<td colspan="6" style="background-color: #8FBC8F; padding: 10px;"></td>
 	</tr>
@@ -72,6 +72,14 @@
 			<input type="hidden" id="P_name" value="<%=pdto.getP_name()%>">
 			<input type="hidden" id="pID" value="<%=pdto.getP_id()%>">
 		</td>
+	</tr>
+	<tr>
+		<td></td>
+		<td>답변상태</td>
+		<td>작성자</td>
+		<td>제목</td>
+		<td>작성일</td>
+		<td></td>
 	</tr>
 		<%
 			List<QuestionDTO> prodQuestionList = (List<QuestionDTO>) session.getAttribute("prodQuestionList");

@@ -45,8 +45,8 @@
 			<td></td>
 			<td>번호</td>
 			<td>작성자</td>
-			<td>작성일</td>
 			<td>제목</td>
+			<td>작성일</td>
 			<td>만족도</td>
 		</tr>
 		<%
@@ -62,8 +62,8 @@
 				<img alt="프로필" src="images/<%=rDTO.getPROFILE_IMG() %>" width="40px" height="40px">
 				&nbsp;&nbsp; <%=rDTO.getUSERID()%> </a>
 			</td>
-			<td><%=created%></td>
 			<td><%=rDTO.getREVIEW_TITLE()%></td>
+			<td><%=created%></td>
 			<td><%=rDTO.getREVIEW_RATE() %></td>
 		</tr>
 		<tr id="hiden<%=rDTO.getREVIEW_ID()%>" style="display: none;">
