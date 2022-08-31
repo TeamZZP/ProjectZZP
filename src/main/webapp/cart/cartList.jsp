@@ -248,7 +248,10 @@ a:hover {
          var p_amount = $("#cartAmount" + cart_id).val();
          var sum_money = $(this).attr("data-sum_money"); //총금액
          
-         console.log(cart_id, p_selling_price, p_amount, sum_money)
+         
+         $("#cartAmount" + cart_id).val(p_amount);
+         console.log("ss: " + $("#cartAmount" + cart_id).val());
+         console.log(cart_id, p_selling_price, p_amount, sum_money);
          
          var userid = $(this).attr("data-id");
       
@@ -277,6 +280,10 @@ a:hover {
                console.log(error);
             }
          }) // end ajax
+         
+       
+         
+         
          
       })//end updBtn
       

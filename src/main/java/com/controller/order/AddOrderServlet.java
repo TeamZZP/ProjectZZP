@@ -2,6 +2,7 @@ package com.controller.order;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -35,11 +36,17 @@ public class AddOrderServlet extends HttpServlet {
 		orderdto.setDelivery_address((String)request.getAttribute("delivery_address"));
 		orderdto.setDelivery_loc((String)request.getAttribute("delivery_loc"));
 		orderdto.setDelivery_req((String)request.getAttribute("delivery_req"));
-		//orderdto.setOrder_quantity(1);
+		//orderdto.setOrder_amount(request.getAttribute("p_amount"));
 		orderdto.setOrder_date("");
 		
 		OrderService service = new OrderService();
 		int n = service.addOrder(orderdto);
+		
+		System.out.println(n + "주문 전송 성공");
+		
+		request.setAttribute("orderdto", orderdto);
+		RequestDispatcher dis = request.getRequestDispatcher("orderSheet.jsp");
+		dis.forward(request, response);
 		
 	}
 
