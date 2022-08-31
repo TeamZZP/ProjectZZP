@@ -131,11 +131,27 @@ a:hover {
   			console.log("체크안됨");
   		}
   	});  */
-      
-      
+	
+	//전체선택-빈수차
+/* 	$("#allCheck").on("click", function() {
+		console.log("click====");
+		if ($(this).is(":checked")) {
+			$("input[name=check]").prop("checked", true);
+			
+		} else {
+			$("input[name=check]").prop("checked", false);
+		}
+	})//end fn
+	$("input[name=check]").click(function() {
+		var total = $("input[name=check]").length;
+		var checked = $("input[name=check]:checked").length;
+
+		if(total != checked) $("#allCheck").prop("checked", false);
+		else $("#allCheck").prop("checked", true); 
+	}); */
       
       //전체선택
-       $("#allCheck").on("click", function() {
+        $("#allCheck").on("click", function() {//#allCheck
         var result = this.checked;
         var item_price = "";
          $(".individual_cart_checkbox").each(function(idx, data) {
@@ -152,13 +168,10 @@ a:hover {
         		var chk =data.innerText+",";
         		console.log(chk);
         		
-        	})//
+        	})
             data.checked = result;
-           
-           
          })
-          
-          
+         
         /* 	var chk =[];
         	
         	chk += item_price;
@@ -167,33 +180,6 @@ a:hover {
            var totalprice = 0;
         	 totalprice += item_price;
         	 console.log(totalprice); */
-         
-         
-         
-         
-         
-         
-         
-         
-         
-         
-         
-         
-         
-         
-         
-         
-         
-         
-         
-         
-         
-         
-         
-         
-         
-         
-         
          
          
          
