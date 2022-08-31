@@ -37,7 +37,8 @@
 		
 		$("#QuestionInsert").click(function () {
 			var qID = $("#pID").val();
-			var pName = $("#pName").val();
+			var pName = $("#P_name").val();
+			console.log(qID + "\t" + pName);
 			location.href = "questionInsert.jsp?P_ID="+qID+"&P_Name="+pName;
 		});//
 	}); //end ready
@@ -63,18 +64,20 @@
 		<td>
 		<%
 			ProductDTO pdto = (ProductDTO) request.getAttribute("ProductRetrieveDTO");
+		%>
+			<input type="hidden" id="P_name" value="<%=pdto.getP_name()%>">
+			<input type="hidden" id="pID" value="<%=pdto.getP_id()%>">
+		<%
 			List<QuestionDTO> prodQuestionList = (List<QuestionDTO>) session.getAttribute("prodQuestionList");
 			for (QuestionDTO qDTO : prodQuestionList) {
 				String user = qDTO.getUSERID();
 				String created = qDTO.getQ_CREATED().substring(0, 10);
 		%>
-		<input type="hidden" id="pID" value="<%=qDTO.getP_ID()%>">
-		<input type="hidden" id="pName" value="<%=pdto.getP_name()%>">
 			<table class="questionDetail" data-qID="<%=qDTO.getQ_ID()%>" title="더블클릭">
-				<tr class="answer">
+				<tr>
 					<td colspan="5" style="background-color: #8FBC8F;"></td>
 				</tr>
-				<tr class="answer">
+				<tr>
 					<td rowspan="2" style="text-align: center;"><img alt="Q" src="images/question/Q.png" width="50px" height="55px">
 					</td>
 					<td><%=qDTO.getQ_STATUS()%></td>
@@ -92,10 +95,10 @@
 					<td><%=created%></td>
 					<td style="text-align: center;"> <img alt="문의 답변 보기" src="images/question/down.png" width="20px" height="20px"> </td>
 				</tr>
-				<tr class="answer">
+				<tr>
 					<td colspan="5"><%=qDTO.getQ_TITLE()%></td>
 				</tr>
-				<tr id="question">
+				<tr>
 					<td colspan="6" style="border: none;">
 						<div style="text-align: right; margin-right: 70px;" id="answer<%=qDTO.getQ_ID()%>"> <span class="answer<%=qDTO.getQ_ID()%>"> </span> </div> 
 					</td>
