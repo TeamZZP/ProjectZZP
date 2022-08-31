@@ -24,7 +24,7 @@
 					if (data != null) {
 						$("#answer"+qID).attr("display","none");
 						$("#answer"+qID).slideToggle("slow").html(data + 
-						" &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <img alt='A' src='images/question/A.png' width='50px' height='55px'>").css({'font-weight':'bold'});
+						" &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <img alt='A' src='images/question/A.png' width='50px' height='55px'>").css({'font-weight':'bold','border-bottom': '1px solid #8FBC8F'});
 					} else {
 						alert("권한이 없습니다.");
 					}
@@ -56,6 +56,7 @@
 	  padding: 10px;
 	  vertical-align: top;
 	  border-bottom: 1px solid #8FBC8F;
+	  vertical-align: middle;
 	}
 </style>
 
@@ -104,8 +105,10 @@
 		<td style="text-align: center;"> <img alt="문의 답변 보기" src="images/question/down.png" width="20px" height="20px"> </td>
 	</tr>
 	<tr>
-		<td colspan="6">
-			<div style="text-align: right; margin: 0px 70px; border-radius: 15%;" id="answer<%=qDTO.getQ_ID()%>"> <span class="answer<%=qDTO.getQ_ID()%>"> </span> </div> 
+		<td colspan="6" style="border-bottom: none;">
+			<div style="text-align: right; margin: 0px 82px;" id="answer<%=qDTO.getQ_ID()%>"> 
+				<span class="answer<%=qDTO.getQ_ID()%>"> </span> 
+			</div> 
 		</td>
 	</tr>
 		<%

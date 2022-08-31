@@ -17,6 +17,7 @@
 	  padding: 10px;
 	  vertical-align: top;
 	  border-bottom: 1px solid #8FBC8F;
+	  vertical-align: middle;
 	}
 	</style>
 	
