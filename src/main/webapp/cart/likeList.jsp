@@ -104,9 +104,12 @@ int likeCount = (int) request.getAttribute("likeCount");
 
 		<div class="col-lg-3 col-md-4 col-sm-6">
 			<div class="p-3">
+			
 				<div class="hover-zoomin">
 					<a href="ProductRetrieveServlet?p_id=<%=p_id%>"> 
-					<img src="images/p_image/<%=p_image%>" width="200" height="200"></a>
+					<img src="images/p_image/<%=p_image%>" width="200" height="200" importance="low"></a>
+						<input type="checkbox" name="check" id="check" checked="checked" class="individual_cart_checkbox" 
+					style="position:relative; top: -250px; right: 100px;" >
 				</div>
 			</div>
 			<div>
@@ -118,9 +121,14 @@ int likeCount = (int) request.getAttribute("likeCount");
 				</p>
 			</div>
 		</div>
-
+		 
 		<%
 		}
 		%>
+		
 	</div>
+	<div style="float: right;" >
+         <input type="submit" class="btn btn-success" id="delAllCart"
+            value="상품삭제">
+     	 </div>
 </div>
