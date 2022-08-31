@@ -8,7 +8,12 @@
 <% 
 	//회원의 챌린지 목록 가져오기
 	PageDTO pDTO = (PageDTO) request.getAttribute("pDTO");
+	int curPage = pDTO.getCurPage();
 	List<ChallengeDTO> challengeList = pDTO.getList();
+	String userid = null;
+	if(challengeList.size()>0) {
+		userid = challengeList.get(0).getUserid();
+	}
 	//회원의 챌린지 개수 가져오기
 	int challNum = (Integer) request.getAttribute("challNum");
 	//각 게시글마다 도장 가져오기
@@ -49,18 +54,24 @@
     }
 </style>
 
+<script type="text/javascript"
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function () {
+		
+	});
+</script>
 
 <div class="row p-2 mx-4 mb-2">
 	<div class="col">챌린지 <span class="text-success fw-bold"><%= challNum %></span></div>
 </div>
 
-<div class="row ms-3">
+<div class="challengeAll row ms-3">
 
 <%
 		for (int i=1; i<= challengeList.size(); i++) {
 			ChallengeDTO dto = challengeList.get(i-1);
 			int chall_id = dto.getChall_id();
-			String userid = dto.getUserid();
 			String chall_title = dto.getChall_title();
 			String chall_content = dto.getChall_content();
 			String chall_category = dto.getChall_category();
@@ -71,7 +82,7 @@
 			int chall_comments = dto.getChall_comments();
 	%>
 					
-     <div class="col-xl-4 col-md-6">
+     <div class="challengePost col-xl-4 col-md-6">
        <div class="p-3">
 	       <a href="ProfileMainServlet?userid=<%=userid%>"><img src="images/<%=profile_img%>" width="30" height="30"></a>&nbsp;&nbsp;
 	       <a href="ProfileMainServlet?userid=<%=userid%>"><%=userid%></a><br>
@@ -95,5 +106,9 @@
 	<%
 	 	} //end for
 	%>
+	
+
+	
+	
 	
 </div>

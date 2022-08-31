@@ -143,6 +143,23 @@
 	
 </div>
 
+	<!-- 페이징 -->
+	  <div class="p-2 text-center">
+	  <% 
+		    int curPage = pDTO.getCurPage(); 
+		    int perPage = pDTO.getPerPage(); 
+		    int totalCount = pDTO.getTotalCount();
+		    int totalPage = totalCount/perPage;
+		    if (totalCount%perPage!=0) totalPage++;
+		    for (int p=1; p<=totalPage; p++) {
+		    	if (p==curPage) {
+		    		out.print("<b>"+p+"</b>&nbsp;&nbsp;");
+		    	} else {
+		    		out.print("<a href='ProfileCategoryServlet?category=mychallenge&userid="+userid+"&curPage="+p+"'>"+p+"</a>&nbsp;&nbsp;");
+		    	} 
+		    }
+	  %>
+	  </div>
 
 </div>
 </div>
