@@ -30,7 +30,11 @@ padding-right: 11%;
 }
 </style>
 
-   <script>
+  <script type="text/javascript"
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript"> 
+
+		
 function getCategoryProduct(id){  //category.jsp에서 비동기처리로 product.jsp의 $("#categoryProductContainer") 바꾸기     
 	
 	
@@ -55,7 +59,8 @@ function getCategoryProduct(id){  //category.jsp에서 비동기처리로 produc
 
     }); 
 	
-               }
+               }//end getCategoryProduct
+	        
  </script>
 </head>
 <body>

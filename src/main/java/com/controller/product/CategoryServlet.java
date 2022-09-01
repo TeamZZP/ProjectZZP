@@ -33,18 +33,19 @@ public class CategoryServlet extends HttpServlet {
 		
 	
 		String p_id = request.getParameter("p_id");
+		//request.getAttribute("c_id");
 
 		CategoryService service = new CategoryService();
 		
 		List<CategoryProductDTO> product_list  = null; //베스트상품
 		
 		ProductService pservice = new ProductService();
-       if (request.getParameter("c_id") == null ||"".equals(request.getParameter("c_id"))) {
+       if (request.getAttribute("c_id") == null ||"".equals(request.getAttribute("c_id"))) {
     	   System.out.println("카테고리 아이디 확인 : "+request.getParameter("c_id"));
     	   product_list= pservice.bestProductList();  //베스트 상품 가져오기(이미지,productDTO)
 			
 		}else {
-			product_list= pservice.productList(Integer.parseInt(request.getParameter("c_id"))); 
+			product_list= pservice.productList(Integer.parseInt((String)request.getAttribute("c_id"))); 
 		}
    		
       
@@ -64,7 +65,7 @@ public class CategoryServlet extends HttpServlet {
 		//위 데이터를 map에 저장
 		HashMap<String, String> p_map = new HashMap<String, String>();
 		
-		p_map.put("c_id", request.getParameter("c_id"));
+		p_map.put("c_id", (String)request.getAttribute("c_id"));
 		p_map.put("sortBy", sortBy);
 		
 		System.out.println("카테고리서블릿!!!!!!"+p_map);

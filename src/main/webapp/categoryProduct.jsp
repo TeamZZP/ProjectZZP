@@ -36,16 +36,17 @@
 </style>
 <script type="text/javascript"
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script type="text/javascript">    
-var productLike = 0;
+<script type="text/javascript"> 
+<%MemberDTO mdto = (MemberDTO) session.getAttribute("login");%>
+ <%--  var productLike = 0;
 
 function productChoice(n) {
       console.log(n);
 
      
-     <%MemberDTO mdto = (MemberDTO) session.getAttribute("login");
+    
 
-if (mdto != null) {%>
+<%if (mdto != null) {%>
 
 
 		$.ajax({
@@ -83,11 +84,11 @@ if (mdto != null) {%>
 	$(function() {
 
 		//정렬 기준 선택시 form 제출
-		$("#sortBy").on("change", function() {
+	/*	$("#sortBy").on("change", function() {
 
 			console.log(c_id + "카테고리프로덕트!");
 			$("#prodForm2").submit();
-		});
+		});*/
 
 		$("button[name=up]").on("click", function() {
 			var p_id = $(this).attr("data-p_id");
@@ -129,17 +130,18 @@ if (mdto != null) {%>
 		
 	/* 	$("#deleteMember"+id).modal("hide");
 		$(".modal-backdrop").hide();//모달창 닫고 백드롭 hide */
-	})
+	}) --%>
 </script>
-<form action="CategoryServlet" id="prodForm2">
+<form action="CategoryServlet" id="prodForm">
 	<%
-	PageDTO pDTO = (PageDTO) request.getAttribute("pDTO");
-
-	String sortBy = (String) request.getAttribute("sortBy");
+	PageDTO pDTO=(PageDTO) request.getAttribute("pDTO");
+	String searchName=(String) request.getAttribute("searchName");
+	String searchValue=(String) request.getAttribute("searchValue");
+	String sortBy=(String) request.getAttribute("sortBy");
 
 	List<CategoryProductDTO> pDTO_list = pDTO.getList();
-
-	List<CategoryProductDTO> product_list = (List<CategoryProductDTO>) request.getAttribute("product_list");
+   
+	//List<CategoryProductDTO> product_list = (List<CategoryProductDTO>) request.getAttribute("product_list");
 	%>
 
 	<div id="categoryProductContainer" class="container ">
@@ -148,17 +150,13 @@ if (mdto != null) {%>
 				<div class="col">
 					<div class="float-end">
 						<!-- 정렬 -->
-						<select class="form-select sortBy" name="sortBy" id="sortBy"
-							data-style="btn-info"
-							style="width: 145px; margin-left: -24px; display: inline;">
-							<option value="p_id" selected>정렬</option>
-							<option value="p_id" <%if ("p_id".equals(sortBy)) {%> selected
-								<%}%>>최신상품순</option>
-							<option value="p_selling_price"
-								<%if ("p_selling_price".equals(sortBy)) {%> selected <%}%>>판매가순</option>
-							<option value="p_name" <%if ("p_name".equals(sortBy)) {%> selected
-								<%}%>>상품명순</option>
-						</select>
+						<select class="form-select sortBy" name="sortBy" id="sortBy" data-style="btn-info" 
+				  		  style="width: 145px; margin-left: -24px; display: inline;">
+					    <option value="p_id" selected>정렬</option>
+					    <option value="p_id" <% if("p_id".equals(sortBy)){%>selected<%}%>>최신상품순</option>
+					    <option value="p_selling_price" <% if("p_selling_price".equals(sortBy)){%>selected<%}%>>판매가순</option>
+					    <option value="p_name" <% if("p_name".equals(sortBy)){%>selected<%}%>>상품명순</option>
+				  </select>
 					</div>
 				</div>
 			</div>
@@ -177,7 +175,7 @@ if (mdto != null) {%>
 				int p_stock = pDTO_list.get(i).getP_stock();
 				String userid = pDTO_list.get(i).getUserid();
 				String p_image = pDTO_list.get(i).getP_image();
-				
+				 request.setAttribute("c_id", c_id);
 				int likecheck = 0;
 
 				if (mdto != null) {

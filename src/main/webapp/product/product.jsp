@@ -137,7 +137,7 @@ function productChoice(n) {
 		
 	})
 </script>
-<form action="" id="prodForm">	
+<form action="StoreServlet" id="prodForm">	
 <%
 PageDTO pDTO=(PageDTO) request.getAttribute("pDTO");
 String searchName=(String) request.getAttribute("searchName");
@@ -146,7 +146,7 @@ String sortBy=(String) request.getAttribute("sortBy");
 
 List<CategoryProductDTO> pDTO_list = pDTO.getList();
 
-List<CategoryProductDTO> product_list = (List<CategoryProductDTO>) request.getAttribute("product_list");
+//List<CategoryProductDTO> product_list = (List<CategoryProductDTO>) request.getAttribute("product_list");
 
 %>
 	
