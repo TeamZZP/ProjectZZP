@@ -9,6 +9,7 @@ import com.dao.OrderDAO;
 import com.dto.CategoryProductDTO;
 import com.dto.ImagesDTO;
 import com.dto.OrderDTO;
+import com.dto.PageDTO;
 
 public class OrderService {
 	OrderDAO dao;
@@ -63,6 +64,16 @@ public class OrderService {
         	session.close();
         }
 		return n;
+	}
+	public PageDTO MyOrderList(int curPage, String userid) {
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		PageDTO dto = null;
+		try {
+			dto = dao.MyOrderList(session, curPage, userid);
+		} finally {
+			session.close();
+		}
+		return dto;
 	}
 	
 	

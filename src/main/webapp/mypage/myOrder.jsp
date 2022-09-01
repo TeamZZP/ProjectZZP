@@ -1,20 +1,11 @@
+<%@page import="com.dto.ProductOrderDTO"%>
+<%@page import="com.dto.OrderDTO"%>
+<%@page import="java.util.List"%>
 <%@page import="com.dto.MemberDTO"%>
 <%@page import="com.dto.PageDTO"%>
-<%@page import="com.dto.QuestionProductDTO"%>
-<%@page import="com.dto.QuestionDTO"%>
-<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
-<% String before = "myQuestion"; 
 
-	//session에 저장된 userid 읽어오기 
-	MemberDTO member = (MemberDTO) session.getAttribute("login"); 
-	String userid = null;
-	if (member != null) {
-		userid = member.getUserid();
-	}
-%>
 <style>
 	a {
 		color : black;
@@ -26,6 +17,15 @@
 	}
 </style>
 
+    <%
+	  //session에 저장된 userid 읽어오기 
+	  	MemberDTO member = (MemberDTO) session.getAttribute("login"); 
+	  	String userid = null;
+	  	if (member != null) {
+	  		userid = member.getUserid();
+	  	}
+    %>
+    
 <div id="addContainer">
 <div class="container">
 <div class="row">
@@ -60,41 +60,35 @@
 <div id="addTableDiv">
 <table id="addTable" class="table table-hover" style="text-align: center;">
 	<tr class="table-success">
-		<th>번호</th>
+		<th>주문번호</th>
 		<th>상품명</th>
-		<th>카테고리</th>
-		<th>제목</th>
-		<th>작성일</th>
-		<th>답변상태</th>
+		<th>가격</th>
+		<th>주문날짜</th>
+		<th colspan="2">주소</th>
+		<th>배송상태</th>
+		<th>리뷰쓰기</th>
 	</tr>
 	<%
-		PageDTO pDTO  = (PageDTO)session.getAttribute("myList");
-		List<QuestionProductDTO> myList = pDTO.getList();
-		for(QuestionProductDTO qDTO : myList){
-			String date = qDTO.getQ_CREATED();
+		PageDTO pDTO = (PageDTO)session.getAttribute("myOrderList");
+		List<ProductOrderDTO> myList = pDTO.getList();
+		for(ProductOrderDTO qDTO : myList){
+			String date = qDTO.getORDER_DATE();
 			String day = date.substring(0,10);
 			System.out.print("날짜 " + day);
 	%>
 	<tr>
-		<td> <%= qDTO.getQ_ID() %> </td>
-		<%if(qDTO.getP_NAME() == null){ %>
-	    	<td> - </td>
-	    <% } else { %> 
-	    	<td> <%= qDTO.getP_NAME() %> </td>
-    	<%} %> 
-		<td> <%= qDTO.getQ_CATEGORY() %> </td>
-		<td>
-			<a style="text-decoration: none; color: black;" 
-    			href="QuestionOneSelect?Q_ID=<%= qDTO.getQ_ID() %>&USERID=<%=qDTO.getUSERID()%>&before=<%=before%>">
-		  	<%= qDTO.getQ_TITLE() %> 
-		 	</a>
-		</td>
+		<td> <%= qDTO.getORDER_ID() %> </td>
+	    <td> <%= qDTO.getP_NAME() %> </td>
+	    <td> <%= qDTO.getTOTAL_PRICE() %> </td>
 		<td> <%= day %> </td>
-		<td <%if(qDTO.getQ_STATUS().equals("답변완료")){ %> style="color: green;" <%} %>> <%= qDTO.getQ_STATUS() %> </td>
+		<td> <%= qDTO.getDELIVERY_ADDRESS() %> </td>
+		<td> <%= qDTO.getDELIVERY_LOC() %> </td>
+		<td> <%= qDTO.getORDER_STATE() %> </td>
+		<td> <button onclick="location.href='reviewInsert.jsp'" class="btn btn-outline-success">리뷰작성</button> </td>
 	</tr>
 	<%	} %>
 	<tr>
-		<td colspan="6" style="text-align: center;">
+		<td colspan="8" style="text-align: center;">
 			 <%
 		        int curPage = pDTO.getCurPage();
 		        int perPage = pDTO.getPerPage();
