@@ -40,4 +40,14 @@ public class ReviewDAO {
 		return session.selectOne("ReviewMapper.selectOneProduct", p_ID);
 	}
 
+	public int reviewInsert(SqlSession session, HashMap<String, String> map) {
+		int num = session.insert("ReviewMapper.reviewInsert", map);
+		return num;
+	}
+
+	public int orderIDreivewCheck(SqlSession session, int ORDER_ID) {
+		int num = session.selectOne("ReviewMapper.orderIDreivewCheck", ORDER_ID);
+		return num;
+	}
+
 }

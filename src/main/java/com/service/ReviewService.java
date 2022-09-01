@@ -66,4 +66,31 @@ public class ReviewService {
 		return map;
 	}
 
+
+
+	public int reviewInsert(HashMap<String, String> map) {
+		int num = 0;
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		try {
+			num = dao.reviewInsert(session, map);
+			session.commit();
+		} finally {
+			session.close();
+		}
+		return num;
+	}
+
+
+
+	public int orderIDreivewCheck(int ORDER_ID) {
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		int num = 0;
+		try {
+			num = dao.orderIDreivewCheck(session, ORDER_ID);
+		} finally {
+			session.close();
+		}
+		return num;
+	}
+
 }

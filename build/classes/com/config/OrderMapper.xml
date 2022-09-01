@@ -47,6 +47,9 @@ insert into orders (order_id, userid, p_id, total_price, delivery_address, deliv
 values(#{order_id}, #{userid}, #{p_id}, #{total_price}, #{delivery_address}, #{delivery_loc}, #{delivery_req},sysdate,'주문완료', #{order_quantity})
 </insert>	
 <select id="MyOrderList" parameterType="string" resultType="ProductOrderDTO">
-	select * from orders where userid = #{userid}
+	select * from orders RIGHT OUTER JOIN product USING(p_id) where orders.userid = #{userid} order by ORDER_DATE desc
+</select>
+<select id="myOrderNum" resultType="int">
+	select count(*) from QUESTION where userid = #{userid}
 </select>
 </mapper>

@@ -22,5 +22,12 @@
 		from product p join images i using(p_id)
 		where image_rnk=1 and p_id=#{p_id}
 	</select>
-	
+	<insert id="reviewInsert" parameterType="map">
+		insert into REVIEW (REVIEW_ID, ORDER_ID, P_ID, USERID, REVIEW_TITLE, REVIEW_CONTENT,REVIEW_RATE, REVIEW_IMG, REVIEW_CREATED)
+			values (REVIEW_REVIEW_ID_SEQ.nextval, #{ORDER_ID}, #{P_ID}, #{USERID}, #{REVIEW_TITLE}, #{REVIEW_CONTENT},
+				#{REVIEW_RATE}, #{REVIEW_IMG}, sysdate)
+	</insert> 
+	<select id="orderIDreivewCheck" parameterType="int" resultType="int">
+		select count(*) from review where order_ID = #{ORDER_ID}
+	</select>
 </mapper>
