@@ -1,3 +1,5 @@
+<%@page import="java.util.List"%>
+<%@page import="com.dto.PageDTO"%>
 <%@page import="com.dto.MemberDTO"%>
 <%@page import="com.dto.StampDTO"%>
 <%@page import="java.util.Set"%>
@@ -6,7 +8,9 @@
     pageEncoding="UTF-8"%>
 <%
 	//회원의 도장 목록 가져오기
-	LinkedHashMap<Integer, StampDTO> stampMap = (LinkedHashMap<Integer, StampDTO>) request.getAttribute("stampMap");
+	PageDTO pDTO = (PageDTO) request.getAttribute("pDTO");
+	List<StampDTO> list = pDTO.getList();
+	int totalCount = pDTO.getTotalCount();
 	//session에 저장된 userid 읽어오기 
 	MemberDTO member = (MemberDTO) session.getAttribute("login"); 
 	String userid = null;
@@ -80,23 +84,18 @@
 
 <table class="table table-hover text-center">
 	<tr class="table-success">
-		<th>내 도장 <span class="text-success fw-bold"><%= stampMap.size() %></span></th>
+		<th>내 도장 <span class="text-success fw-bold"><%= totalCount %></span></th>
 	</tr>
 </table>
 
 <div class="row ms-3">
 
 <%
-
-		Set<Integer> keySet = stampMap.keySet();
-		System.out.println(keySet);
-		int count = 0;
-		for (Integer key : keySet) {
-			StampDTO dto = stampMap.get(key);
-			int stamp_id = dto.getStamp_id();
-			String stamp_img = dto.getStamp_img();
-			String stamp_name = dto.getStamp_name();
-			String stamp_content = dto.getStamp_content();
+for (StampDTO dto : list) {
+	int stamp_id = dto.getStamp_id();
+	String stamp_img = dto.getStamp_img();
+	String stamp_name = dto.getStamp_name();
+	String stamp_content = dto.getStamp_content();
 	%>
 					
      <div class="col-xl-4 col-md-6">
@@ -129,6 +128,24 @@
 	%>
 	
 </div>
+
+
+	<!-- 페이징 -->
+	  <div class="p-2 text-center">
+	  <% 
+		    int curPage = pDTO.getCurPage(); 
+		    int perPage = pDTO.getPerPage(); 
+		    int totalPage = totalCount/perPage;
+		    if (totalCount%perPage!=0) totalPage++;
+		    for (int p=1; p<=totalPage; p++) {
+		    	if (p==curPage) {
+		    		out.print("<b>"+p+"</b>&nbsp;&nbsp;");
+		    	} else {
+		    		out.print("<a href='ProfileCategoryServlet?category=mystamp&userid="+userid+"&curPage="+p+"'>"+p+"</a>&nbsp;&nbsp;");
+		    	} 
+		    }
+	  %>
+	  </div>
 
 
 </div>
