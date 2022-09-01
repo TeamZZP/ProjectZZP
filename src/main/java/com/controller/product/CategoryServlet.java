@@ -32,9 +32,7 @@ public class CategoryServlet extends HttpServlet {
 				
 		String userid = "";
 		
-		if(member != null) {
-			userid = member.getUserid();
-		}	
+	
 		String p_id = request.getParameter("p_id");
 
 		CategoryService service = new CategoryService();
@@ -50,14 +48,7 @@ public class CategoryServlet extends HttpServlet {
 			product_list= pservice.productList(Integer.parseInt(request.getParameter("c_id"))); 
 		}
    		
-       
-		/*
-		 * HashMap<String,String> map = new HashMap<String, String>(); map.put("p_id",
-		 * p_id); map.put("userid", userid); int likecheck = service.likeCheck(map);
-		 * 
-		 * request.setAttribute("c_likecheck", likecheck);
-		 */
-       
+      
    	//페이징
 		String curPage=request.getParameter("curPage");//현재 페이지
 		if (curPage == null) {curPage="1";}//1페이지 시작
@@ -84,8 +75,17 @@ public class CategoryServlet extends HttpServlet {
 		System.out.println("카테고리서블릿!!!!!!"+pDTO2);
 		
 		
+		 
+		/*
+		 * HashMap<String,String> map = new HashMap<String, String>(); map.put("p_id",
+		 * p_id); map.put("userid", userid); int likecheck = service.likeCheck(map);
+		 * 
+		 * request.setAttribute("c_likecheck", likecheck);
+		 */
+       
+		
 			if(member != null) {
-			
+			userid = member.getUserid();
 			HashMap<String,String> map = new HashMap<String, String>();
 			
 			//int [] likecheck = null ; 
@@ -95,7 +95,7 @@ public class CategoryServlet extends HttpServlet {
 			for (int i = 0; i < product_list.size(); i++) {
 
 				map.put("p_id",  Integer.toString(product_list.get(i).getP_id()));
-				map.put("userid", member.getUserid());
+				map.put("userid", userid);
 				likecheck.add(product_service.likeCheck(map));
 				
 			}
