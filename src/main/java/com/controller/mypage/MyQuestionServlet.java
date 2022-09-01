@@ -1,4 +1,4 @@
-package com.controller.Question;
+package com.controller.mypage;
 
 import java.io.IOException;
 import java.util.List;

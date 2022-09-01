@@ -44,7 +44,7 @@
 		<a href="#" class="btn btn-outline-success">전체보기</a>
 	</div>
 	<div></div>
-		<a href="#" class="btn btn-outline-success">1. 주문 내역</a>
+		<a href="MyOrderServlet" class="btn btn-outline-success">1. 주문 내역</a>
 		<a href="#" class="btn btn-outline-success">2. 반품/취소/교환 목록</a>
 		<a href="ProfileCategoryServlet?category=myreview&userid=<%=userid%>" class="btn btn-outline-success">3. 내 구매후기</a><br>
 		<br>

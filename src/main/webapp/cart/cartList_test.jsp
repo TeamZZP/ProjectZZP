@@ -293,8 +293,7 @@
 			console.log("체크박스의 카트 아이디 : "+n);
 
 			var cart_id = $(this).attr("data-xxx");//cart_id
-//			var p_selling_price = $(this).attr("data-price");//tag에 없는 데이터
-//			console.log("???? : "+p_selling_price);//undefined
+
 			var p_amount = $("#cartAmount" + cart_id).val();//수량
 			console.log("수량 : "+p_amount);//undefined
 			var sum_money = $("#sum_money").text();//현재 장바구니 상품 금액
