@@ -89,7 +89,7 @@
 	    <!-- carousel_1 -->
 	      <div class="col retrieve" onclick="javascrip:location.href='ProductRetrieveServlet?p_id=<%=p_id%>';">
 	        <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" 
-	        	style="width:25rem; height:25rem; background-image: url('images/p_image/<%=p_image%>'); background-size:cover;">
+	        	style="background-image: url('images/p_image/<%=p_image%>'); background-size:cover;">
 	          <div class="d-flex flex-column h-100 p-5 pb-3 text-white fw-bold text-shadow-1">
 	            <h2 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold text-shadow-1"><%= p_content %></h2>
 	            <ul class="d-flex list-unstyled mt-auto">
@@ -136,15 +136,15 @@
 			String p_image2 = product_list2.get(i).getP_image();
 	    %>
 	    <!-- carousel_2 -->
-	   	<div class="col retrieve" onclick="javascrip:location.href='ProductRetrieveServlet?p_id=<%=p_id2%>';">
+	      <div class="col retrieve" onclick="javascrip:location.href='ProductRetrieveServlet?p_id=<%=p_id2%>';">
 	        <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" 
-	        	style="width:25rem; height:25rem; background-image: url('images/p_image/<%=p_image2%>'); background-size:cover;">
-	          <div class="d-flex flex-column h-100 p-5 pb-3 text-white fw-bold text-shadow-1">
-	            <h2 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold text-shadow-1"><%= p_content2 %></h2>
+	        	style="background-image: url('images/p_image/<%=p_image2%>'); background-size:cover;">
+	          <div class="d-flex flex-column h-100 p-5 pb-3 fw-bold text-shadow-1">
+	           <h2 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold text-shadow-1"><%=p_content2%></h2> 
 	            <ul class="d-flex list-unstyled mt-auto">
 	              <li class="me-auto">
 	              </li>
-	              <li class="d-flex align-items-center me-3">
+	              <li class="d-flex align-items-center me-3" >
 	                <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#geo-fill"></use></svg>
 	                <small><%= p_name2 %></small>
 	              </li>
@@ -155,7 +155,7 @@
 	            </ul>
 	          </div>
 	        </div>
-	      </div>
+	      </div> 
        <%
     	 }
        %>

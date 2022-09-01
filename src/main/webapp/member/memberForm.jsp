@@ -99,22 +99,51 @@ $("#emailSel").change(function() {
 //아이디 중복 검사
 $("#idCheck").click(function() {
 	event.preventDefault();
-	var popupX = (window.screen.width / 2) - (200 / 2);
-	var popupY= (window.screen.height / 4) - (300 / 2);
-	window.open("member/idCheckForm.jsp","",'status=no, height=200, width=600, left='+ popupX + ', top='+ popupY);
-	
+});
+$("#useridBtn").click(function() {
+	event.preventDefault();
+	console.log($("#modalUserid").val());
+	$.ajax({
+		type: "get",
+		url: "MemberIdCheckServlet",
+		dataType: "text",
+		data: {
+			userid: $("#modalUserid").val()
+		},
+		success: function(responseData, status, xhr) {
+			$("#result4").text(responseData);
+			$("#useId").attr("data-id",$("#modalUserid").val());
+			console.log($("#useId").attr("data-id"));
+		},
+		error: function(xhr, status, error) {
+			console.log(error);
+		}
+	}); 
+});
+$("#useId").click(function() {
+	var mesg = $("#result4").text();
+	if (mesg=="중복된 아이디입니다 :(") {
+		$("#result4").text("아이디를 다시 확인하시기 바랍니다.");
+	} else {
+		$(this).attr("data-bs-dismiss", "modal");
+		$("#userid").val($(this).attr("data-id"));
+		/* $("#modalUserid").val("");
+		$("#result4").text("");  */
+	}
 });
 
 //아이디 중복 or 비밀번호 불일치 시 로그인 불가
 $("#addMember").click(function() {
-	var mesg = $("#result").text();
-	var mesg2 = $("#result2").text();
-	if (mesg=="중복된 아이디입니다 :(") {
+	var mesg = $("#result4").text();
+	var mesg2 = $("#result3").text();
+	if (mesg=="아이디를 다시 확인하시기 바랍니다.") {
 		alert("아이디를 확인해주세요")
+		$("#userid").focus();
 		event.preventDefault();
 	}
 	if (mesg2=="비밀번호 불일치") {
 		alert("비밀번호가 일치하지 않습니다 :(")
+		$("#passwd").focus();
 		event.preventDefault();
 	};
 });
@@ -153,10 +182,32 @@ System.out.println(map);
                                             <div class="input-group">
                                                 <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
                                                 <input type="text" oninput="chkInfo(this.value)" class="form-control" name="userid" id="userid" placeholder="영문자와 숫자로 이루어진 4~12자리를 입력하세요" />
-                                                <button id="idCheck" class="btn btn-outline-success">중복확인</button>
+                                                <button id="idCheck" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#checkId">중복확인</button>
                                             </div>
                                         </div>
                                     </div>
+	                                   	<!-- Modal -->
+										<div class="modal fade modal-first" id="checkId" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+										  <div class="modal-dialog">
+										    <div class="modal-content">
+										      <div class="modal-header">
+										        <h5 class="modal-title" id="staticBackdropLabel">아이디 중복 확인</h5>
+										        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+										      </div>
+										      <div class="modal-body">
+										      	<div class="form-group">
+											        <input type="text" class="form-control" id="modalUserid" style="width: 200px; display: inline;" placeholder="아이디 입력" >
+									      			<button type="submit" class="btn btn-outline-success" style="display: inline;" id="useridBtn">중복확인</button>
+										      		<span style="display: block;" id="result4"></span>
+										      	</div>
+										      </div>
+										      <div class="modal-footer">
+										        <button type="button" name="useId" id="useId" data-id="" class="btn btn-success">사용하기</button>
+										        <button type="button" id="closeWin" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+										      </div>
+										    </div> 
+										  </div>
+										</div>
                                     <!-- 비밀번호 -->
                                      <div class="form-group">
                                         <label for="passwd" class="cols-sm-2 control-label" style="font-weight: bold;">비밀번호</label>
@@ -164,7 +215,7 @@ System.out.println(map);
                                             <div class="input-group">
                                                 <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
                                                 <input type="password" class="form-control" name="passwd" id="passwd" placeholder="영문자,숫자,특수문자를 포함하여 8~25자리를 입력하세요" />
-                                                <span id="result2" style="color: red;"></span>
+                                                <span id="result2" style="color: blue;"></span>
                                             </div>
                                         </div>
                                     </div>

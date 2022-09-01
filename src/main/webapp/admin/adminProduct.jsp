@@ -154,51 +154,6 @@ if(mesg != null){
 					삭제
 				</button>
 			</td>
-	<%-- <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script>
-	$(document).ready(function () {
-		//관리자페이지 카테고리
-		$(".category").click(function() {
-			let category = $(this).attr("data-category");
-			location.href="AdminCategoryServlet?category="+category;
-		});
-		//상품검색
-		$("#searchProd").click(function() {
-			$("#prodForm").submit();
-		});
-		//정렬 기준 선택시 form 제출
-		$("#sortBy").on("change", function () {
-			$("#prodForm").submit();
-		});
-		//상품등록 버튼
-		$("#addProduct").click(function() {
-			location.href="../adminProductAdd.jsp";
-		});
-		//상품 상세페이지
-		$(".productDetail").click(function() {
-			let p_id = $(this).attr("data-p_id");
-			location.href="AdminProdDetailServlet?p_id="+p_id;
-		});
-		//상품보기 버튼
-		$("body").on("click", "#prodDetail", function () {
-			let p_id = $(this).attr("data-id");
-			console.log(p_id);
-			location.href="ProductRetrieveServlet?p_id="+p_id;
-		});
-		//상품삭제 버튼
-		$("#deleteProduct<%= p_id %>").on("shown.bs.modal", function (e){//#deleteMember modal 창을 열 때 선택한 버튼의 data-id를 가져옴(deleteID로 설정했더니 안돼서 다시 id로 바꿈)--modal창의 삭제 버튼에 저장
-			    var id = $(e.relatedTarget).data("id");
-			    $("#delProd<%= p_id %>").val(id);
-		});
-		$("#delProd<%= p_id %>").on("click", function() {
-			var p_id = $(this).val();
-			console.log(p_id);
-			location.href="ProductDeleteServlet?p_id="+p_id;
-		});
-		
-	});//end ready
-	
-	</script> --%>
 	<%
 		c++;		
 		}	
