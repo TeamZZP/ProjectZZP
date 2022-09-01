@@ -34,7 +34,7 @@
 			<a href="MypageServlet">마이페이지 홈</a>
 		</div>
 	   <div class="col">
-	   		<a href="MyOrderServlet">주문 내역</a>
+	   		<a href="MyOrderServlet"  class="currCategory">주문 내역</a>
 	   </div>
 	   <div class="col">반품/취소/교환 목록</div>
 	   <div class="col">
@@ -47,7 +47,7 @@
 	   		<a href="ProfileCategoryServlet?category=mystamp&userid=<%=userid%>">내 도장</a>
 	   </div>
 	   <div class="col">
-	      <a href="MyQuestionServlet" class="currCategory">내 문의 내역</a>
+	      <a href="MyQuestionServlet">내 문의 내역</a>
 	   </div>
 	   <div class="col">
 	      <a href="AddressListServlet">배송지 관리</a>
