@@ -22,7 +22,7 @@
 <body>
 <jsp:include page="common/header.jsp" flush="true"></jsp:include><br>
 <jsp:include page="main/popup.jsp" flush="true"></jsp:include><br>
-<jsp:include page="main/mainview.jsp" flush="true"></jsp:include><br>  
+<jsp:include page="main/mainview3.jsp" flush="true"></jsp:include><br>  
 <jsp:include page="common/footer.jsp" flush="true"></jsp:include><br>
 </body>
 </html>

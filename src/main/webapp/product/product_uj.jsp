@@ -279,44 +279,16 @@ List<CategoryProductDTO> product_list = (List<CategoryProductDTO>) request.getAt
 									</div>
 								</div>
 								<div class="modal-footer">
-										<button type="button" class="btn btn-secondary"
-											data-bs-dismiss="modal">계속쇼핑하기</button>
-										<button type="button" class="btn btn-success" id="saveCart<%=p_id%>" data-p_id="<%=p_id%>" name = "saveCart"
-										data-p_name = "<%=p_name %>" data-p_selling_price="<%=p_selling_price%>" data-p_image=<%=p_image %>
-										<%-- 	 data-bs-toggle="modal" data-bs-target="#xxx<%=p_id%>"  --%>>장바구니저장</button>
-									</div>
-								</div>
-							</div>
-						</div>
-
-					</form>
-					<!-- 장바구니 모달안에 모달 -->
-					<div class="modal fade" id="xxx<%=p_id%>"
-						data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-						aria-labelledby="staticBackdropLabel" aria-hidden="true">
-						<div class="modal-dialog">
-							<div class="modal-content">
-								<div class="modal-header">
-										<h5 class="modal-title" id="cart_title"
-											style="text-align: center">
-											<%=p_name%>
-										</h5>
-
-										<button type="button" class="btn-close"
-											data-bs-dismiss="modal" aria-label="Close"></button>
-									</div>
-								<div class="modal-body">장바구니에 저장되었습니다.</div>
-								<div class="modal-footer">
 									<button type="button" class="btn btn-secondary"
 										data-bs-dismiss="modal">계속쇼핑하기</button>
-									<button type="button" class="btn btn-success" name="moveCart" id="moveCart<%=p_id%>" data-P_id="<%=p_id%>"
-										 onclick="location.href='CartListServlet';">장바구니로이동</button>
+									<button type="submit" class="btn btn-success">장바구니저장</button>
 								</div>
 							</div>
 						</div>
-					</div> 
-				</div>
+					</div>
+				</form>
 			</div>
+		</div>
 		<%
 		}
 		%>
@@ -344,47 +316,3 @@ List<CategoryProductDTO> product_list = (List<CategoryProductDTO>) request.getAt
 	</div>
 </div>
 </form>
-<script>
-	$(function() {
-		
-		$(".amountBtn").on("click",function(){
-			console.log(".amountBtn 클릭");
-			
-			$("button[name=saveCart]").on("click",function(){
-				var p_id = $(this).attr("data-P_id");
-				var p_name = $(this).attr("data-p_name");
-				var p_selling_price = $(this).attr("data-p_selling_price");
-				var p_image = $(this).attr("data-p_image");
-				var p_amount = $("input[name=p_amount]").val();
-				
-				console.log(p_id);
-				console.log("saveCart클릭됨");
-				console.log(p_name,p_selling_price,p_amount,p_image);
-				/* $.ajax({
-					type : "post",
-					url : "addCartServlet",
-					data : {
-						p_id : p_id,
-						p_name : p_name,
-						p_selling_price : p_selling_price,
-						p_amount : p_name,
-						p_image : p_image,
-					},
-					dataType : "text",
-					success : function(data,status,xhr) {
-						alert("장바구니에 저장되었습니다.")
-					},
-					error : function(xhr, status, error) {
-						alert(error);
-					}
-
-				}); //end ajax */
-				
-			})
-			
-			
-		})//
-		 
-		
-	})//end function
-</script>
