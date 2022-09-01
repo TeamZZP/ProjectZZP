@@ -36,7 +36,7 @@
 	 		for(int i = 0; i < list.size(); i++){
 	 			QuestionProductDTO qDTO = list.get(i);
 	 			String created = qDTO.getQ_CREATED();
-	 			String crete = created.substring(0, 10);
+	 			String create = created.substring(0, 10);
 
 	 			String user = qDTO.getUSERID();
 	 %>
@@ -49,7 +49,7 @@
     		<td> <%= qDTO.getQ_CATEGORY() %> </td>
     		<td> <a style="text-decoration: none; color: black;" 
     			href="QuestionOneSelect?Q_ID=<%= qDTO.getQ_ID() %>&USERID=<%=qDTO.getUSERID()%>&before=<%=before %>"> <%= qDTO.getQ_TITLE() %> </a> </td>
-    		<td> <%= crete %> </td>
+    		<td> <%= create %> </td>
     		<td> 
     			<% 
     			   String use = "";	
