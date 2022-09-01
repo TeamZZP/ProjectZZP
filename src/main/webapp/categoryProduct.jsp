@@ -8,7 +8,7 @@
 <%@page import="com.dto.ProductDTO"%>
 <%@page import="java.util.List"%>
 <%@page import="com.dto.MemberDTO"%>
-<style>
+<%-- <style>
 .hover-zoomin a {
 	display: block;
 	position: relative;
@@ -37,8 +37,8 @@
 <script type="text/javascript"
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript"> 
-<%MemberDTO mdto = (MemberDTO) session.getAttribute("login");%>
- <%--  var productLike = 0;
+
+ var productLike = 0;
 
 function productChoice(n) {
       console.log(n);
@@ -130,10 +130,11 @@ function productChoice(n) {
 		
 	/* 	$("#deleteMember"+id).modal("hide");
 		$(".modal-backdrop").hide();//모달창 닫고 백드롭 hide */
-	}) --%>
-</script>
+	})
+</script> --%>
 <form action="CategoryServlet" id="prodForm">
 	<%
+	MemberDTO mdto = (MemberDTO) session.getAttribute("login");
 	PageDTO pDTO=(PageDTO) request.getAttribute("pDTO");
 	String searchName=(String) request.getAttribute("searchName");
 	String searchValue=(String) request.getAttribute("searchValue");
@@ -176,6 +177,7 @@ function productChoice(n) {
 				String userid = pDTO_list.get(i).getUserid();
 				String p_image = pDTO_list.get(i).getP_image();
 				 request.setAttribute("c_id", c_id);
+				
 				int likecheck = 0;
 
 				if (mdto != null) {
