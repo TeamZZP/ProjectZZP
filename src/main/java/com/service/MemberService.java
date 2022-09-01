@@ -166,4 +166,16 @@ public class MemberService {
 		return dto;
 	}
 
+	public int changeMember(HashMap<String, String> changeMemberMap) {
+		SqlSession session=MySqlSessionFactory.getSqlSession();
+		int num=0;
+		try {
+			num=dao.changeMember(session, changeMemberMap);
+			session.commit();
+		} finally {
+			session.close();
+		}
+		return num;
+	}
+
 }

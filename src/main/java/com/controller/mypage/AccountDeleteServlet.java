@@ -34,26 +34,18 @@ public class AccountDeleteServlet extends HttpServlet {
 		System.out.println(userid);
 		System.out.println(passwd);
 		
-		String mesg="";
 		//회원 전용
 		if (dto != null) {
+			System.out.println("계정 삭제");
 			//delete
 			MemberService service=new MemberService();
 			
 			int num=service.deleteMember(userid);
 			System.out.println("삭제 갯수 : "+num);
-			
-			mesg="회원 탈퇴가 완료되었습니다.";
-			
-			/*
-			 * if (dto.getRole() == 1) {//관리자가 회원 삭제한 경우 mesg="해당 회원이 삭제되었습니다."; }
-			 */
-			
-			out.print(mesg);
 			//ajax--redirectX
 		} else {
 			//alert로 로그인 후 이용하세요 출력
-			mesg="로그인이 필요합니다.";
+			String mesg="로그인이 필요합니다.";
 			session.setAttribute("mesg", mesg);
 			session.setMaxInactiveInterval(60*30);
 			

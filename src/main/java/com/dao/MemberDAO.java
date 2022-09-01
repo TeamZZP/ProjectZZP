@@ -84,4 +84,9 @@ public class MemberDAO {
 		return session.selectOne("selectMemberBykakao", map);
 	}
 
+	public int changeMember(SqlSession session, HashMap<String, String> changeMemberMap) {
+		int num=session.update("MemberMapper.changeMember", changeMemberMap);
+		return num;
+	}
+
 }

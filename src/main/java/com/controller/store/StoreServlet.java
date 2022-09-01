@@ -42,7 +42,7 @@ public class StoreServlet extends HttpServlet {
 				String searchValue=request.getParameter("searchValue");
 				String sortBy=request.getParameter("sortBy");
 				
-				if (sortBy == null) {sortBy="p_id";}//최초 정렬 기준
+				if (sortBy == null) {sortBy="p_order";}//최초 정렬 기준//주문 순=베스트
 				
 				System.out.println(curPage+"\t"+searchName+"\t"+searchValue+"\t"+sortBy);
 				
