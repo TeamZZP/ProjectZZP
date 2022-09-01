@@ -1,3 +1,4 @@
+<%@page import="com.dto.PageDTO"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.Set"%>
@@ -7,24 +8,50 @@
     pageEncoding="UTF-8"%>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<div id="adminContent" class="col-md-auto">
+<style>
+	a {
+		text-decoration: none;
+		color: black;
+	}
+</style>
+<%
+	PageDTO pDTO=(PageDTO) request.getAttribute("pDTO");
+	String searchName=(String) request.getAttribute("searchName");
+	String searchValue=(String) request.getAttribute("searchValue");
+	String sortBy=(String) request.getAttribute("sortBy");
+%>
+<form action="AdminMainServlet" id="mainMemberForm">
 <div class="container" style="margin-top: 5px; margin-bottom: 5px;">
-	<div class="row row-cols-auto">
-		  <div class="col"></div>
-			  <div class="col">
-				  <select class="form-select" data-style="btn-info" id="inputGroupSelect01" 
-				  		  style="width: 145px; margin-right: -20px; margin-left: -24px;">
-					    <option selected disabled hidden>카테고리</option>
-					    <option value="userid">아이디</option>
-					    <option value="username">이름</option>
-					    <option value="email">이메일</option>
-					    <option value="phone">전화번호</option>
-					    <option value="address">주소</option>
-				  </select>
+	<div class="row row-cols-auto" style="justify-content: space-between;"><!-- 상단 카테고리, 검색, 정렬 -->
+		<div class="row row-cols-auto">
+			<div class="col">
+			<!-- 검색 searchName 같으면 selected -->
+				<select class="form-select" name="searchName" data-style="btn-info" id="inputGroupSelect01"
+							style="width: 145px; margin-right: -20px; margin-left: 0px;">
+					<option selected disabled hidden>카테고리</option>
+					<option value="userid" <% if("userid".equals(searchName)){ %>selected<% } %>>아이디</option>
+					<option value="username"<% if("username".equals(searchName)){ %>selected<% } %>>이름</option>
+					<option value="phone"<% if("phone".equals(searchName)){ %>selected<% } %>>전화번호</option>
+					<option value="address"<% if("address".equals(searchName)){ %>selected<% } %>>주소</option>
+				</select>
 			  </div>
-		  <div class="col"><input type="text" class="form-control" style="width: 150px; margin-right: -20px;"></div>
-	      <div class="col"><button type="button" class="btn btn-success">검색</button></div>
+			  <div class="col"><input type="text" name="searchValue" class="form-control" style="width: 150px; margin-right: -20px;"
+			  			<% if(searchValue != null && !searchValue.equals("null")){ %>value="<%= searchValue %>"<% } %>></div>
+		      <div class="col"><button type="button" id="searchMember" class="btn btn-success">검색</button></div>
+	    </div>
+		<div class="col">
+	    	<div class="float-end">
+			<!-- 정렬 -->
+			<select class="form-select sortBy" name="sortBy" id="sortBy" data-style="btn-info" 
+					style="width: 145px; margin-left: -24px; display: inline;">
+				<option value="created_at" selected>정렬</option>
+				<option value="created_at" <% if("created_at".equals(sortBy)){%>selected<%}%>>가입일자</option>
+				<option value="userid" <% if("userid".equals(sortBy)){%>selected<%}%>>아이디</option>
+				<option value="username" <% if("username".equals(sortBy)){%>selected<%}%>>이름</option>
+				<option value="addr1" <% if("addr1".equals(sortBy)){%>selected<%}%>>주소</option>
+			</select>
+			</div>
+		</div>
 	</div>
 </div>
 <div class="container col-md-auto">
@@ -34,56 +61,104 @@
 	<tr>
 		<th>아이디</th>
 		<th>이름</th>
-		<th>이메일</th>
 		<th>전화번호</th>
-		<th>주소</th>
+		<th>기본 주소</th>
+		<th>가입일자</th>
 		<th>관리</th>
 	</tr>
 <%
-	List<MemberDTO> memberList=(List<MemberDTO>) session.getAttribute("memberList");
-	HashMap<String, List<AddressDTO>> addressMap=(HashMap<String, List<AddressDTO>>) session.getAttribute("addressMap");
-	
-	for (MemberDTO member : memberList) {
-		//System.out.println(member);
-		String userid=member.getUserid();
-		String passwd=member.getPasswd();
-		String username=member.getUsername();
-		String email1=member.getEmail1();
-		String email2=member.getEmail2();
-		String phone=member.getPhone();
-		String created_at=member.getCreated_at();
-		
-//		for (int i = 0; i < addressMap.size(); i++) {
-			List<AddressDTO> addressList=addressMap.get(userid);
-//			AddressDTO address=addressList.get(i);//addressMap의 size만큼 for문 반복 중//userid로 뽑아온 addressList의 size와 for문의 size가 다름//indexOutOfBounds 발생
-			
-			for (int j = 0; j < addressList.size(); j++) {
-				AddressDTO address=addressList.get(j);
-				String address_name=address.getAddress_name();
-				String receiver_name=address.getReceiver_name();
-				String receiver_phone=address.getReceiver_phone();
-				String post_num=address.getPost_num();
-				String addr1=address.getAddr1();
-				String addr2=address.getAddr2();
-				int default_chk=address.getDefault_chk();
-				
-				//System.out.println("출력 확인 : "+address);
-/* 	if (addr2 == null) {
-		addr2="상세 주소를 입력하세요.";
-	} */
-
+	List<AddressDTO> list=pDTO.getList();
+	for(int i=0; i<list.size(); i++){
+		String userid=list.get(i).getUserid();
+		String username=list.get(i).getUsername();
+		String phone=list.get(i).getPhone();
+		String post_num=list.get(i).getPost_num();
+		String addr1=list.get(i).getAddr1();
+		String addr2=list.get(i).getAddr2();
+		String created_at=list.get(i).getCreated_at();
 %>
+<form>
+	<tr id="list">
+		<td id="id<%= userid %>"><%= userid %></td>
+		<td><%= username %></td>
+		<td><%= phone.substring(0, 3)+"-"
+				+ phone.substring(3, 7)+"-"
+				+ phone.substring(7, 11) %>
+		</td>
+		<td>
+			<span style="font-size: 14px;"><%= post_num %></span>
+			<%= "&nbsp;&nbsp;&nbsp;" + addr1+ "&nbsp;" + addr2 %>
+		</td>
+		<td><%= created_at %></td>
+		<td>
+			<!-- Modal -->
+			<div class="modal fade" id="deleteMember<%= userid %>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+			  <div class="modal-dialog">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h5 class="modal-title" id="staticBackdropLabel"></h5>
+			        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			      </div>
+			      <div class="modal-body">
+			        회원 <b><%= userid %></b>님을 삭제하시겠습니까?
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" id="delete<%= userid %>" data-id="<%= userid %>" name="delete" class="btn btn-success">삭제</button>
+			        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+			<!-- Button trigger modal -->
+			<button type="button" id="change<%= userid %>" data-edit="<%= userid %>" class="btn btn-outline-success btn-sm" name="change">수정</button>
+			<button type="button" id="checkDelete<%= userid %>" class="btn btn-outline-dark btn-sm" name="checkDelete" data-bs-toggle="modal" data-bs-target="#deleteMember<%= userid %>">
+				삭제
+			</button><!-- open modal -->
+		</td>
+<%
+	}
+%>
+	</tr>
+</form>
+</table>
+	<!-- 페이징 -->
+	 <div class="p-2 text-center">
+	<%
+		int curPage = pDTO.getCurPage();
+		int perPage = pDTO.getPerPage();
+		int totalCount = pDTO.getTotalCount();
+		int totalPage = totalCount/perPage;
+		if(totalCount % perPage != 0) totalPage++;
+		for(int p=1; p<=totalPage; p++){
+			if(p==curPage){
+				out.print("<b>"+p+"</b>&nbsp;&nbsp;");
+			} else {
+				out.print("<a id='search' href='AdminMainServlet?curPage="+p
+	    				+"&searchName="+searchName+"&searchValue="+searchValue
+	    				+"&sortBy="+sortBy+"&category=member'>"+p+"</a>&nbsp;&nbsp;");
+			}
+		} 
+	%>
+	</div>
+</div>
+</div>
+</form>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
-		$("#deleteMember").on("shown.bs.modal", function (e) {//#deleteMember modal 창을 열 때 선택한 버튼의 data-id를 가져옴(deleteID로 설정했더니 안돼서 다시 id로 바꿈)--modal창의 삭제 버튼에 저장
-		    var id = $(e.relatedTarget).data("id");
-		    $("#delete<%= userid %>").val(id);
+		$("#sortBy").on("change", function() {
+			$("#mainMemberForm").submit();
 		});//end fn
-		$("#delete<%= userid %>").on("click", function() {//모달의 삭제 버튼 클릭시 회원 삭제
-			var userid=$(this).val();
+		
+		$("#searchMember").on("click", function() {
+			$("#mainMemberForm").submit();
+		});//end fn
+		
+		$("button[name=delete]").on("click", function() {//모달의 삭제 버튼 클릭시 회원 삭제
+			var userid=$(this).attr("data-id");
 			console.log(userid);
-			//*****ajax
-			$.ajax({
+  			//*****ajax
+   			$.ajax({
 				type : "post",
 				url : "AccountDeleteServlet",//페이지 이동 없이 해당 url에서 작업 완료 후 데이터만 가져옴
 				dataType : "text",
@@ -91,67 +166,22 @@
 					userid : userid
 				},
 				success : function(data, status, xhr) {
-					alert(data);
-					//location.href="memberList.jsp";//수정 후 페이지 이동--새로운 목록으로 출력하도록 수정
+					alert("해당 회원이 삭제되었습니다.");
+					$("#deleteMember"+userid).modal("hide");
+					$(".modal-backdrop").hide();//모달창 닫고 백드롭 hide
+					console.log("success");
+					$("#checkDelete"+userid).parents("tr").remove();
 				},
 				error: function(xhr, status, error) {
-					console.log(error);
+					alert(error);
 				}						
 			});//end ajax
 		});//end fn
-<%--  		$("#checkDelete<%= userid %>").on("click", function() {//첫번째 선택자만 이벤트 실행됨//userid 추가해서 버튼 구분함--ok
-			event.preventDefault();
-			var id = $(this).attr("data-xxx");
-		});//end fn --%>
-		$("#change<%= userid %>").on("click", function() {//회원 정보 출력 페이지로 이동
+		
+		$("button[name=change]").on("click", function() {//회원 정보 출력 페이지로 이동
 			var userid=$(this).attr("data-edit");
 			console.log(userid);
-			
+			location.href="AccountManagementServlet?memberId="+userid;
 		});//end fn
 	});//end ready
 </script>
-<form>
-	<tr id="list">
-		<td><%= userid %></td>
-		<td><%= username %></td>
-		<td><%= email1+"@"+email2 %></td>
-		<td><%= phone %></td>
-		<td><%= post_num + "&nbsp;&nbsp;&nbsp;" + addr1+ "&nbsp;" + addr2 %></td>
-		<td>
-			<!-- Modal -->
-			<div class="modal fade" id="deleteMember" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-			  <div class="modal-dialog">
-			    <div class="modal-content">
-			      <div class="modal-header">
-			        <h5 class="modal-title" id="staticBackdropLabel">회원 삭제</h5>
-			        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-			      </div>
-			      <div class="modal-body">
-			        <%-- 회원 <%= userid %>님을 삭제하시겠습니까?--첫번째 데이터가 출력됨 --%>
-			        선택한 회원을 삭제하시겠습니까?
-			      </div>
-			      <div class="modal-footer">
-			        <button type="button" id="delete<%= userid %>" class="btn btn-success">삭제</button>
-			        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-			      </div>
-			    </div>
-			  </div>
-			</div>
-			<!-- Button trigger modal -->
-			<button type="button" id="change<%= userid %>" data-edit="<%= userid %>" class="btn btn-outline-success btn-sm">수정</button>
-			<button type="button" id="checkDelete<%= userid %>" data-id="<%= userid %>" class="btn btn-outline-dark btn-sm" data-bs-toggle="modal" data-bs-target="#deleteMember">
-				삭제
-			</button><!-- open modal -->
-		</td>
-<%
-			}
-//		}
-	}
-%>
-
-	</tr>
-</form>
-</table>
-</div>
-</div>
-</div>

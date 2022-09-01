@@ -29,7 +29,6 @@
 %>
 
 
-<div class="challengeAll row ms-3">
 <%
 		for (int i=1; i<= challengeList.size(); i++) {
 			ChallengeDTO dto = challengeList.get(i-1);
@@ -68,4 +67,3 @@
 	<%
 	 	} //end for
 	%>
-</div>

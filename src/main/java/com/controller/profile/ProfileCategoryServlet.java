@@ -45,20 +45,20 @@ public class ProfileCategoryServlet extends HttpServlet {
 		System.out.println(userid+" "+category);
 		
 		ChallengeService service = new ChallengeService();
+		
+		//페이징 처리
+		String curPage = request.getParameter("curPage"); //현재페이지
+		if (curPage == null) { curPage = "1"; } //시작 시 1페이지로 시작
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("userid", userid);
+		
 		String url = null;
 		
 		if (category.contains("review")) {
 			
-			//페이징 처리
-			String curPage = request.getParameter("curPage"); //현재페이지
-			if (curPage == null) { curPage = "1"; } //시작 시 1페이지로 시작
-			
-			HashMap<String, String> map = new HashMap<String, String>();
-			map.put("userid", userid);
-			
 			//회원의 리뷰 가져오기
 			ReviewService reviewService = new ReviewService();
-			PageDTO reviewPageDTO = reviewService.selectUserReview(map, Integer.parseInt(curPage), 2);
+			PageDTO reviewPageDTO = reviewService.selectUserReview(map, Integer.parseInt(curPage), 10);
 			
 			//리뷰에 해당하는 상품 정보 가져오기
 			List<ReviewDTO> reviewList = reviewPageDTO.getList();
@@ -67,35 +67,23 @@ public class ProfileCategoryServlet extends HttpServlet {
 				prodMap.put(r.getP_ID(), reviewService.selectOneProduct(r.getP_ID()));
 			}
 			
-			//회원의 리뷰 개수 가져오기
-			int reviewNum = reviewService.countTotalUserReview(map);
-			
 			request.setAttribute("reviewPageDTO", reviewPageDTO);
 			request.setAttribute("prodMap", prodMap);
-			request.setAttribute("reviewNum", reviewNum);
 			
 			url = "profile/profileReview.jsp";
 			
 			if (category.equals("myreview")) {
 				url = "myReview.jsp";
-			} 
+			} else if (category.equals("scrollreview")) {
+				url = "profile/scrollreview.jsp";
+			}
 			
 			
 		} else if (category.contains("challenge")) {
 			
-			//페이징 처리
-			String curPage = request.getParameter("curPage"); //현재페이지
-			if (curPage == null) { curPage = "1"; } //시작 시 1페이지로 시작
-			
-			HashMap<String, String> map = new HashMap<String, String>();
-			map.put("userid", userid);
-			
 			//회원의 챌린지 목록 가져오기
 			PageDTO pDTO = service.selectChallengeByUserid(map, Integer.parseInt(curPage), 6);
 			List<ChallengeDTO> challengeList = pDTO.getList();
-			
-			//회원의 챌린지 개수 가져오기
-			int challNum = service.countTotalUserChallenge(map);
 			
 			//각 게시글마다 도장 가져오기
 			HashMap<String, String> stampListMap = new HashMap<String, String>();
@@ -111,7 +99,6 @@ public class ProfileCategoryServlet extends HttpServlet {
 			request.setAttribute("profile_img", profile_img);
 			request.setAttribute("stampListMap", stampListMap);
 			request.setAttribute("pDTO", pDTO);
-			request.setAttribute("challNum", challNum);
 			
 			url = "profile/profileChallenge.jsp";
 			
@@ -123,20 +110,18 @@ public class ProfileCategoryServlet extends HttpServlet {
 			
 			
 		} else if (category.contains("stamp")) {
-			//회원의 도장 목록 가져오기
-			List<StampDTO> stampList = service.selectMemberStampByUserid(userid);
-			//이미지와 함께 hashmap에 담기 (중복 stamp_id 제거 위해 LinkedHashMap 사용)
-			LinkedHashMap<Integer, StampDTO> stampMap = new LinkedHashMap<Integer, StampDTO>();
-			for (StampDTO dto : stampList) {
-				stampMap.put(dto.getStamp_id(), dto);
-			}
 			
-			request.setAttribute("stampMap", stampMap);
+			//회원의 도장 목록 가져오기
+			PageDTO pDTO = service.selectMemberStampByUserid(map, Integer.parseInt(curPage), 6);
+			
+			request.setAttribute("pDTO", pDTO);
 
 			url = "profile/profileStamp.jsp";
 			
 			if (category.equals("mystamp")) {
 				url = "myStamp.jsp";
+			} else if (category.equals("scrollstamp")) {
+				url = "profile/scrollstamp.jsp";
 			}
 			
 		}

@@ -42,17 +42,21 @@ public class StoreServlet extends HttpServlet {
 				String searchValue=request.getParameter("searchValue");
 				String sortBy=request.getParameter("sortBy");
 				
-				if (sortBy == null) {sortBy="p_order";}//최초 정렬 기준//주문 순=베스트
-				
-				System.out.println(curPage+"\t"+searchName+"\t"+searchValue+"\t"+sortBy);
+				HashMap<String, String> p_map = new HashMap<String, String>();
 				
 				//위 데이터를 map에 저장
-				HashMap<String, String> p_map = new HashMap<String, String>();
 				p_map.put("searchName", searchName);
 				p_map.put("searchValue", searchValue);
-				p_map.put("sortBy", sortBy);
+				if (sortBy == null) {
+					p_map.put("sortBy", "p_order");	
+					}else{//최초 정렬 기준//주문 순=베스트
+					p_map.put("sortBy", sortBy);	
+					}
 				
-				PageDTO pDTO = product_service.selectAllProduct(p_map,Integer.parseInt(curPage));
+				System.out.println(curPage+"\t"+searchName+"\t"+searchValue+"\t"+sortBy);
+	
+				PageDTO pDTO = new PageDTO();
+				pDTO = 	product_service.selectAllProduct(p_map,Integer.parseInt(curPage));
 				System.out.println("스토어리스트!!!!!!"+pDTO);
 				
 		
