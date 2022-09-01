@@ -26,6 +26,30 @@
 	  	}
     %>
     
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+	$(document).ready(function () {
+		$(".chk").click(function () {
+			var ORDER_ID = $(this).attr("data-orderID");
+			console.log(ORDER_ID);
+		 	$.ajax({
+				type:"post",
+				url:"orderIdCheckServlet",
+				data:{
+					ORDER_ID : ORDER_ID
+				},
+				dataType:"text",
+				success: function (data, status, xhr) {
+					
+				},
+				error: function (xhr, status, error) {
+					
+				} 
+			});//end ajax
+		});
+	}); //end ready
+</script> 
+    
 <div id="addContainer">
 <div class="container">
 <div class="row">
@@ -58,37 +82,47 @@
 </div>
 <div class="col-lg-10">
 <div id="addTableDiv">
+<form id="myOrderForm" method="post">
 <table id="addTable" class="table table-hover" style="text-align: center;">
 	<tr class="table-success">
-		<th>주문번호</th>
 		<th>상품명</th>
 		<th>가격</th>
 		<th>주문날짜</th>
-		<th colspan="2">주소</th>
+		<th>주소</th>
 		<th>배송상태</th>
-		<th>리뷰쓰기</th>
+		<th></th>
 	</tr>
 	<%
 		PageDTO pDTO = (PageDTO)session.getAttribute("myOrderList");
 		List<ProductOrderDTO> myList = pDTO.getList();
-		for(ProductOrderDTO qDTO : myList){
-			String date = qDTO.getORDER_DATE();
+		for(ProductOrderDTO DTO : myList){
+			String date = DTO.getORDER_DATE();
 			String day = date.substring(0,10);
 			System.out.print("날짜 " + day);
 	%>
 	<tr>
-		<td> <%= qDTO.getORDER_ID() %> </td>
-	    <td> <%= qDTO.getP_NAME() %> </td>
-	    <td> <%= qDTO.getTOTAL_PRICE() %> </td>
+	    <td> <%= DTO.getP_NAME() %> </td>
+	    <td> <%= DTO.getTOTAL_PRICE() %> </td>
 		<td> <%= day %> </td>
-		<td> <%= qDTO.getDELIVERY_ADDRESS() %> </td>
-		<td> <%= qDTO.getDELIVERY_LOC() %> </td>
-		<td> <%= qDTO.getORDER_STATE() %> </td>
-		<td> <button onclick="location.href='reviewInsert.jsp'" class="btn btn-outline-success">리뷰작성</button> </td>
+		<td> <%= DTO.getDELIVERY_ADDRESS() %> <br>  <%= DTO.getDELIVERY_LOC() %> </td>
+		<td> <%= DTO.getORDER_STATE() %> </td>
+		<td> 
+			<% if(DTO.getORDER_STATE().equals("배송완료")){ %>
+				<a data-orderID="<%= DTO.getORDER_ID() %>" class="btn btn-outline-success chk" 
+					<%-- href="reviewInsert.jsp?ORDER_ID=<%= DTO.getORDER_ID()%>&P_NAME=<%= DTO.getP_NAME() %>&P_ID=<%= DTO.getP_ID() %>" --%> role="button">
+					리뷰작성
+				 </a>
+				<input type="hidden" class="ORDER_ID" value="<%= DTO.getORDER_ID() %>">
+				<input type="hidden" class="P_NAME" value="<%= DTO.getP_NAME() %>">
+				<input type="hidden" class="P_ID" value="<%= DTO.getP_ID() %>">
+			<%} else { %> 
+				<button type="button" class="btn btn-outline-secondary">배송현황</button> 
+			<% } %>
+		</td>
 	</tr>
 	<%	} %>
 	<tr>
-		<td colspan="8" style="text-align: center;">
+		<td colspan="7" style="text-align: center;">
 			 <%
 		        int curPage = pDTO.getCurPage();
 		        int perPage = pDTO.getPerPage();
@@ -106,6 +140,7 @@
 		</td>
 	</tr>
 </table>
+</form>
 </div>
 </div>
 </div>
