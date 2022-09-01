@@ -30,10 +30,12 @@
 	List<ChallengeDTO> challengeList = pDTO.getList();
 	int challListSize = challengeList.size();
 	//회원의 챌린지 개수 가져오기
-	int challNum = (Integer) request.getAttribute("challNum");
+	int totalCount = pDTO.getTotalCount();
 	
 	//회원의 도장 목록 가져오기
-	LinkedHashMap<Integer, StampDTO> stampMap = (LinkedHashMap<Integer, StampDTO>) request.getAttribute("stampMap");
+	PageDTO stampPageDTO = (PageDTO) request.getAttribute("stampPageDTO");
+	List<StampDTO> stampList = stampPageDTO.getList();
+	int stampNum = stampPageDTO.getTotalCount();
 	
 	//session에 저장된 userid 읽어오기 
 	MemberDTO member = (MemberDTO) session.getAttribute("login"); 
@@ -152,7 +154,7 @@
 	
 		<div>
 		  <div class="row p-2 mx-4 mt-5">
-		    <div class="col">챌린지 <span class="text-success fw-bold"><%= challNum %></span></div>
+		    <div class="col">챌린지 <span class="text-success fw-bold"><%= totalCount %></span></div>
 			 <div class="col"><div class="float-end"><small><a class="category" data-category="challenge">전체보기</a></small></div></div>
 		  </div>
 		  <div class="text-center mt-2">
@@ -178,19 +180,16 @@
 		
 		<div>
 		  <div class="row p-2 mx-4 mt-5">
-		    <div class="col">도장 <span class="text-success fw-bold"><%= stampMap.size() %></span></div>
+		    <div class="col">도장 <span class="text-success fw-bold"><%= stampNum %></span></div>
 			 <div class="col"><div class="float-end"><small><a class="category" data-category="stamp">전체보기</a></small></div></div>
 		  </div>
 		  <div class="text-center mt-2">
-		        <%  Set<Integer> keySet = stampMap.keySet();
-		        		System.out.println(keySet);
-		       		int count = 0;
-		        	for (Integer key : keySet) {
-		        		StampDTO dto = stampMap.get(key);
-		    			int stamp_id = dto.getStamp_id();
-		    			String stamp_img = dto.getStamp_img();
-		    			String stamp_name = dto.getStamp_name();
-		    			String stamp_content = dto.getStamp_content();
+		        <%  
+		        for (StampDTO dto : stampList) {
+					int stamp_id = dto.getStamp_id();
+					String stamp_img = dto.getStamp_img();
+					String stamp_name = dto.getStamp_name();
+					String stamp_content = dto.getStamp_content();
 		        %>
 					<img src="/eclipse/upload/<%=stamp_img%>" border="0" align="middle" class="img"
 						width="200" height="200" onerror="this.src='images/uploadarea.png'"
@@ -212,11 +211,9 @@
 							    </div>
 							  </div>
 							</div>
-		        <%  	count++;
-		        		if (count==4) break;
-		        	} 
-		        if (stampMap.size() < 4) {
-		        	for (int i = 0; i < 4-stampMap.size(); i++) {
+		        <%  }	 
+		        if (stampNum < 4) {
+		        	for (int i = 0; i < 4-stampNum; i++) {
 		        %>
 		        	<img src="images/none.png" class="img" width="200" height="200" >
 		        <% }

@@ -325,10 +325,24 @@
 </select>
 
 <select id="selectMemberStampByUserid" resultType="com.dto.StampDTO">
-	select stamp_id, stamp_img, stamp_name, stamp_content 
-	from member_stamp join stamp using(stamp_id)
+	select userid, stamp_id, stamp_img, stamp_name, stamp_content 
+	from member_stamp m join stamp s using(stamp_id)
 	where userid=#{userid}
+	and m.chall_id in (select min(chall_id) 
+						from member_stamp
+						group by userid, stamp_id 
+						having userid=#{userid})
 	order by stamp_id desc
+</select>
+
+<select id="countTotalStamp" resultType="int">
+	select count(*) 
+	from member_stamp m join stamp s using(stamp_id)
+	where userid=#{userid}
+	and m.chall_id in (select min(chall_id) 
+						from member_stamp
+						group by userid, stamp_id 
+						having userid=#{userid})
 </select>
 
 <select id="selectStampImg" resultType="string">

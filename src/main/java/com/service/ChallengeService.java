@@ -233,17 +233,6 @@ public class ChallengeService {
 		}
 		return profile_img;
 	}
-
-//	public List<ChallengeDTO> selectChallengeByUserid(String userid) {
-//		List<ChallengeDTO> list = null;
-//		SqlSession session = MySqlSessionFactory.getSqlSession();
-//		try {
-//			list = dao.selectChallengeByUserid(session, userid);
-//		} finally {
-//			session.close();
-//		}
-//		return list;
-//	}
 	
 	public PageDTO selectChallengeByUserid(HashMap<String, String> map, int curPage, int perPage) {
 		PageDTO pDTO = null;
@@ -348,15 +337,15 @@ public class ChallengeService {
 		return map;
 	}
 
-	public List<StampDTO> selectMemberStampByUserid(String userid) {
-		List<StampDTO> list = null;
+	public PageDTO selectMemberStampByUserid(HashMap<String, String> map, int curPage, int perPage) {
+		PageDTO dto = null;
 		SqlSession session = MySqlSessionFactory.getSqlSession();
 		try {
-			list = dao.selectMemberStampByUserid(session, userid);
+			dto = dao.selectMemberStampByUserid(session, map, curPage, perPage);
 		} finally {
 			session.close();
 		}
-		return list;
+		return dto;
 	}
 
 	public String selectStampImg(String stampId) {
@@ -450,6 +439,7 @@ public class ChallengeService {
 		return n;
 	}
 
+	
 	
 
 

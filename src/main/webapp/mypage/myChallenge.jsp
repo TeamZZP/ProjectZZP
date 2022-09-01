@@ -11,7 +11,7 @@
 	PageDTO pDTO = (PageDTO) request.getAttribute("pDTO");
 	List<ChallengeDTO> challengeList = pDTO.getList();
 	//회원의 챌린지 개수 가져오기
-	int challNum = (Integer) request.getAttribute("challNum");
+	int totalCount = pDTO.getTotalCount();
 	//각 게시글마다 도장 가져오기
 	HashMap<String, String> stampListMap = (HashMap<String, String>) request.getAttribute("stampListMap");
 	//회원의 프로필 이미지 가져오기
@@ -96,7 +96,7 @@
 
 <table class="table table-hover text-center">
 	<tr class="table-success">
-		<th>내 챌린지 <span class="text-success fw-bold"><%= challNum %></span></th>
+		<th>내 챌린지 <span class="text-success fw-bold"><%= totalCount %></span></th>
 	</tr>
 </table>
 
@@ -148,7 +148,6 @@
 	  <% 
 		    int curPage = pDTO.getCurPage(); 
 		    int perPage = pDTO.getPerPage(); 
-		    int totalCount = pDTO.getTotalCount();
 		    int totalPage = totalCount/perPage;
 		    if (totalCount%perPage!=0) totalPage++;
 		    for (int p=1; p<=totalPage; p++) {

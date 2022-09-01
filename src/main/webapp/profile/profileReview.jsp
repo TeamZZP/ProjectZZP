@@ -7,19 +7,23 @@
     pageEncoding="UTF-8"%>
 <%
 	//회원의 리뷰 목록 가져오기
-	PageDTO reviewPageDTO = (PageDTO) request.getAttribute("reviewPageDTO");
-	List<ReviewDTO> reviewList = reviewPageDTO.getList();
+	PageDTO pDTO = (PageDTO) request.getAttribute("reviewPageDTO");
+	List<ReviewDTO> reviewList = pDTO.getList();
+	//페이징
+	int perPage = pDTO.getPerPage(); 
+	int totalCount = pDTO.getTotalCount();
+	int totalPage = totalCount/perPage;
+	if (totalCount%perPage!=0) totalPage++;
+	int curPage = pDTO.getCurPage();
 	
 	//리뷰에 해당하는 상품 정보 가져오기
 	HashMap<Integer, HashMap<String, String>> prodMap = (HashMap<Integer, HashMap<String, String>>) request.getAttribute("prodMap");
-	//회원의 리뷰 개수 가져오기
-	int reviewNum = (Integer) request.getAttribute("reviewNum");
 	
 	//session에 저장된 userid 읽어오기 
 	MemberDTO member = (MemberDTO) session.getAttribute("login"); 
-	String currUserid = null;
+	String userid = null;
 	if (member != null) {
-		currUserid = member.getUserid();
+		userid = member.getUserid();
 	}
 
 %>
@@ -28,9 +32,74 @@
 
 </style>
 
+<script type="text/javascript"
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function () {
+		
+		//무한 스크롤
+		$('.skeleton').hide();
+		let curPage = 1;
+		let isLoading = false;
+		
+		function infiniteScroll() {
+			let reviewPost = document.querySelector('.reviewPost:last-child')
+			
+			//인터섹션 옵저버 생성
+			const io = new IntersectionObserver((entry, observer)=>{
+				
+				const ioTarget = entry[0].target //현재 보이는 타겟
+				if (entry[0].isIntersecting) { //viewport에 타켓이 보일 때
+					console.log('현재 보이는 타겟', ioTarget)
+					io.unobserve(reviewPost) //현재 보이는 타겟 감시 취소
+					
+					//현재 페이지가 전체 페이지와 같거나 로딩 중인 경우 아래 실행 X
+					if (curPage == '<%=totalPage%>' || isLoading) { return; }
+				
+					isLoading = true //로딩중 true
+					$('.skeleton').show() //로딩 이미지 띄우기
+					curPage++ //요청할 페이지 증가
+					getList(curPage) //추가 페이지 요청 함수
+					
+					reviewPost = document.querySelector('.reviewPost:last-child') 
+					io.observe(reviewPost) //새로운 타겟 감시
+				}
+			}, {
+				threshold: 0.8 //viewport에 타겟이 80%이상 보일 때
+			})
+			
+			io.observe(reviewPost) //타겟 감시
+		}
+		infiniteScroll() //최초 호출
+		
+		function getList(curPage) { //추가 페이지 요청 함수
+			console.log('inscroll '+curPage)
+			$.ajax({
+				type:'get',
+				url:'ProfileCategoryServlet',
+				data: {
+					userid:'<%=userid%>',
+					category:'scrollreview',
+					curPage:curPage
+				},
+				dataType:'html',
+				success: function (data) {
+					$('#reviewTable').append(data) //응답받은 데이터 추가
+					$('.skeleton').hide() //로딩 이미지 숨기기
+					isLoading = false //로딩중 false
+					infiniteScroll() //다시 호출
+				},
+				error: function () {
+					alert('문제가 발생했습니다. 다시 시도해 주세요.');
+				}
+			})
+		}
+	});
+</script>
+
 
 <div class="row p-2 mx-4 mb-2">
-	<div class="col">구매후기 <span class="text-success fw-bold"><%= reviewNum %></span></div>
+	<div class="col">구매후기 <span class="text-success fw-bold"><%= totalCount %></span></div>
 </div>
 
 <div class="row">
@@ -50,7 +119,7 @@
 	String p_name = map.get("P_NAME");
 	String image_route = map.get("IMAGE_ROUTE");
 %>
-	<tr>
+	<tr class="reviewPost">
 		<td style="padding:5 0 0 10px;" width="30%" class="text-center">
 			<a href="ProductRetrieveServlet?p_id=<%=p_id%>"> 
 			<img src="images/p_image/<%=image_route%>" border="0" align="middle" class="img pb-1"
@@ -65,13 +134,18 @@
 		<td width="20%" class="align-middle">
 			<div><%= review_created %></div>
 		</td>
+	</tr>
 <%
 		}
 %>
-	</tr>
+	
 	
 	
 	
 </table>
+
+<div class="row skeleton ms-3">
+  <div class="col-xl-4 col-md-6 ms-2"><img class="img" src="images/none.png" width="67%"></div>
+</div>
 
 </div>

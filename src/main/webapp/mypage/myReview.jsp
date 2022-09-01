@@ -13,7 +13,7 @@
 	//리뷰에 해당하는 상품 정보 가져오기
 	HashMap<Integer, HashMap<String, String>> prodMap = (HashMap<Integer, HashMap<String, String>>) request.getAttribute("prodMap");
 	//회원의 리뷰 개수 가져오기
-	int reviewNum = (Integer) request.getAttribute("reviewNum");
+	int reviewNum = pDTO.getTotalCount();
 	
 	//session에 저장된 userid 읽어오기 
 	MemberDTO member = (MemberDTO) session.getAttribute("login"); 
@@ -104,10 +104,11 @@
 			<button class="btn btn-light btn-sm">수정</button>
 			<button class="btn btn-light btn-sm">삭제</button>
 		</td>
+	</tr>
 <%
 		}
 %>
-	</tr>
+	
 	<tr>
 		<td colspan="6" style="text-align: center;">
 			 <%

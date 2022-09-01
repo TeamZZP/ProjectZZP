@@ -121,12 +121,6 @@ public class ChallengeDAO {
 		String profile_img = session.selectOne("ChallengeMapper.selectProfileImg", userid);
 		return profile_img;
 	}
-
-
-//	public List<ChallengeDTO> selectChallengeByUserid(SqlSession session, String userid) {
-//		List<ChallengeDTO> list = session.selectList("ChallengeMapper.selectChallengeByUserid", userid);
-//		return list;
-//	}
 	
 	public PageDTO selectChallengeByUserid(SqlSession session, HashMap<String, String> map, int curPage, int perPage) {
 		PageDTO pDTO = new PageDTO();
@@ -180,10 +174,24 @@ public class ChallengeDAO {
 		HashMap<String, String> map = session.selectOne("ChallengeMapper.selectMemberStamp", chall_id);
 		return map;
 	}
+	
+	public PageDTO selectMemberStampByUserid(SqlSession session, HashMap<String, String> map, int curPage,
+			int perPage) {
+		PageDTO pDTO = new PageDTO();
+		pDTO.setPerPage(perPage);
+		int offset = (curPage - 1)*perPage;
+		
+		List<StampDTO> list = session.selectList("ChallengeMapper.selectMemberStampByUserid", map, new RowBounds(offset, perPage));
+		
+		pDTO.setCurPage(curPage);
+		pDTO.setList(list);
+		pDTO.setTotalCount(countTotalStamp(session, map));
+		
+		return pDTO;
+	}
 
-	public List<StampDTO> selectMemberStampByUserid(SqlSession session, String userid) {
-		List<StampDTO> list = session.selectList("ChallengeMapper.selectMemberStampByUserid", userid);
-		return list;
+	private int countTotalStamp(SqlSession session, HashMap<String, String> map) {
+		return session.selectOne("ChallengeMapper.countTotalStamp", map);
 	}
 
 	public String selectStampImg(SqlSession session, String stampId) {
@@ -236,8 +244,8 @@ public class ChallengeDAO {
 		return session.selectOne("ChallengeMapper.selectChallIdFromComment", comment_id);
 	}
 
-	
 
+	
 	
 
 

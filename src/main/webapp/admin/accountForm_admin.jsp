@@ -47,7 +47,7 @@
 				alert("이름은 한글 3글자 이내로 입력하세요.");
 				$("#username").val("");
 				$("#username").focus();
-			} else if (!numChk.test(phone)) {
+			} else if (!numChk.test(phone) || phone.length > 11) {
 				event.preventDefault();
 				alert("전화번호를 형식에 맞게 입력하세요.");
 				$("#phone").val("");
