@@ -71,9 +71,9 @@ function productChoice(n) {
 			},
 			dataType : "text",
 			success : function(data) {
-				alert(likecheck);
+				alert(data);
 				var like_img = '';
-				if (likecheck == 0) {
+				if (data == 0) {
 					like_img = "images/like.png";
 				} else {
 					like_img = "images/liked.png";
@@ -215,10 +215,9 @@ List<CategoryProductDTO> product_list = (List<CategoryProductDTO>) request.getAt
 			<div class="p-2 text-center">
 
 				<a id="productChoice" href="javascript:productChoice(<%=p_id%>)"> 
-					
-				
-
-					<%
+			
+			<img id="like_img<%=p_id%>" src="images/like.png" width="30" height="30" class="liked"> 
+					<%-- <%
 					if (likecheck == 1) {
 					%> <img id="like_img<%=p_id%>"
 					src="images/liked.png" width="30" height="30" class="liked">
@@ -227,7 +226,7 @@ List<CategoryProductDTO> product_list = (List<CategoryProductDTO>) request.getAt
 					%> <img id="like_img<%=p_id%>" src="images/like.png"
 					width="30" height="30" class="liked"> 
 					
-					<% } %>
+					<% } %> --%>
 
 				</a>
 

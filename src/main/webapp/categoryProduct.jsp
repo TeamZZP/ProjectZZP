@@ -215,8 +215,8 @@ if (mdto != null) {%>
 						} else {
 						%> <img id="like_img<%=p_id%>" src="images/like.png"
 						width="30" height="30" class="liked"> <%
- }
- %>
+                        }
+                         %>
 
 					</a>
 
