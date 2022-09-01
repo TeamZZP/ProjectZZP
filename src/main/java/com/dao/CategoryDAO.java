@@ -23,6 +23,7 @@ public class CategoryDAO {
 
 	public List<CategoryDTO> allCategory(SqlSession session) {
 		List<CategoryDTO> list = session.selectList("allCategory");
+		System.out.println(list);
 		return list;
 	}
 

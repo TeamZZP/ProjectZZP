@@ -2,6 +2,7 @@ package com.controller.member;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,8 +19,12 @@ public class LogoutServlet extends HttpServlet {
        
    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	  request.setCharacterEncoding("UTF-8");
+	  
       HttpSession session = request.getSession();
       MemberDTO dto = (MemberDTO) session.getAttribute("login");
+      HashMap<String, String> map = (HashMap<String, String>) session.getAttribute("kakaoInfo");
+      System.out.println(map);
+      
       if (dto!=null) {
          session.invalidate();
          

@@ -65,7 +65,7 @@ if(mesg != null){
 				</select> 
 				<input type="text" name="searchValue" class="form-control" style="width: 150px; display: inline;"
 	  				<% if(searchValue!=null && !searchValue.equals("null")) {%>value="<%= searchValue %>"<% } %>>
-	  			<button type="button" class="btn btn-success" id="searchProd" style="margin-top: -5px; display: inline;r">검색</button>
+	  			<button type="button" class="btn btn-success" id="searchProd" style="margin-top: -5px; display: inline;">검색</button>
 	  	  	</div>
       	  	<div class="col">
       	  		<div class="float-end">
@@ -131,7 +131,7 @@ if(mesg != null){
 			<td class="productDetail" data-p_id="<%= p_id %>"><%= p_created %></td>
 			<td>
 				<!-- Modal -->
-				<div class="modal fade" id="deleteProduct<%= p_id %>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+				<div class="modal fade modal-first" id="deleteProduct<%= p_id %>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 				  <div class="modal-dialog">
 				    <div class="modal-content">
 				      <div class="modal-header">
@@ -142,7 +142,7 @@ if(mesg != null){
 				        선택한 상품을 삭제하시겠습니까?
 				      </div>
 				      <div class="modal-footer">
-				        <button type="button" id="delProd<%= p_id %>" class="btn btn-success">삭제</button>
+				        <button type="button" name="delete" id="delProd<%= p_id %>" data-id="<%= p_id %>" class="btn btn-success">삭제</button>
 				        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
 				      </div>
 				    </div> 
@@ -154,7 +154,7 @@ if(mesg != null){
 					삭제
 				</button>
 			</td>
-	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<%-- <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script>
 	$(document).ready(function () {
 		//관리자페이지 카테고리
@@ -198,7 +198,7 @@ if(mesg != null){
 		
 	});//end ready
 	
-	</script>
+	</script> --%>
 	<%
 		c++;		
 		}	
@@ -227,3 +227,44 @@ if(mesg != null){
 	</div>
 	</div>
 </form> 
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script>
+	$(document).ready(function () {
+		//관리자페이지 카테고리
+		$(".category").click(function() {
+			let category = $(this).attr("data-category");
+			location.href="AdminCategoryServlet?category="+category;
+		});
+		//상품검색
+		$("#searchProd").click(function() {
+			$("#prodForm").submit();
+		});
+		//정렬 기준 선택시 form 제출
+		$("#sortBy").on("change", function () {
+			$("#prodForm").submit();
+		});
+		//상품등록 버튼
+		$("#addProduct").click(function() {
+			location.href="../adminProductAdd.jsp";
+		});
+		//상품 상세페이지
+		$(".productDetail").click(function() {
+			let p_id = $(this).attr("data-p_id");
+			location.href="AdminProdDetailServlet?p_id="+p_id;
+		});
+		//상품보기 버튼
+		$("body").on("click", "#prodDetail", function () {
+			let p_id = $(this).attr("data-id");
+			console.log(p_id);
+			location.href="ProductRetrieveServlet?p_id="+p_id;
+		});
+		//상품삭제 버튼
+		$("button[name=delete]").click(function() {
+			let p_id = $(this).attr("data-id");
+			console.log(p_id);
+			location.href="ProductDeleteServlet?p_id="+p_id;
+		});
+		
+	});//end ready
+	
+	</script>

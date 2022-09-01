@@ -34,6 +34,7 @@ public class ProductDAO {
 
 	public List<CategoryProductDTO> searchProduct(SqlSession session, String searchValue) {
 		List<CategoryProductDTO> list = session.selectList("ProductMapper.searchProduct",searchValue);
+		System.out.println(list);
 		return list;
 	}
 

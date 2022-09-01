@@ -124,11 +124,20 @@ $("#addMember").click(function() {
 </script>  
 <%
 HashMap<String, String> map = (HashMap<String, String>) session.getAttribute("kakaoInfo");
-String emails = map.get("email");
-String username = map.get("username");
-String [] arr = emails.split("@");
-String email1 = arr[0];
-String email2 = arr[1];
+System.out.println(map);
+	String email = null;
+	String username = null;
+	String [] arr = null;
+	String email1 = null;
+	String email2 = null;
+
+	if(map!=null){
+		email = map.get("email");
+		username = map.get("username");
+		arr = email.split("@");
+		email1 = arr[0];
+		email2 = arr[1];
+	}
 %>  
 <div class="container">
 <div class="row justify-content-center">
@@ -175,21 +184,21 @@ String email2 = arr[1];
                                         <div class="cols-sm-10">
                                             <div class="input-group">
                                                 <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
-                                                <input type="text" class="form-control" name="username" id="username" <%if(username.length()!=0){%>readonly="readonly"<%}%> value="<%=username%>" placeholder="이름을 입력하세요" />
+                                                <input type="text" class="form-control" name="username" id="username" <%if(username!=null){%> readonly="readonly" value="<%=username%>" <%}%> placeholder="이름을 입력하세요"  />
                                             </div>
                                         </div>
                                     </div>
                                     <!-- 이메일 -->
-                                   	<div class="form-group">
+                                   <div class="form-group">
                    					   <label for="type" class="col-sm-3 control-label" style="font-weight: bold;">이메일</label>
                    					  <div class="row g-3">
 									  <div class="col-sm-4">
-									    <input type="text" name="email1" id="email1" <%if(email1.length()!=0){%>readonly="readonly"<%}%> value="<%=email1%>" class="form-control">
+									    <input type="text" name="email1" id="email1" <%if(email1!=null){%>readonly="readonly" value="<%=email1%>" <%}%> class="form-control">
 									  </div>
 									  <div class="col-sm-4">
 									    <div class="input-group">
 									      <div class="input-group-text">@</div>
-									      <input type="text" name="email2"  placeholder="직접입력" <%if(email2.length()!=0){%>readonly="readonly"<%}%> value="<%=email2%>" id="email2" class="form-control">
+									      <input type="text" name="email2"  placeholder="직접입력" <%if(email2!=null){%>readonly="readonly" value="<%=email2%>" <%}%> id="email2" class="form-control">
 									    </div>
 									  </div>
 									  <div class="col-sm-4">
@@ -204,7 +213,7 @@ String email2 = arr[1];
 									  </div>
 									</div>
 									</div>
-								  </div>
+								  </div> 
                          		    <!-- 전화번호 -->
                                     <div class="form-group">
                                         <label for="number" class="cols-sm-2 control-label" style="font-weight: bold;">전화번호</label>

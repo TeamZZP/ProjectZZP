@@ -25,12 +25,14 @@ public class KakaoLoginServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		String email = request.getParameter("email");
 		String nickname = request.getParameter("nickname");
-		System.out.println(email+" "+nickname);
+		String accessToken = request.getParameter("accessToken");
+		System.out.println(accessToken);
 		
 		//카카오 데이터로 기존 회원 여부 확인
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("email", email);
 		map.put("username", nickname);
+		map.put("accessToken", accessToken);
 		MemberService mService = new MemberService();
 		MemberDTO dto = mService.selectMemberBykakao(map);
 		System.out.println(dto);
@@ -44,6 +46,7 @@ public class KakaoLoginServlet extends HttpServlet {
 		//회원인 경우 로그인 처리
 		else {
 			session.setAttribute("login", dto);
+			session.setAttribute("kakaoInfo", map);
 			session.setMaxInactiveInterval(60*60);
 			response.sendRedirect("MainServlet");
 		}
