@@ -364,13 +364,13 @@ List<CategoryProductDTO> pDTO_list = pDTO.getList();
 			}); //end ajax
 		})
 		
-/* 		$("#back").on("click", function() {
+ 		$("#back").on("click", function() {
 			console.log("click======");
 			var md=$(this).attr("data-md");
 			console.log(md);
-			//$("#addcart"+md).modal("hide");
-			//$("#xxx"+md).modal("hide");
-			//$(".modal-backdrop").hide();//모달창 닫고 백드롭 hide
-		}) */
+			$("#addcart"+md).modal("hide");
+			$("#xxx"+md).modal("hide");
+			$(".modal-backdrop.show").hide();//모달창 닫고 백드롭 hide
+		});//end fn
 	})//end function
 </script>
