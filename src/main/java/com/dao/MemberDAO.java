@@ -45,11 +45,6 @@ public class MemberDAO {
 		return num;
 	}
 
-	public List<MemberDTO> selectAllMember(SqlSession session) {
-		List<MemberDTO> memberList=session.selectList("MemberMapper.selectAllMember");
-		return memberList;
-	}
-
 	public MemberDTO findId(SqlSession session, HashMap<String, String> map) {
 		return session.selectOne("findId", map);
 	}
@@ -62,7 +57,7 @@ public class MemberDAO {
 		return session.selectOne("checkPw", userid);
 	}
 
-	public PageDTO selectAllMember2(SqlSession sessioin, HashMap<String, String> map, int curPage) {
+	public PageDTO selectAllMember(SqlSession sessioin, HashMap<String, String> map, int curPage) {
 		PageDTO pDTO=new PageDTO();
 		pDTO.setCurPage(curPage);
 		pDTO.setPerPage(5);//한 페이지에 5개 출력
@@ -70,7 +65,7 @@ public class MemberDAO {
 		int offset=(curPage-1)*perPage;//페이지 시작 idx
 		
 		//map에 검색 조건, 검색어, 정렬 저장된 상태
-		List<AddressDTO> list=sessioin.selectList("MemberMapper.selectAllMember2", map, new RowBounds(offset, perPage));
+		List<AddressDTO> list=sessioin.selectList("MemberMapper.selectAllMember", map, new RowBounds(offset, perPage));
 		
 		pDTO.setList(list);//현재 페이지에 해당하는 데이터 리스트
 		pDTO.setTotalCount(totalCount(sessioin, map));//전체 레코드 갯수
