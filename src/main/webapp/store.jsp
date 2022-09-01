@@ -66,6 +66,6 @@ function getCategoryProduct(id){  //category.jsp에서 비동기처리로 produc
 <body>
 <jsp:include page="common/header.jsp" flush="true"></jsp:include><br>
 <%@include file="category/category.jsp" %>
-<jsp:include page="product/product.jsp" flush="true"></jsp:include><br>
+<jsp:include page="product/product_test.jsp" flush="true"></jsp:include><br>
 <jsp:include page="common/footer.jsp" flush="true"></jsp:include><br>
 </body>
