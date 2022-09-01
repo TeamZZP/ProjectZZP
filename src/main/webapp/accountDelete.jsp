@@ -18,7 +18,7 @@
 	$(document).ready(function() {
 		$("#passwd").focus();
 		
-		$("#n").on("click", function() {
+		$("#cancle").on("click", function() {
 			alert("메인 페이지로 돌아갑니다.");
 			location.href="MainServlet";//취소 후 메인페이지 이동
 		});//end fn
@@ -44,8 +44,8 @@
 						passwd : $("#passwd").val()
 					},
 					success : function(data, status, xhr) {
-						alert(data);
-						location.href="LogoutServlet";//수정 후 메인페이지 이동
+						alert("회원 탈퇴가 완료되었습니다.");
+						location.href="LogoutServlet";//탈퇴, 로그아웃 후 메인페이지 이동
 					},
 					error: function(xhr, status, error) {
 						console.log(error);
@@ -66,8 +66,8 @@
 <h6><b>비밀번호를 입력해 주십시오</b></h6>
 <input type="password" name="passwd" id="passwd">
 <br><br>
-<button id="y" class="btn btn-success">예</button>&nbsp;&nbsp;
-<button type="button" id="n" class="btn btn-success">아니오</button>
+<button class="btn btn-success">예</button>&nbsp;&nbsp;
+<button type="button" id="cancle" class="btn btn-success">아니오</button>
 </form>
 </div>
 
