@@ -52,6 +52,7 @@ $(function() {
 	});
 	
 	
+	
 	 
 });
 
@@ -127,7 +128,8 @@ int total_price = 0;
       총금액: <%= total_price%>
       <br><br><br>
        <input type="hidden" name="total_price" id="total_price" value="<%=total_price %>">
-<h3 style="font-weight: bold; color: green;">&emsp;배송지 선택</h3><button type="submit" class="btn btn-success"  id="selectAdd" style="float: right;" >다른배송지</button><br>
+<h3 style="font-weight: bold; color: green;">&emsp;배송지 선택</h3>
+<a type="submit" class="btn btn-success"  id="selectAdd" style="float: right;"  href="javascript:selectAllAddress(<%=mdto.getUserid()%>)">다른배송지</a><br>
 <hr id="orderHr">
       <%
       List<AddressDTO> add_list = (List<AddressDTO>)request.getAttribute("add_list");
