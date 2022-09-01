@@ -41,17 +41,29 @@ public class ProductLikeServlet extends HttpServlet {
 		
 		ProductService service = new ProductService();
 		//찜 갯수 확인 
+		
+		
+		
 		int likecheck = service.likeCheck(map);
 		System.out.println("찜 갯수 확인"+likecheck);
 		//찜 추가
 		if(likecheck== 0) {
 			int n = service.addLike(map);
 			System.out.println(n+"찜 추가");
+			//이부분 추가함
+			out.print(likecheck);
+			
 		
-		  }else{
+		}else{
 			  int n2 = service.deleteLike(map);
-			  System.out.println("찜 삭제"+n2);
-		  }
+		  System.out.println("찜 삭제"+n2);
+			out.print(likecheck);
+
+		
+		}
+		
+		
+		
 	}else {
 		session.setAttribute("mesg", "로그인이 필요합니다.");
 		response.sendRedirect("LoginUIServlet");

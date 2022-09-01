@@ -168,15 +168,17 @@
 	                     style="font-weight: bold; margin: 8px; display: line"><%=p_name%></span></a>
 	                  <br>
 	                  <div class="amount">
+	                  <div class="form-group">
 	                     <label>수량:</label>
 	                     	<input type="text" id="cartAmount<%=cart_id%>"
-	                        	class="p_amount" name="p_amount"
-	                        	style="text-align: right; line-height: 0px;" maxlength="3"
-	                        	size="2" value="<%=p_amount%>">
+	                        	class="p_amount form-control" name="p_amount"
+	                        	style="text-align: right; width: 80px; display:inline; margin-left: 20px;" maxlength="3"
+	                     		value="<%=p_amount%>">
 	                     	<input type="button"
-	                        	value="변경" id="updBtn" class="updBtn" style="line-height: 28px;"
+	                        	value="변경" id="updBtn" class="updBtn btn btn-outline-success" style="display:inline; margin-top: -3px;"
 	                        	data-xxx="<%=cart_id%>" data-price="<%=p_selling_price%>"
 	                        	data-id="<%=userid%>" data-sum_money="<%=sum_money%>" /> <br>
+	                    </div>
 	                  </div>
 	                  상품가격 :<span id="item_price<%=cart_id%>"
 	                     style="margin-bottom: 15px;" class="item_price" ><%=p_selling_price * p_amount%></span><br>

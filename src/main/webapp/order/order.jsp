@@ -45,7 +45,13 @@ $(function() {
 	
 	$("#AddOrder").on("click", function() {	
 		 $("form").attr("action", "AddOrderServlet");		
-	})
+	});
+	
+	$("#delivery_loc").on("change", function() {
+		console.log($("#delivery_loc").val());
+	});
+	
+	
 	 
 });
 
@@ -92,9 +98,8 @@ int total_price = 0;
 
       <div class="order_content">
          <input type="hidden" name="p_id" id="p_id" value="<%=p_id %>">
-         <input type="hidden" name="userid" id="userid" value="<%=userid %>">
-         <input type="hidden" name="total_price" id="p_amount" value="<%=p_amount %>">
-        
+      	 <input type="hidden" name="p_amount" id="p_amount" value="<%=p_amount %>">
+         <input type="hidden" name="p_price" id="p_price" value="<%=p_selling_price * p_amount %>">
 
          <ul class="orderProduct_list" style="line-height: 50px; font-size: 20px;">
             <li id="orderLi">
@@ -103,8 +108,7 @@ int total_price = 0;
                   style="border: 10px;" height="150"></a>
               
                <div class="cart_list_info">
-                <input type="hidden" id="p_id" name="p_id" value="<%=p_id%>">
-               
+              
                   상품명: 
                   <a href="ProductRetrieveServlet?p_id=<%=p_id%>"> 
                   <span name="p_name" style=" margin: 8px; display: line"><%=p_name%></span>
@@ -164,15 +168,15 @@ int total_price = 0;
          <input type="hidden" name="orderdate" id="orderdate" value="<%= (new java.util.Date()).toLocaleString()%>">
          <input type="hidden" name="order_state" id="order_state" value="주문완료">
     	 
-      받으실 장소 :&emsp; &nbsp;
-    	<select id="delievery_loc" name="delievery_loc">
-    	<option>문앞</option>
-    	<option>직접받고 부재 시 문앞</option>
-    	<option>경비실</option>
-    	<option>택배함</option>
+        받으실 장소 :&emsp; &nbsp;
+    	<select id="delivery_loc" name="delivery_loc">
+    	<option value="frontDoor">문앞</option>
+    	<option value="directly_or_frontDoor">직접받고 부재 시 문앞</option>
+    	<option value="security">경비실</option>
+    	<option value="delievery_box">택배함</option>
     	</select>
     	<br><br>
-    	배송 요청사항 :&emsp;<input id="delievery_req"  id="delievery_req">
+    	배송 요청사항 :&emsp;<input id="delivery_req"  name="delivery_req">
     	<br><br>
     	
       </li>
