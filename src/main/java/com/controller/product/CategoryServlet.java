@@ -29,9 +29,6 @@ public class CategoryServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		MemberDTO member = (MemberDTO) session.getAttribute("login");
 		ProductService  product_service  = new ProductService(); 
-
-	
-				
 				
 		String userid = "";
 		
@@ -45,9 +42,8 @@ public class CategoryServlet extends HttpServlet {
 		List<CategoryProductDTO> product_list  = null; //베스트상품
 		
 		ProductService pservice = new ProductService();
-		
        if (request.getParameter("c_id") == null ||"".equals(request.getParameter("c_id"))) {
-			
+    	   System.out.println("카테고리 아이디 확인 : "+request.getParameter("c_id"));
     	   product_list= pservice.bestProductList();  //베스트 상품 가져오기(이미지,productDTO)
 			
 		}else {

@@ -14,8 +14,11 @@
 	}
 </style>
 <%
- 	MemberDTO member=(MemberDTO) request.getAttribute("login");
-	
+ 	MemberDTO dto=(MemberDTO) session.getAttribute("login");
+//	System.out.println("jsp에서 관리자 : "+dto);
+ 	MemberDTO member=(MemberDTO) request.getAttribute("member");
+// 	System.out.println("jsp에서 회원 : "+member);
+ 	
 	String userid=member.getUserid();
 	String passwd=member.getPasswd();
 	String username=member.getUsername();
@@ -58,9 +61,29 @@
 			location.href="AdminMainServlet";
 		});//
 		//회원 삭제
-		$("#delAccount").on("click", function() {
-			console.log("회원 삭제 버튼 클릭");
-			location.href="";
+		$("#delete").on("click", function() {
+			event.preventDefault();
+			var id=$(this).attr("data-id");
+			console.log("삭제할 회원 아이디 : "+id);
+			//*****ajax
+			$.ajax({
+				type : "post",
+				url : "AccountDeleteServlet",//페이지 이동 없이 해당 url에서 작업 완료 후 데이터만 가져옴
+				dataType : "text",
+				data : {//서버에 전송할 데이터
+					userid : id
+				},
+				success : function(data, status, xhr) {
+					alert("해당 회원이 삭제되었습니다.");
+					$("#deleteMember").modal("hide");
+					$(".modal-backdrop").hide();//모달창 닫고 백드롭 hide
+					console.log("success");
+					location.href="AdminMainServlet";//삭제 후 관리자 페이지 메인으로 이동
+				},
+				error: function(xhr, status, error) {
+					console.log(error);
+				}						
+			});//end ajax
 		});
 	});//end ready
 </script>
@@ -112,12 +135,30 @@
 					<!-- 주소 -->
 					
 					<!--  -->
+					<!-- Modal -->
+					<div class="modal fade" id="deleteMember" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+					  <div class="modal-dialog">
+					    <div class="modal-content">
+					      <div class="modal-header">
+					        <h5 class="modal-title" id="staticBackdropLabel">회원 삭제</h5>
+					        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					      </div>
+					      <div class="modal-body">
+					        선택한 회원을 삭제하시겠습니까?
+					      </div>
+					      <div class="modal-footer">
+					        <button type="button" id="delete" data-id="<%= userid %>" name="delete" class="btn btn-success">삭제</button>
+					        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+					      </div>
+					    </div>
+					  </div>
+					</div>
 					<div class="form-group" style="margin-top: 10px; text-align: center;">
 						<input type="submit" value="변경" class="btn btn-success">
 						<input type="reset" value="변경 취소" class="btn btn-success" id="cancle">
 					</div>
 					<div class="d-grid gap-2 d-md-flex justify-content-md-end" style="padding-top: 15px;">
-						<button class="btn btn-light btn-sm" type="button" id="delAccount">회원 삭제</button>
+						<button class="btn btn-light btn-sm" type="button" id="chkDelete" data-bs-toggle="modal" data-bs-target="#deleteMember">회원 삭제</button>
 					</div>
 					<!--  <div class="login-register">
 					</div> -->

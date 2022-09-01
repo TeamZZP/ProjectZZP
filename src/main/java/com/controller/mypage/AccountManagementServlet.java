@@ -42,15 +42,15 @@ public class AccountManagementServlet extends HttpServlet {
 			if (dto.getRole() == 1) {
 				System.out.println("관리자가 회원 계정 접근");
 				//회원 id 파싱
-				String id=request.getParameter("memberid");
-				System.out.println("아이디======="+id);
+				String id=request.getParameter("memberId");
+				System.out.println("회원 아이디======="+id);
 				
 				MemberDTO member=m_service.selectMember(id);
-				AddressDTO address=a_service.selectDefaultAddress(id);//회원의 기본 배송지
+//				AddressDTO address=a_service.selectDefaultAddress(id);//회원의 기본 배송지
 				List<AddressDTO> addressList=a_service.selectAllAddress(id);//회원의 전체 address
 
-				request.setAttribute("login",member);
-				request.setAttribute("address", address);
+				request.setAttribute("member",member);
+//				request.setAttribute("address", address);
 				request.setAttribute("addressList", addressList);
 //				System.out.println("회원 : "+member);
 //				System.out.println("주소 : "+address);

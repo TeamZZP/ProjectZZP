@@ -132,4 +132,10 @@
 			where concat(concat(email1,'@'),email2) = #{email} and username=#{username}
 		</select>
 		
+		<update id="changeMember" parameterType="hashmap">
+			update member
+			set username=#{username},
+				phone=#{phone}
+			where userid=#{userid}
+		</update>
 </mapper>
