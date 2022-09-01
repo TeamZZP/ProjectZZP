@@ -13,6 +13,11 @@
  .retrieve{
   cursor: pointer;
  }
+ 
+ #card{
+ height: 25;
+ width: 15;
+ }
 </style>
 </head>
 <body>
@@ -71,9 +76,9 @@
 	    <%
 	    int idx = 3;
 	    List<CategoryProductDTO> product_list = (List<CategoryProductDTO>)request.getAttribute("bestprod"); 
-		if(product_list.size()<3){
+		 if(product_list.size()<3){
 			idx = product_list.size();
-		}
+		} 
 	    for ( int i = 0 ; i < idx ; i++ ) {
 		    int p_id = product_list.get(i).getP_id();
 		    String p_name =product_list.get(i).getP_name();
@@ -120,9 +125,9 @@
 	    <%
 	    int idx2 = 5;
 	    List<CategoryProductDTO> product_list2 = (List<CategoryProductDTO>)request.getAttribute("bestprod"); 
-		if(product_list2.size()<5){
+		 if(product_list2.size()<5){
 			idx2 = product_list2.size();
-		}
+		} 
 	    for ( int i = 3 ; i <= idx2 ; i++ ) {
 		    int p_id2 = product_list2.get(i).getP_id();
 		    String p_name2 =product_list2.get(i).getP_name();
@@ -137,7 +142,7 @@
 			String p_image2 = product_list2.get(i).getP_image();
 	    %>
 	   	<div class="col retrieve" onclick="javascrip:location.href='ProductRetrieveServlet?p_id=<%=p_id2%>';">
-	        <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" 
+	        <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg "
 	        	style="background-image: url('images/p_image/<%=p_image2%>'); background-size:cover;">
 	          <div class="d-flex flex-column h-100 p-5 pb-3 text-white fw-bold text-shadow-1">
 	            <h2 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold text-shadow-1"><%= p_content2 %></h2>
