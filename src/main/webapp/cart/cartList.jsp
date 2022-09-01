@@ -1,4 +1,3 @@
-
 <%@ page import="com.dto.CartDTO"%>
 <%@ page import="java.util.List"%>
 <%@ page import="java.util.Map"%>
@@ -23,12 +22,6 @@ a:hover {
    padding: 0 19px;
 }
 
-/* .cart_content h3 {
-   font-size: 13px;
-   font-family: bold;
-   margin-bottom: 4px;
-   color: #F05522;
-} */
 .cart_list li {
    display: flex;
    position: relative;
@@ -65,7 +58,6 @@ a:hover {
    border: none;
    width: 59px;
    height: 30px;
-   /* line-height: px; */
    border-radius: 4px;
    border: 1px solid #D0D0D0;
    text-align: center;
@@ -87,271 +79,6 @@ a:hover {
    justify-content: space-evenly;
 }
 </style>
-<script type="text/javascript"
-   src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>
- 		  
-	 
-   $(function() {
-	  //주문 버튼
-	  $("#order").on("click", function() {
-      
-      $("form").attr("action", "OrderServlet");
-   })//order
-   
-      //체크박스 미선택시 alert창
-      $("#delAllCart").on("click", function() {
-         if ($(".individual_cart_checkbox").is(":checked") == false) {
-
-            alert("삭제할 상품을 선택하세요.");
-            event.preventDefault();
-         }
-         
-         $("form").attr("action", "CartDelAllServlet");
-      })//체크박스미선택
-
-      
-      
-      /* 
-      $("#allCheck").click(function() {
-    	  
-    	  var chk_arr = [];
-    	  
-  		if($("#allCheck").is(":checked")){
-  			
-  			$("input[name=check]").prop("checked", true);
-  				console.log("체크됨");
-  				var chk = $(this).val();
-  				console.log(chk);
-  				/* chk_arr.push(chk); */
-  			  /*}
-  		else{
-  			
-  			$("input[name=check]").prop("checked", false);
-  			console.log("체크안됨");
-  		}
-  	});  */
-	
-	//전체선택-빈수차
-/* 	$("#allCheck").on("click", function() {
-		console.log("click====");
-		if ($(this).is(":checked")) {
-			$("input[name=check]").prop("checked", true);
-			
-		} else {
-			$("input[name=check]").prop("checked", false);
-		}
-	})//end fn
-	$("input[name=check]").click(function() {
-		var total = $("input[name=check]").length;
-		var checked = $("input[name=check]:checked").length;
-
-		if(total != checked) $("#allCheck").prop("checked", false);
-		else $("#allCheck").prop("checked", true); 
-	}); */
-      
-      //전체선택
-        $("#allCheck").on("click", function() {//#allCheck
-        var result = this.checked;
-        var item_price = "";
-         $(".individual_cart_checkbox").each(function(idx, data) {
-        	  var n = $(this).val(); 
-        	 console.log(data);
-        	
-        	 
-        	 item_price = $(".item_price");
-        	 
-        	 console.log(item_price);
-        	$.each(item_price,function(idx,data){
-        		console.log(data.innerText);
-        		
-        		var chk =data.innerText+",";
-        		console.log(chk);
-        		
-
-        		 var cart_id = $(this).attr("data-xxx"); //cart_id
-                 var p_selling_price = $(this).attr("data-price");
-                 var p_amount = $("#cartAmount" + cart_id).val();
-                 var sum_money = $("#sum_money").text();
-              	 var item_price = $("#item_price" + n).text();
-                 
-                if($(this).is(":checked")==true){
-                	 console.log("체크됨!");
-                	
-                 	console.log(item_price);
-                 	
-                 	sum_money = parseInt(sum_money) + parseInt(item_price);
-                 	
-                 	 var fee = sum_money >= 50000 ? 0 : 3000;
-                     var total = sum_money + fee;
-                     
-                     $("#sum_money").text(sum_money);
-                     $("#fee").text(fee);
-                     $("#total").text(total);
-                 	
-                }else{
-                	console.log("체크안됨!");
-                
-         
-                     $("#sum_money").text("0");
-                     $("#fee").text("0");
-                     $("#total").text("0");
-                }  
-        	})//
-
-        	})
-
-         
-        /* 	var chk =[];
-        	
-        	chk += item_price;
-        	console.log(chk);
-        	
-           var totalprice = 0;
-        	 totalprice += item_price;
-        	 console.log(totalprice); */
-         
-         
-         
-         
-         
-         /*  //체크박스 체크 /해제 
-         if( $("#allCheck").prop("checked")){
-        	 $(".individual_cart_checkbox").attr("checked",true);
-        	 var n = $("#allCheck").val();
-        	 cols
-         }else{
-        	 $(".individual_cart_checkbox").attr("checked",false);
-         } 
-          */
-         
-      /*    
-     	
-     	  
-     	    
-         var cart_id = $(this).attr("data-xxx"); //cart_id
-         var p_selling_price = $(this).attr("data-price");
-         var p_amount = $("#cartAmount" + cart_id).val();
-         var sum_money = $("#sum_money").text();
-      	 var item_price = $("#item_price" + n).text();
-         
-        if($(this).is(":checked")==true){
-        	 console.log("체크됨!");
-        	
-         	console.log(item_price);
-         	sum_money = parseInt(sum_money) + parseInt(item_price);
-         	
-         	 var fee = sum_money >= 50000 ? 0 : 3000;
-             var total = sum_money + fee;
-             
-             $("#sum_money").text(sum_money);
-             $("#fee").text(fee);
-             $("#total").text(total);
-         	
-        }else{
-        	console.log("체크안됨!");
-
-        	 */
-    
-       })//end allcheck  
-      
-      //개별선택
-      $(".delBtn").on("click", function() {
-         var cart_id = $(this).attr("data-xxx");
-         location.href = "CartDelServlet?cart_id=" + cart_id;
-      })//end
-      
-      //장바구니 수량 수정
-      $(".updBtn").on("click", function() {
-    	  
-         var cart_id = $(this).attr("data-xxx"); //cart_id
-         var p_selling_price = $(this).attr("data-price");
-         var p_amount = $("#cartAmount" + cart_id).val();
-         var sum_money = $(this).attr("data-sum_money"); //총금액
-         
-         
-         $("#cartAmount" + cart_id).val(p_amount);
-         console.log("ss: " + $("#cartAmount" + cart_id).val());
-         console.log(cart_id, p_selling_price, p_amount, sum_money);
-         
-         var userid = $(this).attr("data-id");
-      
-         $.ajax({
-            type : "get",
-            url : "CartUpdateServlet",
-            data : {
-               cart_id : cart_id,
-               p_amount : p_amount,
-               sum_money : sum_money
-            },
-            dataType : "text",
-            success : function(data, status, xhr) {
-               var sum = p_amount * p_selling_price;
-               $("#item_price" + cart_id).text(sum);
-
-               sum_money = parseInt(data);
-               var fee = sum_money >= 50000 ? 0 : 3000;
-               var total = sum_money + fee;
-
-               $("#sum_money").text(sum_money);
-               $("#fee").text(fee);
-               $("#total").text(total);
-            },
-            error : function(xhr, status, error) {
-               console.log(error);
-            }
-         }) // end ajax
-         
-       
-         
-         
-         
-      })//end updBtn
-      
-      //개별체크박스 선택시 가격 변동
-      $(".individual_cart_checkbox").on("click",function(){
-     	 var n = $(this).val();
-     	 console.log(n);
-     	  
-         var cart_id = $(this).attr("data-xxx"); //cart_id
-         var p_selling_price = $(this).attr("data-price");
-         var p_amount = $("#cartAmount" + cart_id).val();
-         var sum_money = $("#sum_money").text();
-      	 var item_price = $("#item_price" + n).text();
-         
-        if($(this).is(":checked")==true){
-        	 console.log("체크됨!");
-        	
-         	console.log(item_price);
-         	sum_money = parseInt(sum_money) + parseInt(item_price);
-         	
-         	 var fee = sum_money >= 50000 ? 0 : 3000;
-             var total = sum_money + fee;
-             
-             $("#sum_money").text(sum_money);
-             $("#fee").text(fee);
-             $("#total").text(total);
-         	
-        }else{
-        	console.log("체크안됨!");
-        
-        	console.log(item_price);
-        	sum_money =  parseInt(sum_money) - parseInt(item_price);
-        	
-        	 var fee = sum_money >= 50000 ? 0 : 3000;
-             var total = sum_money + fee;
-             
-             $("#sum_money").text(sum_money);
-             $("#fee").text(fee);
-             $("#total").text(total);
-        }
-      })//end individual_cart_checkbox
-   
-   
-
-   })//end
-   
-</script>
 
 <div id="outer">
    <header>
@@ -374,7 +101,7 @@ a:hover {
             <input type="checkbox" name="allCheck" id="allCheck" checked="checked"   > 장바구니(<%=cartCount%>)
          </button>
          <button type="button" class="btn btn-outline-success" id="like" onclick="location.href='ProductLikeListServlet';">
-         <input type="checkbox" name="allCheck" id="allCheck">찜한상품(<%=likeCount%>)</button>
+       <!--   <input type="checkbox" name="allCheck" id="allCheck"> -->찜한상품(<%=likeCount%>)</button>
       </div>
    </div>
    <%
@@ -428,15 +155,9 @@ a:hover {
 		 </div>
          <ul class="cart_list" style="line-height: 50px; font-size: 20px;">
             <li>
-            
-            
             <input type="checkbox" name="check" id="check" checked="checked"
                class="individual_cart_checkbox" value="<%=cart_id%>" 
                style="width: 30px; position: relative; bottom: 100px; margin-right: 10px;">
-               
-               
-               
-               
                <a href="ProductRetrieveServlet?p_id=<%=p_id%>"> <img
                   src="images/p_image/<%=p_image%>" width="200"
                   style="border: 10px;" height="200" ></a>
@@ -496,5 +217,204 @@ a:hover {
 <script type="text/javascript"
    src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
+ 		  
+	 
+	$(function() {
+		
+		 //주문 버튼
+		  $("#order").on("click", function() {
+	      
+	      $("form").attr("action", "OrderServlet");
+	   })//order
+
+		//체크박스 미선택시 alert창
+		$("#delAllCart").on("click", function() {
+			if ($(".individual_cart_checkbox").is(":checked") == false) {
+				alert("삭제할 상품을 선택하세요.");
+				event.preventDefault();
+			}
+			$("form").attr("action", "CartDelAllServlet");
+		})//체크박스미선택
 	
+		//전체선택
+	 	$("#allCheck").on("click", function() {
+			console.log("click====");
+			if ($(this).is(":checked")) {
+				$("input[name=check]").prop("checked", true);//체크박스 전체 선택
+				
+				var sum_money = $("#sum_money").text();//현재 장바구니 상품 금액
+				console.log("장바구니 금액 : "+sum_money);
+				
+				//체크박스 전체 가격 데이터 더한 값==text()
+				$("input[name=check]").each(function (index, data) {
+					var cart_id=$(this).val();
+					console.log(cart_id);
+					var item_price = $("#item_price" + cart_id).text();//상품 가격
+					console.log("상품 가격 : "+item_price);
+					
+					sum_money =  parseInt(sum_money) + parseInt(item_price);//장바구니에 상품 가격 추가
+					console.log("최종 장바구니 가격 : "+sum_money);
+					
+					$("#sum_money").text(sum_money);
+					var fee = sum_money >= 50000 ? 0 : 3000;
+					var total = sum_money + fee;
+					$("#fee").text(fee);
+					$("#total").text(total);
+				});
+			} else {
+				$("input[name=check]").prop("checked", false);//체크박스 전체 선택 해제
+				
+				var sum_money = $("#sum_money").text();//현재 장바구니 상품 금액
+				console.log("장바구니 금액 : "+sum_money);
+				
+				//체크박스 전체 가격 데이터 뺀 값==text()
+				$("input[name=check]").each(function (index, data) {
+					var cart_id=$(this).val();
+					console.log(cart_id);
+					var item_price = $("#item_price" + cart_id).text();//상품 가격
+					console.log("상품 가격 : "+item_price);
+					
+					sum_money =  parseInt(sum_money) - parseInt(item_price);//장바구니에서 상품 가격 빼기
+				});
+				console.log("최종 장바구니 가격 : "+sum_money);
+				
+				$("#sum_money").text(sum_money);
+				var fee = sum_money >= 50000 ? 0 : 3000;
+				var total = sum_money + fee;
+				$("#fee").text(fee);
+				$("#total").text(total);
+			}
+		})//end fn
+		
+		//전체선택 안됐을 경우 체크 해제
+		$("input[name=check]").click(function() {
+			var total = $("input[name=check]").length;
+			var checked = $("input[name=check]:checked").length;
+	
+			if(total != checked) $("#allCheck").prop("checked", false);
+			else $("#allCheck").prop("checked", true); 
+		});
+		
+		//개별체크박스 선택시 가격 변동
+		$(".individual_cart_checkbox").on("click",function(){
+			var n = $(this).val();
+			console.log("체크박스의 카트 아이디 : "+n);
+
+			var cart_id = $(this).attr("data-xxx");//cart_id
+			var p_amount = $("#cartAmount" + cart_id).val();//수량
+			console.log("수량 : "+p_amount);//undefined
+			var sum_money = $("#sum_money").text();//현재 장바구니 상품 금액
+			console.log("장바구니 금액 : "+sum_money);//
+			var item_price = $("#item_price" + n).text();//상품 가격
+			console.log("상품 가격 : "+item_price);//
+
+			if($(this).is(":checked")==true){
+				console.log("check true");
+				console.log("상품 가격 : "+item_price);
+				
+				sum_money = parseInt(sum_money) + parseInt(item_price);//장바구니에 상품 가격 추가
+
+				var fee = sum_money >= 50000 ? 0 : 3000;
+				var total = sum_money + fee;
+
+				$("#sum_money").text(sum_money);
+				$("#fee").text(fee);
+				$("#total").text(total);
+			} else {
+				console.log("check false XXX");
+				console.log("상품 가격 : "+item_price);
+				
+				sum_money =  parseInt(sum_money) - parseInt(item_price);//장바구니에서 상품 가격 빼기
+
+				var fee = sum_money >= 50000 ? 0 : 3000;
+				var total = sum_money + fee;
+
+				$("#sum_money").text(sum_money);
+				$("#fee").text(fee);
+				$("#total").text(total);
+			}
+		})//end individual_cart_checkbox
+		
+		//폼 제출시 선택된 체크박스 값만 가져오기
+		/* $("#order").on("click", function() {
+//			var select_obj = "";
+			$("input[name=check]:checked").each(function (index, data) {
+//				select_obj += ",";
+				console.log($(this).val());
+//				select_obj += $(this).val();
+			});
+			console.log("주문 버튼 클릭");
+			event.preventDefault();
+		});//end fn */
+
+		
+      
+      //전체선택
+        $("#a").on("click", function() {//#allCheck
+        var result = this.checked;
+        var item_price = "";
+         $(".individual_cart_checkbox").each(function(idx, data) {
+        	 /* var n = $(this).val(); */
+        	 console.log(data);
+        	
+        	 
+        	 item_price = $(".item_price");
+        	 
+        	 console.log(item_price);
+        	$.each(item_price,function(idx,data){
+        		console.log(data.innerText);
+        		
+        		var chk =data.innerText+",";
+        		console.log(chk);
+        		
+        	})
+            data.checked = result;
+         })
+         
+       })//end allcheck  
+      
+		//개별 삭제
+		$(".delBtn").on("click", function() {
+			var cart_id = $(this).attr("data-xxx");
+			location.href = "CartDelServlet?cart_id=" + cart_id;
+		})//end
+		
+		//장바구니 수량 수정
+		$(".updBtn").on("click", function() {
+			var cart_id = $(this).attr("data-xxx"); //cart_id
+			var p_selling_price = $(this).attr("data-price");
+			var p_amount = $("#cartAmount" + cart_id).val();
+			var sum_money = $(this).attr("data-sum_money"); //총금액
+			
+			console.log(cart_id, p_selling_price, p_amount, sum_money)
+			
+			var userid = $(this).attr("data-id");
+
+			$.ajax({
+				type : "get",
+				url : "CartUpdateServlet",
+				data : {
+					cart_id : cart_id,
+					p_amount : p_amount,
+					sum_money : sum_money
+				},
+				dataType : "text",
+				success : function(data, status, xhr) {
+					var sum = p_amount * p_selling_price;
+					$("#item_price" + cart_id).text(sum);
+
+					sum_money = parseInt(data);
+					var fee = sum_money >= 50000 ? 0 : 3000;
+					var total = sum_money + fee;
+
+					$("#sum_money").text(sum_money);
+					$("#fee").text(fee);
+					$("#total").text(total);
+				},
+				error : function(xhr, status, error) {
+					console.log(error);
+				}
+			}) // end ajax
+		})//end updBtn
+   })//end
 </script>
