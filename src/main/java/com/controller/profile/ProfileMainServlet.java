@@ -64,24 +64,16 @@ public class ProfileMainServlet extends HttpServlet {
 		
 		//회원의 챌린지 목록 가져오기
 		PageDTO pDTO = service.selectChallengeByUserid(map, 1, 4);
-		//회원의 챌린지 개수 가져오기
-		int challNum = service.countTotalUserChallenge(map);
 		
 		//회원의 도장 목록 가져오기
-		List<StampDTO> stampList = service.selectMemberStampByUserid(userid);
-		//이미지와 함께 hashmap에 담기 (중복 stamp_id 제거 위해 LinkedHashMap 사용)
-		LinkedHashMap<Integer, StampDTO> stampMap = new LinkedHashMap<Integer, StampDTO>();
-		for (StampDTO dto : stampList) {
-			stampMap.put(dto.getStamp_id(), dto);
-		}
+		PageDTO stampPageDTO = service.selectMemberStampByUserid(map, 1, 4);
 		
 		request.setAttribute("reviewPageDTO", reviewPageDTO);
 		request.setAttribute("prodMap", prodMap);
 		request.setAttribute("reviewNum", reviewNum);
 		request.setAttribute("pDTO", pDTO);
-		request.setAttribute("challNum", challNum);
 		request.setAttribute("profileMap", profileMap);
-		request.setAttribute("stampMap", stampMap);
+		request.setAttribute("stampPageDTO", stampPageDTO);
 		
 		RequestDispatcher dis = request.getRequestDispatcher("profileMain.jsp");
 		dis.forward(request, response);

@@ -100,17 +100,6 @@ public class MemberService {
 		return num;
 	}
 
-	public List<MemberDTO> selectAllMember() {
-		SqlSession session=MySqlSessionFactory.getSqlSession();
-		List<MemberDTO> memberList=null;
-		try {
-			memberList=dao.selectAllMember(session);
-		} finally {
-			session.close();
-		}
-		return memberList;
-	}
-
 	public MemberDTO findId(HashMap<String, String> map) {
 		SqlSession session = MySqlSessionFactory.getSqlSession();
 		MemberDTO dto = null;
@@ -143,12 +132,11 @@ public class MemberService {
 		}
 		return dto;
 	}
-
-	public PageDTO selectAllMember2(HashMap<String, String> map, int curPage) {
+	public PageDTO selectAllMember(HashMap<String, String> map, int curPage) {
 		SqlSession sessioin=MySqlSessionFactory.getSqlSession();
 		PageDTO dto=null;
 		try {
-			dto=dao.selectAllMember2(sessioin, map, curPage);
+			dto=dao.selectAllMember(sessioin, map, curPage);
 		} finally {
 			sessioin.close();
 		}

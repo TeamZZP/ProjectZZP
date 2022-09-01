@@ -52,7 +52,6 @@ public class AdminCategoryServlet extends HttpServlet {
 		PageDTO pDTO = null;
 		String url = null;
 		
-		
 		//전체 회원 목록
 		if (category.equals("member")) {
 			if (sortBy == null) {sortBy="created_at";}//최초 정렬 기준
@@ -61,27 +60,12 @@ public class AdminCategoryServlet extends HttpServlet {
 			map.put("sortBy", sortBy);
 			
 			MemberService m_service=new MemberService();
-			AddressService a_service=new AddressService();
-			HashMap<String, AddressDTO> addMap=new HashMap<String, AddressDTO>();
 			
 			//전체 회원 목록 --->> 검색 기준, 검색어, 정렬 기준, 현재 페이지를 매개변수로 받음
-			List<MemberDTO> memberList=m_service.selectAllMember();
-			pDTO=m_service.selectAllMember2(map, Integer.parseInt(curPage));
+			pDTO=m_service.selectAllMember(map, Integer.parseInt(curPage));
 			System.out.println(pDTO);
 			
-			String userid=null;
-			//전체 회원 주소 목록--회원별 주소
-			for (int i = 0; i < memberList.size(); i++) {
-				userid=memberList.get(i).getUserid();
-				AddressDTO address=a_service.selectDefaultAddress(userid);
-				addMap.put(userid, address);//userid의 기본 주소 출력
-			}
-			
-			request.setAttribute("memberList", memberList);
-			request.setAttribute("addMap", addMap);//userid의 address 리스트
-			
 			url = "adminMember.jsp";
-			
 			
 		//전체 상품 목록
 		} else if(category.equals("product")) {

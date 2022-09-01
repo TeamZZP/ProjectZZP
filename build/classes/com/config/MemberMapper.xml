@@ -52,11 +52,7 @@
 			where userid = #{userid}
 		</delete>
 
-		<select id="selectAllMember" resultType="MemberDTO">
-			select * from member
-			order by created_at
-		</select>
-		<select id="selectAllMember2" resultType="AddressDTO" parameterType="hashmap">
+		<select id="selectAllMember" resultType="AddressDTO" parameterType="hashmap">
 			select m.userid, m.username, m.phone,a.post_num, a.addr1, a.addr2, m.created_at
 			from member m join address a
 			on m.userid = a.userid

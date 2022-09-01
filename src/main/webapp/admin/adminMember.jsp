@@ -22,22 +22,23 @@
 <form action="AdminCategoryServlet" id="memberForm">
 <input type="hidden" name="category" value="member">
 <div class="container" style="margin-top: 5px; margin-bottom: 5px;">
-	<div class="row row-cols-auto" style="justify-content: space-between;">
-			<div class="row row-cols-auto">
-			  <div class="col">
-			  <!-- 검색 searchName 같으면 selected -->
-				  <select class="form-select" name="searchName" data-style="btn-info" id="inputGroupSelect01" style="width: 145px; margin-right: -20px; margin-left: 0px;">
-					    <option selected disabled hidden>카테고리</option>
-					    <option value="userid" <% if("userid".equals(searchName)){ %>selected<% } %>>아이디</option>
-					    <option value="username"<% if("username".equals(searchName)){ %>selected<% } %>>이름</option>
-					    <option value="phone"<% if("phone".equals(searchName)){ %>selected<% } %>>전화번호</option>
-					    <option value="address"<% if("address".equals(searchName)){ %>selected<% } %>>주소</option>
-				  </select>
+	<div class="row row-cols-auto" style="justify-content: space-between;"><!-- 상단 카테고리, 검색, 정렬 -->
+		<div class="row row-cols-auto">
+			<div class="col">
+			<!-- 검색 searchName 같으면 selected -->
+				<select class="form-select" name="searchName" data-style="btn-info" id="inputGroupSelect01"
+							style="width: 145px; margin-right: -20px; margin-left: 0px;">
+					<option selected disabled hidden>카테고리</option>
+					<option value="userid" <% if("userid".equals(searchName)){ %>selected<% } %>>아이디</option>
+					<option value="username"<% if("username".equals(searchName)){ %>selected<% } %>>이름</option>
+					<option value="phone"<% if("phone".equals(searchName)){ %>selected<% } %>>전화번호</option>
+					<option value="address"<% if("address".equals(searchName)){ %>selected<% } %>>주소</option>
+				</select>
 			  </div>
 			  <div class="col"><input type="text" name="searchValue" class="form-control" style="width: 150px; margin-right: -20px;"
 			  			<% if(searchValue != null && !searchValue.equals("null")){ %>value="<%= searchValue %>"<% } %>></div>
 		      <div class="col"><button type="button" id="searchMember" class="btn btn-success">검색</button></div>
-	      </div>
+	    </div>
 		<div class="col">
 	    	<div class="float-end">
 			<!-- 정렬 -->
@@ -52,13 +53,10 @@
 			</div>
 		</div>
 	</div>
-
 </div>
-
 <div class="container col-md-auto">
 <!-- <div class="container col col-lg-9"> -->
 <div class="row justify-content-md-center">
-
 <br>
 <table class="table table-hover table-sm">
 	<tr>
@@ -80,7 +78,6 @@
 		String addr2=list.get(i).getAddr2();
 		String created_at=list.get(i).getCreated_at();
 %>
-<input type="hidden" id="id" value="<%= userid %>">
 <form>
 	<tr id="list">
 		<td><%= userid %></td>
@@ -100,12 +97,11 @@
 			  <div class="modal-dialog">
 			    <div class="modal-content">
 			      <div class="modal-header">
-			        <h5 class="modal-title" id="staticBackdropLabel">회원 삭제</h5>
+			        <h5 class="modal-title" id="staticBackdropLabel"></h5>
 			        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 			      </div>
 			      <div class="modal-body">
-			        <%-- 회원 <%= userid %>님을 삭제하시겠습니까?--첫번째 데이터가 출력됨 --%>
-			        선택한 회원을 삭제하시겠습니까?
+			      	회원 <b><%= userid %></b>님을 삭제하시겠습니까?
 			      </div>
 			      <div class="modal-footer">
 			        <button type="button" id="delete<%= userid %>" data-id="<%= userid %>" name="delete" class="btn btn-success">삭제</button>
@@ -184,9 +180,8 @@
 		});//end fn
 		
 		$("button[name=change]").on("click", function() {//수정 버튼 클릭//회원 정보 출력 페이지로 이동
-			console.log("click=====");
 			var id=$(this).attr("data-id");
-			console.log(id);
+//			console.log(id);
 			location.href="AccountManagementServlet?memberId="+id;
 		});//end fn
 	});//end ready
