@@ -30,7 +30,7 @@ public class ProductLikeServlet extends HttpServlet {
 	HttpSession session = request.getSession();
 	MemberDTO dto = (MemberDTO)session.getAttribute("login");
 	String p_id = request.getParameter("p_id");
-	String userid = request.getParameter("userid");
+	String userid = dto.getUserid();
 	System.out.println(p_id+userid);
 	
 	if(dto != null) {
@@ -50,19 +50,15 @@ public class ProductLikeServlet extends HttpServlet {
 		if(likecheck== 0) {
 			int n = service.addLike(map);
 			System.out.println(n+"찜 추가");
-			//이부분 추가함
-			out.print(likecheck);
-			
-		
+			likecheck=1;
+
 		}else{
 			  int n2 = service.deleteLike(map);
-		  System.out.println("찜 삭제"+n2);
-			out.print(likecheck);
-
-		
+		      System.out.println("찜 삭제"+n2);
+		      likecheck=0;
 		}
 		
-		
+		out.print(likecheck);
 		
 	}else {
 		session.setAttribute("mesg", "로그인이 필요합니다.");

@@ -59,19 +59,17 @@ function productChoice(n) {
  	MemberDTO mdto = (MemberDTO) session.getAttribute("login");
 	if (mdto != null) {%>
 
-      var userid =  <%=mdto.getUserid()%>;
-
 		$.ajax({
 
 			type : "get",
 			url : "ProductLikeServlet",
 			data : {
 				"p_id" : n,
-				"userid" : userid
+			
 			},
 			dataType : "text",
 			success : function(data) {
-				alert(data);
+				
 				var like_img = '';
 				if (data == 0) {
 					like_img = "images/like.png";
@@ -149,6 +147,7 @@ String sortBy=(String) request.getAttribute("sortBy");
 List<CategoryProductDTO> pDTO_list = pDTO.getList();
 
 List<CategoryProductDTO> product_list = (List<CategoryProductDTO>) request.getAttribute("product_list");
+
 %>
 	
 <div id="categoryProductContainer" class="container ">
@@ -216,8 +215,7 @@ List<CategoryProductDTO> product_list = (List<CategoryProductDTO>) request.getAt
 
 				<a id="productChoice" href="javascript:productChoice(<%=p_id%>)"> 
 			
-			<img id="like_img<%=p_id%>" src="images/like.png" width="30" height="30" class="liked"> 
-					<%-- <%
+					<%
 					if (likecheck == 1) {
 					%> <img id="like_img<%=p_id%>"
 					src="images/liked.png" width="30" height="30" class="liked">
@@ -226,7 +224,7 @@ List<CategoryProductDTO> product_list = (List<CategoryProductDTO>) request.getAt
 					%> <img id="like_img<%=p_id%>" src="images/like.png"
 					width="30" height="30" class="liked"> 
 					
-					<% } %> --%>
+					<% } %>
 
 				</a>
 

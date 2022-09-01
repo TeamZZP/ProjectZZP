@@ -47,7 +47,6 @@ function productChoice(n) {
 
 if (mdto != null) {%>
 
-      var userid =  <%=mdto.getUserid()%>;
 
 		$.ajax({
 
@@ -55,13 +54,13 @@ if (mdto != null) {%>
 			url : "ProductLikeServlet",
 			data : {
 				"p_id" : n,
-				"userid" : userid
+				
 			},
 			dataType : "text",
 			success : function(data) {
-				alert(data);
+				
 				var like_img = '';
-				if (likecheck == 0) {
+				if (data == 0) {
 					like_img = "images/like.png";
 				} else {
 					like_img = "images/liked.png";
