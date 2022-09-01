@@ -29,4 +29,11 @@ public class OrderDAO {
 		int n = session.insert("OrderMapper.addOrder",orderdto);
 		return n;
 	}
+
+
+
+	public int getOrderid(SqlSession session) {
+		int n = session.selectOne("OrderMapper.getOrderid");
+		return n;
+	}
 }

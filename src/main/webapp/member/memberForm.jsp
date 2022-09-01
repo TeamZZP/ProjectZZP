@@ -1,3 +1,5 @@
+<%@page import="java.util.HashMap"%>
+<%@page import="com.dto.MemberDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
@@ -119,7 +121,24 @@ $("#addMember").click(function() {
 	
 });
 
-</script>    
+</script>  
+<%
+HashMap<String, String> map = (HashMap<String, String>) session.getAttribute("kakaoInfo");
+System.out.println(map);
+	String email = null;
+	String username = null;
+	String [] arr = null;
+	String email1 = null;
+	String email2 = null;
+
+	if(map!=null){
+		email = map.get("email");
+		username = map.get("username");
+		arr = email.split("@");
+		email1 = arr[0];
+		email2 = arr[1];
+	}
+%>  
 <div class="container">
 <div class="row justify-content-center">
                     <div class="col-md-8">
@@ -165,21 +184,21 @@ $("#addMember").click(function() {
                                         <div class="cols-sm-10">
                                             <div class="input-group">
                                                 <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
-                                                <input type="text" class="form-control" name="username" id="username" placeholder="이름을 입력하세요" />
+                                                <input type="text" class="form-control" name="username" id="username" <%if(username!=null){%> readonly="readonly" value="<%=username%>" <%}%> placeholder="이름을 입력하세요"  />
                                             </div>
                                         </div>
                                     </div>
                                     <!-- 이메일 -->
-                                   	<div class="form-group">
+                                   <div class="form-group">
                    					   <label for="type" class="col-sm-3 control-label" style="font-weight: bold;">이메일</label>
                    					  <div class="row g-3">
 									  <div class="col-sm-4">
-									    <input type="text" name="email1" id="email1" class="form-control">
+									    <input type="text" name="email1" id="email1" <%if(email1!=null){%>readonly="readonly" value="<%=email1%>" <%}%> class="form-control">
 									  </div>
 									  <div class="col-sm-4">
 									    <div class="input-group">
 									      <div class="input-group-text">@</div>
-									      <input type="text" name="email2"  placeholder="직접입력" id="email2" class="form-control">
+									      <input type="text" name="email2"  placeholder="직접입력" <%if(email2!=null){%>readonly="readonly" value="<%=email2%>" <%}%> id="email2" class="form-control">
 									    </div>
 									  </div>
 									  <div class="col-sm-4">
@@ -194,7 +213,7 @@ $("#addMember").click(function() {
 									  </div>
 									</div>
 									</div>
-								  </div>
+								  </div> 
                          		    <!-- 전화번호 -->
                                     <div class="form-group">
                                         <label for="number" class="cols-sm-2 control-label" style="font-weight: bold;">전화번호</label>

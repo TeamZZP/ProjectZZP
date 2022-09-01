@@ -107,7 +107,7 @@
   color: #EF3B3A;
 }
 body {
-   background: #76b852; 
+   background: #76b852;   *//* fallback for old browsers */
    background: rgb(141,194,111); 
    background: linear-gradient(90deg, rgba(141,194,111,1) 0%, rgba(118,184,82,1) 50%); */
   font-family: "Roboto", sans-serif;
@@ -126,7 +126,7 @@ body {
 $(document).ready(function() {
 	
 	//아이디 비밀번호 필수
-	$("form").submit(function() {
+	$("#loginForm").submit(function() {
 		if ($("#userid").val().length == 0) {
 			alert("아이디를 입력해주세요!");
 			$("#userid").focus();
@@ -143,7 +143,7 @@ $(document).ready(function() {
 
 <div class="login-page">
   <div class="form">
-    <form class="login-form" action="LoginServlet" method="post">
+    <form id="loginForm" class="login-form" action="LoginServlet" method="post">
       <input type="text" name="userid" id="userid" placeholder="아이디" autofocus />
       <input type="password" name="passwd" id="passwd" placeholder="비밀번호"/>
       <button type="submit">로그인</button><br>
@@ -156,10 +156,16 @@ $(document).ready(function() {
       </p>
     </form>
       <div id="kko">
-	    <a id="kakao-login-btn" >
+	    <a id="custom-login-btn" href="javascript:kakaoLogin();">
 			<img src="//k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg"
 				width="222" alt="카카오 로그인 버튼" />
 		</a>
+		<form id="form-kakao-login" method="post" action="KakaoLoginServlet">
+		    			<input type="hidden" name="email" id="kakaoEmail"/>
+		    			<input type="hidden" name="nickname" id="kakaoNickname"/>
+		    			<input type="hidden" name="accessToken" id="accessToken"/>
+		    			<!-- <input type="hidden" name="img"/> -->
+		</form>
 	  </div>
 	  <div id="naver">
 		<a id="naver-login-btn" href="#">
@@ -170,33 +176,42 @@ $(document).ready(function() {
   </div>
 </div>
 
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script type="text/javascript">
-$(document).ready(function() {
-	window.Kakao.init("6967e0449063c04f2ba9d396e18a25a6"); //js key세팅
+	//window.Kakao.init("6967e0449063c04f2ba9d396e18a25a6"); //js key세팅
 	
-	$("#kko").click(function() {
-		Kakao.Auth.login({
+	function kakaoLogin() {
+		window.Kakao.init("6967e0449063c04f2ba9d396e18a25a6");
+		
+		window.Kakao.Auth.login({
+			scope: 'profile_nickname, profile_image, account_email',
 			success: function(authObj) {
-				Kakao.API.request({
-					url: 'v2/user/me',
-					success: function(res) {
-						console.log(res);
-						var id = res.id;
-						scope : 'account_email';
-						alert('로그인성공');
-						location.href="MainServlet";
-					}
-				})
 				console.log(authObj);
-				var token = authObj.access_token;
-			},
-			fail: function(err) {
-				alert(JSON.stringify(err));
+				window.Kakao.API.request({
+					url: '/v2/user/me',/* 로그인한 사용자의 정보 가져오기 */
+					success: res => {
+						
+						var accessToken = Kakao.Auth.getAccessToken();
+						Kakao.Auth.setAccessToken(accessToken);
+						console.log("accessToken===="+accessToken);
+						
+						const kakao_account = res.kakao_account;
+						console.log(kakao_account);
+						console.log(kakao_account.email);
+						console.log(kakao_account.profile.nickname);
+						
+						document.getElementById("kakaoEmail").value = kakao_account.email;
+						document.getElementById("kakaoNickname").value = kakao_account.profile.nickname;
+						document.getElementById("accessToken").value = accessToken;
+						
+						document.querySelector("#form-kakao-login").submit();
+					},
+					fail: function(error) {
+						console.log('카카오톡과 연결되지 않습니다. 다시 시도해주시기 바랍니다.');
+					}
+				});
 			}
-		})
-	});
-	
-}
+		});
+	};
+
 </script>

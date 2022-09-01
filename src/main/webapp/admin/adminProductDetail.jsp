@@ -183,7 +183,7 @@ List<ImagesDTO> ilist = (List<ImagesDTO>) request.getAttribute("ImagesRetrieveLi
 					        </div>
 					    </div>
 					</div>
-					<!-- 상품등록or취소 버튼 -->
+					<!-- 상품수정or취소 버튼 -->
 					<div class="form-group" style="margin-top: 20px; text-align: center;">
 						<input type="submit" value="수정" id="updateProd" class="btn btn-success">
 						<button id="backList" class="btn btn-success">취소</button>

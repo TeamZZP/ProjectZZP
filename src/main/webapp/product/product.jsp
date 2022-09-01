@@ -59,7 +59,7 @@ function productChoice(n) {
  	MemberDTO mdto = (MemberDTO) session.getAttribute("login");
 	if (mdto != null) {%>
 
-      var userid =  '<%=mdto.getUserid()%>';
+      var userid =  <%=mdto.getUserid()%>;
 
 		$.ajax({
 
@@ -71,8 +71,9 @@ function productChoice(n) {
 			},
 			dataType : "text",
 			success : function(data) {
+				alert(likecheck);
 				var like_img = '';
-				if (data.likecheck == 0) {
+				if (likecheck == 0) {
 					like_img = "images/like.png";
 				} else {
 					like_img = "images/liked.png";
@@ -213,7 +214,9 @@ List<CategoryProductDTO> product_list = (List<CategoryProductDTO>) request.getAt
 			<!-- 찜기능  -->
 			<div class="p-2 text-center">
 
-				<a id="productChoice" href="javascript:productChoice(<%=p_id%>)">
+				<a id="productChoice" href="javascript:productChoice(<%=p_id%>)"> 
+					
+				
 
 					<%
 					if (likecheck == 1) {

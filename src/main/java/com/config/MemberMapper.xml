@@ -127,4 +127,9 @@
 			where userid = #{userid}
 		</select>
 		
+		<select id="selectMemberBykakao" resultType="MemberDTO" parameterType="hashmap">
+			select * from member
+			where concat(concat(email1,'@'),email2) = #{email} and username=#{username}
+		</select>
+		
 </mapper>

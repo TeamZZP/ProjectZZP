@@ -163,6 +163,7 @@ $(document).ready(function() {
 		<form id="form-kakao-login" method="post" action="KakaoLoginServlet">
 		    			<input type="hidden" name="email" id="kakaoEmail"/>
 		    			<input type="hidden" name="nickname" id="kakaoNickname"/>
+		    			<input type="hidden" name="accessToken" id="accessToken"/>
 		    			<!-- <input type="hidden" name="img"/> -->
 		</form>
 	  </div>
@@ -201,6 +202,7 @@ $(document).ready(function() {
 						
 						document.getElementById("kakaoEmail").value = kakao_account.email;
 						document.getElementById("kakaoNickname").value = kakao_account.profile.nickname;
+						document.getElementById("accessToken").value = accessToken;
 						
 						document.querySelector("#form-kakao-login").submit();
 					},

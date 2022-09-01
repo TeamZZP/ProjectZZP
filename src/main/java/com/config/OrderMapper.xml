@@ -34,10 +34,17 @@ where p.p_id in
 			#{item}
 		</foreach>
 	</select>
+	
 
-<insert id="addOrder">
+<select id="getOrderid" resultType="int">
+select orders_order_id_seq.NEXTVAL from dual
+</select>	
+	
+	
+
+<insert id="addOrder" parameterType="OrderDTO">
 insert into orders (order_id, userid, p_id, total_price, delivery_address, delivery_loc, delivery_req, order_date,order_state,p_amount)
-values(order_order_id_seq.NEXTVAL, #{userid}, #{p_id}, #{total_price}, #{delivery_address}, #{delivery_loc}, #{delivery_req},sysdate,'주문완료', #{p_amount})
+values(#{order_id}, #{userid}, #{p_id}, #{total_price}, #{delivery_address}, #{delivery_loc}, #{delivery_req},sysdate,'주문완료', #{order_quantity})
 </insert>	
 
 </mapper>

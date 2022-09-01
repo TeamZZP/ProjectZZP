@@ -24,7 +24,7 @@ float: left;
 padding-right: 11%;
 }
 
-#category_a{
+.categorycss{
 	text-decoration: none;
 	color: black;
 }
