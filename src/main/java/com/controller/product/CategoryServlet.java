@@ -30,22 +30,23 @@ public class CategoryServlet extends HttpServlet {
 		MemberDTO member = (MemberDTO) session.getAttribute("login");
 				
 		String userid = "";
-		
-	
+
 		String p_id = request.getParameter("p_id");
-		//request.getAttribute("c_id");
 
 		CategoryService service = new CategoryService();
 		
 		List<CategoryProductDTO> product_list  = null; //베스트상품
 		
 		ProductService pservice = new ProductService();
-       if (request.getAttribute("c_id") == null ||"".equals(request.getAttribute("c_id"))) {
+		PageDTO pDTO = new PageDTO();
+
+       if (request.getParameter("c_id") == null ||"".equals(request.getParameter("c_id"))) {
     	   System.out.println("카테고리 아이디 확인 : "+request.getParameter("c_id"));
     	   product_list= pservice.bestProductList();  //베스트 상품 가져오기(이미지,productDTO)
-			
+			pDTO.setList(product_list);
 		}else {
-			product_list= pservice.productList(Integer.parseInt((String)request.getAttribute("c_id"))); 
+		   product_list= pservice.productList(Integer.parseInt(request.getParameter("c_id"))); 
+		   pDTO.setList(product_list);
 		}
    		
       
@@ -57,22 +58,29 @@ public class CategoryServlet extends HttpServlet {
 		String searchName=request.getParameter("searchName");
 		String searchValue=request.getParameter("searchValue");
 		String sortBy=request.getParameter("sortBy");
+		//String sortBy=(String)request.getAttribute("sortBy");
 		
-		if (sortBy == null) {sortBy="p_id";}//최초 정렬 기준
+		HashMap<String, String> p_map = new HashMap<String, String>();
+		
+		//위 데이터를 map에 저장
+		p_map.put("searchName", searchName);
+		p_map.put("searchValue", searchValue);
+		if (sortBy == null) {
+			p_map.put("sortBy", "p_order");	
+			}else{//최초 정렬 기준//주문 순=베스트
+			p_map.put("sortBy", sortBy);	
+			p_map.put("c_id", request.getParameter("c_id"));	
+			}
 		
 		System.out.println(curPage+"\t"+searchName+"\t"+searchValue+"\t"+sortBy);
 		
-		//위 데이터를 map에 저장
-		HashMap<String, String> p_map = new HashMap<String, String>();
 		
-		p_map.put("c_id", (String)request.getAttribute("c_id"));
-		p_map.put("sortBy", sortBy);
+		System.out.println("카테고리서블릿에서 파싱전 c_id!!!!!!"+request.getParameter("c_id"));
+		System.out.println("카테고리서블릿에서 sortBy"+sortBy);
 		
-		System.out.println("카테고리서블릿!!!!!!"+p_map);
+		pDTO = pservice.selectC_Product(p_map,Integer.parseInt(curPage));
 		
-		PageDTO pDTO2 = pservice.selectC_Product(p_map,Integer.parseInt(curPage));
-		
-		System.out.println("카테고리서블릿!!!!!!"+pDTO2);
+		System.out.println("카테고리서블릿!!!!!!"+pDTO);
 		
 		
 		 
@@ -108,7 +116,7 @@ public class CategoryServlet extends HttpServlet {
 		}
 		
 		
-       	request.setAttribute("pDTO", pDTO2);
+       	request.setAttribute("pDTO", pDTO);
 		request.setAttribute("sortBy", sortBy);
         request.setAttribute("product_list", product_list);
 
