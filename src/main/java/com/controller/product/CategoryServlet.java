@@ -28,7 +28,6 @@ public class CategoryServlet extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		MemberDTO member = (MemberDTO) session.getAttribute("login");
-		ProductService  product_service  = new ProductService(); 
 				
 		String userid = "";
 		
@@ -70,7 +69,7 @@ public class CategoryServlet extends HttpServlet {
 		
 		System.out.println("카테고리서블릿!!!!!!"+p_map);
 		
-		PageDTO pDTO2 = product_service.selectC_Product(p_map,Integer.parseInt(curPage));
+		PageDTO pDTO2 = pservice.selectC_Product(p_map,Integer.parseInt(curPage));
 		
 		System.out.println("카테고리서블릿!!!!!!"+pDTO2);
 		
@@ -96,7 +95,7 @@ public class CategoryServlet extends HttpServlet {
 
 				map.put("p_id",  Integer.toString(product_list.get(i).getP_id()));
 				map.put("userid", userid);
-				likecheck.add(product_service.likeCheck(map));
+				likecheck.add(pservice.likeCheck(map));
 				
 			}
 			

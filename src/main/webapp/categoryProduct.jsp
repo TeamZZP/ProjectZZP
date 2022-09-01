@@ -324,7 +324,7 @@ if (mdto != null) {%>
 					if (p == curPage) {
 						out.print("<b>" + p + "</b>&nbsp;&nbsp;");
 					} else {
-						out.print("<a id='search' href='StoreServlet?curPage=" + p + "&sortBy=" + sortBy + "&category=product'>" + p
+						out.print("<a id='search' href='CategoryServlet?curPage=" + p + "&sortBy=" + sortBy + "&category=product'>" + p
 						+ "</a>&nbsp;&nbsp;");
 					}
 				}
