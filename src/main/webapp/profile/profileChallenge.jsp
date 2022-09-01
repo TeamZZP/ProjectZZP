@@ -20,8 +20,6 @@
 	if(challengeList.size()>0) {
 		userid = challengeList.get(0).getUserid();
 	}
-	//회원의 챌린지 개수 가져오기
-	int challNum = (Integer) request.getAttribute("challNum");
 	//각 게시글마다 도장 가져오기
 	HashMap<String, String> stampListMap = (HashMap<String, String>) request.getAttribute("stampListMap");
 	//회원의 프로필 이미지 가져오기
@@ -71,27 +69,41 @@
 	$(document).ready(function () {
 		
 		//무한 스크롤
-		$('.back-drop').hide()
-		let curPage = 1
-		let isLoading = false
-		$(window).on('scroll', function () {
-			let scrollTop = $(window).scrollTop() //위로 스크롤된 길이
-			let windowHeight = $(window).height() //웹브라우저 창의 높이
-			let documentHeight = $(document).height() //문서 전체 높이
-			let isBottom = scrollTop + windowHeight + 200 >= documentHeight //바닥까지 스크롤 여부
+		$('.skeleton').hide();
+		let curPage = 1;
+		let isLoading = false;
+		
+		function infiniteScroll() {
+			let challPost = document.querySelector('.challengePost:last-child')
 			
-			if (isBottom) {
-				if (curPage == '<%=totalPage%>' || isLoading) {
-					console.log('끝!')
-					return;
+			//인터섹션 옵저버 생성
+			const io = new IntersectionObserver((entry, observer)=>{
+				
+				const ioTarget = entry[0].target //현재 보이는 타겟
+				if (entry[0].isIntersecting) { //viewport에 타켓이 보일 때
+					console.log('현재 보이는 타겟', ioTarget)
+					io.unobserve(challPost) //현재 보이는 타겟 감시 취소
+					
+					//현재 페이지가 전체 페이지와 같거나 로딩 중인 경우 아래 실행 X
+					if (curPage == '<%=totalPage%>' || isLoading) { return; }
+				
+					isLoading = true //로딩중 true
+					$('.skeleton').show() //로딩 이미지 띄우기
+					curPage++ //요청할 페이지 증가
+					getList(curPage) //추가 페이지 요청 함수
+					
+					challPost = document.querySelector('.challengePost:last-child') 
+					io.observe(challPost) //새로운 타겟 감시
 				}
-				isLoading = true //로딩중 true
-				$('.back-drop').show() //로딩 이미지 띄우기
-				curPage++ //요청할 페이지 증가
-				getList(curPage) //추가 페이지 요청 함수
-			}
-		})
-		function getList(curPage) {
+			}, {
+				threshold: 0.8 //viewport에 타겟이 80%이상 보일 때
+			})
+			
+			io.observe(challPost) //타겟 감시
+		}
+		infiniteScroll() //최초 호출
+		
+		function getList(curPage) { //추가 페이지 요청 함수
 			console.log('inscroll '+curPage)
 			$.ajax({
 				type:'get',
@@ -103,22 +115,21 @@
 				},
 				dataType:'html',
 				success: function (data) {
-					console.log(data)
-					$('.challengeAll:last').append(data) //응답받은 데이터 추가
-					$('.back-drop').hide() //로딩 이미지 숨기기
+					$('.challengeAll').append(data) //응답받은 데이터 추가
+					$('.skeleton').hide() //로딩 이미지 숨기기
 					isLoading = false //로딩중 false
+					infiniteScroll() //다시 호출
 				},
 				error: function () {
 					alert('문제가 발생했습니다. 다시 시도해 주세요.');
 				}
 			})
-			
 		}
 	});
 </script>
 
 <div class="row p-2 mx-4 mb-2">
-	<div class="col">챌린지 <span class="text-success fw-bold"><%= challNum %></span></div>
+	<div class="col">챌린지 <span class="text-success fw-bold"><%= totalCount %></span></div>
 </div>
 
 <div class="challengeAll row ms-3">
@@ -165,7 +176,7 @@
 
 </div>
 
-<div class="row back-drop ms-3">
+<div class="row skeleton ms-3">
   <div class="col-xl-4 col-md-6"><img class="img" src="images/none.png"></div>
   <div class="col-xl-4 col-md-6"><img class="img" src="images/none.png"></div>
   <div class="col-xl-4 col-md-6"><img class="img" src="images/none.png"></div>
