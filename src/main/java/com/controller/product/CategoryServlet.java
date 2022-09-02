@@ -58,14 +58,14 @@ public class CategoryServlet extends HttpServlet {
 				pDTO.setList(product_list);*/
 				System.out.println("11111111111111111111111");
 				 if (sortBy == null) {
-						//p_map.put("sortBy", "p_order");	
-						sortBy ="p_order";
+						p_map.put("sortBy", "p_order");	
+						//sortBy ="p_order";
 						}else{//최초 정렬 기준//주문 순=베스트
-						//p_map.put("sortBy", sortBy);
+						p_map.put("sortBy", sortBy);
 							System.out.println("sortBy : "+ sortBy);
 						}
 			       
-			       pDTO = pservice.selectBestProductListPaging(sortBy,Integer.parseInt(curPage));
+			       pDTO = pservice.selectBestProductListPaging(p_map,Integer.parseInt(curPage));
 			       
 			}else {
 				
@@ -73,10 +73,11 @@ public class CategoryServlet extends HttpServlet {
 			  /* product_list= pservice.productList(Integer.parseInt(request.getParameter("c_id"))); 
 			   pDTO.setList(product_list);*/
 		       
-		       if (sortBy == null) {
-					p_map.put("sortBy", "p_order");	
+		       if (sortBy== null) {
+					p_map.put("sortBy", "p_id");	
+					p_map.put("c_id", request.getParameter("c_id"));
 					}else{//최초 정렬 기준//주문 순=베스트
-					p_map.put("sortBy", sortBy);	
+					p_map.put("sortBy",sortBy);	
 					p_map.put("c_id", request.getParameter("c_id"));	
 					}
 		       

@@ -47,7 +47,7 @@ and IMAGE_RNK = 1) as p_image
 ,p.P_STOCK
 from product p
 ) 
-order by p_order desc, ${sortBy} desc
+order by ${sortBy} desc
 </select>
 
 <select id="ProductList" resultType="CategoryProductDTO" >
@@ -261,7 +261,7 @@ and IMAGE_RNK = 1) as p_image
 ,p.P_STOCK
 from product p
 
-where p.c_id = #{c_id} 
+where p.c_id = ${c_id} 
 	 
 order by ${sortBy} desc
 

@@ -143,7 +143,7 @@ public class ProductDAO {
 
 	}
 	
-	public PageDTO selectBestProductListPaging(SqlSession session, String sortBy, int curPage) {
+	public PageDTO selectBestProductListPaging(SqlSession session, HashMap<String, String> p_map, int curPage) {
 		System.out.println("ProductDAO.selectBestProductListPaging");
 		PageDTO pDTO=new PageDTO();
 		pDTO.setCurPage(curPage);
@@ -152,7 +152,7 @@ public class ProductDAO {
 		int offset=(curPage-1)*perPage;//페이지 시작 idx
 		
 		//map에 검색 조건, 검색어, 정렬 저장된 상태
-		List<CategoryProductDTO> list=session.selectList("ProductMapper.selectBestProductListPaging", sortBy, new RowBounds(offset, perPage));
+		List<CategoryProductDTO> list=session.selectList("ProductMapper.bestProductListPaging", p_map, new RowBounds(offset, perPage));
 		
 		pDTO.setList(list);//현재 페이지에 해당하는 데이터 리스트
 		pDTO.setTotalCount(bestProdCount(session));//전체 레코드 갯수
