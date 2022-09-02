@@ -470,5 +470,11 @@
 	where comment_id=#{comment_id}
 </select>
 
+<update id="updateReport" parameterType="hashmap">
+	update report
+	set report_status=#{report_status}
+	where report_id=#{report_id}
+</update>
+
 
 </mapper>

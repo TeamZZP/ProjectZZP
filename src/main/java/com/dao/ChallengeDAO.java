@@ -249,6 +249,10 @@ public class ChallengeDAO {
 		return session.selectOne("ChallengeMapper.selectChallIdFromComment", comment_id);
 	}
 
+	public int updateReport(SqlSession session, HashMap<String, String> map) {
+		return session.update("ChallengeMapper.updateReport", map);
+	}
+
 	
 
 
