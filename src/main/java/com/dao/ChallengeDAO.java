@@ -149,6 +149,11 @@ public class ChallengeDAO {
 		int n = session.delete("ChallengeMapper.deleteAllComments", comment_id);
 		return n;
 	}
+	
+	public int updateComment(SqlSession session, CommentsDTO dto) {
+		int n = session.update("ChallengeMapper.updateComment", dto);
+		return n;
+	}
 
 	public StampDTO selectOneStamp(SqlSession session, String chall_id) {
 		StampDTO dto = session.selectOne("ChallengeMapper.selectOneStamp", chall_id);
@@ -243,6 +248,8 @@ public class ChallengeDAO {
 	public int selectChallIdFromComment(SqlSession session, int comment_id) {
 		return session.selectOne("ChallengeMapper.selectChallIdFromComment", comment_id);
 	}
+
+	
 
 
 	
