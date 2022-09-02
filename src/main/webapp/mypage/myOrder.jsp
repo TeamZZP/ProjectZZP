@@ -46,7 +46,7 @@
 					if (data == 0) {
 						chk.attr("href","reviewInsert.jsp?ORDER_ID="+ORDER_ID+"&P_NAME="+P_NAME+"&P_ID="+P_ID);
 					} else {
-						
+						//chk.attr("href","reviewUpdate.jsp?ORDER_ID="+ORDER_ID+"&P_NAME="+P_NAME+"&P_ID="+P_ID);
 					}
 				},
 				error: function (xhr, status, error) {
