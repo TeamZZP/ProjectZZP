@@ -34,13 +34,30 @@
 	}
 </style>
 
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+	$(document).ready(function () {
+		$(".reviewUpdate").click(function () {
+			/* var REVIEW_ID = $(this).attr("data-reviewID");
+			console.log(REVIEW_ID); */
+			console.log("클릭");
+			//$("#reviewForm").attr("action","reviewOneSelect?REVIEW_ID="+REVIEW_ID);
+		});
+		$(".reviewDelete").click(function () {
+			console.log("클릭");
+		});
+	});//end ready
+</script>
+
 <div class="container">
 <div class="row">
 	<div class="col-lg-2">
 		<div class="col">
 			<a href="MypageServlet">마이페이지 홈</a>
 		</div>
-	   <div class="col">주문 내역</div>
+	   <div class="col" > 
+	   		<a href="MyOrderServlet">주문 내역</a> 
+	   </div>
 	   <div class="col">반품/취소/교환 목록</div>
 	   <div class="col">
 	   		<a href="ProfileCategoryServlet?category=myreview&userid=<%=userid%>" class="currCategory">내 구매후기</a>
@@ -63,6 +80,7 @@
 	</div>
 <div class="col-lg-10">
 <div id="addTableDiv">
+<form method="post" id="reviewForm">
 <table id="reviewTable" class="table table-hover">
 	<tr class="table-success text-center">
 		<th width="25%">상품정보</th>
@@ -101,8 +119,8 @@
 			<div><%= review_created %></div>
 		</td>
 		<td class="align-middle text-center">
-			<button class="btn btn-light btn-sm">수정</button>
-			<button class="btn btn-light btn-sm">삭제</button>
+			<button class="btn btn-light btn-sm" class="reviewUpdate" data-reviewID="<%=dto.getREVIEW_ID() %>">수정</button>
+			<button class="btn btn-light btn-sm" class="reviewDelete" data-reviewID="<%=dto.getREVIEW_ID() %>">삭제</button>
 		</td>
 	</tr>
 <%
@@ -128,6 +146,7 @@
 		</td>
 	</tr>
 </table>
+</form>
 </div>
 </div>
 </div>
