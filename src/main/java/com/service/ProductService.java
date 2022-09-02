@@ -260,6 +260,18 @@ public class ProductService {
 		}
 		return dto;
 	}
+	
+	public PageDTO selectBestProductListPaging(String sortBy, int curPage) {
+		System.out.println("ProductService.selectBestProductListPaging");
+		SqlSession session=MySqlSessionFactory.getSqlSession();
+		PageDTO dto=null;
+		try {
+			dto=dao.selectBestProductListPaging(session, sortBy, curPage);
+		} finally {
+			session.close();
+		}
+		return dto;
+	}
 
 	public int updateProduct(ProductDTO dto) {
 		int num = 0;
@@ -285,6 +297,9 @@ public class ProductService {
 		return num;
 	}
 
+
+
+	
 
 
 }

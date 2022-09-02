@@ -137,6 +137,7 @@ function productChoice(n) {
 		
 	})
 </script>
+<div id="categoryClickChange">
 <form action="StoreServlet" id="prodForm">	
 <%
 PageDTO pDTO=(PageDTO) request.getAttribute("pDTO");
@@ -344,6 +345,7 @@ List<CategoryProductDTO> pDTO_list = pDTO.getList();
 	</div>
 </div>
 </form>
+</div>
 <script>
 	$(function() {
 		

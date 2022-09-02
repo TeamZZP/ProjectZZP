@@ -30,8 +30,7 @@ padding-right: 11%;
 }
 </style>
 
-  <script type="text/javascript"
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript"> 
 
 		
@@ -49,8 +48,8 @@ function getCategoryProduct(id){  //category.jsp에서 비동기처리로 produc
          url: "CategoryServlet",
          dataType : "text",
          success : function(data,status,xhr){
-         	 $("#categoryProductContainer").empty();
-        	 $("#categoryProductContainer").append(data);
+         	 $("#categoryClickChange").empty();
+        	 $("#categoryClickChange").append(data);
         	 
                },error : function (xhr,status,error){
             	   console.log(error);

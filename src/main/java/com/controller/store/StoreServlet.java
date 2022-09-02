@@ -55,8 +55,8 @@ public class StoreServlet extends HttpServlet {
 				
 				System.out.println(curPage+"\t"+searchName+"\t"+searchValue+"\t"+sortBy);
 	
-				PageDTO pDTO = new PageDTO();
-				pDTO = 	product_service.selectAllProduct(p_map,Integer.parseInt(curPage));
+				PageDTO pDTO = new PageDTO(); //변수 list,curpage,perpage,totalCount
+				pDTO = 	product_service.selectAllProduct(p_map,Integer.parseInt(curPage)); //페이징 상품List
 				System.out.println("스토어리스트!!!!!!"+pDTO);
 				
 		
