@@ -38,10 +38,9 @@
 <script>
 	$(document).ready(function () {
 		$(".reviewUpdate").click(function () {
-			/* var REVIEW_ID = $(this).attr("data-reviewID");
-			console.log(REVIEW_ID); */
-			console.log("클릭");
-			//$("#reviewForm").attr("action","reviewOneSelect?REVIEW_ID="+REVIEW_ID);
+			var REVIEW_ID = $(this).attr("data-reviewID");
+			console.log(REVIEW_ID);
+			$("#reviewForm").attr("action","reviewOneSelect?REVIEW_ID="+REVIEW_ID);
 		});
 		$(".reviewDelete").click(function () {
 			console.log("클릭");
@@ -81,7 +80,7 @@
 	</div>
 <div class="col-lg-10">
 <div id="addTableDiv">
-<!-- <form method="post" id="reviewForm"> -->
+<form method="post" id="reviewForm">
 <table id="reviewTable" class="table table-hover">
 	<tr class="table-success text-center">
 		<th width="25%">상품정보</th>
@@ -120,8 +119,8 @@
 			<div><%= review_created %></div>
 		</td>
 		<td class="align-middle text-center">
-			<button class="btn btn-light btn-sm" class="reviewUpdate" data-reviewID="<%=dto.getREVIEW_ID() %>">수정</button>
-			<button class="btn btn-light btn-sm" class="reviewDelete" data-reviewID="<%=dto.getREVIEW_ID() %>">삭제</button>
+			<button class="btn btn-light btn-sm reviewUpdate" data-reviewID="<%=dto.getREVIEW_ID() %>">수정</button>
+			<button class="btn btn-light btn-sm reviewDelete" data-reviewID="<%=dto.getREVIEW_ID() %>">삭제</button>
 		</td>
 	</tr>
 <%
@@ -148,7 +147,7 @@
 		</td>
 	</tr>
 </table>
-<!-- </form> -->
+</form>
 </div>
 </div>
 </div>
