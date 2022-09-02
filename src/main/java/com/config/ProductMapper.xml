@@ -27,6 +27,29 @@ from product p
 order by p_order desc
 </select>
 
+<select id="bestProductListPaging" resultType="CategoryProductDTO" parameterType="hashmap">
+select *
+from (
+select p.P_ID
+,(select 
+IMAGE_ROUTE
+from images
+where p_id = p.p_id 
+and IMAGE_RNK = 1) as p_image
+,(select count(*) from Orders where p_id = p.p_id  ) as p_order
+,p.P_NAME
+,p.P_CONTENT
+,p.C_ID
+,p.P_COST_PRICE
+,p.P_SELLING_PRICE
+,p.P_DISCOUNT
+,p.P_CREATED
+,p.P_STOCK
+from product p
+) 
+order by p_order desc, ${sortBy} desc
+</select>
+
 <select id="ProductList" resultType="CategoryProductDTO" >
 select *
 from (
@@ -83,10 +106,6 @@ where p.c_id = #{c_id}
 <select id="ImagesRetrieve" parameterType="int" resultType="ImagesDTO">
 select * from images where p_id= #{p_id}
 </select>
-
-<!-- <select id="bestProduct" resultType="productDTO">
-select * from product
-</select> -->
 
 <select id="searchProduct" resultType="CategoryProductDTO" parameterType="String">
 	select p.P_ID,(select IMAGE_ROUTE from images where p_id = p.p_id and IMAGE_RNK = 1) as p_image, p.P_NAME, p.P_CONTENT
@@ -184,8 +203,16 @@ and IMAGE_RNK = 1) as p_image,p.P_NAME,p.P_CONTENT,p.C_ID,p.P_COST_PRICE
 	 order by ${sortBy} desc
 </select>
 
-<select id="totalCount" parameterType="hashmap" resultType="int">
-	select count(*) from product
+<select id="BestProdCount" resultType="int">
+	select count(*) from product 
+</select>
+
+<select id="totalCount" resultType="int" parameterType="hashmap">
+	select count(*) from product 
+</select>
+
+<select id="countByC_id" resultType="int" parameterType="hashmap">
+	select count(*) from product where c_id = ${c_id}
 </select>
 
 <!-- 스토어 메인 페이징 -->

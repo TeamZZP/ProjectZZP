@@ -29,28 +29,14 @@ public class CategoryServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		MemberDTO member = (MemberDTO) session.getAttribute("login");
 				
-		String userid = "";
-
-		String p_id = request.getParameter("p_id");
 
 		CategoryService service = new CategoryService();
-		
-		List<CategoryProductDTO> product_list  = null; //베스트상품
-		
 		ProductService pservice = new ProductService();
-		PageDTO pDTO = new PageDTO();
-
-       if (request.getParameter("c_id") == null ||"".equals(request.getParameter("c_id"))) {
-    	   System.out.println("카테고리 아이디 확인 : "+request.getParameter("c_id"));
-    	   product_list= pservice.bestProductList();  //베스트 상품 가져오기(이미지,productDTO)
-			pDTO.setList(product_list);
-		}else {
-		   product_list= pservice.productList(Integer.parseInt(request.getParameter("c_id"))); 
-		   pDTO.setList(product_list);
-		}
-   		
-      
-   	//페이징
+		
+		List<CategoryProductDTO> product_list  = null; 
+	    PageDTO pDTO = new PageDTO();
+	    
+	  //페이징 데이터
 		String curPage=request.getParameter("curPage");//현재 페이지
 		if (curPage == null) {curPage="1";}//1페이지 시작
 		
@@ -58,29 +44,67 @@ public class CategoryServlet extends HttpServlet {
 		String searchName=request.getParameter("searchName");
 		String searchValue=request.getParameter("searchValue");
 		String sortBy=request.getParameter("sortBy");
-		//String sortBy=(String)request.getAttribute("sortBy");
-		
+
 		HashMap<String, String> p_map = new HashMap<String, String>();
 		
 		//위 데이터를 map에 저장
 		p_map.put("searchName", searchName);
 		p_map.put("searchValue", searchValue);
-		if (sortBy == null) {
-			p_map.put("sortBy", "p_order");	
-			}else{//최초 정렬 기준//주문 순=베스트
-			p_map.put("sortBy", sortBy);	
-			p_map.put("c_id", request.getParameter("c_id"));	
+		
+      //end 페이징 데이터	
+	    
+	    if (request.getParameter("c_id") == null ||"".equals(request.getParameter("c_id"))) {
+	    	/*   product_list= pservice.bestProductList();  //베스트 상품 가져오기(이미지,productDTO)
+				pDTO.setList(product_list);*/
+				System.out.println("11111111111111111111111");
+				 if (sortBy == null) {
+						//p_map.put("sortBy", "p_order");	
+						sortBy ="p_order";
+						}else{//최초 정렬 기준//주문 순=베스트
+						//p_map.put("sortBy", sortBy);
+							System.out.println("sortBy : "+ sortBy);
+						}
+			       
+			       pDTO = pservice.selectBestProductListPaging(sortBy,Integer.parseInt(curPage));
+			       
+			}else {
+				
+		       System.out.println("카테고리 아이디 확인 : "+request.getParameter("c_id"));
+			  /* product_list= pservice.productList(Integer.parseInt(request.getParameter("c_id"))); 
+			   pDTO.setList(product_list);*/
+		       
+		       if (sortBy == null) {
+					p_map.put("sortBy", "p_order");	
+					}else{//최초 정렬 기준//주문 순=베스트
+					p_map.put("sortBy", sortBy);	
+					p_map.put("c_id", request.getParameter("c_id"));	
+					}
+		       
+		       pDTO = pservice.selectC_Product(p_map,Integer.parseInt(curPage));
 			}
+	   		
 		
-		System.out.println(curPage+"\t"+searchName+"\t"+searchValue+"\t"+sortBy);
-		
-		
-		System.out.println("카테고리서블릿에서 파싱전 c_id!!!!!!"+request.getParameter("c_id"));
-		System.out.println("카테고리서블릿에서 sortBy"+sortBy);
-		
-		pDTO = pservice.selectC_Product(p_map,Integer.parseInt(curPage));
-		
-		System.out.println("카테고리서블릿!!!!!!"+pDTO);
+					
+				
+			/*	if (sortBy == null) {
+					p_map.put("sortBy", "p_order");	
+					}else{//최초 정렬 기준//주문 순=베스트
+					p_map.put("sortBy", sortBy);	
+					p_map.put("c_id", request.getParameter("c_id"));	
+					}
+				
+				System.out.println(curPage+"\t"+searchName+"\t"+searchValue+"\t"+sortBy);
+					
+				System.out.println("카테고리서블릿 c_id : "+request.getParameter("c_id"));
+				System.out.println("카테고리서블릿 sortBy : "+p_map.get("sortBy"));
+				//에러 ㄱ
+				pDTO = pservice.selectC_Product(p_map,Integer.parseInt(curPage));
+				
+				System.out.println("카테고리서블릿!!!!!!"+pDTO);*/
+
+      
+      
+   	
 		
 		
 		 
@@ -91,7 +115,7 @@ public class CategoryServlet extends HttpServlet {
 		 * request.setAttribute("c_likecheck", likecheck);
 		 */
        
-		
+         String userid = "";
 			if(member != null) {
 			userid = member.getUserid();
 			HashMap<String,String> map = new HashMap<String, String>();
