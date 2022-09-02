@@ -24,6 +24,12 @@
 	.oneReport {
 		cursor: pointer;
 	}
+	.statusChange {
+		width: 110px;
+	}
+	.done {
+		color: 	#C0C0C0;
+	}
 </style>
 
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -53,7 +59,7 @@ $(document).ready(function () {
 	});
 	//신고 삭제
 	$(".delReportBtn").on("click", function (e) {
-		$('#delForm').attr('action', 'ReportDeleteServlet').submit()
+		$('#reportForm').attr('action', 'ReportDeleteServlet').submit()
 	});
 	//전체 선택 체크박스
 	$('#checkAll').on('click', function () {
@@ -67,7 +73,13 @@ $(document).ready(function () {
 		} else {
 			$('#deleteModal').modal('toggle')
 		}
-		
+	})
+	//신고 상태 변경
+	$('.statusChange').on('change', function () {
+		let id = $(this).attr('data-id')
+		$('#statusChangeId').val(id)
+		$('#statusChange').val($('#status'+id).val())
+		$('#reportForm').attr('action', 'ReportUpdateServlet').submit()
 	})
 	
 });
@@ -107,7 +119,7 @@ $(document).ready(function () {
 <div class="container col-md-auto">
 <div class="row justify-content-md-center">
 
-<form id="delForm">
+<form id="reportForm">
 <input type="hidden" name="curPage" value="<%= pDTO.getCurPage() %>">
 <input type="hidden" name="searchName" value="<%= searchName %>">
 <input type="hidden" name="searchValue" value="<%= searchValue %>">
@@ -115,6 +127,8 @@ $(document).ready(function () {
 <input type="hidden" name="status" value="<%= status %>">
 <input type="hidden" name="category" value="report">
 <input type="hidden" name="report_id" id="delreport_id">
+<input type="hidden" name="statusChangeId" id="statusChangeId">
+<input type="hidden" name="statusChange" id="statusChange">
 
 <table class="table table-hover table-sm">
 	<tr>
@@ -122,7 +136,6 @@ $(document).ready(function () {
 		<th>신고 번호</th>
 		<th>신고자</th>
 		<th>구분</th>
-		<!-- <th>글번호</th> -->
 		<th>작성자</th>
 		<th>제목 및 내용</th>
 		<th>신고사유</th>
@@ -144,17 +157,21 @@ $(document).ready(function () {
 		String content = dto.getContent();
 %>
 
-	<tr id="list">
+	<tr id="list" <% if("처리 완료".equals(report_status)) {%> class="done" <%} %>>
 		<td><input type="checkbox" class="delCheck" name="report_id" value="<%= report_id %>"></td>
 		<td class="oneReport" data-id="<%= report_id %>"><%= report_id %></td>
 		<td class="oneReport" data-id="<%= report_id %>"><%= userid %></td>
 		<td class="oneReport" data-id="<%= report_id %>"><%= report_category %></td>
-		<%-- <td><% if(chall_id!=0) {%><%=chall_id%><%} else{%><%=comment_id%><%} %></td> --%>
 		<td class="oneReport" data-id="<%= report_id %>"><%= reported_userid %></td>
 		<td class="oneReport" data-id="<%= report_id %>" id="content<%= report_id %>"><%= content %></td>
 		<td class="oneReport" data-id="<%= report_id %>"><%= report_reason %></td>
 		<td class="oneReport" data-id="<%= report_id %>"><%= report_created %></td>
-		<td class="oneReport" data-id="<%= report_id %>"><%= report_status %></td>
+		<td>
+			<select id="status<%= report_id %>" class="statusChange form-select form-select-sm" data-id="<%= report_id %>">
+			  <option value="0" <% if("처리 대기".equals(report_status)) {%> selected <%} %>>처리 대기</option>
+			  <option value="1" <% if("처리 완료".equals(report_status)) {%> selected <%} %>>처리 완료</option>
+			</select>
+		</td>
 		<td>
 			<button type="button" class="btn btn-outline-dark btn-sm" 
 					data-bs-toggle="modal" data-bs-target="#deleteModal" data-bs-id="<%= report_id %>">삭제</button>
