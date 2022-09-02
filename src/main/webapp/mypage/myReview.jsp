@@ -46,6 +46,7 @@
 		$(".reviewDelete").click(function () {
 			console.log("클릭");
 		});
+
 	});//end ready
 </script>
 
@@ -80,7 +81,7 @@
 	</div>
 <div class="col-lg-10">
 <div id="addTableDiv">
-<form method="post" id="reviewForm">
+<!-- <form method="post" id="reviewForm"> -->
 <table id="reviewTable" class="table table-hover">
 	<tr class="table-success text-center">
 		<th width="25%">상품정보</th>
@@ -126,7 +127,8 @@
 <%
 		}
 %>
-	
+
+
 	<tr>
 		<td colspan="6" style="text-align: center;">
 			 <%
@@ -146,8 +148,9 @@
 		</td>
 	</tr>
 </table>
-</form>
+<!-- </form> -->
 </div>
 </div>
 </div>
 </div>
+

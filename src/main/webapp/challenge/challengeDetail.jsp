@@ -269,6 +269,17 @@ a {
 				$("#reply_content"+comment_id).val("@"+commentUserid+"  ");
 			}
 		});
+		//수정 답글 창 보이기 
+		$("#comment_area").on("click", ".commentUpdateBtn", function () {
+			let comment_id = $(this).attr("data-cid");
+			let parent = $(this).attr("data-parent");
+			
+			$("#update"+comment_id).css("display", "block");
+			$("#update_content"+comment_id).focus();
+			if (parent != "null") {
+				$("#update_content"+comment_id).val("@"+parent+"  ");
+			}
+		});
 		
 		//좋아요 추가/삭제
 		$("#liked_area").on("click", ".liked", function () {
@@ -536,9 +547,10 @@ function displayedAt(createdAt) {
                             	<% if (step != 0) { %><span style="color: green;">@<%= parentMap.get(parent_id) %> &nbsp;</span><% } %>
                             	<%= comment_content %></p>
                             <div class="d-flex flex-row user-feed"> 
-                            	<a class="reply ml-3" data-cid="<%= comment_id %>" data-user="<%= commentUserid %>">답글 달기</a> &nbsp;&nbsp;&nbsp;
+                            	<a class="reply ml-3" data-cid="<%= comment_id %>" data-user="<%= commentUserid %>">답글 달기</a> &nbsp;&nbsp;
                             	<!-- 해당 댓글의 작성자인 경우 -->
                             	<% if (commentUserid!=null && commentUserid.equals(currUserid)) { %>
+								<a class="ml-3 commentUpdateBtn" data-cid="<%= comment_id %>" data-parent="<%= parentMap.get(parent_id) %>">수정</a> &nbsp;&nbsp;
 								<a class="ml-3 commentDelBtn" data-cid="<%= comment_id %>">삭제</a> 
 								<!-- 관리자인 경우 -->
 								<% } else if ("admin1".equals(currUserid)) { %>
@@ -561,7 +573,6 @@ function displayedAt(createdAt) {
 	                    		<img src="images/<%= currProfile_img %>" width="30" height="30" class="rounded-circle mr-3">
 	                    	</div>
 	                    	<div class="reply_box d-flex flex-row align-items-center w-100 text-justify mb-0">
-	                    		<%-- <label class="idTag">@<%= commentUserid %></label> --%>
 	                    		<input type="text" class="reply_content form-control" name="comment_content" id="reply_content<%= comment_id %>"> 
 	                    		<button class="commentBtn commentReplyBtn" 
 	                    			data-cid="<%= comment_id %>" data-group="<%= group_order %>"
@@ -577,6 +588,30 @@ function displayedAt(createdAt) {
 	                    	</div>
 	                    </div>
                     </div>
+                    
+                    <!-- 수정 입력창 -->
+                    <div id="update<%= comment_id %>" style="display: none;">
+	                    <div class="d-flex flex-row p-3">
+	                    	<div style="width: 60px;"></div>
+	                    	<div class="profile">
+	                    		<img src="images/<%= currProfile_img %>" width="30" height="30" class="rounded-circle mr-3">
+	                    	</div>
+	                    	<div class="reply_box d-flex flex-row align-items-center w-100 text-justify mb-0">
+	                    		<input type="text" class="update_content form-control" name="comment_content" id="update_content<%= comment_id %>"> 
+	                    		<button class="commentBtn commentUpdate" data-cid="<%= comment_id %>">입력</button>
+	                    			<!-- 답글 대상 아이디 보이기 -->
+		                    		<script type="text/javascript">
+		                    		 $("#update_content<%= comment_id %>").on("input", function () {
+		            					if (String($(this).val()).indexOf("@<%= parentMap.get(parent_id) %>  ") == -1 
+		            							&& "<%= parentMap.get(parent_id) %>" != "null") {
+		            						$(this).val("@<%= parentMap.get(parent_id) %>  ");
+		            					}
+		            				 }); 
+		                    		</script>
+	                    	</div>
+	                    </div>
+                    </div>
+                    
                 <%} %><!-- end for -->
                 </div>
                 
