@@ -120,7 +120,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td> <button type="button" id="reviewList" class="btn btn-success">목록</button> </td>
+				<td> <button id="reviewList" class="btn btn-success">목록</button> </td>
 				<td style="text-align: right;">
 					<button id="reviewInsert" data-userid="<%=userid %>" data-operate="<%=operate %>" class="btn btn-success">등록</button>
 					<button id="reviewCancel" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#bb">취소</button>

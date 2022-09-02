@@ -135,7 +135,7 @@
 				<%} else { %>
 				<td colspan="2">
 					<div>
-					  <button type="button" class="btn btn-secondary" id="uploadBtu" style="padding: 2rem;">첨부파일</button>
+					  <button class="btn btn-secondary" id="uploadBtu" style="padding: 2rem;">첨부파일</button>
 					  	<img id="upload" alt="" src="/eclipse/upload/<%=dto.getREVIEW_IMG()%>" width="100px" height="100px" style="border: 1px solid gray;">
 					  	<input class="form-control" type="file" accept="image/*" name="REVIEW_IMG">
 					</div>
