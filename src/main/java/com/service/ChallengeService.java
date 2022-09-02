@@ -279,6 +279,18 @@ public class ChallengeService {
 		}
 		return n;
 	}
+	
+	public int updateComment(CommentsDTO dto) {
+		int n = 0;
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		try {
+			n = dao.updateComment(session, dto);
+			session.commit();
+		} finally {
+			session.close();
+		}
+		return n;
+	}
 
 	public StampDTO selectOneStamp(String chall_id) {
 		StampDTO dto = null;
@@ -438,6 +450,19 @@ public class ChallengeService {
 		}
 		return n;
 	}
+
+	public int updateReport(HashMap<String, String> map) {
+		int n = 0;
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		try {
+			n = dao.updateReport(session, map);
+			session.commit();
+		} finally {
+			session.close();
+		}
+		return n;
+	}
+
 
 	
 	

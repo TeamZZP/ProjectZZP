@@ -30,7 +30,10 @@
 <script>
 	$(document).ready(function () {
 		$(".chk").click(function () {
+			var chk = $(this);
 			var ORDER_ID = $(this).attr("data-orderID");
+			var P_NAME = $(this).attr("data-pNAME");
+			var P_ID = $(this).attr("data-pID");
 			console.log(ORDER_ID);
 		 	$.ajax({
 				type:"post",
@@ -40,7 +43,11 @@
 				},
 				dataType:"text",
 				success: function (data, status, xhr) {
-					
+					if (data == 0) {
+						chk.attr("href","reviewInsert.jsp?ORDER_ID="+ORDER_ID+"&P_NAME="+P_NAME+"&P_ID="+P_ID);
+					} else {
+						//chk.attr("href","reviewUpdate.jsp?ORDER_ID="+ORDER_ID+"&P_NAME="+P_NAME+"&P_ID="+P_ID);
+					}
 				},
 				error: function (xhr, status, error) {
 					
@@ -108,8 +115,8 @@
 		<td> <%= DTO.getORDER_STATE() %> </td>
 		<td> 
 			<% if(DTO.getORDER_STATE().equals("배송완료")){ %>
-				<a data-orderID="<%= DTO.getORDER_ID() %>" class="btn btn-outline-success chk" 
-					<%-- href="reviewInsert.jsp?ORDER_ID=<%= DTO.getORDER_ID()%>&P_NAME=<%= DTO.getP_NAME() %>&P_ID=<%= DTO.getP_ID() %>" --%> role="button">
+				<a data-orderID="<%= DTO.getORDER_ID() %>" data-pNAME="<%= DTO.getP_NAME() %>" data-pID="<%= DTO.getP_ID() %>"
+					class="btn btn-outline-success chk" role="button">
 					리뷰작성
 				 </a>
 				<input type="hidden" class="ORDER_ID" value="<%= DTO.getORDER_ID() %>">

@@ -180,6 +180,12 @@
 		)
 </delete>
 
+<update id="updateComment" parameterType="com.dto.CommentsDTO">
+	update comments
+	set comment_content=#{comment_content}
+	where comment_id=#{comment_id}
+</update>
+
 <select id="countComments" resultType="int">
 	select chall_comments from challenge
 	where chall_id=#{chall_id}
@@ -463,6 +469,12 @@
 	select chall_id from comments
 	where comment_id=#{comment_id}
 </select>
+
+<update id="updateReport" parameterType="hashmap">
+	update report
+	set report_status=#{report_status}
+	where report_id=#{report_id}
+</update>
 
 
 </mapper>

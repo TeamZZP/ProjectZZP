@@ -163,7 +163,7 @@ a {
 					url:"CommentsAddServlet",
 					data: {
 						chall_id:"<%= chall_id %>",
-						comment_content:comment_content,
+						comment_content:comment_content.trim(),
 						userid:"<%= currUserid %>",
 					},
 					dataType:"html",
@@ -197,7 +197,7 @@ a {
 					url:"CommentsAddServlet",
 					data: {
 						chall_id:"<%= chall_id %>",
-						comment_content:comment_content,
+						comment_content:comment_content.trim(),
 						userid:"<%= currUserid %>",
 						parent_id:cid,
 						group_order:group
@@ -224,7 +224,7 @@ a {
 					data: {
 						chall_id:"<%= chall_id %>",
 						comment_id:$(this).attr("data-cid"),
-						userid:"<%= currUserid %>",
+						userid:"<%= currUserid %>"
 					},
 					dataType:"html",
 					success: function (data) {
@@ -237,6 +237,39 @@ a {
 				});
 			} else {
 				event.preventDefault();
+			}
+		});
+		//댓글 수정 
+		$("#comment_area").on("click", ".commentUpdateBtn", function () { 
+			let cid = $(this).attr("data-cid");
+			let content = $("#update_content"+cid);
+			let parent = $(this).attr("data-parent");
+			let comment_content = content.val();
+			
+			if (parent != "null") {
+				comment_content = content.val().substring(parent.length+3);
+			}
+			if (comment_content.trim().length == 0) {
+				content.focus();
+			} else {
+				$.ajax({
+					type:"post",
+					url:"CommentsUpdateServlet",
+					data: {
+						chall_id:"<%= chall_id %>",
+						comment_id:cid,
+						comment_content:comment_content.trim(),
+						userid:"<%= currUserid %>"
+					},
+					dataType:"html",
+					success: function (data) {
+						$("#comment_area").html(data);
+						countComments();
+					},
+					error: function () {
+						alert("문제가 발생했습니다. 다시 시도해 주세요.");
+					}
+				});
 			}
 		});
 		//댓글 개수 구해오기
@@ -264,10 +297,26 @@ a {
 				let comment_id = $(this).attr("data-cid");
 				let commentUserid = $(this).attr("data-user");
 				
+				$("#update"+comment_id).css("display", "none");
 				$("#reply"+comment_id).css("display", "block");
 				$("#reply_content"+comment_id).focus();
 				$("#reply_content"+comment_id).val("@"+commentUserid+"  ");
 			}
+		});
+		//수정 답글 창 보이기 
+		$("#comment_area").on("click", ".update", function () {
+			let comment_id = $(this).attr("data-cid");
+			let parent = $(this).attr("data-parent");
+			let content = $(this).attr("data-content");
+			
+			$("#reply"+comment_id).css("display", "none");
+			$("#update"+comment_id).css("display", "block");
+			$("#update_content"+comment_id).val("");
+			$("#update_content"+comment_id).focus();
+			if (parent != "null") {
+				$("#update_content"+comment_id).val("@"+parent+"  ");
+			}
+			$("#update_content"+comment_id).val($("#update_content"+comment_id).val()+content);
 		});
 		
 		//좋아요 추가/삭제
@@ -536,9 +585,11 @@ function displayedAt(createdAt) {
                             	<% if (step != 0) { %><span style="color: green;">@<%= parentMap.get(parent_id) %> &nbsp;</span><% } %>
                             	<%= comment_content %></p>
                             <div class="d-flex flex-row user-feed"> 
-                            	<a class="reply ml-3" data-cid="<%= comment_id %>" data-user="<%= commentUserid %>">답글 달기</a> &nbsp;&nbsp;&nbsp;
+                            	<a class="reply ml-3" data-cid="<%= comment_id %>" data-user="<%= commentUserid %>">답글 달기</a> &nbsp;&nbsp;
                             	<!-- 해당 댓글의 작성자인 경우 -->
                             	<% if (commentUserid!=null && commentUserid.equals(currUserid)) { %>
+								<a class="ml-3 update" data-cid="<%= comment_id %>" 
+										data-parent="<%= parentMap.get(parent_id) %>" data-content="<%= comment_content %>">수정</a> &nbsp;&nbsp;
 								<a class="ml-3 commentDelBtn" data-cid="<%= comment_id %>">삭제</a> 
 								<!-- 관리자인 경우 -->
 								<% } else if ("admin1".equals(currUserid)) { %>
@@ -561,12 +612,11 @@ function displayedAt(createdAt) {
 	                    		<img src="images/<%= currProfile_img %>" width="30" height="30" class="rounded-circle mr-3">
 	                    	</div>
 	                    	<div class="reply_box d-flex flex-row align-items-center w-100 text-justify mb-0">
-	                    		<%-- <label class="idTag">@<%= commentUserid %></label> --%>
 	                    		<input type="text" class="reply_content form-control" name="comment_content" id="reply_content<%= comment_id %>"> 
 	                    		<button class="commentBtn commentReplyBtn" 
 	                    			data-cid="<%= comment_id %>" data-group="<%= group_order %>"
 	                    			data-parent="<%= parentMap.get(parent_id) %>">입력</button>
-	                    			<!-- 답글 대상 아이디 보이기 -->
+	                    			<!-- 답글 대상 아이디 고정 -->
 		                    		<script type="text/javascript">
 		                    		 $("#reply_content<%= comment_id %>").on("input", function () {
 		            					if (String($(this).val()).indexOf("@<%= commentUserid %>  ") == -1) {
@@ -577,6 +627,31 @@ function displayedAt(createdAt) {
 	                    	</div>
 	                    </div>
                     </div>
+                    
+                    <!-- 수정 입력창 -->
+                    <div id="update<%= comment_id %>" style="display: none;">
+	                    <div class="d-flex flex-row p-3">
+	                    	<div style="width: 60px;"></div>
+	                    	<div class="profile">
+	                    		<img src="images/<%= currProfile_img %>" width="30" height="30" class="rounded-circle mr-3">
+	                    	</div>
+	                    	<div class="reply_box d-flex flex-row align-items-center w-100 text-justify mb-0">
+	                    		<input type="text" class="update_content form-control" name="comment_content" id="update_content<%= comment_id %>"> 
+	                    		<button class="commentBtn commentUpdateBtn" data-cid="<%= comment_id %>"
+	                    					data-parent="<%= parentMap.get(parent_id) %>">입력</button>
+	                    			<!-- 답글 대상 아이디 고정 -->
+		                    		<script type="text/javascript">
+		                    		 $("#update_content<%= comment_id %>").on("input", function () {
+		            					if ("<%= parentMap.get(parent_id) %>" != "null" 
+		            							&& String($(this).val()).indexOf("@<%= parentMap.get(parent_id) %>  ") == -1 ) {
+		            						$(this).val("@<%= parentMap.get(parent_id) %>  ");
+		            					}
+		            				 }); 
+		                    		</script>
+	                    	</div>
+	                    </div>
+                    </div>
+                    
                 <%} %><!-- end for -->
                 </div>
                 
