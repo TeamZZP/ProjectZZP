@@ -13,22 +13,19 @@
 %>
 <style>
 </style>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>
-	$(document).ready(function() {
-		
-	});//end ready
-</script>
+
 <div class="container col-md-8">
 <div class="justify-content-center">
 <div class="row">
 <div class="col-md-5">
-<%-- <img alt="" src="mypage/user.png" width="30px" height="30px">
-	<input type="text" name="username" value="<%= username %>" readonly="readonly"/><br><!-- 수정 불가 or 퍼센트로 데이터 가져옴 -->
-<br> --%>
 	<div class="card" style="width: 16rem;">
-	  <div style = "padding: 30px 30px 30px 30px;">
-	  	<img src="mypage/user.png" class="card-img-top" alt="..."><!-- 이미지 작게 조절 -->
+	  <div style = "padding: 30px 30px 30px 30px;" class="img">
+	  	<a>
+	  		<figure>
+	  			<img src="images/user.png" class="card-img-top" id="profileImg">
+	  			<figcaption>사진 변경</figcaption>
+	  		</figure>
+	  	</a>
 	  </div>
 	  <div class="card-body">
 	    <h5 class="card-title"><b><%= username %>님</b></h5>
@@ -59,3 +56,11 @@
 </div>
 </div>
 </div>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+	$(document).ready(function() {
+		$("#profileImg").on("click", function() {
+			console.log("clickkkkkk");
+		});//end fn
+	});//end ready
+</script>
