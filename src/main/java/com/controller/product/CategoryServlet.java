@@ -75,7 +75,9 @@ public class CategoryServlet extends HttpServlet {
 		       
 		       if (sortBy == null) {
 					p_map.put("sortBy", "p_order");	
+					
 					}else{//최초 정렬 기준//주문 순=베스트
+						
 					p_map.put("sortBy", sortBy);	
 					p_map.put("c_id", request.getParameter("c_id"));	
 					}
