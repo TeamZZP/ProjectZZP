@@ -30,8 +30,12 @@ if (member != null) {
 %>
 
 <style>
-	.searchName, .searchValue {
+	.form-select {
 		width: 140px; 
+		display: inline;
+	}
+	.searchValue {
+		width: 150px; 
 		display: inline;
 	}
 	a {
