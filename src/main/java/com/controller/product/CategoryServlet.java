@@ -3,6 +3,7 @@ package com.controller.product;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -28,11 +29,10 @@ public class CategoryServlet extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		MemberDTO member = (MemberDTO) session.getAttribute("login");
-				
 
 		CategoryService service = new CategoryService();
 		ProductService pservice = new ProductService();
-		
+		HashMap<String, String> p_map = new HashMap<String, String>();
 		List<CategoryProductDTO> product_list  = null; 
 	    PageDTO pDTO = new PageDTO();
 	    
@@ -40,17 +40,10 @@ public class CategoryServlet extends HttpServlet {
 		String curPage=request.getParameter("curPage");//현재 페이지
 		if (curPage == null) {curPage="1";}//1페이지 시작
 		
-		//검색 기준, 검색어
-		String searchName=request.getParameter("searchName");
-		String searchValue=request.getParameter("searchValue");
 		String sortBy=request.getParameter("sortBy");
 
-		HashMap<String, String> p_map = new HashMap<String, String>();
 		
-		//위 데이터를 map에 저장
-		p_map.put("searchName", searchName);
-		p_map.put("searchValue", searchValue);
-		
+		System.out.println("현재 페이지 : "+curPage+"\t 정렬 기준 : "+sortBy);
       //end 페이징 데이터	
 	    
 	    if (request.getParameter("c_id") == null ||"".equals(request.getParameter("c_id"))) {
@@ -58,14 +51,14 @@ public class CategoryServlet extends HttpServlet {
 				pDTO.setList(product_list);*/
 				System.out.println("11111111111111111111111");
 				 if (sortBy == null) {
-						//p_map.put("sortBy", "p_order");	
-						sortBy ="p_order";
+						p_map.put("sortBy", "p_order");	
+						//sortBy ="p_order";
 						}else{//최초 정렬 기준//주문 순=베스트
-						//p_map.put("sortBy", sortBy);
+						p_map.put("sortBy", sortBy);
 							System.out.println("sortBy : "+ sortBy);
 						}
 			       
-			       pDTO = pservice.selectBestProductListPaging(sortBy,Integer.parseInt(curPage));
+			       pDTO = pservice.selectBestProductListPaging(p_map,Integer.parseInt(curPage));
 			       
 			}else {
 				
@@ -73,20 +66,25 @@ public class CategoryServlet extends HttpServlet {
 			  /* product_list= pservice.productList(Integer.parseInt(request.getParameter("c_id"))); 
 			   pDTO.setList(product_list);*/
 		       
+
 		       if (sortBy == null) {
 					p_map.put("sortBy", "p_order");	
 					
 					}else{//최초 정렬 기준//주문 순=베스트
 						
 					p_map.put("sortBy", sortBy);	
+
+		       if (sortBy== null) {
+					p_map.put("sortBy", "p_id");	
+					p_map.put("c_id", request.getParameter("c_id"));
+					}else{//최초 정렬 기준//주문 순=베스트
+					p_map.put("sortBy",sortBy);	
+
 					p_map.put("c_id", request.getParameter("c_id"));	
 					}
 		       
 		       pDTO = pservice.selectC_Product(p_map,Integer.parseInt(curPage));
 			}
-	   		
-		
-					
 				
 			/*	if (sortBy == null) {
 					p_map.put("sortBy", "p_order");	
@@ -104,12 +102,6 @@ public class CategoryServlet extends HttpServlet {
 				
 				System.out.println("카테고리서블릿!!!!!!"+pDTO);*/
 
-      
-      
-   	
-		
-		
-		 
 		/*
 		 * HashMap<String,String> map = new HashMap<String, String>(); map.put("p_id",
 		 * p_id); map.put("userid", userid); int likecheck = service.likeCheck(map);
@@ -126,14 +118,14 @@ public class CategoryServlet extends HttpServlet {
 			
 			List<Integer> likecheck = new ArrayList<Integer>();
 			
-			for (int i = 0; i < product_list.size(); i++) {
+			List<CategoryProductDTO> c_productList=pDTO.getList();
+			for (int i = 0; i < c_productList.size(); i++) {
 
-				map.put("p_id",  Integer.toString(product_list.get(i).getP_id()));
+				map.put("p_id",  Integer.toString(c_productList.get(i).getP_id()));
 				map.put("userid", userid);
 				likecheck.add(pservice.likeCheck(map));
 				
 			}
-			
 
 			System.out.println("찜 갯수 확인"+likecheck);
 			
@@ -144,15 +136,12 @@ public class CategoryServlet extends HttpServlet {
 		
        	request.setAttribute("pDTO", pDTO);
 		request.setAttribute("sortBy", sortBy);
-        request.setAttribute("product_list", product_list);
-
-        System.out.println("상품 출력=============="+product_list);
+        //request.setAttribute("product_list", product_list);
+        System.out.println("상품 출력=============="+pDTO);
 
 		RequestDispatcher dis = request.getRequestDispatcher("categoryProduct.jsp");
 		dis.forward(request, response);
-		 
-		
-		
+	}
 	}
 
 	/**

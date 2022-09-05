@@ -136,8 +136,6 @@ function productChoice(n) {
 	<%
 	MemberDTO mdto = (MemberDTO) session.getAttribute("login");
 	PageDTO pDTO=(PageDTO) request.getAttribute("pDTO");
-	String searchName=(String) request.getAttribute("searchName");
-	String searchValue=(String) request.getAttribute("searchValue");
 	String sortBy=(String) request.getAttribute("sortBy");
 
 	List<CategoryProductDTO> pDTO_list = pDTO.getList();

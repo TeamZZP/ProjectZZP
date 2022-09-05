@@ -9,9 +9,7 @@ public class CategoryProductDTO extends ProductDTO {
 	private int p_id;
 	private String p_created;
 	private int c_id;
-	
 
-	
 
 	@Override
 	public String toString() {

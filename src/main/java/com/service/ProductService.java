@@ -261,12 +261,12 @@ public class ProductService {
 		return dto;
 	}
 	
-	public PageDTO selectBestProductListPaging(String sortBy, int curPage) {
+	public PageDTO selectBestProductListPaging(HashMap<String, String> p_map, int curPage) {
 		System.out.println("ProductService.selectBestProductListPaging");
 		SqlSession session=MySqlSessionFactory.getSqlSession();
 		PageDTO dto=null;
 		try {
-			dto=dao.selectBestProductListPaging(session, sortBy, curPage);
+			dto=dao.selectBestProductListPaging(session, p_map, curPage);
 		} finally {
 			session.close();
 		}
