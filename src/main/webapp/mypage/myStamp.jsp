@@ -59,7 +59,9 @@
 		<div class="col">
 			<a href="MypageServlet">마이페이지 홈</a>
 		</div>
-	   <div class="col">주문 내역</div>
+	   <div class="col">
+			<a href="MyOrderServlet">주문 내역</a> 
+		</div>
 	   <div class="col">반품/취소/교환 목록</div>
 	   <div class="col">
 	   		<a href="ProfileCategoryServlet?category=myreview&userid=<%=userid%>">내 구매후기</a>
