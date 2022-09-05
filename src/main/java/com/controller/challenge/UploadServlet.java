@@ -131,7 +131,10 @@ public class UploadServlet extends HttpServlet {
 					int n = service.insertChallenge(map);
 					System.out.println(n+"개의 레코드 추가");
 					
-					//자기가 올린 게시글로 이동??? 
+					if (map.get("chall_category").equals("이 달의 챌린지")) {
+						session.setAttribute("stampMesg", "stampMesg");
+					}
+					
 					response.sendRedirect("ChallengeListServlet");
 					
 				//챌린지 게시글 업데이트

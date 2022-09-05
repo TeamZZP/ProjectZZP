@@ -63,6 +63,9 @@
     .custom-tooltip {
   		--bs-tooltip-bg: var(--bs-success);
 	}
+	.tooltip-inner {
+  		max-width: 430px;
+	}
 
 </style>
 <%
@@ -86,7 +89,12 @@
 	HashMap<Integer, Integer> resultLikedMap = (HashMap<Integer, Integer>) request.getAttribute("resultLikedMap");
 	//각 게시글마다 도장 가져오기
 	HashMap<String, String> stampListMap = (HashMap<String, String>) request.getAttribute("stampListMap");
-	System.out.println(stampListMap);
+	//이 달의 챌린지 도장 가져오기
+	StampDTO stampDTO = (StampDTO) request.getAttribute("stampDTO");
+	String stamp_img = stampDTO.getStamp_img();
+	String stamp_name = stampDTO.getStamp_name();
+	String stamp_content = stampDTO.getStamp_content();
+	
 	//session에 저장된 메시지가 있는 경우 경고창 띄워주고 삭제하기
 	String mesg = (String) session.getAttribute("mesg");
 	if (mesg != null) {
@@ -95,8 +103,9 @@
 		alert("<%= mesg %>");
 	</script>
 <% } 
-	session.removeAttribute("mesg");
-%>
+	session.removeAttribute("mesg"); %>
+
+
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
  	$(document).ready(function () {
@@ -163,7 +172,7 @@
        <a href="ChallengeDetailServlet?chall_id=<%= challThisMonth.getChall_id() %>"><%= challThisMonth.getChall_title() %>
         <span class="challThisMonth">참여하러가기</span> </a> 
         <a data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="custom-tooltip"
-        		title="매달 바뀌는 챌린지 도전 과제에 참여해 보세요! 참여시 받을 수 있는 예쁜 도장을 모아보세요!">
+        		title="매달 바뀌는 챌린지 도전 과제에 참여해 보세요! '이 달의 챌린지' 카테고리를 선택해 챌린지 인증 사진을 올려주세요. 참여시 받을 수 있는 예쁜 도장을 모아보세요!">
         	<img src="images/help.png" width="25" style="margin-top: -5px;">
         </a>
      </div>
@@ -266,4 +275,32 @@
 </form>    
     
     
-    
+  
+<button id="stampBtn" type="button" data-bs-toggle="modal" data-bs-target="#stampModal" style="display: none;"></button>
+ <!-- Modal -->
+	<div class="modal fade" id="stampModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="exampleModalLabel">도장을 획득했습니다! <<%= stamp_name %>></h5>
+	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	      </div>
+	      <div class="modal-body text-center">
+	      <img src="/eclipse/upload/<%=stamp_img%>" width="400">
+	      </div>
+	      <div class="modal-footer mb-3 text-center">
+	       <%= stamp_content %>
+	      </div>
+	    </div>
+	  </div>
+	 </div>
+	 
+<% //session에 저장된 stampMesg가 있는 경우 모달 띄워주고 삭제하기
+	String stampMesg = (String) session.getAttribute("stampMesg");
+	if (stampMesg != null) {
+%>
+	<script type="text/javascript">
+	$('#stampBtn').trigger('click')
+	</script>
+<% } 
+	session.removeAttribute("stampMesg"); %>
