@@ -1,7 +1,7 @@
+<%@page import="com.dto.ProductOrderReviewImagesDTO"%>
 <%@page import="com.dto.ImagesOrderDTO"%>
 <%@page import="com.dto.ImagesDTO"%>
 <%@page import="com.dto.ProductOrderDTO"%>
-<%@page import="com.dto.ProductOrderReviewDTO"%>
 <%@page import="com.dto.OrderDTO"%>
 <%@page import="java.util.List"%>
 <%@page import="com.dto.MemberDTO"%>
@@ -117,20 +117,16 @@
 		<th></th>
 	</tr>
 	<%
-		List<ImagesOrderDTO> imgList = (List<ImagesOrderDTO>)session.getAttribute("iDTO");
 		PageDTO pDTO = (PageDTO)session.getAttribute("myOrderList");
-		List<ProductOrderReviewDTO> myList = pDTO.getList();
+		List<ProductOrderReviewImagesDTO> myList = pDTO.getList();
 			for (int i = 0; i < myList.size(); i++) {
-				ProductOrderReviewDTO DTO = myList.get(i);
+				ProductOrderReviewImagesDTO DTO = myList.get(i);
 				String date = DTO.getORDER_DATE();
 				String day = date.substring(0,10);
 				System.out.print("날짜 " + day);
-					
-				ImagesOrderDTO iDTO = imgList.get(i);
-				String imgs = iDTO.getImage_route();
 	%>
 	<tr>
-	    <td> <img alt="상품사진" src="images/p_image/<%=imgs%>" width="100px" height="100px"> <br> <%= DTO.getP_NAME() %> </td>
+	    <td> <img alt="상품사진" src="images/p_image/<%=DTO.getIMAGE_ROUTE()%>" width="100px" height="100px"> <br> <%= DTO.getP_NAME() %> </td>
 	    <td> <%= DTO.getTOTAL_PRICE() %> </td>
 		<td> <%= day %> </td>
 		<td> <%= DTO.getDELIVERY_ADDRESS() %> <br>  <%= DTO.getDELIVERY_LOC() %> </td>
@@ -164,7 +160,7 @@
 		          	if(i== curPage){
 		          		out.print(i+"&nbsp;"); //현재페이지
 		          	}else{
-		          		out.print("<a style='color: green;' href = 'MyQuestionServlet?curPage="+i+"'>" + i + " </a>");  
+		          		out.print("<a style='color: green;' href = 'MyOrderServlet?curPage="+i+"'>" + i + " </a>");  
 		          	} //다른 페이지 선택시 링크로 이동
 		        }//end for
 		  	 %>
