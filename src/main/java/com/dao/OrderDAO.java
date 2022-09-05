@@ -9,6 +9,7 @@ import com.dto.CategoryProductDTO;
 import com.dto.OrderDTO;
 import com.dto.PageDTO;
 import com.dto.ProductOrderDTO;
+import com.dto.ProductOrderReviewDTO;
 
 public class OrderDAO {
 
@@ -47,7 +48,7 @@ public class OrderDAO {
 		int perPage = pDTO.getPerPage();
 		int offset = (curPage - 1) * perPage;
 		
-		List<ProductOrderDTO> list = session.selectList("OrderMapper.MyOrderList", userid, new RowBounds(offset, perPage));
+		List<ProductOrderReviewDTO> list = session.selectList("OrderMapper.MyOrderList", userid, new RowBounds(offset, perPage));
 		
 		pDTO.setCurPage(curPage);
 		pDTO.setList(list);

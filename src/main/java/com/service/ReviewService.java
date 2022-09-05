@@ -2,13 +2,16 @@ package com.service;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
 import com.config.MySqlSessionFactory;
 import com.dao.ReviewDAO;
 import com.dto.PageDTO;
+import com.dto.ProductOrderReviewDTO;
 import com.dto.ReviewDTO;
+import com.dto.ReviewProductDTO;
 import com.dto.ReviewProfileDTO;
 
 public class ReviewService {
@@ -82,11 +85,38 @@ public class ReviewService {
 
 
 
-	public int orderIDreivewCheck(int ORDER_ID) {
+	public ReviewDTO orderIDreivewCheck(int ORDER_ID) {
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		ReviewDTO dto = null;
+		try {
+			dto = dao.orderIDreivewCheck(session, ORDER_ID);
+		} finally {
+			session.close();
+		}
+		return dto;
+	}
+
+
+
+	public ProductOrderReviewDTO selectOneReview(Map<String, String> map) {
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		ProductOrderReviewDTO dto = null;
+		try {
+			dto = dao.selectOneReview(session, map);
+		} finally {
+			session.close();
+		}
+		return dto;
+	}
+
+
+
+	public int reviewUpdate(HashMap<String, String> map) {
 		SqlSession session = MySqlSessionFactory.getSqlSession();
 		int num = 0;
 		try {
-			num = dao.orderIDreivewCheck(session, ORDER_ID);
+			num = dao.reviewUpdate(session, map);
+			session.commit();
 		} finally {
 			session.close();
 		}

@@ -43,7 +43,7 @@
 				}
 			});//
 			$("#reviewList").click(function () {
-				$("#reviewForm").attr("action", "MyOrderServlet");
+				$("#reviewUpdateForm").attr("action", "MyOrderServlet");
 			});//
 			$("#reviewUpdate").click(function () {
 				var operate = $("#reviewUpdate").attr("data-operate");
@@ -79,10 +79,10 @@
 		});//end ready
 	</script>
 <div style="text-align: center; display: flex; justify-content:center; height: 100px; margin-bottom: 10px;" >
-		<img src="" alt="..." style="width: auto;">
+		<img src="images/review/reviewMain.png" alt="..." style="width: auto;">
 </div>
 
-<form action="" id="reviewUpdateForm" enctype="multipart/form-data" method="post">
+<form id="reviewUpdateForm" enctype="multipart/form-data" method="post">
 <input type="hidden" name="USERID" value="<%=userid%>">
 <input type="hidden" name="oldFile" value="">
 <div class="container justify-content-center">

@@ -1,4 +1,5 @@
 <%@page import="com.dto.ProductOrderDTO"%>
+<%@page import="com.dto.ProductOrderReviewDTO"%>
 <%@page import="com.dto.OrderDTO"%>
 <%@page import="java.util.List"%>
 <%@page import="com.dto.MemberDTO"%>
@@ -6,6 +7,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
+<%
+	String mesg = (String)session.getAttribute("mesg");
+	if(mesg != null){
+%>
+	<script>
+		alert("<%=mesg%>");
+	</script>
+<%
+	}
+	session.removeAttribute("mesg");
+%>
 <style>
 	a {
 		color : black;
@@ -18,12 +30,12 @@
 </style>
 
     <%
-	  //session에 저장된 userid 읽어오기 
-	  	MemberDTO member = (MemberDTO) session.getAttribute("login"); 
-	  	String userid = null;
-	  	if (member != null) {
-	  		userid = member.getUserid();
-	  	}
+    //session에 저장된 userid 읽어오기 
+    	  	MemberDTO member = (MemberDTO) session.getAttribute("login"); 
+    	  	String userid = null;
+    	  	if (member != null) {
+    	  		userid = member.getUserid();
+    	  	}
     %>
     
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -32,6 +44,7 @@
 		$(".chk").click(function () {
 			var chk = $(this);
 			var ORDER_ID = $(this).attr("data-orderID");
+			var REVIEW_ID = $(this).attr("data-reviewID");
 			var P_NAME = $(this).attr("data-pNAME");
 			var P_ID = $(this).attr("data-pID");
 			console.log(ORDER_ID);
@@ -46,7 +59,7 @@
 					if (data == 0) {
 						chk.attr("href","reviewInsert.jsp?ORDER_ID="+ORDER_ID+"&P_NAME="+P_NAME+"&P_ID="+P_ID);
 					} else {
-						//chk.attr("href","reviewUpdate.jsp?ORDER_ID="+ORDER_ID+"&P_NAME="+P_NAME+"&P_ID="+P_ID);
+						chk.attr("href","reviewOneSelect?REVIEW_ID="+REVIEW_ID+"&P_ID="+P_ID);
 					}
 				},
 				error: function (xhr, status, error) {
@@ -100,12 +113,12 @@
 		<th></th>
 	</tr>
 	<%
-		PageDTO pDTO = (PageDTO)session.getAttribute("myOrderList");
-		List<ProductOrderDTO> myList = pDTO.getList();
-		for(ProductOrderDTO DTO : myList){
-			String date = DTO.getORDER_DATE();
-			String day = date.substring(0,10);
-			System.out.print("날짜 " + day);
+	PageDTO pDTO = (PageDTO)session.getAttribute("myOrderList");
+			List<ProductOrderReviewDTO> myList = pDTO.getList();
+			for(ProductOrderReviewDTO DTO : myList){
+				String date = DTO.getORDER_DATE();
+				String day = date.substring(0,10);
+				System.out.print("날짜 " + day);
 	%>
 	<tr>
 	    <td> <%= DTO.getP_NAME() %> </td>
@@ -115,7 +128,8 @@
 		<td> <%= DTO.getORDER_STATE() %> </td>
 		<td> 
 			<% if(DTO.getORDER_STATE().equals("배송완료")){ %>
-				<a data-orderID="<%= DTO.getORDER_ID() %>" data-pNAME="<%= DTO.getP_NAME() %>" data-pID="<%= DTO.getP_ID() %>"
+				<a data-orderID="<%= DTO.getORDER_ID() %>" data-pNAME="<%= DTO.getP_NAME() %>" 
+					data-pID="<%= DTO.getP_ID() %>" data-reviewID="<%=DTO.getREVIEW_ID() %>"
 					class="btn btn-outline-success chk" role="button">
 					리뷰작성
 				 </a>

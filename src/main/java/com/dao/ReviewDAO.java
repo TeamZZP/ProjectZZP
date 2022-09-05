@@ -2,13 +2,16 @@ package com.dao;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 
 import com.dto.ChallengeDTO;
 import com.dto.PageDTO;
+import com.dto.ProductOrderReviewDTO;
 import com.dto.ReviewDTO;
+import com.dto.ReviewProductDTO;
 import com.dto.ReviewProfileDTO;
 
 public class ReviewDAO {
@@ -45,8 +48,18 @@ public class ReviewDAO {
 		return num;
 	}
 
-	public int orderIDreivewCheck(SqlSession session, int ORDER_ID) {
-		int num = session.selectOne("ReviewMapper.orderIDreivewCheck", ORDER_ID);
+	public ReviewDTO orderIDreivewCheck(SqlSession session, int ORDER_ID) {
+		ReviewDTO dto = session.selectOne("ReviewMapper.orderIDreivewCheck", ORDER_ID);
+		return dto;
+	}
+
+	public ProductOrderReviewDTO selectOneReview(SqlSession session, Map<String, String> map) {
+		ProductOrderReviewDTO dto = session.selectOne("ReviewMapper.selectOneReview", map);
+		return dto;
+	}
+
+	public int reviewUpdate(SqlSession session, HashMap<String, String> map) {
+		int num = session.update("ReviewMapper.reviewUpdate", map);
 		return num;
 	}
 

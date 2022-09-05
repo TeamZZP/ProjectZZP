@@ -63,7 +63,7 @@
 		});//end ready
 	</script>
 <div style="text-align: center; display: flex; justify-content:center; height: 100px; margin-bottom: 10px;" >
-		<img src="" alt="..." style="width: auto;">
+		<img src="images/review/reviewMain.png" alt="..." style="width: auto;">
 </div>
 
 <form id="reviewForm" enctype="multipart/form-data" method="post">

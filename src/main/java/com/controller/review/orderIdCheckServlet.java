@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.dto.MemberDTO;
+import com.dto.ReviewDTO;
 import com.service.ReviewService;
 
 @WebServlet("/orderIdCheckServlet")
@@ -30,13 +31,15 @@ public class orderIdCheckServlet extends HttpServlet {
 			System.out.println("orderId확인 " + ORDER_ID);
 			
 			ReviewService service = new ReviewService();
-			int num = service.orderIDreivewCheck(ORDER_ID);
-			System.out.println("리뷰 갯수" + num);
+			ReviewDTO dto = service.orderIDreivewCheck(ORDER_ID);
+			System.out.println("리뷰 " + dto);
 			
 			response.setContentType("text/html;charset=utf-8");
 			PrintWriter out = response.getWriter();
-			if (num != 1) {
-				
+			if (dto != null) {
+				out.print(dto.getREVIEW_ID());
+			} else {
+				out.print(0);
 			}
 			
 		} else {
