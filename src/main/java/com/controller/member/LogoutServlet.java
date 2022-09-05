@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -28,17 +29,25 @@ public class LogoutServlet extends HttpServlet {
       if (dto!=null) {
          session.invalidate();
          
-         response.setContentType("text/html; charset=UTF-8");
-         PrintWriter out = response.getWriter();
-
-         out.println("<script language='javascript'>");
-         out.println("alert('다음에 또 만나요:)')");
-         out.println("location.href='MainServlet';");
-         out.println("</script>");
-         out.flush();
-         response.sendRedirect("MainServlet");
+			/*
+			 * response.setContentType("text/html; charset=UTF-8"); PrintWriter out =
+			 * response.getWriter();
+			 * 
+			 * out.println("<script language='javascript'>");
+			 * out.println("alert('다음에 또 만나요:)')");
+			 * out.println("location.href='MainServlet';"); out.println("</script>");
+			 * out.flush(); response.sendRedirect("MainServlet");
+			 */
+         
+         request.setAttribute("mesg", "다음에 또 만나요!");
+		 RequestDispatcher dis = request.getRequestDispatcher("MainServlet");
+		 dis.forward(request, response);
+         
+         
       }else {
-         response.sendRedirect("LoginUIServlet");
+         session.setAttribute("mesg", "잘못된 접근입니다.");
+		 session.setMaxInactiveInterval(60*30);
+		 response.sendRedirect("LoginUIServlet");
       }
    }
 

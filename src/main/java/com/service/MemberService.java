@@ -166,4 +166,15 @@ public class MemberService {
 		return num;
 	}
 
+	public MemberDTO checkPasswd(HashMap<String, String> map) {
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		MemberDTO dto = null;
+		try {
+			dto = dao.checkPasswd(session, map);
+		} finally {
+			session.close();
+		}
+		return dto;
+	}
+
 }

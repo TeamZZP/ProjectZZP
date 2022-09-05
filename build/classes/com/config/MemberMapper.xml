@@ -26,6 +26,11 @@
 		
 		<select id="loginMember" parameterType="hashMap" resultType="MemberDTO">
 			select userid, passwd, username, email1, email2, phone, created_at, role
+			from member where userid=#{userid} 
+		</select>
+		
+		<select id="checkPasswd" parameterType="hashMap" resultType="MemberDTO">
+			select userid, passwd, username, email1, email2, phone, created_at, role
 			from member where userid=#{userid} and passwd=#{passwd}
 		</select>
 		

@@ -56,17 +56,21 @@ public class NaverLoginServlet extends HttpServlet {
 			map.put("addr1", "도로명주소");
 			map.put("addr2", "지번주소");
 			MemberService service = new MemberService();
-			int num = service.addMember(map);
-			System.out.println(num);
-			
-			//로그인
-			HashMap<String, String> Loginmap = new HashMap<String, String>();
-			Loginmap.put("userid", email);
-			Loginmap.put("passwd", "1");
-			MemberDTO logindto = service.loginMember(Loginmap);
-			System.out.println(logindto);
-			session.setAttribute("login", logindto); 
-			
+			int num = 0;
+			try {
+				num = service.addMember(map);
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				System.out.println(num);
+				//로그인
+				HashMap<String, String> Loginmap = new HashMap<String, String>();
+				Loginmap.put("userid", email);
+				Loginmap.put("passwd", "1");
+				MemberDTO loginedto = service.loginMember(Loginmap);
+				System.out.println(loginedto);
+				session.setAttribute("login", loginedto); 
+			}
 		} 
 		//회원인 경우 로그인 처리
 		else {

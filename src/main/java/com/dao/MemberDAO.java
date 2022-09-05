@@ -84,4 +84,8 @@ public class MemberDAO {
 		return num;
 	}
 
+	public MemberDTO checkPasswd(SqlSession session, HashMap<String, String> map) {
+		return session.selectOne("checkPasswd", map);
+	}
+
 }

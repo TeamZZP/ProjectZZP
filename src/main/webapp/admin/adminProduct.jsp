@@ -60,6 +60,7 @@ if(mesg != null){
 		  	<div class="col">
 		  	  <!-- 검색 -->
 				<select class="form-select sortBy" name="searchName" data-style="btn-info" id="inputGroupSelect01">
+					<option selected disabled hidden>검색 기준</option>
 					<option value="c_id" <% if("c_id".equals(searchName)){%> selected
 						<%}%>>카테고리</option>
 					<option value="p_id" <% if("p_id".equals(searchName)){%> selected
@@ -79,7 +80,6 @@ if(mesg != null){
       	  		<div class="float-end">
 			  	  <!-- 정렬 -->
 				  <select class="form-select sortBy" name="sortBy" id="sortBy" data-style="btn-info">
-					    <option value="p_id" selected>정렬</option>
 					    <option value="p_id" <% if("p_id".equals(sortBy)){%>selected<%}%>>최신상품순</option>
 					    <option value="p_selling_price" <% if("p_selling_price".equals(sortBy)){%>selected<%}%>>판매가순</option>
 					    <option value="p_name" <% if("p_name".equals(sortBy)){%>selected<%}%>>상품명순</option>
