@@ -37,7 +37,6 @@ public class reviewUploadServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		MemberDTO mDTO = (MemberDTO) session.getAttribute("login");
 		String USERID = request.getParameter("USERID");
-		int ORDER_ID = Integer.parseInt(request.getParameter("ORDER_ID"));
 		System.out.println("유저 "+ USERID);
 		
 		if (mDTO!=null && mDTO.getUserid().equals(USERID)) {
@@ -159,18 +158,18 @@ public class reviewUploadServlet extends HttpServlet {
 						response.sendRedirect("MyOrderServlet");
 					}
 					
-				}/* else if ("update".equals(operate)) {
+				} else if ("update".equals(operate)) {
 					int n = service.reviewUpdate(map);
 					System.out.println(n+"개의 리뷰 업데이트");
 					
 					if (n != 0) {
 						session.setAttribute("mesg", "게시물이 업데이트 되었습니다.");
-						response.sendRedirect("QuestionListServlet");
+						response.sendRedirect("ProfileCategoryServlet?category=myreview&userid="+USERID);
 					} else {
 						session.setAttribute("mesg", "게시물 업데이트를 실패하였습니다. 다시 시도하세요.");
-						response.sendRedirect("QuestionListServlet");
+						response.sendRedirect("ProfileCategoryServlet?category=myreview&userid="+USERID);
 					}
-				} */
+				} 
 			}
 		} else {
 			session.setAttribute("mesg", "로그인이 필요합니다.");

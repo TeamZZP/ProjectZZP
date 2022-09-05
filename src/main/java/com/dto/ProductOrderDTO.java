@@ -1,6 +1,6 @@
 package com.dto;
 
-public class ProductOrderReviewDTO {
+public class ProductOrderDTO {
 
 	int ORDER_ID;
 	String USERID;
@@ -20,22 +20,15 @@ public class ProductOrderReviewDTO {
 	int P_DISCOUNT;
 	String P_CREATED;
 	int P_STOCK;
-	int REVIEW_ID;
-	String REVIEW_TITLE;
-	String REVIEW_CONTENT;
-	String REVIEW_RATE;
-	String REVIEW_IMG;
-	String REVIEW_CREATED;
 	
-	public ProductOrderReviewDTO() {
+	public ProductOrderDTO() {
 		super();
 	}
 
-	public ProductOrderReviewDTO(int oRDER_ID, String uSERID, int p_ID, int tOTAL_PRICE, String dELIVERY_ADDRESS,
+	public ProductOrderDTO(int oRDER_ID, String uSERID, int p_ID, int tOTAL_PRICE, String dELIVERY_ADDRESS,
 			String dELIVERY_LOC, String dELIVERY_REQ, String oRDER_DATE, String oRDER_STATE, int p_AMOUNT,
 			String p_NAME, String p_CONTENT, int c_ID, int p_COST_PRICE, int p_SELLING_PRICE, int p_DISCOUNT,
-			String p_CREATED, int p_STOCK, int rEVIEW_ID, String rEVIEW_TITLE, String rEVIEW_CONTENT,
-			String rEVIEW_RATE, String rEVIEW_IMG, String rEVIEW_CREATED) {
+			String p_CREATED, int p_STOCK) {
 		super();
 		ORDER_ID = oRDER_ID;
 		USERID = uSERID;
@@ -55,12 +48,6 @@ public class ProductOrderReviewDTO {
 		P_DISCOUNT = p_DISCOUNT;
 		P_CREATED = p_CREATED;
 		P_STOCK = p_STOCK;
-		REVIEW_ID = rEVIEW_ID;
-		REVIEW_TITLE = rEVIEW_TITLE;
-		REVIEW_CONTENT = rEVIEW_CONTENT;
-		REVIEW_RATE = rEVIEW_RATE;
-		REVIEW_IMG = rEVIEW_IMG;
-		REVIEW_CREATED = rEVIEW_CREATED;
 	}
 
 	public int getORDER_ID() {
@@ -207,64 +194,14 @@ public class ProductOrderReviewDTO {
 		P_STOCK = p_STOCK;
 	}
 
-	public int getREVIEW_ID() {
-		return REVIEW_ID;
-	}
-
-	public void setREVIEW_ID(int rEVIEW_ID) {
-		REVIEW_ID = rEVIEW_ID;
-	}
-
-	public String getREVIEW_TITLE() {
-		return REVIEW_TITLE;
-	}
-
-	public void setREVIEW_TITLE(String rEVIEW_TITLE) {
-		REVIEW_TITLE = rEVIEW_TITLE;
-	}
-
-	public String getREVIEW_CONTENT() {
-		return REVIEW_CONTENT;
-	}
-
-	public void setREVIEW_CONTENT(String rEVIEW_CONTENT) {
-		REVIEW_CONTENT = rEVIEW_CONTENT;
-	}
-
-	public String getREVIEW_RATE() {
-		return REVIEW_RATE;
-	}
-
-	public void setREVIEW_RATE(String rEVIEW_RATE) {
-		REVIEW_RATE = rEVIEW_RATE;
-	}
-
-	public String getREVIEW_IMG() {
-		return REVIEW_IMG;
-	}
-
-	public void setREVIEW_IMG(String rEVIEW_IMG) {
-		REVIEW_IMG = rEVIEW_IMG;
-	}
-
-	public String getREVIEW_CREATED() {
-		return REVIEW_CREATED;
-	}
-
-	public void setREVIEW_CREATED(String rEVIEW_CREATED) {
-		REVIEW_CREATED = rEVIEW_CREATED;
-	}
-
 	@Override
 	public String toString() {
-		return "ProductOrderReviewDTO [ORDER_ID=" + ORDER_ID + ", USERID=" + USERID + ", P_ID=" + P_ID
-				+ ", TOTAL_PRICE=" + TOTAL_PRICE + ", DELIVERY_ADDRESS=" + DELIVERY_ADDRESS + ", DELIVERY_LOC="
-				+ DELIVERY_LOC + ", DELIVERY_REQ=" + DELIVERY_REQ + ", ORDER_DATE=" + ORDER_DATE + ", ORDER_STATE="
-				+ ORDER_STATE + ", P_AMOUNT=" + P_AMOUNT + ", P_NAME=" + P_NAME + ", P_CONTENT=" + P_CONTENT + ", C_ID="
-				+ C_ID + ", P_COST_PRICE=" + P_COST_PRICE + ", P_SELLING_PRICE=" + P_SELLING_PRICE + ", P_DISCOUNT="
-				+ P_DISCOUNT + ", P_CREATED=" + P_CREATED + ", P_STOCK=" + P_STOCK + ", REVIEW_ID=" + REVIEW_ID
-				+ ", REVIEW_TITLE=" + REVIEW_TITLE + ", REVIEW_CONTENT=" + REVIEW_CONTENT + ", REVIEW_RATE="
-				+ REVIEW_RATE + ", REVIEW_IMG=" + REVIEW_IMG + ", REVIEW_CREATED=" + REVIEW_CREATED + "]";
+		return "ProductOrderDTO [ORDER_ID=" + ORDER_ID + ", USERID=" + USERID + ", P_ID=" + P_ID + ", TOTAL_PRICE="
+				+ TOTAL_PRICE + ", DELIVERY_ADDRESS=" + DELIVERY_ADDRESS + ", DELIVERY_LOC=" + DELIVERY_LOC
+				+ ", DELIVERY_REQ=" + DELIVERY_REQ + ", ORDER_DATE=" + ORDER_DATE + ", ORDER_STATE=" + ORDER_STATE
+				+ ", P_AMOUNT=" + P_AMOUNT + ", P_NAME=" + P_NAME + ", P_CONTENT=" + P_CONTENT + ", C_ID=" + C_ID
+				+ ", P_COST_PRICE=" + P_COST_PRICE + ", P_SELLING_PRICE=" + P_SELLING_PRICE + ", P_DISCOUNT="
+				+ P_DISCOUNT + ", P_CREATED=" + P_CREATED + ", P_STOCK=" + P_STOCK + "]";
 	}
-	
+
 }
