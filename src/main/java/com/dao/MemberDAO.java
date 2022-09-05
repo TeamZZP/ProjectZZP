@@ -17,7 +17,7 @@ public class MemberDAO {
 		return session.selectOne("checkId", userid);
 	}
 
-	public int addMember(SqlSession session, HashMap<String, String> map) {
+	public int addMember(SqlSession session, HashMap<String, String> map) throws Exception {
 		return session.insert("addMember", map);
 	}
 
@@ -75,8 +75,8 @@ public class MemberDAO {
 		return session.selectOne("MemberMapper.totalCount", map);
 	}
 
-	public MemberDTO selectMemberBykakao(SqlSession session, HashMap<String, String> map) {
-		return session.selectOne("selectMemberBykakao", map);
+	public MemberDTO selectMemberBySocial(SqlSession session, HashMap<String, String> map) {
+		return session.selectOne("selectMemberBySocial", map);
 	}
 
 	public int changeMember(SqlSession session, HashMap<String, String> changeMemberMap) {

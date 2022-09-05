@@ -44,20 +44,29 @@ public class MemberAddServlet extends HttpServlet {
 		map.put("addr2", addr2);
 	
 		MemberService service = new MemberService();
-		int num = service.addMember(map);
-		System.out.println(num);
-		
-		if (num>0) {
+		int num = 0;
+		try {
+			num = service.addMember(map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			System.out.println("MemberAddServlet>>>"+num);
 			HttpSession session = request.getSession();
-			session.setAttribute("mesg", userid+"님 회원가입 회원가입을 축하합니다 :)");
+			String nextPage = "";
+			if (num>0) {
+				session.setAttribute("mesg", userid+"님 회원가입 회원가입을 축하합니다 :)");
+				nextPage = "LoginUIServlet";
+				session.setMaxInactiveInterval(60*30);
+				
+			} else if (num==0) {
+				session.setAttribute("mesg", "다시 시도해 주시기 바랍니다.");
+				nextPage = "MemberUIServlet";
+			}
 			session.setMaxInactiveInterval(60*30);
-			
-			response.sendRedirect("LoginUIServlet");
-		} else {
-			response.sendRedirect("MemberUIServlet");
-		}
-		
+			response.sendRedirect(nextPage);
+		 }	
 	}
+
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
