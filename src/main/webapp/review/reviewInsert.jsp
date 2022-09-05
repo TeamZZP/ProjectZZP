@@ -46,8 +46,8 @@
 			$("#reviewInsert").click(function () {
 				var operate = $("#reviewInsert").attr("data-operate");
 				var userid = $("#reviewInsert").attr("data-userid");
-				var REVIEW_IMG = $("#REVIEW_IMG").val();
-				console.log(REVIEW_IMG);
+				//var REVIEW_IMG = $("#REVIEW_IMG").val();
+				//console.log(REVIEW_IMG);
 				$("#reviewForm").attr("action", "reviewUploadServlet?USERID="+userid+"&operate="+operate);
 			}); //
 			function checkFileExtension(){ 

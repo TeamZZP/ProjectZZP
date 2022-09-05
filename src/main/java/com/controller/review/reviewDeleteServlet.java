@@ -13,40 +13,37 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.dto.MemberDTO;
-import com.dto.ReviewDTO;
 import com.service.ReviewService;
 
-@WebServlet("/orderIdCheckServlet")
-public class orderIdCheckServlet extends HttpServlet {
+@WebServlet("/reviewDeleteServlet")
+public class reviewDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    public orderIdCheckServlet() {
+
+	public reviewDeleteServlet() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
+		String REVIEW_ID = request.getParameter("REVIEW_ID");
+		String USERID = request.getParameter("USERID");
+		System.out.println(REVIEW_ID + "\t" + USERID);
+		
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("REVIEW_ID", REVIEW_ID);
+		map.put("USERID", USERID);
+		
 		HttpSession session = request.getSession();
 		MemberDTO mDTO = (MemberDTO) session.getAttribute("login");
 		if (mDTO != null) {
-			String ORDER_ID = request.getParameter("ORDER_ID");
-			String P_ID = request.getParameter("P_ID");
-			System.out.println("orderId확인 " + ORDER_ID + "\t" + P_ID);
-			
-			Map<String, String> map = new HashMap<String, String>();
-			map.put("ORDER_ID", ORDER_ID);
-			map.put("P_ID", P_ID);
-			
 			ReviewService service = new ReviewService();
-			ReviewDTO dto = service.orderIDreivewCheck(map);
-			System.out.println("리뷰 " + dto);
+			int reviewDel = service.reviewDelete(map);
+			System.out.println("리뷰 삭제 갯수 " + reviewDel);
 			
-			response.setContentType("text/html;charset=utf-8");
-			PrintWriter out = response.getWriter();
-			if (dto != null) {
-				out.print(dto.getREVIEW_ID());
-			} else {
-				out.print(0);
+			if (reviewDel != 0) {
+				response.setContentType("text/html;charset=utf-8");
+				PrintWriter out = response.getWriter();
+				out.print("삭제성공");
 			}
 			
 		} else {

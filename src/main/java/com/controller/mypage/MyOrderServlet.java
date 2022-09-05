@@ -1,6 +1,7 @@
 package com.controller.mypage;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,9 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import com.dto.MemberDTO;
 import com.dto.PageDTO;
-import com.dto.ProductOrderReviewDTO;
 import com.service.OrderService;
-import com.service.QuestionService;
 
 @WebServlet("/MyOrderServlet")
 public class MyOrderServlet extends HttpServlet {
@@ -38,7 +37,7 @@ public class MyOrderServlet extends HttpServlet {
 			System.out.println("pDTO " + pDTO);
 			
 			session.setAttribute("myOrderList", pDTO);		
-			response.sendRedirect("myOrder.jsp");
+			response.sendRedirect("myOrder.jsp"); 
 			
 		} else {
 			session.setAttribute("mesg", "로그인이 필요합니다");
