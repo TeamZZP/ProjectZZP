@@ -163,7 +163,7 @@
        <a href="ChallengeDetailServlet?chall_id=<%= challThisMonth.getChall_id() %>"><%= challThisMonth.getChall_title() %>
         <span class="challThisMonth">참여하러가기</span> </a> 
         <a data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="custom-tooltip"
-        		title="매달 바뀌는 챌린지 도전 과제에 참여해 보세요! ">
+        		title="매달 바뀌는 챌린지 도전 과제에 참여해 보세요! 참여시 받을 수 있는 예쁜 도장을 모아보세요!">
         	<img src="images/help.png" width="25" style="margin-top: -5px;">
         </a>
      </div>

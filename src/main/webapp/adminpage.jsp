@@ -7,7 +7,7 @@
 <title>ZZP</title>
 <%
 	String mesg=(String) session.getAttribute("mesg");
-	if (mesg != null){
+	if (mesg != null && mesg.length() != 0){
 %>
 <script type="text/javascript">
 		alert("<%= mesg %>");
