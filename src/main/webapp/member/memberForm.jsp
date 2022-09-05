@@ -298,7 +298,7 @@ System.out.println(map);
                                     <!--  -->
                                     <div class="form-group" style="margin-top: 10px; text-align: center;">
                                         <input type="submit" value="회원가입" id="addMember" class="btn btn-success">
-										<input type="reset" value="취소" class="btn btn-success">
+										<input type="button" onclick="javascript:history.back();" value="취소" class="btn btn-success">
                                     </div>
                                    <!--  <div class="login-register">
                                     </div> -->
