@@ -39,8 +39,9 @@
 	$(document).ready(function () {
 		$(".reviewUpdate").click(function () {
 			var REVIEW_ID = $(this).attr("data-reviewID");
+			var P_ID = $(this).attr("data-pID");
 			console.log(REVIEW_ID);
-			$("#reviewForm").attr("action","reviewOneSelect?REVIEW_ID="+REVIEW_ID);
+			$("#reviewForm").attr("action","reviewOneSelect?REVIEW_ID="+REVIEW_ID+"&P_ID="+P_ID);
 		});
 		$(".reviewDelete").click(function () {
 			console.log("클릭");
@@ -55,7 +56,7 @@
 		<div class="col">
 			<a href="MypageServlet">마이페이지 홈</a>
 		</div>
-	   <div class="col" > 
+	   <div class="col"> 
 	   		<a href="MyOrderServlet">주문 내역</a> 
 	   </div>
 	   <div class="col">반품/취소/교환 목록</div>
@@ -119,7 +120,7 @@
 			<div><%= review_created %></div>
 		</td>
 		<td class="align-middle text-center">
-			<button class="btn btn-light btn-sm reviewUpdate" data-reviewID="<%=dto.getREVIEW_ID() %>">수정</button>
+			<button class="btn btn-light btn-sm reviewUpdate" data-reviewID="<%=dto.getREVIEW_ID() %>" data-pID=<%=dto.getP_ID() %>>수정</button>
 			<button class="btn btn-light btn-sm reviewDelete" data-reviewID="<%=dto.getREVIEW_ID() %>">삭제</button>
 		</td>
 	</tr>
