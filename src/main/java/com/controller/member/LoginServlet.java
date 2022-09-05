@@ -32,7 +32,6 @@ public class LoginServlet extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		String nextPage = "";
-		String mesg = "";
 		if (dto!=null) {
 			MemberDTO logindto = service.checkPasswd(map);
 			System.out.println("checkPasswd>>"+logindto);
@@ -41,15 +40,14 @@ public class LoginServlet extends HttpServlet {
 				session.setAttribute("login", logindto); 
 				nextPage = "MainServlet";
 			} else {
-				mesg = "비밀번호가 틀렸습니다:(";
+				session.setAttribute("mesg", "비밀번호가 틀렸습니다:(");
 				nextPage = "LoginUIServlet";
 			}
 		} else {
 			//DB정보 없을 시 mesg 출력
-			mesg = "일치하는 회원이 없습니다:(";
+			session.setAttribute("mesg", "일치하는 회원이 없습니다:(");
 			nextPage = "LoginUIServlet";
 		}
-		session.setAttribute("mesg", mesg);
 		session.setMaxInactiveInterval(60*60);
 		response.sendRedirect(nextPage);
 	}
