@@ -171,7 +171,9 @@
 					userid : userid
 				},
 				success : function(data, status, xhr) {
-					alert("해당 회원이 삭제되었습니다.");
+					//alert("해당 회원이 삭제되었습니다.");
+					$("#modalBtn").trigger("click");
+					$("#mesg").text("해당 회원이 삭제되었습니다.");
 					$("#deleteMember"+userid).modal("hide");
 					$(".modal-backdrop").hide();//모달창 닫고 백드롭 hide
 					console.log("success");
