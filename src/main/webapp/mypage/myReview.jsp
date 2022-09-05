@@ -40,11 +40,31 @@
 		$(".reviewUpdate").click(function () {
 			var REVIEW_ID = $(this).attr("data-reviewID");
 			var P_ID = $(this).attr("data-pID");
-			console.log(REVIEW_ID);
 			$("#reviewForm").attr("action","reviewOneSelect?REVIEW_ID="+REVIEW_ID+"&P_ID="+P_ID);
 		});
 		$(".reviewDelete").click(function () {
-			console.log("클릭");
+			var REVIEW_ID = $(this).attr("data-reviewID");
+			var USERID = $(this).attr("data-userid");
+			$.ajax({
+				type:"post",
+				url:"reviewDeleteServlet",
+				data:{
+					REVIEW_ID:REVIEW_ID,
+					USERID:USERID
+				},
+				dataType:"text",
+				success: function (data, status, xhr) {
+					if (data.equals("삭제 성공")) {
+						alert("리뷰가 삭제되었습니다.");
+						reload;
+					} else {
+						alret("리뷰 삭제를 실패했습니다. 다시 시도해주세요");
+					}
+				},
+				error: function (xhr, status, error) {
+					
+				}
+			});//end ajax
 		});
 
 	});//end ready
@@ -121,7 +141,7 @@
 		</td>
 		<td class="align-middle text-center">
 			<button class="btn btn-light btn-sm reviewUpdate" data-reviewID="<%=dto.getREVIEW_ID() %>" data-pID=<%=dto.getP_ID() %>>수정</button>
-			<button class="btn btn-light btn-sm reviewDelete" data-reviewID="<%=dto.getREVIEW_ID() %>">삭제</button>
+			<button type="button" class="btn btn-light btn-sm reviewDelete" data-reviewID="<%=dto.getREVIEW_ID() %>" data-userid="<%=dto.getUSERID()%>">삭제</button>
 		</td>
 	</tr>
 <%

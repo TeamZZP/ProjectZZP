@@ -105,11 +105,11 @@
 <form id="myOrderForm" method="post">
 <table id="addTable" class="table table-hover" style="text-align: center;">
 	<tr class="table-success">
-		<th>상품명</th>
-		<th>가격</th>
-		<th>주문날짜</th>
-		<th>주소</th>
-		<th>배송상태</th>
+		<th width="25%">상품명</th>
+		<th width="10%">가격</th>
+		<th width="10%">주문날짜</th>
+		<th width="35%">주소</th>
+		<th width="10%">배송상태</th>
 		<th></th>
 	</tr>
 	<%
@@ -130,6 +130,7 @@
 			<% if(DTO.getORDER_STATE().equals("배송완료")){ %>
 				<a data-orderID="<%= DTO.getORDER_ID() %>" data-pNAME="<%= DTO.getP_NAME() %>" 
 					data-pID="<%= DTO.getP_ID() %>" data-reviewID="<%=DTO.getREVIEW_ID() %>"
+					data-userid="<%=userid %>"
 					class="btn btn-outline-success chk" role="button">
 					리뷰작성
 				 </a>
