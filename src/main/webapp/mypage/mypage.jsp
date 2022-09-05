@@ -12,18 +12,45 @@
 	String created_at=member.getCreated_at();
 %>
 <style>
+	.img a{
+	  display: block; /* 영역적용위해 사용 */
+	  width: 100%; height: 100%;
+	
+	  overflow: hidden;/* 이미지가 커질때 다른 이미지를 침범하기 때문에 반드시 부모요소보다 이미지가 커질때 넘어가는 것을 막아주세요. */
+	
+	  position: relative; /* absolute의 기본기준은 body로 처리 - 현재 요소로 기준변경 - 이 코드 추가하니까 바깥 영역으로 침범 안 하고 잘림 */
+	}
+	.img figure{
+	  width: 100%; height: 100%;/* a태그의 영역을 상속받도록 처리 */
+	}
+	.img figcaption{
+	  width: 100%; height: 100%;/* 역시 부모 전체 영역을 상속 받도록  width: 100%; height: 100%; 를 줬고, */
+	  background-color: rgba(0,0,0,0.3);/* 검정색 배경색에 투명도를 주기 위해  background-color: rgba(0,0,0,0.7); 로  rgba( ) 함수를 사용 */
+	
+	  position: absolute; /* 이미지와 겹치게 처리 */
+	  top: 0; left: 0;/* 이미지 위에 올라가야 하므로  position: absolute; top: 0; left: 0; 를 줘서 겹치도록 */
+	
+	  color: #fff; text-align: center;
+	  line-height: 200px;
+	
+	  opacity: 0; /* 위에 올라가는 bg기 때문에 처음엔 안 보이게 처리 */
+	
+	  transition: 0.3s; /* 자연스럽게 나타나야하기 때문에 CSS변화에 시간차를 주기 위해 */
+	}
+	.img a:hover figcaption, .img a:focus figcaption{
+	  opacity: 1;/* 마우스를 올렸을 때와 초점받았을 때 보이게 하도록 */
+	}
 </style>
-
 <div class="container col-md-8">
 <div class="justify-content-center">
 <div class="row">
 <div class="col-md-5">
 	<div class="card" style="width: 16rem;">
-	  <div style = "padding: 30px 30px 30px 30px;" class="img">
-	  	<a>
+	  <div class="img" style="padding: 30px 30px 30px 30px;">
+	  	<a href="ProfileChangeServlet">
 	  		<figure>
-	  			<img src="images/user.png" class="card-img-top" id="profileImg">
-	  			<figcaption>사진 변경</figcaption>
+	  			<img src="images/user.png" class="card-img-top">
+	  			<figcaption id="changeImg">사진 변경</figcaption>
 	  		</figure>
 	  	</a>
 	  </div>
@@ -59,8 +86,6 @@
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 	$(document).ready(function() {
-		$("#profileImg").on("click", function() {
-			console.log("clickkkkkk");
-		});//end fn
+		
 	});//end ready
 </script>

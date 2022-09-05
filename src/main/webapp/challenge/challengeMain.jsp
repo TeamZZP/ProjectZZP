@@ -49,6 +49,20 @@
 		top: -6%; 
 		width: 40%;
     }
+    .challThisMonth {
+    	font-weight: bold;
+    	color: green;
+    	margin-left: 10px;
+    }
+    .challThisMonth:hover {
+    	font-weight: bold;
+    	color: #006600;
+    	margin-left: 10px;
+    }
+    
+    .custom-tooltip {
+  		--bs-tooltip-bg: var(--bs-success);
+	}
 
 </style>
 <%
@@ -132,6 +146,12 @@
 			});
 		}
 		
+		//툴팁 활성화
+		let tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+		let tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+				  			return new bootstrap.Tooltip(tooltipTriggerEl)
+						})
+		
 	}); 
  	
 </script>
@@ -140,7 +160,12 @@
 <div class="container">
    <div class="row">
      <div class="col-sm-6">
-       <a href="ChallengeDetailServlet?chall_id=<%= challThisMonth.getChall_id() %>" class=""><%= challThisMonth.getChall_title() %></a>
+       <a href="ChallengeDetailServlet?chall_id=<%= challThisMonth.getChall_id() %>"><%= challThisMonth.getChall_title() %>
+        <span class="challThisMonth">참여하러가기</span> </a> 
+        <a data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="custom-tooltip"
+        		title="매달 바뀌는 챌린지 도전 과제에 참여해 보세요! 참여시 받을 수 있는 예쁜 도장을 모아보세요!">
+        	<img src="images/help.png" width="25" style="margin-top: -5px;">
+        </a>
      </div>
      <div class="col-sm-6">
        <div class="float-end">
