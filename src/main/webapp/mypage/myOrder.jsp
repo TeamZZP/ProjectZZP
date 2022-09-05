@@ -48,11 +48,13 @@
 			var P_NAME = $(this).attr("data-pNAME");
 			var P_ID = $(this).attr("data-pID");
 			console.log(ORDER_ID);
+			console.log(P_ID);
 		 	$.ajax({
 				type:"post",
 				url:"orderIdCheckServlet",
 				data:{
-					ORDER_ID : ORDER_ID
+					ORDER_ID : ORDER_ID,
+					P_ID : P_ID
 				},
 				dataType:"text",
 				success: function (data, status, xhr) {

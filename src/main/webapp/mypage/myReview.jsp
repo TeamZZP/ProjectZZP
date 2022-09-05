@@ -5,6 +5,19 @@
 <%@page import="com.dto.PageDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%
+	String mesg = (String)session.getAttribute("mesg");
+	if(mesg != null){
+%>
+	<script>
+		alert("<%=mesg%>");
+	</script>
+<%
+	}
+	session.removeAttribute("mesg");
+%>    
+    
 <%
 	//회원의 리뷰 목록 가져오기
 	PageDTO pDTO = (PageDTO) request.getAttribute("reviewPageDTO");
@@ -54,12 +67,13 @@
 				},
 				dataType:"text",
 				success: function (data, status, xhr) {
-					if (data.equals("삭제 성공")) {
+					console.log(data);
+					if (data == "삭제성공") {
+						location.href= "ProfileCategoryServlet?category=myreview&userid="+USERID;
 						alert("리뷰가 삭제되었습니다.");
-						reload;
 					} else {
 						alret("리뷰 삭제를 실패했습니다. 다시 시도해주세요");
-					}
+					} 
 				},
 				error: function (xhr, status, error) {
 					
