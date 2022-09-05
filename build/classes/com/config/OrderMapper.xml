@@ -49,7 +49,7 @@ values(#{order_id}, #{userid}, #{p_id}, #{total_price}, #{delivery_address}, #{d
 <select id="MyOrderList" parameterType="string" resultType="ProductOrderReviewImagesDTO">
    	select * from orders o full outer join product using(p_id) full outer join review using(p_id) full outer join images using(p_id)
 	    where o.userid = #{userid} and IMAGE_RNK = 1
-	    order by ORDER_DATE, P_ID desc
+	    order by ORDER_DATE desc
 </select>
 <select id="myOrderNum" parameterType="string" resultType="int">
 	select count(*) from orders o full outer join product using(p_id) full outer join review using(p_id)
