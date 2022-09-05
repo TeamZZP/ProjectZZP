@@ -24,44 +24,53 @@
 	var numChk = /^01(0|1[6-9])(\d{3,4})(\d{4})$/; 
 	
 	if (userid.length==0) {
-		alert("아이디를 입력해주세요 :)");
+		$("#modalBtn").trigger("click");
+		$("#mesg").text("아이디를 입력해주세요 :)");
 		$("#userid").focus();
 		event.preventDefault();
 	} else if (passwd.length==0) {
-		alert("비밀번호를 입력해주세요 :)");
+		$("#modalBtn").trigger("click");
+		$("#mesg").text("비밀번호를 입력해주세요 :)");
 		$("#passwd").focus();
 		event.preventDefault();
 	} else if (passwd2.length==0) {
-		alert("비밀번호를 확인해주세요 :)");
+		$("#modalBtn").trigger("click");
+		$("#mesg").text("비밀번호를 확인해주세요 :)");
 		$("#passwd2").focus();
 		event.preventDefault();
 	}  else if (username.length==0) {
-		alert("이름을 입력해주세요 :)");
+		$("#modalBtn").trigger("click");
+		$("#mesg").text("이름을 입력해주세요 :)");
 		$("#username").focus();
 		event.preventDefault();
 	} else if (email1.length==0 || email2.length==0) {
-		alert("이메일을 입력해주세요 :)");
+		$("#modalBtn").trigger("click");
+		$("#mesg").text("이메일을 입력해주세요 :)");
 		$("#email1").focus();
 		event.preventDefault();
 	} else if (phone.length==0) {
-		alert("전화번호를 입력해주세요 :)");
+		$("#modalBtn").trigger("click");
+		$("#mesg").text("전화번호를 입력해주세요 :)");
 		$("#phone").focus();
 		event.preventDefault();
 	} else if (sample4_postcode.length==0||sample4_roadAddress.length==0||sample4_jibunAddress.length==0) {
-		alert("주소를 입력해주세요 :)");
+		$("#modalBtn").trigger("click");
+		$("#mesg").text("주소를 입력해주세요 :)");
 		$("#sample4_postcode").focus();
 		event.preventDefault();
 	}
 	//아이디 유효성 검사
 	else if (!idChk.test(userid)) {
-		alert("아이디를 형식에 맞게 입력해주세요 :)");
+		$("#modalBtn").trigger("click");
+		$("#mesg").text("아이디를 형식에 맞게 입력해주세요 :)");
 		$("#userid").val("");
 		$("#userid").focus();
 		event.preventDefault();
 	}
 	//비밀번호 유효성 검사
 	else if (!pwChk.test(passwd)) {
-		alert("비밀번호를 형식에 맞게 입력해주세요 :)");
+		$("#modalBtn").trigger("click");
+		$("#mesg").text("비밀번호를 형식에 맞게 입력해주세요 :)");
 		$("#passwd").val("");
 		$("#passwd").focus();
 		event.preventDefault();
@@ -69,6 +78,7 @@
 	//이름 유효성 검사
 	else if (!nameChk.test(username) || username.length>3) {
 		alert("이름을 확인해주세요 :)");
+		
 		$("#username").val("");
 		$("#username").focus();
 		event.preventDefault();
@@ -309,6 +319,8 @@ System.out.println(map);
                     </div>
                 </div>
 </div>
+
+
 
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
