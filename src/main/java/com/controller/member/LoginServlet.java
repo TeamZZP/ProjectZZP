@@ -31,17 +31,27 @@ public class LoginServlet extends HttpServlet {
 		System.out.println(dto);
 		
 		HttpSession session = request.getSession();
+		String nextPage = "";
+		String mesg = "";
 		if (dto!=null) {
-			//login 인증정보 저장
-			session.setAttribute("login", dto); 
-			session.setMaxInactiveInterval(60*60);
-			response.sendRedirect("MainServlet");
+			MemberDTO logindto = service.checkPasswd(map);
+			System.out.println("checkPasswd>>"+logindto);
+			if (logindto!=null) {
+				//login 인증정보 저장
+				session.setAttribute("login", logindto); 
+				nextPage = "MainServlet";
+			} else {
+				mesg = "비밀번호가 틀렸습니다:(";
+				nextPage = "LoginUIServlet";
+			}
 		} else {
 			//DB정보 없을 시 mesg 출력
-			session.setAttribute("mesg", "로그인 정보가 올바르지 않습니다:("); 
-			session.setMaxInactiveInterval(60*30);
-			response.sendRedirect("LoginUIServlet");
+			mesg = "일치하는 회원이 없습니다:(";
+			nextPage = "LoginUIServlet";
 		}
+		session.setAttribute("mesg", mesg);
+		session.setMaxInactiveInterval(60*60);
+		response.sendRedirect(nextPage);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

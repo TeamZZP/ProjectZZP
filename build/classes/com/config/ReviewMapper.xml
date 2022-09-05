@@ -27,7 +27,14 @@
 			values (REVIEW_REVIEW_ID_SEQ.nextval, #{ORDER_ID}, #{P_ID}, #{USERID}, #{REVIEW_TITLE}, #{REVIEW_CONTENT},
 				#{REVIEW_RATE}, #{REVIEW_IMG}, sysdate)
 	</insert> 
-	<select id="orderIDreivewCheck" parameterType="int" resultType="int">
-		select count(*) from review where order_ID = #{ORDER_ID}
+	<select id="orderIDreivewCheck" parameterType="int" resultType="ReviewDTO">
+		select * from REVIEW where ORDER_ID = #{ORDER_ID}
 	</select>
+	<select id="selectOneReview" parameterType="map" resultType="ProductOrderReviewDTO">
+		select * from review r RIGHT OUTER JOIN product p USING(p_id) join REVIEW USING(p_id) where P_ID = #{P_ID} and r.REVIEW_ID = #{REVIEW_ID}
+	</select>
+	<update id="reviewUpdate" parameterType="map">
+		update REVIEW set REVIEW_TITLE = #{REVIEW_TITLE}, REVIEW_CONTENT = #{REVIEW_CONTENT}, REVIEW_RATE = #{REVIEW_RATE}, REVIEW_IMG = #{REVIEW_IMG}
+			where REVIEW_ID = #{REVIEW_ID}
+	</update>
 </mapper>

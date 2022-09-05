@@ -30,7 +30,7 @@ public class MemberService {
 		return num;
 	}
 
-	public int addMember(HashMap<String, String> map) {
+	public int addMember(HashMap<String, String> map) throws Exception {
 		SqlSession session = MySqlSessionFactory.getSqlSession();
 		int num = 0;
 		try {
@@ -143,11 +143,11 @@ public class MemberService {
 		return dto;
 	}
 
-	public MemberDTO selectMemberBykakao(HashMap<String, String> map) {
+	public MemberDTO selectMemberBySocial(HashMap<String, String> map) {
 		SqlSession session=MySqlSessionFactory.getSqlSession();
 		MemberDTO dto = null;
 		try {
-			dto = dao.selectMemberBykakao(session,map);
+			dto = dao.selectMemberBySocial(session,map);
 		} finally {
 			session.close();
 		}
@@ -164,6 +164,17 @@ public class MemberService {
 			session.close();
 		}
 		return num;
+	}
+
+	public MemberDTO checkPasswd(HashMap<String, String> map) {
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		MemberDTO dto = null;
+		try {
+			dto = dao.checkPasswd(session, map);
+		} finally {
+			session.close();
+		}
+		return dto;
 	}
 
 }

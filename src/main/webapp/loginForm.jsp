@@ -5,12 +5,27 @@
 <head>
 <meta charset="UTF-8">
 <title>ZZP</title>
+<style>
+#modalBtn{
+	display: none;
+}
+.modal-body{
+	text-align: center;
+}
+#mesg{
+	margin: 0;
+}
+</style>
 <%
 	String mesg=(String) session.getAttribute("mesg");
 	if (mesg != null){
 %>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
-	alert("<%= mesg %>");
+$(document).ready(function() {
+	$("#modalBtn").trigger("click");
+	$("#mesg").text("<%= mesg %>");
+});
 </script>
 <%
 	session.removeAttribute("mesg");
@@ -18,6 +33,23 @@
 %>
 </head>
 <body>
+<div class="modal" id="checkVal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">ZZP</h5>
+      </div>
+      <div class="modal-body">
+        <p id="mesg"></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" data-bs-dismiss="modal">닫기</button>
+      </div>
+    </div>
+  </div>
+</div>
+<button type="button" id="modalBtn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#checkVal">modal</button>
+
 <jsp:include page="common/header.jsp" flush="true"></jsp:include><br>
 <jsp:include page="member/loginForm.jsp" flush="true"></jsp:include> 
 </body>

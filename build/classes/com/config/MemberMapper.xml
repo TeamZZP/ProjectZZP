@@ -26,6 +26,11 @@
 		
 		<select id="loginMember" parameterType="hashMap" resultType="MemberDTO">
 			select userid, passwd, username, email1, email2, phone, created_at, role
+			from member where userid=#{userid} 
+		</select>
+		
+		<select id="checkPasswd" parameterType="hashMap" resultType="MemberDTO">
+			select userid, passwd, username, email1, email2, phone, created_at, role
 			from member where userid=#{userid} and passwd=#{passwd}
 		</select>
 		
@@ -123,7 +128,7 @@
 			where userid = #{userid}
 		</select>
 		
-		<select id="selectMemberBykakao" resultType="MemberDTO" parameterType="hashmap">
+		<select id="selectMemberBySocial" resultType="MemberDTO" parameterType="hashmap">
 			select * from member
 			where concat(concat(email1,'@'),email2) = #{email} and username=#{username}
 		</select>

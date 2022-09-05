@@ -46,10 +46,17 @@ select orders_order_id_seq.NEXTVAL from dual
 insert into orders (order_id, userid, p_id, total_price, delivery_address, delivery_loc, delivery_req, order_date,order_state,p_amount)
 values(#{order_id}, #{userid}, #{p_id}, #{total_price}, #{delivery_address}, #{delivery_loc}, #{delivery_req},sysdate,'주문완료', #{order_quantity})
 </insert>	
-<select id="MyOrderList" parameterType="string" resultType="ProductOrderDTO">
-	select * from orders RIGHT OUTER JOIN product USING(p_id) where orders.userid = #{userid} order by ORDER_DATE desc
+<select id="MyOrderList" parameterType="string" resultType="ProductOrderReviewDTO">
+	<!-- select p_id, r.review_id, o.order_id, o.userid, p.p_name, o.total_price, o.delivery_address, o.delivery_loc, o.order_date, o.order_state from 
+	   review r RIGHT OUTER JOIN product p USING(p_id)
+	    RIGHT OUTER join orders o using(p_id)
+	    where o.userid = #{userid} 
+	    order by ORDER_DATE desc -->
+	select * from review RIGHT OUTER JOIN product USING(p_id) RIGHT OUTER join orders o using(p_id) 
+		where o.userid = #{userid} 
+   	 	order by ORDER_DATE desc
 </select>
-<select id="myOrderNum" resultType="int">
+<select id="myOrderNum" parameterType="string" resultType="int">
 	select count(*) from QUESTION where userid = #{userid}
 </select>
 </mapper>

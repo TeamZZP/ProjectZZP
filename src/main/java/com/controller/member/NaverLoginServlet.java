@@ -17,39 +17,66 @@ import javax.websocket.Session;
 import com.dto.MemberDTO;
 import com.service.MemberService;
 
-@WebServlet("/KakaoLoginServlet")
-public class KakaoLoginServlet extends HttpServlet {
+@WebServlet("/NaverLoginServlet")
+public class NaverLoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		String email = request.getParameter("email");
-		String nickname = request.getParameter("nickname");
-		String accessToken = request.getParameter("accessToken");
-		System.out.println(accessToken);
+		String username = request.getParameter("username");
+		System.out.println(email+" "+username);
 		
-		//카카오 데이터로 기존 회원 여부 확인
+		//이메일 나누기
+		int emailSplit = email.indexOf("@");
+		String email1 = email.substring(0, emailSplit);
+		String email2 = email.substring(emailSplit+1,email.length());
+		System.out.println(email1+" "+email2);
+		
+		//네이버 데이터로 기존 회원 여부 확인
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("email", email);
-		map.put("username", nickname);
-		map.put("accessToken", accessToken);
+		map.put("username", username);
 		MemberService mService = new MemberService();
-		MemberDTO dto = mService.selectMemberBykakao(map);
+		MemberDTO dto = mService.selectMemberBySocial(map);
 		System.out.println(dto);
 		
 		//회원아닌 경우 회원가입
 		HttpSession session = request.getSession();
 		if (dto==null) {
-			session.setAttribute("kakaoInfo", map);
-			response.sendRedirect("MemberUIServlet");
+			//회원가입
+			HashMap<String, String> memberMap = new HashMap<String, String>();
+			map.put("userid", email);
+			map.put("passwd", "1");
+			map.put("username", username);
+			map.put("email1", email1);
+			map.put("email2", email2);
+			map.put("phone", "01000000000");
+			map.put("post_num", "우편");
+			map.put("addr1", "도로명주소");
+			map.put("addr2", "지번주소");
+			MemberService service = new MemberService();
+			int num = 0;
+			try {
+				num = service.addMember(map);
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				System.out.println(num);
+				//로그인
+				HashMap<String, String> Loginmap = new HashMap<String, String>();
+				Loginmap.put("userid", email);
+				Loginmap.put("passwd", "1");
+				MemberDTO loginedto = service.loginMember(Loginmap);
+				System.out.println(loginedto);
+				session.setAttribute("login", loginedto); 
+			}
 		} 
 		//회원인 경우 로그인 처리
 		else {
 			session.setAttribute("login", dto);
-			session.setAttribute("kakaoInfo", map);
-			session.setMaxInactiveInterval(60*60);
-			response.sendRedirect("MainServlet");
 		}
+		session.setMaxInactiveInterval(60*60);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

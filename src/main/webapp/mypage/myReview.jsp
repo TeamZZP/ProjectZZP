@@ -5,6 +5,19 @@
 <%@page import="com.dto.PageDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%
+	String mesg = (String)session.getAttribute("mesg");
+	if(mesg != null){
+%>
+	<script>
+		alert("<%=mesg%>");
+	</script>
+<%
+	}
+	session.removeAttribute("mesg");
+%>    
+    
 <%
 	//회원의 리뷰 목록 가져오기
 	PageDTO pDTO = (PageDTO) request.getAttribute("reviewPageDTO");
@@ -39,11 +52,33 @@
 	$(document).ready(function () {
 		$(".reviewUpdate").click(function () {
 			var REVIEW_ID = $(this).attr("data-reviewID");
-			console.log(REVIEW_ID);
-			$("#reviewForm").attr("action","reviewOneSelect?REVIEW_ID="+REVIEW_ID);
+			var P_ID = $(this).attr("data-pID");
+			$("#reviewForm").attr("action","reviewOneSelect?REVIEW_ID="+REVIEW_ID+"&P_ID="+P_ID);
 		});
 		$(".reviewDelete").click(function () {
-			console.log("클릭");
+			var REVIEW_ID = $(this).attr("data-reviewID");
+			var USERID = $(this).attr("data-userid");
+			$.ajax({
+				type:"post",
+				url:"reviewDeleteServlet",
+				data:{
+					REVIEW_ID:REVIEW_ID,
+					USERID:USERID
+				},
+				dataType:"text",
+				success: function (data, status, xhr) {
+					console.log(data);
+					if (data == "삭제성공") {
+						location.href= "ProfileCategoryServlet?category=myreview&userid="+USERID;
+						alert("리뷰가 삭제되었습니다.");
+					} else {
+						alret("리뷰 삭제를 실패했습니다. 다시 시도해주세요");
+					} 
+				},
+				error: function (xhr, status, error) {
+					
+				}
+			});//end ajax
 		});
 
 	});//end ready
@@ -55,7 +90,7 @@
 		<div class="col">
 			<a href="MypageServlet">마이페이지 홈</a>
 		</div>
-	   <div class="col" > 
+	   <div class="col"> 
 	   		<a href="MyOrderServlet">주문 내역</a> 
 	   </div>
 	   <div class="col">반품/취소/교환 목록</div>
@@ -119,8 +154,8 @@
 			<div><%= review_created %></div>
 		</td>
 		<td class="align-middle text-center">
-			<button class="btn btn-light btn-sm reviewUpdate" data-reviewID="<%=dto.getREVIEW_ID() %>">수정</button>
-			<button class="btn btn-light btn-sm reviewDelete" data-reviewID="<%=dto.getREVIEW_ID() %>">삭제</button>
+			<button class="btn btn-light btn-sm reviewUpdate" data-reviewID="<%=dto.getREVIEW_ID() %>" data-pID=<%=dto.getP_ID() %>>수정</button>
+			<button type="button" class="btn btn-light btn-sm reviewDelete" data-reviewID="<%=dto.getREVIEW_ID() %>" data-userid="<%=dto.getUSERID()%>">삭제</button>
 		</td>
 	</tr>
 <%
