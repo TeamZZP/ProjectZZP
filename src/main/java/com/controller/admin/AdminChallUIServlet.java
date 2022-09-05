@@ -58,7 +58,7 @@ public class AdminChallUIServlet extends HttpServlet {
 			
 		//관리자가 아닌 경우
 		} else {
-			session.setAttribute("mesg", "잘못된 접근입니다.");
+			//session.setAttribute("mesg", "잘못된 접근입니다.");
 			response.sendRedirect("main");
 		}
 	}
