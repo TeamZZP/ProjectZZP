@@ -77,15 +77,16 @@
 	}
 	//이름 유효성 검사
 	else if (!nameChk.test(username) || username.length>3) {
-		alert("이름을 확인해주세요 :)");
-		
+		$("#modalBtn").trigger("click");
+		$("#mesg").text("이름을 확인해주세요 :)");
 		$("#username").val("");
 		$("#username").focus();
 		event.preventDefault();
 	}
 	//전화번호 유효성 검사
 	else if (!numChk.test(phone)) {
-		alert("전화번호를 형식에 맞게 입력해주세요 :)");
+		$("#modalBtn").trigger("click");
+		$("#mesg").text("전화번호를 형식에 맞게 입력해주세요 :)");
 		$("#phone").val("");
 		$("#phone").focus();
 		event.preventDefault();
@@ -147,13 +148,16 @@ $("#addMember").click(function() {
 	var mesg = $("#result4").text();
 	var mesg2 = $("#result3").text();
 	if (mesg=="아이디를 다시 확인하시기 바랍니다.") {
-		alert("아이디를 확인해주세요")
+		$("#modalBtn").trigger("click");
+		$("#mesg").text("아이디를 확인해주세요 :(");
 		$("#userid").focus();
 		event.preventDefault();
 	}
 	if (mesg2=="비밀번호 불일치") {
-		alert("비밀번호가 일치하지 않습니다 :(")
-		$("#passwd").focus();
+		$("#modalBtn").trigger("click");
+		$("#mesg").text("비밀번호가 일치하지 않습니다 :(");
+		$("#passwd2").val("");
+		$("#passwd2").focus();
 		event.preventDefault();
 	};
 });
