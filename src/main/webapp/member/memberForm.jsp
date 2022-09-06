@@ -173,13 +173,19 @@ System.out.println(map);
 	String [] arr = null;
 	String email1 = null;
 	String email2 = null;
+	int emailSplit = 0;
 
 	if(map!=null){
 		email = map.get("email");
 		username = map.get("username");
-		arr = email.split("@");
+		/* arr = email.split("@");
 		email1 = arr[0];
-		email2 = arr[1];
+		email2 = arr[1]; */
+		
+		emailSplit = email.indexOf("@");
+		email1 = email.substring(0, emailSplit);
+		email2 = email.substring(emailSplit+1,email.length());
+		System.out.println(email1+" "+email2);
 	}
 %>  
 <div class="container">
