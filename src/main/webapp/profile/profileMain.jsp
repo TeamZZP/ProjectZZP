@@ -91,11 +91,11 @@
 
 
 <div class="col-lg-1 float-md-start">
-	   <ul class="list-group justify-content-center mt-5">
-	     <li class="list-group-item border-0"><a class="category" data-category="all">모두보기</a></li>
-	     <li class="list-group-item border-0"><a class="category" data-category="review">구매후기</a></li>
-	     <li class="list-group-item border-0"><a class="category" data-category="challenge">챌린지</a></li>
-	     <li class="list-group-item border-0"><a class="category" data-category="stamp">도장</a></li>
+	   <ul class="mt-5">
+	     <li class="nav-link px-2 mb-1 link-dark"><a class="category" data-category="all">모두보기</a></li>
+	     <li class="nav-link px-2 mb-1 link-dark"><a class="category" data-category="review">구매후기</a></li>
+	     <li class="nav-link px-2 mb-1 link-dark"><a class="category" data-category="challenge">챌린지</a></li>
+	     <li class="nav-link px-2 mb-1 link-dark"><a class="category" data-category="stamp">도장</a></li>
 	   </ul>
 </div>
 

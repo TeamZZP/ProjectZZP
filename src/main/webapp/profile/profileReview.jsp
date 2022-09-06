@@ -29,13 +29,21 @@
 %>
 
 <style>
-
+.img {
+	width: 100px;
+	height: 100px;
+}
 </style>
 
 <script type="text/javascript"
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function () {
+		
+		//첨부파일 보이기
+		$("#uploadBtu").click(function () {
+			window.open("showImg.jsp", "", "width=400px height=500px");
+		});
 		
 		//무한 스크롤
 		$('.skeleton').hide();
@@ -93,7 +101,7 @@
 					alert('문제가 발생했습니다. 다시 시도해 주세요.');
 				}
 			})
-		}
+		}//무한 스크롤 end
 	});
 </script>
 
@@ -120,18 +128,27 @@
 	String image_route = map.get("IMAGE_ROUTE");
 %>
 	<tr class="reviewPost">
-		<td style="padding:5 0 0 10px;" width="30%" class="text-center">
+		<td style="padding:5 0 0 10px;" width="25%" class="text-center">
 			<a href="ProductRetrieveServlet?p_id=<%=p_id%>"> 
 			<img src="images/p_image/<%=image_route%>" border="0" align="middle" class="img pb-1"
-					 style="width: 70%;"	onerror="this.src='images/uploadarea.png'"><br>
+					onerror="this.src='images/uploadarea.png'"><br>
 			<%= p_name %></a>
 		</td>
-		<td width="50%" class="align-middle">
+		<td width="35%" class="align-middle">
 			  <b><%= review_title %></b><br><br>
 			  <%= review_content %><br>
 			  <%= review_rate %>
 		</td>
-		<td width="20%" class="align-middle">
+		<td width="25%" style="text-align: center; vertical-align: middle;">
+				<%if(dto.getREVIEW_IMG() == null || dto.getREVIEW_IMG().equals("null")){ %>
+					
+				<%} else { %>
+					<div id="uploadBtu">
+					<img id="upload" alt="" src="/eclipse/upload/<%=dto.getREVIEW_IMG()%>" width="100px" height="100px" style="border: 1px solid gray;">
+					</div>
+				<%} %>
+		</td>
+		<td width="15%" class="align-middle">
 			<div><%= review_created %></div>
 		</td>
 	</tr>

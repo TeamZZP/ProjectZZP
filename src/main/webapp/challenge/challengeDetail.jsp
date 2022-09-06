@@ -6,11 +6,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <style>
-#challDetailContent {
-	width: 700px;
-	margin: 0 auto;
+
+.container-xl {
 	align-items: center;
-	position: relative;
 }
 
 .img {
@@ -18,8 +16,10 @@
 	margin-left: auto;
 	margin-right: auto;
 }
-
-.container input[type="text"] {
+#img_area {
+	position: relative;
+}
+.container-xl input[type="text"] {
 	width: 80%;
 	padding: 10px 20px;
 	margin: 5px 0;
@@ -40,15 +40,15 @@ a {
     background-color: #fff;
     border: none;
 }
-.container .form-color {
+.container-xl .form-color {
     background-color: #fafafa
 }
-.container .form-control {
+.container-xl .form-control {
     height: 48px;
     border-radius: 15px;
     display: inline;
 }
-.container .form-control:focus {
+.container-xl .form-control:focus {
     color: #495057;
     background-color: #fff;
     border-color: #35b69f;
@@ -79,24 +79,10 @@ a {
 .commentBtn:hover {
 	color: #35b69f;
 }
-/* .reply_box {
-	position: relative; 
-}
-.reply_content {
-    text-indent: 80px;
-}
-.idTag {
-	display: block;
-	position: absolute; 
-	left: 15px; 
-	top: 15px; 
-	z-index: 9; 
-} */
 .stamp {
 	position: absolute; 
-	left: 458px; 
-	top: 146px; 
-	
+	left: 65%; 
+	top: -3%; 
 }
 </style>
 <% 
@@ -458,15 +444,14 @@ function displayedAt(createdAt) {
 
 
 
-<div class="container">
-	<div id="challDetailContent">
-		<div class="row">
-		    <div class="d-flex w-75">
-				<div class="w-50"><%= chall_category %></div>
-				<div class="w-50"><%= chall_title %></div>
-			</div>
-			<div class="w-25">
-			  <div class="float-end">
+<div class="container-xl" id="">
+  <div class="row justify-content-md-center">
+	 <div class="col-lg-7">
+	  <table class="table table-borderless" style="margin: 0 auto;">
+		<tr>
+			<td width="25%"><%= chall_category %></td>
+			<td rowspan="2" class="fs-4 fw-bold"><%= chall_title %></td>
+			<td class="text-end">
 				<!-- 해당 게시글의 글쓴이인 경우 -->
 				<% if (userid.equals(currUserid)) { %>
 				<a href="ChallengeUIServlet?chall_id=<%= chall_id %>&userid=<%= currUserid %>" class="btn btn-outline-success">수정</a> 
@@ -479,66 +464,61 @@ function displayedAt(createdAt) {
 				<a class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#reportModal" 
 												data-bs-category="1" data-bs-cid="<%= chall_id %>">신고</a>
 				<% } %>
-			   </div>
-			</div>
-		</div>
-		<div style="height: 10px"></div>
-		<div class="row">
-			<div class="col">
-				<%= chall_created %>
-			</div>
-			<div class="col">
-			  <div class="float-end">
-				조회수 <%= chall_hits %>
-			  </div>
-			</div>
-		</div>
-		<div style="height: 10px"></div>
-		<div class="row p-3">
-			<div class="col">
-				<a href="ProfileMainServlet?userid=<%= userid %>">
-				   <img src="images/<%= profile_img %>" width="50" height="50"></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			</td>
+		</tr>
+		<tr>
+			<td><%= chall_created %></td>
+			<td class="text-end">조회수 <%= chall_hits %></td>
+		</tr>
+		<tr>
+			<td colspan="2">
+			    <a href="ProfileMainServlet?userid=<%= userid %>">
+				   <img src="images/<%= profile_img %>" width="50" height="50" class="ms-5 mx-3"></a>
 				<a href="ProfileMainServlet?userid=<%= userid %>"><%= userid %></a>
-			</div>
-		</div>
-		<div class="row p-3">
-			<div class="col">
+			</td>
+		</tr>
+		<tr id="img_area">
+			<td colspan="3">
 				<img src="/eclipse/upload/<%= chall_img %>" class="img"
-					onerror="this.src='images/uploadarea.png'" width="600" height="600">
+					onerror="this.src='images/uploadarea.png'" width="80%">
 				<% if (stampMap != null) { %>
-				<img src="/eclipse/upload/<%= stampMap.get("STAMP_IMG") %>" class="stamp" width="200" height="200">
+				<img src="/eclipse/upload/<%= stampMap.get("STAMP_IMG") %>" class="stamp" width="25%">
 				<% } %>
-			</div>
-		</div>
-		<div class="row p-2 text-center">
-			<div class="col" id="liked_area">
-				<!-- 해당 게시글을 현재 로그인한 회원이 좋아요했던 경우 -->
-				<% if (likedIt == 1) { %>
-				<img src="images/liked.png" width="40" height="40" class="liked">
-				<!-- 그외의 경우 -->
-				<% } else { %>
-				<img src="images/like.png" width="40" height="40" class="liked">
-				<% } %>
-				<span id="likeNum"><%= chall_liked %></span>
-			</div>
-			<div class="col">
-				<img src="images/bubble.png" width="37" height="35"> 
-				<span id="commentsNum"><%= chall_comments %></span>
-			</div>
-		</div>
-
-		<div class="row p-4" style="height: 100px;">
-			<%= chall_content %>
-		</div>
-		
-	</div>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="3" class="text-center">
+			  <div class="row">
+				<div id="liked_area" class="col">
+					<!-- 해당 게시글을 현재 로그인한 회원이 좋아요했던 경우 -->
+					<% if (likedIt == 1) { %>
+					<img src="images/liked.png" width="40" height="40" class="liked">
+					<!-- 그외의 경우 -->
+					<% } else { %>
+					<img src="images/like.png" width="40" height="40" class="liked">
+					<% } %>
+					<span id="likeNum"><%= chall_liked %></span>
+				</div>
+				<div class="col">
+					<img src="images/bubble.png" width="37" height="35"> 
+					<span id="commentsNum"><%= chall_comments %></span>
+				</div>
+			  </div>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="3"><%= chall_content %></td>
+		</tr>
+	  </table>
+	 </div>
+  </div>
 </div>
 
 
 <!-- 댓글 목록 -->		
-<div class="container mt-5 mb-5 comment">
+<div class="container-xl mt-5 mb-5 comment">
     <div class="row height d-flex justify-content-center align-items-center">
-        <div class="col-md-7">
+        <div class="col-lg-7">
          <hr>
             <div class="card">
                 <div class="p-3">
