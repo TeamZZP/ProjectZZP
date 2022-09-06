@@ -25,7 +25,15 @@
 	top: 655px;
 	left : 160px; 
 }
-
+#modalBtn{
+	display: none;
+}
+.modal-body{
+	text-align: center;
+}
+#mesg{
+	margin: 0;
+}
 </style>
 <%
 /* 
@@ -82,28 +90,40 @@
 		$("form").on("submit", function () {
 			if ($("#chall_title").val().length == 0) {
 				event.preventDefault();
-				alert("제목을 입력해 주세요.");
+				//alert("제목을 입력해 주세요.");
+				$("#modalBtn").trigger("click");
+				$("#mesg").text("제목을 입력해 주세요.");
 			} else if (($("#old_file").val() == "null" || $("#old_file").val().length == 0) 
 						&& $("#chall_img")[0].files[0] == null) {
 				event.preventDefault();
-				alert("사진을 업로드해 주세요.");
+				//alert("사진을 업로드해 주세요.");
+				$("#modalBtn").trigger("click");
+				$("#mesg").text("사진을 업로드해 주세요.");
 			} else if (($("#old_stamp").val() == "null" || $("#old_stamp").val().length == 0) 
 						&& $("#stamp_img")[0].files[0] == null) {
 				event.preventDefault();
-				alert("도장 사진을 업로드해 주세요.");
+				//alert("도장 사진을 업로드해 주세요.");
+				$("#modalBtn").trigger("click");
+				$("#mesg").text("도장 사진을 업로드해 주세요.");
 			} else if ($("#chall_img").val() != 0 && !checkFileExtension()) {
 				event.preventDefault();
 			} else if ($("#stamp_img").val() != 0 && !checkStampExtension()) {
 				event.preventDefault();
 			} else if ($("#chall_content").val().length == 0) {
 				event.preventDefault();
-				alert("본문을 입력해 주세요.");
+				//alert("본문을 입력해 주세요.");
+				$("#modalBtn").trigger("click");
+				$("#mesg").text("본문을 입력해 주세요.");
 			} else if ($("#stamp_name").val().length == 0) {
 				event.preventDefault();
-				alert("도장 이름을 입력해 주세요.");
+				//alert("도장 이름을 입력해 주세요.");
+				$("#modalBtn").trigger("click");
+				$("#mesg").text("도장 이름을 입력해 주세요.");
 			} else if ($("#stamp_content").val().length == 0) {
 				event.preventDefault();
-				alert("도장 설명을 입력해 주세요.");
+				//alert("도장 설명을 입력해 주세요.");
+				$("#modalBtn").trigger("click");
+				$("#mesg").text("도장 설명을 입력해 주세요.");
 			}
 		});
 		//파일업로드 이미지 클릭시 input type="file" 클릭
@@ -171,7 +191,9 @@
 		if (fileValue.match(reg)) {
 			return true;
 		} else {
-			alert("jpg, jpeg, png, gif 파일만 업로드 가능합니다.");
+			//alert("jpg, jpeg, png, gif 파일만 업로드 가능합니다.");
+			$("#modalBtn").trigger("click");
+			$("#mesg").text("jpg, jpeg, png, gif 파일만 업로드 가능합니다.");
 			return false;
 		}
 	}
@@ -182,7 +204,9 @@
 		if (fileValue.match(reg)) {
 			return true;
 		} else {
-			alert("jpg, jpeg, png, gif 파일만 업로드 가능합니다.");
+			//alert("jpg, jpeg, png, gif 파일만 업로드 가능합니다.");
+			$("#modalBtn").trigger("click");
+			$("#mesg").text("jpg, jpeg, png, gif 파일만 업로드 가능합니다.");
 			return false;
 		}
 	}
@@ -280,4 +304,20 @@
 </div>
 </div>
 
-
+<!-- 모달 -->
+<div class="modal" id="checkVal" data-bs-backdrop="static">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">ZZP</h5>
+      </div>
+      <div class="modal-body">
+        <p id="mesg"></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" data-bs-dismiss="modal">닫기</button>
+      </div>
+    </div>
+  </div>
+</div>
+<button type="button" id="modalBtn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#checkVal">modal</button>
