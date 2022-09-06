@@ -9,7 +9,7 @@
 	
 	<select id="selectUserReview" resultType="com.dto.ReviewDTO">
 		select * from review
-		where userid=#{userid}
+		where userid=#{userid} order by REVIEW_CREATED desc
 	</select>
 	
 	<select id="countTotalUserReview" resultType="int">

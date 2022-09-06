@@ -58,7 +58,7 @@ public class ProfileCategoryServlet extends HttpServlet {
 			
 			//회원의 리뷰 가져오기
 			ReviewService reviewService = new ReviewService();
-			PageDTO reviewPageDTO = reviewService.selectUserReview(map, Integer.parseInt(curPage), 10);
+			PageDTO reviewPageDTO = reviewService.selectUserReview(map, Integer.parseInt(curPage), 5);
 			
 			//리뷰에 해당하는 상품 정보 가져오기
 			List<ReviewDTO> reviewList = reviewPageDTO.getList();

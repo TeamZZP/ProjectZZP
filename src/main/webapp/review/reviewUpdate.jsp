@@ -43,7 +43,8 @@
 				}
 			});//
 			$("#reviewList").click(function () {
-				$("#reviewUpdateForm").attr("action", "MyOrderServlet");
+				history.back();
+				event.preventDefault();
 			});//
 			$("#reviewUpdate").click(function () {
 				var operate = $("#reviewUpdate").attr("data-operate");

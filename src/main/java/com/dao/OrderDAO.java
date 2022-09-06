@@ -1,6 +1,7 @@
 package com.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
@@ -67,4 +68,25 @@ public class OrderDAO {
 		List<ImagesOrderDTO> list = session.selectList("OrderMapper.ProdImg", userid);
 		return list;
 	}
+
+
+
+	public PageDTO MyOrderSearchList(SqlSession session, int curPage, Map<String, String> map) {
+		PageDTO pDTO = new PageDTO();
+		pDTO.setPerPage(5);
+		int perPage = pDTO.getPerPage();
+		int offset = (curPage - 1) * perPage;
+		
+		List<ProductOrderReviewImagesDTO> list = session.selectList("OrderMapper.MyOrderSearchList", map, new RowBounds(offset, perPage));
+		
+		pDTO.setCurPage(curPage);
+		pDTO.setList(list);
+		pDTO.setTotalCount(myOrderSearchNum(session, map));
+		
+		return pDTO;
+	}
+	private int myOrderSearchNum(SqlSession session, Map<String, String> map) {
+		return session.selectOne("OrderMapper.myOrderSearchNum", map);
+	}
+	
 }
