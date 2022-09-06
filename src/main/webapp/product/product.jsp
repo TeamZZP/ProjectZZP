@@ -375,9 +375,12 @@ List<CategoryProductDTO> pDTO_list = pDTO.getList();
 		
 		
 	<%} else{ %>
-		alert("로그인이 필요합니다.");
-		location.href = "LoginUIServlet";
-		event.preventDefault();
+		$("#modalBtn").trigger("click");
+		$("#mesg").text("로그인이 필요합니다.");
+		$("#closemodal").click(function() {
+        location.href="LoginUIServlet";//
+     })
+		/* event.preventDefault(); */
 	<% } %>
 	
 		})
