@@ -49,8 +49,12 @@ function productChoice(n) {
 
 		}); //end ajax
 <%} else {%>
-	alert("로그인이 필요합니다.");
-		location.href = "LoginUIServlet";
+		$("#modalBtn").trigger("click");
+		$("#mesg").text("로그인이 필요합니다.");
+		
+		$("#closemodal").click(function() {
+		location.href="LoginUIServlet";
+		}) 
 		event.preventDefault();
 <%}%>
 
@@ -116,9 +120,14 @@ function productChoice(n) {
 			}
 		  })//end ajax
 		  
+		  $("#modalBtn2").trigger("click");
 	<%} else{ %>
-		alert("로그인이 필요합니다.");
-		location.href = "LoginUIServlet";
+	$("#modalBtn").trigger("click");
+	$("#mesg").text("로그인이 필요합니다.");
+	
+	$("#closemodal").click(function() {
+    location.href="LoginUIServlet";
+ }) 
 		event.preventDefault();
 	<% } %>
 	
@@ -326,12 +335,12 @@ if (member != null) {
 						
 						<td>
 						<!-- Button trigger modal -->
-						<button  type="button" class="btn btn-success" name="cart" id="cart<%=p_id %>" data-bs-toggle="modal" data-bs-target="#cartCkeck"
-						data-P_id = "<%=p_id%>"
+						<button  type="button" class="btn btn-success" name="cart" id="cart<%=p_id %>" data-P_id = "<%=p_id%>"
 						data-p_name = "<%=p_name %>" data-p_selling_price="<%=p_selling_price%>" data-p_image=<%=ilist.get(0).getImage_route()%>>
 						장바구니
 						</button>
 						<!-- Modal -->
+						<button type="button" id="modalBtn2" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#cartCkeck" style="display: none;">modal</button>
 						<div class="modal fade" id="cartCkeck" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 						  <div class="modal-dialog">
 						    <div class="modal-content">

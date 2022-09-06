@@ -85,8 +85,13 @@ function productChoice(n) {
 
 		}); //end ajax
 <%} else {%>
-	alert("로그인이 필요합니다.");
-		location.href = "LoginUIServlet";
+	$("#modalBtn").trigger("click");
+	$("#mesg").text("로그인이 필요합니다.");
+
+	$("#closemodal").click(function() {
+	location.href="LoginUIServlet";
+	}) 
+
 		event.preventDefault();
 <%}%>
 
@@ -238,9 +243,9 @@ List<CategoryProductDTO> pDTO_list = pDTO.getList();
 								<div class="modal-footer">
 										<button type="button" class="btn btn-secondary"
 											data-bs-dismiss="modal">계속쇼핑하기</button>
-										<button type="button" class="btn btn-success" id="saveCart<%=p_id%>" data-p_id="<%=p_id%>" name = "saveCart"
+										<button type="button" class="btn btn-success doubleModal" id="saveCart<%=p_id%>" data-p_id="<%=p_id%>" name = "saveCart"
 										data-p_name = "<%=p_name %>" data-p_selling_price="<%=p_selling_price%>" data-p_image=<%=p_image %>
-											 data-bs-toggle="modal" data-bs-target="#chkmodal<%=p_id%>" >장바구니저장</button>
+											 >장바구니저장</button>
 									</div>
 								</div>
 							</div>
@@ -248,7 +253,8 @@ List<CategoryProductDTO> pDTO_list = pDTO.getList();
 
 					</form>
 				<!-- 장바구니 모달안에 모달 -->
-						<div class="modal fade" id="chkmodal<%=p_id%>"
+						<button type="button" id="modalBtn2" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#chkmodal<%=p_id%>" style="display: none;">modal</button>
+						<div class="modal fade doublemodal" id="chkmodal<%=p_id%>"
 						data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
 						aria-labelledby="staticBackdropLabel" aria-hidden="true">
 						<div class="modal-dialog">
@@ -351,8 +357,6 @@ List<CategoryProductDTO> pDTO_list = pDTO.getList();
 			console.log(p_id, p_name, p_selling_price, count, p_image);
 			
 		<% if (mdto != null ) { %>	
-		
-			
 			
 			$.ajax({
 				type : "post",
@@ -372,16 +376,18 @@ List<CategoryProductDTO> pDTO_list = pDTO.getList();
 					console.log(error);
 				}
 			}); //end ajax
-		
+			
+			$("#modalBtn2").trigger("click");
 		
 	<%} else{ %>
+
 		$("#modalBtn").trigger("click");
 		$("#mesg").text("로그인이 필요합니다.");
+		
 		$("#closemodal").click(function() {
         location.href="LoginUIServlet";
      }) 
-     	/* alert("로그인이 필요합니다.");
-		location.href="LoginUIServlet"; */
+     	
 		event.preventDefault();
 	<% } %>
 	

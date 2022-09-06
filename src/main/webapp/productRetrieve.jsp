@@ -9,11 +9,71 @@
 <script src="<c:url value='/bootstrap/js/bootstrap.js'/>" type="text/javascript"></script>
 <script src="<c:url value='/bootstrap/js/bootstrap.min.js'/>" type="text/javascript"></script>
 
+<style type="text/css">
+li{
+display: block;
+list-style: none;
+
+}
+#category{
+float: left;
+padding-right: 11%;
+}
+
+.categorycss{
+	text-decoration: none;
+	color: black;
+}
+#modalBtn{
+	display: none;
+}
+.modal-body{
+	text-align: center;
+}
+#mesg{
+	margin: 0;
+}
+</style>
+<%
+	String mesg=(String) session.getAttribute("mesg");
+	if (mesg != null){
+%>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript"> 
+$(document).ready(function() {
+	$("#modalBtn").trigger("click");
+	$("#mesg").text("<%= mesg %>");
+});
+</script>
+<%
+session.removeAttribute("mesg");
+}
+%>
 <title>ZZP</title>
+<button type="button" id="modalBtn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#checkVal">modal</button>
+
+<div class="modal checkVal" id="checkVal" data-bs-backdrop="static">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">ZZP</h5>
+      </div>
+      <div class="modal-body">
+        <p id="mesg"></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button"  id="closemodal" class="btn btn-success" data-bs-dismiss="modal">닫기</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 <div id="prodTop">
 	<jsp:include page="common/header.jsp" flush="true"></jsp:include><br>
 	<jsp:include page="product/productRetrieve.jsp" flush="true"></jsp:include><br>
 </div>
+
 <div class="row">
 	<div class="btn-group" role="group" aria-label="Basic example">
 		<a class="btn btn-outline-success" href="#prodDetail" role="button" style="text-decoration: none; color: green;">제품상세</a>

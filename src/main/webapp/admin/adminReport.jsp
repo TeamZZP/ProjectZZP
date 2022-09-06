@@ -34,6 +34,15 @@
 	.done {
 		color: 	#C0C0C0;
 	}
+	#modalBtn{
+		display: none;
+	}
+	.modal-body{
+		text-align: center;
+	}	
+	#mesg{
+		margin: 0;
+	}
 </style>
 
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -48,7 +57,9 @@ $(document).ready(function () {
 	$('.oneReport').on('click', function () {
 		let id = $(this).attr('data-id')
 		if ($("#content"+id).text()=='(삭제된 글입니다)') {
-			alert('이미 삭제된 글입니다.')
+			//alert('이미 삭제된 글입니다.')
+			$("#modalBtn").trigger("click");
+			$("#mesg").text("이미 삭제된 글입니다.");
 		} else {
 			location.href = 'ReportUIServlet?report_id='+id
 		}
@@ -73,9 +84,13 @@ $(document).ready(function () {
 	$('.delCheckBtn').on('click', function () {
 		//data-bs-toggle="modal" 
 		if ($('.delCheck:checked').length == 0) {
-			alert('삭제할 신고를 선택해 주세요.')
+			//alert('삭제할 신고를 선택해 주세요.')
+			$("#modalBtn").trigger("click");
+			$("#mesg").text("삭제할 신고를 선택해 주세요.");
 		} else {
-			$('#deleteModal').modal('toggle')
+			//$('#deleteModal').modal('toggle')
+			$("#modalBtn").trigger("click");
+			$("#mesg").html("선택한 신고 기록을 삭제하시겠습니까? <br>(게시글은 삭제되지 않습니다.)");
 		}
 	})
 	//신고 상태 변경
@@ -220,7 +235,7 @@ $(document).ready(function () {
 	  
 	  
 	  <!-- Modal -->
-			<div id="deleteModal" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+			<!-- <div id="deleteModal" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 			  <div class="modal-dialog">
 			    <div class="modal-content">
 			      <div class="modal-header">
@@ -236,4 +251,24 @@ $(document).ready(function () {
 			      </div>
 			    </div> 
 			  </div>
-			</div>
+			</div> -->
+			
+<div class="modal fade" id="checkVal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">ZZP</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p id="mesg"></p>
+      </div>
+      <div class="modal-footer">
+       <!--  <button type="button" class="btn btn-success" data-bs-dismiss="modal">닫기</button> -->
+        <button type="button" class="delReportBtn btn btn-success">확인</button>
+		<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+      </div>
+    </div>
+  </div>
+</div>
+<button type="button" id="modalBtn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#checkVal">modal</button>
