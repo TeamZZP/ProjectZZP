@@ -10,6 +10,7 @@ import com.dto.AddressDTO;
 import com.dto.CategoryProductDTO;
 import com.dto.MemberDTO;
 import com.dto.PageDTO;
+import com.dto.ProfileDTO;
 
 public class MemberDAO {
 
@@ -81,6 +82,20 @@ public class MemberDAO {
 
 	public int changeMember(SqlSession session, HashMap<String, String> changeMemberMap) {
 		int num=session.update("MemberMapper.changeMember", changeMemberMap);
+		return num;
+	}
+
+	public MemberDTO checkPasswd(SqlSession session, HashMap<String, String> map) {
+		return session.selectOne("checkPasswd", map);
+	}
+
+	public ProfileDTO selectProfile(SqlSession session, String userid) {
+		ProfileDTO dto=session.selectOne("MemberMapper.selectProfile", userid);
+		return dto;
+	}
+
+	public int changeProfile(SqlSession session, HashMap<String, String> map) {
+		int num=session.update("MemberMapper.changeProfile", map);
 		return num;
 	}
 

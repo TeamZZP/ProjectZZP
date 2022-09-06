@@ -1,5 +1,7 @@
+<%@page import="com.dto.ProductOrderReviewImagesDTO"%>
+<%@page import="com.dto.ImagesOrderDTO"%>
+<%@page import="com.dto.ImagesDTO"%>
 <%@page import="com.dto.ProductOrderDTO"%>
-<%@page import="com.dto.ProductOrderReviewDTO"%>
 <%@page import="com.dto.OrderDTO"%>
 <%@page import="java.util.List"%>
 <%@page import="com.dto.MemberDTO"%>
@@ -48,11 +50,13 @@
 			var P_NAME = $(this).attr("data-pNAME");
 			var P_ID = $(this).attr("data-pID");
 			console.log(ORDER_ID);
+			console.log(P_ID);
 		 	$.ajax({
 				type:"post",
 				url:"orderIdCheckServlet",
 				data:{
-					ORDER_ID : ORDER_ID
+					ORDER_ID : ORDER_ID,
+					P_ID : P_ID
 				},
 				dataType:"text",
 				success: function (data, status, xhr) {
@@ -103,25 +107,26 @@
 <div class="col-lg-10">
 <div id="addTableDiv">
 <form id="myOrderForm" method="post">
-<table id="addTable" class="table table-hover" style="text-align: center;">
+<table id="addTable" class="table table-hover" style="text-align: center; vertical-align: middle;">
 	<tr class="table-success">
-		<th>상품명</th>
-		<th>가격</th>
-		<th>주문날짜</th>
-		<th>주소</th>
-		<th>배송상태</th>
+		<th width="25%">상품명</th>
+		<th width="10%">가격</th>
+		<th width="10%">주문날짜</th>
+		<th width="35%">주소</th>
+		<th width="10%">배송상태</th>
 		<th></th>
 	</tr>
 	<%
-	PageDTO pDTO = (PageDTO)session.getAttribute("myOrderList");
-			List<ProductOrderReviewDTO> myList = pDTO.getList();
-			for(ProductOrderReviewDTO DTO : myList){
+		PageDTO pDTO = (PageDTO)session.getAttribute("myOrderList");
+		List<ProductOrderReviewImagesDTO> myList = pDTO.getList();
+			for (int i = 0; i < myList.size(); i++) {
+				ProductOrderReviewImagesDTO DTO = myList.get(i);
 				String date = DTO.getORDER_DATE();
 				String day = date.substring(0,10);
 				System.out.print("날짜 " + day);
 	%>
 	<tr>
-	    <td> <%= DTO.getP_NAME() %> </td>
+	    <td> <img alt="상품사진" src="images/p_image/<%=DTO.getIMAGE_ROUTE()%>" width="100px" height="100px"> <br> <%= DTO.getP_NAME() %> </td>
 	    <td> <%= DTO.getTOTAL_PRICE() %> </td>
 		<td> <%= day %> </td>
 		<td> <%= DTO.getDELIVERY_ADDRESS() %> <br>  <%= DTO.getDELIVERY_LOC() %> </td>
@@ -130,6 +135,7 @@
 			<% if(DTO.getORDER_STATE().equals("배송완료")){ %>
 				<a data-orderID="<%= DTO.getORDER_ID() %>" data-pNAME="<%= DTO.getP_NAME() %>" 
 					data-pID="<%= DTO.getP_ID() %>" data-reviewID="<%=DTO.getREVIEW_ID() %>"
+					data-userid="<%=userid %>"
 					class="btn btn-outline-success chk" role="button">
 					리뷰작성
 				 </a>
@@ -154,7 +160,7 @@
 		          	if(i== curPage){
 		          		out.print(i+"&nbsp;"); //현재페이지
 		          	}else{
-		          		out.print("<a style='color: green;' href = 'MyQuestionServlet?curPage="+i+"'>" + i + " </a>");  
+		          		out.print("<a style='color: green;' href = 'MyOrderServlet?curPage="+i+"'>" + i + " </a>");  
 		          	} //다른 페이지 선택시 링크로 이동
 		        }//end for
 		  	 %>

@@ -26,6 +26,11 @@
 		
 		<select id="loginMember" parameterType="hashMap" resultType="MemberDTO">
 			select userid, passwd, username, email1, email2, phone, created_at, role
+			from member where userid=#{userid} 
+		</select>
+		
+		<select id="checkPasswd" parameterType="hashMap" resultType="MemberDTO">
+			select userid, passwd, username, email1, email2, phone, created_at, role
 			from member where userid=#{userid} and passwd=#{passwd}
 		</select>
 		
@@ -133,5 +138,19 @@
 			set username=#{username},
 				phone=#{phone}
 			where userid=#{userid}
+		</update>
+		<select id="selectProfile" resultType="com.dto.ProfileDTO">
+			select userid, profile_img, profile_txt from profile
+			where userid = #{userid}
+		</select>
+		<update id="changeProfile" parameterType="hashmap">
+			update profile
+			<if test="profile_img != null">
+				set profile_img = #{profile_img}
+			</if>
+			<if test="profile_txt != null">
+				set profile_txt = #{profile_txt}
+			</if>
+			where userid = #{userid}
 		</update>
 </mapper>

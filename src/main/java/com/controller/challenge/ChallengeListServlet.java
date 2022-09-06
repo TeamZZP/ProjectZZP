@@ -103,6 +103,8 @@ public class ChallengeListServlet extends HttpServlet {
 		
 		//이 달의 챌린지 가져오기
 		ChallengeDTO challThisMonth = service.selectChallThisMonth();
+		//이 달의 챌린지 도장 가져오기
+		StampDTO stampDTO = service.selectOneStamp(String.valueOf(challThisMonth.getChall_id()));
 		
 		request.setAttribute("pDTO", pDTO);
 		request.setAttribute("searchName", searchName);
@@ -112,6 +114,7 @@ public class ChallengeListServlet extends HttpServlet {
 		request.setAttribute("resultLikedMap", resultLikedMap);
 		request.setAttribute("challThisMonth", challThisMonth);
 		request.setAttribute("stampListMap", stampListMap);
+		request.setAttribute("stampDTO", stampDTO);
 		
 		RequestDispatcher dis = request.getRequestDispatcher("challengeMain.jsp");
 		dis.forward(request, response);

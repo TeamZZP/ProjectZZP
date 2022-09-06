@@ -13,8 +13,12 @@
 %>
 
 <style>
-	.searchName, .searchValue, .form-select {
+	.form-select {
 		width: 140px; 
+		display: inline;
+	}
+	.searchValue {
+		width: 150px; 
 		display: inline;
 	}
 	a {
@@ -92,7 +96,7 @@ $(document).ready(function () {
 	<input type="hidden" name="category" value="report">
 		<div class="row">
 		  <div class="col">
-			  <select name="searchName" class="form-select searchName" data-style="btn-info" id="inputGroupSelect01">
+			  <select name="searchName" class="form-select" data-style="btn-info" id="inputGroupSelect01">
 				   <option selected disabled hidden>검색 기준</option>
 				   <option value="r.userid" <% if("r.userid".equals(searchName)) {%>selected<%} %>>신고자</option>
 				   <option value="reported_userid" <% if("reported_userid".equals(searchName)) {%>selected<%} %>>작성자</option>

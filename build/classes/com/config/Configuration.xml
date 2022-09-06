@@ -23,9 +23,10 @@
 	<typeAlias type="com.dto.QuestionProductDTO" alias="QuestionProductDTO"/> 
 	<typeAlias type="com.dto.product_likedDTO" alias="product_likedDTO"/> 
 	<typeAlias type="com.dto.ReviewProfileDTO" alias="ReviewProfileDTO"/> 
-	<typeAlias type="com.dto.ProductOrderReviewDTO" alias="ProductOrderReviewDTO"/> 
+	<typeAlias type="com.dto.ProductOrderReviewImagesDTO" alias="ProductOrderReviewImagesDTO"/> 
 	<typeAlias type="com.dto.ProductOrderDTO" alias="ProductOrderDTO"/> 
 	<typeAlias type="com.dto.ReviewProductDTO" alias="ReviewProductDTO"/> 
+	<typeAlias type="com.dto.ProductOrderReviewDTO" alias="ProductOrderReviewDTO"/> 
 
 </typeAliases>
   <environments default="development">

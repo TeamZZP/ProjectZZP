@@ -8,6 +8,14 @@
 		text-decoration: none;
 		color: black;
 	}
+	.form-select {
+		width: 140px; 
+		display: inline;
+	}
+	.searchValue {
+		width: 150px; 
+		display: inline;
+	}
 </style>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
@@ -47,11 +55,12 @@ if(mesg != null){
 <!-- 관리자페이지 상품관리 -->
 <form action="AdminCategoryServlet" id="prodForm">
 <input type="hidden" name="category" value="product">
-	<div class="container" style="margin-top: 5px; margin-bottom: 5px;">
+	<div class="container mt-2 mb-2">
 		<div class="row">
 		  	<div class="col">
 		  	  <!-- 검색 -->
-				<select class="form-select sortBy" name="searchName" data-style="btn-info" id="inputGroupSelect01" style="width: 140px; display: inline;">
+				<select class="form-select sortBy" name="searchName" data-style="btn-info" id="inputGroupSelect01">
+					<option selected disabled hidden>검색 기준</option>
 					<option value="c_id" <% if("c_id".equals(searchName)){%> selected
 						<%}%>>카테고리</option>
 					<option value="p_id" <% if("p_id".equals(searchName)){%> selected
@@ -63,16 +72,14 @@ if(mesg != null){
 					<option value="p_created" <% if("p_created".equals(searchName)){%>
 						selected <%}%>>등록일</option>
 				</select> 
-				<input type="text" name="searchValue" class="form-control" style="width: 150px; display: inline;"
+				<input type="text" name="searchValue" class="form-control searchValue" 
 	  				<% if(searchValue!=null && !searchValue.equals("null")) {%>value="<%= searchValue %>"<% } %>>
-	  			<button type="button" class="btn btn-success" id="searchProd" style="margin-top: -5px; display: inline;">검색</button>
+	  			<button type="button" class="btn btn-success" id="searchProd" style="margin-top: -5px;">검색</button>
 	  	  	</div>
       	  	<div class="col">
       	  		<div class="float-end">
 			  	  <!-- 정렬 -->
-				  <select class="form-select sortBy" name="sortBy" id="sortBy" data-style="btn-info" 
-				  		  style="width: 145px; margin-left: -24px; display: inline;">
-					    <option value="p_id" selected>정렬</option>
+				  <select class="form-select sortBy" name="sortBy" id="sortBy" data-style="btn-info">
 					    <option value="p_id" <% if("p_id".equals(sortBy)){%>selected<%}%>>최신상품순</option>
 					    <option value="p_selling_price" <% if("p_selling_price".equals(sortBy)){%>selected<%}%>>판매가순</option>
 					    <option value="p_name" <% if("p_name".equals(sortBy)){%>selected<%}%>>상품명순</option>

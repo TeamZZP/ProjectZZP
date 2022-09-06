@@ -13,6 +13,14 @@
 		text-decoration: none;
 		color: black;
 	}
+	.form-select {
+		width: 140px; 
+		display: inline;
+	}
+	.searchValue {
+		width: 150px; 
+		display: inline;
+	}
 </style>
 <%
 	PageDTO pDTO=(PageDTO) request.getAttribute("pDTO");
@@ -21,29 +29,25 @@
 	String sortBy=(String) request.getAttribute("sortBy");
 %>
 <form action="AdminMainServlet" id="mainMemberForm">
-<div class="container" style="margin-top: 5px; margin-bottom: 5px;">
-	<div class="row row-cols-auto" style="justify-content: space-between;"><!-- 상단 카테고리, 검색, 정렬 -->
-		<div class="row row-cols-auto">
-			<div class="col">
+<div class="container mt-2 mb-2">
+	<div class="row"><!-- 상단 카테고리, 검색, 정렬 -->
+		<div class="col">
 			<!-- 검색 searchName 같으면 selected -->
-				<select class="form-select" name="searchName" data-style="btn-info" id="inputGroupSelect01"
-							style="width: 145px; margin-right: -20px; margin-left: 0px;">
+				<select class="form-select" name="searchName" data-style="btn-info" id="inputGroupSelect01">
 					<option selected disabled hidden>카테고리</option>
 					<option value="userid" <% if("userid".equals(searchName)){ %>selected<% } %>>아이디</option>
 					<option value="username"<% if("username".equals(searchName)){ %>selected<% } %>>이름</option>
 					<option value="phone"<% if("phone".equals(searchName)){ %>selected<% } %>>전화번호</option>
 					<option value="address"<% if("address".equals(searchName)){ %>selected<% } %>>주소</option>
 				</select>
-			  </div>
-			  <div class="col"><input type="text" name="searchValue" class="form-control" style="width: 150px; margin-right: -20px;"
-			  			<% if(searchValue != null && !searchValue.equals("null")){ %>value="<%= searchValue %>"<% } %>></div>
-		      <div class="col"><button type="button" id="searchMember" class="btn btn-success">검색</button></div>
+			  <input type="text" name="searchValue" class="form-control searchValue" 
+			  			<% if(searchValue != null && !searchValue.equals("null")){ %>value="<%= searchValue %>"<% } %>>
+		      <button type="button" id="searchMember" class="btn btn-success" style="margin-top: -5px;">검색</button>
 	    </div>
 		<div class="col">
 	    	<div class="float-end">
 			<!-- 정렬 -->
-			<select class="form-select sortBy" name="sortBy" id="sortBy" data-style="btn-info" 
-					style="width: 145px; margin-left: -24px; display: inline;">
+			<select class="form-select sortBy" name="sortBy" id="sortBy" data-style="btn-info">
 				<option value="created_at" selected>정렬</option>
 				<option value="created_at" <% if("created_at".equals(sortBy)){%>selected<%}%>>가입일자</option>
 				<option value="userid" <% if("userid".equals(sortBy)){%>selected<%}%>>아이디</option>
@@ -166,7 +170,9 @@
 					userid : userid
 				},
 				success : function(data, status, xhr) {
-					alert("해당 회원이 삭제되었습니다.");
+					//alert("해당 회원이 삭제되었습니다.");
+					$("#modalBtn").trigger("click");
+					$("#mesg").text("해당 회원이 삭제되었습니다.");
 					$("#deleteMember"+userid).modal("hide");
 					$(".modal-backdrop").hide();//모달창 닫고 백드롭 hide
 					console.log("success");

@@ -24,58 +24,69 @@
 	var numChk = /^01(0|1[6-9])(\d{3,4})(\d{4})$/; 
 	
 	if (userid.length==0) {
-		alert("아이디를 입력해주세요 :)");
+		$("#modalBtn").trigger("click");
+		$("#mesg").text("아이디를 입력해주세요 :)");
 		$("#userid").focus();
 		event.preventDefault();
 	} else if (passwd.length==0) {
-		alert("비밀번호를 입력해주세요 :)");
+		$("#modalBtn").trigger("click");
+		$("#mesg").text("비밀번호를 입력해주세요 :)");
 		$("#passwd").focus();
 		event.preventDefault();
 	} else if (passwd2.length==0) {
-		alert("비밀번호를 확인해주세요 :)");
+		$("#modalBtn").trigger("click");
+		$("#mesg").text("비밀번호를 확인해주세요 :)");
 		$("#passwd2").focus();
 		event.preventDefault();
 	}  else if (username.length==0) {
-		alert("이름을 입력해주세요 :)");
+		$("#modalBtn").trigger("click");
+		$("#mesg").text("이름을 입력해주세요 :)");
 		$("#username").focus();
 		event.preventDefault();
 	} else if (email1.length==0 || email2.length==0) {
-		alert("이메일을 입력해주세요 :)");
+		$("#modalBtn").trigger("click");
+		$("#mesg").text("이메일을 입력해주세요 :)");
 		$("#email1").focus();
 		event.preventDefault();
 	} else if (phone.length==0) {
-		alert("전화번호를 입력해주세요 :)");
+		$("#modalBtn").trigger("click");
+		$("#mesg").text("전화번호를 입력해주세요 :)");
 		$("#phone").focus();
 		event.preventDefault();
 	} else if (sample4_postcode.length==0||sample4_roadAddress.length==0||sample4_jibunAddress.length==0) {
-		alert("주소를 입력해주세요 :)");
+		$("#modalBtn").trigger("click");
+		$("#mesg").text("주소를 입력해주세요 :)");
 		$("#sample4_postcode").focus();
 		event.preventDefault();
 	}
 	//아이디 유효성 검사
 	else if (!idChk.test(userid)) {
-		alert("아이디를 형식에 맞게 입력해주세요 :)");
+		$("#modalBtn").trigger("click");
+		$("#mesg").text("아이디를 형식에 맞게 입력해주세요 :)");
 		$("#userid").val("");
 		$("#userid").focus();
 		event.preventDefault();
 	}
 	//비밀번호 유효성 검사
 	else if (!pwChk.test(passwd)) {
-		alert("비밀번호를 형식에 맞게 입력해주세요 :)");
+		$("#modalBtn").trigger("click");
+		$("#mesg").text("비밀번호를 형식에 맞게 입력해주세요 :)");
 		$("#passwd").val("");
 		$("#passwd").focus();
 		event.preventDefault();
 	}
 	//이름 유효성 검사
 	else if (!nameChk.test(username) || username.length>3) {
-		alert("이름을 확인해주세요 :)");
+		$("#modalBtn").trigger("click");
+		$("#mesg").text("이름을 확인해주세요 :)");
 		$("#username").val("");
 		$("#username").focus();
 		event.preventDefault();
 	}
 	//전화번호 유효성 검사
 	else if (!numChk.test(phone)) {
-		alert("전화번호를 형식에 맞게 입력해주세요 :)");
+		$("#modalBtn").trigger("click");
+		$("#mesg").text("전화번호를 형식에 맞게 입력해주세요 :)");
 		$("#phone").val("");
 		$("#phone").focus();
 		event.preventDefault();
@@ -137,13 +148,16 @@ $("#addMember").click(function() {
 	var mesg = $("#result4").text();
 	var mesg2 = $("#result3").text();
 	if (mesg=="아이디를 다시 확인하시기 바랍니다.") {
-		alert("아이디를 확인해주세요")
+		$("#modalBtn").trigger("click");
+		$("#mesg").text("아이디를 확인해주세요 :(");
 		$("#userid").focus();
 		event.preventDefault();
 	}
 	if (mesg2=="비밀번호 불일치") {
-		alert("비밀번호가 일치하지 않습니다 :(")
-		$("#passwd").focus();
+		$("#modalBtn").trigger("click");
+		$("#mesg").text("비밀번호가 일치하지 않습니다 :(");
+		$("#passwd2").val("");
+		$("#passwd2").focus();
 		event.preventDefault();
 	};
 });
@@ -159,13 +173,19 @@ System.out.println(map);
 	String [] arr = null;
 	String email1 = null;
 	String email2 = null;
+	int emailSplit = 0;
 
 	if(map!=null){
 		email = map.get("email");
 		username = map.get("username");
-		arr = email.split("@");
+		/* arr = email.split("@");
 		email1 = arr[0];
-		email2 = arr[1];
+		email2 = arr[1]; */
+		
+		emailSplit = email.indexOf("@");
+		email1 = email.substring(0, emailSplit);
+		email2 = email.substring(emailSplit+1,email.length());
+		System.out.println(email1+" "+email2);
 	}
 %>  
 <div class="container">
@@ -309,7 +329,6 @@ System.out.println(map);
                     </div>
                 </div>
 </div>
-
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
     //본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
