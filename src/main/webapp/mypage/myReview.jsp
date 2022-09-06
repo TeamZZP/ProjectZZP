@@ -80,7 +80,9 @@
 				}
 			});//end ajax
 		});
-
+		$("#uploadBtu").click(function () {
+			window.open("showImg.jsp", "", "width=400px height=500px");
+		});
 	});//end ready
 </script>
 
@@ -119,7 +121,7 @@
 <table id="reviewTable" class="table table-hover">
 	<tr class="table-success text-center">
 		<th width="25%">상품정보</th>
-		<th width="40%">내용</th>
+		<th width="40%" colspan="2">내용</th>
 		<th width="20%">등록일</th>
 		<th width="15%">수정·삭제</th>
 	</tr>
@@ -142,13 +144,22 @@
 		<td style="padding:5 0 0 10px;" class="text-center">
 			<a href="ProductRetrieveServlet?p_id=<%=p_id%>"> 
 			<img src="images/p_image/<%=image_route%>" border="0" align="middle" class="img pb-1"
-					 style="width: 70%;"	onerror="this.src='images/uploadarea.png'"><br>
+					 width="100px" height="100px" onerror="this.src='images/uploadarea.png'"><br>
 			<%= p_name %></a>
 		</td>
 		<td class="align-middle">
 			  <b><%= review_title %></b><br><br>
 			  <%= review_content %><br>
 			  <%= review_rate %>
+		</td>
+		<td style="text-align: center; vertical-align: middle;">
+				<%if(dto.getREVIEW_IMG() == null || dto.getREVIEW_IMG().equals("null")){ %>
+					
+				<%} else { %>
+					<div id="uploadBtu">
+					<img id="upload" alt="" src="/eclipse/upload/<%=dto.getREVIEW_IMG()%>" width="100px" height="100px" style="border: 1px solid gray;">
+					</div>
+				<%} %>
 		</td>
 		<td class="align-middle text-center">
 			<div><%= review_created %></div>
@@ -161,8 +172,6 @@
 <%
 		}
 %>
-
-
 	<tr>
 		<td colspan="6" style="text-align: center;">
 			 <%

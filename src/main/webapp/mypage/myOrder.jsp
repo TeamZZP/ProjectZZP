@@ -126,7 +126,12 @@
 				System.out.print("날짜 " + day);
 	%>
 	<tr>
-	    <td> <img alt="상품사진" src="images/p_image/<%=DTO.getIMAGE_ROUTE()%>" width="100px" height="100px"> <br> <%= DTO.getP_NAME() %> </td>
+	    <td> 
+	    	<a href="ProductRetrieveServlet?p_id=<%=DTO.getP_ID()%>"> 
+	   		<img alt="상품사진" src="images/p_image/<%=DTO.getIMAGE_ROUTE()%>" width="100px" height="100px"> 
+	    	<br> <%= DTO.getP_NAME() %> 
+	    	</a>
+	    </td>
 	    <td> <%= DTO.getTOTAL_PRICE() %> </td>
 		<td> <%= day %> </td>
 		<td> <%= DTO.getDELIVERY_ADDRESS() %> <br>  <%= DTO.getDELIVERY_LOC() %> </td>

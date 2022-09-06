@@ -104,6 +104,7 @@
 
 //이메일 선택 시 값 입력
 $("#emailSel").change(function() {
+	console.log(this.value)
 	$("#email2").val(this.value);
 });
 
@@ -201,7 +202,7 @@ System.out.println(map);
                                         <div class="cols-sm-10">
                                             <div class="input-group">
                                                 <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-                                                <input type="text" oninput="chkInfo(this.value)" class="form-control" name="userid" id="userid" placeholder="영문자와 숫자로 이루어진 4~12자리를 입력하세요" />
+                                                <input type="text" class="form-control" name="userid" id="userid" placeholder="영문자와 숫자로 이루어진 4~12자리를 입력하세요" />
                                                 <button id="idCheck" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#checkId">중복확인</button>
                                             </div>
                                         </div>
@@ -274,9 +275,10 @@ System.out.println(map);
 									  </div>
 									  <div class="col-sm-4">
 									   <div class="col-sm">
-									    <label class="visually-hidden" for="autoSizingSelect">Preference</label>
-									    <select id="emailSel" class="form-select" aria-label="Default select example">
-                            				<option value="" selected disabled hidden>이메일선택</option>
+									    <label class="visually-hidden" for="autoSizingSelect">email</label>
+									    <select id="emailSel" class="form-select" aria-label="Default select example" 
+									    	<%if(email2!=null){%> onfocus="this.initialSelct=this.seletedIndex;" onchange="this.selectedIndex=this.initialSelect;" <%}%>>
+                            				<option value="<%if(email2!=null){%><%=email2%><%}%>" selected disabled hidden><%if(email2==null){%> 이메일선택 <%}if(email2!=null){%><%=email2%><%}%></option>
 									        <option value="daum.net">daum.net</option>
 									        <option value="naver.com">naver.com</option>
 									        <option value="google.com">google.com</option>

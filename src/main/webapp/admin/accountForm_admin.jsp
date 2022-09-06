@@ -40,16 +40,22 @@
 			var numChk = /^[0-9]*.{11}$/; 
 			if (username.length == 0 || phone.length == 0) {
 				event.preventDefault();
-				alert("변경할 회원 정보를 입력하세요.");
+				//alert("변경할 회원 정보를 입력하세요.");
+				$("#modalBtn").trigger("click");
+				$("#mesg").text("변경할 회원 정보를 입력하세요.");
 				$("#username").focus();
 			} else if (username.length > 3) {
 				event.preventDefault();
-				alert("이름은 한글 3글자 이내로 입력하세요.");
+				//alert("이름은 한글 3글자 이내로 입력하세요.");
+				$("#modalBtn").trigger("click");
+				$("#mesg").text("이름은 한글 3글자 이내로 입력하세요.");
 				$("#username").val("");
 				$("#username").focus();
 			} else if (!numChk.test(phone) || phone.length > 11) {
 				event.preventDefault();
-				alert("전화번호를 형식에 맞게 입력하세요.");
+				//alert("전화번호를 형식에 맞게 입력하세요.");
+				$("#modalBtn").trigger("click");
+				$("#mesg").text("전화번호를 형식에 맞게 입력하세요.");
 				$("#phone").val("");
 				$("#phone").focus();
 			} else {
@@ -74,11 +80,15 @@
 					userid : id
 				},
 				success : function(data, status, xhr) {
-					alert("해당 회원이 삭제되었습니다.");
-					$("#deleteMember").modal("hide");
-					$(".modal-backdrop").hide();//모달창 닫고 백드롭 hide
+					//alert("해당 회원이 삭제되었습니다.");
+					$("#modalBtn").trigger("click");
+					$("#mesg").text("해당 회원이 삭제되었습니다.");
+					//$("#deleteMember").modal("hide");
+					//$(".modal-backdrop").hide();//모달창 닫고 백드롭 hide
 					console.log("success");
-					location.href="AdminMainServlet";//삭제 후 관리자 페이지 메인으로 이동
+					$("#modalCloseBtn").click(function() {
+						location.href="AdminMainServlet";//삭제 후 관리자 페이지 메인으로 이동
+					})
 				},
 				error: function(xhr, status, error) {
 					console.log(error);
