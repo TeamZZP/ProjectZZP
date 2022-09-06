@@ -369,18 +369,20 @@ List<CategoryProductDTO> pDTO_list = pDTO.getList();
 					console.log("장바구니에 저장되었습니다.");
 				},
 				error : function(xhr, status, error) {
-					alert(error);
+					console.log(error);
 				}
 			}); //end ajax
 		
 		
 	<%} else{ %>
-		$("#modalBtn").trigger("click");
+		 $("#modalBtn").trigger("click");
 		$("#mesg").text("로그인이 필요합니다.");
 		$("#closemodal").click(function() {
-        location.href="LoginUIServlet";//
-     })
-		/* event.preventDefault(); */
+        location.href="LoginUIServlet";
+     }) 
+     	/* alert("로그인이 필요합니다.");
+		location.href="LoginUIServlet"; */
+		event.preventDefault();
 	<% } %>
 	
 		})
