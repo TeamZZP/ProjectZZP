@@ -83,8 +83,11 @@
 		$(".uploadBtu").click(function () {
 			var popupX = (document.body.offsetWidth / 2) - (200 / 2);
 			var popupY= (window.screen.height / 2) - (300 / 2);
-
-			window.open('showImgReview.jsp', '', 'status=no, height=400, width=300, left='+ popupX + ', top='+ popupY);
+			
+			var img = $(this).children(img).attr("src");
+			console.log(img);
+			
+			window.open('showImgReview.jsp?img='+img , '', 'status=no, height=500, width=400, left='+ popupX + ', top='+ popupY);
 		});
 	});//end ready
 </script>
