@@ -15,29 +15,73 @@
 <script type="text/javascript"
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
+var productLike = 0;
+
+function productChoice(n) {
+      console.log(n);
+ <%
+ 	MemberDTO mdto = (MemberDTO) session.getAttribute("login");
+	if (mdto != null) {%>
+
+		$.ajax({
+
+			type : "get",
+			url : "ProductLikeServlet",
+			data : {
+				"p_id" : n,
+			
+			},
+			dataType : "text",
+			success : function(data) {
+				
+				var like_img = '';
+				if (data == 0) {
+					like_img = "images/like.png";
+				} else {
+					like_img = "images/liked.png";
+				}
+				$("#like_img" + n).attr('src', like_img);
+				console.log("성공");
+			},
+			error : function(xhr, status, error) {
+				alert(error);
+			}
+
+		}); //end ajax
+<%} else {%>
+	alert("로그인이 필요합니다.");
+		location.href = "LoginUIServlet";
+		event.preventDefault();
+<%}%>
+
+	}
 	$(function() {
 
-		$("#up").click(function() {
-
-			var count = parseInt($("#p_amount").val());
-			$("#p_amount").val(parseInt(count) + 1);
-
-			var sellingPrice = $("#sellingPrice").text();
+		$("button[name=up]").click(function() {
+			
+			var p_id =$(this).attr("data-p_id");
+			console.log(p_id);
+			
+			var count = parseInt($("#p_amount"+p_id).val());
+			$("#p_amount"+p_id).val(parseInt(count) + 1);
+			
+			var price = parseInt($("#price"+p_id).text());
 			//수정
-			$("#total").text((count + 1) * sellingPrice);
+			$("#total"+p_id).text((count + 1) * price);
 
 		});//end up
 
-		$("#down").click(function() {
+		$("button[name=down]").click(function() {
 
-			var count = parseInt($("#p_amount").val());
-
-			if (count != 1) {
-				$("#p_amount").val(parseInt(count) - 1);
-				var sellingPrice = $("#sellingPrice").text();
-				$("#total").text((count - 1) * sellingPrice);
-			}
-
+			var p_id =$(this).attr("data-p_id");
+			console.log(p_id);
+			
+			var count = parseInt($("#p_amount"+p_id).val());
+			$("#p_amount"+p_id).val(parseInt(count) - 1);
+			
+			var price = parseInt($("#price"+p_id).text());
+			//수정
+			$("#total"+p_id).text((count - 1) * price);
 		});//end down
 
 	  $("#cart").on("click", function() {
@@ -106,11 +150,17 @@ int p_stock = pdto.getP_stock();
 	crossorigin="anonymous">
 
 <%
+MemberDTO member = (MemberDTO)session.getAttribute("login");
 List<ImagesDTO> ilist = (List<ImagesDTO>) request.getAttribute("ImagesRetrieveList");
 
 System.out.println("productRetrieve.jsp에서 파싱한 pdto==" + pdto);
 System.out.println("productRetrieve.jsp에서 파싱한 ilist==" + ilist);
 
+int likecheck = 0;
+
+if (member != null) {
+	likecheck = (int)request.getAttribute("likecheck");
+} 
 %>
 
 
@@ -179,7 +229,7 @@ System.out.println("productRetrieve.jsp에서 파싱한 ilist==" + ilist);
 					<tr>
 						<th>상품명</th>
 						<td></td>
-						<td ><%=p_name%></td>
+						<td style="font-size: 20px; font-weight: bold;"><%=p_name%></td>
 					</tr>
 
 					<tr>
@@ -199,7 +249,7 @@ System.out.println("productRetrieve.jsp에서 파싱한 ilist==" + ilist);
 					<tr>
 						<th>상품가격</th>
 						<td></td>
-						<td><span id="p_selling_price" name="p_selling_price"><%=p_selling_price%></span>원</td>
+						<td><span id="price<%=p_id %>" name="p_selling_price"><%=p_selling_price%></span>원</td>
 						
 					</tr>
 
@@ -220,10 +270,14 @@ System.out.println("productRetrieve.jsp에서 파싱한 ilist==" + ilist);
 					<tr>
 						<th>수량</th>
 						<td></td>
-						<td><input id="p_amount" name="p_amount" value="1" style="line-height: 27px;"  maxlength="3"
+						<td>
+						<input id="p_amount<%=p_id %>" name="p_amount" value="1" class="form-control"
+						style=" text-align; right; margin-top: -4px; height:39px; width:80px; display: inline;  " maxlength="3"
 								size="2" >
-							<button type="button" class="btn btn-outline-success" id="up" >+</button>
-							<button type="button" class="btn btn-outline-success" id="down">-</button>
+						
+							<button style="display:inline; margin-top: -7px;" type="button" class="btn btn-outline-success" name="up" id="up<%=p_id %>" data-p_id="<%=p_id%>">+</button>
+							<button style="display:inline; margin-top: -7px;" type="button" class="btn btn-outline-success" name="down" id="down<%=p_id%>"  data-p_id="<%=p_id%>">-</button>
+						
 						</td>
 						<td></td>
 
@@ -236,7 +290,7 @@ System.out.println("productRetrieve.jsp에서 파싱한 ilist==" + ilist);
 					<tr>
 						<th>총 상품가격</th>
 						<td></td>
-						<td><a id="total"><%=p_selling_price%></a>원</td>
+						<td style="font-size: 20px; font-weight: bold;"><span id="total<%=p_id%>"><%=p_selling_price%></span>원</td>
 					</tr>
 
 					<tr>
@@ -244,10 +298,20 @@ System.out.println("productRetrieve.jsp에서 파싱한 ilist==" + ilist);
 					</tr>
 
 					<tr >
-						
+					<!-- 찜  -->
+						 <td><a id="productChoice"
+						href="javascript:productChoice(<%=p_id%>)">
+						 <%  if (likecheck == 1) {%> 
+						 <img id="like_img<%=p_id%>" src="images/liked.png" width="50" height="50" class="liked">
+						  <% } else { %> 
+						  <img id="like_img<%=p_id%>" src="images/like.png" width="50"
+							height="50" class="liked">
+						<% } %>
+					</a></td> 
+					
 						<td><button type="submit" class="btn btn-success" id="order">주문하기</button>
 						</td>
-						<td></td>
+						
 						<td>
 						<!-- Button trigger modal -->
 						<button  type="button" class="btn btn-success" id="cart" data-bs-toggle="modal" data-bs-target="#cartCkeck">
