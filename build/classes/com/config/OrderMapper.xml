@@ -55,4 +55,31 @@ values(#{order_id}, #{userid}, #{p_id}, #{total_price}, #{delivery_address}, #{d
 	select count(*) from orders o full outer join product using(p_id) full outer join review using(p_id)
 	    where o.userid = #{userid}
 </select>
+<select id="MyOrderSearchList" parameterType="map" resultType="ProductOrderReviewImagesDTO">
+   	select * from orders o full outer join product p using(p_id) full outer join review using(p_id) full outer join images using(p_id)
+	    <choose> 
+			<when test="searchCategory == 'P_NAME' and search != null "> 
+				 where IMAGE_RNK = 1  and o.userid = #{userid} and p.p_name like '%${search}%'
+			</when>
+			<when test="searchCategory == 'ORDER_DATE' and search != null"> 
+				 where IMAGE_RNK = 1  and o.userid = #{userid} and o.order_date like '%${search}%'
+			</when>
+			<otherwise>
+			</otherwise> 
+		</choose>
+	    order by ORDER_DATE desc
+</select>
+<select id="myOrderSearchNum" parameterType="map" resultType="int">
+		select count(*) from orders o full outer join product p using(p_id) full outer join review using(p_id) full outer join images using(p_id)
+		<choose> 
+			<when test="searchCategory == 'P_NAME' and search != null "> 
+				 where IMAGE_RNK = 1  and o.userid = #{userid} and p.p_name like '%${search}%'
+			</when>
+			<when test="searchCategory == 'ORDER_DATE' and search != null"> 
+				 where IMAGE_RNK = 1  and o.userid = #{userid} and o.order_date like '%${search}%'
+			</when>
+			<otherwise>
+			</otherwise> 
+		</choose>
+</select>
 </mapper>

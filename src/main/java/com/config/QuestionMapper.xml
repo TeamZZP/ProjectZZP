@@ -54,7 +54,7 @@
 	</select>
 	<select id="totalCount2" resultType="int" parameterType="map">
 		select count(*) from PRODUCT
-			<choose> 
+		<choose> 
 			<when test="category == 'P_NAME'"> 
 				where p_name like '%${searchValue}%' or p_content like '%${searchValue}%'
 			</when>

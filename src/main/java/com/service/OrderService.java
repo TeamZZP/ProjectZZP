@@ -1,6 +1,7 @@
 package com.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -85,6 +86,16 @@ public class OrderService {
 			session.close();
 		}
 		return list;
+	}
+	public PageDTO MyOrderSearchList(int curPage, Map<String, String> map) {
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		PageDTO dto = null; 
+		try {
+			dto = dao.MyOrderSearchList(session, curPage, map);  
+		} finally {
+			session.close();
+		}
+		return dto;
 	}
 	
 	

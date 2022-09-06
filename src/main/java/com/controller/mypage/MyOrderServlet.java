@@ -1,6 +1,8 @@
 package com.controller.mypage;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -32,9 +34,24 @@ public class MyOrderServlet extends HttpServlet {
 			}
 			String userid = mDTO.getUserid();
 			
-			OrderService service = new OrderService();
-			pDTO = service.MyOrderList(Integer.parseInt(curPage), userid);
-			System.out.println("pDTO " + pDTO);
+			String search = request.getParameter("search");
+			String searchCategory = request.getParameter("searchCategory");
+			System.out.println("검색어 " + search + "\t" + searchCategory);
+			
+			Map<String, String> map = new HashMap<String, String>();
+			map.put("search", search); 
+			map.put("searchCategory", searchCategory);
+			map.put("userid", userid);
+			
+			if (search != null) {
+				OrderService service = new OrderService();
+				pDTO = service.MyOrderSearchList(Integer.parseInt(curPage), map);
+				System.out.println("pDTO " + pDTO); 
+			} else {
+				OrderService service = new OrderService();
+				pDTO = service.MyOrderList(Integer.parseInt(curPage), userid);
+				System.out.println("pDTO " + pDTO);
+			}
 			
 			session.setAttribute("myOrderList", pDTO);		
 			response.sendRedirect("myOrder.jsp"); 
