@@ -85,11 +85,11 @@ public class ReviewService {
 
 
 
-	public ReviewDTO orderIDreivewCheck(int ORDER_ID) {
+	public ReviewDTO orderIDreivewCheck(Map<String, String> map) {
 		SqlSession session = MySqlSessionFactory.getSqlSession();
 		ReviewDTO dto = null;
 		try {
-			dto = dao.orderIDreivewCheck(session, ORDER_ID);
+			dto = dao.orderIDreivewCheck(session, map);
 		} finally {
 			session.close();
 		}
@@ -116,6 +116,20 @@ public class ReviewService {
 		int num = 0;
 		try {
 			num = dao.reviewUpdate(session, map);
+			session.commit();
+		} finally {
+			session.close();
+		}
+		return num;
+	}
+
+
+
+	public int reviewDelete(Map<String, String> map) {
+		int num = 0;
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		try {
+			num = dao.reviewDelete(session, map);
 			session.commit();
 		} finally {
 			session.close();

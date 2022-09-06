@@ -1,6 +1,8 @@
 package com.controller.mypage;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -13,6 +15,7 @@ import javax.servlet.http.HttpSession;
 
 import com.dto.AddressDTO;
 import com.dto.MemberDTO;
+import com.dto.ProfileDTO;
 import com.service.AddressService;
 import com.service.MemberService;
 
@@ -28,20 +31,34 @@ public class ProfileChangeServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
 		HttpSession session=request.getSession();
+		PrintWriter out=response.getWriter();
 		
 		MemberDTO dto=(MemberDTO) session.getAttribute("login");
 		
 		//회원 전용
 		if (dto != null) {
 			String userid=dto.getUserid();
-			//회원 정보
-			MemberService m_service=new MemberService();
-			MemberDTO member=m_service.selectMember(userid);
+			//회원 프로필
+			MemberService service=new MemberService();
+			HashMap<String, String> map=new HashMap<String, String>();
 			
-			request.setAttribute("login", member);
+			String profile_img=request.getParameter("profile_img");
+			String profile_txt=request.getParameter("profile_txt");
+			map.put("userid", userid);
+			map.put("profile_img", profile_img);
+			map.put("profile_txt", profile_txt);
+			System.out.println("파싱 데이터 map 저장-----"+map);
 			
-			RequestDispatcher dis=request.getRequestDispatcher("mypage/changeProfile.jsp");//로그인 된 계정 정보 session 저장-마이페이지 오픈
-			dis.forward(request, response);
+			int num=service.changeProfile(map);
+			System.out.println("프로필 수정 개수 : "+num);
+			
+			ProfileDTO profile=service.selectProfile(userid);
+			profile_img=profile.getProfile_img();
+			profile_txt=profile.getProfile_txt();
+			
+			out.print(profile_txt);
+			
+			
 		} else {
 			//alert로 로그인 후 이용하세요 출력
 			String mesg="로그인이 필요합니다.";

@@ -6,10 +6,10 @@ import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 
 import com.dto.CategoryProductDTO;
+import com.dto.ImagesOrderDTO;
 import com.dto.OrderDTO;
 import com.dto.PageDTO;
-import com.dto.ProductOrderDTO;
-import com.dto.ProductOrderReviewDTO;
+import com.dto.ProductOrderReviewImagesDTO;
 
 public class OrderDAO {
 
@@ -44,11 +44,11 @@ public class OrderDAO {
 
 	public PageDTO MyOrderList(SqlSession session, int curPage, String userid) {
 		PageDTO pDTO = new PageDTO();
-		pDTO.setPerPage(10);
+		pDTO.setPerPage(5);
 		int perPage = pDTO.getPerPage();
 		int offset = (curPage - 1) * perPage;
 		
-		List<ProductOrderReviewDTO> list = session.selectList("OrderMapper.MyOrderList", userid, new RowBounds(offset, perPage));
+		List<ProductOrderReviewImagesDTO> list = session.selectList("OrderMapper.MyOrderList", userid, new RowBounds(offset, perPage));
 		
 		pDTO.setCurPage(curPage);
 		pDTO.setList(list);
@@ -59,5 +59,12 @@ public class OrderDAO {
 
 	private int myOrderNum(SqlSession session, String userid) {
 		return session.selectOne("QuestionMapper.myQuestionNum", userid);
+	}
+
+
+
+	public List<ImagesOrderDTO> ProdImg(SqlSession session, String userid) {
+		List<ImagesOrderDTO> list = session.selectList("OrderMapper.ProdImg", userid);
+		return list;
 	}
 }

@@ -44,12 +44,12 @@ public class ReviewDAO {
 	}
 
 	public int reviewInsert(SqlSession session, HashMap<String, String> map) {
-		int num = session.insert("ReviewMapper.reviewInsert", map);
+		int num = session.insert("ReviewMapper.reviewInsert", map); 
 		return num;
 	}
 
-	public ReviewDTO orderIDreivewCheck(SqlSession session, int ORDER_ID) {
-		ReviewDTO dto = session.selectOne("ReviewMapper.orderIDreivewCheck", ORDER_ID);
+	public ReviewDTO orderIDreivewCheck(SqlSession session, Map<String, String> map) {
+		ReviewDTO dto = session.selectOne("ReviewMapper.orderIDreivewCheck", map);
 		return dto;
 	}
 
@@ -60,6 +60,11 @@ public class ReviewDAO {
 
 	public int reviewUpdate(SqlSession session, HashMap<String, String> map) {
 		int num = session.update("ReviewMapper.reviewUpdate", map);
+		return num;
+	}
+
+	public int reviewDelete(SqlSession session, Map<String, String> map) {
+		int num = session.delete("ReviewMapper.reviewDelete", map);
 		return num;
 	}
 

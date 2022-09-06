@@ -8,6 +8,7 @@ import com.config.MySqlSessionFactory;
 import com.dao.OrderDAO;
 import com.dto.CategoryProductDTO;
 import com.dto.ImagesDTO;
+import com.dto.ImagesOrderDTO;
 import com.dto.OrderDTO;
 import com.dto.PageDTO;
 
@@ -71,9 +72,19 @@ public class OrderService {
 		try {
 			dto = dao.MyOrderList(session, curPage, userid);
 		} finally {
-			session.close();
+			session.close(); 
 		}
 		return dto;
+	}
+	public List<ImagesOrderDTO> ProdImg(String userid) {
+		List<ImagesOrderDTO> list = null;
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		try {
+			list = dao.ProdImg(session, userid);
+		} finally {
+			session.close();
+		}
+		return list;
 	}
 	
 	

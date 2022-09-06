@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import com.dto.AddressDTO;
 import com.dto.MemberDTO;
+import com.dto.ProfileDTO;
 import com.service.AddressService;
 import com.service.MemberService;
 
@@ -37,9 +38,17 @@ public class MypageServlet extends HttpServlet {
 			//회원 정보
 			MemberService m_service=new MemberService();
 			MemberDTO member=m_service.selectMember(userid);
+			ProfileDTO m_profile=m_service.selectProfile(userid);
+			System.out.println("회원 프로필 : "+m_profile);
+			String Profile_txt=m_profile.getProfile_txt();
+			if (Profile_txt == null || Profile_txt.equals(" ")) {
+				System.out.println("프로필 메세지 내용 없음");
+				m_profile.setProfile_txt("프로필 메세지를 입력하세요.");
+				System.out.println("수정======"+m_profile);
+			}
 			
 			request.setAttribute("login", member);
-			
+			request.setAttribute("m_profile", m_profile);
 			RequestDispatcher dis=request.getRequestDispatcher("mypage.jsp");//로그인 된 계정 정보 session 저장-마이페이지 오픈
 			dis.forward(request, response);
 		} else {
