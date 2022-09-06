@@ -15,9 +15,7 @@ import com.dto.CartDTO;
 import com.dto.MemberDTO;
 import com.service.CartService;
 
-/**
- * Servlet implementation class productCartServlet
- */
+
 @WebServlet("/addCartServlet")
 public class addCartServlet extends HttpServlet {
    private static final long serialVersionUID = 1L;

@@ -223,7 +223,7 @@ List<CategoryProductDTO> pDTO_list = pDTO.getList();
 										<div class="area_count holder">
 												<div class="option_btn_wrap" style="top: 0;">
 													<div class="option_btn_tools" style="float: none;">
-														<input name="p_amount" class="form-control" id="quantity<%=p_id %>" value="1" style="text-align: right; width: 80px; display: inline;margin-left: 20px; " maxlength="3" >
+														<input name="p_amount" class="form-control" id="p_amount<%=p_id %>" value="1" style="text-align: right; width: 80px; display: inline;margin-left: 20px; " maxlength="3" >
 														<button type="button" class="btn btn-outline-success"
 															id="up<%=p_id %>" name="up" data-p_id="<%=p_id %>" >+</button>
 														<button type="button" class="btn btn-outline-success"
@@ -317,12 +317,12 @@ List<CategoryProductDTO> pDTO_list = pDTO.getList();
 			console.log(p_id +" up클릭");
 			
 			//input태그 수량변화
-			var quantity = parseInt($("#quantity"+p_id).val());
-			$("#quantity"+p_id).val(parseInt(quantity) + 1);
-			count=$("#quantity"+p_id).val();
+			var p_amount = parseInt($("#p_amount"+p_id).val());
+			$("#p_amount"+p_id).val(parseInt(p_amount) + 1);
+			count=$("#p_amount"+p_id).val();
 			var price = parseInt($("#price"+p_id).val());
 			
-			$("#total"+p_id).text((quantity+1)*price);
+			$("#total"+p_id).text(count*price);
 			//총합 구하기
 		})//end up
 		$("button[name=down]").on("click", function() {
@@ -330,14 +330,14 @@ List<CategoryProductDTO> pDTO_list = pDTO.getList();
 			console.log(p_id +" down클릭");
 			
 			//input태그 수량변화
-			var quantity = parseInt($("#quantity"+p_id).val());
+			var p_amount = parseInt($("#p_amount"+p_id).val());
 			
-			if(quantity !=1){
-			$("#quantity"+p_id).val(parseInt(quantity) - 1);
-			xxx=$("#quantity"+p_id).val();
+			if(p_amount !=1){
+			$("#p_amount"+p_id).val(parseInt(p_amount) - 1);
+			count=$("#p_amount"+p_id).val();
 			var price = parseInt($("#price"+p_id).val());
 			
-			$("#total"+p_id).text((quantity-1)*price);
+			$("#total"+p_id).text(count*price);
 			
 			}
 		})//end down

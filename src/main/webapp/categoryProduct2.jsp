@@ -217,69 +217,70 @@ function productChoice(n) {
 
 					</a>
 
-				<!-- 장바구니 모달창-->
-				<!-- Button trigger modal -->
-				<button type="button" class="carticon btn" data-bs-toggle="modal"
-					data-bs-target="#addcart<%=p_id%>" style="border: 0; outline: 0;">
-					<img src="images/cart.png" width="25" height="25" >
-				</button>
+					<!-- 장바구니 모달창-->
+					<!-- Button trigger modal -->
+					<button type="button" class="btn" id="cartimg"
+						data-bs-toggle="modal" data-bs-target="#addcart<%=p_id%>">
+						<img src="images/cart.png" width="25" height="25">
+					</button>
 
-				<!-- Modal -->
-				<form action="addCartServlet">
-					<input type="hidden" name="p_id" value="<%=p_id%>"> <input
-						type="hidden" name="p_image" value="<%=p_image%>"> <input
-						type="hidden" name="p_name" value="<%=p_name%>">
+					<!-- Modal -->
+					<form action="addCartServlet">
+						<input type="hidden" name="p_id" value="<%=p_id%>"> <input
+							type="hidden" name="p_image" value="<%=p_image%>"> <input
+							type="hidden" name="p_name" value="<%=p_name%>">
 
-					<div class="modal fade" id="addcart<%=p_id%>"
-						data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-						aria-labelledby="staticBackdropLabel" aria-hidden="true">
-						<div class="modal-dialog">
-							<div class="modal-content">
-								<div class="modal-header" id="header">
-									<h5 class="modal-title" id="cart_title"
-										style="text-align: center">
-										<%=p_name%>
-									</h5>
+						<div class="modal fade" id="addcart<%=p_id%>"
+							data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+							aria-labelledby="staticBackdropLabel" aria-hidden="true">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="cart_title"
+											style="text-align: center">
+											<%=p_name%>
+										</h5>
 
-									<button type="button" class="btn-close" data-bs-dismiss="modal"
-										aria-label="Close"></button>
-								</div>
-								<div class="modal-body">
-									<div class="opt_block no-border order_quantity_area"
-										style="height: auto;">
-										<div class="area_tit holder">
-											<span class="option_title inline-blocked"
-												style="margin-bottom: 7px">수량</span>
-										</div>
-										<div class="area_count holder">
+										<button type="button" class="btn-close"
+											data-bs-dismiss="modal" aria-label="Close"></button>
+									</div>
+									<div class="modal-body">
+										<div class="opt_block no-border order_quantity_area"
+											style="height: auto;">
+											<div class="area_tit holder">
+												<span class="option_title inline-blocked"
+													style="margin-bottom: 7px">수량</span>
+											</div>
+											<div class="area_count holder">
 												<div class="option_btn_wrap" style="top: 0;">
 													<div class="option_btn_tools" style="float: none;">
-														<input name="p_amount" class="form-control" id="p_amount<%=p_id %>" value="1" style="text-align: right; width: 80px; display: inline;margin-left: 20px; " maxlength="3" >
+														<input name="p_amount" id="quantity<%=p_id%>" value="1"
+															style="text-align: center;">
 														<button type="button" class="btn btn-outline-success"
-															id="up<%=p_id %>" name="up" data-p_id="<%=p_id %>" >+</button>
+															id="up<%=p_id%>" name="up" data-p_id="<%=p_id%>">+</button>
 														<button type="button" class="btn btn-outline-success"
-															id="down<%=p_id %>"  name="down"  data-p_id="<%=p_id %>" >-</button>
-															<br> <input type="hidden" id="price<%=p_id %>" name="p_selling_price" value="<%=p_selling_price%>">
-														<a>총 상품금액 : </a><span id="total<%=p_id %>"><%=p_selling_price%></span>원
+															id="down<%=p_id%>" name="down" data-p_id="<%=p_id%>">-</button>
+														<br> <input type="hidden" id="price<%=p_id%>"
+															name="p_selling_price" value="<%=p_selling_price%>">
+														<a>총 상품금액 : </a><span id="total<%=p_id%>"><%=p_selling_price%></span>원
 													</div>
 												</div>
 											</div>
+										</div>
 									</div>
-								</div>
-								<div class="modal-footer">
+									<div class="modal-footer">
 										<button type="button" class="btn btn-secondary"
 											data-bs-dismiss="modal">계속쇼핑하기</button>
-										<button type="button" class="btn btn-success" id="saveCart<%=p_id%>" data-p_id="<%=p_id%>" name = "saveCart"
-										data-p_name = "<%=p_name %>" data-p_selling_price="<%=p_selling_price%>" data-p_image=<%=p_image %>
-											 data-bs-toggle="modal" data-bs-target="#chkmodal<%=p_id%>" >장바구니저장</button>
+										<button type="button" class="btn btn-success"
+											data-bs-toggle="modal" data-bs-target="#xxx<%=p_id%>">장바구니저장</button>
 									</div>
 								</div>
 							</div>
 						</div>
 
 					</form>
-				<!-- 장바구니 모달안에 모달 -->
-						<div class="modal fade" id="chkmodal<%=p_id%>"
+					<!-- 장바구니 모달안에 모달 -->
+					<div class="modal fade" id="xxx<%=p_id%>"
 						data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
 						aria-labelledby="staticBackdropLabel" aria-hidden="true">
 						<div class="modal-dialog">
@@ -295,21 +296,18 @@ function productChoice(n) {
 									</div>
 								<div class="modal-body">장바구니에 저장되었습니다.</div>
 								<div class="modal-footer">
-									<button type="button" class="btn btn-secondary" name="back"
-										data-bs-dismiss="modal" id="back<%=p_id%>" data-p_id="<%=p_id%>">계속쇼핑하기</button>
-									<button type="button" class="btn btn-success" name="moveCart" id="moveCart<%=p_id%>" data-P_id="<%=p_id%>"
-										 onclick="location.href='CartListServlet';">장바구니로이동</button>
+									<button type="button" class="btn btn-secondary"
+										data-bs-dismiss="modal">계속쇼핑하기</button>
+									<button type="button" class="btn btn-success" name="moveCart" id="moveCart<%=p_id%>" data-P_id="<%=p_id%>">장바구니로이동</button>
 								</div>
 							</div>
 						</div>
-					</div> 
+					</div>
 				</div>
 			</div>
-		</div>
-		<%
-		}
-		%>
-		
+			<%
+			}
+			%>
 
 			<!-- 페이징 -->
 			<div class="p-2 text-center">
@@ -331,4 +329,5 @@ function productChoice(n) {
 				%>
 			</div>
 		</div>
+	</div>
 </form>

@@ -56,49 +56,55 @@ function productChoice(n) {
 
 	}
 	$(function() {
-
+		
+		var count = "1";
 		$("button[name=up]").click(function() {
 			
 			var p_id =$(this).attr("data-p_id");
-			console.log(p_id);
+			console.log("up클릭 "+p_id);
 			
-			var count = parseInt($("#p_amount"+p_id).val());
-			$("#p_amount"+p_id).val(parseInt(count) + 1);
+			var p_amount= $("#p_amount"+p_id).val();
+			$("#p_amount"+p_id).val(parseInt(p_amount)+1);
+			count = $("#p_amount"+p_id).val();
 			
-			var price = parseInt($("#price"+p_id).text());
-			//수정
-			$("#total"+p_id).text((count + 1) * price);
-
+			var price = $("#price"+p_id).text();
+			
+			var total = $("#total"+p_id).text(count*price);
+			
 		});//end up
 
-		$("button[name=down]").click(function() {
+		 $("button[name=down]").click(function() {
 
 			var p_id =$(this).attr("data-p_id");
-			console.log(p_id);
+			console.log("down클릭 "+p_id);
+			var p_amount= $("#p_amount"+p_id).val();
 			
-			var count = parseInt($("#p_amount"+p_id).val());
-			$("#p_amount"+p_id).val(parseInt(count) - 1);
+			if(p_amount != 1){
+			$("#p_amount"+p_id).val(parseInt(p_amount)-1);
+			count = $("#p_amount"+p_id).val();
+			console.log(count);
+			var price = $("#price"+p_id).text();
+			var total = $("#total"+p_id).text(count*price);
+			}
 			
-			var price = parseInt($("#price"+p_id).text());
-			//수정
-			$("#total"+p_id).text((count - 1) * price);
-		});//end down
+		});//end down 
 
-	  $("#cart").on("click", function() {
-		  var p_id = $("#p_id").val();
-		  var p_name= $("#p_name").val();
-		  var p_selling_price = $("#p_selling_price").val();
-		  var p_amount= $("#p_amount").val();
-		  var p_image= $("#p_image").val();
+	  $("button[name=cart]").on("click", function() {
+		  var p_id = $(this).attr("data-P_id");
+		  var p_name = $(this).attr("data-p_name");
+		  var p_selling_price = $(this).attr("data-p_selling_price");
+		  var p_image = $(this).attr("data-p_image");
+		   console.log(p_id, p_name, p_selling_price, count, p_image);
 		  
+		 <%if(mdto != null){%>
 		  $.ajax({
-			  type : "get",
+			  type : "post",
 			  url : "addCartServlet",
 		  	  data : {
 		  		p_id : p_id,
 		  		p_name : p_name,
 		  		p_selling_price : p_selling_price,
-		  		p_amount:p_amount,
+		  		p_amount:count,
 		  		p_image:p_image
 		  	  },
 		  	  dataType : "text",
@@ -109,8 +115,14 @@ function productChoice(n) {
 				console.log(error);
 			}
 		  })//end ajax
-		})//cart   
-		
+		  
+	<%} else{ %>
+		alert("로그인이 필요합니다.");
+		location.href = "LoginUIServlet";
+		event.preventDefault();
+	<% } %>
+	
+	})//cart 
 	
 	$("#order").on("click", function() {
 		
@@ -314,7 +326,9 @@ if (member != null) {
 						
 						<td>
 						<!-- Button trigger modal -->
-						<button  type="button" class="btn btn-success" id="cart" data-bs-toggle="modal" data-bs-target="#cartCkeck">
+						<button  type="button" class="btn btn-success" name="cart" id="cart<%=p_id %>" data-bs-toggle="modal" data-bs-target="#cartCkeck"
+						data-P_id = "<%=p_id%>"
+						data-p_name = "<%=p_name %>" data-p_selling_price="<%=p_selling_price%>" data-p_image=<%=ilist.get(0).getImage_route()%>>
 						장바구니
 						</button>
 						<!-- Modal -->

@@ -4,7 +4,7 @@
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-        <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
         
 <%@page import="org.apache.ibatis.reflection.SystemMetaObject"%>
 <%@page import="java.util.HashMap"%>
@@ -21,6 +21,7 @@
 <head>
 <meta charset="UTF-8">
 <title>ZZP</title>
+
 </head>
 <body>
 <jsp:include page="common/header.jsp" flush="true"></jsp:include><br>
