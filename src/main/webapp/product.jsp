@@ -49,7 +49,7 @@ $(document).ready(function() {
 %>
 </head>
 <body>
-<div class="modal" id="checkVal" data-bs-backdrop="static">
+<div class="modal checkVal" id="checkVal" data-bs-backdrop="static">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -65,6 +65,7 @@ $(document).ready(function() {
   </div>
 </div>
 <button type="button" id="modalBtn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#checkVal">modal</button>
+
 <jsp:include page="common/header.jsp" flush="true"></jsp:include><br>
 <jsp:include page="category/category.jsp" flush="true"></jsp:include><br> 
 <jsp:include page="product/product.jsp" flush="true"></jsp:include><br>
