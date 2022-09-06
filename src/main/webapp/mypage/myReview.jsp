@@ -142,7 +142,7 @@
 		<td style="padding:5 0 0 10px;" class="text-center">
 			<a href="ProductRetrieveServlet?p_id=<%=p_id%>"> 
 			<img src="images/p_image/<%=image_route%>" border="0" align="middle" class="img pb-1"
-					 style="width: 70%;"	onerror="this.src='images/uploadarea.png'"><br>
+					 width="100px" height="100px" onerror="this.src='images/uploadarea.png'"><br>
 			<%= p_name %></a>
 		</td>
 		<td class="align-middle">
