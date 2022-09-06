@@ -67,7 +67,7 @@ $(document).ready(function() {
 <button type="button" id="modalBtn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#checkVal">modal</button>
 <jsp:include page="common/header.jsp" flush="true"></jsp:include><br>
 <jsp:include page="category/category.jsp" flush="true"></jsp:include><br> 
-<jsp:include page="product/product.jsp" flush="true"></jsp:include><br>
+<jsp:include page="product/product2.jsp" flush="true"></jsp:include><br>
 <jsp:include page="common/footer.jsp" flush="true"></jsp:include><br>
 </body>
 

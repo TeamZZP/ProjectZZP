@@ -86,8 +86,13 @@ function productChoice(n) {
 		}); //end ajax
 <%} else {%>
 	alert("로그인이 필요합니다.");
-		location.href = "LoginUIServlet";
-		event.preventDefault();
+
+	$("#modalBtn").trigger("click");
+	$("#mesg").text("로그인이 필요합니다.");
+	$("#closemodal").click(function() {
+    location.href="LoginUIServlet";
+ }) 
+		n.preventDefault();
 <%}%>
 
 	}
@@ -375,14 +380,15 @@ List<CategoryProductDTO> pDTO_list = pDTO.getList();
 		
 		
 	<%} else{ %>
-		$("#modalBtn").trigger("click");
+	
+		/* $("#modalBtn").trigger("click");
 		$("#mesg").text("로그인이 필요합니다.");
 		$("#closemodal").click(function() {
         location.href="LoginUIServlet";
-     }) 
+     })  */
      	/* alert("로그인이 필요합니다.");
 		location.href="LoginUIServlet"; */
-		event.preventDefault();
+		event.preventDefualt;
 	<% } %>
 	
 		})
