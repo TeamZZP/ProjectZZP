@@ -80,8 +80,11 @@
 				}
 			});//end ajax
 		});
-		$("#uploadBtu").click(function () {
-			window.open("showImg.jsp", "", "width=400px height=500px");
+		$(".uploadBtu").click(function () {
+			var popupX = (document.body.offsetWidth / 2) - (200 / 2);
+			var popupY= (window.screen.height / 2) - (300 / 2);
+
+			window.open('showImgReview.jsp', '', 'status=no, height=400, width=300, left='+ popupX + ', top='+ popupY);
 		});
 	});//end ready
 </script>
@@ -156,8 +159,8 @@
 				<%if(dto.getREVIEW_IMG() == null || dto.getREVIEW_IMG().equals("null")){ %>
 					
 				<%} else { %>
-					<div id="uploadBtu">
-					<img id="upload" alt="" src="/eclipse/upload/<%=dto.getREVIEW_IMG()%>" width="100px" height="100px" style="border: 1px solid gray;">
+					<div class="uploadBtu">
+						<img class="upload" alt="" src="/eclipse/upload/<%=dto.getREVIEW_IMG()%>" width="100px" height="100px" style="border: 1px solid gray;">
 					</div>
 				<%} %>
 		</td>

@@ -71,6 +71,11 @@
 				} 
 			});//end ajax
 		});
+		$("#searchBtn").click(function () {
+			var search = $("#search").val();
+			var searchCategory = $("#searchCategory").val();
+			$("#myOrderSearchForm").attr("action", "MyOrderServlet?search="+search+"&searchCategory="+searchCategory); 
+		});
 	}); //end ready
 </script> 
     
@@ -106,6 +111,24 @@
 </div>
 <div class="col-lg-10">
 <div id="addTableDiv">
+<form id="myOrderSearchForm">
+	<div class="row">
+		<div class="col-md-3"></div>
+		<div class="col-md-2">
+			<select id="searchCategory" name="searchCategory" class="form-select" aria-label="Default select example">
+				<option value="P_NAME" selected="selected">상품명</option>
+				<option value="ORDER_DATE">구매날짜</option>
+			</select>
+		</div>
+		<div class="col-md-5">
+			<input type="text" id="search" name="search" class="form-control" placeholder=" ex) 상품명:칫솔 ex) 날짜:YY/MM/DD 혹은 MM/DD">
+		</div>
+		<div class="col-md-2">
+			<button type="submit" id="searchBtn" class="btn btn-outline-success">구매항목검색</button>
+		</div>
+	</div>
+</form>
+<br>
 <form id="myOrderForm" method="post">
 <table id="addTable" class="table table-hover" style="text-align: center; vertical-align: middle;">
 	<tr class="table-success">
