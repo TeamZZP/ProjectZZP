@@ -9,6 +9,7 @@ import com.config.MySqlSessionFactory;
 import com.dao.MemberDAO;
 import com.dto.MemberDTO;
 import com.dto.PageDTO;
+import com.dto.ProfileDTO;
 
 public class MemberService {
 	
@@ -175,6 +176,29 @@ public class MemberService {
 			session.close();
 		}
 		return dto;
+	}
+
+	public ProfileDTO selectProfile(String userid) {
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		ProfileDTO dto=null;
+		try {
+			dto=dao.selectProfile(session, userid);
+		} finally {
+			session.close();
+		}
+		return dto;
+	}
+
+	public int changeProfile(HashMap<String, String> map) {
+		SqlSession session=MySqlSessionFactory.getSqlSession();
+		int num=0;
+		try {
+			num=dao.changeProfile(session, map);
+			session.commit();
+		} finally {
+			session.close();
+		}
+		return num;
 	}
 
 }

@@ -1,15 +1,14 @@
 <%@page import="com.dto.MemberDTO"%>
+<%@page import="com.dto.ProfileDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 	MemberDTO member=(MemberDTO) request.getAttribute("login");
-	
 	String userid=member.getUserid();
-	String passwd=member.getPasswd();
 	String username=member.getUsername();
-	String email1=member.getEmail1();
-	String email2=member.getEmail2();
-	String phone=member.getPhone();
-	String created_at=member.getCreated_at();
+	
+	ProfileDTO m_profile=(ProfileDTO) request.getAttribute("m_profile");
+	String profile_img=m_profile.getProfile_img();
+	String profile_txt=m_profile.getProfile_txt();
 %>
 <style>
 	.img a{
@@ -47,7 +46,7 @@
 <div class="col-md-5">
 	<div class="card" style="width: 16rem;">
 	  <div class="img" style="padding: 30px 30px 30px 30px;">
-	  	<a href="ProfileChangeServlet">
+	  	<a>
 	  		<figure>
 	  			<img src="images/user.png" class="card-img-top">
 	  			<figcaption id="changeImg">사진 변경</figcaption>
@@ -56,8 +55,56 @@
 	  </div>
 	  <div class="card-body">
 	    <h5 class="card-title"><b><%= username %>님</b></h5>
-	    <p class="card-text">프로필 메세지</p>
+	    <p class="card-text" id="changeTxt"><%= profile_txt %></p>
 	  </div>
+	</div>
+	<div class="col-md-6">
+		<!-- Modal -->
+			<div class="modal fade" id="selectImg" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="staticBackdropLabel">프로필 이미지 변경</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							프로필 이미지
+						</div>
+						<div class="modal-footer">
+							<button type="button" id="submitImg" class="btn btn-success">수정</button>
+					        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		<!-- end modal -->
+		<button type="button" id="openImgModal" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#selectImg" style="display: none;">
+			사진 수정
+		</button><br><br>
+		<!-- open modal -->
+		<!-- Modal -->
+			<div class="modal fade" id="writeTxt" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="staticBackdropLabel">프로필 메세지 변경</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<input type="text" id="profile_txt" name="profile_txt" value="<%= profile_txt %>" style="width: 100%; height: 100px;"/>
+						</div>
+						<div class="modal-footer">
+							<button id="submitTxt" class="btn btn-success">수정</button>
+					        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		<!-- end modal -->
+		<button type="button" id="openTxtModal" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#writeTxt" style="display: none;">
+			프로필 메세지 수정
+		</button>
+		<!-- open modal -->
 	</div>
 </div>
 <div class="col-md-7">
@@ -83,9 +130,63 @@
 </div>
 </div>
 </div>
+<div class="modal" id="alertModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">ZZP</h5>
+      </div>
+      <div class="modal-body">
+        <p id="mesg"></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" data-bs-dismiss="modal">닫기</button>
+      </div>
+    </div>
+  </div>
+</div>
+<button type="button" id="modalBtn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#alertModal" style="display: none;">modal</button>
+
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>
+<script type="text/javascript">
 	$(document).ready(function() {
-		
+		$("#changeImg").on("click", function() {
+			console.log("clickkkkkkkkk");
+			$("#openImgModal").trigger("click");
+		});//end fn
+		$("#changeTxt").on("click", function() {
+			console.log("click=============");
+			$("#openTxtModal").trigger("click");
+		});//end fn
+		$("#profile_txt").on("click", function() {
+			$(this).val("");
+		});//end fn
+		$("#submitTxt").on("click", function() {
+			var profile_txt=$("#profile_txt").val();
+			if (profile_txt.length == 0) {
+				$("#modalBtn").trigger("click");
+				$("#mesg").text("변경할 프로필 메세지를 입력하세요.");
+			} else {
+				//ajax
+				$.ajax({
+					type : "post",
+					url : "ProfileChangeServlet",
+					dataType : "text",
+					data : {
+						profile_txt : profile_txt
+					},
+					success : function(data, status, xhr) {
+						console.log("success");
+						console.log(data);
+						$("#writeTxt").modal("hide");
+						$(".modal-backdrop").hide();//모달창 닫고 백드롭 hide
+						$("#changeTxt").text(data);
+					},
+					error: function(xhr, status, error) {
+						alert(error);
+					}
+				});//end ajax
+			}
+		});//
 	});//end ready
 </script>
