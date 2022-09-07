@@ -3,11 +3,16 @@
 <%
 	String sales = (String) request.getAttribute("sales");
 	String salesIncrease = (String) request.getAttribute("salesIncrease");
+	String member = (String) request.getAttribute("member");
+	String memberIncrease = (String) request.getAttribute("memberIncrease");
 %>
 
 <style>
 	.percent[data-n^='+'] {
 		color: green;
+	}
+	.percent[data-n^='-'] {
+		color: red;
 	}
 </style>
 
@@ -29,7 +34,8 @@
 	<div class="card">
 	  <div class="card-body text-center">
 	    <h5 class="card-title">회원수</h5>
-	    <h2 class="card-text"><%= sales %></h2>
+	    <h2 class="card-text"><%= member %></h2>
+	    <h6 class="card-text percent" data-n="<%= memberIncrease %>"><%= memberIncrease %></h6>
 	  </div>
 	</div>
   </div>

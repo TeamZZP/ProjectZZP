@@ -489,6 +489,28 @@ public class ChallengeService {
 		return n;
 	}
 
+	public int getMemberNum() {
+		int n = 0;
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		try {
+			n = dao.getMemberNum(session);
+		} finally {
+			session.close();
+		}
+		return n;
+	}
+
+	public int getTodayMember() {
+		int n = 0;
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		try {
+			n = dao.getTodayMember(session);
+		} finally {
+			session.close();
+		}
+		return n;
+	}
+
 
 	
 	

@@ -485,7 +485,16 @@
 
 <select id="getTodaySales" resultType="double">
 	select sum(total_price) from orders
-	where TO_CHAR(order_date,'YY/MM/DD') = TO_CHAR(sysdate, 'YY/MM/DD')
+	where TO_CHAR(order_date,'YY/MM/DD') = TO_CHAR(CURRENT_TIMESTAMP, 'YY/MM/DD')
+</select>
+
+<select id="getMemberNum" resultType="int">
+	select count(*) from member
+</select>
+
+<select id="getTodayMember" resultType="int">
+	select count(*) from member
+	where TO_CHAR(created_at,'YY/MM/DD') = TO_CHAR(CURRENT_TIMESTAMP, 'YY/MM/DD')
 </select>
 
 </mapper>

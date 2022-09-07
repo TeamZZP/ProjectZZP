@@ -40,13 +40,22 @@ public class AdminMainServlet2 extends HttpServlet {
 		double origin = sales - service.getTodaySales();
 		double increase = (sales-origin)/origin*100;
 		String salesIncrease 
-			= (increase >= 0)? "+"+String.format("%.2f%%", increase) : "-"+String.format("%.2f%%", increase);
+			= ( (increase >= 0)? "+" : "-" ) + String.format("%.2f%%", increase);
 		
 		//회원수
-		//int member = service.getMemberNum();
+		int member = service.getMemberNum();
+		//회원 증가율
+		double originM = member - service.getTodayMember();
+		double increaseM = (member-originM)/originM*100;
+		String memberIncrease
+			= ( (increaseM >= 0)? "+" : "-" ) + String.format("%.2f%%", increaseM);
 		
 		request.setAttribute("sales", df.format(sales));
 		request.setAttribute("salesIncrease", salesIncrease);
+		
+		request.setAttribute("member", member+" 명");
+		request.setAttribute("memberIncrease", memberIncrease);
+		
 		RequestDispatcher dis = request.getRequestDispatcher("adminMain.jsp");
 		dis.forward(request, response);
 		
