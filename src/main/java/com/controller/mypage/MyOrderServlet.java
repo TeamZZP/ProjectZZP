@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -47,14 +48,22 @@ public class MyOrderServlet extends HttpServlet {
 				OrderService service = new OrderService();
 				pDTO = service.MyOrderSearchList(Integer.parseInt(curPage), map);
 				System.out.println("pDTO " + pDTO); 
+				
+				request.setAttribute("search", search);
+				request.setAttribute("searchCategory", searchCategory);
+				session.setAttribute("myOrderList", pDTO);	
+				
+				RequestDispatcher dis = request.getRequestDispatcher("myOrder.jsp");
+				dis.forward(request, response);
 			} else {
 				OrderService service = new OrderService();
 				pDTO = service.MyOrderList(Integer.parseInt(curPage), userid);
 				System.out.println("pDTO " + pDTO);
+				
+				session.setAttribute("myOrderList", pDTO);	
+				
+				response.sendRedirect("myOrder.jsp");
 			}
-			
-			session.setAttribute("myOrderList", pDTO);		
-			response.sendRedirect("myOrder.jsp"); 
 			
 		} else {
 			session.setAttribute("mesg", "로그인이 필요합니다");

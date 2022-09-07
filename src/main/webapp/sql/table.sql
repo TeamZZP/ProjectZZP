@@ -226,6 +226,24 @@ CREATE TABLE answer (
 	q_id	NUMBER CONSTRAINT FK_answer_q_id REFERENCES QUESTION(Q_ID) on DELETE CASCADE,
 	answer_created	DATE DEFAULT sysdate
 );
+-- 쿠폰
+create table coupon ( 
+  coupon_id NUMBER PRIMARY KEY,
+  coupon_img VARCHAR2(300) NOT NULL,
+  coupon_name VARCHAR2(50) NOT NULL,
+  coupon_discount NUMBER NOT NULL,
+  coupon_created DATE DEFAULT sysdate NOT NULL,
+  coupon_validity DATE NOT NULL
+);
+
+-- 쿠폰 획득 
+create table member_coupon( 
+	userid VARCHAR2(30) NOT NULL REFERENCES member(userid) ON DELETE CASCADE,
+	coupon_id NUMBER     NOT NULL REFERENCES coupon(coupon_id) ON DELETE CASCADE,
+	coupon_created DATE   DEFAULT sysdate    NOT NULL,
+    coupon_status VARCHAR2(30) NOT NULL,
+    coupon_used DATE 
+);
 
 -- 시퀀스
 CREATE SEQUENCE 테이블명_컬럼명_seq
@@ -317,7 +335,13 @@ CREATE SEQUENCE question_q_id_seq
   INCREMENT BY 1
   NOCYCLE
   NOCACHE;
-  
+ 
+-- 쿠폰 시퀀스
+CREATE SEQUENCE coupon_coupon_id_seq
+  START WITH 1
+  INCREMENT BY 1
+  NOCYCLE
+  NOCACHE;
 -------------- insert --------------
 -- 상품
 INSERT INTO PRODUCT (P_ID,P_NAME,P_CONTENT,P_CATEGORY,P_COST_PRICE,P_SELLING_PRICE,P_DISCOUNT,P_CREATED,P_STOCK,USERID) 
