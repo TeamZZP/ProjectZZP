@@ -477,4 +477,15 @@
 </update>
 
 
+
+
+<select id="getTotalSales" resultType="double">
+	select sum(total_price) from orders
+</select>
+
+<select id="getTodaySales" resultType="double">
+	select sum(total_price) from orders
+	where TO_CHAR(order_date,'YY/MM/DD') = TO_CHAR(sysdate, 'YY/MM/DD')
+</select>
+
 </mapper>

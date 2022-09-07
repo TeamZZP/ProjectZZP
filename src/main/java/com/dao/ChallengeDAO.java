@@ -254,6 +254,17 @@ public class ChallengeDAO {
 	}
 
 	
+	
+	////////////////
+	public double getTotalSales(SqlSession session) {
+		return session.selectOne("getTotalSales");
+	}
+
+	public double getTodaySales(SqlSession session) {
+		return session.selectOne("getTodaySales");
+	}
+
+	
 
 
 	
