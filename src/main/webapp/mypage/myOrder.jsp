@@ -1,3 +1,4 @@
+<%@page import="org.apache.ibatis.reflection.SystemMetaObject"%>
 <%@page import="com.dto.ProductOrderReviewImagesDTO"%>
 <%@page import="com.dto.ImagesOrderDTO"%>
 <%@page import="com.dto.ImagesDTO"%>
@@ -111,17 +112,25 @@
 </div>
 <div class="col-lg-10">
 <div id="addTableDiv">
+<%
+	String searchCategory = (String)request.getAttribute("searchCategory");
+	String search = (String)request.getAttribute("search");
+	System.out.println("검색어 " + search + "\t" + searchCategory);
+%>
 <form id="myOrderSearchForm">
 	<div class="row">
 		<div class="col-md-3"></div>
 		<div class="col-md-2">
 			<select id="searchCategory" name="searchCategory" class="form-select" aria-label="Default select example">
-				<option value="P_NAME" selected="selected">상품명</option>
-				<option value="ORDER_DATE">구매날짜</option>
+				<option value="P_NAME" <%if(searchCategory != null && search != null){
+					if(searchCategory.equals("상품명")){ %> selected="selected" <% } } %> >상품명</option>
+				<option value="ORDER_DATE" <%if(searchCategory != null && search != null){
+					if(searchCategory.equals("구매날짜")){ %> selected="selected" <% } } %> >구매날짜</option>
 			</select>
 		</div>
 		<div class="col-md-5">
-			<input type="text" id="search" name="search" class="form-control" placeholder=" ex) 상품명:칫솔 ex) 날짜:YY/MM/DD 혹은 MM/DD">
+			<input type="text" id="search" name="search" class="form-control" placeholder=" ex) 상품명:칫솔   ex) 날짜:YY/MM/DD 혹은 MM/DD"
+			<%if(search != null){ %> value="<%=search %>" <%} %>>
 		</div>
 		<div class="col-md-2">
 			<button type="submit" id="searchBtn" class="btn btn-outline-success">구매항목검색</button>
@@ -146,7 +155,7 @@
 				ProductOrderReviewImagesDTO DTO = myList.get(i);
 				String date = DTO.getORDER_DATE();
 				String day = date.substring(0,10);
-				System.out.print("날짜 " + day);
+				System.out.println("날짜 " + day);
 	%>
 	<tr>
 	    <td> 
