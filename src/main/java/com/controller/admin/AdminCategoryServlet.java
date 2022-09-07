@@ -107,9 +107,16 @@ public class AdminCategoryServlet extends HttpServlet {
 			
 			url = "adminReport.jsp";
 			
+		//쿠폰 목록
+		} else if (category.equals("coupon")) {
 			
+			
+			pDTO = service.selectAllReport(map, Integer.parseInt(curPage));
+			
+			request.setAttribute("status", status);
+			
+			url = "adminReport.jsp";
 		}
-		
 		
 		request.setAttribute("pDTO", pDTO);
 		request.setAttribute("searchName", searchName);
