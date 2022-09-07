@@ -18,6 +18,7 @@ import com.dto.MemberDTO;
 import com.dto.PageDTO;
 import com.service.AddressService;
 import com.service.ChallengeService;
+import com.service.CouponService;
 import com.service.MemberService;
 import com.service.ProductService;
 
@@ -107,9 +108,15 @@ public class AdminCategoryServlet extends HttpServlet {
 			
 			url = "adminReport.jsp";
 			
+		//쿠폰 목록
+		} else if (category.equals("coupon")) {
 			
+			CouponService service = new CouponService();
+			pDTO = service.selectCoupon(map, Integer.parseInt(curPage));
+			System.out.println(pDTO);
+			
+			url = "adminCoupon.jsp";
 		}
-		
 		
 		request.setAttribute("pDTO", pDTO);
 		request.setAttribute("searchName", searchName);

@@ -19,4 +19,13 @@ $(document).ready(function () {
 			<button type="button" class="btn btn-outline-success category" data-category="challenge" id="challengeManagement">챌린지관리</button>
 		</div>
 	</div>
+	<br>
+	<div class="row">
+		<div class="btn-group" role="group" aria-label="Basic example">
+			<button type="button" class="btn btn-outline-success category" data-category="coupon" id="couponManagement">쿠폰관리</button>
+			<button type="button" class="btn btn-outline-success category"></button>
+			<button type="button" class="btn btn-outline-success category"></button>
+			<button type="button" class="btn btn-outline-success category"></button>
+		</div>
+	</div>
 </div>

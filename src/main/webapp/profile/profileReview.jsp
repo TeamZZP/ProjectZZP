@@ -143,7 +143,7 @@
 		<td width="35%" class="align-middle">
 			  <b><%= review_title %></b><br><br>
 			  <%= review_content %><br>
-			  <%= review_rate %>
+			  <span class="badge rounded-pill bg-secondary mt-1"><%= review_rate %></span>
 		</td>
 		<td width="25%" style="text-align: center; vertical-align: middle;">
 				<%if(dto.getREVIEW_IMG() == null || dto.getREVIEW_IMG().equals("null")){ %>
