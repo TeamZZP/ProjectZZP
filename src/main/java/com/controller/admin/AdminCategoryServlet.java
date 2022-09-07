@@ -33,6 +33,9 @@ public class AdminCategoryServlet extends HttpServlet {
 		HttpSession session=request.getSession();
 		MemberDTO dto=(MemberDTO) session.getAttribute("login");
 		
+		//관리자 전용
+		if (dto != null && dto.getRole() == 1) {
+		
 		//페이징 처리
 		String curPage = request.getParameter("curPage"); //현재페이지
 		if (curPage == null) { curPage = "1"; } //시작 시 1페이지로 시작
@@ -69,7 +72,6 @@ public class AdminCategoryServlet extends HttpServlet {
 			
 		//전체 상품 목록
 		} else if(category.equals("product")) {
-			if (sortBy==null) { sortBy = "p_id"; }
 			System.out.println(curPage+" "+searchName+" "+searchValue+" "+sortBy);
 			
 			map.put("sortBy", sortBy);
@@ -116,6 +118,15 @@ public class AdminCategoryServlet extends HttpServlet {
 		
 		RequestDispatcher dis = request.getRequestDispatcher(url);
 		dis.forward(request, response);
+		
+		} else {
+			//로그인 후 이용하세요 출력
+			String mesg="로그인이 필요합니다.";
+			session.setAttribute("mesg", mesg);
+			session.setMaxInactiveInterval(60*30);
+			
+			response.sendRedirect("LoginUIServlet");
+		}
 		
 	}
 

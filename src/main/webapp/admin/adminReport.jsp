@@ -235,11 +235,11 @@ $(document).ready(function () {
 	  
 	  
 	  <!-- Modal -->
-			<!-- <div id="deleteModal" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+			<div id="deleteModal" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 			  <div class="modal-dialog">
 			    <div class="modal-content">
 			      <div class="modal-header">
-			        <h5 class="modal-title" id="staticBackdropLabel">신고 삭제</h5>
+			        <h5 class="modal-title" id="staticBackdropLabel">ZZP</h5>
 			        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 			      </div>
 			      <div class="modal-body">
@@ -251,7 +251,7 @@ $(document).ready(function () {
 			      </div>
 			    </div> 
 			  </div>
-			</div> -->
+			</div> 
 			
 <div class="modal fade" id="checkVal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
   <div class="modal-dialog" role="document">
