@@ -3,6 +3,7 @@
 <%@ page import="java.util.Map"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
+
 <style>
 .heading {
    flex: 1;
@@ -90,6 +91,7 @@ a:hover {
 </div>
 
 <div class="container">
+
    <%
    int cartCount = (int) request.getAttribute("cartCount"); 
    int likeCount = (int) request.getAttribute("likeCount"); 
@@ -98,7 +100,7 @@ a:hover {
       <div class="btn-group" role="group" aria-label="Basic example">
 
          <button type="button" class="btn btn-outline-success" id="cart">
-            <input type="checkbox" name="allCheck" id="allCheck" checked="checked"   > 장바구니(<%=cartCount%>)
+            <input type="checkbox" name="allCheck" id="allCheck" checked="checked"> 장바구니(<%=cartCount%>)
          </button>
          <button type="button" class="btn btn-outline-success" id="like" onclick="location.href='ProductLikeListServlet';">
        <!--   <input type="checkbox" name="allCheck" id="allCheck"> -->찜한상품(<%=likeCount%>)</button>
@@ -144,15 +146,12 @@ a:hover {
       System.out.println("상품명 :" + p_name);
       System.out.println("상품번호 :" + p_id);
    %>
-
- 
-      <div class="cart_content">
-       <input type="hidden" name="userid" id="userid" value="<%=userid %>">
-      	<div class="cart_info_div">
-  		<input type="hidden" class="individual_sum_money_input" value="<%=sum_money %>">
-         <input type="hidden" class="individual_fee_input" value="<%=fee %>">
-		 <input type="hidden" class="individual_total_input" value="<%=total%>">
-		 </div>
+		<input type="hidden" class="individual_sum_money_input" value="<%=sum_money %>">
+        <input type="hidden" class="individual_fee_input" value="<%=fee %>">
+		<input type="hidden" class="individual_total_input" value="<%=total%>">
+		<input type="hidden" name="userid" id="userid" value="<%=userid %>">
+ 		 <input type="hidden" id="p_id" name="p_id" value="<%=p_id%>">	
+      <div class="cart_content "  >
          <ul class="cart_list" style="line-height: 50px; font-size: 20px;">
             <li>
             <input type="checkbox" name="check" id="check" checked="checked"
@@ -161,11 +160,8 @@ a:hover {
                <a href="ProductRetrieveServlet?p_id=<%=p_id%>"> <img
                   src="images/p_image/<%=p_image%>" width="200"
                   style="border: 10px;" height="200" ></a>
-               <div class="cart_list_info">
-               
-                <input type="hidden" id="p_id" name="p_id" value="<%=p_id%>">
-               
-                  주문번호: <span name="cart_id"><%=cart_id%></span><br> 상품명: <a
+               <div class="cart_list_info" style="padding-left: 50px;" >
+               주문번호: <span name="cart_id"><%=cart_id%></span><br> 상품명: <a
                      href="ProductRetrieveServlet?p_id=<%=p_id%>"> <span
                      name="p_name"
                      style="font-weight: bold; margin: 8px; display: line"><%=p_name%></span></a>
@@ -183,29 +179,34 @@ a:hover {
 	                        	data-id="<%=userid%>" data-sum_money="<%=sum_money%>" /> <br>
 	                    </div>
                   </div>
-                  상품가격 :<span id="item_price<%=cart_id%>"
-                     style="margin-bottom: 15px;" class="item_price" ><%=p_selling_price * p_amount%></span><br>
+                  상품가격 :<span id="item_price<%=cart_id%>"  data-id="<%=cart_id%>" name="item_price"
+                     style="margin-bottom: 15px; font-weight: bold;" class="item_price"  ><%=p_selling_price * p_amount%>원</span><br>
                </div> <span class="cart_item_del"> <img src="images/delete.png"
                   width="20" height="20" class="delBtn" data-xxx="<%=cart_id%>"></span>
             </li>
          </ul>
-      </div>
+         </div>
       <%
       }
       %>
 
-      <div class="cart_total">
-  
-         <div class="shipping">
-            <p>상품금액</p>
+      <div class="cart_total" style="text-align: center;" >
+      
+  		<div class="cart_info_div" style="font-weight:bold; font-size: 30px; padding-top: 30px; " >
+            <span class="price" id="sum_money"><%=sum_money%>원</span>
+             <span style="font-size: 40px; color: gray;">+</span>
+             <span class="price" id="fee" ><%=fee%>원</span>
+              <span style="font-size: 40px; color:gray;">=</span>
+              <span class="price" id="total" style="color: green;"><%=total%>원</span>
+         </div>
+         <div class="shipping" style="color: gray;" >
+            <p>상품 금액</p>
+            <span ></span>
             <p>배송비</p>
-            <p>총주문금액</p>
+            <span ></span>
+            <p>총 주문금액</p>
          </div>
-         <div class="cart_info_div">
-            <span class="price" id="sum_money"><%=sum_money%></span> <span
-               class="price" id="fee"><%=fee%></span> <span class="price"
-               id="total"><%=total%></span>
-         </div>
+         
       </div>
       <div style="float: right;" >
          <input type="submit" class="btn btn-success" id="order" value="주문하기">
@@ -218,6 +219,7 @@ a:hover {
       %>
    </form>
 </div>
+
 <script type="text/javascript"
    src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
@@ -225,6 +227,15 @@ a:hover {
 	 
 	$(function() {
 		
+		//숫자 천단위 ,찍기
+		/* $("#sum_money").text($("#sum_money").text().replace( /\,/g, '' ).replace( /(\d)(?=(?:\d{3})+(?!\d))/g, '$1,' ) );
+		$("#fee").text($("#fee").text().replace( /\,/g, '' ).replace( /(\d)(?=(?:\d{3})+(?!\d))/g, '$1,' ) );
+		$("#total").text($("#total").text().replace( /\,/g, '' ).replace( /(\d)(?=(?:\d{3})+(?!\d))/g, '$1,' ) );
+		
+		var cart_id = $("span[name=item_price]").attr("data-id"); // 왜 첫번째만 될까..?
+		console.log(cart_id);
+		$("#item_price"+cart_id).text($("#item_price"+cart_id).text().replace( /\,/g, '' ).replace( /(\d)(?=(?:\d{3})+(?!\d))/g, '$1,' ) );
+		 */
 		 //주문 버튼
 		  $("#order").on("click", function() {
 	      
@@ -259,11 +270,11 @@ a:hover {
 					sum_money =  parseInt(sum_money) + parseInt(item_price);//장바구니에 상품 가격 추가
 					console.log("최종 장바구니 가격 : "+sum_money);
 					
-					$("#sum_money").text(sum_money);
+					$("#sum_money").text(sum_money+"원");
 					var fee = sum_money >= 50000 ? 0 : 3000;
 					var total = sum_money + fee;
-					$("#fee").text(fee);
-					$("#total").text(total);
+					$("#fee").text(fee+"원");
+					$("#total").text(total+"원");
 				});
 			} else {
 				$("input[name=check]").prop("checked", false);//체크박스 전체 선택 해제
@@ -282,11 +293,11 @@ a:hover {
 				});
 				console.log("최종 장바구니 가격 : "+sum_money);
 				
-				$("#sum_money").text(sum_money);
+				$("#sum_money").text(sum_money+"원");
 				var fee = sum_money >= 50000 ? 0 : 3000;
 				var total = sum_money + fee;
-				$("#fee").text(fee);
-				$("#total").text(total);
+				$("#fee").text(fee+"원");
+				$("#total").text(total+"원");
 			}
 		})//end fn
 		
@@ -321,9 +332,9 @@ a:hover {
 				var fee = sum_money >= 50000 ? 0 : 3000;
 				var total = sum_money + fee;
 
-				$("#sum_money").text(sum_money);
-				$("#fee").text(fee);
-				$("#total").text(total);
+				$("#sum_money").text(sum_money+"원");
+				$("#fee").text(fee+"원");
+				$("#total").text(total+"원");
 			} else {
 				console.log("check false XXX");
 				console.log("상품 가격 : "+item_price);
@@ -333,9 +344,9 @@ a:hover {
 				var fee = sum_money >= 50000 ? 0 : 3000;
 				var total = sum_money + fee;
 
-				$("#sum_money").text(sum_money);
-				$("#fee").text(fee);
-				$("#total").text(total);
+				$("#sum_money").text(sum_money+"원");
+				$("#fee").text(fee+"원");
+				$("#total").text(total+"원");
 			}
 		})//end individual_cart_checkbox
 		
