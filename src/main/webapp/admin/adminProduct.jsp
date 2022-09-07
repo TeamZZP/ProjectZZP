@@ -25,6 +25,9 @@
 	#mesg{
 		margin: 0;
 	}
+	#modalBtn{
+		display: none;
+	}
 </style>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
@@ -179,8 +182,8 @@ if(mesg != null){
 		</table>
 		<div>
 		  <div class="float-end me-3" style="margin-top: -8px;">
-			<button type="button" id="modalBtn" class="delCheckBtn btn btn-outline-dark btn-sm" style="width: 80px;"
-				data-bs-toggle="modal" data-bs-target="#checkVal">선택삭제</button>
+			<button type="button" class="delCheckBtn btn btn-outline-dark btn-sm" style="width: 80px;"
+							data-bs-target="#deleteModal" data-bs-id="">선택삭제</button>
 		  </div>
 		</div>
 		<!-- 페이징 -->
@@ -225,6 +228,7 @@ if(mesg != null){
     </div>
   </div>
 </div>
+<button type="button" id="modalBtn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#checkVal">modal</button>
 
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script>
@@ -251,7 +255,15 @@ if(mesg != null){
 			$(".delCheck").prop('checked', $(this).prop('checked'));
 		});
 		//체크박스 선택 삭제
-		$(".")
+		$(".delCheckBtn").click(function() {
+			if ($('.delCheck:checked').length == 0) {
+				$("#modalBtn").trigger("click");
+				$("#mesg").text("삭제할 상품을 선택해 주세요.");
+			} else {
+				$("#modalBtn").trigger("click");
+				$("#mesg").html("선택한 상품을 삭제하시겠습니까?");
+			}
+		});
 		//상품 상세페이지
 		$(".productDetail").click(function() {
 			let p_id = $(this).attr("data-p_id");
