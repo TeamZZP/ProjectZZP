@@ -461,6 +461,33 @@ public class ChallengeService {
 		}
 		return n;
 	}
+	
+	
+	
+	
+	/////////////////
+
+	public double getTotalSales() {
+		double n = 0;
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		try {
+			n = dao.getTotalSales(session);
+		} finally {
+			session.close();
+		}
+		return n;
+	}
+
+	public double getTodaySales() {
+		double n = 0;
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		try {
+			n = dao.getTodaySales(session);
+		} finally {
+			session.close();
+		}
+		return n;
+	}
 
 
 	
