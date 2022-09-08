@@ -40,8 +40,8 @@ public class QuestionAnswerServlet extends HttpServlet {
 		if (selectA != null) { //달린 댓글이 있으면 업데이트
 			if (mDTO.getUserid().equals("admin1")) {
 				AnswerDTO aDTO = new AnswerDTO();
-				aDTO.setANSWER_CONTENT(ANSWER_CONTENT);
-				aDTO.setQ_ID(Integer.parseInt(Q_ID));
+				aDTO.setAnswer_content(ANSWER_CONTENT);
+				aDTO.setQ_id(0);
 				
 				int num = service.answerUpdate(aDTO);
 				System.out.println("답변 수정 갯수 " + num);
@@ -57,8 +57,8 @@ public class QuestionAnswerServlet extends HttpServlet {
 		} else {//달린 댓글이 없으면 추가
 			if (mDTO.getUserid().equals("admin1")) {
 				AnswerDTO aDTO = new AnswerDTO();
-				aDTO.setANSWER_CONTENT(ANSWER_CONTENT);
-				aDTO.setQ_ID(Integer.parseInt(Q_ID));
+				aDTO.setAnswer_content(ANSWER_CONTENT);
+				aDTO.setQ_id(Integer.parseInt(Q_ID));
 				
 				int num = service.answerInsert(aDTO);
 				System.out.println("답변갯수 " + num);

@@ -2,51 +2,59 @@ package com.dto;
 
 public class AnswerDTO {
 
-	int ANSWER_ID;
-	String ANSWER_CONTENT;
-	int Q_ID;
-	String ANSWER_CREATED;
+	int answer_id; 
+	String answer_content; 
+	int q_id; 
+	String answer_created;
 	
 	public AnswerDTO() {
 		super();
 	}
-	
-	public AnswerDTO(int aNSWER_ID, String aNSWER_CONTENT, int q_ID, String aNSWER_CREATED) {
+
+	public AnswerDTO(int answer_id, String answer_content, int q_id, String answer_created) {
 		super();
-		ANSWER_ID = aNSWER_ID;
-		ANSWER_CONTENT = aNSWER_CONTENT;
-		Q_ID = q_ID;
-		ANSWER_CREATED = aNSWER_CREATED;
+		this.answer_id = answer_id;
+		this.answer_content = answer_content;
+		this.q_id = q_id;
+		this.answer_created = answer_created;
 	}
-	
-	public int getANSWER_ID() {
-		return ANSWER_ID;
+
+	public int getAnswer_id() {
+		return answer_id;
 	}
-	public void setANSWER_ID(int aNSWER_ID) {
-		ANSWER_ID = aNSWER_ID;
+
+	public void setAnswer_id(int answer_id) {
+		this.answer_id = answer_id;
 	}
-	public String getANSWER_CONTENT() {
-		return ANSWER_CONTENT;
+
+	public String getAnswer_content() {
+		return answer_content;
 	}
-	public void setANSWER_CONTENT(String aNSWER_CONTENT) {
-		ANSWER_CONTENT = aNSWER_CONTENT;
+
+	public void setAnswer_content(String answer_content) {
+		this.answer_content = answer_content;
 	}
-	public int getQ_ID() {
-		return Q_ID;
+
+	public int getQ_id() {
+		return q_id;
 	}
-	public void setQ_ID(int q_ID) {
-		Q_ID = q_ID;
+
+	public void setQ_id(int q_id) {
+		this.q_id = q_id;
 	}
-	public String getANSWER_CREATED() {
-		return ANSWER_CREATED;
+
+	public String getAnswer_created() {
+		return answer_created;
 	}
-	public void setANSWER_CREATED(String aNSWER_CREATED) {
-		ANSWER_CREATED = aNSWER_CREATED;
+
+	public void setAnswer_created(String answer_created) {
+		this.answer_created = answer_created;
 	}
+
 	@Override
 	public String toString() {
-		return "AnswerDTO [ANSWER_ID=" + ANSWER_ID + ", ANSWER_CONTENT=" + ANSWER_CONTENT + ", Q_ID=" + Q_ID
-				+ ", ANSWER_CREATED=" + ANSWER_CREATED + "]";
+		return "AnswerDTO [answer_id=" + answer_id + ", answer_content=" + answer_content + ", q_id=" + q_id
+				+ ", answer_created=" + answer_created + "]";
 	}
 	
 }
