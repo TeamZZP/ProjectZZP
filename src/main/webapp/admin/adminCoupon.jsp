@@ -141,25 +141,25 @@ if(mesg != null){
 			List<CouponDTO> couponList = pDTO.getList();
 			for ( int i = 0 ; i < couponList.size() ; i++ ) {
 				CouponDTO cDTO = couponList.get(i);
-				String created = cDTO.getCOUPON_CREATED();
+				String created = cDTO.getCoupon_created();
 	 			String create = created.substring(0, 10);
 	 			
-	 			String validity = cDTO.getCOUPON_VALIDITY();
+	 			String validity = cDTO.getCoupon_validity();
 	 			String val = validity.substring(0, 10);
 		%>
 			<tr id="list">
-				<td><input type="checkbox" class="delCheck" name="COUPON_ID" value="<%=cDTO.getCOUPON_ID() %>"></td>
-				<td> <%=cDTO.getCOUPON_ID() %> </td>
-				<td> <img alt="쿠폰" src="images/coupon/<%=cDTO.getCOUPON_IMG()%>" width="50px" height="50px"> </td>
-				<td> <%=cDTO.getCOUPON_NAME() %> </td>
-				<td> <%=cDTO.getCOUPON_DISCOUNT() %> </td>
+				<td><input type="checkbox" class="delCheck" name="COUPON_ID" value="<%=cDTO.getCoupon_id() %>"></td>
+				<td> <%=cDTO.getCoupon_id() %> </td>
+				<td> <img alt="쿠폰" src="images/coupon/<%=cDTO.getCoupon_img()%>" width="50px" height="50px"> </td>
+				<td> <%=cDTO.getCoupon_name() %> </td>
+				<td> <%=cDTO.getCoupon_discount() %> </td>
 				<td> <%=create %> </td>
 				<td> <%=val %> </td>
 				<td>
-					<button type="button" id="delCoupon<%=cDTO.getCOUPON_ID() %>" data-id="<%=cDTO.getCOUPON_ID() %>" class="btn btn-outline-dark btn-sm" data-bs-toggle="modal" data-bs-target="#deleteCoupon<%=cDTO.getCOUPON_ID() %>">
+					<button type="button" id="delCoupon<%=cDTO.getCoupon_id() %>" data-id="<%=cDTO.getCoupon_id() %>" class="btn btn-outline-dark btn-sm" data-bs-toggle="modal" data-bs-target="#deleteCoupon<%=cDTO.getCoupon_id() %>">
 						삭제
 					</button>
-					<div class="modal fade modal-first" id="deleteCoupon<%=cDTO.getCOUPON_ID()%>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+					<div class="modal fade modal-first" id="deleteCoupon<%=cDTO.getCoupon_id()%>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 					  <div class="modal-dialog">
 					    <div class="modal-content">
 					      <div class="modal-header">
@@ -170,7 +170,7 @@ if(mesg != null){
 					        선택한 쿠폰을 삭제하시겠습니까?
 					      </div>
 					      <div class="modal-footer">
-					        <button type="button" name="delete" id="delCoupon<%=cDTO.getCOUPON_ID() %>" data-id="<%=cDTO.getCOUPON_ID() %>" class="btn btn-success">삭제</button>
+					        <button type="button" name="delete" id="delCoupon<%=cDTO.getCoupon_id() %>" data-id="<%=cDTO.getCoupon_id() %>" class="btn btn-success">삭제</button>
 					        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
 					      </div>
 					    </div> 
