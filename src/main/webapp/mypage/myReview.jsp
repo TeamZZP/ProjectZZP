@@ -134,13 +134,13 @@
 	<%
 	for (int i = 0; i < reviewList.size(); i++) {	
 		ReviewDTO dto = reviewList.get(i);
-		int review_id = dto.getREVIEW_ID();
-		int p_id = dto.getP_ID();
-		String review_title = dto.getREVIEW_TITLE();
-		String review_content = dto.getREVIEW_CONTENT();
-		String review_rate = dto.getREVIEW_RATE();
-		String review_img = dto.getREVIEW_IMG();
-		String review_created = dto.getREVIEW_CREATED().substring(0,10);
+		int review_id = dto.getReview_id();
+		int p_id = dto.getP_id();
+		String review_title = dto.getReview_title();
+		String review_content = dto.getReview_content();
+		String review_rate = dto.getReview_rate();
+		String review_img = dto.getReview_img();
+		String review_created = dto.getReview_create().substring(0,10);
 		
 		HashMap<String, String> map = prodMap.get(p_id);
 		String p_name = map.get("P_NAME");
@@ -159,11 +159,11 @@
 			  <span class="badge rounded-pill bg-secondary mt-1"><%= review_rate %></span>
 		</td>
 		<td style="text-align: center; vertical-align: middle;">
-				<%if(dto.getREVIEW_IMG() == null || dto.getREVIEW_IMG().equals("null")){ %>
+				<%if(dto.getReview_img() == null || dto.getReview_img().equals("null")){ %>
 					
 				<%} else { %>
 					<div class="uploadBtu">
-						<img class="upload" alt="" src="/eclipse/upload/<%=dto.getREVIEW_IMG()%>" width="100px" height="100px" style="border: 1px solid gray;">
+						<img class="upload" alt="" src="/eclipse/upload/<%=dto.getReview_img()%>" width="100px" height="100px" style="border: 1px solid gray;">
 					</div>
 				<%} %>
 		</td>
@@ -171,8 +171,8 @@
 			<div><%= review_created %></div>
 		</td>
 		<td class="align-middle text-center">
-			<button class="btn btn-light btn-sm reviewUpdate" data-reviewID="<%=dto.getREVIEW_ID() %>" data-pID=<%=dto.getP_ID() %>>수정</button>
-			<button type="button" class="btn btn-light btn-sm reviewDelete" data-reviewID="<%=dto.getREVIEW_ID() %>" data-userid="<%=dto.getUSERID()%>">삭제</button>
+			<button class="btn btn-light btn-sm reviewUpdate" data-reviewID="<%=dto.getReview_id() %>" data-pID=<%=dto.getP_id() %>>수정</button>
+			<button type="button" class="btn btn-light btn-sm reviewDelete" data-reviewID="<%=dto.getReview_id() %>" data-userid="<%=dto.getUserid()%>">삭제</button>
 		</td>
 	</tr>
 <%

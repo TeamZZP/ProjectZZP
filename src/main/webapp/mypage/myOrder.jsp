@@ -153,32 +153,32 @@
 		List<ProductOrderReviewImagesDTO> myList = pDTO.getList();
 			for (int i = 0; i < myList.size(); i++) {
 				ProductOrderReviewImagesDTO DTO = myList.get(i);
-				String date = DTO.getORDER_DATE();
+				String date = DTO.getOrder_date();
 				String day = date.substring(0,10);
 				System.out.println("날짜 " + day);
 	%>
 	<tr>
 	    <td> 
-	    	<a href="ProductRetrieveServlet?p_id=<%=DTO.getP_ID()%>"> 
-	   		<img alt="상품사진" src="images/p_image/<%=DTO.getIMAGE_ROUTE()%>" width="100px" height="100px"> 
-	    	<br> <%= DTO.getP_NAME() %> 
+	    	<a href="ProductRetrieveServlet?p_id=<%=DTO.getP_id()%>"> 
+	   		<img alt="상품사진" src="images/p_image/<%=DTO.getImage_route()%>" width="100px" height="100px"> 
+	    	<br> <%= DTO.getP_name() %> 
 	    	</a>
 	    </td>
-	    <td> <%= DTO.getTOTAL_PRICE() %> </td>
+	    <td> <%= DTO.getTotal_price() %> </td>
 		<td> <%= day %> </td>
-		<td> <%= DTO.getDELIVERY_ADDRESS() %> <br>  <%= DTO.getDELIVERY_LOC() %> </td>
-		<td> <%= DTO.getORDER_STATE() %> </td>
+		<td> <%= DTO.getDelivery_address() %> <br>  <%= DTO.getDelivery_loc() %> </td>
+		<td> <%= DTO.getOrder_state() %> </td>
 		<td> 
-			<% if(DTO.getORDER_STATE().equals("배송완료")){ %>
-				<a data-orderID="<%= DTO.getORDER_ID() %>" data-pNAME="<%= DTO.getP_NAME() %>" 
-					data-pID="<%= DTO.getP_ID() %>" data-reviewID="<%=DTO.getREVIEW_ID() %>"
+			<% if(DTO.getOrder_state().equals("배송완료")){ %>
+				<a data-orderID="<%= DTO.getOrder_id() %>" data-pNAME="<%= DTO.getP_name() %>" 
+					data-pID="<%= DTO.getP_id() %>" data-reviewID="<%=DTO.getReview_id() %>"
 					data-userid="<%=userid %>"
 					class="btn btn-outline-success chk" role="button">
 					리뷰작성
 				 </a>
-				<input type="hidden" class="ORDER_ID" value="<%= DTO.getORDER_ID() %>">
-				<input type="hidden" class="P_NAME" value="<%= DTO.getP_NAME() %>">
-				<input type="hidden" class="P_ID" value="<%= DTO.getP_ID() %>">
+				<input type="hidden" class="ORDER_ID" value="<%= DTO.getOrder_id() %>">
+				<input type="hidden" class="P_NAME" value="<%= DTO.getP_name() %>">
+				<input type="hidden" class="P_ID" value="<%= DTO.getP_id() %>">
 			<%} else { %> 
 				<button type="button" class="btn btn-outline-secondary">배송현황</button> 
 			<% } %>

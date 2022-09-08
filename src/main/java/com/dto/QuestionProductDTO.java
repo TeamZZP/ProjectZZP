@@ -19,7 +19,7 @@ public class QuestionProductDTO {
 	private String q_img; 
 	private String q_status;
 	private String userid;
-	private String p_id; 
+	private int p_id; 
 	
 	public QuestionProductDTO() {
 		super();
@@ -28,7 +28,7 @@ public class QuestionProductDTO {
 	public QuestionProductDTO(String p_name, String p_content, int c_id, int p_cost_price, int p_selling_price,
 			int p_discount, String p_created, int p_stock, int q_id, int q_board_category, String q_category,
 			String q_title, String q_content, String q_created, String q_img, String q_status, String userid,
-			String p_id) {
+			int p_id) {
 		super();
 		this.p_name = p_name;
 		this.p_content = p_content;
@@ -186,11 +186,11 @@ public class QuestionProductDTO {
 		this.userid = userid;
 	}
 
-	public String getP_id() {
+	public int getP_id() {
 		return p_id;
 	}
 
-	public void setP_id(String p_id) {
+	public void setP_id(int p_id) {
 		this.p_id = p_id;
 	}
 
