@@ -2,68 +2,81 @@ package com.dto;
 
 public class CouponDTO {
 	
-	int COUPON_ID;
-	String COUPON_IMG;
-	String COUPON_NAME;
-	int COUPON_DISCOUNT;
-	String COUPON_CREATED;
-	String COUPON_VALIDITY;
+	int coupon_id; 
+	String coupon_img; 
+	String coupon_name; 
+	int coupon_discount;
+	String coupon_created;
+	String coupon_validity; 
 	
 	public CouponDTO() {
 		super();
 	}
-	
-	public CouponDTO(int cOUPON_ID, String cOUPON_IMG, String cOUPON_NAME, int cOUPON_DISCOUNT, String cOUPON_CREATED,
-			String cOUPON_VALIDITY) {
+
+	public CouponDTO(int coupon_id, String coupon_img, String coupon_name, int coupon_discount, String coupon_created,
+			String coupon_validity) {
 		super();
-		COUPON_ID = cOUPON_ID;
-		COUPON_IMG = cOUPON_IMG;
-		COUPON_NAME = cOUPON_NAME;
-		COUPON_DISCOUNT = cOUPON_DISCOUNT;
-		COUPON_CREATED = cOUPON_CREATED;
-		COUPON_VALIDITY = cOUPON_VALIDITY;
-	}
-	public int getCOUPON_ID() {
-		return COUPON_ID;
-	}
-	public void setCOUPON_ID(int cOUPON_ID) {
-		COUPON_ID = cOUPON_ID;
-	}
-	public String getCOUPON_IMG() {
-		return COUPON_IMG;
-	}
-	public void setCOUPON_IMG(String cOUPON_IMG) {
-		COUPON_IMG = cOUPON_IMG;
-	}
-	public String getCOUPON_NAME() {
-		return COUPON_NAME;
-	}
-	public void setCOUPON_NAME(String cOUPON_NAME) {
-		COUPON_NAME = cOUPON_NAME;
-	}
-	public int getCOUPON_DISCOUNT() {
-		return COUPON_DISCOUNT;
-	}
-	public void setCOUPON_DISCOUNT(int cOUPON_DISCOUNT) {
-		COUPON_DISCOUNT = cOUPON_DISCOUNT;
-	}
-	public String getCOUPON_CREATED() {
-		return COUPON_CREATED;
-	}
-	public void setCOUPON_CREATED(String cOUPON_CREATED) {
-		COUPON_CREATED = cOUPON_CREATED;
-	}
-	public String getCOUPON_VALIDITY() {
-		return COUPON_VALIDITY;
-	}
-	public void setCOUPON_VALIDITY(String cOUPON_VALIDITY) {
-		COUPON_VALIDITY = cOUPON_VALIDITY;
-	}
-	@Override
-	public String toString() {
-		return "CouponDTO [COUPON_ID=" + COUPON_ID + ", COUPON_IMG=" + COUPON_IMG + ", COUPON_NAME=" + COUPON_NAME
-				+ ", COUPON_DISCOUNT=" + COUPON_DISCOUNT + ", COUPON_CREATED=" + COUPON_CREATED + ", COUPON_VALIDITY="
-				+ COUPON_VALIDITY + "]";
+		this.coupon_id = coupon_id;
+		this.coupon_img = coupon_img;
+		this.coupon_name = coupon_name;
+		this.coupon_discount = coupon_discount;
+		this.coupon_created = coupon_created;
+		this.coupon_validity = coupon_validity;
 	}
 
+	public int getCoupon_id() {
+		return coupon_id;
+	}
+
+	public void setCoupon_id(int coupon_id) {
+		this.coupon_id = coupon_id;
+	}
+
+	public String getCoupon_img() {
+		return coupon_img;
+	}
+
+	public void setCoupon_img(String coupon_img) {
+		this.coupon_img = coupon_img;
+	}
+
+	public String getCoupon_name() {
+		return coupon_name;
+	}
+
+	public void setCoupon_name(String coupon_name) {
+		this.coupon_name = coupon_name;
+	}
+
+	public int getCoupon_discount() {
+		return coupon_discount;
+	}
+
+	public void setCoupon_discount(int coupon_discount) {
+		this.coupon_discount = coupon_discount;
+	}
+
+	public String getCoupon_created() {
+		return coupon_created;
+	}
+
+	public void setCoupon_created(String coupon_created) {
+		this.coupon_created = coupon_created;
+	}
+
+	public String getCoupon_validity() {
+		return coupon_validity;
+	}
+
+	public void setCoupon_validity(String coupon_validity) {
+		this.coupon_validity = coupon_validity;
+	}
+
+	@Override
+	public String toString() {
+		return "CouponDTO [coupon_id=" + coupon_id + ", coupon_img=" + coupon_img + ", coupon_name=" + coupon_name
+				+ ", coupon_discount=" + coupon_discount + ", coupon_created=" + coupon_created + ", coupon_validity="
+				+ coupon_validity + "]";
+	}
+	
 }

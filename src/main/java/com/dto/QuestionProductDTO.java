@@ -2,206 +2,206 @@ package com.dto;
 
 public class QuestionProductDTO {
 
-	int P_ID;
-	String P_NAME;
-	String P_CONTENT;
-	int C_ID;
-	int P_COST_PRICE;
-	int P_SELLING_PRICE;
-	int P_DISCOUNT;
-	String P_CREATED;
-	int P_STOCK;
-	String USERID;
-	int Q_ID;
-	int Q_BOARD_CATEGORY;
-	String Q_CATEGORY;
-	String Q_TITLE;
-	String Q_CONTENT;
-	String Q_CREATED;
-	String 	Q_IMG;
-	String 	Q_STATUS;
+	private String p_name;
+	private String p_content;
+	private int c_id;
+	private int p_cost_price;
+	private int p_selling_price;
+	private int p_discount;
+	private String p_created;
+	private int p_stock;
+	private int q_id; 
+	private int q_board_category;
+	private  String q_category; 
+	private  String q_title;
+	private  String q_content; 
+	private String q_created; 
+	private String q_img; 
+	private String q_status;
+	private String userid;
+	private String p_id; 
 	
 	public QuestionProductDTO() {
 		super();
 	}
 
-	public QuestionProductDTO(int p_ID, String p_NAME, String p_CONTENT, int c_ID, int p_COST_PRICE,
-			int p_SELLING_PRICE, int p_DISCOUNT, String p_CREATED, int p_STOCK, String uSERID, int q_ID,
-			int q_BOARD_CATEGORY, String q_CATEGORY, String q_TITLE, String q_CONTENT, String q_CREATED, String q_IMG,
-			String q_STATUS) {
+	public QuestionProductDTO(String p_name, String p_content, int c_id, int p_cost_price, int p_selling_price,
+			int p_discount, String p_created, int p_stock, int q_id, int q_board_category, String q_category,
+			String q_title, String q_content, String q_created, String q_img, String q_status, String userid,
+			String p_id) {
 		super();
-		P_ID = p_ID;
-		P_NAME = p_NAME;
-		P_CONTENT = p_CONTENT;
-		C_ID = c_ID;
-		P_COST_PRICE = p_COST_PRICE;
-		P_SELLING_PRICE = p_SELLING_PRICE;
-		P_DISCOUNT = p_DISCOUNT;
-		P_CREATED = p_CREATED;
-		P_STOCK = p_STOCK;
-		USERID = uSERID;
-		Q_ID = q_ID;
-		Q_BOARD_CATEGORY = q_BOARD_CATEGORY;
-		Q_CATEGORY = q_CATEGORY;
-		Q_TITLE = q_TITLE;
-		Q_CONTENT = q_CONTENT;
-		Q_CREATED = q_CREATED;
-		Q_IMG = q_IMG;
-		Q_STATUS = q_STATUS;
+		this.p_name = p_name;
+		this.p_content = p_content;
+		this.c_id = c_id;
+		this.p_cost_price = p_cost_price;
+		this.p_selling_price = p_selling_price;
+		this.p_discount = p_discount;
+		this.p_created = p_created;
+		this.p_stock = p_stock;
+		this.q_id = q_id;
+		this.q_board_category = q_board_category;
+		this.q_category = q_category;
+		this.q_title = q_title;
+		this.q_content = q_content;
+		this.q_created = q_created;
+		this.q_img = q_img;
+		this.q_status = q_status;
+		this.userid = userid;
+		this.p_id = p_id;
 	}
 
-	public int getP_ID() {
-		return P_ID;
+	public String getP_name() {
+		return p_name;
 	}
 
-	public void setP_ID(int p_ID) {
-		P_ID = p_ID;
+	public void setP_name(String p_name) {
+		this.p_name = p_name;
 	}
 
-	public String getP_NAME() {
-		return P_NAME;
+	public String getP_content() {
+		return p_content;
 	}
 
-	public void setP_NAME(String p_NAME) {
-		P_NAME = p_NAME;
+	public void setP_content(String p_content) {
+		this.p_content = p_content;
 	}
 
-	public String getP_CONTENT() {
-		return P_CONTENT;
+	public int getC_id() {
+		return c_id;
 	}
 
-	public void setP_CONTENT(String p_CONTENT) {
-		P_CONTENT = p_CONTENT;
+	public void setC_id(int c_id) {
+		this.c_id = c_id;
 	}
 
-	public int getC_ID() {
-		return C_ID;
+	public int getP_cost_price() {
+		return p_cost_price;
 	}
 
-	public void setC_ID(int c_ID) {
-		C_ID = c_ID;
+	public void setP_cost_price(int p_cost_price) {
+		this.p_cost_price = p_cost_price;
 	}
 
-	public int getP_COST_PRICE() {
-		return P_COST_PRICE;
+	public int getP_selling_price() {
+		return p_selling_price;
 	}
 
-	public void setP_COST_PRICE(int p_COST_PRICE) {
-		P_COST_PRICE = p_COST_PRICE;
+	public void setP_selling_price(int p_selling_price) {
+		this.p_selling_price = p_selling_price;
 	}
 
-	public int getP_SELLING_PRICE() {
-		return P_SELLING_PRICE;
+	public int getP_discount() {
+		return p_discount;
 	}
 
-	public void setP_SELLING_PRICE(int p_SELLING_PRICE) {
-		P_SELLING_PRICE = p_SELLING_PRICE;
+	public void setP_discount(int p_discount) {
+		this.p_discount = p_discount;
 	}
 
-	public int getP_DISCOUNT() {
-		return P_DISCOUNT;
+	public String getP_created() {
+		return p_created;
 	}
 
-	public void setP_DISCOUNT(int p_DISCOUNT) {
-		P_DISCOUNT = p_DISCOUNT;
+	public void setP_created(String p_created) {
+		this.p_created = p_created;
 	}
 
-	public String getP_CREATED() {
-		return P_CREATED;
+	public int getP_stock() {
+		return p_stock;
 	}
 
-	public void setP_CREATED(String p_CREATED) {
-		P_CREATED = p_CREATED;
+	public void setP_stock(int p_stock) {
+		this.p_stock = p_stock;
 	}
 
-	public int getP_STOCK() {
-		return P_STOCK;
+	public int getQ_id() {
+		return q_id;
 	}
 
-	public void setP_STOCK(int p_STOCK) {
-		P_STOCK = p_STOCK;
+	public void setQ_id(int q_id) {
+		this.q_id = q_id;
 	}
 
-	public String getUSERID() {
-		return USERID;
+	public int getQ_board_category() {
+		return q_board_category;
 	}
 
-	public void setUSERID(String uSERID) {
-		USERID = uSERID;
+	public void setQ_board_category(int q_board_category) {
+		this.q_board_category = q_board_category;
 	}
 
-	public int getQ_ID() {
-		return Q_ID;
+	public String getQ_category() {
+		return q_category;
 	}
 
-	public void setQ_ID(int q_ID) {
-		Q_ID = q_ID;
+	public void setQ_category(String q_category) {
+		this.q_category = q_category;
 	}
 
-	public int getQ_BOARD_CATEGORY() {
-		return Q_BOARD_CATEGORY;
+	public String getQ_title() {
+		return q_title;
 	}
 
-	public void setQ_BOARD_CATEGORY(int q_BOARD_CATEGORY) {
-		Q_BOARD_CATEGORY = q_BOARD_CATEGORY;
+	public void setQ_title(String q_title) {
+		this.q_title = q_title;
 	}
 
-	public String getQ_CATEGORY() {
-		return Q_CATEGORY;
+	public String getQ_content() {
+		return q_content;
 	}
 
-	public void setQ_CATEGORY(String q_CATEGORY) {
-		Q_CATEGORY = q_CATEGORY;
+	public void setQ_content(String q_content) {
+		this.q_content = q_content;
 	}
 
-	public String getQ_TITLE() {
-		return Q_TITLE;
+	public String getQ_created() {
+		return q_created;
 	}
 
-	public void setQ_TITLE(String q_TITLE) {
-		Q_TITLE = q_TITLE;
+	public void setQ_created(String q_created) {
+		this.q_created = q_created;
 	}
 
-	public String getQ_CONTENT() {
-		return Q_CONTENT;
+	public String getQ_img() {
+		return q_img;
 	}
 
-	public void setQ_CONTENT(String q_CONTENT) {
-		Q_CONTENT = q_CONTENT;
+	public void setQ_img(String q_img) {
+		this.q_img = q_img;
 	}
 
-	public String getQ_CREATED() {
-		return Q_CREATED;
+	public String getQ_status() {
+		return q_status;
 	}
 
-	public void setQ_CREATED(String q_CREATED) {
-		Q_CREATED = q_CREATED;
+	public void setQ_status(String q_status) {
+		this.q_status = q_status;
 	}
 
-	public String getQ_IMG() {
-		return Q_IMG;
+	public String getUserid() {
+		return userid;
 	}
 
-	public void setQ_IMG(String q_IMG) {
-		Q_IMG = q_IMG;
+	public void setUserid(String userid) {
+		this.userid = userid;
 	}
 
-	public String getQ_STATUS() {
-		return Q_STATUS;
+	public String getP_id() {
+		return p_id;
 	}
 
-	public void setQ_STATUS(String q_STATUS) {
-		Q_STATUS = q_STATUS;
+	public void setP_id(String p_id) {
+		this.p_id = p_id;
 	}
 
 	@Override
 	public String toString() {
-		return "QuestionProductDTO [P_ID=" + P_ID + ", P_NAME=" + P_NAME + ", P_CONTENT=" + P_CONTENT + ", C_ID=" + C_ID
-				+ ", P_COST_PRICE=" + P_COST_PRICE + ", P_SELLING_PRICE=" + P_SELLING_PRICE + ", P_DISCOUNT="
-				+ P_DISCOUNT + ", P_CREATED=" + P_CREATED + ", P_STOCK=" + P_STOCK + ", USERID=" + USERID + ", Q_ID="
-				+ Q_ID + ", Q_BOARD_CATEGORY=" + Q_BOARD_CATEGORY + ", Q_CATEGORY=" + Q_CATEGORY + ", Q_TITLE="
-				+ Q_TITLE + ", Q_CONTENT=" + Q_CONTENT + ", Q_CREATED=" + Q_CREATED + ", Q_IMG=" + Q_IMG + ", Q_STATUS="
-				+ Q_STATUS + "]";
+		return "QuestionProductDTO [p_name=" + p_name + ", p_content=" + p_content + ", c_id=" + c_id
+				+ ", p_cost_price=" + p_cost_price + ", p_selling_price=" + p_selling_price + ", p_discount="
+				+ p_discount + ", p_created=" + p_created + ", p_stock=" + p_stock + ", q_id=" + q_id
+				+ ", q_board_category=" + q_board_category + ", q_category=" + q_category + ", q_title=" + q_title
+				+ ", q_content=" + q_content + ", q_created=" + q_created + ", q_img=" + q_img + ", q_status="
+				+ q_status + ", userid=" + userid + ", p_id=" + p_id + "]";
 	}
-	
+
 }

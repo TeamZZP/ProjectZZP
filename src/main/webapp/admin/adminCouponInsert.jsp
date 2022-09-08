@@ -5,18 +5,18 @@
 <script type="text/javascript">
 	$(document).ready(
 			function() {
-				$("#COUPON_NAME").focus();
+				$("#coupon_name").focus();
 				$("#CouponInsert").click(function() {
-					var COUPON_NAME = $("#COUPON_NAME").val();
-					var COUPON_DISCOUNT = $("#COUPON_DISCOUNT").val();
-					var COUPON_VALIDITY = $("#COUPON_VALIDITY").val();
-					if (COUPON_NAME.length == 0) {
+					var COUPON_NAME = $("#coupon_name").val();
+					var COUPON_DISCOUNT = $("#coupon_discount").val();
+					var COUPON_VALIDITY = $("#coupon_validity").val();
+					if (coupon_name.length == 0) {
 						alert("쿠폰 이름을 입력하십시오");
 						event.preventDefault();
-					} else if (COUPON_DISCOUNT.length == 0) {
+					} else if (coupon_discount.length == 0) {
 						alert("쿠폰 할인율을 입력하십시오");
 						event.preventDefault();
-					} else if (COUPON_VALIDITY.length == 0) {
+					} else if (coupon_validity.length == 0) {
 						alert("쿠폰 만료일을 입력하십시오");
 						event.preventDefault();
 					}
@@ -40,7 +40,7 @@
 				<td colspan="3"> 
 					<b>쿠폰 이름</b>
 					<div class="input-group">
-					  <input type="text" class="form-control" name="COUPON_NAME" id="COUPON_NAME">
+					  <input type="text" class="form-control" name="coupon_name" id="coupon_name">
 					</div>
 				</td>
 			</tr>
@@ -48,7 +48,7 @@
 				<td colspan="3">
 					<b>할인율</b>
 					<div class="input-group">
-					  <input type="text" class="form-control" name="COUPON_DISCOUNT" id="COUPON_DISCOUNT">
+					  <input type="text" class="form-control" name="coupon_discount" id="coupon_discount">
 					</div>
 				</td>
 			</tr>
@@ -56,7 +56,7 @@
 				<td colspan="3">
 					<b>쿠폰 시작일</b>
 					<div class="input-group">
-					   <input type="text" class="form-control" name="COUPON_CREATED" id="COUPON_CREATED" placeholder="적지 않으면 오늘날짜로 됩니다.">
+					   <input type="text" class="form-control" name="coupon_created" id="coupon_created" placeholder="적지 않으면 오늘날짜로 됩니다. ex) YY/MM/DD">
 					</div>
 				</td>
 			</tr>
@@ -64,7 +64,7 @@
 				<td colspan="3">
 					<b>쿠폰 만료일</b>
 					<div class="input-group">
-					    <input type="text" class="form-control" name="COUPON_VALIDITY" id="COUPON_VALIDITY">
+					    <input type="text" class="form-control" name="coupon_validity" id="coupon_validity" placeholder="ex) YY/MM/DD">
 					</div>
 				</td>
 			</tr>

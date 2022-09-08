@@ -2,77 +2,91 @@ package com.dto;
 
 public class NoticeDTO {
 
-	int NOTICE_ID;
-	String NOTICE_TITTLE;
-	String NOTICE_CONTENT;
-	String NOTICE_CREATED;
-	String USERID;
-	String NOTICE_CATEGORY;
-	int NOTICE_HITS;
+	int notice_id; 
+	String notice_tittle; 
+	String notice_content;
+	String notice_create; 
+	String userid; 
+	String notice_category; 
+	int notice_hits; 
 	
 	public NoticeDTO() {
 		super();
 	}
-	
-	public NoticeDTO(int nOTICE_ID, String nOTICE_TITTLE, String nOTICE_CONTENT, String nOTICE_CREATED, String uSERID,
-			String nOTICE_CATEGORY, int nOTICE_HITS) {
+
+	public NoticeDTO(int notice_id, String notice_tittle, String notice_content, String notice_create, String userid,
+			String notice_category, int notice_hits) {
 		super();
-		NOTICE_ID = nOTICE_ID;
-		NOTICE_TITTLE = nOTICE_TITTLE;
-		NOTICE_CONTENT = nOTICE_CONTENT;
-		NOTICE_CREATED = nOTICE_CREATED;
-		USERID = uSERID;
-		NOTICE_CATEGORY = nOTICE_CATEGORY;
-		NOTICE_HITS = nOTICE_HITS;
+		this.notice_id = notice_id;
+		this.notice_tittle = notice_tittle;
+		this.notice_content = notice_content;
+		this.notice_create = notice_create;
+		this.userid = userid;
+		this.notice_category = notice_category;
+		this.notice_hits = notice_hits;
 	}
-	
-	public int getNOTICE_ID() {
-		return NOTICE_ID;
+
+	public int getNotice_id() {
+		return notice_id;
 	}
-	public void setNOTICE_ID(int nOTICE_ID) {
-		NOTICE_ID = nOTICE_ID;
+
+	public void setNotice_id(int notice_id) {
+		this.notice_id = notice_id;
 	}
-	public String getNOTICE_TITTLE() {
-		return NOTICE_TITTLE;
+
+	public String getNotice_tittle() {
+		return notice_tittle;
 	}
-	public void setNOTICE_TITTLE(String nOTICE_TITTLE) {
-		NOTICE_TITTLE = nOTICE_TITTLE;
+
+	public void setNotice_tittle(String notice_tittle) {
+		this.notice_tittle = notice_tittle;
 	}
-	public String getNOTICE_CONTENT() {
-		return NOTICE_CONTENT;
+
+	public String getNotice_content() {
+		return notice_content;
 	}
-	public void setNOTICE_CONTENT(String nOTICE_CONTENT) {
-		NOTICE_CONTENT = nOTICE_CONTENT;
+
+	public void setNotice_content(String notice_content) {
+		this.notice_content = notice_content;
 	}
-	public String getNOTICE_CREATED() {
-		return NOTICE_CREATED;
+
+	public String getNotice_create() {
+		return notice_create;
 	}
-	public void setNOTICE_CREATED(String nOTICE_CREATED) {
-		NOTICE_CREATED = nOTICE_CREATED;
+
+	public void setNotice_create(String notice_create) {
+		this.notice_create = notice_create;
 	}
-	public String getUSERID() {
-		return USERID;
+
+	public String getUserid() {
+		return userid;
 	}
-	public void setUSERID(String uSERID) {
-		USERID = uSERID;
+
+	public void setUserid(String userid) {
+		this.userid = userid;
 	}
-	public String getNOTICE_CATEGORY() {
-		return NOTICE_CATEGORY;
+
+	public String getNotice_category() {
+		return notice_category;
 	}
-	public void setNOTICE_CATEGORY(String nOTICE_CATEGORY) {
-		NOTICE_CATEGORY = nOTICE_CATEGORY;
+
+	public void setNotice_category(String notice_category) {
+		this.notice_category = notice_category;
 	}
-	public int getNOTICE_HITS() {
-		return NOTICE_HITS;
+
+	public int getNotice_hits() {
+		return notice_hits;
 	}
-	public void setNOTICE_HITS(int nOTICE_HITS) {
-		NOTICE_HITS = nOTICE_HITS;
+
+	public void setNotice_hits(int notice_hits) {
+		this.notice_hits = notice_hits;
 	}
+
 	@Override
 	public String toString() {
-		return "NoticeDTO [NOTICE_ID=" + NOTICE_ID + ", NOTICE_TITTLE=" + NOTICE_TITTLE + ", NOTICE_CONTENT="
-				+ NOTICE_CONTENT + ", NOTICE_CREATED=" + NOTICE_CREATED + ", USERID=" + USERID + ", NOTICE_CATEGORY="
-				+ NOTICE_CATEGORY + ", NOTICE_HITS=" + NOTICE_HITS + "]";
+		return "NoticeDTO [notice_id=" + notice_id + ", notice_tittle=" + notice_tittle + ", notice_content="
+				+ notice_content + ", notice_create=" + notice_create + ", userid=" + userid + ", notice_category="
+				+ notice_category + ", notice_hits=" + notice_hits + "]";
 	}
 	
 }

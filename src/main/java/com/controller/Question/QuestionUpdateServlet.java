@@ -33,7 +33,7 @@ public class QuestionUpdateServlet extends HttpServlet {
 		
 		if (mDTO != null) {
 			String USERID = mDTO.getUserid();
-			int Q_ID = OneSelectDTO.getQ_ID();
+			int Q_ID = OneSelectDTO.getQ_id();
 			String Q_TITLE = request.getParameter("qTittle");
 			String P_ID = request.getParameter("pId");
 			String Q_CONTENT = request.getParameter("qContent");
@@ -42,14 +42,14 @@ public class QuestionUpdateServlet extends HttpServlet {
 			String Q_IMG = request.getParameter("qFile");
 			
 			QuestionDTO qDTO = new QuestionDTO();
-			qDTO.setP_ID(P_ID);
-			qDTO.setQ_BOARD_CATEGORY(Q_BOARD_CATEGORY);
-			qDTO.setQ_CATEGORY(Q_CATEGORY);
-			qDTO.setQ_CONTENT(Q_CONTENT);
-			qDTO.setQ_ID(Q_ID);
-			qDTO.setQ_IMG(Q_IMG);
-			qDTO.setQ_TITLE(Q_TITLE);
-			qDTO.setUSERID(USERID);
+			qDTO.setP_id(P_ID);
+			qDTO.setQ_board_category(Q_BOARD_CATEGORY);
+			qDTO.setQ_category(Q_CATEGORY);
+			qDTO.setQ_content(Q_CONTENT);
+			qDTO.setQ_id(Q_ID);
+			qDTO.setQ_img(Q_IMG);
+			qDTO.setQ_title(Q_TITLE);
+			qDTO.setUserid(USERID);
 			System.out.println("qDTO " + qDTO);
 			
 			/*

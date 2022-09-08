@@ -30,9 +30,9 @@ public class NoticeUpdateServlet extends HttpServlet {
 		System.out.println("NoticeUpdate " + NOTICE_ID + "\t" + NOTICE_TITTLE + "\t" + NOTICE_CONTENT);
 		
 		NoticeDTO dto = new NoticeDTO();
-		dto.setNOTICE_ID(NOTICE_ID);
-		dto.setNOTICE_TITTLE(NOTICE_TITTLE);
-		dto.setNOTICE_CONTENT(NOTICE_CONTENT);
+		dto.setNotice_id(NOTICE_ID);
+		dto.setNotice_tittle(NOTICE_TITTLE);
+		dto.setNotice_content(NOTICE_CONTENT);
 		
 		NoticeService service = new NoticeService();
 		int num = service.noticeUpdate(dto);

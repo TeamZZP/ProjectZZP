@@ -2,101 +2,121 @@ package com.dto;
 
 public class QuestionDTO {
 
-	int Q_ID;
-	int Q_BOARD_CATEGORY;
-    String Q_CATEGORY;
-    String Q_TITLE;
-    String Q_CONTENT;
-    String Q_CREATED;
-    String Q_IMG;
-    String Q_STATUS;
-    String USERID;
-    String P_ID;
+	int q_id; 
+	int q_board_category;
+    String q_category; 
+    String q_title;
+    String q_content; 
+    String q_created; 
+    String q_img; 
+    String q_status;
+    String userid;
+    String p_id; 
     
 	public QuestionDTO() {
 		super();
 	}
-	
-	public QuestionDTO(int q_ID, int q_BOARD_CATEGORY, String q_CATEGORY, String q_TITLE, String q_CONTENT,
-			String q_CREATED, String q_IMG, String q_STATUS, String uSERID, String p_ID) {
+
+	public QuestionDTO(int q_id, int q_board_category, String q_category, String q_title, String q_content,
+			String q_created, String q_img, String q_status, String userid, String p_id) {
 		super();
-		Q_ID = q_ID;
-		Q_BOARD_CATEGORY = q_BOARD_CATEGORY;
-		Q_CATEGORY = q_CATEGORY;
-		Q_TITLE = q_TITLE;
-		Q_CONTENT = q_CONTENT;
-		Q_CREATED = q_CREATED;
-		Q_IMG = q_IMG;
-		Q_STATUS = q_STATUS;
-		USERID = uSERID;
-		P_ID = p_ID;
+		this.q_id = q_id;
+		this.q_board_category = q_board_category;
+		this.q_category = q_category;
+		this.q_title = q_title;
+		this.q_content = q_content;
+		this.q_created = q_created;
+		this.q_img = q_img;
+		this.q_status = q_status;
+		this.userid = userid;
+		this.p_id = p_id;
 	}
-	
-	public int getQ_ID() {
-		return Q_ID;
+
+	public int getQ_id() {
+		return q_id;
 	}
-	public void setQ_ID(int q_ID) {
-		Q_ID = q_ID;
+
+	public void setQ_id(int q_id) {
+		this.q_id = q_id;
 	}
-	public int getQ_BOARD_CATEGORY() {
-		return Q_BOARD_CATEGORY;
+
+	public int getQ_board_category() {
+		return q_board_category;
 	}
-	public void setQ_BOARD_CATEGORY(int q_BOARD_CATEGORY) {
-		Q_BOARD_CATEGORY = q_BOARD_CATEGORY;
+
+	public void setQ_board_category(int q_board_category) {
+		this.q_board_category = q_board_category;
 	}
-	public String getQ_CATEGORY() {
-		return Q_CATEGORY;
+
+	public String getQ_category() {
+		return q_category;
 	}
-	public void setQ_CATEGORY(String q_CATEGORY) {
-		Q_CATEGORY = q_CATEGORY;
+
+	public void setQ_category(String q_category) {
+		this.q_category = q_category;
 	}
-	public String getQ_TITLE() {
-		return Q_TITLE;
+
+	public String getQ_title() {
+		return q_title;
 	}
-	public void setQ_TITLE(String q_TITLE) {
-		Q_TITLE = q_TITLE;
+
+	public void setQ_title(String q_title) {
+		this.q_title = q_title;
 	}
-	public String getQ_CONTENT() {
-		return Q_CONTENT;
+
+	public String getQ_content() {
+		return q_content;
 	}
-	public void setQ_CONTENT(String q_CONTENT) {
-		Q_CONTENT = q_CONTENT;
+
+	public void setQ_content(String q_content) {
+		this.q_content = q_content;
 	}
-	public String getQ_CREATED() {
-		return Q_CREATED;
+
+	public String getQ_created() {
+		return q_created;
 	}
-	public void setQ_CREATED(String q_CREATED) {
-		Q_CREATED = q_CREATED;
+
+	public void setQ_created(String q_created) {
+		this.q_created = q_created;
 	}
-	public String getQ_IMG() {
-		return Q_IMG;
+
+	public String getQ_img() {
+		return q_img;
 	}
-	public void setQ_IMG(String q_IMG) {
-		Q_IMG = q_IMG;
+
+	public void setQ_img(String q_img) {
+		this.q_img = q_img;
 	}
-	public String getQ_STATUS() {
-		return Q_STATUS;
+
+	public String getQ_status() {
+		return q_status;
 	}
-	public void setQ_STATUS(String q_STATUS) {
-		Q_STATUS = q_STATUS;
+
+	public void setQ_status(String q_status) {
+		this.q_status = q_status;
 	}
-	public String getUSERID() {
-		return USERID;
+
+	public String getUserid() {
+		return userid;
 	}
-	public void setUSERID(String uSERID) {
-		USERID = uSERID;
+
+	public void setUserid(String userid) {
+		this.userid = userid;
 	}
-	public String getP_ID() {
-		return P_ID;
+
+	public String getP_id() {
+		return p_id;
 	}
-	public void setP_ID(String p_ID) {
-		P_ID = p_ID;
+
+	public void setP_id(String p_id) {
+		this.p_id = p_id;
 	}
+
 	@Override
 	public String toString() {
-		return "QuestionDTO [Q_ID=" + Q_ID + ", Q_BOARD_CATEGORY=" + Q_BOARD_CATEGORY + ", Q_CATEGORY=" + Q_CATEGORY
-				+ ", Q_TITLE=" + Q_TITLE + ", Q_CONTENT=" + Q_CONTENT + ", Q_CREATED=" + Q_CREATED + ", Q_IMG=" + Q_IMG
-				+ ", Q_STATUS=" + Q_STATUS + ", USERID=" + USERID + ", P_ID=" + P_ID + "]";
+		return "QuestionDTO [q_id=" + q_id + ", q_board_category=" + q_board_category + ", q_category=" + q_category
+				+ ", q_title=" + q_title + ", q_content=" + q_content + ", q_created=" + q_created + ", q_img=" + q_img
+				+ ", q_status=" + q_status + ", userid=" + userid + ", p_id=" + p_id + "]";
 	}
-    
+	
 }

@@ -2,160 +2,196 @@ package com.dto;
 
 public class ReviewProductDTO {
 
-	int REVIEW_ID;
-	int ORDER_ID;
-	int P_ID;
-	String USERID;
-	String REVIEW_TITLE;
-	String REVIEW_CONTENT;
-	String REVIEW_RATE;
-	String REVIEW_IMG;
-	String REVIEW_CREATED;
-	String P_NAME;
-	String P_CONTENT;
-	int C_ID;
-	int P_COST_PRICE;
-	int P_SELLING_PRICE;
-	int P_DISCOUNT;
-	String P_CREATED;
-	int P_STOCK;
+	private String userid;
+	private int p_id;
+	private int order_id;
+	private int review_id; 
+	private String review_title; 
+	private String review_content; 
+	private String review_rate; 
+	private String review_img; 
+	private String review_create; 
+	private String p_name;
+	private String p_content;
+	private int c_id;
+	private int p_cost_price;
+	private int p_selling_price;
+	private int p_discount;
+	private String p_created;
+	private int p_stock;
 	
 	public ReviewProductDTO() {
 		super();
 	}
-	public ReviewProductDTO(int rEVIEW_ID, int oRDER_ID, int p_ID, String uSERID, String rEVIEW_TITLE,
-			String rEVIEW_CONTENT, String rEVIEW_RATE, String rEVIEW_IMG, String rEVIEW_CREATED, String p_NAME,
-			String p_CONTENT, int c_ID, int p_COST_PRICE, int p_SELLING_PRICE, int p_DISCOUNT, String p_CREATED,
-			int p_STOCK) {
+
+	public ReviewProductDTO(String userid, int p_id, int order_id, int review_id, String review_title,
+			String review_content, String review_rate, String review_img, String review_create, String p_name,
+			String p_content, int c_id, int p_cost_price, int p_selling_price, int p_discount, String p_created,
+			int p_stock) {
 		super();
-		REVIEW_ID = rEVIEW_ID;
-		ORDER_ID = oRDER_ID;
-		P_ID = p_ID;
-		USERID = uSERID;
-		REVIEW_TITLE = rEVIEW_TITLE;
-		REVIEW_CONTENT = rEVIEW_CONTENT;
-		REVIEW_RATE = rEVIEW_RATE;
-		REVIEW_IMG = rEVIEW_IMG;
-		REVIEW_CREATED = rEVIEW_CREATED;
-		P_NAME = p_NAME;
-		P_CONTENT = p_CONTENT;
-		C_ID = c_ID;
-		P_COST_PRICE = p_COST_PRICE;
-		P_SELLING_PRICE = p_SELLING_PRICE;
-		P_DISCOUNT = p_DISCOUNT;
-		P_CREATED = p_CREATED;
-		P_STOCK = p_STOCK;
+		this.userid = userid;
+		this.p_id = p_id;
+		this.order_id = order_id;
+		this.review_id = review_id;
+		this.review_title = review_title;
+		this.review_content = review_content;
+		this.review_rate = review_rate;
+		this.review_img = review_img;
+		this.review_create = review_create;
+		this.p_name = p_name;
+		this.p_content = p_content;
+		this.c_id = c_id;
+		this.p_cost_price = p_cost_price;
+		this.p_selling_price = p_selling_price;
+		this.p_discount = p_discount;
+		this.p_created = p_created;
+		this.p_stock = p_stock;
 	}
-	public int getREVIEW_ID() {
-		return REVIEW_ID;
+
+	public String getUserid() {
+		return userid;
 	}
-	public void setREVIEW_ID(int rEVIEW_ID) {
-		REVIEW_ID = rEVIEW_ID;
+
+	public void setUserid(String userid) {
+		this.userid = userid;
 	}
-	public int getORDER_ID() {
-		return ORDER_ID;
+
+	public int getP_id() {
+		return p_id;
 	}
-	public void setORDER_ID(int oRDER_ID) {
-		ORDER_ID = oRDER_ID;
+
+	public void setP_id(int p_id) {
+		this.p_id = p_id;
 	}
-	public int getP_ID() {
-		return P_ID;
+
+	public int getOrder_id() {
+		return order_id;
 	}
-	public void setP_ID(int p_ID) {
-		P_ID = p_ID;
+
+	public void setOrder_id(int order_id) {
+		this.order_id = order_id;
 	}
-	public String getUSERID() {
-		return USERID;
+
+	public int getReview_id() {
+		return review_id;
 	}
-	public void setUSERID(String uSERID) {
-		USERID = uSERID;
+
+	public void setReview_id(int review_id) {
+		this.review_id = review_id;
 	}
-	public String getREVIEW_TITLE() {
-		return REVIEW_TITLE;
+
+	public String getReview_title() {
+		return review_title;
 	}
-	public void setREVIEW_TITLE(String rEVIEW_TITLE) {
-		REVIEW_TITLE = rEVIEW_TITLE;
+
+	public void setReview_title(String review_title) {
+		this.review_title = review_title;
 	}
-	public String getREVIEW_CONTENT() {
-		return REVIEW_CONTENT;
+
+	public String getReview_content() {
+		return review_content;
 	}
-	public void setREVIEW_CONTENT(String rEVIEW_CONTENT) {
-		REVIEW_CONTENT = rEVIEW_CONTENT;
+
+	public void setReview_content(String review_content) {
+		this.review_content = review_content;
 	}
-	public String getREVIEW_RATE() {
-		return REVIEW_RATE;
+
+	public String getReview_rate() {
+		return review_rate;
 	}
-	public void setREVIEW_RATE(String rEVIEW_RATE) {
-		REVIEW_RATE = rEVIEW_RATE;
+
+	public void setReview_rate(String review_rate) {
+		this.review_rate = review_rate;
 	}
-	public String getREVIEW_IMG() {
-		return REVIEW_IMG;
+
+	public String getReview_img() {
+		return review_img;
 	}
-	public void setREVIEW_IMG(String rEVIEW_IMG) {
-		REVIEW_IMG = rEVIEW_IMG;
+
+	public void setReview_img(String review_img) {
+		this.review_img = review_img;
 	}
-	public String getREVIEW_CREATED() {
-		return REVIEW_CREATED;
+
+	public String getReview_create() {
+		return review_create;
 	}
-	public void setREVIEW_CREATED(String rEVIEW_CREATED) {
-		REVIEW_CREATED = rEVIEW_CREATED;
+
+	public void setReview_create(String review_create) {
+		this.review_create = review_create;
 	}
-	public String getP_NAME() {
-		return P_NAME;
+
+	public String getP_name() {
+		return p_name;
 	}
-	public void setP_NAME(String p_NAME) {
-		P_NAME = p_NAME;
+
+	public void setP_name(String p_name) {
+		this.p_name = p_name;
 	}
-	public String getP_CONTENT() {
-		return P_CONTENT;
+
+	public String getP_content() {
+		return p_content;
 	}
-	public void setP_CONTENT(String p_CONTENT) {
-		P_CONTENT = p_CONTENT;
+
+	public void setP_content(String p_content) {
+		this.p_content = p_content;
 	}
-	public int getC_ID() {
-		return C_ID;
+
+	public int getC_id() {
+		return c_id;
 	}
-	public void setC_ID(int c_ID) {
-		C_ID = c_ID;
+
+	public void setC_id(int c_id) {
+		this.c_id = c_id;
 	}
-	public int getP_COST_PRICE() {
-		return P_COST_PRICE;
+
+	public int getP_cost_price() {
+		return p_cost_price;
 	}
-	public void setP_COST_PRICE(int p_COST_PRICE) {
-		P_COST_PRICE = p_COST_PRICE;
+
+	public void setP_cost_price(int p_cost_price) {
+		this.p_cost_price = p_cost_price;
 	}
-	public int getP_SELLING_PRICE() {
-		return P_SELLING_PRICE;
+
+	public int getP_selling_price() {
+		return p_selling_price;
 	}
-	public void setP_SELLING_PRICE(int p_SELLING_PRICE) {
-		P_SELLING_PRICE = p_SELLING_PRICE;
+
+	public void setP_selling_price(int p_selling_price) {
+		this.p_selling_price = p_selling_price;
 	}
-	public int getP_DISCOUNT() {
-		return P_DISCOUNT;
+
+	public int getP_discount() {
+		return p_discount;
 	}
-	public void setP_DISCOUNT(int p_DISCOUNT) {
-		P_DISCOUNT = p_DISCOUNT;
+
+	public void setP_discount(int p_discount) {
+		this.p_discount = p_discount;
 	}
-	public String getP_CREATED() {
-		return P_CREATED;
+
+	public String getP_created() {
+		return p_created;
 	}
-	public void setP_CREATED(String p_CREATED) {
-		P_CREATED = p_CREATED;
+
+	public void setP_created(String p_created) {
+		this.p_created = p_created;
 	}
-	public int getP_STOCK() {
-		return P_STOCK;
+
+	public int getP_stock() {
+		return p_stock;
 	}
-	public void setP_STOCK(int p_STOCK) {
-		P_STOCK = p_STOCK;
+
+	public void setP_stock(int p_stock) {
+		this.p_stock = p_stock;
 	}
+
 	@Override
 	public String toString() {
-		return "ReviewProductDTO [REVIEW_ID=" + REVIEW_ID + ", ORDER_ID=" + ORDER_ID + ", P_ID=" + P_ID + ", USERID="
-				+ USERID + ", REVIEW_TITLE=" + REVIEW_TITLE + ", REVIEW_CONTENT=" + REVIEW_CONTENT + ", REVIEW_RATE="
-				+ REVIEW_RATE + ", REVIEW_IMG=" + REVIEW_IMG + ", REVIEW_CREATED=" + REVIEW_CREATED + ", P_NAME="
-				+ P_NAME + ", P_CONTENT=" + P_CONTENT + ", C_ID=" + C_ID + ", P_COST_PRICE=" + P_COST_PRICE
-				+ ", P_SELLING_PRICE=" + P_SELLING_PRICE + ", P_DISCOUNT=" + P_DISCOUNT + ", P_CREATED=" + P_CREATED
-				+ ", P_STOCK=" + P_STOCK + "]";
+		return "ReviewProductDTO [userid=" + userid + ", p_id=" + p_id + ", order_id=" + order_id + ", review_id="
+				+ review_id + ", review_title=" + review_title + ", review_content=" + review_content + ", review_rate="
+				+ review_rate + ", review_img=" + review_img + ", review_create=" + review_create + ", p_name=" + p_name
+				+ ", p_content=" + p_content + ", c_id=" + c_id + ", p_cost_price=" + p_cost_price
+				+ ", p_selling_price=" + p_selling_price + ", p_discount=" + p_discount + ", p_created=" + p_created
+				+ ", p_stock=" + p_stock + "]";
 	}
 	
 }

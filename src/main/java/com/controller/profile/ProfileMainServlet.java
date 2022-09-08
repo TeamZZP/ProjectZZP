@@ -57,7 +57,7 @@ public class ProfileMainServlet extends HttpServlet {
 		List<ReviewDTO> reviewList = reviewPageDTO.getList();
 		HashMap<Integer, HashMap<String, String>> prodMap = new HashMap<Integer, HashMap<String,String>>();
 		for (ReviewDTO r : reviewList) {
-			prodMap.put(r.getP_ID(), reviewService.selectOneProduct(r.getP_ID()));
+			prodMap.put(r.getP_id(), reviewService.selectOneProduct(r.getP_id()));
 		}
 		//회원의 리뷰 개수 가져오기
 		int reviewNum = reviewService.countTotalUserReview(map);

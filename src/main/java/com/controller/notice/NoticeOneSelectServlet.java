@@ -41,7 +41,7 @@ public class NoticeOneSelectServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		
 		if (nDTO != null) {
-			String category = nDTO.getNOTICE_CATEGORY();
+			String category = nDTO.getNotice_category();
 			System.out.println("카테고리 " + category);
 			
 			Map<String, String> map = new HashMap<String, String>();
@@ -69,8 +69,8 @@ public class NoticeOneSelectServlet extends HttpServlet {
 			session.setAttribute("noticeOne", nDTO);//상세정보 내용
 			
 			Map<String, Integer> map2 = new HashMap<String, Integer>();
-			map2.put("noticeID", nDTO.getNOTICE_ID());
-			map2.put("noticeHite", nDTO.getNOTICE_HITS()+1);
+			map2.put("noticeID", nDTO.getNotice_id());
+			map2.put("noticeHite", nDTO.getNotice_hits()+1);
 			
 			int hiteUpdateNum = service.noticeHite(map2);
 			System.out.println("hiteUpdateNum " + hiteUpdateNum); //조회수

@@ -38,13 +38,13 @@ public class QuestionInsertServlet extends HttpServlet {
 			String Q_IMG = request.getParameter("qFile");
 			
 			QuestionDTO qDTO = new QuestionDTO();
-			qDTO.setUSERID(USERID);
-			qDTO.setQ_TITLE(Q_TITLE);
-			qDTO.setP_ID(P_ID);
-			qDTO.setQ_CONTENT(Q_CONTENT);
-			qDTO.setQ_BOARD_CATEGORY(Q_BOARD_CATEGORY);
-			qDTO.setQ_CATEGORY(Q_CATEGORY);
-			qDTO.setQ_IMG(Q_IMG);
+			qDTO.setUserid(USERID);
+			qDTO.setQ_title(Q_TITLE);
+			qDTO.setP_id(P_ID);
+			qDTO.setQ_content(Q_CONTENT);
+			qDTO.setQ_board_category(Q_BOARD_CATEGORY);
+			qDTO.setQ_category(Q_CATEGORY);
+			qDTO.setQ_img(Q_IMG);
 			
 			System.out.println("qDTO " + qDTO);
 			

@@ -33,10 +33,10 @@ public class NoticeInsertServlet extends HttpServlet {
 			String NOTICE_CATEGORY = request.getParameter("nCategory");
 			
 			NoticeDTO nDTO = new NoticeDTO();
-			nDTO.setUSERID(USERID);
-			nDTO.setNOTICE_TITTLE(NOTICE_TITTLE);
-			nDTO.setNOTICE_CONTENT(NOTICE_CONTENT);
-			nDTO.setNOTICE_CATEGORY(NOTICE_CATEGORY);
+			nDTO.setUserid(USERID);
+			nDTO.setNotice_tittle(NOTICE_TITTLE);
+			nDTO.setNotice_content(NOTICE_CONTENT);
+			nDTO.setNotice_category(NOTICE_CATEGORY);
 			System.out.println("insert할 내용 " + nDTO);
 			
 			

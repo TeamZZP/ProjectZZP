@@ -38,7 +38,7 @@ public class ProdOneSelectServlet extends HttpServlet {
 			
 			QuestionService service = new QuestionService();
 			QuestionProductDTO qDTO = service.questionOneSelect(Q_ID);
-			String writer = qDTO.getUSERID();
+			String writer = qDTO.getUserid();
 			
 			if (userid.equals(writer)) {
 				AnswerService Aservice = new AnswerService();

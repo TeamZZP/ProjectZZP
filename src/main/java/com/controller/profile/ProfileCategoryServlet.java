@@ -64,7 +64,7 @@ public class ProfileCategoryServlet extends HttpServlet {
 			List<ReviewDTO> reviewList = reviewPageDTO.getList();
 			HashMap<Integer, HashMap<String, String>> prodMap = new HashMap<Integer, HashMap<String,String>>();
 			for (ReviewDTO r : reviewList) {
-				prodMap.put(r.getP_ID(), reviewService.selectOneProduct(r.getP_ID()));
+				prodMap.put(r.getP_id(), reviewService.selectOneProduct(r.getP_id()));
 			}
 			
 			request.setAttribute("reviewPageDTO", reviewPageDTO);
