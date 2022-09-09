@@ -44,7 +44,7 @@ public class orderIdCheckServlet extends HttpServlet {
 			response.setContentType("text/html;charset=utf-8");
 			PrintWriter out = response.getWriter();
 			if (dto != null) {
-				out.print(dto.getREVIEW_ID());
+				out.print(dto.getReview_id());
 			} else {
 				out.print(0);
 			}

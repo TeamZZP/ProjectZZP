@@ -38,7 +38,7 @@ public class ProdOneSelectServlet extends HttpServlet {
 			
 			QuestionService service = new QuestionService();
 			QuestionProductDTO qDTO = service.questionOneSelect(Q_ID);
-			String writer = qDTO.getUSERID();
+			String writer = qDTO.getUserid();
 			
 			if (userid.equals(writer)) {
 				AnswerService Aservice = new AnswerService();
@@ -46,7 +46,7 @@ public class ProdOneSelectServlet extends HttpServlet {
 				System.out.println("aDTO " + aDTO);
 				
 				if (aDTO != null) {
-					String Acontent = aDTO.getANSWER_CONTENT();
+					String Acontent = aDTO.getAnswer_content();
 					
 					response.setContentType("text/html;charset=utf-8");
 					PrintWriter out = response.getWriter();

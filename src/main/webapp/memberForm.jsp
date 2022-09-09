@@ -33,7 +33,7 @@ $(document).ready(function() {
 %>
 </head>
 <body>
-<div class="modal" id="checkVal">
+<div class="modal" id="checkVal" data-bs-backdrop="static">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">

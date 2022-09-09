@@ -28,27 +28,27 @@
 	<form action="NoticeUpdateServlet" method="post">
 	<div class="container justify-content-center">
 	<div class="row">
-		<input type="hidden" name="nId" value="<%=nDTO.getNOTICE_ID()%>">
+		<input type="hidden" name="nId" value="<%=nDTO.getNotice_id()%>">
 		<table border="1" style="border-collapse: collapse;">
 			<tr>
 				<td colspan="2"> 
 					<div class="input-group">
 						 <span class="input-group-text">제목</span>
-						 <input type="text" class="form-control" name="nTittle" id="nTittle"  value="<%=nDTO.getNOTICE_TITTLE()%>">
+						 <input type="text" class="form-control" name="nTittle" id="nTittle"  value="<%=nDTO.getNotice_tittle()%>">
 					</div>
 				</td>
 			</tr>
 			<tr>
 				<td>
-					 작성일 <input type="text" class="form-control" value="<%=nDTO.getNOTICE_CREATED() %>">
+					 작성일 <input type="text" class="form-control" value="<%=nDTO.getNotice_create() %>">
 				</td>
 				<td>
-					조회 <input type="text" class="form-control" value="<%=nDTO.getNOTICE_HITS()%>">
+					조회 <input type="text" class="form-control" value="<%=nDTO.getNotice_hits()%>">
 				</td>
 			</tr>
 			<tr>
 				<td colspan="2"> 
-					<textarea rows="10" cols="50" name="nContent"  class="form-control"><%=nDTO.getNOTICE_CONTENT()%></textarea> 
+					<textarea rows="10" cols="50" name="nContent"  class="form-control"><%=nDTO.getNotice_content()%></textarea> 
 				</td>
 			</tr>
 			<tr>

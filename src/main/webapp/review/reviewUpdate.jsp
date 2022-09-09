@@ -94,21 +94,21 @@
 	%>
 			<tr> 
 				<td> 
-					<input type="hidden" name="REVIEW_ID" value="<%=dto.getREVIEW_ID()%>">
-					<input type="hidden" name="ORDER_ID" value="<%=dto.getORDER_ID()%>">
-					<input type="hidden" name="P_ID" value="<%=dto.getP_ID()%>">
+					<input type="hidden" name="REVIEW_ID" value="<%=dto.getReview_id()%>">
+					<input type="hidden" name="ORDER_ID" value="<%=dto.getOrder_id()%>">
+					<input type="hidden" name="P_ID" value="<%=dto.getP_id()%>">
 					<div class="input-group">
 					  <span class="input-group-text">주문한 상품</span>
-					  <input type="text" class="form-control shadow-none" value="<%=dto.getP_NAME()%>" readonly="readonly">
+					  <input type="text" class="form-control shadow-none" value="<%=dto.getP_name()%>" readonly="readonly">
 					</div>
 				</td>
 				<td colspan="2"> 
 					<div class="input-group">
 					  <label class="input-group-text" for="inputGroupSelect01">구매 만족도</label>
 					  <select class="form-select"  name="REVIEW_RATE">
-					    <option value="만족" <%if(dto.getREVIEW_RATE().equals("만족")){ %> selected="selected" <% } %>>만족</option>
-					    <option value="보통" <%if(dto.getREVIEW_RATE().equals("보통")){ %> selected="selected" <% } %>>보통</option>
-					    <option value="불만족" <%if(dto.getREVIEW_RATE().equals("불만족")){ %> selected="selected" <% } %>>불만족</option>
+					    <option value="만족" <%if(dto.getReview_rate().equals("만족")){ %> selected="selected" <% } %>>만족</option>
+					    <option value="보통" <%if(dto.getReview_rate().equals("보통")){ %> selected="selected" <% } %>>보통</option>
+					    <option value="불만족" <%if(dto.getReview_rate().equals("불만족")){ %> selected="selected" <% } %>>불만족</option>
 					  </select>
 					</div>
 				</td>
@@ -117,19 +117,19 @@
 				<td colspan="2"> 
 					<div class="input-group">
 					  <span class="input-group-text">제목</span>
-					  <input type="text" class="form-control" name="REVIEW_TITLE" id="REVIEW_TITLE" value="<%=dto.getREVIEW_TITLE()%>">
+					  <input type="text" class="form-control" name="REVIEW_TITLE" id="REVIEW_TITLE" value="<%=dto.getReview_title()%>">
 					</div>
 				</td>
 			</tr>
 			<tr>
 				<td colspan="2">
 					<div>
-					  <textarea class="form-control" rows="15" cols="50" name="REVIEW_CONTENT" id="REVIEW_CONTENT" placeholder="내용을 입력하십시오."><%=dto.getREVIEW_CONTENT() %></textarea>
+					  <textarea class="form-control" rows="15" cols="50" name="REVIEW_CONTENT" id="REVIEW_CONTENT" placeholder="내용을 입력하십시오."><%=dto.getReview_content() %></textarea>
 					</div>
 				</td>
 			</tr>
 			<tr>
-				<%if(dto.getREVIEW_IMG() == null || dto.getREVIEW_IMG().equals("null")){ %>
+				<%if(dto.getReview_img() == null || dto.getReview_img().equals("null")){ %>
 				<td colspan="2">
 					<input class="form-control" type="file" accept="image/*" name="REVIEW_IMG" id="REVIEW_IMG">
 				</td>
@@ -137,7 +137,7 @@
 				<td colspan="2">
 					<div>
 					  <button class="btn btn-secondary" id="uploadBtu" style="padding: 2rem;">첨부파일</button>
-					  	<img id="upload" alt="" src="/eclipse/upload/<%=dto.getREVIEW_IMG()%>" width="100px" height="100px" style="border: 1px solid gray;">
+					  	<img id="upload" alt="" src="/eclipse/upload/<%=dto.getReview_img()%>" width="100px" height="100px" style="border: 1px solid gray;">
 					  	<input class="form-control" type="file" accept="image/*" name="REVIEW_IMG">
 					</div>
 				</td>
@@ -146,7 +146,7 @@
 			<tr>
 				<td> <button id="reviewList" class="btn btn-success">목록</button> </td>
 				<td style="text-align: right;">
-					<button id="reviewUpdate" data-userid="<%=dto.getUSERID() %>" data-operate="<%=operate %>" data-reviewID="<%=dto.getORDER_ID()%>" class="btn btn-success">수정</button>
+					<button id="reviewUpdate" data-userid="<%=dto.getUserid() %>" data-operate="<%=operate %>" data-reviewID="<%=dto.getOrder_id()%>" class="btn btn-success">수정</button>
 					<button id="reviewCancel" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#bb">취소</button>
 					
 					<div class="modal fade" id="bb" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">

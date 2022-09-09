@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -40,15 +41,9 @@ public class IdFindServlet extends HttpServlet {
 				session.setAttribute("findId", dto);
 				response.sendRedirect("findIdresult.jsp");
 			} else {
-				 response.setContentType("text/html; charset=UTF-8");
-		         PrintWriter out = response.getWriter();
-				 out.println("<script language='javascript'>");
-		         out.println("alert('해당 회원 정보가 없습니다:(')");
-		         out.println("location.href='IdFindUIServlet';");
-		         out.println("</script>");
-		         out.flush();
-		         response.sendRedirect("IdFindUIServlet");
-		         return;
+				request.setAttribute("mesg", "해당 회원 정보가 없습니다:(");
+				RequestDispatcher dis = request.getRequestDispatcher("IdFindUIServlet");		
+				dis.forward(request, response);
 			}
 		} 
 		//이메일로 찾기
@@ -66,15 +61,9 @@ public class IdFindServlet extends HttpServlet {
 				session.setAttribute("findId", dto);
 				response.sendRedirect("findIdresult.jsp");
 			} else {
-				 response.setContentType("text/html; charset=UTF-8");
-		         PrintWriter out = response.getWriter();
-				 out.println("<script language='javascript'>");
-		         out.println("alert('해당 회원 정보가 없습니다:(')");
-		         out.println("location.href='IdFindUIServlet';");
-		         out.println("</script>");
-		         out.flush();
-		         response.sendRedirect("IdFindUIServlet");
-		         return;
+				request.setAttribute("mesg", "해당 회원 정보가 없습니다:(");
+				RequestDispatcher dis = request.getRequestDispatcher("IdFindUIServlet");		
+				dis.forward(request, response);
 			}
 		}
 	}

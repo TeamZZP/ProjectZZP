@@ -1,111 +1,112 @@
 package com.dto;
 
 public class ReviewDTO {
-	int REVIEW_ID;
-	int ORDER_ID;
-	int P_ID;
-	String USERID;
-	String REVIEW_TITLE;
-	String REVIEW_CONTENT;
-	String REVIEW_RATE;
-	String REVIEW_IMG;
-	String REVIEW_CREATED;
+	
+	String userid;
+	int p_id;
+	int order_id;
+	int review_id; 
+	String review_title; 
+	String review_content; 
+	String review_rate; 
+	String review_img; 
+	String review_create; 
 	
 	public ReviewDTO() {
 		super();
 	}
 
-	public ReviewDTO(int rEVIEW_ID, int oRDER_ID, int p_ID, String uSERID, String rEVIEW_TITLE, String rEVIEW_CONTENT,
-			String rEVIEW_RATE, String rEVIEW_IMG, String rEVIEW_CREATED) {
+	public ReviewDTO(String userid, int p_id, int order_id, int review_id, String review_title, String review_content,
+			String review_rate, String review_img, String review_create) {
 		super();
-		REVIEW_ID = rEVIEW_ID;
-		ORDER_ID = oRDER_ID;
-		P_ID = p_ID;
-		USERID = uSERID;
-		REVIEW_TITLE = rEVIEW_TITLE;
-		REVIEW_CONTENT = rEVIEW_CONTENT;
-		REVIEW_RATE = rEVIEW_RATE;
-		REVIEW_IMG = rEVIEW_IMG;
-		REVIEW_CREATED = rEVIEW_CREATED;
+		this.userid = userid;
+		this.p_id = p_id;
+		this.order_id = order_id;
+		this.review_id = review_id;
+		this.review_title = review_title;
+		this.review_content = review_content;
+		this.review_rate = review_rate;
+		this.review_img = review_img;
+		this.review_create = review_create;
 	}
 
-	public int getREVIEW_ID() {
-		return REVIEW_ID;
+	public String getUserid() {
+		return userid;
 	}
 
-	public void setREVIEW_ID(int rEVIEW_ID) {
-		REVIEW_ID = rEVIEW_ID;
+	public void setUserid(String userid) {
+		this.userid = userid;
 	}
 
-	public int getORDER_ID() {
-		return ORDER_ID;
+	public int getP_id() {
+		return p_id;
 	}
 
-	public void setORDER_ID(int oRDER_ID) {
-		ORDER_ID = oRDER_ID;
+	public void setP_id(int p_id) {
+		this.p_id = p_id;
 	}
 
-	public int getP_ID() {
-		return P_ID;
+	public int getOrder_id() {
+		return order_id;
 	}
 
-	public void setP_ID(int p_ID) {
-		P_ID = p_ID;
+	public void setOrder_id(int order_id) {
+		this.order_id = order_id;
 	}
 
-	public String getUSERID() {
-		return USERID;
+	public int getReview_id() {
+		return review_id;
 	}
 
-	public void setUSERID(String uSERID) {
-		USERID = uSERID;
+	public void setReview_id(int review_id) {
+		this.review_id = review_id;
 	}
 
-	public String getREVIEW_TITLE() {
-		return REVIEW_TITLE;
+	public String getReview_title() {
+		return review_title;
 	}
 
-	public void setREVIEW_TITLE(String rEVIEW_TITLE) {
-		REVIEW_TITLE = rEVIEW_TITLE;
+	public void setReview_title(String review_title) {
+		this.review_title = review_title;
 	}
 
-	public String getREVIEW_CONTENT() {
-		return REVIEW_CONTENT;
+	public String getReview_content() {
+		return review_content;
 	}
 
-	public void setREVIEW_CONTENT(String rEVIEW_CONTENT) {
-		REVIEW_CONTENT = rEVIEW_CONTENT;
+	public void setReview_content(String review_content) {
+		this.review_content = review_content;
 	}
 
-	public String getREVIEW_RATE() {
-		return REVIEW_RATE;
+	public String getReview_rate() {
+		return review_rate;
 	}
 
-	public void setREVIEW_RATE(String rEVIEW_RATE) {
-		REVIEW_RATE = rEVIEW_RATE;
+	public void setReview_rate(String review_rate) {
+		this.review_rate = review_rate;
 	}
 
-	public String getREVIEW_IMG() {
-		return REVIEW_IMG;
+	public String getReview_img() {
+		return review_img;
 	}
 
-	public void setREVIEW_IMG(String rEVIEW_IMG) {
-		REVIEW_IMG = rEVIEW_IMG;
+	public void setReview_img(String review_img) {
+		this.review_img = review_img;
 	}
 
-	public String getREVIEW_CREATED() {
-		return REVIEW_CREATED;
+	public String getReview_create() {
+		return review_create;
 	}
 
-	public void setREVIEW_CREATED(String rEVIEW_CREATED) {
-		REVIEW_CREATED = rEVIEW_CREATED;
+	public void setReview_create(String review_create) {
+		this.review_create = review_create;
 	}
 
 	@Override
 	public String toString() {
-		return "ReviewDTO [REVIEW_ID=" + REVIEW_ID + ", ORDER_ID=" + ORDER_ID + ", P_ID=" + P_ID + ", USERID=" + USERID
-				+ ", REVIEW_TITLE=" + REVIEW_TITLE + ", REVIEW_CONTENT=" + REVIEW_CONTENT + ", REVIEW_RATE="
-				+ REVIEW_RATE + ", REVIEW_IMG=" + REVIEW_IMG + ", REVIEW_CREATED=" + REVIEW_CREATED + "]";
+		return "ReviewDTO [userid=" + userid + ", p_id=" + p_id + ", order_id=" + order_id + ", review_id=" + review_id
+				+ ", review_title=" + review_title + ", review_content=" + review_content + ", review_rate="
+				+ review_rate + ", review_img=" + review_img + ", review_create=" + review_create + "]";
 	}
 
 }

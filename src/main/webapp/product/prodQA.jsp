@@ -85,12 +85,12 @@
 		<%
 			List<QuestionDTO> prodQuestionList = (List<QuestionDTO>) session.getAttribute("prodQuestionList");
 			for (QuestionDTO qDTO : prodQuestionList) {
-				String user = qDTO.getUSERID();
-				String created = qDTO.getQ_CREATED().substring(0, 10);
+				String user = qDTO.getUserid();
+				String created = qDTO.getQ_created().substring(0, 10);
 		%>
-	<tr class="questionDetail" data-qID="<%=qDTO.getQ_ID()%>" title="더블클릭">
+	<tr class="questionDetail" data-qID="<%=qDTO.getQ_id()%>" title="더블클릭">
 		<td style="text-align: center;"><img alt="Q" src="images/question/Q.png" width="50px" height="55px"></td>
-		<td><%=qDTO.getQ_STATUS()%></td>
+		<td><%=qDTO.getQ_status()%></td>
 		<td>
 			<%
 				String use = "";
@@ -100,14 +100,14 @@
 			%> 
 			<%=user.substring(0, 5).concat(use)%>
 		</td>
-		<td><%=qDTO.getQ_TITLE()%></td>
+		<td><%=qDTO.getQ_title()%></td>
 		<td><%=created%></td>
 		<td style="text-align: center;"> <img alt="문의 답변 보기" src="images/question/down.png" width="20px" height="20px"> </td>
 	</tr>
 	<tr>
 		<td colspan="6" style="border-bottom: none;">
-			<div style="text-align: right; margin: 0px 82px;" id="answer<%=qDTO.getQ_ID()%>"> 
-				<span class="answer<%=qDTO.getQ_ID()%>"> </span> 
+			<div style="text-align: right; margin: 0px 82px;" id="answer<%=qDTO.getQ_id()%>"> 
+				<span class="answer<%=qDTO.getQ_id()%>"> </span> 
 			</div> 
 		</td>
 	</tr>

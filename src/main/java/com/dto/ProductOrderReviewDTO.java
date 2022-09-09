@@ -2,269 +2,269 @@ package com.dto;
 
 public class ProductOrderReviewDTO {
 
-	int ORDER_ID;
-	String USERID;
-	int P_ID;
-	int TOTAL_PRICE;
-	String DELIVERY_ADDRESS;
-	String DELIVERY_LOC;
-	String DELIVERY_REQ;
-	String ORDER_DATE;
-	String ORDER_STATE;
-	int P_AMOUNT;
-	String P_NAME;
-	String P_CONTENT;
-	int C_ID;
-	int P_COST_PRICE;
-	int P_SELLING_PRICE;
-	int P_DISCOUNT;
-	String P_CREATED;
-	int P_STOCK;
-	int REVIEW_ID;
-	String REVIEW_TITLE;
-	String REVIEW_CONTENT;
-	String REVIEW_RATE;
-	String REVIEW_IMG;
-	String REVIEW_CREATED;
+	int order_id; 
+	String userid;
+	int p_id; 
+	int total_price; 
+	String delivery_address;
+	String delivery_loc;
+	String delivery_req; 
+	String order_date; 
+	String order_state; 
+	int p_amount; 
+	String p_name; 
+	String p_content;
+	int c_id; 
+	int p_cost_price; 
+	int p_selling_price; 
+	int p_discount; 
+	String p_created;
+	int p_stock; 
+	int review_id; 
+	String review_title; 
+	String review_content; 
+	String review_rate; 
+	String review_img; 
+	String review_create; 
 	
 	public ProductOrderReviewDTO() {
 		super();
 	}
 
-	public ProductOrderReviewDTO(int oRDER_ID, String uSERID, int p_ID, int tOTAL_PRICE, String dELIVERY_ADDRESS,
-			String dELIVERY_LOC, String dELIVERY_REQ, String oRDER_DATE, String oRDER_STATE, int p_AMOUNT,
-			String p_NAME, String p_CONTENT, int c_ID, int p_COST_PRICE, int p_SELLING_PRICE, int p_DISCOUNT,
-			String p_CREATED, int p_STOCK, int rEVIEW_ID, String rEVIEW_TITLE, String rEVIEW_CONTENT,
-			String rEVIEW_RATE, String rEVIEW_IMG, String rEVIEW_CREATED) {
+	public ProductOrderReviewDTO(int order_id, String userid, int p_id, int total_price, String delivery_address,
+			String delivery_loc, String delivery_req, String order_date, String order_state, int p_amount,
+			String p_name, String p_content, int c_id, int p_cost_price, int p_selling_price, int p_discount,
+			String p_created, int p_stock, int review_id, String review_title, String review_content,
+			String review_rate, String review_img, String review_create) {
 		super();
-		ORDER_ID = oRDER_ID;
-		USERID = uSERID;
-		P_ID = p_ID;
-		TOTAL_PRICE = tOTAL_PRICE;
-		DELIVERY_ADDRESS = dELIVERY_ADDRESS;
-		DELIVERY_LOC = dELIVERY_LOC;
-		DELIVERY_REQ = dELIVERY_REQ;
-		ORDER_DATE = oRDER_DATE;
-		ORDER_STATE = oRDER_STATE;
-		P_AMOUNT = p_AMOUNT;
-		P_NAME = p_NAME;
-		P_CONTENT = p_CONTENT;
-		C_ID = c_ID;
-		P_COST_PRICE = p_COST_PRICE;
-		P_SELLING_PRICE = p_SELLING_PRICE;
-		P_DISCOUNT = p_DISCOUNT;
-		P_CREATED = p_CREATED;
-		P_STOCK = p_STOCK;
-		REVIEW_ID = rEVIEW_ID;
-		REVIEW_TITLE = rEVIEW_TITLE;
-		REVIEW_CONTENT = rEVIEW_CONTENT;
-		REVIEW_RATE = rEVIEW_RATE;
-		REVIEW_IMG = rEVIEW_IMG;
-		REVIEW_CREATED = rEVIEW_CREATED;
+		this.order_id = order_id;
+		this.userid = userid;
+		this.p_id = p_id;
+		this.total_price = total_price;
+		this.delivery_address = delivery_address;
+		this.delivery_loc = delivery_loc;
+		this.delivery_req = delivery_req;
+		this.order_date = order_date;
+		this.order_state = order_state;
+		this.p_amount = p_amount;
+		this.p_name = p_name;
+		this.p_content = p_content;
+		this.c_id = c_id;
+		this.p_cost_price = p_cost_price;
+		this.p_selling_price = p_selling_price;
+		this.p_discount = p_discount;
+		this.p_created = p_created;
+		this.p_stock = p_stock;
+		this.review_id = review_id;
+		this.review_title = review_title;
+		this.review_content = review_content;
+		this.review_rate = review_rate;
+		this.review_img = review_img;
+		this.review_create = review_create;
 	}
 
-	public int getORDER_ID() {
-		return ORDER_ID;
+	public int getOrder_id() {
+		return order_id;
 	}
 
-	public void setORDER_ID(int oRDER_ID) {
-		ORDER_ID = oRDER_ID;
+	public void setOrder_id(int order_id) {
+		this.order_id = order_id;
 	}
 
-	public String getUSERID() {
-		return USERID;
+	public String getUserid() {
+		return userid;
 	}
 
-	public void setUSERID(String uSERID) {
-		USERID = uSERID;
+	public void setUserid(String userid) {
+		this.userid = userid;
 	}
 
-	public int getP_ID() {
-		return P_ID;
+	public int getP_id() {
+		return p_id;
 	}
 
-	public void setP_ID(int p_ID) {
-		P_ID = p_ID;
+	public void setP_id(int p_id) {
+		this.p_id = p_id;
 	}
 
-	public int getTOTAL_PRICE() {
-		return TOTAL_PRICE;
+	public int getTotal_price() {
+		return total_price;
 	}
 
-	public void setTOTAL_PRICE(int tOTAL_PRICE) {
-		TOTAL_PRICE = tOTAL_PRICE;
+	public void setTotal_price(int total_price) {
+		this.total_price = total_price;
 	}
 
-	public String getDELIVERY_ADDRESS() {
-		return DELIVERY_ADDRESS;
+	public String getDelivery_address() {
+		return delivery_address;
 	}
 
-	public void setDELIVERY_ADDRESS(String dELIVERY_ADDRESS) {
-		DELIVERY_ADDRESS = dELIVERY_ADDRESS;
+	public void setDelivery_address(String delivery_address) {
+		this.delivery_address = delivery_address;
 	}
 
-	public String getDELIVERY_LOC() {
-		return DELIVERY_LOC;
+	public String getDelivery_loc() {
+		return delivery_loc;
 	}
 
-	public void setDELIVERY_LOC(String dELIVERY_LOC) {
-		DELIVERY_LOC = dELIVERY_LOC;
+	public void setDelivery_loc(String delivery_loc) {
+		this.delivery_loc = delivery_loc;
 	}
 
-	public String getDELIVERY_REQ() {
-		return DELIVERY_REQ;
+	public String getDelivery_req() {
+		return delivery_req;
 	}
 
-	public void setDELIVERY_REQ(String dELIVERY_REQ) {
-		DELIVERY_REQ = dELIVERY_REQ;
+	public void setDelivery_req(String delivery_req) {
+		this.delivery_req = delivery_req;
 	}
 
-	public String getORDER_DATE() {
-		return ORDER_DATE;
+	public String getOrder_date() {
+		return order_date;
 	}
 
-	public void setORDER_DATE(String oRDER_DATE) {
-		ORDER_DATE = oRDER_DATE;
+	public void setOrder_date(String order_date) {
+		this.order_date = order_date;
 	}
 
-	public String getORDER_STATE() {
-		return ORDER_STATE;
+	public String getOrder_state() {
+		return order_state;
 	}
 
-	public void setORDER_STATE(String oRDER_STATE) {
-		ORDER_STATE = oRDER_STATE;
+	public void setOrder_state(String order_state) {
+		this.order_state = order_state;
 	}
 
-	public int getP_AMOUNT() {
-		return P_AMOUNT;
+	public int getP_amount() {
+		return p_amount;
 	}
 
-	public void setP_AMOUNT(int p_AMOUNT) {
-		P_AMOUNT = p_AMOUNT;
+	public void setP_amount(int p_amount) {
+		this.p_amount = p_amount;
 	}
 
-	public String getP_NAME() {
-		return P_NAME;
+	public String getP_name() {
+		return p_name;
 	}
 
-	public void setP_NAME(String p_NAME) {
-		P_NAME = p_NAME;
+	public void setP_name(String p_name) {
+		this.p_name = p_name;
 	}
 
-	public String getP_CONTENT() {
-		return P_CONTENT;
+	public String getP_content() {
+		return p_content;
 	}
 
-	public void setP_CONTENT(String p_CONTENT) {
-		P_CONTENT = p_CONTENT;
+	public void setP_content(String p_content) {
+		this.p_content = p_content;
 	}
 
-	public int getC_ID() {
-		return C_ID;
+	public int getC_id() {
+		return c_id;
 	}
 
-	public void setC_ID(int c_ID) {
-		C_ID = c_ID;
+	public void setC_id(int c_id) {
+		this.c_id = c_id;
 	}
 
-	public int getP_COST_PRICE() {
-		return P_COST_PRICE;
+	public int getP_cost_price() {
+		return p_cost_price;
 	}
 
-	public void setP_COST_PRICE(int p_COST_PRICE) {
-		P_COST_PRICE = p_COST_PRICE;
+	public void setP_cost_price(int p_cost_price) {
+		this.p_cost_price = p_cost_price;
 	}
 
-	public int getP_SELLING_PRICE() {
-		return P_SELLING_PRICE;
+	public int getP_selling_price() {
+		return p_selling_price;
 	}
 
-	public void setP_SELLING_PRICE(int p_SELLING_PRICE) {
-		P_SELLING_PRICE = p_SELLING_PRICE;
+	public void setP_selling_price(int p_selling_price) {
+		this.p_selling_price = p_selling_price;
 	}
 
-	public int getP_DISCOUNT() {
-		return P_DISCOUNT;
+	public int getP_discount() {
+		return p_discount;
 	}
 
-	public void setP_DISCOUNT(int p_DISCOUNT) {
-		P_DISCOUNT = p_DISCOUNT;
+	public void setP_discount(int p_discount) {
+		this.p_discount = p_discount;
 	}
 
-	public String getP_CREATED() {
-		return P_CREATED;
+	public String getP_created() {
+		return p_created;
 	}
 
-	public void setP_CREATED(String p_CREATED) {
-		P_CREATED = p_CREATED;
+	public void setP_created(String p_created) {
+		this.p_created = p_created;
 	}
 
-	public int getP_STOCK() {
-		return P_STOCK;
+	public int getP_stock() {
+		return p_stock;
 	}
 
-	public void setP_STOCK(int p_STOCK) {
-		P_STOCK = p_STOCK;
+	public void setP_stock(int p_stock) {
+		this.p_stock = p_stock;
 	}
 
-	public int getREVIEW_ID() {
-		return REVIEW_ID;
+	public int getReview_id() {
+		return review_id;
 	}
 
-	public void setREVIEW_ID(int rEVIEW_ID) {
-		REVIEW_ID = rEVIEW_ID;
+	public void setReview_id(int review_id) {
+		this.review_id = review_id;
 	}
 
-	public String getREVIEW_TITLE() {
-		return REVIEW_TITLE;
+	public String getReview_title() {
+		return review_title;
 	}
 
-	public void setREVIEW_TITLE(String rEVIEW_TITLE) {
-		REVIEW_TITLE = rEVIEW_TITLE;
+	public void setReview_title(String review_title) {
+		this.review_title = review_title;
 	}
 
-	public String getREVIEW_CONTENT() {
-		return REVIEW_CONTENT;
+	public String getReview_content() {
+		return review_content;
 	}
 
-	public void setREVIEW_CONTENT(String rEVIEW_CONTENT) {
-		REVIEW_CONTENT = rEVIEW_CONTENT;
+	public void setReview_content(String review_content) {
+		this.review_content = review_content;
 	}
 
-	public String getREVIEW_RATE() {
-		return REVIEW_RATE;
+	public String getReview_rate() {
+		return review_rate;
 	}
 
-	public void setREVIEW_RATE(String rEVIEW_RATE) {
-		REVIEW_RATE = rEVIEW_RATE;
+	public void setReview_rate(String review_rate) {
+		this.review_rate = review_rate;
 	}
 
-	public String getREVIEW_IMG() {
-		return REVIEW_IMG;
+	public String getReview_img() {
+		return review_img;
 	}
 
-	public void setREVIEW_IMG(String rEVIEW_IMG) {
-		REVIEW_IMG = rEVIEW_IMG;
+	public void setReview_img(String review_img) {
+		this.review_img = review_img;
 	}
 
-	public String getREVIEW_CREATED() {
-		return REVIEW_CREATED;
+	public String getReview_create() {
+		return review_create;
 	}
 
-	public void setREVIEW_CREATED(String rEVIEW_CREATED) {
-		REVIEW_CREATED = rEVIEW_CREATED;
+	public void setReview_create(String review_create) {
+		this.review_create = review_create;
 	}
 
 	@Override
 	public String toString() {
-		return "ProductOrderReviewDTO [ORDER_ID=" + ORDER_ID + ", USERID=" + USERID + ", P_ID=" + P_ID
-				+ ", TOTAL_PRICE=" + TOTAL_PRICE + ", DELIVERY_ADDRESS=" + DELIVERY_ADDRESS + ", DELIVERY_LOC="
-				+ DELIVERY_LOC + ", DELIVERY_REQ=" + DELIVERY_REQ + ", ORDER_DATE=" + ORDER_DATE + ", ORDER_STATE="
-				+ ORDER_STATE + ", P_AMOUNT=" + P_AMOUNT + ", P_NAME=" + P_NAME + ", P_CONTENT=" + P_CONTENT + ", C_ID="
-				+ C_ID + ", P_COST_PRICE=" + P_COST_PRICE + ", P_SELLING_PRICE=" + P_SELLING_PRICE + ", P_DISCOUNT="
-				+ P_DISCOUNT + ", P_CREATED=" + P_CREATED + ", P_STOCK=" + P_STOCK + ", REVIEW_ID=" + REVIEW_ID
-				+ ", REVIEW_TITLE=" + REVIEW_TITLE + ", REVIEW_CONTENT=" + REVIEW_CONTENT + ", REVIEW_RATE="
-				+ REVIEW_RATE + ", REVIEW_IMG=" + REVIEW_IMG + ", REVIEW_CREATED=" + REVIEW_CREATED + "]";
+		return "ProductOrderReviewDTO [order_id=" + order_id + ", userid=" + userid + ", p_id=" + p_id
+				+ ", total_price=" + total_price + ", delivery_address=" + delivery_address + ", delivery_loc="
+				+ delivery_loc + ", delivery_req=" + delivery_req + ", order_date=" + order_date + ", order_state="
+				+ order_state + ", p_amount=" + p_amount + ", p_name=" + p_name + ", p_content=" + p_content + ", c_id="
+				+ c_id + ", p_cost_price=" + p_cost_price + ", p_selling_price=" + p_selling_price + ", p_discount="
+				+ p_discount + ", p_created=" + p_created + ", p_stock=" + p_stock + ", review_id=" + review_id
+				+ ", review_title=" + review_title + ", review_content=" + review_content + ", review_rate="
+				+ review_rate + ", review_img=" + review_img + ", review_create=" + review_create + "]";
 	}
-	
+
 }

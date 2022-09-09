@@ -11,7 +11,7 @@
 	
 	AnswerDTO aDTO = (AnswerDTO)session.getAttribute("aDTO");	
 	
-	String date = qDTO.getQ_CREATED();
+	String date = qDTO.getQ_created();
 	String day = date.substring(0,10);
 	System.out.print("날짜 " + day);
 %>
@@ -25,7 +25,7 @@
 			$("#detailForm").attr("action", "questionUpdate.jsp");
 		});//
 		$("#questionDelete").click(function () {
-			$("#detailForm").attr("action", "QuestionDeleteServlet?Q_ID=<%=qDTO.getQ_ID()%>");
+			$("#detailForm").attr("action", "QuestionDeleteServlet?Q_ID=<%=qDTO.getQ_id()%>");
 		});//
 		$("#before").click(function () {
 			history.back();
@@ -72,7 +72,7 @@
 				<td colspan="2"> 
 					<div class="input-group">
 					  <span class="input-group-text">제목</span>
-					  <input type="text" class="form-control shadow-none" value="<%= qDTO.getQ_TITLE() %>" readonly="readonly">
+					  <input type="text" class="form-control shadow-none" value="<%= qDTO.getQ_title() %>" readonly="readonly">
 					</div>
 				</td>
 			</tr>
@@ -86,7 +86,7 @@
 				<td> 
 					<div class="input-group">
 					  <span class="input-group-text">작성자</span>
-					  <input type="text" class="form-control shadow-none" value="<%= qDTO.getUSERID() %> " readonly="readonly">
+					  <input type="text" class="form-control shadow-none" value="<%= qDTO.getUserid() %>" readonly="readonly">
 					</div>
 				</td>
 			</tr>
@@ -94,23 +94,23 @@
 				<th colspan="2"> 
 					<div class="input-group">
 					  <span class="input-group-text">상품정보</span>
-					  <input type="text" class="form-control shadow-none"  <%if(qDTO.getP_NAME() != null){ %> value="<%=qDTO.getP_NAME() %>" <% }%>  readonly="readonly">
+					  <input type="text" class="form-control shadow-none"  <%if(qDTO.getP_name() != null){ %> value="<%=qDTO.getP_name() %>" <% }%>  readonly="readonly">
 					</div>
 				</th>
 			</tr>
 			<tr>
 				<td colspan="2">
-				  <textarea class="form-control shadow-none" rows="15" cols="50" readonly="readonly"> <%= qDTO.getQ_CONTENT() %> </textarea>
+				  <textarea class="form-control shadow-none" rows="15" cols="50" readonly="readonly"> <%= qDTO.getQ_content() %> </textarea>
 				</td>
 			</tr>
 			<tr>
-			<%if(qDTO.getQ_IMG() == null || qDTO.getQ_IMG().equals("null")){ %>
+			<%if(qDTO.getQ_img() == null || qDTO.getQ_img().equals("null")){ %>
 				<td></td>
 			<%} else { %>
 				<td>
 					<div>
 					  	<button type="button" class="btn btn-secondary" id="uploadBtu" style="padding: 2rem;">첨부파일</button>
-					  	<img id="upload" alt="" src="/eclipse/upload/<%=qDTO.getQ_IMG()%>" width="100px" height="100px" style="border: 1px solid gray;">
+					  	<img id="upload" alt="" src="/eclipse/upload/<%=qDTO.getQ_img()%>" width="100px" height="100px" style="border: 1px solid gray;">
 					</div>
 				</td>
 			<%} %>
@@ -119,7 +119,7 @@
 				<td colspan="2">
 					<div class="input-group">
 					  <span class="input-group-text">답변</span>
-					  <textarea class="form-control shadow-none" readonly="readonly" id="answerCheck"><%if(aDTO != null){ %><%= aDTO.getANSWER_CONTENT() %><%} else { %><%=qDTO.getQ_STATUS() %><%} %></textarea>
+					  <textarea class="form-control shadow-none" readonly="readonly" id="answerCheck"><%if(aDTO != null){ %><%= aDTO.getAnswer_content() %><%} else { %><%=qDTO.getQ_status() %><%} %></textarea>
 					</div>
 				</td>
 			</tr>
@@ -158,8 +158,8 @@
 			<tr>
 				<td colspan="2">
 					<div class="input-group">
-					  <textarea class="form-control" id="answer"><%if(aDTO != null){ %><%=aDTO.getANSWER_CONTENT() %><%} %></textarea>
-					  <button class="btn btn-outline-secondary" type="button" id="answerBtn" data-qid="<%=qDTO.getQ_ID()%>">답글 올리기</button>
+					  <textarea class="form-control" id="answer"><%if(aDTO != null){ %><%=aDTO.getAnswer_content() %><%} %></textarea>
+					  <button class="btn btn-outline-secondary" type="button" id="answerBtn" data-qid="<%=qDTO.getQ_id()%>">답글 올리기</button>
 					</div>
 				</td>
 			</tr>

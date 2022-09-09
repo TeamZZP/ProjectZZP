@@ -35,20 +35,20 @@
 	 		List<QuestionProductDTO> list = pDTO.getList();
 	 		for(int i = 0; i < list.size(); i++){
 	 			QuestionProductDTO qDTO = list.get(i);
-	 			String created = qDTO.getQ_CREATED();
+	 			String created = qDTO.getQ_created();
 	 			String create = created.substring(0, 10);
 
-	 			String user = qDTO.getUSERID();
+	 			String user = qDTO.getUserid();
 	 %>
-    		<td> <%= qDTO.getQ_ID() %> </td>
-    		<%if(qDTO.getP_NAME() == null){ %>
+    		<td> <%= qDTO.getQ_id() %> </td>
+    		<%if(qDTO.getP_name() == null){ %>
 	    		<td> - </td>
 	    	<% } else { %> 
-	    		<td> <%= qDTO.getP_NAME() %> </td>
+	    		<td> <%= qDTO.getP_name() %> </td>
     		<%} %>
-    		<td> <%= qDTO.getQ_CATEGORY() %> </td>
+    		<td> <%= qDTO.getQ_category() %> </td>
     		<td> <a style="text-decoration: none; color: black;" 
-    			href="QuestionOneSelect?Q_ID=<%= qDTO.getQ_ID() %>&USERID=<%=qDTO.getUSERID()%>&before=<%=before %>"> <%= qDTO.getQ_TITLE() %> </a> </td>
+    			href="QuestionOneSelect?Q_ID=<%= qDTO.getQ_id() %>&USERID=<%=qDTO.getUserid()%>&before=<%=before %>"> <%= qDTO.getQ_title() %> </a> </td>
     		<td> <%= create %> </td>
     		<td> 
     			<% 
@@ -59,7 +59,7 @@
     			<% } %>
     			<%= user.substring(0, 5).concat(use) %>
     		</td>
-    		<td <%if(qDTO.getQ_STATUS().equals("답변완료")){ %> style="color: green;" <%} %>> <%= qDTO.getQ_STATUS() %> </td>
+    		<td <%if(qDTO.getQ_status().equals("답변완료")){ %> style="color: green;" <%} %>> <%= qDTO.getQ_status() %> </td>
     	</tr>
     <%
     	}

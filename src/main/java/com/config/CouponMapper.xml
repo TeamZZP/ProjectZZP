@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="CouponMapper">
+	<select id="selectCoupon" parameterType="map" resultType="CouponDTO">
+		select * from Coupon 
+		<if test="searchName == 'COUPON_NAME' and searchName != null">
+			where COUPON_NAME like '%${searchValue}%'
+		</if>
+		<if test="searchName == 'COUPON_DISCOUNT' and searchName != null">
+			where COUPON_DISCOUNT like '%${searchValue}%'
+		</if>
+		<if test="sortBy == COUPON_DISCOUNT_up and sortBy != null">
+			order by COUPON_DISCOUNT desc
+		</if>
+		<if test="sortBy == COUPON_DISCOUNT_down and sortBy != null">
+			order by COUPON_DISCOUNT asc
+		</if>
+		<if test="sortBy == COUPON_VALIDITY and sortBy != null">
+			order by COUPON_VALIDITY desc
+		</if>
+		<if test="sortBy == COUPON_CREATED and sortBy != null">
+			order by COUPON_CREATED desc
+		</if>
+	</select>
+	<select id="countCoupon" parameterType="map" resultType="int">
+		select count(*) from Coupon
+		<if test="searchName == 'COUPON_NAME' and searchName != null">
+			where COUPON_NAME like '%${searchValue}%'
+		</if>
+		<if test="searchName == 'COUPON_DISCOUNT' and searchName != null">
+			where COUPON_DISCOUNT like '%${searchValue}%'
+		</if>
+		<if test="sortBy == COUPON_DISCOUNT_up and sortBy != null">
+			order by COUPON_DISCOUNT desc
+		</if>
+		<if test="sortBy == COUPON_DISCOUNT_down and sortBy != null">
+			order by COUPON_DISCOUNT asc
+		</if>
+		<if test="sortBy == COUPON_VALIDITY and sortBy != null">
+			order by COUPON_VALIDITY desc
+		</if>
+		<if test="sortBy == COUPON_CREATED and sortBy != null">
+			order by COUPON_CREATED desc
+		</if>
+	</select>
+</mapper>
