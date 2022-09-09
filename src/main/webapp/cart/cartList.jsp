@@ -4,6 +4,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 
+
 <style>
 .heading {
    flex: 1;
@@ -78,6 +79,10 @@ a:hover {
    display: flex;
    text-align: center;
    justify-content: space-evenly;
+}
+label{
+	font-weight: bold;
+	color: gray;
 }
 </style>
 
@@ -161,14 +166,16 @@ a:hover {
                   src="images/p_image/<%=p_image%>" width="200"
                   style="border: 10px;" height="200" ></a>
                <div class="cart_list_info" style="padding-left: 50px;" >
-               주문번호: <span name="cart_id"><%=cart_id%></span><br> 상품명: <a
+              <label > 주문번호:</label>
+               <span name="cart_id" id="cart_id" data-P_id="<%=p_id %>" ><%=cart_id%></span><br>
+               <label > 상품명:</label> <a
                      href="ProductRetrieveServlet?p_id=<%=p_id%>"> <span
                      name="p_name"
                      style="font-weight: bold; margin: 8px; display: line"><%=p_name%></span></a>
                   <br>
                   <div class="amount">
                     <div class="form-group">
-	                     <label>수량:</label>
+	                     <label >수량:</label>
 	                     	<input type="text" id="cartAmount<%=cart_id%>"
 	                        	class="p_amount form-control" name="p_amount"
 	                        	style="text-align: right; width: 80px; display:inline; margin-left: 20px;" maxlength="3"
@@ -179,7 +186,8 @@ a:hover {
 	                        	data-id="<%=userid%>" data-sum_money="<%=sum_money%>" /> <br>
 	                    </div>
                   </div>
-                  상품가격 :<span id="item_price<%=cart_id%>"  data-id="<%=cart_id%>" name="item_price"
+                 <label > 상품가격 :</label>
+                 <span id="item_price<%=cart_id%>"  data-id="<%=cart_id%>" name="item_price"
                      style="margin-bottom: 15px; font-weight: bold;" class="item_price"  ><%=p_selling_price * p_amount%>원</span><br>
                </div> <span class="cart_item_del"> <img src="images/delete.png"
                   width="20" height="20" class="delBtn" data-xxx="<%=cart_id%>"></span>
@@ -194,7 +202,7 @@ a:hover {
       
   		<div class="cart_info_div" style="font-weight:bold; font-size: 30px; padding-top: 30px; " >
             <span class="price" id="sum_money"><%=sum_money%>원</span>
-             <span style="font-size: 40px; color: gray;">+</span>
+			<span style="font-size: 40px; color: gray;">+</span>
              <span class="price" id="fee" ><%=fee%>원</span>
               <span style="font-size: 40px; color:gray;">=</span>
               <span class="price" id="total" style="color: green;"><%=total%>원</span>
@@ -224,18 +232,24 @@ a:hover {
    src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
  		  
-	 
+
 	$(function() {
 		
-		//숫자 천단위 ,찍기
-		/* $("#sum_money").text($("#sum_money").text().replace( /\,/g, '' ).replace( /(\d)(?=(?:\d{3})+(?!\d))/g, '$1,' ) );
-		$("#fee").text($("#fee").text().replace( /\,/g, '' ).replace( /(\d)(?=(?:\d{3})+(?!\d))/g, '$1,' ) );
-		$("#total").text($("#total").text().replace( /\,/g, '' ).replace( /(\d)(?=(?:\d{3})+(?!\d))/g, '$1,' ) );
+ 	//숫자 천단위 ,찍기
+	
+		var sum_money= parseInt($("#sum_money").text());
+		var fee = parseInt($("#fee").text());
+		var total = parseInt($("#total").text());
+		var item_price = parseInt($("span[name=item_price]").text());
+			
+		$("#sum_money").text(sum_money.toLocaleString('ko-KR')+"원");
+		$("#fee").text(fee.toLocaleString('ko-KR')+"원");
+		$("#total").text(total.toLocaleString('ko-KR')+"원");
+		$("#item_price").text(item_price.toLocaleString('ko-KR')+"원");
 		
-		var cart_id = $("span[name=item_price]").attr("data-id"); // 왜 첫번째만 될까..?
-		console.log(cart_id);
-		$("#item_price"+cart_id).text($("#item_price"+cart_id).text().replace( /\,/g, '' ).replace( /(\d)(?=(?:\d{3})+(?!\d))/g, '$1,' ) );
-		 */
+		console.log($("#sum_money").text())
+		
+	
 		 //주문 버튼
 		  $("#order").on("click", function() {
 	      
@@ -316,8 +330,6 @@ a:hover {
 			console.log("체크박스의 카트 아이디 : "+n);
 
 			var cart_id = $(this).attr("data-xxx");//cart_id
-			var p_amount = $("#cartAmount" + cart_id).val();//수량
-			console.log("수량 : "+p_amount);//undefined
 			var sum_money = $("#sum_money").text();//현재 장바구니 상품 금액
 			console.log("장바구니 금액 : "+sum_money);//
 			var item_price = $("#item_price" + n).text();//상품 가격
