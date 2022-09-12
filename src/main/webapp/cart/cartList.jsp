@@ -3,8 +3,10 @@
 <%@ page import="java.util.Map"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
-
-
+<%@ page import="java.text.*"%>
+<%
+	DecimalFormat df = new DecimalFormat("###,###");
+%>
 <style>
 .heading {
    flex: 1;
@@ -160,7 +162,7 @@ label{
          <ul class="cart_list" style="line-height: 50px; font-size: 20px;">
             <li>
             <input type="checkbox" name="check" id="check" checked="checked"
-               class="individual_cart_checkbox" value="<%=cart_id%>" 
+               class="individual_cart_checkbox" value="<%=cart_id%>" data-price="<%=p_selling_price%>"
                style="width: 30px; position: relative; bottom: 100px; margin-right: 10px;">
                <a href="ProductRetrieveServlet?p_id=<%=p_id%>"> <img
                   src="images/p_image/<%=p_image%>" width="200"
@@ -237,19 +239,16 @@ label{
 		
  	//숫자 천단위 ,찍기
 	
-		var sum_money= parseInt($("#sum_money").text());
+ 		var sum_money= parseInt($("#sum_money").text());
 		var fee = parseInt($("#fee").text());
 		var total = parseInt($("#total").text());
 		var item_price = parseInt($("span[name=item_price]").text());
-			
+		
 		$("#sum_money").text(sum_money.toLocaleString('ko-KR')+"원");
 		$("#fee").text(fee.toLocaleString('ko-KR')+"원");
 		$("#total").text(total.toLocaleString('ko-KR')+"원");
 		$("#item_price").text(item_price.toLocaleString('ko-KR')+"원");
 		
-		console.log($("#sum_money").text())
-		
-	
 		 //주문 버튼
 		  $("#order").on("click", function() {
 	      
@@ -272,46 +271,66 @@ label{
 				$("input[name=check]").prop("checked", true);//체크박스 전체 선택
 				
 				var sum_money = $("#sum_money").text();//현재 장바구니 상품 금액
+				sum_money = sum_money.replace(/,/g, "");//콤마 제거 문자열 변환
+				sum_money = parseInt(sum_money);//정수로
 				console.log("장바구니 금액 : "+sum_money);
 				
 				//체크박스 전체 가격 데이터 더한 값==text()
 				$("input[name=check]").each(function (index, data) {
 					var cart_id=$(this).val();
 					console.log(cart_id);
+					
 					var item_price = $("#item_price" + cart_id).text();//상품 가격
+					item_price = item_price.replace(/,/g, "");//콤마 제거 문자열 변환
+					item_price = parseInt(item_price);//정수로
 					console.log("상품 가격 : "+item_price);
 					
 					sum_money =  parseInt(sum_money) + parseInt(item_price);//장바구니에 상품 가격 추가
 					console.log("최종 장바구니 가격 : "+sum_money);
-					
-					$("#sum_money").text(sum_money+"원");
+
 					var fee = sum_money >= 50000 ? 0 : 3000;
 					var total = sum_money + fee;
-					$("#fee").text(fee+"원");
-					$("#total").text(total+"원");
+					
+
 				});
+				var sum_money2=sum_money.toLocaleString('ko-KR')+"원";
+				var fee2=fee.toLocaleString('ko-KR')+"원";
+				var total2=total.toLocaleString('ko-KR')+"원";
+				$("#sum_money").text(sum_money2);
+				$("#fee").text(fee2);
+				$("#total").text(total2);
 			} else {
 				$("input[name=check]").prop("checked", false);//체크박스 전체 선택 해제
 				
 				var sum_money = $("#sum_money").text();//현재 장바구니 상품 금액
+				sum_money = sum_money.replace(/,/g, "");//콤마 제거 문자열 변환
+				sum_money = parseInt(sum_money);//정수로
 				console.log("장바구니 금액 : "+sum_money);
 				
 				//체크박스 전체 가격 데이터 뺀 값==text()
 				$("input[name=check]").each(function (index, data) {
 					var cart_id=$(this).val();
 					console.log(cart_id);
+					
 					var item_price = $("#item_price" + cart_id).text();//상품 가격
+					item_price = item_price.replace(/,/g, "");//콤마 제거 문자열 변환
+					item_price = parseInt(item_price);//정수로
 					console.log("상품 가격 : "+item_price);
 					
 					sum_money =  parseInt(sum_money) - parseInt(item_price);//장바구니에서 상품 가격 빼기
+					console.log("최종 장바구니 가격 : "+sum_money);
+					var fee = sum_money >= 50000 ? 0 : 3000;
+					var total = sum_money + fee;
+					
+					var sum_money2=sum_money.toLocaleString('ko-KR')+"원";
+					var fee2=fee.toLocaleString('ko-KR')+"원";
+					var total2=total.toLocaleString('ko-KR')+"원";
+
+					$("#sum_money").text(sum_money2);
+					$("#fee").text(fee2);
+					$("#total").text(total2);
 				});
-				console.log("최종 장바구니 가격 : "+sum_money);
-				
-				$("#sum_money").text(sum_money+"원");
-				var fee = sum_money >= 50000 ? 0 : 3000;
-				var total = sum_money + fee;
-				$("#fee").text(fee+"원");
-				$("#total").text(total+"원");
+
 			}
 		})//end fn
 		
@@ -328,37 +347,51 @@ label{
 		$(".individual_cart_checkbox").on("click",function(){
 			var n = $(this).val();
 			console.log("체크박스의 카트 아이디 : "+n);
-
-			var cart_id = $(this).attr("data-xxx");//cart_id
+			
 			var sum_money = $("#sum_money").text();//현재 장바구니 상품 금액
-			console.log("장바구니 금액 : "+sum_money);//
+			sum_money = sum_money.replace(/,/g, "");//콤마 제거 문자열 변환
+			sum_money = parseInt(sum_money);//정수로 '원' 삭제됨
+			console.log("장바구니 금액 : "+sum_money);
+			
 			var item_price = $("#item_price" + n).text();//상품 가격
-			console.log("상품 가격 : "+item_price);//
+			item_price = item_price.replace(/,/g, "");//콤마 제거 문자열 변환
+			item_price = parseInt(item_price);//정수로
+			console.log("상품 가격 : "+item_price);
 
 			if($(this).is(":checked")==true){
 				console.log("check true");
-				console.log("상품 가격 : "+item_price);
+				console.log("체크 된 상품 가격 : "+item_price);
 				
-				sum_money = parseInt(sum_money) + parseInt(item_price);//장바구니에 상품 가격 추가
+				sum_money = sum_money + item_price;//장바구니에 상품 가격 추가
 
 				var fee = sum_money >= 50000 ? 0 : 3000;
 				var total = sum_money + fee;
-
-				$("#sum_money").text(sum_money+"원");
-				$("#fee").text(fee+"원");
-				$("#total").text(total+"원");
+				
+				var sum_money2=sum_money.toLocaleString('ko-KR')+"원";
+				var fee2=fee.toLocaleString('ko-KR')+"원";
+				var total2=total.toLocaleString('ko-KR')+"원";
+				$("#sum_money").text(sum_money2);
+				$("#fee").text(fee2);
+				$("#total").text(total2);
 			} else {
 				console.log("check false XXX");
-				console.log("상품 가격 : "+item_price);
+				console.log("체크 해제 된 상품 가격 : "+item_price);
 				
-				sum_money =  parseInt(sum_money) - parseInt(item_price);//장바구니에서 상품 가격 빼기
+				console.log(sum_money);
+				console.log(item_price);
 
+				sum_money =  sum_money - item_price;//장바구니에서 상품 가격 빼기
+				console.log(sum_money);
+				
 				var fee = sum_money >= 50000 ? 0 : 3000;
 				var total = sum_money + fee;
 
-				$("#sum_money").text(sum_money+"원");
-				$("#fee").text(fee+"원");
-				$("#total").text(total+"원");
+				var sum_money2=sum_money.toLocaleString('ko-KR')+"원";
+				var fee2=fee.toLocaleString('ko-KR')+"원";
+				var total2=total.toLocaleString('ko-KR')+"원";
+				$("#sum_money").text(sum_money2);
+				$("#fee").text(fee2);
+				$("#total").text(total2);
 			}
 		})//end individual_cart_checkbox
 		
