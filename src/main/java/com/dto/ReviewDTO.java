@@ -10,14 +10,14 @@ public class ReviewDTO {
 	String review_content; 
 	String review_rate; 
 	String review_img; 
-	String review_create; 
+	String review_created; 
 	
 	public ReviewDTO() {
 		super();
 	}
 
 	public ReviewDTO(String userid, int p_id, int order_id, int review_id, String review_title, String review_content,
-			String review_rate, String review_img, String review_create) {
+			String review_rate, String review_img, String review_created) {
 		super();
 		this.userid = userid;
 		this.p_id = p_id;
@@ -27,7 +27,7 @@ public class ReviewDTO {
 		this.review_content = review_content;
 		this.review_rate = review_rate;
 		this.review_img = review_img;
-		this.review_create = review_create;
+		this.review_created = review_created;
 	}
 
 	public String getUserid() {
@@ -94,19 +94,19 @@ public class ReviewDTO {
 		this.review_img = review_img;
 	}
 
-	public String getReview_create() {
-		return review_create;
+	public String getReview_created() {
+		return review_created;
 	}
 
-	public void setReview_create(String review_create) {
-		this.review_create = review_create;
+	public void setReview_created(String review_created) {
+		this.review_created = review_created;
 	}
 
 	@Override
 	public String toString() {
 		return "ReviewDTO [userid=" + userid + ", p_id=" + p_id + ", order_id=" + order_id + ", review_id=" + review_id
 				+ ", review_title=" + review_title + ", review_content=" + review_content + ", review_rate="
-				+ review_rate + ", review_img=" + review_img + ", review_create=" + review_create + "]";
+				+ review_rate + ", review_img=" + review_img + ", review_created=" + review_created + "]";
 	}
 
 }

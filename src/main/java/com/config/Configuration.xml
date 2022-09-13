@@ -28,6 +28,7 @@
 	<typeAlias type="com.dto.ReviewProductDTO" alias="ReviewProductDTO"/> 
 	<typeAlias type="com.dto.ProductOrderReviewDTO" alias="ProductOrderReviewDTO"/> 
 	<typeAlias type="com.dto.CouponDTO" alias="CouponDTO"/> 
+	<typeAlias type="com.dto.CouponMemberCouponDTO" alias="CouponMemberCouponDTO"/> 
 
 </typeAliases>
   <environments default="development">

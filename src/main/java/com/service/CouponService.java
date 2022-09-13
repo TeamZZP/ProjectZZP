@@ -90,4 +90,16 @@ public class CouponService {
 		return num;
 	}
 
+	public PageDTO myCouponList(int curPage, String userid) {
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		PageDTO dto = null;
+		try {
+			dto = dao.myCouponList(session, userid, curPage);
+			session.commit();
+		} finally {
+			session.close();
+		}
+		return dto;
+	}
+
 }
