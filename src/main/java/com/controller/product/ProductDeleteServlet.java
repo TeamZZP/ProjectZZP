@@ -1,6 +1,10 @@
 package com.controller.product;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.dto.MemberDTO;
 import com.dto.ProductDTO;
 import com.service.ProductService;
 
@@ -17,19 +22,38 @@ public class ProductDeleteServlet extends HttpServlet {
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		  request.setCharacterEncoding("UTF-8");
-		  int p_id = Integer.parseInt(request.getParameter("p_id")) ; 
-	      
-		  ProductService service = new ProductService();
-		  int num = service.deleteProduct(p_id);
-		  System.out.println(num);
 		  
+		  //관리자 처리
 		  HttpSession session = request.getSession();
-		  if (num==1) {
-			response.sendRedirect("AdminCategoryServlet?category=product");
-			session.setAttribute("mesg", "상품이 삭제되었습니다.");
+		  MemberDTO dto = (MemberDTO) session.getAttribute("login");
+		  if (dto.getRole()==1 && dto!=null) {
+			  
+			  String [] p_ids = request.getParameterValues("p_id");
+			  List<String> ids = Arrays.asList(p_ids);
+		      
+			  ProductService service = new ProductService();
+			  int num = service.deleteProduct(ids);
+			  System.out.println("ProductDelete 갯수>>"+num);
+			  
+			  String curPage = request.getParameter("curPage");
+			  String searchName = request.getParameter("searchName");
+			  String searchValue = request.getParameter("searchValue");
+			  String sortBy = request.getParameter("sortBy");
+			  String category = request.getParameter("category");
+			  
+			  if (num==1) {
+				response.sendRedirect("AdminCategoryServlet?curPage="+curPage
+							+"&searchName="+searchName+"&searchValue="+searchValue
+							+"&sortBy="+sortBy+"&category=product");
+			  } else {
+				  response.sendRedirect("AdminCategoryServlet?curPage="+curPage
+							+"&searchName="+searchName+"&searchValue="+searchValue
+							+"&sortBy="+sortBy+"&category=product");
+			  }
+		  
 		} else {
-			response.sendRedirect("AdminCategoryServlet?category=product");
-			session.setAttribute("mesg", "상품이 삭제되지 않았습니다. 다시 확인해주세요");
+			session.setAttribute("mesg", "잘못된 접근입니다.");
+			response.sendRedirect("MainServlet");
 		}
 	}
 

@@ -82,7 +82,6 @@ public class AdminCategoryServlet extends HttpServlet {
 			
 			url = "adminProduct.jsp";
 			
-			
 		//관리자가 작성한 챌린지 목록
 		} else if(category.equals("challenge")) {
 			map.put("userid", "admin1");
