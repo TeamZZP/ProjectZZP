@@ -66,4 +66,28 @@ public class CouponService {
 		return num;
 	}
 
+	public CouponDTO selectOneCoupon(String coupon_id) {
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		CouponDTO cDTO = null;
+		try {
+			cDTO = dao.selectOneCoupon(session, coupon_id);
+			session.commit();
+		} finally {
+			session.close();
+		}
+		return cDTO;
+	}
+
+	public int couponUpdate(CouponDTO dto) {
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		int num = 0;
+		try {
+			num = dao.couponUpdate(session, dto);
+			session.commit();
+		} finally {
+			session.close();
+		}
+		return num;
+	}
+
 }

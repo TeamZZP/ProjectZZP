@@ -67,6 +67,10 @@
 			var couponId = $(this).attr("data-couponId");
 			location.href = "AdminCouponDeleteServlet?coupon_id="+couponId;
 		});
+		$(".couponUpdate").click(function () {
+			var couponId = $(this).attr("data-couponId");
+			location.href = "AdminCouponOneSelect?coupon_id="+couponId;
+		});
 	});//end ready
 </script>
 <%
@@ -149,6 +153,9 @@ if(mesg != null){
 				<td> <%=create %> </td>
 				<td> <%=val %> </td>
 				<td>
+					<button type="button" data-couponId="<%=cDTO.getCoupon_id() %>" class="couponUpdate btn btn-outline-dark btn-sm">
+						수정
+					</button>
 					<button type="button" data-couponId="<%=cDTO.getCoupon_id() %>" class="btn btn-outline-dark btn-sm" data-bs-toggle="modal" data-bs-target="#delCoupon">
 						삭제
 					</button>

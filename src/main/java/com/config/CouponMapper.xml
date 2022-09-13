@@ -46,11 +46,11 @@
 		</if>
 	</select>
 	<insert id="couponInsert" parameterType="CouponDTO">
-		insert into coupon (COUPON_ID , COUPON_IMG, COUPON_NAME, COUPON_DISCOUNT, COUPON_CREATED, COUPON_VALIDITY)
+		insert into COUPON (COUPON_ID , COUPON_IMG, COUPON_NAME, COUPON_DISCOUNT, COUPON_CREATED, COUPON_VALIDITY)
 			values (COUPON_COUPON_ID_SEQ.nextval, null, #{coupon_name}, #{coupon_discount}, #{coupon_created}, #{coupon_validity})
 	</insert>
 	<delete id="couponDelete" parameterType="string">
-		delete from coupon where COUPON_ID = #{coupon_id}
+		delete from COUPON where COUPON_ID = #{coupon_id}
 	</delete>
 	<delete id="couponAllDel" parameterType="list">
 		delete from coupon where COUPON_ID in
@@ -58,4 +58,12 @@
 			#{couponId}
 		</foreach>
 	</delete>
+	<select id="selectOneCoupon" parameterType="string" resultType="CouponDTO">
+		select * from COUPON where COUPON_ID = #{coupon_id}
+	</select>
+	<update id="couponUpdate" parameterType="CouponDTO">
+		update COUPON set COUPON_NAME = #{coupon_name}, COUPON_DISCOUNT = #{coupon_discount}, COUPON_CREATED = #{coupon_created}, 
+			COUPON_VALIDITY = #{coupon_validity}
+			where COUPON_ID = #{coupon_id}
+	</update>
 </mapper>

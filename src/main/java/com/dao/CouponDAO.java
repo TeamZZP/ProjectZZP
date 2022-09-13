@@ -46,4 +46,14 @@ public class CouponDAO {
 		return num;
 	}
 
+	public CouponDTO selectOneCoupon(SqlSession session, String coupon_id) {
+		CouponDTO cDTO = session.selectOne("CouponMapper.selectOneCoupon", coupon_id); 
+		return cDTO;
+	}
+
+	public int couponUpdate(SqlSession session, CouponDTO dto) {
+		int num = session.update("CouponMapper.couponUpdate", dto);
+		return num;
+	}
+
 }
