@@ -153,7 +153,7 @@ if(mesg != null){
 				<td> <%=create %> </td>
 				<td> <%=val %> </td>
 				<td>
-					<button type="button" data-couponId="<%=cDTO.getCoupon_id() %>" class="couponUpdate btn btn-outline-dark btn-sm">
+					<button type="button" data-couponId="<%=cDTO.getCoupon_id() %>" class="couponUpdate btn btn-outline-success btn-sm">
 						수정
 					</button>
 					<button type="button" data-couponId="<%=cDTO.getCoupon_id() %>" class="btn btn-outline-dark btn-sm" data-bs-toggle="modal" data-bs-target="#delCoupon">
