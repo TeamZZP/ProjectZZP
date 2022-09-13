@@ -24,7 +24,7 @@
 						alert("쿠폰 시작일을 입력하십시오");
 						event.preventDefault();
 					} else {
-						$("#CouponForm").attr("action", "AdminCouponInsert");
+						$("#CouponForm").attr("action", "AdminCouponInsertServlet");
 					}
 				});
 				$("#CouponList").click(function() {

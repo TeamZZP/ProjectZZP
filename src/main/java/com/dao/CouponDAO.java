@@ -36,4 +36,14 @@ public class CouponDAO {
 		return num;
 	}
 
+	public int couponDelete(SqlSession session, String coupon_id) {
+		int num = session.delete("CouponMapper.couponDelete", coupon_id);
+		return num;
+	}
+
+	public int couponAllDel(SqlSession session, List<String> couponList) {
+		int num = session.delete("CouponMapper.couponAllDel", couponList);
+		return num;
+	}
+
 }

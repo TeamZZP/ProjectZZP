@@ -1,6 +1,7 @@
 package com.service;
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -34,6 +35,30 @@ public class CouponService {
 		int num = 0;
 		try {
 			num = dao.couponInsert(session, cDTO);
+			session.commit();
+		} finally {
+			session.close();
+		}
+		return num;
+	}
+
+	public int couponDelete(String coupon_id) {
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		int num = 0;
+		try {
+			num = dao.couponDelete(session, coupon_id);
+			session.commit();
+		} finally {
+			session.close();
+		}
+		return num;
+	}
+
+	public int couponAllDel(List<String> couponList) {
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		int num = 0;
+		try {
+			num = dao.couponAllDel(session, couponList);
 			session.commit();
 		} finally {
 			session.close();
