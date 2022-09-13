@@ -240,7 +240,7 @@ create table coupon (
 create table member_coupon( 
 	userid VARCHAR2(30) NOT NULL REFERENCES member(userid) ON DELETE CASCADE,
 	coupon_id NUMBER     NOT NULL REFERENCES coupon(coupon_id) ON DELETE CASCADE,
-	coupon_created DATE   DEFAULT sysdate    NOT NULL,
+	coupon_get DATE   DEFAULT sysdate    NOT NULL,
     coupon_status VARCHAR2(30) NOT NULL,
     coupon_used DATE 
 );
