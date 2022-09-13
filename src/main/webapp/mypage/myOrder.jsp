@@ -95,6 +95,9 @@
 	   		<a href="ProfileCategoryServlet?category=myreview&userid=<%=userid%>">내 구매후기</a>
 	   </div>
 	   <div class="col">
+	   		<a href="MyCouponServlet">내 쿠폰함</a>
+	   </div>
+	   <div class="col">
 	   		<a href="ProfileCategoryServlet?category=mychallenge&userid=<%=userid%>">내 챌린지</a>
 	   </div>
 	   <div class="col">
