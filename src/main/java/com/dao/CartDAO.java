@@ -59,5 +59,11 @@ public class CartDAO {
 		session.update("updateCart",cart);
 		
 	}
+
+	//선택한 상품 주문하기
+	public CartDTO selectCart(SqlSession session, HashMap<String, String> map) {
+		CartDTO dto = session.selectOne("selectCart",map);
+		return dto;
+	}
 	
 }
