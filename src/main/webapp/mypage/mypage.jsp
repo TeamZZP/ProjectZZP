@@ -118,17 +118,18 @@
 		<a href="#" class="btn btn-outline-success">배송 완료</a>
 		<a href="#" class="btn btn-outline-success">전체보기</a>
 	</div>
-	<div></div>
+	<div>
 		<a href="MyOrderServlet" class="btn btn-outline-success">1. 주문 내역</a>
 		<a href="#" class="btn btn-outline-success">2. 반품/취소/교환 목록</a>
-		<a href="ProfileCategoryServlet?category=myreview&userid=<%=userid%>" class="btn btn-outline-success">3. 내 구매후기</a><br>
+		<a href="ProfileCategoryServlet?category=myreview&userid=<%=userid%>" class="btn btn-outline-success">3. 내 구매후기</a>
+		<a href="" class="btn btn-outline-success">4. 내 쿠폰함</a><br>
 		<br>
-		<a href="ProfileCategoryServlet?category=mychallenge&userid=<%=userid%>" class="btn btn-outline-success">4. 내 챌린지</a>
-		<a href="ProfileCategoryServlet?category=mystamp&userid=<%=userid%>" class="btn btn-outline-success">5. 내 도장</a>
-		<a href="MyQuestionServlet" class="btn btn-outline-success">6. 내 문의 내역</a><br>
+		<a href="ProfileCategoryServlet?category=mychallenge&userid=<%=userid%>" class="btn btn-outline-success">5. 내 챌린지</a>
+		<a href="ProfileCategoryServlet?category=mystamp&userid=<%=userid%>" class="btn btn-outline-success">6. 내 도장</a>
+		<a href="MyQuestionServlet" class="btn btn-outline-success">7. 내 문의 내역</a><br>
 		<br>
-		<a href="AddressListServlet" class="btn btn-outline-success">7. 배송지 관리</a>
-		<a href="checkPasswd.jsp" class="btn btn-outline-success">8. 계정 관리</a><br>
+		<a href="AddressListServlet" class="btn btn-outline-success">8. 배송지 관리</a>
+		<a href="checkPasswd.jsp" class="btn btn-outline-success">9. 계정 관리</a><br>
 		<br>
 	</div>
 </div>
