@@ -1,6 +1,7 @@
 package com.controller.admin;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.List;
 
@@ -16,6 +17,7 @@ import com.dto.AddressDTO;
 import com.dto.MemberDTO;
 import com.dto.PageDTO;
 import com.service.AddressService;
+import com.service.ChallengeService;
 import com.service.MemberService;
 
 @WebServlet("/AdminMainServlet")
@@ -31,45 +33,42 @@ public class AdminMainServlet extends HttpServlet {
 		MemberDTO dto=(MemberDTO) session.getAttribute("login");
 		
 		//관리자 전용
-		if (dto != null && dto.getRole() == 1) {
-			//페이징 처리
-			String curPage = request.getParameter("curPage"); //현재페이지
-			if (curPage == null) { curPage = "1"; } //시작 시 1페이지로 시작
+//		if (dto != null && dto.getRole() == 1) {
+			//총 판매액
+			ChallengeService service = new ChallengeService();
+			double sales = service.getTotalSales();
+			DecimalFormat df = new DecimalFormat("\u00A4 #,###");
+			//판매액 증가율
+			double origin = sales - service.getTodaySales();
+			double increase = (sales-origin)/origin*100;
+			String salesIncrease 
+				= ( (increase >= 0)? "+" : "-" ) + String.format("%.2f%%", increase);
 			
-			//검색기준, 검색어
-			String searchName = request.getParameter("searchName");
-			String searchValue = request.getParameter("searchValue");
-			String sortBy = request.getParameter("sortBy");
-			if (sortBy == null) {sortBy="created_at";}//최초 정렬 기준
-			System.out.println(curPage+"\t"+searchName+"\t"+searchValue+"\t"+sortBy);
+			//회원수
+			int member = service.getTotalMember();
+			//회원 증가율
+			double originM = member - service.getTodayMember();
+			double increaseM = (member-originM)/originM*100;
+			String memberIncrease
+				= ( (increaseM >= 0)? "+" : "-" ) + String.format("%.2f%%", increaseM);
 			
-			//위 데이터를 map에 저장
-			HashMap<String, String> map = new HashMap<String, String>();
-			map.put("searchName", searchName);
-			map.put("searchValue", searchValue);
-			map.put("sortBy", sortBy);
+			request.setAttribute("sales", df.format(sales));
+			request.setAttribute("salesIncrease", salesIncrease);
 			
-			MemberService m_service=new MemberService();
+			request.setAttribute("member", member+" 명");
+			request.setAttribute("memberIncrease", memberIncrease);
 			
-			//전체 회원 목록 --->> 검색 기준, 검색어, 정렬 기준, 현재 페이지를 매개변수로 받음
-			PageDTO pDTO=m_service.selectAllMember(map, Integer.parseInt(curPage));
-			System.out.println(pDTO);
-			
-			request.setAttribute("pDTO", pDTO);
-			request.setAttribute("searchName", searchName);
-			request.setAttribute("searchValue", searchValue);
-			request.setAttribute("sortBy", sortBy);
-			
-			RequestDispatcher dis = request.getRequestDispatcher("adminpage.jsp");
+			RequestDispatcher dis = request.getRequestDispatcher("adminMain.jsp");
 			dis.forward(request, response);
-		} else {
-			//alert로 로그인 후 이용하세요 출력
-			String mesg="로그인이 필요합니다.";
-			session.setAttribute("mesg", mesg);
-			session.setMaxInactiveInterval(60*30);
 			
-			response.sendRedirect("LoginUIServlet");
-		}
+//		} else {
+//			//alert로 로그인 후 이용하세요 출력
+//			String mesg="로그인이 필요합니다.";
+//			session.setAttribute("mesg", mesg);
+//			session.setMaxInactiveInterval(60*30);
+//			
+//			response.sendRedirect("LoginUIServlet");
+//		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

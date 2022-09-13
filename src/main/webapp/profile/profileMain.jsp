@@ -132,8 +132,8 @@
 		  <div class="text-center mt-2">
 		        <% for (int i = 0; i < reviewListSize; i++) { 
 		        	ReviewDTO reviewDTO = reviewList.get(i);
-		        	int review_id = reviewDTO.getREVIEW_ID();
-		        	int p_id = reviewDTO.getP_ID();
+		        	int review_id = reviewDTO.getReview_id();
+		        	int p_id = reviewDTO.getP_id();
 		        	HashMap<String, String> map = prodMap.get(p_id);
 		        	String image_route = map.get("IMAGE_ROUTE");
 		        %>

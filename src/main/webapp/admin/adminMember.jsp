@@ -127,7 +127,7 @@
 </form>
 </table>
 	<!-- 페이징 -->
-	 <div class="p-2 text-center">
+	 <div class="p-2 text-center memberPage">
 	<%
 		int curPage = pDTO.getCurPage();
 		int perPage = pDTO.getPerPage();
