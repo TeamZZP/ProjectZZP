@@ -240,6 +240,7 @@
 		<a href="#" class="btn btn-outline-success">배송 완료</a>
 		<a href="#" class="btn btn-outline-success">전체보기</a>
 	</div>
+	<div>
 		<a href="MyOrderServlet" class="btn btn-outline-success">1. 주문 내역</a>
 		<a href="#" class="btn btn-outline-success">2. 반품/취소/교환 목록</a>
 		<a href="ProfileCategoryServlet?category=myreview&userid=<%=userid%>" class="btn btn-outline-success">3. 내 구매후기</a>
@@ -252,6 +253,7 @@
 		<a href="AddressListServlet" class="btn btn-outline-success">8. 배송지 관리</a>
 		<a href="checkPasswd.jsp" class="btn btn-outline-success">9. 계정 관리</a><br>
 		<br>
+	</div>
 </div>
 
 <div class="wrap col-md-9">
