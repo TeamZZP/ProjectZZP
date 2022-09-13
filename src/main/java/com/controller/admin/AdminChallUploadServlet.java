@@ -133,8 +133,6 @@ public class AdminChallUploadServlet extends HttpServlet {
 							
 						}//end else
 					}//end while
-					
-					
 				} catch (FileUploadException e) {
 					e.printStackTrace();
 				}
