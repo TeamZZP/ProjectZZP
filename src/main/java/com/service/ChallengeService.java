@@ -489,11 +489,11 @@ public class ChallengeService {
 		return n;
 	}
 
-	public int getMemberNum() {
+	public int getTotalMember() {
 		int n = 0;
 		SqlSession session = MySqlSessionFactory.getSqlSession();
 		try {
-			n = dao.getMemberNum(session);
+			n = dao.getTotalMember(session);
 		} finally {
 			session.close();
 		}

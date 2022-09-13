@@ -6,9 +6,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<% String before = "myQuestion"; 
+<% 
+	String before = "myQuestion"; 
 
-	//session에 저장된 userid 읽어오기 
 	MemberDTO member = (MemberDTO) session.getAttribute("login"); 
 	String userid = null;
 	if (member != null) {
@@ -41,6 +41,9 @@
 	   		<a href="ProfileCategoryServlet?category=myreview&userid=<%=userid%>">내 구매후기</a>
 	   </div>
 	   <div class="col">
+	   		<a href="MyCouponServlet">내 쿠폰함</a>
+	   </div>
+	   <div class="col">
 	   		<a href="ProfileCategoryServlet?category=mychallenge&userid=<%=userid%>">내 챌린지</a>
 	   </div>
 	   <div class="col">
@@ -71,26 +74,26 @@
 		PageDTO pDTO  = (PageDTO)session.getAttribute("myList");
 		List<QuestionProductDTO> myList = pDTO.getList();
 		for(QuestionProductDTO qDTO : myList){
-			String date = qDTO.getQ_CREATED();
+			String date = qDTO.getQ_created();
 			String day = date.substring(0,10);
 			System.out.print("날짜 " + day);
 	%>
 	<tr>
-		<td> <%= qDTO.getQ_ID() %> </td>
-		<%if(qDTO.getP_NAME() == null){ %>
+		<td> <%= qDTO.getQ_id() %> </td>
+		<%if(qDTO.getP_name() == null){ %>
 	    	<td> - </td>
 	    <% } else { %> 
-	    	<td> <%= qDTO.getP_NAME() %> </td>
+	    	<td> <%= qDTO.getP_name() %> </td>
     	<%} %> 
-		<td> <%= qDTO.getQ_CATEGORY() %> </td>
+		<td> <%= qDTO.getQ_category() %> </td>
 		<td>
 			<a style="text-decoration: none; color: black;" 
-    			href="QuestionOneSelect?Q_ID=<%= qDTO.getQ_ID() %>&USERID=<%=qDTO.getUSERID()%>&before=<%=before%>">
-		  	<%= qDTO.getQ_TITLE() %> 
+    			href="QuestionOneSelect?Q_ID=<%= qDTO.getQ_id() %>&USERID=<%=qDTO.getUserid()%>&before=<%=before%>">
+		  	<%= qDTO.getQ_title() %> 
 		 	</a>
 		</td>
 		<td> <%= day %> </td>
-		<td <%if(qDTO.getQ_STATUS().equals("답변완료")){ %> style="color: green;" <%} %>> <%= qDTO.getQ_STATUS() %> </td>
+		<td <%if(qDTO.getQ_status().equals("답변완료")){ %> style="color: green;" <%} %>> <%= qDTO.getQ_status() %> </td>
 	</tr>
 	<%	} %>
 	<tr>

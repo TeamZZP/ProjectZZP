@@ -129,8 +129,12 @@ p_discount=#{p_discount}, p_stock=#{p_stock}, userid='admin1'
 where p_id=#{p_id}
 </update>
 
-<delete id="deleteProduct">
-delete from product where p_id=#{p_id}
+<delete id="deleteProduct" parameterType="list">
+delete from product
+where p_id in
+	<foreach item="id" collection="list" open="(" separator="," close=")">
+		#{id}
+	</foreach>
 </delete>
 
 <!-- 찜 갯수  -->

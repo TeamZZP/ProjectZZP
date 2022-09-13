@@ -7,9 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-<jsp:include page="common/header.jsp" flush="true"></jsp:include><br>
-<jsp:include page="admin/adminCategory.jsp" flush="true"></jsp:include>
-<jsp:include page="admin/adminCouponInsert.jsp" flush="true"></jsp:include>
-<jsp:include page="common/footer.jsp" flush="true"></jsp:include><br>
+	<jsp:include page="common/header.jsp" flush="true"></jsp:include><br>
+	<jsp:include page="admin/adminCategory.jsp" flush="true"></jsp:include>
+	<jsp:include page="admin/adminCouponInsert.jsp" flush="true"></jsp:include>
+	<jsp:include page="common/footer.jsp" flush="true"></jsp:include><br>
 </body>
 </html>

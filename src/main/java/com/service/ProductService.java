@@ -134,18 +134,18 @@ public class ProductService {
 		return num;
 	}
 
-	public int deleteProduct(int p_id) {
+	public int deleteProduct(List<String> ids) {
 		int num = 0;
 		SqlSession session = MySqlSessionFactory.getSqlSession();
 		try {
-			num = dao.deleteProduct(session, p_id);
+			num = dao.deleteProduct(session, ids);
         	session.commit();
         }finally {
         	session.close();
         }
 		return num;
 	}
-
+	
 	public int likeCount(String userid) {
 		int n = 0;
 		SqlSession session = MySqlSessionFactory.getSqlSession();
@@ -296,6 +296,8 @@ public class ProductService {
 		}
 		return num;
 	}
+
+	
 
 
 

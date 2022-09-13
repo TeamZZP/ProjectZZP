@@ -67,8 +67,8 @@ public class ProductDAO {
 		return session.update("updateProduct", map);
 	}
 
-	public int deleteProduct(SqlSession session, int p_id) {
-		return session.delete("deleteProduct", p_id);
+	public int deleteProduct(SqlSession session, List<String> ids) {
+		return session.delete("deleteProduct", ids);
 	}
 
 	public int likeCount(SqlSession session, String userid) {

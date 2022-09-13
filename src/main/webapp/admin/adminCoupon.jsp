@@ -34,46 +34,44 @@
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
-		//상품검색
 		$("#searchCoupon").click(function() {
-			$("#CouponForm").submit();
+			$("#couponForm").submit();
 		});
-		//정렬 기준 선택시 form 제출
-		$("#sortBy").on("change", function() {
-			$("#CouponForm").submit();
+		$("#sortBy").change(function() {
+			$("#couponForm").submit();
 		});
-		//관리자페이지 카테고리
-		$(".category").click(function() {
-			let category = $(this).attr("data-category");
-			location.href = "AdminCategoryServlet?category=" + category;
-		});
-		//상품검색
-		$("#searchCoupon").click(function() {
-			$("#CouponForm").submit();
-		});
-		//정렬 기준 선택시 form 제출
-		$("#sortBy").on("change", function() {
-			$("#CouponForm").submit();
-		});
-		//상품등록 버튼
-		$("#addCoupon").click(function() {
-			location.href = "../adminProductAdd.jsp";
-		});
-		//체크박스 전체선택
 		$("#checkAll").click(function() {
 			$(".delCheck").prop('checked', $(this).prop('checked'));
 		});
-		//체크박스 선택 삭제
 		$(".delCheckBtn").click(function() {
-			if ($('.delCheck:checked').length == 0) {
+			if ($(".delCheck:checked").length == 0) {
 				$("#modalBtn").trigger("click");
-				$("#mesg").text("삭제할 상품을 선택해 주세요.");
+				$("#mesg").text("삭제할 쿠폰을 선택해 주세요.");
+				$("#okBtn").html("<button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>취소</button>");
 			} else {
 				$("#modalBtn").trigger("click");
-				$("#mesg").html("선택한 상품을 삭제하시겠습니까?");
+				$("#mesg").html("선택한 쿠폰을 삭제하시겠습니까?");
+				$("#okBtn").html("<button type='button' id='allDelBtn' class='btn btn-success'>확인</button>"
+						+"<button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>취소</button>");
+				$("#allDelBtn").click(function () {
+					var allDel = $(".delCheck:checked");
+					var delId = "";
+					$.each(allDel, function (i, e) {
+						delId += e.value + ",";
+					});
+					location.href = "AdminCouponAllDeleteServlet?coupon_id="+delId;
+				});
 			}
 		});
-	});
+		$(".delCoupon").click(function () {
+			var couponId = $(this).attr("data-couponId");
+			location.href = "AdminCouponDeleteServlet?coupon_id="+couponId;
+		});
+		$(".couponUpdate").click(function () {
+			var couponId = $(this).attr("data-couponId");
+			location.href = "AdminCouponOneSelect?coupon_id="+couponId;
+		});
+	});//end ready
 </script>
 <%
 String mesg = (String)session.getAttribute("mesg");
@@ -90,33 +88,32 @@ if(mesg != null){
 	String searchName = (String) request.getAttribute("searchName");
 	String searchValue = (String) request.getAttribute("searchValue");
 	String sortBy = (String) request.getAttribute("sortBy");
-	System.out.println(sortBy);
 %>
 
 <div class="container col-md-auto">
 <div class="row justify-content-md-center">
-	<form action="AdminCategoryServlet" id="CouponForm">
-	<input type="hidden" name="category" value="coupon">
+	<form action="AdminCategoryServlet" id="couponForm">
+		<input type="hidden" name="category" value="coupon">
 		<div class="container mt-2 mb-2">
 			<div class="row">
 			  	<div class="col">
 					<select class="form-select sortBy" name="searchName" data-style="btn-info" id="inputGroupSelect01">
 						<option selected disabled hidden>검색 기준</option>
-						<option value="COUPON_NAME" <% if("COUPON_NAME".equals(searchName)){%> selected <%}%>>쿠폰이름</option>
-						<option value="COUPON_DISCOUNT" <% if("COUPON_DISCOUNT".equals(searchName)){%> selected <%}%>>할인율</option>
+						<option value="coupon_name" <% if("coupon_name".equals(searchName)){%> selected <%}%>>쿠폰이름</option>
+						<option value="coupon_discount" <% if("coupon_discount".equals(searchName)){%> selected <%}%>>할인율</option>
 					</select> 
 					<input type="text" name="searchValue" class="form-control searchValue" 
 		  				<% if(searchValue!=null && !searchValue.equals("null")) {%>value="<%= searchValue %>"<% } %>>
-		  			<button type="button" class="btn btn-success" id="searchProd" style="margin-top: -5px;">검색</button>
+		  			<button type="button" class="btn btn-success" id="searchCoupon" style="margin-top: -5px;">검색</button>
 		  	  	</div>
 	      	  	<div class="col">
 	      	  		<div class="float-end">
 					  <select class="form-select sortBy" name="sortBy" id="sortBy" data-style="btn-info">
 						    <option selected disabled hidden>정렬</option>
-						    <option value="COUPON_DISCOUNT_up" <% if("COUPON_DISCOUNT_up".equals(sortBy)){%>selected<%}%>>할인율 높은순</option>
-						    <option value="COUPON_DISCOUNT_down" <% if("COUPON_DISCOUNT_down".equals(sortBy)){%>selected<%}%>>할인율 낮은순</option>
-						    <option value="COUPON_VALIDITY" <% if("COUPON_VALIDITY".equals(sortBy)){%>selected<%}%>>유효기간순</option>
-						    <option value="COUPON_CREATED" <% if("COUPON_CREATED".equals(sortBy)){%>selected<%}%>>등록일순</option>
+						    <option value="coupon_discount_up" <% if("coupon_discount_up".equals(sortBy)){%>selected<%}%>>할인율 높은순</option>
+						    <option value="coupon_discount_down" <% if("coupon_discount_down".equals(sortBy)){%>selected<%}%>>할인율 낮은순</option>
+						    <option value="coupon_validity" <% if("coupon_validity".equals(sortBy)){%>selected<%}%>>유효기간순</option>
+						    <option value="coupon_created" <% if("coupon_created".equals(sortBy)){%>selected<%}%>>등록일순</option>
 					  </select>
 					  <a href="adminCouponInsert.jsp" class="btn btn-success" style="margin-top: -5px;">쿠폰등록</a>
 				  </div>
@@ -156,10 +153,13 @@ if(mesg != null){
 				<td> <%=create %> </td>
 				<td> <%=val %> </td>
 				<td>
-					<button type="button" id="delCoupon<%=cDTO.getCoupon_id() %>" data-id="<%=cDTO.getCoupon_id() %>" class="btn btn-outline-dark btn-sm" data-bs-toggle="modal" data-bs-target="#deleteCoupon<%=cDTO.getCoupon_id() %>">
+					<button type="button" data-couponId="<%=cDTO.getCoupon_id() %>" class="couponUpdate btn btn-outline-success btn-sm">
+						수정
+					</button>
+					<button type="button" data-couponId="<%=cDTO.getCoupon_id() %>" class="btn btn-outline-dark btn-sm" data-bs-toggle="modal" data-bs-target="#delCoupon">
 						삭제
 					</button>
-					<div class="modal fade modal-first" id="deleteCoupon<%=cDTO.getCoupon_id()%>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+					<div class="modal fade modal-first" id="delCoupon" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 					  <div class="modal-dialog">
 					    <div class="modal-content">
 					      <div class="modal-header">
@@ -170,7 +170,7 @@ if(mesg != null){
 					        선택한 쿠폰을 삭제하시겠습니까?
 					      </div>
 					      <div class="modal-footer">
-					        <button type="button" name="delete" id="delCoupon<%=cDTO.getCoupon_id() %>" data-id="<%=cDTO.getCoupon_id() %>" class="btn btn-success">삭제</button>
+					        <button type="button" data-couponId="<%=cDTO.getCoupon_id() %>" class="delCoupon btn btn-success">삭제</button>
 					        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
 					      </div>
 					    </div> 
@@ -184,9 +184,27 @@ if(mesg != null){
 		</table>
 		<div>
 		  <div class="float-end me-3" style="margin-top: -8px;">
-			<button type="button" class="delCheckBtn btn btn-outline-dark btn-sm" style="width: 80px;"
-							data-bs-target="#deleteModal" data-bs-id="">선택삭제</button>
+			<button type="button" class="delCheckBtn btn btn-outline-dark btn-sm" style="width: 80px;" data-bs-target="#deleteModal">
+				선택삭제
+			</button>
 		  </div>
+		  
+			<div class="modal fade" id="checkVal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
+			  <div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h5 class="modal-title">ZZP</h5>
+			        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			      </div>
+			      <div class="modal-body">
+			        <p id="mesg"></p>
+			      </div>
+			      <div class="modal-footer" id="okBtn">
+			      </div>
+			    </div>
+			  </div>
+			</div>
+			<button type="button" id="modalBtn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#checkVal">modal</button>
 		</div>
 		 <div class="p-2 text-center">
 		<%
@@ -211,22 +229,3 @@ if(mesg != null){
 	</form> 
 </div>
 </div>
-<!-- 모달 -->
-<div class="modal fade" id="checkVal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">ZZP</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <p id="mesg"></p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="delReportBtn btn btn-success">확인</button>
-		<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-      </div>
-    </div>
-  </div>
-</div>
-<button type="button" id="modalBtn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#checkVal">modal</button>

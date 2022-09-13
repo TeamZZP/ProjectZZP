@@ -63,7 +63,7 @@
 		background-color: #F8F8F8;
 	}
 	.greenContainer {/* 녹색 배경 */
-		height: 132px;
+		height: 120px;
 		background-color: #24855b;
 		
 		display: flex;
@@ -161,46 +161,13 @@
 	.listContainer .right {
 		margin-left: auto;
 	}
-	/* ==================== 내지갑의 보유 적립금 들어가는 부분 ==================== */
-	.listContainer .smallLight {
-		font-size: 14px;
-		color: #c2c2c2;
-	}
-	.listContainer .smallLight > span {
-		margin-left: 10px;
-	}
-	.listContainer .right .blct {
-		font-size: 14px;
-		font-weight: bold;
-		margin-right: 5px;
-	}
-	/* 공지사항 이용안내 고객센터 */
-	.infoContainer {
-		background-color: white;
-		display: flex;
-		height: 100px;
-		margin-bottom: 10px;
-	}
-	.infoContainer .item {
-		flex-grow: 1;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		flex-direction: column;
-		font-size: 13px;
-		text-decoration: none;
-		color: black;
-	}
-	.infoContainer .item > div:first-child {
-		margin-bottom: 2px;
-	}
 </style>
-<div class="container col-md-8">
+<div class="container col-md-10">
 <input type="hidden" name="old_file" id="old_file" value="<%= profile_img %>">
 
 <div class="justify-content-center">
 <div class="row">
-<div class="col-md-5">
+<div class="col-md-3">
 	<div class="card" style="width: 16rem;">
 	  <div class="img" style="padding: 30px 30px 30px 30px;">
 	  	<a>
@@ -266,6 +233,8 @@
 		<!-- open modal -->
 	</div>
 </div>
+<<<<<<< HEAD
+=======
 <div class="col-md-7">
 	<div style="padding-bottom: 70px;">
 		<a href="#" class="btn btn-outline-success">입금, 결제</a>
@@ -275,38 +244,39 @@
 	</div>
 		<a href="MyOrderServlet" class="btn btn-outline-success">1. 주문 내역</a>
 		<a href="#" class="btn btn-outline-success">2. 반품/취소/교환 목록</a>
-		<a href="ProfileCategoryServlet?category=myreview&userid=<%=userid%>" class="btn btn-outline-success">3. 내 구매후기</a><br>
+		<a href="ProfileCategoryServlet?category=myreview&userid=<%=userid%>" class="btn btn-outline-success">3. 내 구매후기</a>
+		<a href="MyCouponServlet" class="btn btn-outline-success">4. 내 쿠폰함</a><br>
 		<br>
-		<a href="ProfileCategoryServlet?category=mychallenge&userid=<%=userid%>" class="btn btn-outline-success">4. 내 챌린지</a>
-		<a href="ProfileCategoryServlet?category=mystamp&userid=<%=userid%>" class="btn btn-outline-success">5. 내 도장</a>
-		<a href="MyQuestionServlet" class="btn btn-outline-success">6. 내 문의 내역</a><br>
+		<a href="ProfileCategoryServlet?category=mychallenge&userid=<%=userid%>" class="btn btn-outline-success">5. 내 챌린지</a>
+		<a href="ProfileCategoryServlet?category=mystamp&userid=<%=userid%>" class="btn btn-outline-success">6. 내 도장</a>
+		<a href="MyQuestionServlet" class="btn btn-outline-success">7. 내 문의 내역</a><br>
 		<br>
-		<a href="AddressListServlet" class="btn btn-outline-success">7. 배송지 관리</a>
-		<a href="checkPasswd.jsp" class="btn btn-outline-success">8. 계정 관리</a><br>
+		<a href="AddressListServlet" class="btn btn-outline-success">8. 배송지 관리</a>
+		<a href="checkPasswd.jsp" class="btn btn-outline-success">9. 계정 관리</a><br>
 		<br>
 </div>
+>>>>>>> e1fef060eb8770f6823b36a24ac82e028c667d68
 
-
-<div class="wrap">
+<div class="wrap col-md-9">
 	<div class="greenContainer">
 		<div>
-			<div class="grade">회원 등급</div>
-			<div class="name">회원 username</div>
+			<div class="grade">id : <%= userid %></div>
+			<div class="name"><%= username %>님</div>
 		</div>
 		<div class="modify">i</div>
 	</div>
 	<div class="summaryContainer">
 		<div class="item">
-			<div class="number">354</div>
-			<div>단골상점</div>
-		</div>
-		<div class="item">
-			<div class="number">354</div>
+			<div class="number">000</div>
 			<div>구매 후기</div>
 		</div>
 		<div class="item">
-			<div class="number">354</div>
-			<div>적립금</div>
+			<div class="number">111</div>
+			<div>참여한 챌린지</div>
+		</div>
+		<div class="item">
+			<div class="number">999</div>
+			<div>쿠폰</div>
 		</div>				
 	</div>
 	<div class="shippingStatusContainer">
@@ -344,7 +314,7 @@
 		</div>
 	</div>
 	<div class="listContainer">
-		<a href="#" class="item">
+		<a href="MyOrderServlet" class="item">
 			<div class="icon">§</div>
 			<div class="text">주문 내역<span class="circle"></span></div>
 			<div class="right">></div>
@@ -354,81 +324,58 @@
 			<div class="text">반품/취소/교환 목록</div>
 			<div class="right">></div>
 		</a>
-		<a href="#" class="item">
+		<a href="ProfileCategoryServlet?category=myreview&userid=<%=userid%>" class="item">
 			<div class="icon">§</div>
 			<div class="text">구매 후기</div>
 			<div class="right">></div>
 		</a>
-		<a href="#" class="item">
+		<a href="ProfileCategoryServlet?category=mychallenge&userid=<%=userid%>" class="item">
 			<div class="icon">§</div>
 			<div class="text">내 챌린지</div>
 			<div class="right">></div>
 		</a>
-		<a href="#" class="item">
+		<a href="ProfileCategoryServlet?category=mystamp&userid=<%=userid%>" class="item">
 			<div class="icon">§</div>
 			<div class="text">내 도장</div>
 			<div class="right">></div>
 		</a>
-		<a href="#" class="item">
+		<a href="MyQuestionServlet" class="item">
 			<div class="icon">§</div>
 			<div class="text">내 문의 내역</div>
 			<div class="right">></div>
 		</a>
-		<a href="#" class="item">
+		<a href="AddressListServlet" class="item">
 			<div class="icon">§</div>
 			<div class="text">배송지 관리</div>
 			<div class="right">></div>
 		</a>
-		<a href="#" class="item">
+		<a href="PasswdCheckServlet" class="item">
 			<div class="icon">§</div>
 			<div class="text">계정 관리</div>
 			<div class="right">></div>
 		</a>
 	</div>
-	<div class="listContainer">
-		<a href="#" class="item">
-			<div class="icon">§</div>
-			<div class="text">
-				<span>내지갑</span>
-				<span class="smallLight">
-					<span>|</span>
-					<span>보유 적립금</span>
-				</span>
-			</div>
-			<div class="right">
-				<span class="blct">175 BLCT</span>
-			></div>
-		</a>
-		<a href="#" class="item">
-			<div class="icon">§</div>
-			<div class="text">알림</div>
-			<div class="right">></div>
-		</a>
-		<a href="#" class="item">
-			<div class="icon">§</div>
-			<div class="text">설정</div>
-			<div class="right">></div>
-		</a>
-	</div>
-	<div class="infoContainer">
-		<a href="#" class="item">
-			<div>icon</div>
-			<div>공지사항</div>
-		</a>
-		<a href="#" class="item">
-			<div>icon</div>
-			<div>이용안내</div>
-		</a>
-		<a href="#" class="item">
-			<div>icon</div>
-			<div>고객센터</div>
-		</a>
-	</div>
 </div>
 
-
-
-
+<%-- <div class="col-md-7">
+	<div style="padding-bottom: 70px;">
+		<a href="#" class="btn btn-outline-success">입금, 결제</a>
+		<a href="#" class="btn btn-outline-success">배송중</a>
+		<a href="#" class="btn btn-outline-success">배송 완료</a>
+		<a href="#" class="btn btn-outline-success">전체보기</a>
+	</div>
+		<a href="MyOrderServlet" class="btn btn-outline-success">1. 주문 내역</a>
+		<a href="#" class="btn btn-outline-success">2. 반품/취소/교환 목록</a>
+		<a href="ProfileCategoryServlet?category=myreview&userid=<%=userid%>" class="btn btn-outline-success">3. 내 구매후기</a><br>
+		<br>
+		<a href="ProfileCategoryServlet?category=mychallenge&userid=<%=userid%>" class="btn btn-outline-success">4. 내 챌린지</a>
+		<a href="ProfileCategoryServlet?category=mystamp&userid=<%=userid%>" class="btn btn-outline-success">5. 내 도장</a>
+		<a href="MyQuestionServlet" class="btn btn-outline-success">6. 내 문의 내역</a><br>
+		<br>
+		<a href="AddressListServlet" class="btn btn-outline-success">7. 배송지 관리</a>
+		<a href="PasswdCheckServlet" class="btn btn-outline-success">8. 계정 관리</a><br>
+		<br>
+</div> --%>
 </div>
 </div>
 </div>

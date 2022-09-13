@@ -229,7 +229,7 @@ CREATE TABLE answer (
 -- 쿠폰
 create table coupon ( 
   coupon_id NUMBER PRIMARY KEY,
-  coupon_img VARCHAR2(300) NOT NULL,
+  coupon_img VARCHAR2(300),
   coupon_name VARCHAR2(50) NOT NULL,
   coupon_discount NUMBER NOT NULL,
   coupon_created DATE DEFAULT sysdate NOT NULL,
@@ -240,9 +240,15 @@ create table coupon (
 create table member_coupon( 
 	userid VARCHAR2(30) NOT NULL REFERENCES member(userid) ON DELETE CASCADE,
 	coupon_id NUMBER     NOT NULL REFERENCES coupon(coupon_id) ON DELETE CASCADE,
-	coupon_created DATE   DEFAULT sysdate    NOT NULL,
+	coupon_get DATE   DEFAULT sysdate    NOT NULL,
     coupon_status VARCHAR2(30) NOT NULL,
     coupon_used DATE 
+);
+
+-- 방문자수 카운터
+create table counter ( 
+	count NUMBER NOT NULL,
+	count_date DATE NOT NULL
 );
 
 -- 시퀀스

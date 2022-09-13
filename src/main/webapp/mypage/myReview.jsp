@@ -106,6 +106,9 @@
 	   		<a href="ProfileCategoryServlet?category=myreview&userid=<%=userid%>" class="currCategory">내 구매후기</a>
 	   </div>
 	   <div class="col">
+	   		<a href="MyCouponServlet">내 쿠폰함</a>
+	   </div>
+	   <div class="col">
 	   		<a href="ProfileCategoryServlet?category=mychallenge&userid=<%=userid%>">내 챌린지</a>
 	   </div>
 	   <div class="col">
@@ -140,7 +143,7 @@
 		String review_content = dto.getReview_content();
 		String review_rate = dto.getReview_rate();
 		String review_img = dto.getReview_img();
-		String review_created = dto.getReview_create().substring(0,10);
+		String review_created = dto.getReview_created().substring(0,10);
 		
 		HashMap<String, String> map = prodMap.get(p_id);
 		String p_name = map.get("P_NAME");
