@@ -233,8 +233,6 @@
 		<!-- open modal -->
 	</div>
 </div>
-<<<<<<< HEAD
-=======
 <div class="col-md-7">
 	<div style="padding-bottom: 70px;">
 		<a href="#" class="btn btn-outline-success">입금, 결제</a>
@@ -255,7 +253,6 @@
 		<a href="checkPasswd.jsp" class="btn btn-outline-success">9. 계정 관리</a><br>
 		<br>
 </div>
->>>>>>> e1fef060eb8770f6823b36a24ac82e028c667d68
 
 <div class="wrap col-md-9">
 	<div class="greenContainer">
