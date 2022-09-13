@@ -213,7 +213,7 @@ $(document).ready(function () {
 </div>
 
 	<!-- 페이징 -->
-	  <div class="p-2 text-center">
+	  <div class="p-2 text-center reportPage">
 	  <% 
 		    int curPage = pDTO.getCurPage(); 
 		    int perPage = pDTO.getPerPage(); 

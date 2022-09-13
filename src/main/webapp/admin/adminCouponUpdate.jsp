@@ -1,3 +1,4 @@
+<%@page import="com.dto.CouponDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
@@ -6,7 +7,7 @@
 	$(document).ready(
 			function() {
 				$("#coupon_name").focus();
-				$("#CouponInsert").click(function() {
+				$("#CouponUpdate").click(function() {
 					var coupon_name = $("#coupon_name").val();
 					var coupon_discount = $("#coupon_discount").val();
 					var coupon_validity = $("#coupon_validity").val();
@@ -24,7 +25,7 @@
 						alert("쿠폰 시작일을 입력하십시오");
 						event.preventDefault();
 					} else {
-						$("#CouponForm").attr("action", "AdminCouponInsertServlet");
+						$("#CouponUpdateForm").attr("action", "AdminCouponUpdateServlet");
 					}
 				});
 				$("#CouponList").click(function() {
@@ -34,20 +35,28 @@
 			});//end ready
 </script>
 
-<form id="CouponForm" method="post">
+<form id="CouponUpdateForm" method="post">
 <div class="container justify-content-center">
 <div class="row">
 	<div class="col-md-5"></div>
 	<div class="col-md-5">
+		<%
+			CouponDTO cDTO = (CouponDTO)session.getAttribute("cDTO");
+			String created = cDTO.getCoupon_created().substring(0,10);
+			String val = cDTO.getCoupon_validity().substring(0,10);
+		%>
 		<table style="text-align: left; vertical-align: middle;">
 			<tr>
-				<td colspan="3"> <b>쿠폰 등록</b> <hr> </td>
+				<td colspan="3"> 
+					<b>쿠폰 등록</b> <hr> 
+					<input type="hidden" name="coupon_id" value="<%=cDTO.getCoupon_id()%>">
+				</td>
 			</tr>
 			<tr>
 				<td colspan="3"> 
 					<b>쿠폰 이름</b>
 					<div class="input-group">
-					  <input type="text" class="form-control" name="coupon_name" id="coupon_name">
+					  <input type="text" class="form-control" name="coupon_name" id="coupon_name" value="<%=cDTO.getCoupon_name()%>">
 					</div>
 				</td>
 			</tr>
@@ -55,7 +64,7 @@
 				<td colspan="3">
 					<b>할인율</b>
 					<div class="input-group">
-					  <input type="text" class="form-control" name="coupon_discount" id="coupon_discount">
+					  <input type="text" class="form-control" name="coupon_discount" id="coupon_discount" value="<%=cDTO.getCoupon_discount()%>">
 					</div>
 				</td>
 			</tr>
@@ -63,7 +72,7 @@
 				<td colspan="3">
 					<b>쿠폰 시작일</b>
 					<div class="input-group">
-					   <input type="text" class="form-control" name="coupon_created" id="coupon_created" placeholder="ex) YY/MM/DD">
+					   <input type="text" class="form-control" name="coupon_created" id="coupon_created"  value="<%=created%>">
 					</div>
 				</td>
 			</tr>
@@ -71,14 +80,14 @@
 				<td colspan="3">
 					<b>쿠폰 만료일</b>
 					<div class="input-group">
-					    <input type="text" class="form-control" name="coupon_validity" id="coupon_validity" placeholder="ex) YY/MM/DD">
+					    <input type="text" class="form-control" name="coupon_validity" id="coupon_validity"  value="<%=val%>">
 					</div>
 				</td>
 			</tr>
 			<tr>
 				<td colspan="2"> <button id="CouponList" class="btn btn-success">목록</button> </td>
 				<td style="text-align: right;">
-					<button id="CouponInsert" type="submit" class="btn btn-success">등록</button>
+					<button id="CouponUpdate" type="submit" class="btn btn-success">등록</button>
 					<button id="CouponCancel" type="reset" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#aa">취소</button>
 					
 					<div class="modal fade" id="aa" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">

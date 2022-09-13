@@ -229,7 +229,7 @@ CREATE TABLE answer (
 -- 쿠폰
 create table coupon ( 
   coupon_id NUMBER PRIMARY KEY,
-  coupon_img VARCHAR2(300) NOT NULL,
+  coupon_img VARCHAR2(300),
   coupon_name VARCHAR2(50) NOT NULL,
   coupon_discount NUMBER NOT NULL,
   coupon_created DATE DEFAULT sysdate NOT NULL,

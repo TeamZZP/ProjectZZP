@@ -5,6 +5,20 @@
 <head>
 <meta charset="UTF-8">
 <title>ZZP</title>
+<style type="text/css">
+.challengeBoard {
+	background-color: #EBFFED;
+	color: green !important;
+}
+.report {
+	color: green !important;
+}
+.reportPage:after{
+	content:'';
+	display:block;
+	clear:both;
+}
+</style>
 </head>
 <body>
 <jsp:include page="common/header.jsp" flush="true"></jsp:include><br>

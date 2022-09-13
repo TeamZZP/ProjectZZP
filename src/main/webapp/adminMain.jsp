@@ -6,6 +6,15 @@
 <meta charset="UTF-8">
 <title>ZZP</title>
 <style>
+.dashboard {
+	background-color: #EBFFED;
+	color: green;
+}
+.container:after{
+	content:'';
+	display:block;
+	clear:both;
+}
 #modalBtn{
 	display: none;
 }
