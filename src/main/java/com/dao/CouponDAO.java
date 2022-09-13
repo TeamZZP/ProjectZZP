@@ -31,4 +31,9 @@ public class CouponDAO {
 		return num;
 	}
 
+	public int couponInsert(SqlSession session, CouponDTO cDTO) {
+		int num = session.insert("CouponMapper.couponInsert", cDTO);
+		return num;
+	}
+
 }

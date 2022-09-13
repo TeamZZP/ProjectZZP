@@ -45,4 +45,8 @@
 			order by COUPON_CREATED desc
 		</if>
 	</select>
+	<insert id="couponInsert" parameterType="CouponDTO">
+		insert into coupon (COUPON_ID , COUPON_IMG, COUPON_NAME, COUPON_DISCOUNT, COUPON_CREATED, COUPON_VALIDITY)
+			values (COUPON_COUPON_ID_SEQ.nextval, null, #{coupon_name}, #{coupon_discount}, #{coupon_created}, #{coupon_validity})
+	</insert>
 </mapper>

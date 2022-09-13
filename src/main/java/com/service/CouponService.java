@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import com.config.MySqlSessionFactory;
 import com.dao.CouponDAO;
+import com.dto.CouponDTO;
 import com.dto.PageDTO;
 
 public class CouponService {
@@ -26,6 +27,18 @@ public class CouponService {
 			session.close();
 		}
 		return dto;
+	}
+
+	public int couponInsert(CouponDTO cDTO) {
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		int num = 0;
+		try {
+			num = dao.couponInsert(session, cDTO);
+			session.commit();
+		} finally {
+			session.close();
+		}
+		return num;
 	}
 
 }

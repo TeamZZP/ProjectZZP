@@ -7,9 +7,10 @@
 			function() {
 				$("#coupon_name").focus();
 				$("#CouponInsert").click(function() {
-					var COUPON_NAME = $("#coupon_name").val();
-					var COUPON_DISCOUNT = $("#coupon_discount").val();
-					var COUPON_VALIDITY = $("#coupon_validity").val();
+					var coupon_name = $("#coupon_name").val();
+					var coupon_discount = $("#coupon_discount").val();
+					var coupon_validity = $("#coupon_validity").val();
+					var coupon_created = $("#coupon_created").val();
 					if (coupon_name.length == 0) {
 						alert("쿠폰 이름을 입력하십시오");
 						event.preventDefault();
@@ -19,6 +20,11 @@
 					} else if (coupon_validity.length == 0) {
 						alert("쿠폰 만료일을 입력하십시오");
 						event.preventDefault();
+					} else if (coupon_created.length == 0) {
+						alert("쿠폰 시작일을 입력하십시오");
+						event.preventDefault();
+					} else {
+						$("#CouponForm").attr("action", "AdminCouponInsert");
 					}
 				});
 				$("#CouponList").click(function() {
@@ -28,8 +34,9 @@
 			});//end ready
 </script>
 
-<form action="" id="CouponForm" enctype="multipart/form-data" method="post">
-<div class="row justify-content-center">
+<form id="CouponForm" method="post">
+<div class="container justify-content-center">
+<div class="row">
 	<div class="col-md-5"></div>
 	<div class="col-md-5">
 		<table style="text-align: left; vertical-align: middle;">
@@ -56,7 +63,7 @@
 				<td colspan="3">
 					<b>쿠폰 시작일</b>
 					<div class="input-group">
-					   <input type="text" class="form-control" name="coupon_created" id="coupon_created" placeholder="적지 않으면 오늘날짜로 됩니다. ex) YY/MM/DD">
+					   <input type="text" class="form-control" name="coupon_created" id="coupon_created" placeholder="ex) YY/MM/DD">
 					</div>
 				</td>
 			</tr>
@@ -71,7 +78,7 @@
 			<tr>
 				<td colspan="2"> <button id="CouponList" class="btn btn-success">목록</button> </td>
 				<td style="text-align: right;">
-					<button id="CouponInsert" class="btn btn-success">등록</button>
+					<button id="CouponInsert" type="submit" class="btn btn-success">등록</button>
 					<button id="CouponCancel" type="reset" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#aa">취소</button>
 					
 					<div class="modal fade" id="aa" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -96,5 +103,6 @@
 		</table>
 	</div>
 	<div class="col-md-2"></div>
+</div>
 </div>
 </form>
