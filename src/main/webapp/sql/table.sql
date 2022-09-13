@@ -245,6 +245,12 @@ create table member_coupon(
     coupon_used DATE 
 );
 
+-- 방문자수 카운터
+create table counter ( 
+	count NUMBER NOT NULL,
+	count_date DATE NOT NULL
+);
+
 -- 시퀀스
 CREATE SEQUENCE 테이블명_컬럼명_seq
   START WITH 1

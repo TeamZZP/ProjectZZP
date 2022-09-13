@@ -58,6 +58,7 @@
     <mapper resource="com/config/AnswerMapper.xml"/>
     <mapper resource="com/config/OrderMapper.xml"/>
     <mapper resource="com/config/CouponMapper.xml"/>
+    <mapper resource="com/config/UtilMapper.xml"/>
   </mappers> 
 </configuration>
   
