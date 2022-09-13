@@ -5,22 +5,22 @@
 <mapper namespace="CouponMapper">
 	<select id="selectCoupon" parameterType="map" resultType="CouponDTO">
 		select * from Coupon 
-		<if test="searchName == 'COUPON_NAME' and searchName != null">
+		<if test="searchName == 'coupon_name' and searchName != null">
 			where COUPON_NAME like '%${searchValue}%'
 		</if>
-		<if test="searchName == 'COUPON_DISCOUNT' and searchName != null">
+		<if test="searchName == 'coupon_discount' and searchName != null">
 			where COUPON_DISCOUNT like '%${searchValue}%'
 		</if>
-		<if test="sortBy == COUPON_DISCOUNT_up and sortBy != null">
+		<if test="sortBy == 'coupon_discount_up' and sortBy != null">
 			order by COUPON_DISCOUNT desc
 		</if>
-		<if test="sortBy == COUPON_DISCOUNT_down and sortBy != null">
+		<if test="sortBy == 'coupon_discount_down' and sortBy != null">
 			order by COUPON_DISCOUNT asc
 		</if>
-		<if test="sortBy == COUPON_VALIDITY and sortBy != null">
+		<if test="sortBy == 'coupon_validity' and sortBy != null">
 			order by COUPON_VALIDITY desc
 		</if>
-		<if test="sortBy == COUPON_CREATED and sortBy != null">
+		<if test="sortBy == 'coupon_created' and sortBy != null">
 			order by COUPON_CREATED desc
 		</if>
 	</select>
@@ -45,4 +45,25 @@
 			order by COUPON_CREATED desc
 		</if>
 	</select>
+	<insert id="couponInsert" parameterType="CouponDTO">
+		insert into COUPON (COUPON_ID , COUPON_IMG, COUPON_NAME, COUPON_DISCOUNT, COUPON_CREATED, COUPON_VALIDITY)
+			values (COUPON_COUPON_ID_SEQ.nextval, null, #{coupon_name}, #{coupon_discount}, #{coupon_created}, #{coupon_validity})
+	</insert>
+	<delete id="couponDelete" parameterType="string">
+		delete from COUPON where COUPON_ID = #{coupon_id}
+	</delete>
+	<delete id="couponAllDel" parameterType="list">
+		delete from coupon where COUPON_ID in
+		<foreach collection="list" item="couponId" open="(" separator="," close=")">
+			#{couponId}
+		</foreach>
+	</delete>
+	<select id="selectOneCoupon" parameterType="string" resultType="CouponDTO">
+		select * from COUPON where COUPON_ID = #{coupon_id}
+	</select>
+	<update id="couponUpdate" parameterType="CouponDTO">
+		update COUPON set COUPON_NAME = #{coupon_name}, COUPON_DISCOUNT = #{coupon_discount}, COUPON_CREATED = #{coupon_created}, 
+			COUPON_VALIDITY = #{coupon_validity}
+			where COUPON_ID = #{coupon_id}
+	</update>
 </mapper>

@@ -264,8 +264,8 @@ public class ChallengeDAO {
 		return session.selectOne("getTodaySales");
 	}
 
-	public int getMemberNum(SqlSession session) {
-		return session.selectOne("getMemberNum");
+	public int getTotalMember(SqlSession session) {
+		return session.selectOne("getTotalMember");
 	}
 
 	public int getTodayMember(SqlSession session) {

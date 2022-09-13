@@ -480,15 +480,15 @@
 
 
 <select id="getTotalSales" resultType="double">
-	select sum(total_price) from orders
+	select NVL(sum(total_price),0) from orders
 </select>
 
 <select id="getTodaySales" resultType="double">
-	select sum(total_price) from orders
+	select NVL(sum(total_price),0) from orders
 	where TO_CHAR(order_date,'YY/MM/DD') = TO_CHAR(CURRENT_TIMESTAMP, 'YY/MM/DD')
 </select>
 
-<select id="getMemberNum" resultType="int">
+<select id="getTotalMember" resultType="int">
 	select count(*) from member
 </select>
 

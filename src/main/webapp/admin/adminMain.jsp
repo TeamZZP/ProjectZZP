@@ -8,6 +8,7 @@
 %>
 
 <style>
+	
 	.percent[data-n^='+'] {
 		color: green;
 	}

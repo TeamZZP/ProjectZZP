@@ -43,7 +43,7 @@ public class AdminMainServlet2 extends HttpServlet {
 			= ( (increase >= 0)? "+" : "-" ) + String.format("%.2f%%", increase);
 		
 		//회원수
-		int member = service.getMemberNum();
+		int member = service.getTotalMember();
 		//회원 증가율
 		double originM = member - service.getTodayMember();
 		double increaseM = (member-originM)/originM*100;
