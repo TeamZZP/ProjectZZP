@@ -50,12 +50,12 @@
 		</tr>
 		<%
 			for(ReviewDTO rDTO : ReviewList){
-				String user = rDTO.getUSERID();
-				String created = rDTO.getREVIEW_CREATED().substring(0, 10);
+				String user = rDTO.getUserid();
+				String created = rDTO.getReview_create().substring(0, 10);
 		%>
-		<tr class="show" id="show<%=rDTO.getREVIEW_ID()%>" data-review="<%=rDTO.getREVIEW_ID()%>">
+		<tr class="show" id="show<%=rDTO.getReview_id()%>" data-review="<%=rDTO.getReview_id()%>">
 			<td><img alt="리뷰" src="images/review/review.png" width="50px" height="50px"></td>
-			<td><%=rDTO.getREVIEW_ID()%></td>
+			<td><%=rDTO.getReview_id()%></td>
 			<td>
 				<%
 					String use = "";
@@ -66,11 +66,11 @@
 				%> <%=user.substring(0, 5).concat(use)%>
 			</td>
 			<td><%=created%></td>
-			<td><%=rDTO.getREVIEW_TITLE()%></td>
-			<td><%=rDTO.getREVIEW_RATE() %></td>
+			<td><%=rDTO.getReview_title()%></td>
+			<td><%=rDTO.getReview_rate() %></td>
 		</tr>
-		<tr id="hiden<%=rDTO.getREVIEW_ID()%>" style="display: none;">
-			<td colspan="6" style="text-align: right; padding-right: 50px;"><%=rDTO.getREVIEW_CONTENT() %></td>
+		<tr id="hiden<%=rDTO.getReview_id()%>" style="display: none;">
+			<td colspan="6" style="text-align: right; padding-right: 50px;"><%=rDTO.getReview_content() %></td>
 		</tr>
 		<%	} %>
 	</table>

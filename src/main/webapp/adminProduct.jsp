@@ -13,7 +13,7 @@
 .product {
 	color: green !important;
 }
-.container:after{
+.productPage:after{
 	content:'';
 	display:block;
 	clear:both;

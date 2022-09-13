@@ -1,14 +1,11 @@
-<%@page import="com.dto.MemberDTO"%>
-<%@page import="com.dto.PageDTO"%>
-<%@page import="com.dto.QuestionProductDTO"%>
-<%@page import="com.dto.QuestionDTO"%>
+<%@page import="com.dto.CouponMemberCouponDTO"%>
 <%@page import="java.util.List"%>
+<%@page import="com.dto.PageDTO"%>
+<%@page import="com.dto.MemberDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
-<% 
-	String before = "myQuestion"; 
 
+<% 
 	MemberDTO member = (MemberDTO) session.getAttribute("login"); 
 	String userid = null;
 	if (member != null) {
@@ -41,7 +38,7 @@
 	   		<a href="ProfileCategoryServlet?category=myreview&userid=<%=userid%>">내 구매후기</a>
 	   </div>
 	   <div class="col">
-	   		<a href="MyCouponServlet">내 쿠폰함</a>
+	   		<a href="MyCouponServlet" class="currCategory">내 쿠폰함</a>
 	   </div>
 	   <div class="col">
 	   		<a href="ProfileCategoryServlet?category=mychallenge&userid=<%=userid%>">내 챌린지</a>
@@ -50,7 +47,7 @@
 	   		<a href="ProfileCategoryServlet?category=mystamp&userid=<%=userid%>">내 도장</a>
 	   </div>
 	   <div class="col">
-	      <a href="MyQuestionServlet" class="currCategory">내 문의 내역</a>
+	      <a href="MyQuestionServlet">내 문의 내역</a>
 	   </div>
 	   <div class="col">
 	      <a href="AddressListServlet">배송지 관리</a>
@@ -61,39 +58,28 @@
 </div>
 <div class="col-lg-10">
 <div id="addTableDiv">
-<table id="addTable" class="table table-hover" style="text-align: center;">
+<table id="addTable" class="table table-hover" style="text-align: center; vertical-align: middle;">
 	<tr class="table-success">
-		<th>번호</th>
-		<th>상품명</th>
-		<th>카테고리</th>
-		<th>제목</th>
-		<th>작성일</th>
-		<th>답변상태</th>
+		<th>쿠폰번호</th>
+		<th>쿠폰이미지</th>
+		<th>쿠폰명</th>
+		<th>할인율</th>
+		<th>사용여부</th>
+		<th>만료일</th>
 	</tr>
 	<%
-		PageDTO pDTO  = (PageDTO)session.getAttribute("myList");
-		List<QuestionProductDTO> myList = pDTO.getList();
-		for(QuestionProductDTO qDTO : myList){
-			String date = qDTO.getQ_created();
-			String day = date.substring(0,10);
-			System.out.print("날짜 " + day);
+		PageDTO pDTO  = (PageDTO)session.getAttribute("myCouponList");
+		List<CouponMemberCouponDTO> myList = pDTO.getList();
+		for(CouponMemberCouponDTO cDTO : myList){
+			String val = cDTO.getCoupon_validity().substring(0,10);
 	%>
 	<tr>
-		<td> <%= qDTO.getQ_id() %> </td>
-		<%if(qDTO.getP_name() == null){ %>
-	    	<td> - </td>
-	    <% } else { %> 
-	    	<td> <%= qDTO.getP_name() %> </td>
-    	<%} %> 
-		<td> <%= qDTO.getQ_category() %> </td>
-		<td>
-			<a style="text-decoration: none; color: black;" 
-    			href="QuestionOneSelect?Q_ID=<%= qDTO.getQ_id() %>&USERID=<%=qDTO.getUserid()%>&before=<%=before%>">
-		  	<%= qDTO.getQ_title() %> 
-		 	</a>
-		</td>
-		<td> <%= day %> </td>
-		<td <%if(qDTO.getQ_status().equals("답변완료")){ %> style="color: green;" <%} %>> <%= qDTO.getQ_status() %> </td>
+		<td> <%= cDTO.getCoupon_id() %> </td>
+	    <td> <img alt="쿠폰" src="images/coupon/<%= cDTO.getCoupon_img() %>" width="50" height="50"> </td>
+		<td> <%= cDTO.getCoupon_name() %> </td>
+		<td> <%= cDTO.getCoupon_discount() %> </td>
+		<td> <%if(cDTO.getCoupon_used() == null){ %> 미사용 <% } else { %> 사용 <% } %></td>
+		<td> <%= val %> </td>
 	</tr>
 	<%	} %>
 	<tr>
@@ -108,7 +94,7 @@
 		          	if(i== curPage){
 		          		out.print(i+"&nbsp;"); //현재페이지
 		          	}else{
-		          		out.print("<a style='color: green;' href = 'MyQuestionServlet?curPage="+i+"'>" + i + " </a>");  
+		          		out.print("<a style='color: green;' href = 'MyCouponServlet?curPage="+i+"'>" + i + " </a>");  
 		          	} //다른 페이지 선택시 링크로 이동
 		        }//end for
 		  	 %>
@@ -119,4 +105,4 @@
 </div>
 </div>
 </div>
-</div>
+</div>    
