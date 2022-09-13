@@ -64,10 +64,10 @@ a{
     			for(NoticeDTO nDTO : pointNotice){
 			%>
     	<tr style="background: #DCDCDC">
-    		<td> <b> <%= nDTO.getNOTICE_ID() %> </b> </td>
-    		<td> <a href="NoticeOneSelectServlet?NOTICE_ID=<%= nDTO.getNOTICE_ID() %>"> <b> <%= nDTO.getNOTICE_TITTLE() %> </b> </a> </td>
-    		<td> <b>  <%= nDTO.getNOTICE_CREATED() %> </b> </td>
-    		<td> <b>  <%= nDTO.getNOTICE_HITS() %> </b> </td>
+    		<td> <b> <%= nDTO.getNotice_id() %> </b> </td>
+    		<td> <a href="NoticeOneSelectServlet?NOTICE_ID=<%= nDTO.getNotice_id() %>"> <b> <%= nDTO.getNotice_tittle() %> </b> </a> </td>
+    		<td> <b>  <%= nDTO.getNotice_create() %> </b> </td>
+    		<td> <b>  <%= nDTO.getNotice_hits() %> </b> </td>
     	</tr>
     		<%
 				}
@@ -79,10 +79,10 @@ a{
 	 			NoticeDTO nDTO = list.get(i);
 		%>
     	<tr>
-    		<td> <%= nDTO.getNOTICE_ID() %> </td>
-    		<td><a href="NoticeOneSelectServlet?NOTICE_ID=<%= nDTO.getNOTICE_ID() %>"> <%= nDTO.getNOTICE_TITTLE() %> </a> </td>
-    		<td> <%= nDTO.getNOTICE_CREATED() %> </td>
-    		<td> <%= nDTO.getNOTICE_HITS() %> </td>
+    		<td> <%= nDTO.getNotice_id() %> </td>
+    		<td><a href="NoticeOneSelectServlet?NOTICE_ID=<%= nDTO.getNotice_id() %>"> <%= nDTO.getNotice_tittle() %> </a> </td>
+    		<td> <%= nDTO.getNotice_create() %> </td>
+    		<td> <%= nDTO.getNotice_hits() %> </td>
     	</tr>
     	<%
 			}

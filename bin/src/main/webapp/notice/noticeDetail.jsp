@@ -34,13 +34,13 @@
 	<form action="NoticeUpdate.jsp" method="post" id="DetailForm">
 	<div class="container justify-content-center">
 	<div class="row">
-		<input type="hidden" name="nId" value="<%=nDTO.getNOTICE_ID()%>">
+		<input type="hidden" name="nId" value="<%=nDTO.getNotice_id()%>">
 		<table style="border-collapse: collapse;" >
 			<tr>
 				<td colspan="2">
 					<div class="input-group shadow-none">
 						 <span class="input-group-text">제목</span>
-						 <input type="text" class="form-control shadow-none"  value="<%=nDTO.getNOTICE_TITTLE()%>" readonly="readonly">
+						 <input type="text" class="form-control shadow-none"  value="<%=nDTO.getNotice_tittle()%>" readonly="readonly">
 					</div>
 				</td>
 			</tr>
@@ -48,28 +48,28 @@
 				<td>
 					<div class="input-group mb-3">
 					  <span class="input-group-text">작성일</span>
-					  <input type="text" class="form-control shadow-none" value="<%=nDTO.getNOTICE_CREATED()%>" readonly="readonly">
+					  <input type="text" class="form-control shadow-none" value="<%=nDTO.getNotice_create()%>" readonly="readonly">
 					</div>
 				</td>
 				<td>
 					<div class="input-group mb-3">
 					  <span class="input-group-text">조회</span>
-					  <input type="text" class="form-control shadow-none" value="<%=nDTO.getNOTICE_HITS()%>" readonly="readonly">
+					  <input type="text" class="form-control shadow-none" value="<%=nDTO.getNotice_hits()%>" readonly="readonly">
 					</div>
 				</td>
 			</tr>
 			<tr>
 				<td colspan="2">
-					<textarea class="form-control shadow-none" rows="15" cols="50" readonly="readonly"> <%=nDTO.getNOTICE_CONTENT()%> </textarea>
+					<textarea class="form-control shadow-none" rows="15" cols="50" readonly="readonly"> <%=nDTO.getNotice_content()%> </textarea>
 				</td>
 			</tr>
 			<tr>
 				<td colspan="2">
 					<div class="input-group col-mb-3">
 					  <button class="btn btn-outline-success col-md-2" onclick="NoticeList()">목록</button>
-					  <button class="btn btn-outline-success col-md-2" type="button" onclick="location.href=href='NoticeOneSelectServlet?NOTICE_ID=<%=nextDTO.getNOTICE_ID()%>'">다음글</button>
-					  <a class="col-md-8" href="NoticeOneSelectServlet?NOTICE_ID=<%=nextDTO.getNOTICE_ID()%>" style="text-decoration: none;">
-						 <input style="text-align: center;" type="url" class="form-control shadow-none" value="<%= nextDTO.getNOTICE_TITTLE() %>" readonly="readonly">
+					  <button class="btn btn-outline-success col-md-2" type="button" onclick="location.href=href='NoticeOneSelectServlet?NOTICE_ID=<%=nextDTO.getNotice_id()%>'">다음글</button>
+					  <a class="col-md-8" href="NoticeOneSelectServlet?NOTICE_ID=<%=nextDTO.getNotice_id()%>" style="text-decoration: none;">
+						 <input style="text-align: center;" type="url" class="form-control shadow-none" value="<%= nextDTO.getNotice_tittle() %>" readonly="readonly">
 					  </a>
 					</div>
 				</td>
