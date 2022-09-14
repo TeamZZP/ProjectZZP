@@ -10,7 +10,7 @@ select * from images where p_id= #{p_id}
 
 <insert id="insertImage" parameterType="hashmap">
 	insert all	
-	<if test='image_route_1'>
+	<if test='image_rnk1==1'>
 		into images 
 		values (product_p_id_seq.CURRVAL, #{image_rnk1}, #{image_route_1}, 'admin1', sysdate )
 	</if>

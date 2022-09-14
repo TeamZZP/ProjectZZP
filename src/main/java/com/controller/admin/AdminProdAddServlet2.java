@@ -25,8 +25,8 @@ import com.service.ImagesService;
 import com.service.ProductService;
 import com.service.QuestionService;
 
-@WebServlet("/AdminProdAddServlet")
-public class AdminProdAddServlet extends HttpServlet {
+@WebServlet("/AdminProdAddServlet2")
+public class AdminProdAddServlet2 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@SuppressWarnings("unused")
@@ -55,7 +55,7 @@ public class AdminProdAddServlet extends HttpServlet {
 				long sizeInBytes=0;
 				String saveName= null;
 				
-				HashMap<String, Object> map = new HashMap<String, Object>();
+				HashMap<String, String> map = new HashMap<String, String>();
 				try {
 					List<FileItem> items= upload.parseRequest(request);
 					Iterator<FileItem> iter= items.iterator();
@@ -91,14 +91,14 @@ public class AdminProdAddServlet extends HttpServlet {
 								
 							if ("image_route_1".equals(fieldName)) {
 								try {
-									String old_file = (String) map.get("old_file");
+									String old_file = map.get("old_file");
 									if (old_file==null || old_file.length()==0) {
 										item.write(new File(dir, saveName));
 										map.put("image_route_1", saveName);
-										map.put("image_rnk1", 1);
+										map.put("image_rnk2", "1");
 									} else {
 										map.put("image_route_1", old_file);
-										map.put("image_rnk1", 1);
+										map.put("image_rnk1", "1");
 									}
 									System.out.println(map);
 								}catch (Exception e) {
@@ -108,15 +108,15 @@ public class AdminProdAddServlet extends HttpServlet {
 							
 							if ("image_route_2".equals(fieldName)) {
 								try {
-									String old_stamp = (String) map.get("old_stamp");
+									String old_stamp = map.get("old_stamp");
 									
 									if (old_stamp==null || old_stamp.length()==0) {
 										item.write(new File(dir, saveName));
 										map.put("image_route_2", saveName);
-										map.put("image_rnk2", 2);
+										map.put("image_rnk2", "2");
 									} else {
 										map.put("image_route_2", old_stamp);
-										map.put("image_rnk2", 2);
+										map.put("image_rnk2", "2");
 									}
 									System.out.println(map);
 								}catch (Exception e) {
@@ -126,15 +126,15 @@ public class AdminProdAddServlet extends HttpServlet {
 							
 							if ("image_route_3".equals(fieldName)) {
 								try {
-									String old_stamp = (String) map.get("old_stamp");
+									String old_stamp = map.get("old_stamp");
 									
 									if (old_stamp==null || old_stamp.length()==0) {
 										item.write(new File(dir, saveName));
 										map.put("image_route_3", saveName);
-										map.put("image_rnk3", 3);
+										map.put("image_rnk3", "3");
 									} else {
 										map.put("image_route_3", old_stamp);
-										map.put("image_rnk3", 3);
+										map.put("image_rnk3", "3");
 									}
 									System.out.println(map);
 								}catch (Exception e) {
@@ -144,15 +144,15 @@ public class AdminProdAddServlet extends HttpServlet {
 							
 							if ("image_route_4".equals(fieldName)) {
 								try {
-									String old_stamp = (String) map.get("old_stamp");
+									String old_stamp = map.get("old_stamp");
 									
 									if (old_stamp==null || old_stamp.length()==0) {
 										item.write(new File(dir, saveName));
 										map.put("image_route_4", saveName);
-										map.put("image_rnk4", 4);
+										map.put("image_rnk4", "4");
 									} else {
 										map.put("image_route_4", old_stamp);
-										map.put("image_rnk4", 4);
+										map.put("image_rnk4", "4");
 									}
 									System.out.println(map);
 								}catch (Exception e) {

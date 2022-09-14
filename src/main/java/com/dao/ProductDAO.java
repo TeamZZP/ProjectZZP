@@ -182,7 +182,7 @@ public class ProductDAO {
 		return n;
 	}
 
-	public int insertProduct(SqlSession session, HashMap<String, String> map) {
+	public int insertProduct(SqlSession session, HashMap<String, Object> map) {
 		return session.insert("insertProduct", map);
 	}
 
