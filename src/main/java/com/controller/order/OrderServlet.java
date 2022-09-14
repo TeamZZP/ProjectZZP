@@ -63,6 +63,8 @@ System.out.println("OrderServlet실행됨");
 			System.out.println(p_id+" "+p_amount);
 		}
 		
+		
+		
 		/*
 		String mesg = "";
 		int p_amount = 0;
