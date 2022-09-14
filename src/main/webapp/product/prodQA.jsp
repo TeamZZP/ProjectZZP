@@ -6,6 +6,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
+<script src="https://kit.fontawesome.com/a4e70846ef.js" crossorigin="anonymous"></script>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 	$(function () {
@@ -24,7 +25,7 @@
 					if (data != null) {
 						$("#answer"+qID).attr("display","none");
 						$("#answer"+qID).slideToggle("slow").html(data + 
-						" &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <img alt='A' src='images/question/A.png' width='50px' height='55px'>").css({'font-weight':'bold','border-bottom': '1px solid #8FBC8F'});
+						" &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <i class='fa-solid fa-a' style='font-size: 50px';></i>").css({'font-weight':'bold','border-bottom': '1px solid #8FBC8F'});
 					} else {
 						alert("권한이 없습니다.");
 					}
@@ -89,7 +90,7 @@
 				String created = qDTO.getQ_created().substring(0, 10);
 		%>
 	<tr class="questionDetail" data-qID="<%=qDTO.getQ_id()%>" title="더블클릭">
-		<td style="text-align: center;"><img alt="Q" src="images/question/Q.png" width="50px" height="55px"></td>
+		<td style="text-align: center;"><i class="fa-solid fa-q" style="font-size: 50px;"></i></td>
 		<td><%=qDTO.getQ_status()%></td>
 		<td>
 			<%

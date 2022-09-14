@@ -135,7 +135,7 @@ public class ProductService {
 		return list;
 	}
 
-	public int updateProduct(HashMap<String, String> map) {
+	public int updateProduct(HashMap<String, Object> map) {
 		int num = 0;
 		SqlSession session = MySqlSessionFactory.getSqlSession();
 		try {

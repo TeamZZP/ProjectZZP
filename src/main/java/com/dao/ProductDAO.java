@@ -63,7 +63,7 @@ public class ProductDAO {
 		return list;
 	}
 
-	public int updateProduct(SqlSession session, HashMap<String, String> map) {
+	public int updateProduct(SqlSession session, HashMap<String, Object> map) {
 		return session.update("updateProduct", map);
 	}
 

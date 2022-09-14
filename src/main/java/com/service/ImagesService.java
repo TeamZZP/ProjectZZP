@@ -24,11 +24,11 @@ public class ImagesService {
 		return list;
 	}
 
-	public int insertImage(HashMap<String, Object> map) {
+	public int updateImage(HashMap<String, Object> map) {
 		int num = 0;
 		SqlSession session = MySqlSessionFactory.getSqlSession();
 		try {
-			num = dao.insertImage(session, map);
+			num = dao.updateImage(session, map);
 			session.commit();
 		} finally {
 			session.close();

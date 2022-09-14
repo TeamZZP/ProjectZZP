@@ -62,8 +62,6 @@ ProductDTO pdto = (ProductDTO) request.getAttribute("ProductRetrieveDTO");
 	String p_name = pdto.getP_name(); //상품명
 	int p_selling_price = pdto.getP_selling_price(); //할인적용판매가
 	int p_stock = pdto.getP_stock(); //재고
-	
-List<ImagesDTO> ilist = (List<ImagesDTO>) request.getAttribute("ImagesRetrieveList");
 %>
 <div class="container prodContainer">
 	<div class="row justify-content-center">
@@ -72,7 +70,7 @@ List<ImagesDTO> ilist = (List<ImagesDTO>) request.getAttribute("ImagesRetrieveLi
 			<div class="card-header" style="text-align: left; font-weight: bold; font-size: large;">상품상세보기</div>
 				<div class="card-body">
 					<!-- Update form 시작 -->
-					<form action="ProductUpdateServlet" class="form-horizontal" method="post" enctype="multipart/form-data">
+					<form action="AdminProdUpdateServlet" class="form-horizontal" method="post" enctype="multipart/form-data">
 					<!-- 상품카테고리 -->
 					<div class="form-group">
 						<label for="c_id" class="cols-sm-2 control-label" style="font-weight: bold;">상품 카테고리</label>
@@ -151,16 +149,6 @@ List<ImagesDTO> ilist = (List<ImagesDTO>) request.getAttribute("ImagesRetrieveLi
 					        </div>
 					    </div>
 					</div>
-					<!-- **이미지 : 첨부파일->4개 첨부되게 수정해야 함 -->
-					<div class="form-group">
-					    <label for="image_route" class="cols-sm-2 control-label" style="font-weight: bold;">이미지</label>
-					    <div class="cols-sm-10">
-					        <div class="input-group">
-					            <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
-								<input class="form-control" type="file" name="image_route" id="image_route">
-					        </div>
-					    </div>
-					</div>
 					<!-- 상품설명 -->
 					<div class="form-group">
 					    <label for="p_content" class="cols-sm-2 control-label" style="font-weight: bold;">상품설명</label>
@@ -171,16 +159,55 @@ List<ImagesDTO> ilist = (List<ImagesDTO>) request.getAttribute("ImagesRetrieveLi
 					        </div>
 					    </div>
 					</div>
-					<!-- 상품상세설명 : 첨부파일 -->
+					<%
+					List<ImagesDTO> ilist = (List<ImagesDTO>) request.getAttribute("ImagesRetrieveList");
+					System.out.println("image List >> "+ilist);
+					int idx;
+					for(idx=0; idx<ilist.size(); idx++){
+					
+					%>
+						<input type="hidden" name="old_file1" id="old_file1" value="<%= ilist.get(0).getImage_route() %>">
+						<input type="hidden" name="old_file2" id="old_file2" value="<%= ilist.get(1).getImage_route() %>">
+						<input type="hidden" name="old_file3" id="old_file3" value="<%= ilist.get(2).getImage_route() %>">
+						<input type="hidden" name="old_file4" id="old_file4" value="<%= ilist.get(3).getImage_route() %>">
+					<% } %>
 					<div class="form-group">
-					    <label for="p_content_detail" class="cols-sm-2 control-label" style="font-weight: bold;">상품 상세설명</label>
-					    <div class="cols-sm-10">
-					        <div class="input-group">
-					            <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
-					            <input class="form-control" type="file" name="p_content_detail" id="p_content_detail">
-					        </div>
-					    </div>
-					</div>
+						    <label for="image_route" class="cols-sm-2 control-label" style="font-weight: bold;">상품이미지 1</label>
+						    <div class="cols-sm-10">
+						        <div class="input-group">
+						            <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+									<input class="form-control" type="file" accept="image/*" name="image_route_1" id="image_route_1" multiple>
+						        </div>
+						    </div>
+						</div>
+						<div class="form-group">
+						    <label for="image_route" class="cols-sm-2 control-label" style="font-weight: bold;">상품이미지 2</label>
+						    <div class="cols-sm-10">
+						        <div class="input-group">
+						            <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+									<input class="form-control" type="file" accept="image/*" name="image_route_2" id="image_route_2" multiple>
+						        </div>
+						    </div>
+						</div>
+						<div class="form-group">
+						    <label for="image_route" class="cols-sm-2 control-label" style="font-weight: bold;">상품이미지 3</label>
+						    <div class="cols-sm-10">
+						        <div class="input-group">
+						            <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+									<input class="form-control" type="file" accept="image/*" name="image_route_3" id="image_route_3" multiple>
+						        </div>
+						    </div>
+						</div>
+						<div class="form-group">
+						    <label for="image_route" class="cols-sm-2 control-label" style="font-weight: bold;">상품이미지 4</label>
+						    <div class="cols-sm-10">
+						        <div class="input-group">
+						            <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+									<input class="form-control" type="file" accept="image/*" name="image_route_4" id="image_route_4" multiple>
+						        </div>
+						    </div>
+						</div>
+						
 					<!-- 상품수정or취소 버튼 -->
 					<div class="form-group" style="margin-top: 20px; text-align: center;">
 						<input type="submit" value="수정" id="updateProd" class="btn btn-success">

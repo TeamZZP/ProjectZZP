@@ -19,6 +19,7 @@ import com.dto.PageDTO;
 import com.service.AddressService;
 import com.service.ChallengeService;
 import com.service.MemberService;
+import com.service.UtilService;
 
 @WebServlet("/AdminMainServlet")
 public class AdminMainServlet extends HttpServlet {
@@ -42,7 +43,7 @@ public class AdminMainServlet extends HttpServlet {
 			double origin = sales - service.getTodaySales();
 			double increase = (sales-origin)/origin*100;
 			String salesIncrease 
-				= ( (increase >= 0)? "+" : "-" ) + String.format("%.2f%%", increase);
+				= ( (increase >= 0)? "+" : "" ) + String.format("%.2f%%", increase);
 			
 			//회원수
 			int member = service.getTotalMember();
@@ -50,13 +51,27 @@ public class AdminMainServlet extends HttpServlet {
 			double originM = member - service.getTodayMember();
 			double increaseM = (member-originM)/originM*100;
 			String memberIncrease
-				= ( (increaseM >= 0)? "+" : "-" ) + String.format("%.2f%%", increaseM);
+				= ( (increaseM >= 0)? "+" : "" ) + String.format("%.2f%%", increaseM);
+			
+			//오늘 방문자수
+			UtilService uService = new UtilService();
+			int todayVisit = uService.countVisitToday();
+			//어제 방문자수
+			double yesterdayVisit = uService.countVisitYesterday();
+			//증감율
+			double increaseV = (todayVisit-yesterdayVisit)/yesterdayVisit*100;
+			String visitIncrease
+			= ( (increaseV >= 0)? "+" : "" ) + String.format("%.2f%%", increaseV);
+			
 			
 			request.setAttribute("sales", df.format(sales));
 			request.setAttribute("salesIncrease", salesIncrease);
 			
 			request.setAttribute("member", member+" 명");
 			request.setAttribute("memberIncrease", memberIncrease);
+			
+			request.setAttribute("todayVisit", todayVisit);
+			request.setAttribute("visitIncrease", visitIncrease);
 			
 			RequestDispatcher dis = request.getRequestDispatcher("adminMain.jsp");
 			dis.forward(request, response);

@@ -5,13 +5,28 @@
 <mapper namespace="UtilMapper">
 
 <select id="countVisitToday" resultType="int">
-	select count(*) from counter 
-	where count_date = CURRENT_DATE
+	select NVL(
+		(select count from counter 
+		where TO_CHAR(count_date,'YY/MM/DD') = TO_CHAR(CURRENT_DATE,'YY/MM/DD')), 0)
+    from dual
+</select>
+
+<select id="countVisitYesterday" resultType="int">
+	select NVL(
+		(select count from counter 
+		where TO_CHAR(count_date,'YY/MM/DD') = TO_CHAR(CURRENT_DATE-1,'YY/MM/DD')), 0)
+    from dual
 </select>
 
 <insert id="addVisit">
 	insert into counter (count, count_date) 
 	values (1, CURRENT_DATE)
 </insert>
+
+<update id="updateVisit">
+	update counter 
+	set count=count+1
+	where TO_CHAR(count_date,'YY/MM/DD') = TO_CHAR(CURRENT_DATE,'YY/MM/DD')
+</update>
 
 </mapper>
