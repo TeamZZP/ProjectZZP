@@ -51,7 +51,7 @@
 		<%
 			for(ReviewDTO rDTO : ReviewList){
 				String user = rDTO.getUserid();
-				String created = rDTO.getReview_create().substring(0, 10);
+				String created = rDTO.getReview_created().substring(0, 10);
 		%>
 		<tr class="show" id="show<%=rDTO.getReview_id()%>" data-review="<%=rDTO.getReview_id()%>">
 			<td><img alt="리뷰" src="images/review/review.png" width="50px" height="50px"></td>
