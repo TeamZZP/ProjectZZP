@@ -19,7 +19,7 @@
 </head>
 <body>
 <jsp:include page="common/header.jsp" flush="true"></jsp:include><br>
-<jsp:include page="mypage/addressList.jsp" flush="true"></jsp:include><br>
+<jsp:include page="mypage/addressList2.jsp" flush="true"></jsp:include><br>
 <jsp:include page="common/footer.jsp" flush="true"></jsp:include><br>
 </body>
 </html>
