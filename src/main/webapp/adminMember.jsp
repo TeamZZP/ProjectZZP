@@ -8,7 +8,7 @@
 <style>
 .member {
 	background-color: #EBFFED;
-	color: green;
+	color: green !important;
 }
 .memberPage:after{
 	content:'';

@@ -33,40 +33,44 @@ public class CategoryServlet extends HttpServlet {
 
 		CategoryService service = new CategoryService();
 		ProductService pservice = new ProductService();
+		
 		HashMap<String, String> p_map = new HashMap<String, String>();
 		List<CategoryProductDTO> product_list  = new ArrayList<CategoryProductDTO>(); 
 	   
 	    
-	  
+		
 		String sortBy=request.getParameter("sortBy");
-
+		String c_id=request.getParameter("c_id");
+		
 	    
-	    if (request.getParameter("c_id") == null ||"".equals(request.getParameter("c_id"))) {
+			if (c_id == null ||"".equals(c_id)) {
 	    	
-				System.out.println("11111111111111111111111");
+				System.out.println(">>카테고리베스트");
+				//최초 정렬 기준 = 주문 순
 				 if (sortBy == null) {
 					p_map.put("sortBy","p_order");	
 				
-					}else{//최초 정렬 기준//주문 순=베스트
+					}else{ 
+					//정렬 선택 시 선택한 기준으로 정렬
+					 p_map.put("sortBy", sortBy);	
 					System.out.println("sortBy : "+ sortBy);
 					}
 			       
 				 product_list = pservice.bestProductListSortBy(p_map);
 			       
 			}else {
-				
-		       System.out.println("카테고리 아이디 확인 : "+request.getParameter("c_id"));
+				//베스트 외 다른 카테고리
+		       System.out.println("카테고리 아이디 확인 : "+c_id);
 			  /* product_list= pservice.productList(Integer.parseInt(request.getParameter("c_id"))); 
 			   pDTO.setList(product_list);*/
-		   	System.out.println("if문 밖"+sortBy);
 		       if (sortBy== null) {
-		    		System.out.println("if문 안"+sortBy);
+		    	 //최초 정렬 기준 = 상품 id 순
 					p_map.put("sortBy", "p_id");	
-					p_map.put("c_id", request.getParameter("c_id"));
-					}else{//최초 정렬 기준//주문 순=베스트
-						System.out.println("else문 안"+sortBy);
+					p_map.put("c_id", c_id);
+					}else{
+					//정렬 선택 시 선택한 기준으로 정렬
 					p_map.put("sortBy",sortBy);	
-					p_map.put("c_id", request.getParameter("c_id"));	
+					p_map.put("c_id", c_id);	
 					}
 		       
 		       product_list = pservice.selectC_Product(p_map);

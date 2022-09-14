@@ -12,4 +12,12 @@ public class UtilDAO {
 		return session.insert("UtilMapper.addVisit");
 	}
 
+	public int updateVisit(SqlSession session) {
+		return session.update("UtilMapper.updateVisit");
+	}
+
+	public int countVisitYesterday(SqlSession session) {
+		return session.selectOne("UtilMapper.countVisitYesterday");
+	}
+
 }
