@@ -1,8 +1,10 @@
 package com.controller.mypage;
 
 import java.io.IOException;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,7 +15,6 @@ import javax.servlet.http.HttpSession;
 import com.dto.MemberDTO;
 import com.dto.PageDTO;
 import com.service.CouponService;
-import com.service.QuestionService;
 
 @WebServlet("/MyCouponServlet")
 public class MyCouponServlet extends HttpServlet {
@@ -35,19 +36,38 @@ public class MyCouponServlet extends HttpServlet {
 			
 			String userid = mDTO.getUserid();
 			
-			CouponService service = new CouponService();
-			pDTO = service.myCouponList(Integer.parseInt(curPage), userid);
-			System.out.println(pDTO);
+			String searchCategory = request.getParameter("searchCategory");
+			System.out.println("검색어 " + searchCategory);
 			
-			session.setAttribute("myCouponList", pDTO);
-			response.sendRedirect("myCoupon.jsp");
+			Map<String, String> map = new HashMap<String, String>();
+			map.put("searchCategory", searchCategory);
+			map.put("userid", userid);
+			
+			if (searchCategory != null) {
+				CouponService service = new CouponService();
+				pDTO = service.MyCouponSearchList(Integer.parseInt(curPage), map);
+				System.out.println("pDTO " + pDTO); 
+				
+				request.setAttribute("searchCategory", searchCategory);
+				session.setAttribute("myCouponList", pDTO);	
+				
+				RequestDispatcher dis = request.getRequestDispatcher("myCoupon.jsp");
+				dis.forward(request, response);
+			} else {
+				CouponService service = new CouponService();
+				pDTO = service.myCouponList(Integer.parseInt(curPage), userid);
+				System.out.println(pDTO);
+				
+				session.setAttribute("myCouponList", pDTO);
+				response.sendRedirect("myCoupon.jsp");
+			}
 			
 		} else {
 			session.setAttribute("mesg", "로그인이 필요합니다");
 			response.sendRedirect("LoginUIServlet");
 		}
 	}
-
+			
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}

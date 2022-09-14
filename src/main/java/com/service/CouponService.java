@@ -2,6 +2,7 @@ package com.service;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -95,6 +96,18 @@ public class CouponService {
 		PageDTO dto = null;
 		try {
 			dto = dao.myCouponList(session, userid, curPage);
+			session.commit();
+		} finally {
+			session.close();
+		}
+		return dto;
+	}
+
+	public PageDTO MyCouponSearchList(int curPage, Map<String, String> map) {
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		PageDTO dto = null;
+		try {
+			dto = dao.MyCouponSearchList(session, map, curPage);
 			session.commit();
 		} finally {
 			session.close();

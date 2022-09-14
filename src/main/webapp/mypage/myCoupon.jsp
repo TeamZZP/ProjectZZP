@@ -22,7 +22,15 @@
 		font-weight: bold;
 	}
 </style>
-
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+	$(document).ready(function () {
+		$("#searchCategory").change(function () {
+			var searchCategory = $("#searchCategory").val();
+			location.href = "MyCouponServlet?searchCategory="+searchCategory
+		});
+	});// end ready	
+</script>
 <div id="addContainer">
 <div class="container">
 <div class="row">
@@ -56,8 +64,29 @@
 	      <a href="checkPasswd.jsp">계정 관리</a>
 	   </div>
 </div>
+
+<%
+	String searchCategory = (String)request.getAttribute("searchCategory");
+%>
+
 <div class="col-lg-10">
 <div id="addTableDiv">
+<div style="">
+	<form id="myCouponSearchForm" method="post">
+		<div class="row">
+			<div class="col-md-9"></div>
+			<div class="col-md-3">
+				<select id="searchCategory" name="searchCategory" class="form-select" aria-label="Default select example">
+					<option selected disabled hidden>정렬</option>
+					<option value="COUPON_DISCOUNT" <%if(searchCategory != null){
+						if(searchCategory.equals("할인율 높은순")){ %> selected="selected" <% } } %> >할인율 높은순</option>
+					<option value="COUPON_VALIDITY" <%if(searchCategory != null){
+						if(searchCategory.equals("만료일순")){ %> selected="selected" <% } } %> >만료일순</option>
+				</select>
+			</div>
+		</div>
+	</form>		
+</div>
 <table id="addTable" class="table table-hover" style="text-align: center; vertical-align: middle;">
 	<tr class="table-success">
 		<th>쿠폰번호</th>

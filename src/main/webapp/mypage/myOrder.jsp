@@ -169,7 +169,7 @@
 	    </td>
 	    <td> <%= DTO.getTotal_price() %> </td>
 		<td> <%= day %> </td>
-		<td> <%= DTO.getDelivery_address() %> <br>  <%= DTO.getDelivery_loc() %> </td>
+		<td> <%= DTO.getDelivery_address() %> <br>  <%-- <%= DTO.getDelivery_loc() %> --%> </td>
 		<td> <%= DTO.getOrder_state() %> </td>
 		<td> 
 			<% if(DTO.getOrder_state().equals("배송완료")){ %>

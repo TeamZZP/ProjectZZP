@@ -233,33 +233,11 @@
 		<!-- open modal -->
 	</div>
 </div>
-<div class="col-md-7">
-	<div style="padding-bottom: 70px;">
-		<a href="#" class="btn btn-outline-success">입금, 결제</a>
-		<a href="#" class="btn btn-outline-success">배송중</a>
-		<a href="#" class="btn btn-outline-success">배송 완료</a>
-		<a href="#" class="btn btn-outline-success">전체보기</a>
-	</div>
-	<div>
-		<a href="MyOrderServlet" class="btn btn-outline-success">1. 주문 내역</a>
-		<a href="#" class="btn btn-outline-success">2. 반품/취소/교환 목록</a>
-		<a href="ProfileCategoryServlet?category=myreview&userid=<%=userid%>" class="btn btn-outline-success">3. 내 구매후기</a>
-		<a href="MyCouponServlet" class="btn btn-outline-success">4. 내 쿠폰함</a><br>
-		<br>
-		<a href="ProfileCategoryServlet?category=mychallenge&userid=<%=userid%>" class="btn btn-outline-success">5. 내 챌린지</a>
-		<a href="ProfileCategoryServlet?category=mystamp&userid=<%=userid%>" class="btn btn-outline-success">6. 내 도장</a>
-		<a href="MyQuestionServlet" class="btn btn-outline-success">7. 내 문의 내역</a><br>
-		<br>
-		<a href="AddressListServlet" class="btn btn-outline-success">8. 배송지 관리</a>
-		<a href="checkPasswd.jsp" class="btn btn-outline-success">9. 계정 관리</a><br>
-		<br>
-	</div>
-</div>
 
 <div class="wrap col-md-9">
 	<div class="greenContainer">
 		<div>
-			<div class="grade">id : <%= userid %></div>
+			<div class="grade">ID : <%= userid %></div>
 			<div class="name"><%= username %>님</div>
 		</div>
 		<div class="modify">i</div>
@@ -314,42 +292,47 @@
 	</div>
 	<div class="listContainer">
 		<a href="MyOrderServlet" class="item">
-			<div class="icon">§</div>
+			<div class="icon">1.</div>
 			<div class="text">주문 내역<span class="circle"></span></div>
 			<div class="right">></div>
 		</a>
 		<a href="#" class="item">
-			<div class="icon">§</div>
+			<div class="icon">2.</div>
 			<div class="text">반품/취소/교환 목록</div>
 			<div class="right">></div>
 		</a>
 		<a href="ProfileCategoryServlet?category=myreview&userid=<%=userid%>" class="item">
-			<div class="icon">§</div>
-			<div class="text">구매 후기</div>
+			<div class="icon">3.</div>
+			<div class="text">내 구매후기</div>
+			<div class="right">></div>
+		</a>
+		<a href="MyCouponServlet" class="item">
+			<div class="icon">4.</div>
+			<div class="text">내 쿠폰함</div>
 			<div class="right">></div>
 		</a>
 		<a href="ProfileCategoryServlet?category=mychallenge&userid=<%=userid%>" class="item">
-			<div class="icon">§</div>
+			<div class="icon">5.</div>
 			<div class="text">내 챌린지</div>
 			<div class="right">></div>
 		</a>
 		<a href="ProfileCategoryServlet?category=mystamp&userid=<%=userid%>" class="item">
-			<div class="icon">§</div>
+			<div class="icon">6.</div>
 			<div class="text">내 도장</div>
 			<div class="right">></div>
 		</a>
 		<a href="MyQuestionServlet" class="item">
-			<div class="icon">§</div>
+			<div class="icon">7.</div>
 			<div class="text">내 문의 내역</div>
 			<div class="right">></div>
 		</a>
 		<a href="AddressListServlet" class="item">
-			<div class="icon">§</div>
+			<div class="icon">8.</div>
 			<div class="text">배송지 관리</div>
 			<div class="right">></div>
 		</a>
 		<a href="PasswdCheckServlet" class="item">
-			<div class="icon">§</div>
+			<div class="icon">9.</div>
 			<div class="text">계정 관리</div>
 			<div class="right">></div>
 		</a>
@@ -363,18 +346,22 @@
 		<a href="#" class="btn btn-outline-success">배송 완료</a>
 		<a href="#" class="btn btn-outline-success">전체보기</a>
 	</div>
+	<div>
 		<a href="MyOrderServlet" class="btn btn-outline-success">1. 주문 내역</a>
 		<a href="#" class="btn btn-outline-success">2. 반품/취소/교환 목록</a>
-		<a href="ProfileCategoryServlet?category=myreview&userid=<%=userid%>" class="btn btn-outline-success">3. 내 구매후기</a><br>
+		<a href="ProfileCategoryServlet?category=myreview&userid=<%=userid%>" class="btn btn-outline-success">3. 내 구매후기</a>
+		<a href="MyCouponServlet" class="btn btn-outline-success">4. 내 쿠폰함</a><br>
 		<br>
-		<a href="ProfileCategoryServlet?category=mychallenge&userid=<%=userid%>" class="btn btn-outline-success">4. 내 챌린지</a>
-		<a href="ProfileCategoryServlet?category=mystamp&userid=<%=userid%>" class="btn btn-outline-success">5. 내 도장</a>
-		<a href="MyQuestionServlet" class="btn btn-outline-success">6. 내 문의 내역</a><br>
+		<a href="ProfileCategoryServlet?category=mychallenge&userid=<%=userid%>" class="btn btn-outline-success">5. 내 챌린지</a>
+		<a href="ProfileCategoryServlet?category=mystamp&userid=<%=userid%>" class="btn btn-outline-success">6. 내 도장</a>
+		<a href="MyQuestionServlet" class="btn btn-outline-success">7. 내 문의 내역</a><br>
 		<br>
-		<a href="AddressListServlet" class="btn btn-outline-success">7. 배송지 관리</a>
-		<a href="PasswdCheckServlet" class="btn btn-outline-success">8. 계정 관리</a><br>
+		<a href="AddressListServlet" class="btn btn-outline-success">8. 배송지 관리</a>
+		<a href="checkPasswd.jsp" class="btn btn-outline-success">9. 계정 관리</a><br>
 		<br>
+	</div>
 </div> --%>
+
 </div>
 </div>
 </div>

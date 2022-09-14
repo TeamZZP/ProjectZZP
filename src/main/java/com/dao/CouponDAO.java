@@ -2,6 +2,7 @@ package com.dao;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
@@ -74,6 +75,25 @@ public class CouponDAO {
 
 	private int myCouponNum(SqlSession session, String userid) {
 		return session.selectOne("CouponMapper.myCouponNum", userid);
+	}
+
+	public PageDTO MyCouponSearchList(SqlSession session, Map<String, String> map, int curPage) {
+		PageDTO pDTO = new PageDTO();
+		pDTO.setPerPage(10);
+		int perPage = pDTO.getPerPage();
+		int offset = (curPage - 1) * perPage;
+		
+		List<CouponMemberCouponDTO> list = session.selectList("CouponMapper.MyCouponSearchList", map, new RowBounds(offset, perPage));
+		
+		pDTO.setCurPage(curPage);
+		pDTO.setList(list);
+		pDTO.setTotalCount(myCouponSearchNum(session, map));
+		
+		return pDTO;
+	}
+
+	private int myCouponSearchNum(SqlSession session, Map<String, String> map) {
+		return session.selectOne("CouponMapper.myCouponSearchNum", map);
 	}
 
 }
