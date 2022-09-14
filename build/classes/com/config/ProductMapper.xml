@@ -27,7 +27,7 @@ from product p
 order by p_order desc
 </select>
 
-<select id="bestProductListPaging" resultType="CategoryProductDTO" parameterType="hashmap">
+<select id="bestProductListSortBy" resultType="CategoryProductDTO" parameterType="HashMap">
 select *
 from (
 select p.P_ID
@@ -129,12 +129,8 @@ p_discount=#{p_discount}, p_stock=#{p_stock}, userid='admin1'
 where p_id=#{p_id}
 </update>
 
-<delete id="deleteProduct" parameterType="list">
-delete from product
-where p_id in
-	<foreach item="id" collection="list" open="(" separator="," close=")">
-		#{id}
-	</foreach>
+<delete id="deleteProduct">
+delete from product where p_id=#{p_id}
 </delete>
 
 <!-- 찜 갯수  -->
@@ -183,24 +179,28 @@ where p_id= #{p_id} and userid = #{userid}
 </update>
 
 <select id="selectProd" resultType="CategoryProductDTO" parameterType="hashmap">
-	select (select C_NAME from category where c_id = p.c_id) as c_name, p.P_ID,(select IMAGE_ROUTE from images where p_id = p.p_id 
-	and IMAGE_RNK = 1) as p_image,p.P_NAME,p.P_CONTENT,p.C_ID,p.P_COST_PRICE
-	,p.P_SELLING_PRICE,p.P_DISCOUNT, to_char(p.P_CREATED, 'YYYY/MM/DD') P_CREATED, p.P_STOCK
-	from product p
-	
-	<where>
-		<if test='searchName=="c_id"'>
-			upper((select C_NAME from category where c_id = p.c_id)) like upper('%${searchValue}%')
-		</if>
-		<if test='searchName!=null and !searchName.equals("null")'>
-		 	${searchName} like '%${searchValue}%'
-		</if>
-	</where>
-		order by 
-		<if test="sortBy!=null">
-			${sortBy} desc,
-		</if>
-		p_id desc
+select (select C_NAME from category where c_id = p.c_id) as c_name, p.P_ID,(select IMAGE_ROUTE from images where p_id = p.p_id 
+and IMAGE_RNK = 1) as p_image,p.P_NAME,p.P_CONTENT,p.C_ID,p.P_COST_PRICE
+,p.P_SELLING_PRICE,p.P_DISCOUNT,p.P_CREATED,p.P_STOCK from product p
+
+<where>
+	<if test='searchName=="c_id"'>
+		upper((select C_NAME from category where c_id = p.c_id)) like upper('%${searchValue}%')
+	</if>
+	<if test='searchName=="p_id"'>
+		p_id like '%${searchValue}%'
+	</if>
+	<if test='searchName=="p_name"'>
+		p_name like '%${searchValue}%'
+	</if>
+	<if test='searchName=="p_selling_price"'>
+		p_selling_price like '%${searchValue}%'
+	</if>
+	<if test='searchName=="p_created"'>
+		p_created like '%${searchValue}%'
+	</if>
+</where>
+	 order by ${sortBy} desc
 </select>
 
 <select id="BestProdCount" resultType="int">
@@ -209,14 +209,6 @@ where p_id= #{p_id} and userid = #{userid}
 
 <select id="totalCount" resultType="int" parameterType="hashmap">
 	select count(*) from product 
-	<where>
-	<if test='searchName=="c_id"'>
-		upper((select C_NAME from category where c_id = p.c_id)) like upper('%${searchValue}%')
-	</if>
-	<if test='searchName!=null and !searchName.equals("null")'>
-	 	${searchName} like '%${searchValue}%'
-	</if>
-</where>
 </select>
 
 <select id="countByC_id" resultType="int" parameterType="hashmap">
@@ -277,7 +269,7 @@ order by ${sortBy} desc
 
 <insert id="insertProduct" parameterType="hashmap">
 	insert into product (p_id,p_name,p_content,c_id,p_cost_price,p_selling_price,p_discount,p_created,p_stock,userid)
-	values (product_p_id_seq.NEXTVAL,#{p_name},#{p_content},#{c_id},#{p_cost_price},#{p_selling_price},#{p_discount},sysdate,#{p_stock},'admin1')
+	values (product_p_id_seq.NEXTVAL,#{p_name},#{p_content},#{c_id},#{p_cost_price},#{p_selling_price},#{p_discount},sysdate,#{p_stock},#{userid})
 </insert>
 
 <insert id="insertProduct2" parameterType="ProductDTO">

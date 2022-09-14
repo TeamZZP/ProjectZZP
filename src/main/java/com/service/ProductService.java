@@ -39,6 +39,19 @@ public class ProductService {
 		return list;
 	}
 	
+	public List<CategoryProductDTO> bestProductListSortBy(HashMap<String, String> p_map) {
+		System.out.println("bestProductListSotrBy");
+		List<CategoryProductDTO> list = null;
+		SqlSession session=MySqlSessionFactory.getSqlSession();
+		
+		try {
+			list=dao.bestProductListSortBy(session,p_map);
+		} finally {
+			session.close();
+		}
+		return list;
+	}
+	
 
 	public ProductDTO productRetrieve(int p_id) {
 		ProductDTO dto = null;
@@ -134,18 +147,18 @@ public class ProductService {
 		return num;
 	}
 
-	public int deleteProduct(List<String> ids) {
+	public int deleteProduct(int p_id) {
 		int num = 0;
 		SqlSession session = MySqlSessionFactory.getSqlSession();
 		try {
-			num = dao.deleteProduct(session, ids);
+			num = dao.deleteProduct(session, p_id);
         	session.commit();
         }finally {
         	session.close();
         }
 		return num;
 	}
-	
+
 	public int likeCount(String userid) {
 		int n = 0;
 		SqlSession session = MySqlSessionFactory.getSqlSession();
@@ -192,7 +205,7 @@ public class ProductService {
 		}return n;
 	}
 
-	public int insertProduct(HashMap<String, Object> map) {
+	public int insertProduct(HashMap<String, String> map) {
 		int num = 0;
 		SqlSession session = MySqlSessionFactory.getSqlSession();
 		try {
@@ -250,28 +263,18 @@ public class ProductService {
 		return dto;
 	}
 
-	public PageDTO selectC_Product(HashMap<String, String> p_map, int curPage) {
+	public List<CategoryProductDTO> selectC_Product(HashMap<String, String> p_map) {
 		SqlSession session=MySqlSessionFactory.getSqlSession();
-		PageDTO dto=null;
+		List<CategoryProductDTO> list = null;
 		try {
-			dto=dao.selectC_Product(session, p_map, curPage);
+			list=dao.selectC_Product(session, p_map);
 		} finally {
 			session.close();
 		}
-		return dto;
+		return list;
 	}
 	
-	public PageDTO selectBestProductListPaging(HashMap<String, String> p_map, int curPage) {
-		System.out.println("ProductService.selectBestProductListPaging");
-		SqlSession session=MySqlSessionFactory.getSqlSession();
-		PageDTO dto=null;
-		try {
-			dto=dao.selectBestProductListPaging(session, p_map, curPage);
-		} finally {
-			session.close();
-		}
-		return dto;
-	}
+	
 
 	public int updateProduct(ProductDTO dto) {
 		int num = 0;
@@ -296,8 +299,6 @@ public class ProductService {
 		}
 		return num;
 	}
-
-	
 
 
 

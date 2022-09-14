@@ -17,6 +17,7 @@ import com.dto.CategoryDTO;
 import com.dto.CategoryProductDTO;
 import com.dto.MemberDTO;
 import com.dto.PageDTO;
+import com.dto.ProductDTO;
 import com.service.CategoryService;
 import com.service.ProductService;
 
@@ -31,58 +32,61 @@ public class StoreServlet extends HttpServlet {
 		MemberDTO mdto = (MemberDTO)session.getAttribute("login");
 		
 		CategoryService category_service = new CategoryService(); // 카테고리 목록 조회
-		ProductService  product_service  = new ProductService(); //베스트 상품 조회
+		ProductService  pservice  = new ProductService(); //베스트 상품 조회
+		HashMap<String, String> p_map = new HashMap<String, String>();
+
 		
-		//페이징
-				String curPage=request.getParameter("curPage");//현재 페이지
-				if (curPage == null) {curPage="1";}//1페이지 시작
-				
-				//검색 기준, 검색어
-				String searchName=request.getParameter("searchName");
-				String searchValue=request.getParameter("searchValue");
 				String sortBy=request.getParameter("sortBy");
+			    List<CategoryProductDTO> product_list = new ArrayList<CategoryProductDTO>();
 				
-				HashMap<String, String> p_map = new HashMap<String, String>();
-				
-				//위 데이터를 map에 저장
-				p_map.put("searchName", searchName);
-				p_map.put("searchValue", searchValue);
-				if (sortBy == null) {
-					p_map.put("sortBy", "p_order");	
-					}else{//최초 정렬 기준//주문 순=베스트
-					p_map.put("sortBy", sortBy);	
+				if (request.getParameter("c_id") == null ||"".equals(request.getParameter("c_id"))) { //베스트상품가져오기
+			    	
+						 if (sortBy == null) {
+							 p_map.put("sortBy", "p_order");	
+								}else{//최초 정렬 기준//주문 순=베스트
+									 p_map.put("sortBy", sortBy);
+								}
+					
+						 product_list = pservice.bestProductListSortBy(p_map);
+					       
+					}else {
+						
+				       System.out.println("카테고리 아이디 확인 : "+request.getParameter("c_id"));
+					  /* product_list= pservice.productList(Integer.parseInt(request.getParameter("c_id"))); 
+					   pDTO.setList(product_list);*/
+				       
+				       if (sortBy== null) {
+							p_map.put("sortBy", "p_id");	
+							p_map.put("c_id", request.getParameter("c_id"));
+							}else{//최초 정렬 기준//주문 순=베스트
+							p_map.put("sortBy",sortBy);	
+							p_map.put("c_id", request.getParameter("c_id"));	
+							}
+				       
+				       product_list = pservice.selectC_Product(p_map);
 					}
-				
-				System.out.println(curPage+"\t"+searchName+"\t"+searchValue+"\t"+sortBy);
-	
-				PageDTO pDTO = new PageDTO(); //변수 list,curpage,perpage,totalCount
-				pDTO = 	product_service.selectAllProduct(p_map,Integer.parseInt(curPage)); //페이징 상품List
-				System.out.println("스토어리스트!!!!!!"+pDTO);
-				
 		
 		
 		
-		List<CategoryDTO> category_list = category_service.allCategory();//
-		List<CategoryProductDTO> product_list = product_service.bestProductList();
-		System.out.println(product_list);
-		
-		if(mdto != null) {
-			
+		List<CategoryDTO> category_list = category_service.allCategory();
+
+        String userid = "";
+			if(mdto != null) {
+			userid = mdto.getUserid();
 			HashMap<String,String> map = new HashMap<String, String>();
-			ProductService service = new ProductService();
 			
 			//int [] likecheck = null ; 
 			
 			List<Integer> likecheck = new ArrayList<Integer>();
 			
-			for (int i = 0; i < product_list.size(); i++) {
+			List<CategoryProductDTO> c_productList=product_list;
+			for (int i = 0; i < c_productList.size(); i++) {
 
-				map.put("p_id",  Integer.toString(product_list.get(i).getP_id()));
-				map.put("userid", mdto.getUserid());
-				likecheck.add(service.likeCheck(map));
+				map.put("p_id",  Integer.toString(c_productList.get(i).getP_id()));
+				map.put("userid", userid);
+				likecheck.add(pservice.likeCheck(map));
 				
 			}
-			
 
 			System.out.println("찜 갯수 확인"+likecheck);
 			
@@ -92,12 +96,11 @@ public class StoreServlet extends HttpServlet {
 		
 		
 		
-		request.setAttribute("pDTO", pDTO);
-		request.setAttribute("searchName", searchName);
-		request.setAttribute("searchValue", searchValue);
+		request.setAttribute("product_list", product_list);
+		
 		request.setAttribute("sortBy", sortBy);
 		request.setAttribute("category_list", category_list);		    
-		request.setAttribute("product_list", product_list);
+	//	request.setAttribute("product_list", product_list);
 		
 			
 		
