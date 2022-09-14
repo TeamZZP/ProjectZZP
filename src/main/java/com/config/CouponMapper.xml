@@ -72,4 +72,22 @@
 	<select id="myCouponNum" parameterType="string" resultType="int">
 		select count(*) from MEMBER_COUPON full outer join COUPON using(COUPON_ID) where USERID = #{userid}
 	</select>
+	<select id="MyCouponSearchList" parameterType="map" resultType="CouponMemberCouponDTO">
+	   	select * from MEMBER_COUPON full outer join COUPON using(COUPON_ID) where USERID = #{userid}
+	   		<if test="searchCategory == 'COUPON_DISCOUNT' and searchCategory != null">
+	   			order by COUPON_DISCOUNT desc
+	   		</if>
+	   		<if test="searchCategory == 'COUPON_VALIDITY' and searchCategory != null">
+	   			order by COUPON_VALIDITY asc
+	   		</if>
+	</select>
+	<select id="myCouponSearchNum" parameterType="map" resultType="int">
+		select count(*) from MEMBER_COUPON full outer join COUPON using(COUPON_ID) where USERID = #{userid}
+		   <if test="searchCategory == 'COUPON_DISCOUNT' and searchCategory != null">
+	   			order by COUPON_DISCOUNT desc
+	   		</if>
+	   		<if test="searchCategory == 'COUPON_VALIDITY' and searchCategory != null">
+	   			order by COUPON_VALIDITY asc
+	   		</if>
+	</select>
 </mapper>
