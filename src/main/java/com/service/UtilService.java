@@ -32,4 +32,28 @@ public class UtilService {
 		return n;
 	}
 
+	public int updateVisit() {
+		int n = 0;
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		try {
+			n = dao.updateVisit(session);
+			session.commit();
+		} finally {
+			session.close();
+		}
+		return n;
+	}
+
+	public int countVisitYesterday() {
+		int n = 0;
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		try {
+			n = dao.countVisitYesterday(session);
+		} finally {
+			session.close();
+		}
+		return n;
+	}
+
+
 }
