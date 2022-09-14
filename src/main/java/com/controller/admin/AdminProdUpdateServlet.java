@@ -157,7 +157,6 @@ public class AdminProdUpdateServlet extends HttpServlet {
 												e.printStackTrace();
 											}
 										}
-										
 								}//end else
 								
 								
