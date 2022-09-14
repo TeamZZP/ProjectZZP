@@ -37,17 +37,13 @@
 <script type="text/javascript"
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript"> 
-
- var productLike = 0;
+var productLike = 0;
 
 function productChoice(n) {
       console.log(n);
-
-     
-    
-
-<%if (mdto != null) {%>
-
+ <%
+ 	MemberDTO mdto = (MemberDTO) session.getAttribute("login");
+	if (mdto != null) {%>
 
 		$.ajax({
 
@@ -55,7 +51,7 @@ function productChoice(n) {
 			url : "ProductLikeServlet",
 			data : {
 				"p_id" : n,
-				
+			
 			},
 			dataType : "text",
 			success : function(data) {
@@ -75,105 +71,65 @@ function productChoice(n) {
 
 		}); //end ajax
 <%} else {%>
-	alert("로그인이 필요합니다.");
-		location.href = "LoginUIServlet";
+	$("#modalBtn").trigger("click");
+	$("#mesg").text("로그인이 필요합니다.");
+
+	$("#closemodal").click(function() {
+	location.href="LoginUIServlet";
+	}) 
+
 		event.preventDefault();
 <%}%>
+
 	}
 
-	$(function() {
-
-		//정렬 기준 선택시 form 제출
-	/*	$("#sortBy").on("change", function() {
-
-			console.log(c_id + "카테고리프로덕트!");
-			$("#prodForm2").submit();
-		});*/
-
-		$("button[name=up]").on("click", function() {
-			var p_id = $(this).attr("data-p_id");
-			console.log(p_id + " up클릭");
-
-			//input태그 수량변화
-			var quantity = parseInt($("#quantity" + p_id).val());
-			$("#quantity" + p_id).val(parseInt(quantity) + 1);
-
-			var price = parseInt($("#price" + p_id).val());
-
-			$("#total" + p_id).text((quantity + 1) * price);
-			//총합 구하기
-		})//end up
-
-		$("button[name=down]").on("click", function() {
-			var p_id = $(this).attr("data-p_id");
-			console.log(p_id + " down클릭");
-
-			//input태그 수량변화
-			var quantity = parseInt($("#quantity" + p_id).val());
-
-			if (quantity != 1) {
-				$("#quantity" + p_id).val(parseInt(quantity) - 1);
-
-				var price = parseInt($("#price" + p_id).val());
-
-				$("#total" + p_id).text((quantity - 1) * price);
-
-			}
-
-		})//
-		
-		$("button[name=moveCart]").on("click",function(){
-			var p_id = $(this).attr("data-P_id");
-			console.log("moveCart===="+p_id);
-		/* 	location.href="CartListServlet"; */
-		})//moveCart
-		
-	/* 	$("#deleteMember"+id).modal("hide");
-		$(".modal-backdrop").hide();//모달창 닫고 백드롭 hide */
-	})
 </script> --%>
-<form action="CategoryServlet" id="prodForm">
+<div id="categoryClickChange">
+<form action="StoreServlet" id="prodForm">	
 	<%
 	MemberDTO mdto = (MemberDTO) session.getAttribute("login");
-	PageDTO pDTO=(PageDTO) request.getAttribute("pDTO");
 	String sortBy=(String) request.getAttribute("sortBy");
 
-	List<CategoryProductDTO> pDTO_list = pDTO.getList();
-   
+	List<CategoryProductDTO> product_list=(List<CategoryProductDTO>) request.getAttribute("product_list");
+
+	int c_id=0;
 	//List<CategoryProductDTO> product_list = (List<CategoryProductDTO>) request.getAttribute("product_list");
 	%>
 
-	<div id="categoryProductContainer" class="container ">
-		<div class="row " align="center">
-			<div class="row">
-				<div class="col">
-					<div class="float-end">
-						<!-- 정렬 -->
-						<select class="form-select sortBy" name="sortBy" id="sortBy" data-style="btn-info" 
+	
+
+<div id="categoryProductContainer" class="container ">
+	<div class="row " align="center">
+		<div class="row">
+		  <div class="col">
+      	  		<div class="float-end">
+			  	  <!-- 정렬 -->
+				  <select class="form-select sortBy" name="sortBy" id="sortBy" data-style="btn-info" 
 				  		  style="width: 145px; margin-left: -24px; display: inline;">
 					    <option value="p_id" selected>정렬</option>
 					    <option value="p_id" <% if("p_id".equals(sortBy)){%>selected<%}%>>최신상품순</option>
 					    <option value="p_selling_price" <% if("p_selling_price".equals(sortBy)){%>selected<%}%>>판매가순</option>
 					    <option value="p_name" <% if("p_name".equals(sortBy)){%>selected<%}%>>상품명순</option>
 				  </select>
-					</div>
-				</div>
-			</div>
+			  </div>
+	    	</div>
+		</div>
+		<div style="height: 10px;"></div>
 
 			<%
-			for (int i = 0; i < pDTO_list.size(); i++) {
+			for (int i = 0; i < product_list.size(); i++) {
 
-				int p_id = pDTO_list.get(i).getP_id();
-				String p_name = pDTO_list.get(i).getP_name();
-				String p_content = pDTO_list.get(i).getP_content();
-				int c_id = pDTO_list.get(i).getC_id();
-				int p_cost_price = pDTO_list.get(i).getP_cost_price();
-				int p_selling_price = pDTO_list.get(i).getP_selling_price();
-				int p_discount = pDTO_list.get(i).getP_discount();
-				String p_created = pDTO_list.get(i).getP_created();
-				int p_stock = pDTO_list.get(i).getP_stock();
-				String userid = pDTO_list.get(i).getUserid();
-				String p_image = pDTO_list.get(i).getP_image();
+				int p_id = product_list.get(i).getP_id();
+				String p_name = product_list.get(i).getP_name();
+				String p_content = product_list.get(i).getP_content();
+				c_id = product_list.get(i).getC_id();
+				int p_cost_price = product_list.get(i).getP_cost_price();
+				int p_selling_price = product_list.get(i).getP_selling_price();
+				int p_discount = product_list.get(i).getP_discount();
+				String p_created = product_list.get(i).getP_created();
+				int p_stock = product_list.get(i).getP_stock();
+				String userid = product_list.get(i).getUserid();
+				String p_image = product_list.get(i).getP_image();
 				 request.setAttribute("c_id", c_id);
 				
 				int likecheck = 0;
@@ -217,9 +173,9 @@ function productChoice(n) {
 
 					</a>
 
-				<!-- 장바구니 모달창-->
+					<!-- 장바구니 모달창-->
 				<!-- Button trigger modal -->
-				<button type="button" class="carticon btn" data-bs-toggle="modal"
+				<button type="button" class="carticon btn" data-bs-toggle="modal" 
 					data-bs-target="#addcart<%=p_id%>" style="border: 0; outline: 0;">
 					<img src="images/cart.png" width="25" height="25" >
 				</button>
@@ -269,9 +225,9 @@ function productChoice(n) {
 								<div class="modal-footer">
 										<button type="button" class="btn btn-secondary"
 											data-bs-dismiss="modal">계속쇼핑하기</button>
-										<button type="button" class="btn btn-success" id="saveCart<%=p_id%>" data-p_id="<%=p_id%>" name = "saveCart"
+										<button type="button" class="btn btn-success doubleModal" id="saveCart<%=p_id%>" data-p_id="<%=p_id%>" name = "saveCart"
 										data-p_name = "<%=p_name %>" data-p_selling_price="<%=p_selling_price%>" data-p_image=<%=p_image %>
-											 data-bs-toggle="modal" data-bs-target="#chkmodal<%=p_id%>" >장바구니저장</button>
+											 >장바구니저장</button>
 									</div>
 								</div>
 							</div>
@@ -279,7 +235,8 @@ function productChoice(n) {
 
 					</form>
 				<!-- 장바구니 모달안에 모달 -->
-						<div class="modal fade" id="chkmodal<%=p_id%>"
+						<button type="button" id="modalBtn2" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#chkmodal<%=p_id%>" style="display: none;">modal</button>
+						<div class="modal fade doublemodal" id="chkmodal<%=p_id%>"
 						data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
 						aria-labelledby="staticBackdropLabel" aria-hidden="true">
 						<div class="modal-dialog">
@@ -305,30 +262,108 @@ function productChoice(n) {
 					</div> 
 				</div>
 			</div>
-		</div>
 		<%
 		}
 		%>
 		
-
-			<!-- 페이징 -->
-			<div class="p-2 text-center">
-				<%
-				int curPage = pDTO.getCurPage();
-				int perPage = pDTO.getPerPage();
-				int totalCount = pDTO.getTotalCount();
-				int totalPage = totalCount / perPage;
-				if (totalCount % perPage != 0)
-					totalPage++;
-				for (int p = 1; p <= totalPage; p++) {
-					if (p == curPage) {
-						out.print("<b>" + p + "</b>&nbsp;&nbsp;");
-					} else {
-						out.print("<a id='search' href='CategoryServlet?curPage=" + p + "&sortBy=" + sortBy + "&category=product'>" + p
-						+ "</a>&nbsp;&nbsp;");
-					}
-				}
-				%>
+					
 			</div>
 		</div>
 </form>
+</div>
+
+<script>
+	$(function() {
+		//정렬 기준 선택시 form 제출
+		$("#sortBy").on("change", function () {
+			$("#prodForm").submit();
+		});
+		
+		
+		var count="1";
+		$("button[name=up]").on("click", function() {
+			var p_id = $(this).attr("data-p_id");
+			console.log(p_id +" up클릭");
+			
+			//input태그 수량변화
+			var p_amount = parseInt($("#p_amount"+p_id).val());
+			$("#p_amount"+p_id).val(parseInt(p_amount) + 1);
+			count=$("#p_amount"+p_id).val();
+			var price = parseInt($("#price"+p_id).val());
+			
+			$("#total"+p_id).text(count*price);
+			//총합 구하기
+		})//end up
+		$("button[name=down]").on("click", function() {
+			var p_id = $(this).attr("data-p_id");
+			console.log(p_id +" down클릭");
+			
+			//input태그 수량변화
+			var p_amount = parseInt($("#p_amount"+p_id).val());
+			
+			if(p_amount !=1){
+			$("#p_amount"+p_id).val(parseInt(p_amount) - 1);
+			count=$("#p_amount"+p_id).val();
+			var price = parseInt($("#price"+p_id).val());
+			
+			$("#total"+p_id).text(count*price);
+			
+			}
+		})//end down
+		$("button[name=saveCart]").on("click",function(){
+			console.log("saveCart클릭됨");
+			
+			var p_id = $(this).attr("data-P_id");
+			var p_name = $(this).attr("data-p_name");
+			var p_selling_price = $(this).attr("data-p_selling_price");
+			var p_image = $(this).attr("data-p_image");
+			console.log(p_id, p_name, p_selling_price, count, p_image);
+			
+		<% if (mdto != null ) { %>	
+			
+			$.ajax({
+				type : "post",
+				url : "addCartServlet",
+				data : {
+					p_id : p_id,
+					p_name : p_name,
+					p_selling_price : p_selling_price,
+					p_amount : count,
+					p_image : p_image,
+				},
+				dataType : "text",
+				success : function(data,status,xhr) {
+					console.log("장바구니에 저장되었습니다.");
+				},
+				error : function(xhr, status, error) {
+					console.log(error);
+				}
+			}); //end ajax
+			
+			$("#modalBtn2").trigger("click");
+		
+	<%} else{ %>
+
+		$("#modalBtn").trigger("click");
+		$("#mesg").text("로그인이 필요합니다.");
+		
+		$("#closemodal").click(function() {
+        location.href="LoginUIServlet";
+     }) 
+     	
+		event.preventDefault();
+	<% } %>
+	
+		})
+		
+ 		$("button[name=back]").on("click", function() {
+			console.log("click======");
+			var p_id=$(this).attr("data-p_id");
+			console.log(p_id);
+			$("#addcart"+p_id).modal("hide");
+			$("#chkmodal"+p_id).modal("hide");
+			$(".modal-backdrop.show").hide();//모달창 닫고 백드롭 hide
+		});//end fn
+		
+	})//end function
+</script>

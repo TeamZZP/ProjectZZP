@@ -27,7 +27,7 @@ from product p
 order by p_order desc
 </select>
 
-<select id="bestProductListPaging" resultType="CategoryProductDTO" parameterType="hashmap">
+<select id="bestProductListSortBy" resultType="CategoryProductDTO" parameterType="HashMap">
 select *
 from (
 select p.P_ID
@@ -156,27 +156,24 @@ where p_id= #{p_id} and userid = #{userid}
 </update>
 
 <select id="selectProd" resultType="CategoryProductDTO" parameterType="hashmap">
-	select (select C_NAME from category where c_id = p.c_id) as c_name, p.P_ID,(select IMAGE_ROUTE from images where p_id = p.p_id 
-	and IMAGE_RNK = 1) as p_image,p.P_NAME,p.P_CONTENT,p.C_ID,p.P_COST_PRICE
-	,p.P_SELLING_PRICE,p.P_DISCOUNT, to_char(p.P_CREATED, 'YYYY/MM/DD') P_CREATED, p.P_STOCK
-	from product p
-	<where>
-		<if test='searchName=="c_id"'>
-			upper((select C_NAME from category where c_id = p.c_id)) like upper('%${searchValue}%')
-		</if>
-		<if test='searchName!=null and !searchName.equals("null")'>
-		 	${searchName} like '%${searchValue}%'
-		</if>
-	</where>
-		order by 
-		<if test="sortBy!=null">
-			${sortBy} desc,
-		</if>
-		p_id desc
-</select>
+		
+select (select C_NAME from category where c_id = p.c_id) as c_name, p.P_ID,(select IMAGE_ROUTE from images where p_id = p.p_id 
+and IMAGE_RNK = 1) as p_image,p.P_NAME,p.P_CONTENT,p.C_ID,p.P_COST_PRICE
+,p.P_SELLING_PRICE,p.P_DISCOUNT,p.P_CREATED,p.P_STOCK from product p
 
-<select id="BestProdCount" resultType="int">
-	select count(*) from product 
+<where>
+	<if test='searchName=="c_id"'>
+		upper((select C_NAME from category where c_id = p.c_id)) like upper('%${searchValue}%')
+	</if>
+	<if test='searchName!=null and !searchName.equals("null")'>
+		${searchName} like '%${searchValue}%'
+	</if>
+</where>
+	order by
+	<if test="sortBy!=null">
+		${sortBy} desc,
+	</if>
+	 p_id desc
 </select>
 
 <select id="totalCount" resultType="int" parameterType="hashmap">
@@ -186,9 +183,13 @@ where p_id= #{p_id} and userid = #{userid}
 		upper((select C_NAME from category where c_id = p.c_id)) like upper('%${searchValue}%')
 	</if>
 	<if test='searchName!=null and !searchName.equals("null")'>
-	 	${searchName} like '%${searchValue}%'
+		${searchName} like '%${searchValue}%'
 	</if>
 </where>
+</select>
+
+<select id="BestProdCount" resultType="int">
+	select count(*) from product 
 </select>
 
 <select id="countByC_id" resultType="int" parameterType="hashmap">

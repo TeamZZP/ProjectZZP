@@ -28,17 +28,16 @@ public class NoticeInsertServlet extends HttpServlet {
 		int admin = mDTO.getRole();
 		if (admin == 1) {
 			String USERID = mDTO.getUserid();
-			String NOTICE_TITTLE = request.getParameter("nTittle");
-			String NOTICE_CONTENT = request.getParameter("nContent");
-			String NOTICE_CATEGORY = request.getParameter("nCategory");
+			String nTittle = request.getParameter("nTittle");
+			String nContent = request.getParameter("nContent");
+			String nCategory = request.getParameter("nCategory");
 			
 			NoticeDTO nDTO = new NoticeDTO();
-			nDTO.setUserid(USERID);
-			nDTO.setNotice_tittle(NOTICE_TITTLE);
-			nDTO.setNotice_content(NOTICE_CONTENT);
-			nDTO.setNotice_category(NOTICE_CATEGORY);
+			nDTO.setUserid(USERID); 
+			nDTO.setNotice_tittle(nTittle);
+			nDTO.setNotice_content(nContent);
+			nDTO.setNotice_category(nCategory);
 			System.out.println("insert할 내용 " + nDTO);
-			
 			
 			NoticeService service = new NoticeService();
 			int num = service.NoticeInsert(nDTO);

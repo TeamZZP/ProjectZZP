@@ -17,96 +17,93 @@ import com.dto.CategoryDTO;
 import com.dto.CategoryProductDTO;
 import com.dto.MemberDTO;
 import com.dto.PageDTO;
+import com.dto.ProductDTO;
 import com.service.CategoryService;
 import com.service.ProductService;
 
 @WebServlet("/StoreServlet")
 public class StoreServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		System.out.println("storeServlet=======");
-		
+
 		HttpSession session = request.getSession();
-		MemberDTO mdto = (MemberDTO)session.getAttribute("login");
-		
+		MemberDTO mdto = (MemberDTO) session.getAttribute("login");
+
 		CategoryService category_service = new CategoryService(); // 카테고리 목록 조회
-		ProductService  product_service  = new ProductService(); //베스트 상품 조회
-		
-		//페이징
-				String curPage=request.getParameter("curPage");//현재 페이지
-				if (curPage == null) {curPage="1";}//1페이지 시작
-				
-				//검색 기준, 검색어
-				String searchName=request.getParameter("searchName");
-				String searchValue=request.getParameter("searchValue");
-				String sortBy=request.getParameter("sortBy");
-				
-				HashMap<String, String> p_map = new HashMap<String, String>();
-				
-				//위 데이터를 map에 저장
-				p_map.put("searchName", searchName);
-				p_map.put("searchValue", searchValue);
-				if (sortBy == null) {
-					p_map.put("sortBy", "p_order");	
-					}else{//최초 정렬 기준//주문 순=베스트
-					p_map.put("sortBy", sortBy);	
-					}
-				
-				System.out.println(curPage+"\t"+searchName+"\t"+searchValue+"\t"+sortBy);
-	
-				PageDTO pDTO = new PageDTO(); //변수 list,curpage,perpage,totalCount
-				pDTO = 	product_service.selectAllProduct(p_map,Integer.parseInt(curPage)); //페이징 상품List
-				System.out.println("스토어리스트!!!!!!"+pDTO);
-				
-		
-		
-		
-		List<CategoryDTO> category_list = category_service.allCategory();//
-		List<CategoryProductDTO> product_list = product_service.bestProductList();
-		System.out.println(product_list);
-		
-		if(mdto != null) {
-			
-			HashMap<String,String> map = new HashMap<String, String>();
-			ProductService service = new ProductService();
-			
-			//int [] likecheck = null ; 
-			
-			List<Integer> likecheck = new ArrayList<Integer>();
-			
-			for (int i = 0; i < product_list.size(); i++) {
+		ProductService pservice = new ProductService(); // 베스트 상품 조회
+		HashMap<String, String> p_map = new HashMap<String, String>();
 
-				map.put("p_id",  Integer.toString(product_list.get(i).getP_id()));
-				map.put("userid", mdto.getUserid());
-				likecheck.add(service.likeCheck(map));
-				
+		String sortBy = request.getParameter("sortBy");
+		String c_id = request.getParameter("c_id");
+		
+		List<CategoryProductDTO> product_list = new ArrayList<CategoryProductDTO>();
+
+		// 스토어 메인
+		if (c_id == null || "".equals(c_id)) {
+			// 최초 정렬 기준//주문 순=베스트
+			if (sortBy == null) {
+				p_map.put("sortBy", "p_order");
+			} else {
+				p_map.put("sortBy", sortBy);
 			}
-			
 
-			System.out.println("찜 갯수 확인"+likecheck);
-			
-			request.setAttribute("likecheck", likecheck);
-			
+			product_list = pservice.bestProductListSortBy(p_map);
+
 		}
+		/*
+		 * else { System.out.println("카테고리 아이디 확인 : "+c_id); product_list=
+		 * pservice.productList(Integer.parseInt(request.getParameter("c_id")));
+		 * pDTO.setList(product_list); System.out.println("카테고리>>>"+c_id+" "+sortBy);
+		 * //최초 정렬 기준//주문 순=베스트 if (sortBy== null) { p_map.put("sortBy", "p_id");
+		 * p_map.put("c_id", request.getParameter("c_id"));
+		 * System.out.println("정렬기준x>>>"+c_id+" "+sortBy); }else{
+		 * p_map.put("sortBy",sortBy); p_map.put("c_id", request.getParameter("c_id"));
+		 * System.out.println("정렬기준O>>>"+c_id+" "+sortBy); }
+		 * 
+		 * product_list = pservice.selectC_Product(p_map); }
+		 */
 		
+		List<CategoryDTO> category_list = category_service.allCategory();
 		
-		
-		request.setAttribute("pDTO", pDTO);
-		request.setAttribute("searchName", searchName);
-		request.setAttribute("searchValue", searchValue);
-		request.setAttribute("sortBy", sortBy);
-		request.setAttribute("category_list", category_list);		    
+		String userid = "";
+		if (mdto != null) {
+			userid = mdto.getUserid();
+			HashMap<String, String> map = new HashMap<String, String>();
+
+			// int [] likecheck = null ;
+
+			List<Integer> likecheck = new ArrayList<Integer>();
+
+			List<CategoryProductDTO> c_productList = product_list;
+			for (int i = 0; i < c_productList.size(); i++) {
+
+				map.put("p_id", Integer.toString(c_productList.get(i).getP_id()));
+				map.put("userid", userid);
+				likecheck.add(pservice.likeCheck(map));
+
+			}
+
+			System.out.println("찜 갯수 확인" + likecheck);
+
+			request.setAttribute("likecheck", likecheck);
+
+		}
+
 		request.setAttribute("product_list", product_list);
-		
-			
-		
-		
+
+		request.setAttribute("sortBy", sortBy);
+		request.setAttribute("category_list", category_list);
+		// request.setAttribute("product_list", product_list);
+
 		RequestDispatcher dis = request.getRequestDispatcher("store.jsp");
 		dis.forward(request, response);
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		doGet(request, response);
 	}
 

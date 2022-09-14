@@ -67,8 +67,8 @@ public class ProductDAO {
 		return session.update("updateProduct", map);
 	}
 
-	public int deleteProduct(SqlSession session, List<String> ids) {
-		return session.delete("deleteProduct", ids);
+	public int deleteProduct(SqlSession session, int p_id) {
+		return session.delete("deleteProduct", p_id);
 	}
 
 	public int likeCount(SqlSession session, String userid) {
@@ -117,20 +117,12 @@ public class ProductDAO {
 	  
 	
 	
-	public PageDTO selectC_Product(SqlSession session, HashMap<String, String> p_map, int curPage) {
+	public List<CategoryProductDTO> selectC_Product(SqlSession session, HashMap<String, String> p_map) {
 		
-		PageDTO pDTO=new PageDTO();
-		pDTO.setCurPage(curPage);
-		pDTO.setPerPage(12);//한 페이지에 12개 출력
-		int perPage=pDTO.getPerPage();//한 페이지에 출력 갯수
-		int offset=(curPage-1)*perPage;//페이지 시작 idx
 		
-		//map에 검색 조건, 검색어, 정렬 저장된 상태
-		List<CategoryProductDTO> list=session.selectList("ProductMapper.selectC_Product", p_map, new RowBounds(offset, perPage));
+		List<CategoryProductDTO> list=session.selectList("ProductMapper.selectC_Product", p_map);
 		
-		pDTO.setList(list);//현재 페이지에 해당하는 데이터 리스트
-		pDTO.setTotalCount(countByC_id(session, p_map));//전체 레코드 갯수
-		return pDTO;
+		return list;
 	}
 	
 	private int countByC_id(SqlSession session, HashMap<String, String> map) {
@@ -143,20 +135,14 @@ public class ProductDAO {
 
 	}
 	
-	public PageDTO selectBestProductListPaging(SqlSession session, HashMap<String, String> p_map, int curPage) {
-		System.out.println("ProductDAO.selectBestProductListPaging");
-		PageDTO pDTO=new PageDTO();
-		pDTO.setCurPage(curPage);
-		pDTO.setPerPage(12);//한 페이지에 12개 출력
-		int perPage=pDTO.getPerPage();//한 페이지에 출력 갯수
-		int offset=(curPage-1)*perPage;//페이지 시작 idx
+	public List<CategoryProductDTO> bestProductListSortBy(SqlSession session,HashMap<String, String> p_map) {
 		
-		//map에 검색 조건, 검색어, 정렬 저장된 상태
-		List<CategoryProductDTO> list=session.selectList("ProductMapper.bestProductListPaging", p_map, new RowBounds(offset, perPage));
+		System.out.println("ProductDAO.bestProductListSortBy"+p_map);
 		
-		pDTO.setList(list);//현재 페이지에 해당하는 데이터 리스트
-		pDTO.setTotalCount(bestProdCount(session));//전체 레코드 갯수
-		return pDTO;
+		List<CategoryProductDTO> list=session.selectList("ProductMapper.bestProductListSortBy",  p_map);
+		
+		return list ;
+		
 	}
 	
 
@@ -182,7 +168,7 @@ public class ProductDAO {
 		return n;
 	}
 
-	public int insertProduct(SqlSession session, HashMap<String, Object> map) {
+	public int insertProduct(SqlSession session, HashMap<String, String> map) {
 		return session.insert("insertProduct", map);
 	}
 

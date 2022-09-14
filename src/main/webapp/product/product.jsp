@@ -101,15 +101,9 @@ function productChoice(n) {
 <div id="categoryClickChange">
 <form action="StoreServlet" id="prodForm">	
 <%
-PageDTO pDTO=(PageDTO) request.getAttribute("pDTO");
-String searchName=(String) request.getAttribute("searchName");
-String searchValue=(String) request.getAttribute("searchValue");
 String sortBy=(String) request.getAttribute("sortBy");
-
-List<CategoryProductDTO> pDTO_list = pDTO.getList();
-
-//List<CategoryProductDTO> product_list = (List<CategoryProductDTO>) request.getAttribute("product_list");
-
+List<CategoryProductDTO> product_list=(List<CategoryProductDTO>) request.getAttribute("product_list");
+int c_id=0;
 %>
 	
 <div id="categoryProductContainer" class="container ">
@@ -128,24 +122,23 @@ List<CategoryProductDTO> pDTO_list = pDTO.getList();
 			  </div>
 	    	</div>
 		</div>
-		 <div style="height: 10px"></div>
-
+		<div style="height: 10px;"></div>
 		<%
-		for (int i = 0; i < pDTO_list.size(); i++) {
+		for (int i = 0; i < product_list.size(); i++) {
 			
 			
 			
-			int p_id = pDTO_list.get(i).getP_id();
-			String p_name = pDTO_list.get(i).getP_name();
-			String p_content = pDTO_list.get(i).getP_content();
-			int c_id = pDTO_list.get(i).getC_id();
-			int p_cost_price = pDTO_list.get(i).getP_cost_price();
-			int p_selling_price = pDTO_list.get(i).getP_selling_price();
-			int p_discount = pDTO_list.get(i).getP_discount();
-			String p_created = pDTO_list.get(i).getP_created();
-			int p_stock = pDTO_list.get(i).getP_stock();
-			String userid = pDTO_list.get(i).getUserid();
-			String p_image = pDTO_list.get(i).getP_image();
+			int p_id = product_list.get(i).getP_id();
+			String p_name = product_list.get(i).getP_name();
+			String p_content = product_list.get(i).getP_content();
+			c_id = product_list.get(i).getC_id();
+			int p_cost_price = product_list.get(i).getP_cost_price();
+			int p_selling_price = product_list.get(i).getP_selling_price();
+			int p_discount = product_list.get(i).getP_discount();
+			String p_created = product_list.get(i).getP_created();
+			int p_stock = product_list.get(i).getP_stock();
+			String userid = product_list.get(i).getUserid();
+			String p_image = product_list.get(i).getP_image();
 			
 			
 			int likecheck = 0;
@@ -158,9 +151,8 @@ List<CategoryProductDTO> pDTO_list = pDTO.getList();
 			}
 		%>
 
-		
-			<div class="col-lg-3 col-md-4 col-sm-6">
-		<div >
+	
+		<div class="col-lg-3 col-md-4 col-sm-6">
 			<div class="hover-zoomin">
 				<a href="ProductRetrieveServlet?p_id=<%=p_id%>"> <img
 					src="images/p_image/<%=p_image%> "></a>
@@ -193,7 +185,7 @@ List<CategoryProductDTO> pDTO_list = pDTO.getList();
 
 				<!-- 장바구니 모달창-->
 				<!-- Button trigger modal -->
-				<button type="button" class="carticon btn" data-bs-toggle="modal"
+				<button type="button" class="carticon btn" data-bs-toggle="modal" 
 					data-bs-target="#addcart<%=p_id%>" style="border: 0; outline: 0;">
 					<img src="images/cart.png" width="25" height="25" >
 				</button>
@@ -280,35 +272,15 @@ List<CategoryProductDTO> pDTO_list = pDTO.getList();
 					</div> 
 				</div>
 			</div>
-		</div>
 		<%
 		}
 		%>
 		
-
-			<!-- 페이징 -->
-	 <div class="p-2 text-center">
-	<%
-		int curPage = pDTO.getCurPage();
-		int perPage = pDTO.getPerPage();
-		int totalCount = pDTO.getTotalCount();
-		int totalPage = totalCount/perPage;
-		if(totalCount%perPage!=0) totalPage++;
-		for(int p=1; p<=totalPage; p++){
-			if(p==curPage){
-				out.print("<b>"+p+"</b>&nbsp;&nbsp;");
-			} else {
-				out.print("<a id='search' href='StoreServlet?curPage="+p
-	    				+"&searchName="+searchName+"&searchValue="+searchValue
-	    				+"&sortBy="+sortBy+"&category=product'>"+p+"</a>&nbsp;&nbsp;");
-			}
-		} 
-	%>
-	</div>
 	</div>
 </div>
 </form>
 </div>
+
 <script>
 	$(function() {
 		//정렬 기준 선택시 form 제출

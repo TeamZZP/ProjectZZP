@@ -19,6 +19,10 @@
 				$("form").attr("action","NoticeInsertServlet");
 			}
 		});
+		$("#noticeList").click(function () {
+			history.back();
+			event.preventDefault();
+		});
 	});;//end ready
 </script>
 	<form method="post" action="">
@@ -31,9 +35,8 @@
 						  <span class="input-group-text">제목</span>
 						  <input type="text" class="form-control" name="nTittle" id="nTittle">
 					</div>
-	    			
 	    			<div class="input-group">
-					  <select class="form-select"   name="nCategory">
+					  <select class="form-select" name="nCategory">
 					    <option value="main">point</option>
 	    				<option value="notice" selected="selected">notice</option>
 					  </select>
@@ -46,9 +49,12 @@
 	    		</td>
 	    	</tr>
 	    	<tr>
+	    		<td style="text-align: left;">
+	    			<button id="noticeList" class="btn btn-outline-success">목록</button>
+	    		</td>
 	    		<td style="text-align: right;">
 	    			<button type="submit" id="noticeInsert" class="btn btn-outline-success">글입력</button> 
-	    			<button type="reset" class="btn btn-outline-success">글삭제</button> 
+	    			<button type="reset" class="btn btn-outline-success">취소</button> 
 	    		</td>
 	    	</tr>
 	    </table>

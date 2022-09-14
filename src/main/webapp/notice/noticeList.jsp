@@ -58,11 +58,12 @@ a{
     		<%
     			List<NoticeDTO> pointNotice = (List<NoticeDTO>)session.getAttribute("pointNotice");
     			for(NoticeDTO nDTO : pointNotice){
+    				String day = nDTO.getNotice_created().substring(0,10);
 			%>
     	<tr style="background: #DCDCDC">
     		<td> <b> <%= nDTO.getNotice_id() %> </b> </td>
     		<td> <a href="NoticeOneSelectServlet?NOTICE_ID=<%= nDTO.getNotice_id() %>"> <b> <%= nDTO.getNotice_tittle() %> </b> </a> </td>
-    		<td> <b>  <%= nDTO.getNotice_create() %> </b> </td>
+    		<td> <b>  <%= day %> </b> </td>
     		<td> <b>  <%= nDTO.getNotice_hits() %> </b> </td>
     	</tr>
     		<%
@@ -73,11 +74,12 @@ a{
 	 		List<NoticeDTO> list = pDTO.getList();
 	 		for(int i = 0; i < list.size(); i++){
 	 			NoticeDTO nDTO = list.get(i);
+	 			String day = nDTO.getNotice_created().substring(0,10);
 		%>
     	<tr>
     		<td> <%= nDTO.getNotice_id() %> </td>
     		<td><a href="NoticeOneSelectServlet?NOTICE_ID=<%= nDTO.getNotice_id() %>"> <%= nDTO.getNotice_tittle() %> </a> </td>
-    		<td> <%= nDTO.getNotice_create() %> </td>
+    		<td> <%= day %> </td>
     		<td> <%= nDTO.getNotice_hits() %> </td>
     	</tr>
     	<%
