@@ -31,8 +31,11 @@
 .submenu-link {
 	margin-left: 30px;
 }
-.storeSubMenu, .challSubMenu {
+.storeSubMenu {
 	margin-left: 50px;
+}
+.challSubMenu {
+	margin-left: 52px;
 }
 
 </style>

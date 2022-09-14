@@ -213,6 +213,7 @@ $(document).ready(function () {
 </div>
 
 	<!-- 페이징 -->
+	<div class="container">
 	  <div class="p-2 text-center reportPage">
 	  <% 
 		    int curPage = pDTO.getCurPage(); 
@@ -231,7 +232,7 @@ $(document).ready(function () {
 		    }
 	  %>
 	  </div>
-	  
+	 </div>
 	  
 	  
 	  <!-- Modal -->
