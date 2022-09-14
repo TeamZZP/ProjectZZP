@@ -66,4 +66,10 @@
 			COUPON_VALIDITY = #{coupon_validity}
 			where COUPON_ID = #{coupon_id}
 	</update>
+	<select id="myCouponList" parameterType="string" resultType="CouponMemberCouponDTO">
+		select * from MEMBER_COUPON full outer join COUPON using(COUPON_ID) where USERID = #{userid}
+	</select>
+	<select id="myCouponNum" parameterType="string" resultType="int">
+		select count(*) from MEMBER_COUPON full outer join COUPON using(COUPON_ID) where USERID = #{userid}
+	</select>
 </mapper>

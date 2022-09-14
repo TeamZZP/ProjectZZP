@@ -28,6 +28,7 @@
 	<typeAlias type="com.dto.ReviewProductDTO" alias="ReviewProductDTO"/> 
 	<typeAlias type="com.dto.ProductOrderReviewDTO" alias="ProductOrderReviewDTO"/> 
 	<typeAlias type="com.dto.CouponDTO" alias="CouponDTO"/> 
+	<typeAlias type="com.dto.CouponMemberCouponDTO" alias="CouponMemberCouponDTO"/> 
 
 </typeAliases>
   <environments default="development">
@@ -57,6 +58,7 @@
     <mapper resource="com/config/AnswerMapper.xml"/>
     <mapper resource="com/config/OrderMapper.xml"/>
     <mapper resource="com/config/CouponMapper.xml"/>
+    <mapper resource="com/config/UtilMapper.xml"/>
   </mappers> 
 </configuration>
   

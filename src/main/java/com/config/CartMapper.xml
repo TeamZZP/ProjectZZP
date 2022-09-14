@@ -52,4 +52,9 @@
 		from cart c, product p 
 		where c.p_id = p.p_id and c.userid = #{userid}
 	</select>  
+	
+	<select id="selectCart" parameterType="hashMap" resultType="CartDTO">
+		select * from cart where p_id = #{p_id} and userid= #{userid}
+	</select>
+	
 </mapper>

@@ -123,7 +123,18 @@ public class CartService {
 		
 	}
 
-	
+	//장바구니 선택한 상품 List에 담기
+	public CartDTO selectCart(HashMap<String, String> map) {
+		CartDTO dto = null;
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		 try {
+			 dto = dao.selectCart(session,map);
+		} finally {
+			session.close();
+		}
+		 return dto;
+	}
+
 	
 	
 }
