@@ -31,6 +31,9 @@
 .submenu-link {
 	margin-left: 30px;
 }
+.storeSubMenu, .challSubMenu {
+	margin-left: 50px;
+}
 
 </style>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -65,7 +68,7 @@ $(document).ready(function () {
 	  </li>
 	  <li class="nav-item has-submenu">
 	    <a class="nav-link submenu-toggle store" href="#" data-bs-toggle="collapse" 
-	    		data-bs-target="#submenu-1" aria-expanded="true" aria-controls="submenu-1"><i class="fa-solid fa-store me-3"></i>스토어 <i class="storeSubMenu fa-solid fa-chevron-up mx-4"></i></a>
+	    		data-bs-target="#submenu-1" aria-expanded="true" aria-controls="submenu-1"><i class="fa-solid fa-store me-3"></i>스토어 <i class="storeSubMenu fa-solid fa-chevron-up"></i></a>
 			<div id="submenu-1" class="collapse submenu submenu-1 show" data-bs-parent="#menu-accordion">
 				<ul class="submenu-list list-unstyled">
 					<li class="submenu-item"><a class="submenu-link category product" data-category="product" id="productManagement">상품관리</a></li>
@@ -76,7 +79,7 @@ $(document).ready(function () {
 	  </li>
 	  <li class="nav-item has-submenu">
 	    <a class="nav-link submenu-toggle challengeBoard" href="#" data-bs-toggle="collapse" 
-	    		data-bs-target="#submenu-2" aria-expanded="true" aria-controls="submenu-1"><i class="fa-solid fa-certificate me-3"></i>챌린지 <i class="challSubMenu fa-solid fa-chevron-up mx-4"></i></a>
+	    		data-bs-target="#submenu-2" aria-expanded="true" aria-controls="submenu-1"><i class="fa-solid fa-certificate me-3"></i>챌린지 <i class="challSubMenu fa-solid fa-chevron-up"></i></a>
 			<div id="submenu-2" class="collapse submenu submenu-2 show" data-bs-parent="#menu-accordion">
 				<ul class="submenu-list list-unstyled">
 					<li class="submenu-item"><a class="submenu-link category challenge" data-category="challenge" id="challengeManagement">챌린지관리</a></li>
