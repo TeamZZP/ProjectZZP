@@ -147,11 +147,11 @@ public class ProductService {
 		return num;
 	}
 
-	public int deleteProduct(int p_id) {
+	public int deleteProduct(List<String> ids) {
 		int num = 0;
 		SqlSession session = MySqlSessionFactory.getSqlSession();
 		try {
-			num = dao.deleteProduct(session, p_id);
+			num = dao.deleteProduct(session, ids);
         	session.commit();
         }finally {
         	session.close();
@@ -205,7 +205,7 @@ public class ProductService {
 		}return n;
 	}
 
-	public int insertProduct(HashMap<String, String> map) {
+	public int insertProduct(HashMap<String, Object> map) {
 		int num = 0;
 		SqlSession session = MySqlSessionFactory.getSqlSession();
 		try {
