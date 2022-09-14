@@ -4,12 +4,10 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="NoticeMapper">
 	<select id="pointNotice" resultType="NoticeDTO">
-		select NOTICE_ID, NOTICE_TITTLE, NOTICE_CONTENT, to_char(NOTICE_CREATED, 'YYYY/MM/DD') NOTICE_CREATED, 
-			USERID, NOTICE_CATEGORY, NOTICE_HITS from notice where NOTICE_CATEGORY = 'main' order by notice_id desc
+		select * from notice where NOTICE_CATEGORY = 'main' order by notice_id desc
 	</select>
 	<select id="noticeList" resultType="NoticeDTO">
-		select NOTICE_ID, NOTICE_TITTLE, NOTICE_CONTENT, to_char(NOTICE_CREATED, 'YYYY/MM/DD') NOTICE_CREATED, 
-			USERID, NOTICE_CATEGORY, NOTICE_HITS from notice where NOT NOTICE_CATEGORY = 'main' order by notice_id desc
+		select * from notice where NOT NOTICE_CATEGORY = 'main' order by notice_id desc
 	</select>
 	<select id="noticeOneSelect" resultType="NoticeDTO" parameterType="int">
 		select NOTICE_ID, NOTICE_TITTLE, NOTICE_CONTENT, to_char(NOTICE_CREATED, 'YYYY/MM/DD') NOTICE_CREATED, 
@@ -21,8 +19,8 @@
     		order by notice_id desc
 	</select>
 	<update id="noticeUpdate" parameterType="NoticeDTO">
-		update notice set NOTICE_TITTLE = #{NOTICE_TITTLE}, NOTICE_CONTENT = #{NOTICE_CONTENT}
-			where NOTICE_ID = #{NOTICE_ID}
+		update notice set NOTICE_TITTLE = #{notice_tittle}, NOTICE_CONTENT = #{notice_content}
+			where NOTICE_ID = #{notice_id}
 	</update>
 	<delete id="NoticeDelete" parameterType="string">
 		delete from notice where NOTICE_ID = #{NOTICE_ID}
@@ -34,7 +32,7 @@
 		select count(*) from notice where NOT NOTICE_CATEGORY = 'main'
 	</select>
 	<insert id="NoticeInsert" parameterType="NoticeDTO">
-		insert into notice (NOTICE_ID,NOTICE_TITTLE,NOTICE_CONTENT,NOTICE_CREATED,NOTICE_HITS,NOTICE_CATEGORY,USERID)
-			values (NOTICE_NOTICE_ID_SEQ.nextval, #{NOTICE_TITTLE}, #{NOTICE_CONTENT}, sysdate, 0, #{NOTICE_CATEGORY}, #{USERID})
+		insert into notice (NOTICE_ID, NOTICE_TITTLE, NOTICE_CONTENT, NOTICE_CREATED, NOTICE_HITS, NOTICE_CATEGORY, USERID)
+			values (NOTICE_NOTICE_ID_SEQ.nextval, #{notice_tittle}, #{notice_content}, sysdate, 0, #{notice_category}, #{userid})
 	</insert>
 </mapper>

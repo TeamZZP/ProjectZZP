@@ -33,7 +33,7 @@ public class NoticeListServlet extends HttpServlet {
 		}
 		
 		NoticeService service = new NoticeService();
-		List<NoticeDTO> list = service.pointNotice();
+		List<NoticeDTO> list = service.pointNotice();//고정공지
 		
 		pDTO = service.page(Integer.parseInt(curPage));
 		System.out.println("pDTO " + pDTO);//나머지

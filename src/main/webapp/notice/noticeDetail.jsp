@@ -56,7 +56,7 @@
 				<td>
 					<div class="input-group mb-3">
 					  <span class="input-group-text">작성일</span>
-					  <input type="text" class="form-control shadow-none" value="<%=nDTO.getNotice_create()%>" readonly="readonly">
+					  <input type="text" class="form-control shadow-none" value="<%=nDTO.getNotice_created()%>" readonly="readonly">
 					</div>
 				</td>
 				<td>

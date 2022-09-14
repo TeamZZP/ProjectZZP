@@ -40,7 +40,7 @@
 			</tr>
 			<tr>
 				<td>
-					 작성일 <input type="text" class="form-control" value="<%=nDTO.getNotice_create() %>">
+					 작성일 <input type="text" class="form-control" value="<%=nDTO.getNotice_created() %>">
 				</td>
 				<td>
 					조회 <input type="text" class="form-control" value="<%=nDTO.getNotice_hits()%>">

@@ -5,15 +5,15 @@
 <mapper namespace="AnswerMapper">
 	<insert id="answerInsert" parameterType="AnswerDTO">
 		insert into ANSWER (ANSWER_ID, ANSWER_CONTENT, Q_ID, ANSWER_CREATED)
-			values (ANSWER_ANSWER_ID.nextval, #{ANSWER_CONTENT}, #{Q_ID}, sysdate)
+			values (ANSWER_ANSWER_ID.nextval, #{answer_content}, #{q_id}, sysdate)
 	</insert>
 	<select id="selectAnswer" parameterType="string" resultType="AnswerDTO">
-		select * from ANSWER where Q_ID = #{Q_ID}
+		select * from ANSWER where Q_ID = #{q_id}
 	</select>
 	<update id="answerUpdate" parameterType="AnswerDTO">
-		update ANSWER set ANSWER_CONTENT = #{ANSWER_CONTENT} where Q_ID = #{Q_ID}
+		update ANSWER set ANSWER_CONTENT = #{answer_content} where Q_ID = #{q_id}
 	</update>
 	<update id="questionStatus" parameterType="string">
-		update QUESTION set Q_STATUS = '답변완료' where Q_ID = #{Q_ID}
+		update QUESTION set Q_STATUS = '답변완료' where Q_ID = #{q_id}
 	</update>
 </mapper>

@@ -5,7 +5,7 @@ public class NoticeDTO {
 	int notice_id; 
 	String notice_tittle; 
 	String notice_content;
-	String notice_create; 
+	String notice_created; 
 	String userid; 
 	String notice_category; 
 	int notice_hits; 
@@ -14,13 +14,13 @@ public class NoticeDTO {
 		super();
 	}
 
-	public NoticeDTO(int notice_id, String notice_tittle, String notice_content, String notice_create, String userid,
+	public NoticeDTO(int notice_id, String notice_tittle, String notice_content, String notice_created, String userid,
 			String notice_category, int notice_hits) {
 		super();
 		this.notice_id = notice_id;
 		this.notice_tittle = notice_tittle;
 		this.notice_content = notice_content;
-		this.notice_create = notice_create;
+		this.notice_created = notice_created;
 		this.userid = userid;
 		this.notice_category = notice_category;
 		this.notice_hits = notice_hits;
@@ -50,12 +50,12 @@ public class NoticeDTO {
 		this.notice_content = notice_content;
 	}
 
-	public String getNotice_create() {
-		return notice_create;
+	public String getNotice_created() {
+		return notice_created;
 	}
 
-	public void setNotice_create(String notice_create) {
-		this.notice_create = notice_create;
+	public void setNotice_created(String notice_created) {
+		this.notice_created = notice_created;
 	}
 
 	public String getUserid() {
@@ -85,8 +85,8 @@ public class NoticeDTO {
 	@Override
 	public String toString() {
 		return "NoticeDTO [notice_id=" + notice_id + ", notice_tittle=" + notice_tittle + ", notice_content="
-				+ notice_content + ", notice_create=" + notice_create + ", userid=" + userid + ", notice_category="
+				+ notice_content + ", notice_created=" + notice_created + ", userid=" + userid + ", notice_category="
 				+ notice_category + ", notice_hits=" + notice_hits + "]";
 	}
-	
+
 }
