@@ -24,7 +24,7 @@ public class ImagesService {
 		return list;
 	}
 
-	public int insertImage(HashMap<String, String> map) {
+	public int insertImage(HashMap<String, Object> map) {
 		int num = 0;
 		SqlSession session = MySqlSessionFactory.getSqlSession();
 		try {

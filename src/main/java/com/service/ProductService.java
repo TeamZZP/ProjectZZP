@@ -192,7 +192,7 @@ public class ProductService {
 		}return n;
 	}
 
-	public int insertProduct(HashMap<String, String> map) {
+	public int insertProduct(HashMap<String, Object> map) {
 		int num = 0;
 		SqlSession session = MySqlSessionFactory.getSqlSession();
 		try {

@@ -2,6 +2,7 @@ package com.controller.order;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -14,9 +15,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.dto.AddressDTO;
+import com.dto.CartDTO;
 import com.dto.CategoryProductDTO;
 import com.dto.MemberDTO;
 import com.service.AddressService;
+import com.service.CartService;
 import com.service.OrderService;
 
 /**
@@ -26,9 +29,41 @@ import com.service.OrderService;
 public class OrderServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("OrderServlet실행됨");
+System.out.println("OrderServlet실행됨");
+		
 		HttpSession session = request.getSession();
 		MemberDTO mdto = (MemberDTO)session.getAttribute("login");
+		String userid = mdto.getUserid();
+		
+		String productid = request.getParameter("p_id");
+		System.out.println(productid);
+		String [] pId = productid.split(",");
+		
+		System.out.println(Arrays.toString(pId)); //주소 대신 배열
+		
+		List<String> p_idList = Arrays.asList(pId);
+		CartService cService = new CartService();
+		
+		List<CartDTO> clist = new ArrayList<CartDTO>();
+		CartDTO c1 = null;
+		
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("userid", userid);
+		for (int i = 0; i < p_idList.size(); i++) {
+			 System.out.println(p_idList.get(i));
+			map.put("p_id", p_idList.get(i));
+			c1 = cService.selectCart(map);
+			clist.add(c1);
+		}
+		System.out.println(clist);
+		
+		for (int i = 0; i < clist.size(); i++) {
+			int p_id = clist.get(i).getP_id();
+			int p_amount = clist.get(i).getP_amount();
+			System.out.println(p_id+" "+p_amount);
+		}
+		
+		/*
 		String mesg = "";
 		int p_amount = 0;
 		
@@ -107,7 +142,7 @@ public class OrderServlet extends HttpServlet {
 			response.sendRedirect("LoginUIServlet");
 		}
 		
-		
+		*/
 		
 	}
 

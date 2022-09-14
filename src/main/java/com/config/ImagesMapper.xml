@@ -9,8 +9,23 @@ select * from images where p_id= #{p_id}
 </select>
 
 <insert id="insertImage" parameterType="hashmap">
-	insert into images (p_id, image_rnk, image_route, userid, update_date)
-	
+	insert all	
+	<if test='image_rnk1==1'>
+		into images 
+		values (product_p_id_seq.CURRVAL, #{image_rnk1}, #{image_route_1}, 'admin1', sysdate )
+	</if>
+	<if test='image_route_2'>
+		into images 
+		values (product_p_id_seq.CURRVAL, #{image_rnk2}, #{image_route_2}, 'admin1', sysdate )
+	</if>
+	<if test='image_route_3'>
+		into images 
+		values (product_p_id_seq.CURRVAL, #{image_rnk3}, #{image_route_3}, 'admin1', sysdate )
+	</if>
+	<if test='image_route_4'>
+		into images 
+		values (product_p_id_seq.CURRVAL, #{image_rnk4}, #{image_route_4}, 'admin1', sysdate )
+	</if>
 </insert>
 
 

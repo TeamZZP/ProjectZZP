@@ -64,9 +64,7 @@ ProductDTO pdto = (ProductDTO) request.getAttribute("ProductRetrieveDTO");
 	int p_stock = pdto.getP_stock(); //재고
 	
 List<ImagesDTO> ilist = (List<ImagesDTO>) request.getAttribute("ImagesRetrieveList");
-
 %>
-
 <div class="container prodContainer">
 	<div class="row justify-content-center">
 		<div class="col-md-8">
@@ -74,7 +72,7 @@ List<ImagesDTO> ilist = (List<ImagesDTO>) request.getAttribute("ImagesRetrieveLi
 			<div class="card-header" style="text-align: left; font-weight: bold; font-size: large;">상품상세보기</div>
 				<div class="card-body">
 					<!-- Update form 시작 -->
-					<form action="ProductUpdateServlet" class="form-horizontal" method="post">
+					<form action="ProductUpdateServlet" class="form-horizontal" method="post" enctype="multipart/form-data">
 					<!-- 상품카테고리 -->
 					<div class="form-group">
 						<label for="c_id" class="cols-sm-2 control-label" style="font-weight: bold;">상품 카테고리</label>

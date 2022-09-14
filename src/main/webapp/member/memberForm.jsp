@@ -322,8 +322,6 @@ System.out.println(map);
                                         <input type="submit" value="회원가입" id="addMember" class="btn btn-success">
 										<input type="button" onclick="javascript:history.back();" value="취소" class="btn btn-success">
                                     </div>
-                                   <!--  <div class="login-register">
-                                    </div> -->
                                 </form>
                             </div>
 
