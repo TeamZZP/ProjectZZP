@@ -73,13 +73,9 @@ from product p
 </select>
 
 <select id="productList" resultType="CategoryProductDTO" parameterType="int">
-	
-	 
 select p.P_ID
 ,(select 
-
 IMAGE_ROUTE
-
 from images
 where p_id = p.p_id 
 and IMAGE_RNK = 1) as p_image
@@ -92,12 +88,8 @@ and IMAGE_RNK = 1) as p_image
 ,p.P_CREATED
 ,p.P_STOCK
 from product p
-
-where p.c_id = #{c_id} 
-	 
-	 	 
+where p.c_id = #{c_id}  	 
 </select>
-
 
 <select id="productRetrieve" parameterType="int" resultType="ProductDTO">
 	select * from product where p_id = #{p_id}
@@ -113,22 +105,6 @@ select * from images where p_id= #{p_id}
 	from product p where p.P_NAME like '%'||#{searchValue}||'%' or p.P_CONTENT like '%'||#{searchValue}||'%'
 </select>
 
-<update id="updateProduct" parameterType="hashmap">
-
-update product set p_name=#{p_name}, p_content=#{p_content}, c_id=#{c_id},
-p_cost_price=#{p_cost_price}, p_selling_price=#{p_selling_price},
-p_discount=#{p_discount}, p_stock=#{p_stock}, userid='admin1'
-where p_id=#{p_id}
-</update>
-
-<update id="updateProduct2" parameterType="ProductDTO">
-
-update product set p_name=#{p_name}, p_content=#{p_content}, c_id=#{c_id},
-p_cost_price=#{p_cost_price}, p_selling_price=#{p_selling_price},
-p_discount=#{p_discount}, p_stock=#{p_stock}, userid='admin1'
-where p_id=#{p_id}
-</update>
-
 <delete id="deleteProduct" parameterType="list">
 delete from product
 where p_id in
@@ -138,17 +114,14 @@ where p_id in
 </delete>
 
 <!-- 찜 갯수  -->
-
 <insert id="addLike" parameterType="hashmap">
 insert into product_liked values (#{userid},#{p_id})
 </insert>
-
 
 <select id="likeCheck" parameterType="hashmap" resultType="int">
 select count(*) from product_liked 
 where p_id= #{p_id} and userid = #{userid}
 </select>
- 
  
 <select id="likeCount" parameterType="String" resultType="int">
 	select count(*) from product_liked where userid = #{userid}
@@ -187,7 +160,6 @@ where p_id= #{p_id} and userid = #{userid}
 	and IMAGE_RNK = 1) as p_image,p.P_NAME,p.P_CONTENT,p.C_ID,p.P_COST_PRICE
 	,p.P_SELLING_PRICE,p.P_DISCOUNT, to_char(p.P_CREATED, 'YYYY/MM/DD') P_CREATED, p.P_STOCK
 	from product p
-	
 	<where>
 		<if test='searchName=="c_id"'>
 			upper((select C_NAME from category where c_id = p.c_id)) like upper('%${searchValue}%')
@@ -244,18 +216,14 @@ and IMAGE_RNK = 1) as p_image
 ,p.P_STOCK
 from product p
 )
-
 order by ${sortBy} desc
-
 </select>
+
 <!-- 스토어 카테고리 리스트 -->
 <select id="selectC_Product" resultType="CategoryProductDTO" parameterType="hashmap">
-	 
 select p.P_ID
 ,(select 
-
 IMAGE_ROUTE
-
 from images
 where p_id = p.p_id 
 and IMAGE_RNK = 1) as p_image
@@ -268,22 +236,72 @@ and IMAGE_RNK = 1) as p_image
 ,p.P_CREATED
 ,p.P_STOCK
 from product p
-
-where p.c_id = ${c_id} 
-	 
+where p.c_id = ${c_id}  
 order by ${sortBy} desc
-
 </select>
 
 <insert id="insertProduct" parameterType="hashmap">
-	insert into product (p_id,p_name,p_content,c_id,p_cost_price,p_selling_price,p_discount,p_created,p_stock,userid)
-	values (product_p_id_seq.NEXTVAL,#{p_name},#{p_content},#{c_id},#{p_cost_price},#{p_selling_price},#{p_discount},sysdate,#{p_stock},'admin1')
+	insert all
+	into product (p_id,
+		p_name,
+		p_content,
+		c_id,
+		p_cost_price,
+		p_selling_price,
+		p_discount,
+		p_created,
+		p_stock,
+		userid)
+	values (product_p_id_seq.NEXTVAL,
+		#{p_name},
+		#{p_content},
+		#{c_id},
+		#{p_cost_price},
+		#{p_selling_price},
+		#{p_discount},
+		sysdate,
+		#{p_stock},
+		'admin1')
+	into images (p_id,
+		image_rnk,
+		image_route,
+		userid,
+		update_date)
+	<if test='image_rnk1==1'>
+		values (product_p_id_seq.NEXTVAL, #{image_rnk1}, #{image_route_1}, 'admin1', sysdate )
+	</if>
+	into images (p_id,
+		image_rnk,
+		image_route,
+		userid,
+		update_date)
+	<if test='image_rnk2==2'>
+		values (product_p_id_seq.NEXTVAL, #{image_rnk2}, #{image_route_2}, 'admin1', sysdate )
+	</if>
+	into images (p_id,
+		image_rnk,
+		image_route,
+		userid,
+		update_date)
+	<if test='image_rnk3==3'>
+		values (product_p_id_seq.NEXTVAL, #{image_rnk3}, #{image_route_3}, 'admin1', sysdate )
+	</if>
+	into images (p_id,
+		image_rnk,
+		image_route,
+		userid,
+		update_date)
+	<if test='image_rnk4==4'>
+		values (product_p_id_seq.NEXTVAL, #{image_rnk4}, #{image_route_4}, 'admin1', sysdate )
+	</if>
+	select * from dual
 </insert>
 
-<insert id="insertProduct2" parameterType="ProductDTO">
-	insert into product (p_id,p_name,p_content,c_id,p_cost_price,p_selling_price,p_discount,p_created,p_stock,userid)
-	values (product_p_id_seq.NEXTVAL,#{p_name},#{p_content},#{c_id},#{p_cost_price},#{p_selling_price},#{p_discount},sysdate,#{p_stock},#{userid})
-</insert>
-
+<update id="updateProduct" parameterType="hashmap">
+	update product set p_name=#{p_name}, p_content=#{p_content}, c_id=#{c_id},
+	p_cost_price=#{p_cost_price}, p_selling_price=#{p_selling_price},
+	p_discount=#{p_discount}, p_stock=#{p_stock}, userid='admin1'
+	where p_id=#{p_id}
+</update>
 
 </mapper>

@@ -14,8 +14,8 @@ public class ImagesDAO {
 		return list;
 	}
 
-	public int insertImage(SqlSession session, HashMap<String, Object> map) {
-		return session.insert("insertImage", map);
+	public int updateImage(SqlSession session, HashMap<String, Object> map) {
+		return session.update("updateImage", map);
 	}
 
 }
