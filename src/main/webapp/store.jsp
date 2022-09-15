@@ -48,9 +48,6 @@ function getCategoryProduct(id){  //category.jsp에서 비동기처리로 produc
          success : function(data,status,xhr){
          	 $("#prodForm").empty();
         	 $("#prodForm").append(data);
-        	<%--  ("<%if(request.getAttribute("c_id").equals("6")){%>  <!-- 타임세일 타이머 -->
-        			 
-        	<% } %>"+data); --%>
         	 console.log("카테고리 변경 완료");
                },error : function (xhr,status,error){
             	   console.log(error);
@@ -66,7 +63,6 @@ function getCategoryProduct(id){  //category.jsp에서 비동기처리로 produc
 <body>
 <jsp:include page="common/header.jsp" flush="true"></jsp:include><br>
 <%@include file="category/category.jsp" %>
-<img alt="" src="images/main/banner_sale.png">
 <jsp:include page="product/product.jsp" flush="true"></jsp:include><br>
 <jsp:include page="common/footer.jsp" flush="true"></jsp:include><br>
 </body>

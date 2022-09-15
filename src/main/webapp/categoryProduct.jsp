@@ -95,7 +95,11 @@ function productChoice(n) {
 	int c_id=0;
 	//List<CategoryProductDTO> product_list = (List<CategoryProductDTO>) request.getAttribute("product_list");
 	%>
-
+	
+	<!-- 타임세일 타이머 -->
+	<%-- <%if(request.getAttribute("c_id").equals("6")){%>
+        		<img alt="" src="images/main/banner_sale.png">	 
+    <% } %> --%>
 	
 
 <div id="categoryProductContainer" class="container ">
