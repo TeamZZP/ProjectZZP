@@ -95,6 +95,7 @@ public class StoreServlet extends HttpServlet {
 		request.setAttribute("product_list", product_list);
 
 		request.setAttribute("sortBy", sortBy);
+		request.setAttribute("c_id", c_id);
 		request.setAttribute("category_list", category_list);
 		// request.setAttribute("product_list", product_list);
 

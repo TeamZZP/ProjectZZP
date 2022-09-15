@@ -97,14 +97,17 @@ function productChoice(n) {
 
 	}
 	
+
+	
 </script>
 <div id="categoryClickChange">
 <form action="StoreServlet" id="prodForm">	
 <%
 String sortBy=(String) request.getAttribute("sortBy");
 List<CategoryProductDTO> product_list=(List<CategoryProductDTO>) request.getAttribute("product_list");
-int c_id=0;
 %>
+
+
 	
 <div id="categoryProductContainer" class="container ">
 	<div class="row " align="center">
@@ -123,6 +126,8 @@ int c_id=0;
 	    	</div>
 		</div>
 		<div style="height: 10px;"></div>
+		
+                    
 		<%
 		for (int i = 0; i < product_list.size(); i++) {
 			
@@ -131,7 +136,7 @@ int c_id=0;
 			int p_id = product_list.get(i).getP_id();
 			String p_name = product_list.get(i).getP_name();
 			String p_content = product_list.get(i).getP_content();
-			c_id = product_list.get(i).getC_id();
+			int c_id = product_list.get(i).getC_id();
 			int p_cost_price = product_list.get(i).getP_cost_price();
 			int p_selling_price = product_list.get(i).getP_selling_price();
 			int p_discount = product_list.get(i).getP_discount();
