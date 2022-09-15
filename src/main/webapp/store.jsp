@@ -47,7 +47,6 @@ function getCategoryProduct(id){  //category.jsp에서 비동기처리로 produc
          dataType : "text",
          success : function(data,status,xhr){
          	 $("#prodForm").empty();
-         	
         	 $("#prodForm").append(data);
         	 console.log("카테고리 변경 완료");
                },error : function (xhr,status,error){

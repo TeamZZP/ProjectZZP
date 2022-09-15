@@ -46,6 +46,7 @@ public class CategoryServlet extends HttpServlet {
 			if (c_id == null ||"".equals(c_id)) {
 				
 				System.out.println(">>카테고리베스트 "+c_id+"베스트");
+				request.setAttribute("c_id", 0);
 				//최초 정렬 기준 = 주문 순
 				 if (sortBy == null) {
 					p_map.put("sortBy","p_order");	
@@ -61,6 +62,7 @@ public class CategoryServlet extends HttpServlet {
 			}else {
 				//베스트 외 다른 카테고리
 		       System.out.println("카테고리 아이디 확인 : "+c_id);
+		       request.setAttribute("c_id", c_id);
 			  /* product_list= pservice.productList(Integer.parseInt(request.getParameter("c_id"))); 
 			   pDTO.setList(product_list);*/
 		       if (sortBy== null) {
@@ -126,6 +128,8 @@ public class CategoryServlet extends HttpServlet {
 		
        	request.setAttribute("product_list", product_list);
 		request.setAttribute("sortBy", sortBy);
+		
+	
 		
         //request.setAttribute("product_list", product_list);
       

@@ -103,7 +103,12 @@ function productChoice(n) {
 	<div class="row " align="center">
 		<!-- 세일베너 -->	
  	<div style="text-align: center;	">
-        		<img id="banner" alt="" src="images/main/banner_sale.png">	 
+ 	
+ 	<% if(request.getAttribute("c_id").equals("6")){%>
+ 	        		<img id="banner" alt="" src="images/main/banner_sale.png">	 
+ 	         <% }else{
+ 	         
+ 	         }%>
      </div> 
 		<div class="row">
 		  <div class="col">
@@ -279,10 +284,12 @@ function productChoice(n) {
 
 <script>
 	$(function() {
+
 		/* ||"".equals($("#c_id").val()) */
-		if($("#c_id").val()!=6 || $("#c_id").val()==null||"null".equals($("#c_id").val())){
+		if($("#c_id").val()!=6){
 			$("#banner").css("display", "none");
 		}
+	
 		//정렬 기준 선택시 form 제출
 		$("#sortBy").on("change", function () {
 			$("#prodForm").submit();
