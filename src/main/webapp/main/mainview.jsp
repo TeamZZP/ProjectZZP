@@ -36,7 +36,7 @@
     </div>
     <!-- 타임세일 -->
     <div class="carousel-item" data-bs-interval="3000" onclick="javascrip:location.href='ProductSearchServlet?c_id=6';">
-      <img src="images/main/banner_time.png" class="d-block w-100" alt="타임세일">
+      <img src="images/main/banner_sale.png" class="d-block w-100" alt="타임세일">
     </div>
     <%
     	ChallengeDTO challThisMonth = (ChallengeDTO) request.getAttribute("challThisMonth");

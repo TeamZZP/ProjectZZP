@@ -76,7 +76,6 @@ ProductDTO pdto = (ProductDTO) request.getAttribute("ProductRetrieveDTO");
 						<label for="c_id" class="cols-sm-2 control-label" style="font-weight: bold;">상품 카테고리</label>
 						<div class="cols-sm-10">
 							<div class="input-group">
-								<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
 								<!-- <input type="text" class="form-control" name="c_id" /> -->
 								<label class="visually-hidden" for="autoSizingSelect">category</label>
 						    	 <select name="c_id" id="c_id" class="form-select" aria-label="Default select example">
@@ -94,7 +93,6 @@ ProductDTO pdto = (ProductDTO) request.getAttribute("ProductRetrieveDTO");
 						<label for="p_id" class="cols-sm-2 control-label" style="font-weight: bold;">상품번호</label>
 						<div class="cols-sm-10">
 							<div class="input-group">
-								<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
 								<input type="text" class="form-control" name="p_id" id="p_id" value="<%= p_id %>" readonly />
 							</div>
 						</div>
@@ -104,7 +102,6 @@ ProductDTO pdto = (ProductDTO) request.getAttribute("ProductRetrieveDTO");
 						<label for="p_name" class="cols-sm-2 control-label" style="font-weight: bold;">상품명</label>
 						<div class="cols-sm-10">
 							<div class="input-group">
-							    <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
 							    <input type="text" class="form-control" name="p_name" id="p_name" value="<%= p_name %>" />
 							</div>
 						</div>
@@ -114,7 +111,6 @@ ProductDTO pdto = (ProductDTO) request.getAttribute("ProductRetrieveDTO");
 					    <label for="p_cost_price" class="cols-sm-2 control-label" style="font-weight: bold;">정상가</label>
 					    <div class="cols-sm-10">
 					        <div class="input-group">
-					            <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
 					            <input type="text" class="form-control" name="p_cost_price" id="p_cost_price" value="<%= p_cost_price %>" />
 					        </div>
 					    </div>
@@ -124,7 +120,6 @@ ProductDTO pdto = (ProductDTO) request.getAttribute("ProductRetrieveDTO");
 						<label for="type" class="col-sm-3 control-label" style="font-weight: bold;">할인</label>
 						<div class="cols-sm-10">
 						    <div class="input-group">
-						      <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
 						      <input type="text" name="p_discount" id="p_discount" class="form-control" value="<%= p_discount %>">
 						    </div>
 						</div>
@@ -134,7 +129,6 @@ ProductDTO pdto = (ProductDTO) request.getAttribute("ProductRetrieveDTO");
 					    <label for="number" class="cols-sm-2 control-label" style="font-weight: bold;">판매가</label>
 					    <div class="cols-sm-10">
 					        <div class="input-group">
-					            <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
 					            <input type="text" class="form-control" name="p_selling_price" id="p_selling_price" value="<%= p_cost_price - p_discount %>" />
 					        </div>
 					    </div>
@@ -144,7 +138,6 @@ ProductDTO pdto = (ProductDTO) request.getAttribute("ProductRetrieveDTO");
 					    <label for="number" class="cols-sm-2 control-label" style="font-weight: bold;">재고</label>
 					    <div class="cols-sm-10">
 					        <div class="input-group">
-					            <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
 					            <input type="text" class="form-control" name="p_stock" id="p_stock" value="<%= p_stock %>" />
 					        </div>
 					    </div>
@@ -154,7 +147,6 @@ ProductDTO pdto = (ProductDTO) request.getAttribute("ProductRetrieveDTO");
 					    <label for="p_content" class="cols-sm-2 control-label" style="font-weight: bold;">상품설명</label>
 					    <div class="cols-sm-10">
 					        <div class="input-group">
-					            <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
 					            <input type="text" class="form-control" name="p_content" id="p_content" value="<%= p_content %>" />
 					        </div>
 					    </div>
@@ -163,19 +155,14 @@ ProductDTO pdto = (ProductDTO) request.getAttribute("ProductRetrieveDTO");
 					List<ImagesDTO> ilist = (List<ImagesDTO>) request.getAttribute("ImagesRetrieveList");
 					System.out.println("image List >> "+ilist);
 					int idx;
-					for(idx=0; idx<ilist.size(); idx++){
-					
+					for(idx=1; idx<=ilist.size(); idx++){
 					%>
-						<input type="hidden" name="old_file1" id="old_file1" value="<%= ilist.get(0).getImage_route() %>">
-						<input type="hidden" name="old_file2" id="old_file2" value="<%= ilist.get(1).getImage_route() %>">
-						<input type="hidden" name="old_file3" id="old_file3" value="<%= ilist.get(2).getImage_route() %>">
-						<input type="hidden" name="old_file4" id="old_file4" value="<%= ilist.get(3).getImage_route() %>">
+						<input type="hidden" name="old_file<%= idx %>" id="old_file<%= idx %>" value="<%= ilist.get(idx-1).getImage_route() %>">
 					<% } %>
 					<div class="form-group">
 						    <label for="image_route" class="cols-sm-2 control-label" style="font-weight: bold;">상품이미지 1</label>
 						    <div class="cols-sm-10">
 						        <div class="input-group">
-						            <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
 									<input class="form-control" type="file" accept="image/*" name="image_route_1" id="image_route_1" multiple>
 						        </div>
 						    </div>
@@ -184,7 +171,6 @@ ProductDTO pdto = (ProductDTO) request.getAttribute("ProductRetrieveDTO");
 						    <label for="image_route" class="cols-sm-2 control-label" style="font-weight: bold;">상품이미지 2</label>
 						    <div class="cols-sm-10">
 						        <div class="input-group">
-						            <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
 									<input class="form-control" type="file" accept="image/*" name="image_route_2" id="image_route_2" multiple>
 						        </div>
 						    </div>
@@ -193,7 +179,6 @@ ProductDTO pdto = (ProductDTO) request.getAttribute("ProductRetrieveDTO");
 						    <label for="image_route" class="cols-sm-2 control-label" style="font-weight: bold;">상품이미지 3</label>
 						    <div class="cols-sm-10">
 						        <div class="input-group">
-						            <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
 									<input class="form-control" type="file" accept="image/*" name="image_route_3" id="image_route_3" multiple>
 						        </div>
 						    </div>
@@ -202,7 +187,6 @@ ProductDTO pdto = (ProductDTO) request.getAttribute("ProductRetrieveDTO");
 						    <label for="image_route" class="cols-sm-2 control-label" style="font-weight: bold;">상품이미지 4</label>
 						    <div class="cols-sm-10">
 						        <div class="input-group">
-						            <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
 									<input class="form-control" type="file" accept="image/*" name="image_route_4" id="image_route_4" multiple>
 						        </div>
 						    </div>
