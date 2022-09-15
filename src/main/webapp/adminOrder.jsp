@@ -10,10 +10,10 @@
 	background-color: #EBFFED;
 	color: green !important;
 }
-.coupon {
+.order {
 	color: green !important;
 }
-.container:after{
+.orderPage:after{
 	content:'';
 	display:block;
 	clear:both;
@@ -21,9 +21,9 @@
 </style>
 </head>
 <body>
-	<jsp:include page="common/header.jsp" flush="true"></jsp:include><br>
-	<jsp:include page="admin/adminCategory.jsp" flush="true"></jsp:include>
-	<jsp:include page="admin/adminCouponUpdate.jsp" flush="true"></jsp:include>
-	<jsp:include page="common/footer.jsp" flush="true"></jsp:include><br>
+<jsp:include page="common/header.jsp" flush="true"></jsp:include><br>
+<jsp:include page="admin/adminCategory.jsp" flush="true"></jsp:include>
+<jsp:include page="admin/adminOrder.jsp" flush="true"></jsp:include>
+<jsp:include page="common/footer.jsp" flush="true"></jsp:include><br>
 </body>
 </html>

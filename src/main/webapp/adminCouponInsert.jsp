@@ -5,6 +5,20 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+.store {
+	background-color: #EBFFED;
+	color: green !important;
+}
+.coupon {
+	color: green !important;
+}
+.container:after{
+	content:'';
+	display:block;
+	clear:both;
+}
+</style>
 </head>
 <body>
 	<jsp:include page="common/header.jsp" flush="true"></jsp:include><br>
