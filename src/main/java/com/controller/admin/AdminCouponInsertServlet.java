@@ -27,14 +27,10 @@ public class AdminCouponInsertServlet extends HttpServlet {
 		if (mDTO.getRole() == 1) {
 			String coupon_name = request.getParameter("coupon_name");
 			int coupon_discount = Integer.parseInt(request.getParameter("coupon_discount"));
-			String coupon_created = request.getParameter("coupon_created");
-			String coupon_validity = request.getParameter("coupon_validity");
 			
 			CouponDTO cDTO = new CouponDTO(); 
 			cDTO.setCoupon_name(coupon_name);
 			cDTO.setCoupon_discount(coupon_discount);
-			cDTO.setCoupon_created(coupon_created);
-			cDTO.setCoupon_validity(coupon_validity);
 			System.out.println("cDTO " + cDTO);
 
 			CouponService service = new CouponService();

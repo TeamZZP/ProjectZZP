@@ -47,6 +47,10 @@ public class MemberAddServlet extends HttpServlet {
 		int num = 0;
 		try {
 			num = service.addMember(map);
+			if (num != 0) {
+				int couponNum = service.memberAddCoupon(userid);
+				System.out.println("회원가입 축하 쿠폰 " + couponNum);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -55,6 +59,7 @@ public class MemberAddServlet extends HttpServlet {
 			String nextPage = "";
 			if (num>0) {
 				session.setAttribute("mesg", userid+"님 회원가입 회원가입을 축하합니다 :)");
+				session.setAttribute("mesg", "쿠폰함을 확인해 주세요. :)");
 				nextPage = "LoginUIServlet";
 				session.setMaxInactiveInterval(60*30);
 				

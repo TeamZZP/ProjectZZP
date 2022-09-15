@@ -99,4 +99,9 @@ public class MemberDAO {
 		return num;
 	}
 
+	public int memberAddCoupon(SqlSession session, String userid) {
+		int num = session.insert("CouponMapper.memberAddCoupon", userid);
+		return num;
+	}
+
 }

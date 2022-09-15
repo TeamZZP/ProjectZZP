@@ -201,4 +201,16 @@ public class MemberService {
 		return num;
 	}
 
+	public int memberAddCoupon(String userid) {
+		SqlSession session=MySqlSessionFactory.getSqlSession();
+		int num = 0;
+		try {
+			num = dao.memberAddCoupon(session, userid);
+			session.commit(); 
+		} finally {
+			session.close();
+		}
+		return num;
+	}
+
 }
