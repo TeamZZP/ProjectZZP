@@ -6,6 +6,15 @@
 <meta charset="UTF-8">
 <title>ZZP</title>
 <style>
+.member {
+	background-color: #EBFFED;
+	color: green !important;
+}
+.memberPage:after{
+	content:'';
+	display:block;
+	clear:both;
+}
 #modalBtn{
 	display: none;
 }

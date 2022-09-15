@@ -17,6 +17,7 @@ import com.dto.ChallengeDTO;
 import com.dto.MemberDTO;
 import com.dto.PageDTO;
 import com.service.AddressService;
+import com.service.AdminService;
 import com.service.ChallengeService;
 import com.service.CouponService;
 import com.service.MemberService;
@@ -107,6 +108,7 @@ public class AdminCategoryServlet extends HttpServlet {
 			
 			url = "adminReport.jsp";
 			
+			
 		//쿠폰 목록
 		} else if (category.equals("coupon")) {
 			
@@ -115,6 +117,20 @@ public class AdminCategoryServlet extends HttpServlet {
 			System.out.println(pDTO);
 			
 			url = "adminCoupon.jsp";
+			
+			
+		//주문 목록
+		} else if (category.equals("order")) {
+			String status = request.getParameter("status");
+			map.put("status", status);
+			
+			AdminService service = new AdminService();
+			pDTO = service.selectAllOrders(map, Integer.parseInt(curPage));
+			
+			request.setAttribute("status", status);
+			
+			url = "adminOrder.jsp";
+			
 		}
 		
 		request.setAttribute("pDTO", pDTO);
