@@ -112,8 +112,6 @@ if(mesg != null){
 						    <option selected disabled hidden>정렬</option>
 						    <option value="coupon_discount_up" <% if("coupon_discount_up".equals(sortBy)){%>selected<%}%>>할인율 높은순</option>
 						    <option value="coupon_discount_down" <% if("coupon_discount_down".equals(sortBy)){%>selected<%}%>>할인율 낮은순</option>
-						    <option value="coupon_validity" <% if("coupon_validity".equals(sortBy)){%>selected<%}%>>유효기간순</option>
-						    <option value="coupon_created" <% if("coupon_created".equals(sortBy)){%>selected<%}%>>등록일순</option>
 					  </select>
 					  <a href="adminCouponInsert.jsp" class="btn btn-success" style="margin-top: -5px;">쿠폰등록</a>
 				  </div>
@@ -129,8 +127,6 @@ if(mesg != null){
 				<th>쿠폰이미지</th>
 				<th>쿠폰명</th>
 				<th>할인율</th>
-				<th>등록일</th>
-				<th>만료일</th>
 				<th></th>
 			</tr>
 		<%
@@ -138,11 +134,6 @@ if(mesg != null){
 			List<CouponDTO> couponList = pDTO.getList();
 			for ( int i = 0 ; i < couponList.size() ; i++ ) {
 				CouponDTO cDTO = couponList.get(i);
-				String created = cDTO.getCoupon_created();
-	 			String create = created.substring(0, 10);
-	 			
-	 			String validity = cDTO.getCoupon_validity();
-	 			String val = validity.substring(0, 10);
 		%>
 			<tr id="list">
 				<td><input type="checkbox" class="delCheck" name="COUPON_ID" value="<%=cDTO.getCoupon_id() %>"></td>
@@ -150,8 +141,6 @@ if(mesg != null){
 				<td> <img alt="쿠폰" src="images/coupon/<%=cDTO.getCoupon_img()%>" width="50px" height="50px"> </td>
 				<td> <%=cDTO.getCoupon_name() %> </td>
 				<td> <%=cDTO.getCoupon_discount() %> </td>
-				<td> <%=create %> </td>
-				<td> <%=val %> </td>
 				<td>
 					<button type="button" data-couponId="<%=cDTO.getCoupon_id() %>" class="couponUpdate btn btn-outline-success btn-sm">
 						수정

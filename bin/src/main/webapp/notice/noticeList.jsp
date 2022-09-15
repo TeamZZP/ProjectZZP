@@ -66,7 +66,7 @@ a{
     	<tr style="background: #DCDCDC">
     		<td> <b> <%= nDTO.getNotice_id() %> </b> </td>
     		<td> <a href="NoticeOneSelectServlet?NOTICE_ID=<%= nDTO.getNotice_id() %>"> <b> <%= nDTO.getNotice_tittle() %> </b> </a> </td>
-    		<td> <b>  <%= nDTO.getNotice_create() %> </b> </td>
+    		<td> <b>  <%= nDTO.getNotice_created() %> </b> </td>
     		<td> <b>  <%= nDTO.getNotice_hits() %> </b> </td>
     	</tr>
     		<%
@@ -81,7 +81,7 @@ a{
     	<tr>
     		<td> <%= nDTO.getNotice_id() %> </td>
     		<td><a href="NoticeOneSelectServlet?NOTICE_ID=<%= nDTO.getNotice_id() %>"> <%= nDTO.getNotice_tittle() %> </a> </td>
-    		<td> <%= nDTO.getNotice_create() %> </td>
+    		<td> <%= nDTO.getNotice_created() %> </td>
     		<td> <%= nDTO.getNotice_hits() %> </td>
     	</tr>
     	<%

@@ -125,7 +125,6 @@
 							<label for="c_id" class="cols-sm-2 control-label" style="font-weight: bold;">상품 카테고리</label>
 							<div class="cols-sm-10">
 								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
 									<label class="visually-hidden" for="autoSizingSelect">category</label>
 							    	 <select name="c_id" id="c_id" class="form-select" aria-label="Default select example">
 								        <option value="none" selected disabled hidden>카테고리 선택</option>
@@ -142,7 +141,6 @@
 							<label for="p_name" class="cols-sm-2 control-label" style="font-weight: bold;">상품명</label>
 							<div class="cols-sm-10">
 								<div class="input-group">
-								    <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
 								    <input type="text" class="form-control" name="p_name" id="p_name"  />
 								</div>
 							</div>
@@ -152,7 +150,6 @@
 						    <label for="p_cost_price" class="cols-sm-2 control-label" style="font-weight: bold;">정상가</label>
 						    <div class="cols-sm-10">
 						        <div class="input-group">
-						            <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
 						            <input type="text" class="form-control" name="p_cost_price" id="p_cost_price"/>
 						        </div>
 						    </div>
@@ -162,7 +159,6 @@
 							<label for="type" class="col-sm-3 control-label" style="font-weight: bold;">할인</label>
 							<div class="cols-sm-10">
 							    <div class="input-group">
-							      <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
 							      <input type="text" name="p_discount" id="p_discount" class="form-control" >
 							    </div>
 							</div>
@@ -172,7 +168,6 @@
 						    <label for="number" class="cols-sm-2 control-label" style="font-weight: bold;">판매가</label>
 						    <div class="cols-sm-10">
 						        <div class="input-group">
-						            <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
 						            <input type="text" class="form-control" name="p_selling_price" id="p_selling_price"  />
 						        </div>
 						    </div>
@@ -182,7 +177,6 @@
 						    <label for="number" class="cols-sm-2 control-label" style="font-weight: bold;">재고</label>
 						    <div class="cols-sm-10">
 						        <div class="input-group">
-						            <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
 						            <input type="text" class="form-control" name="p_stock" id="p_stock" />
 						        </div>
 						    </div>
@@ -192,7 +186,6 @@
 						    <label for="p_content" class="cols-sm-2 control-label" style="font-weight: bold;">상품설명</label>
 						    <div class="cols-sm-10">
 						        <div class="input-group">
-						            <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
 						            <input type="text" class="form-control" name="p_content" id="p_content"  />
 						        </div>
 						    </div>
@@ -202,7 +195,6 @@
 						    <label for="image_route" class="cols-sm-2 control-label" style="font-weight: bold;">상품이미지 1</label>
 						    <div class="cols-sm-10">
 						        <div class="input-group">
-						            <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
 									<input class="form-control" type="file" accept="image/*" name="image_route_1" id="image_route_1" multiple>
 						        </div>
 						    </div>
@@ -211,7 +203,6 @@
 						    <label for="image_route" class="cols-sm-2 control-label" style="font-weight: bold;">상품이미지 2</label>
 						    <div class="cols-sm-10">
 						        <div class="input-group">
-						            <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
 									<input class="form-control" type="file" accept="image/*" name="image_route_2" id="image_route_2" multiple>
 						        </div>
 						    </div>
@@ -220,7 +211,6 @@
 						    <label for="image_route" class="cols-sm-2 control-label" style="font-weight: bold;">상품이미지 3</label>
 						    <div class="cols-sm-10">
 						        <div class="input-group">
-						            <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
 									<input class="form-control" type="file" accept="image/*" name="image_route_3" id="image_route_3" multiple>
 						        </div>
 						    </div>
@@ -229,7 +219,6 @@
 						    <label for="image_route" class="cols-sm-2 control-label" style="font-weight: bold;">상품이미지 4</label>
 						    <div class="cols-sm-10">
 						        <div class="input-group">
-						            <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
 									<input class="form-control" type="file" accept="image/*" name="image_route_4" id="image_route_4" multiple>
 						        </div>
 						    </div>

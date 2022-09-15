@@ -30,11 +30,13 @@ public class VisitorCountServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		UtilService service = new UtilService();
 		int n = service.countVisitToday(); //오늘 방문자수 구하기
-		System.out.println(">>>>>>>>>."+n);
 		
-		if (n == 0) { //첫 방문인 경우 counter 테이블에 insert
+		if (n == 0) { //해당 날짜의 첫 방문인 경우 counter 테이블에 insert
 			int result = service.addVisit();
 			System.out.println(result+"개의 counter 레코드 추가");
+		} else { //해당 날짜의 방문이 이미 있는 경우 counter 테이블에 update
+			int result = service.updateVisit();
+			System.out.println(result+"개의 counter 레코드 업데이트");
 		}
 		
 	}

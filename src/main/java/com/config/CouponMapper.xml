@@ -38,16 +38,10 @@
 		<if test="sortBy == COUPON_DISCOUNT_down and sortBy != null">
 			order by COUPON_DISCOUNT asc
 		</if>
-		<if test="sortBy == COUPON_VALIDITY and sortBy != null">
-			order by COUPON_VALIDITY desc
-		</if>
-		<if test="sortBy == COUPON_CREATED and sortBy != null">
-			order by COUPON_CREATED desc
-		</if>
 	</select>
 	<insert id="couponInsert" parameterType="CouponDTO">
-		insert into COUPON (COUPON_ID , COUPON_IMG, COUPON_NAME, COUPON_DISCOUNT, COUPON_CREATED, COUPON_VALIDITY)
-			values (COUPON_COUPON_ID_SEQ.nextval, null, #{coupon_name}, #{coupon_discount}, #{coupon_created}, #{coupon_validity})
+		insert into COUPON (COUPON_ID , COUPON_IMG, COUPON_NAME, COUPON_DISCOUNT)
+			values (COUPON_COUPON_ID_SEQ.nextval, null, #{coupon_name}, #{coupon_discount})
 	</insert>
 	<delete id="couponDelete" parameterType="string">
 		delete from COUPON where COUPON_ID = #{coupon_id}
@@ -62,8 +56,7 @@
 		select * from COUPON where COUPON_ID = #{coupon_id}
 	</select>
 	<update id="couponUpdate" parameterType="CouponDTO">
-		update COUPON set COUPON_NAME = #{coupon_name}, COUPON_DISCOUNT = #{coupon_discount}, COUPON_CREATED = #{coupon_created}, 
-			COUPON_VALIDITY = #{coupon_validity}
+		update COUPON set COUPON_NAME = #{coupon_name}, COUPON_DISCOUNT = #{coupon_discount}
 			where COUPON_ID = #{coupon_id}
 	</update>
 	<select id="myCouponList" parameterType="string" resultType="CouponMemberCouponDTO">
@@ -90,4 +83,8 @@
 	   			order by COUPON_VALIDITY asc
 	   		</if>
 	</select>
+	<insert id="memberAddCoupon" parameterType="string">
+		insert into member_coupon (USERID, COUPON_ID, COUPON_GET, COUPON_VALIDITY, COUPON_STATUS, COUPON_USED)
+			values (#{userid}, 25, sysdate, add_months(sysdate, 1), '미사용', null)
+	</insert>
 </mapper>

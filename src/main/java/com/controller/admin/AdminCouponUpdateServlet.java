@@ -26,9 +26,7 @@ public class AdminCouponUpdateServlet extends HttpServlet {
 		int coupon_id = Integer.parseInt(request.getParameter("coupon_id"));
 		String coupon_name = request.getParameter("coupon_name");
 		int coupon_discount = Integer.parseInt(request.getParameter("coupon_discount"));
-		String coupon_created = request.getParameter("coupon_created");
-		String coupon_validity = request.getParameter("coupon_validity");
-		CouponDTO dto = new CouponDTO(coupon_id, null, coupon_name, coupon_discount, coupon_created, coupon_validity);
+		CouponDTO dto = new CouponDTO(coupon_id, null, coupon_name, coupon_discount);
 		System.out.println("쿠폰 업데이트 내용 " + dto);
 		
 		HttpSession session = request.getSession();

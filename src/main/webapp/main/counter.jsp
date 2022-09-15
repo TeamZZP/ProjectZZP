@@ -25,7 +25,6 @@ function checkCookie(name) {
 		}
 	}
 	return false;
-	
 }
 
 if (!checkCookie('counted')) { //페이지 열리자마자 'IP' 쿠키유무 확인
@@ -37,7 +36,7 @@ if (!checkCookie('counted')) { //페이지 열리자마자 'IP' 쿠키유무 확
 			console.log('방문수 카운트')
 		},
 		error: function () {
-			alert("문제가 발생했습니다. 다시 시도해 주세요.");
+			alert('문제가 발생했습니다. 다시 시도해 주세요.');
 		}
 	});
 }

@@ -118,5 +118,9 @@ public class MemberDAO {
 		int num=session.selectOne("MemberMapper.countChallenge", userid);
 		return num;
 	}
+	public int memberAddCoupon(SqlSession session, String userid) {
+		int num = session.insert("CouponMapper.memberAddCoupon", userid);
+		return num;
+	}
 
 }

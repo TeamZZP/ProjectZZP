@@ -9,19 +9,11 @@
 				$("#CouponInsert").click(function() {
 					var coupon_name = $("#coupon_name").val();
 					var coupon_discount = $("#coupon_discount").val();
-					var coupon_validity = $("#coupon_validity").val();
-					var coupon_created = $("#coupon_created").val();
 					if (coupon_name.length == 0) {
 						alert("쿠폰 이름을 입력하십시오");
 						event.preventDefault();
 					} else if (coupon_discount.length == 0) {
 						alert("쿠폰 할인율을 입력하십시오");
-						event.preventDefault();
-					} else if (coupon_validity.length == 0) {
-						alert("쿠폰 만료일을 입력하십시오");
-						event.preventDefault();
-					} else if (coupon_created.length == 0) {
-						alert("쿠폰 시작일을 입력하십시오");
 						event.preventDefault();
 					} else {
 						$("#CouponForm").attr("action", "AdminCouponInsertServlet");
@@ -56,22 +48,6 @@
 					<b>할인율</b>
 					<div class="input-group">
 					  <input type="text" class="form-control" name="coupon_discount" id="coupon_discount">
-					</div>
-				</td>
-			</tr>
-			<tr>
-				<td colspan="3">
-					<b>쿠폰 시작일</b>
-					<div class="input-group">
-					   <input type="text" class="form-control" name="coupon_created" id="coupon_created" placeholder="ex) YY/MM/DD">
-					</div>
-				</td>
-			</tr>
-			<tr>
-				<td colspan="3">
-					<b>쿠폰 만료일</b>
-					<div class="input-group">
-					    <input type="text" class="form-control" name="coupon_validity" id="coupon_validity" placeholder="ex) YY/MM/DD">
 					</div>
 				</td>
 			</tr>

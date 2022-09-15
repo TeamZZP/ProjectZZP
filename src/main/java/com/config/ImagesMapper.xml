@@ -28,6 +28,27 @@ select * from images where p_id= #{p_id}
 	</if>
 </insert>
 
+<update id="updateImage" parameterType="hashmap">
+	
+		update images set 
+	<if test='image_rnk1==1'>
+		image_route=#{image_route1}, update_date=sysdate
+		where p_id=#{p_id} and image_rnk=1
+	</if>
+	<if test='image_rnk2==2'>
+		image_route=#{image_route2}, update_date=sysdate
+		where p_id=#{p_id} and image_rnk=2
+	</if>
+	<if test='image_rnk3==3'>
+		image_route=#{image_route3}, update_date=sysdate
+		where p_id=#{p_id} and image_rnk=3
+	</if>
+	<if test='image_rnk4==4'>
+		image_route=#{image_route4}, update_date=sysdate
+		where p_id=#{p_id} and image_rnk=4
+	</if>
+</update>
+
 
 
 </mapper>

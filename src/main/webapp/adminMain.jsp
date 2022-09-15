@@ -8,7 +8,7 @@
 <style>
 .dashboard {
 	background-color: #EBFFED;
-	color: green;
+	color: green !important;
 }
 .container:after{
 	content:'';

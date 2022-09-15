@@ -126,6 +126,7 @@ public class CategoryServlet extends HttpServlet {
 		
        	request.setAttribute("product_list", product_list);
 		request.setAttribute("sortBy", sortBy);
+		
         //request.setAttribute("product_list", product_list);
       
 

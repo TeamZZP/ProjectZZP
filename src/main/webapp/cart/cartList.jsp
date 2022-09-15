@@ -286,12 +286,6 @@ label {
 		$("#total").text(total.toLocaleString('ko-KR')+"원");
 		$("#item_price").text(item_price.toLocaleString('ko-KR')+"원");
 		
-		 //주문 버튼
-		  $("#order").on("click", function() {
-	      
-	      $("form").attr("action", "OrderServlet");
-	   })//order
-
 		//체크박스 미선택시 alert창
 		$("#delAllCart").on("click", function() {
 			if ($(".individual_cart_checkbox").is(":checked") == false) {
@@ -432,39 +426,7 @@ label {
 			}
 		})//end individual_cart_checkbox
 		
-		//폼 제출시 선택된 체크박스 값만 가져오기
-		$("#order").on("click", function() {
-            var arr=[];
-            var p_id=0;
-            var p_amount=0;
-            
-            $("input[name=check]:checked").each(function (index, data) {
-                select_obj = $(this).val();
-                p_id = $(this).attr("data-p_id");
-                var cart_id = $(this).val();
-                p_amount = $("#cartAmount"+cart_id).val();
-                console.log(p_id+" "+cart_id+" "+p_amount);
-                arr = [p_id,p_amount];
-                console.log(arr);
-                
-                  $.ajax({
-                     type: "post",
-                     url : "OrderServlet",
-                     data : {
-                         arr : arr
-                     },
-                     dataType : "text",
-                     traditional : true, //배열을 넘기는 방법
-                     success : function(data,status,xhr) {
-                         console.log("성공");
-                    },error : function(xhr,status,error) {
-                        console.log(error);
-                    }
-                })//end ajax
-            });
-		});//end fn
 
-		
       
       //전체선택
         $("#a").on("click", function() {//#allCheck
