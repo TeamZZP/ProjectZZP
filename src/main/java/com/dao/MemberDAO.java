@@ -99,4 +99,24 @@ public class MemberDAO {
 		return num;
 	}
 
+	public int countReview(SqlSession session, String userid) {
+		int num=session.selectOne("MemberMapper.countReview", userid);
+		return num;
+	}
+
+	public int countCoupon(SqlSession session, String userid) {
+		int num=session.selectOne("MemberMapper.countCoupon", userid);
+		return num;
+	}
+
+	public int countStamp(SqlSession session, String userid) {
+		int num=session.selectOne("MemberMapper.countStamp", userid);
+		return num;
+	}
+
+	public int countChallenge(SqlSession session, String userid) {
+		int num=session.selectOne("MemberMapper.countChallenge", userid);
+		return num;
+	}
+
 }

@@ -38,6 +38,7 @@ public class MypageServlet extends HttpServlet {
 			//회원 정보
 			MemberService m_service=new MemberService();
 			MemberDTO member=m_service.selectMember(userid);
+
 			ProfileDTO m_profile=m_service.selectProfile(userid);
 			System.out.println("회원 프로필 : "+m_profile);
 			String Profile_txt=m_profile.getProfile_txt();
@@ -46,9 +47,19 @@ public class MypageServlet extends HttpServlet {
 				m_profile.setProfile_txt("프로필 메세지를 입력하세요.");
 				System.out.println("수정======"+m_profile);
 			}
+			//review, member_coupon, member_stamp, challenge
+			int myReview=m_service.countReview(userid);
+			int myCoupon=m_service.countCoupon(userid);
+			int myStamp=m_service.countStamp(userid);
+			int myChallenge=m_service.countChallenge(userid);
+			System.out.println("리뷰:"+myReview+" 쿠폰:"+myCoupon+" 스탬프:"+myStamp+" 챌린지:"+myChallenge);
 			
 			request.setAttribute("login", member);
 			request.setAttribute("m_profile", m_profile);
+			request.setAttribute("myReview", myReview);
+			request.setAttribute("myCoupon", myCoupon);
+			request.setAttribute("myStamp", myStamp);
+			request.setAttribute("myChallenge", myChallenge);
 			RequestDispatcher dis=request.getRequestDispatcher("mypage.jsp");//로그인 된 계정 정보 session 저장-마이페이지 오픈
 			dis.forward(request, response);
 		} else {

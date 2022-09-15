@@ -66,6 +66,7 @@ public class ProfileChangeServlet extends HttpServlet {
 				String saveName= null;
 				
 				HashMap<String, String> map = new HashMap<String, String>();
+				
 				try {
 					List<FileItem> items= upload.parseRequest(request);
 					Iterator<FileItem> iter= items.iterator();
@@ -100,7 +101,7 @@ public class ProfileChangeServlet extends HttpServlet {
 								dir.mkdirs();
 							}
 							
-							/*try {
+							try {
 								String old_file = map.get("old_file");
 								
 								if (old_file==null || old_file.length()==0) {
@@ -115,7 +116,7 @@ public class ProfileChangeServlet extends HttpServlet {
 								
 							}catch (Exception e) {
 								e.printStackTrace();
-							}*/
+							}
 						}//end else
 					}//end while
 					

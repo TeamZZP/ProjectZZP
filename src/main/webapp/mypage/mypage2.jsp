@@ -1,6 +1,13 @@
 <%@page import="com.dto.MemberDTO"%>
 <%@page import="com.dto.ProfileDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
 <%
 	MemberDTO member=(MemberDTO) request.getAttribute("login");
 	String userid=member.getUserid();
@@ -9,6 +16,12 @@
 	ProfileDTO m_profile=(ProfileDTO) request.getAttribute("m_profile");
 	String profile_img=m_profile.getProfile_img();
 	String profile_txt=m_profile.getProfile_txt();
+	
+	int myReview=(int) request.getAttribute("myReview");
+	int myCoupon=(int) request.getAttribute("myCoupon");
+	int myStamp=(int) request.getAttribute("myStamp");
+	int myChallenge=(int) request.getAttribute("myChallenge");
+	
 %>
 <style>
 	.img a{
@@ -81,9 +94,12 @@
 	.summaryContainer {/* 단골상점, 상품후기, 적립금 박스 */
 		background-color: white;
 		display: flex;
-		padding: 21px 16px;
 		height: 90px;
-		margin-bottom: 10px;
+		text-align: center;/* div 태그 안의 a 태그 수평 중앙 정렬 */
+		align-items: center;/* div 태그 안의 a 태그 수직 중앙 정렬 */
+	}
+	.summaryContainer a {
+		text-decoration: none;
 	}
 	.summaryContainer .item {/* 단골상점, 상품후기, 적립금 */
 		flex-grow: 1
@@ -95,12 +111,15 @@
 	}
 	.summaryContainer .item > div:nth-child(2){
 		font-size: 13px;
+		color: black;
 	}
 	/* ==================== 주문/배송조회 박스 시작 ==================== */
 	.shippingStatusContainer {
 		padding: 21px 16px;
 		background-color: white;
 		margin-bottom: 10px;
+/* 		text-align: center; div 태그 안의 a 태그 수평 중앙 정렬
+		align-items: center; div 태그 안의 a 태그 수직 중앙 정렬 */
 	}
 	/* ==================== 주문/배송조회 타이틀 ==================== */
 	.shippingStatusContainer .title {
@@ -111,7 +130,7 @@
 	/* ==================== 장바구니 결제완료 배송중 구매확정 [로우] ==================== */
 	.shippingStatusContainer .status {
 		display: flex;
-		justify-content: space-between;
+		justify-content: space-between;/* div 안 item 사이에 간격 추가 */
 		margin-bottom: 21px;
 	}
 	/* ==================== 장바구니 결제완료 배송중 구매확정 [아이템] ==================== */
@@ -163,12 +182,14 @@
 	}
 </style>
 <div class="container col-md-10">
+<form method="post" enctype="multipart/form-data">
+<input type="hidden" name="userid" id="userid" value="<%= userid %>">
 <input type="hidden" name="old_file" id="old_file" value="<%= profile_img %>">
 
 <div class="justify-content-center">
 <div class="row">
 <div class="col-md-3">
-	<div class="card" style="width: 16rem;">
+	<div class="card">
 	  <div class="img" style="padding: 30px 30px 30px 30px;">
 	  	<a>
 	  		<figure>
@@ -192,8 +213,14 @@
 							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 						</div>
 						<div class="modal-body">
-							<div>
-							  <input class="form-control" accept="image/*" type="file" name="imgFile" id="imgFile" multiple>
+							<!-- 이미지 -->
+							<div class="form-group">
+							    <div class="cols-sm-10">
+							        <div class="input-group">
+							            <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+										<input class="form-control" type="file" accept="image/*" name="imgFile" id="imgFile" multiple>
+							        </div>
+							    </div>
 							</div>
 						</div>
 						<div class="modal-footer">
@@ -220,7 +247,7 @@
 							<input type="text" id="profile_txt" name="profile_txt" value="<%= profile_txt %>" style="width: 100%; height: 100px;"/>
 						</div>
 						<div class="modal-footer">
-							<button id="submitTxt" class="btn btn-success">수정</button>
+							<button type="button" id="submitTxt" class="btn btn-success">수정</button>
 					        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
 						</div>
 					</div>
@@ -233,6 +260,7 @@
 		<!-- open modal -->
 	</div>
 </div>
+</form>
 
 <div class="wrap col-md-9">
 	<div class="greenContainer">
@@ -243,18 +271,22 @@
 		<div class="modify">i</div>
 	</div>
 	<div class="summaryContainer">
-		<div class="item">
-			<div class="number">000</div>
+		<a href="ProfileCategoryServlet?category=myreview&userid=<%=userid%>" class="item">
+			<div class="number"><%= myReview %></div>
 			<div>구매 후기</div>
-		</div>
-		<div class="item">
-			<div class="number">111</div>
-			<div>참여한 챌린지</div>
-		</div>
-		<div class="item">
-			<div class="number">999</div>
-			<div>쿠폰</div>
-		</div>				
+		</a>
+		<a href="MyCouponServlet" class="item">
+			<div class="number"><%= myCoupon %></div>
+			<div>내 쿠폰함</div>
+		</a>
+		<a href="ProfileCategoryServlet?category=mychallenge&userid=<%=userid%>" class="item">
+			<div class="number"><%= myChallenge %></div>
+			<div>내 챌린지</div>
+		</a>
+		<a href="ProfileCategoryServlet?category=mystamp&userid=<%=userid%>" class="item">
+			<div class="number"><%= myStamp %></div>
+			<div>내 도장</div>
+		</a>			
 	</div>
 	<div class="shippingStatusContainer">
 		<div class="title">
@@ -264,21 +296,21 @@
 			<div class="item">
 				<div>
 					<div class="green number">6</div>
-					<div class="text">장바구니</div>
-				</div>
-				<div class="icon">></div>
-			</div>
-			<div class="item">
-				<div>
-					<div class="number">0</div>
 					<div class="text">결제완료</div>
 				</div>
 				<div class="icon">></div>
 			</div>
 			<div class="item">
 				<div>
-					<div class="green number">1</div>
+					<div class="number">0</div>
 					<div class="text">배송중</div>
+				</div>
+				<div class="icon">></div>
+			</div>
+			<div class="item">
+				<div>
+					<div class="green number">1</div>
+					<div class="text">배송완료</div>
 				</div>
 				<div class="icon">></div>
 			</div>
@@ -301,7 +333,7 @@
 			<div class="text">반품/취소/교환 목록</div>
 			<div class="right">></div>
 		</a>
-		<a href="ProfileCategoryServlet?category=myreview&userid=<%=userid%>" class="item">
+<!--		<a href="ProfileCategoryServlet?category=myreview&userid=<%=userid%>" class="item">
 			<div class="icon">3.</div>
 			<div class="text">내 구매후기</div>
 			<div class="right">></div>
@@ -320,47 +352,24 @@
 			<div class="icon">6.</div>
 			<div class="text">내 도장</div>
 			<div class="right">></div>
-		</a>
+		</a>	-->
 		<a href="MyQuestionServlet" class="item">
-			<div class="icon">7.</div>
+			<div class="icon">3.</div>
 			<div class="text">내 문의 내역</div>
 			<div class="right">></div>
 		</a>
 		<a href="AddressListServlet" class="item">
-			<div class="icon">8.</div>
+			<div class="icon">4.</div>
 			<div class="text">배송지 관리</div>
 			<div class="right">></div>
 		</a>
 		<a href="PasswdCheckServlet" class="item">
-			<div class="icon">9.</div>
+			<div class="icon">5.</div>
 			<div class="text">계정 관리</div>
 			<div class="right">></div>
 		</a>
 	</div>
 </div>
-
-<%-- <div class="col-md-7">
-	<div style="padding-bottom: 70px;">
-		<a href="#" class="btn btn-outline-success">입금, 결제</a>
-		<a href="#" class="btn btn-outline-success">배송중</a>
-		<a href="#" class="btn btn-outline-success">배송 완료</a>
-		<a href="#" class="btn btn-outline-success">전체보기</a>
-	</div>
-	<div>
-		<a href="MyOrderServlet" class="btn btn-outline-success">1. 주문 내역</a>
-		<a href="#" class="btn btn-outline-success">2. 반품/취소/교환 목록</a>
-		<a href="ProfileCategoryServlet?category=myreview&userid=<%=userid%>" class="btn btn-outline-success">3. 내 구매후기</a>
-		<a href="MyCouponServlet" class="btn btn-outline-success">4. 내 쿠폰함</a><br>
-		<br>
-		<a href="ProfileCategoryServlet?category=mychallenge&userid=<%=userid%>" class="btn btn-outline-success">5. 내 챌린지</a>
-		<a href="ProfileCategoryServlet?category=mystamp&userid=<%=userid%>" class="btn btn-outline-success">6. 내 도장</a>
-		<a href="MyQuestionServlet" class="btn btn-outline-success">7. 내 문의 내역</a><br>
-		<br>
-		<a href="AddressListServlet" class="btn btn-outline-success">8. 배송지 관리</a>
-		<a href="checkPasswd.jsp" class="btn btn-outline-success">9. 계정 관리</a><br>
-		<br>
-	</div>
-</div> --%>
 
 </div>
 </div>
@@ -424,43 +433,41 @@
 			}
 		});//end submitTxt
 		$("#submitImg").on("click", function() {
-			var imgFile=$("#imgFile").val();
 			if (false) {
 				//$("#modalBtn").trigger("click");
 				//$("#mesg").text("변경할 프로필 메세지를 입력하세요.");
 			} else {
-				console.log("이미지 수정 클릭");
-				console.log(imgFile);
-				//ajax
- 				$.ajax({
-					type : "post",
-					url : "ProfileChangeServlet",
-					dataType : "text",
-					data : {
-						profile_img : profile_img
-					},
-					success : function(data, status, xhr) {
-						console.log("success");
-						console.log(data);
-						$("#writeTxt").modal("hide");
-						$(".modal-backdrop").hide();//모달창 닫고 백드롭 hide
-						//$("#changeTxt").text(data);
-					},
-					error: function(xhr, status, error) {
-						alert(error);
-					}
-				});//end ajax
+				let fileValue = $("#imgFile").val();
+				//이미지 확장자 검사
+				let reg = /(.*?)\.(jpg|jpeg|png|gif)$/;
+				
+				if (fileValue.match(reg)) {
+					console.log("이미지 수정 클릭");
+					console.log(fileValue);
+					//ajax
+	 				$.ajax({
+						type : "post",
+						url : "ProfileChangeServlet",
+						dataType : "text",
+						data : {
+							profile_img : fileValue
+						},
+						success : function(data, status, xhr) {
+							console.log("success");
+							//console.log(data);
+							$("#selectImg").modal("hide");
+							$(".modal-backdrop").hide();//모달창 닫고 백드롭 hide
+						},
+						error: function(xhr, status, error) {
+							alert(error);
+						}
+					});//end ajax
+					//return true;
+				} else {
+					alert("jpg, jpeg, png, gif 파일만 업로드 가능합니다.");
+					return false;
+				}
 			}
 		});//end submitImg
-		function checkFileExtension(){ 
-			let fileValue = $("#imgFile").val(); 
-			let reg = /(.*?)\.(jpg|jpeg|png|gif)$/;
-			if (fileValue.match(reg)) {
-				return true;
-			} else {
-				alert("jpg, jpeg, png, gif 파일만 업로드 가능합니다.");
-				return false;
-			}
-		};
 	});//end ready
 </script>

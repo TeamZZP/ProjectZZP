@@ -153,4 +153,20 @@
 			</if>
 			where userid = #{userid}
 		</update>
+		<select id="countReview" parameterType="String" resultType="int">
+			select count(*) from review
+			where userid = #{userid}
+		</select>
+		<select id="countCoupon" parameterType="String" resultType="int">
+			select count(*) from member_coupon
+			where userid = #{userid}
+		</select>
+		<select id="countStamp" parameterType="String" resultType="int">
+			select count(*) from member_stamp
+			where userid = #{userid}
+		</select>
+		<select id="countChallenge" parameterType="String" resultType="int">
+			select count(*) from challenge
+			where userid = #{userid}
+		</select>
 </mapper>

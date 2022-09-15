@@ -201,4 +201,48 @@ public class MemberService {
 		return num;
 	}
 
+	public int countReview(String userid) {
+		SqlSession session=MySqlSessionFactory.getSqlSession();
+		int num=0;
+		try {
+			num=dao.countReview(session, userid);
+		} finally {
+			session.close();
+		}
+		return num;
+	}
+
+	public int countCoupon(String userid) {
+		SqlSession session=MySqlSessionFactory.getSqlSession();
+		int num=0;
+		try {
+			num=dao.countCoupon(session, userid);
+		} finally {
+			session.close();
+		}
+		return num;
+	}
+
+	public int countStamp(String userid) {
+		SqlSession session=MySqlSessionFactory.getSqlSession();
+		int num=0;
+		try {
+			num=dao.countStamp(session, userid);
+		} finally {
+			session.close();
+		}
+		return num;
+	}
+
+	public int countChallenge(String userid) {
+		SqlSession session=MySqlSessionFactory.getSqlSession();
+		int num=0;
+		try {
+			num=dao.countChallenge(session, userid);
+		} finally {
+			session.close();
+		}
+		return num;
+	}
+
 }
