@@ -44,8 +44,8 @@ public class CategoryServlet extends HttpServlet {
 		
 	    
 			if (c_id == null ||"".equals(c_id)) {
-	    	
-				System.out.println(">>카테고리베스트");
+				
+				System.out.println(">>카테고리베스트 "+c_id+"베스트");
 				//최초 정렬 기준 = 주문 순
 				 if (sortBy == null) {
 					p_map.put("sortBy","p_order");	
@@ -134,9 +134,7 @@ public class CategoryServlet extends HttpServlet {
 		dis.forward(request, response);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);

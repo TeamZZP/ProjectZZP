@@ -84,6 +84,7 @@ function productChoice(n) {
 	}
 
 </script> --%>
+
 <div id="categoryClickChange">
 <form action="StoreServlet" id="prodForm">	
 	<%
@@ -92,22 +93,22 @@ function productChoice(n) {
 
 	List<CategoryProductDTO> product_list=(List<CategoryProductDTO>) request.getAttribute("product_list");
 
-	int c_id=0;
-	//List<CategoryProductDTO> product_list = (List<CategoryProductDTO>) request.getAttribute("product_list");
+ 	int c_id=0; 
+
 	%>
 	
-	<!-- 타임세일 타이머 -->
-	<%-- <%if(request.getAttribute("c_id").equals("6")){%>
-        		<img alt="" src="images/main/banner_sale.png">	 
-    <% } %> --%>
-	
+ 
 
 <div id="categoryProductContainer" class="container ">
 	<div class="row " align="center">
+		<!-- 세일베너 -->	
+ 	<div style="text-align: center;	">
+        		<img id="banner" alt="" src="images/main/banner_sale.png">	 
+     </div> 
 		<div class="row">
 		  <div class="col">
       	  		<div class="float-end">
-			  	  <!-- 정렬 -->
+				  	  <!-- 정렬 -->
 				  <select class="form-select sortBy" name="sortBy" id="sortBy" data-style="btn-info" 
 				  		  style="width: 145px; margin-left: -24px; display: inline;">
 					    <option value="p_id" selected>정렬</option>
@@ -278,6 +279,10 @@ function productChoice(n) {
 
 <script>
 	$(function() {
+		/* ||"".equals($("#c_id").val()) */
+		if($("#c_id").val()!=6 || $("#c_id").val()==null||"null".equals($("#c_id").val())){
+			$("#banner").css("display", "none");
+		}
 		//정렬 기준 선택시 form 제출
 		$("#sortBy").on("change", function () {
 			$("#prodForm").submit();
