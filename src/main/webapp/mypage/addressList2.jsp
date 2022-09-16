@@ -28,6 +28,10 @@
 	.modal {
 		overflow: auto;
 	}
+	.tableTop {
+    	border-bottom-color: #24855B;
+    	border-bottom-width: 2.5px;
+    }
 </style>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <div id="addContainer">
@@ -41,6 +45,9 @@
 	   <div class="col">반품/취소/교환 목록</div>
 	   <div class="col">
 	   		<a href="ProfileCategoryServlet?category=myreview&userid=<%=userid%>">내 구매후기</a>
+	   </div>
+	   <div class="col">
+	   		<a href="MyCouponServlet">내 쿠폰함</a>
 	   </div>
 	   <div class="col">
 	   		<a href="ProfileCategoryServlet?category=mychallenge&userid=<%=userid%>">내 챌린지</a>
@@ -61,7 +68,7 @@
 <div class="col-lg-10">
 <div id="addTableDiv">
 <table id="addTable" class="table table-hover" style="table-layout: fixed">
-	<tr class="table-success">
+	<tr class="tableTop">
 		<th width="20%">배송지</th>
 		<th width="55%">주소</th>
 		<th width="20%">연락처</th>

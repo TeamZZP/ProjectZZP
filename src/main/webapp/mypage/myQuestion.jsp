@@ -24,6 +24,10 @@
 		color: green; 
 		font-weight: bold;
 	}
+	.tableTop {
+    	border-bottom-color: #24855B;
+    	border-bottom-width: 2.5px;
+    }
 </style>
 
 <div id="addContainer">
@@ -62,7 +66,7 @@
 <div class="col-lg-10">
 <div id="addTableDiv">
 <table id="addTable" class="table table-hover" style="text-align: center;">
-	<tr class="table-success">
+	<tr class="tableTop">
 		<th>번호</th>
 		<th>상품명</th>
 		<th>카테고리</th>

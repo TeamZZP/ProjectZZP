@@ -1,45 +1,23 @@
-c_id<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="com.dto.MemberDTO"%>
-<%@ page import="com.dto.CategoryProductDTO"%>
+<%@ page import="com.dto.CartDTO"%>
 <%@ page import="com.dto.AddressDTO"%>
 <%@ page import="java.util.List"%>
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="java.util.HashMap"%>
 <style>
-.heading {
-	flex: 1;
-	text-align: center;
-}
-
-a {
-	color: black;
-	text-decoration: none;
-}
-
-a:hover {
-	color: black;
-}
-
-#orderLi {
-	display: flex;
-	position: relative;
-	padding: 24px;
-	border-bottom: 5px solid green;
-}
-
-hr {
-	border-bottom: 2.5px solid green;
-}
-
-#addLi {
-	list-style: none;
-}
-
-label{
-	font-weight: bold;
-	color: gray;
-}
+	.imagediv{
+		width: 100%;
+	}
+	.image{
+		width: 100%;
+		height: auto;
+	}
+	
+	.deli tr{
+	  border-bottom : none;
+	}
 </style>
 <script type="text/javascript"
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -56,151 +34,199 @@ label{
 
 	});
 </script>
-
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-
-	<div class="container">
-		<form action="orderForm">
-			<div style="text-align: center;">
-				<img src="images/ordering.png" width="900" height="200">
-			</div>
-
-			<h3 style="font-weight: bold; color: green;">&emsp;&emsp;주문 상품 정보</h3>
-			<hr id="orderHr">
-
-
-
-			<%
-			MemberDTO mdto = (MemberDTO) session.getAttribute("login");
-			List<CategoryProductDTO> list = (List<CategoryProductDTO>) request.getAttribute("list");
-			HashMap<String, Integer> map = (HashMap<String, Integer>) request.getAttribute("map");
-			ArrayList<HashMap<String, String>> PList = (ArrayList<HashMap<String, String>>) request.getAttribute("PList");
-			String[] pAmountListString = (String[]) request.getAttribute("pAmountListString");
-
-			int total_price = 0;
-			for (int i = 0; i < list.size(); i++) {
-				String userid = list.get(i).getUserid();
-				int p_id = list.get(i).getP_id();
-				String p_name = list.get(i).getP_name();
-				int p_selling_price = list.get(i).getP_selling_price();
-				String p_image = list.get(i).getP_image();
-				int p_amount = Integer.parseInt(pAmountListString[i]);
-
-				System.out.println("상품명 :" + p_name);
-				System.out.println("상품번호 :" + p_id);
-			%>
-
-			<div class="order_content" >
-				<input type="hidden" name="p_id" id="p_id" value="<%=p_id%>">
-				<input type="hidden" name="p_amount" id="p_amount"
-					value="<%=p_amount%>"> <input type="hidden" name="p_price"
-					id="p_price" value="<%=p_selling_price * p_amount%>">
-
-				<ul class="orderProduct_list"
-					style="line-height: 50px; font-size: 20px; ">
-					<li id="orderLi"><a
-						href="ProductRetrieveServlet?p_id=<%=p_id%>"> <img
-							src="images/p_image/<%=p_image%>" width="150"
-							style="border: 10px;" height="150"></a>
-
-						<div class="cart_list_info" style="padding-left: 30px;">
-
-							<label >상품명:</label> <a href="ProductRetrieveServlet?p_id=<%=p_id%>"> <span
-								name="p_name" style="margin: 8px; display: line"><%=p_name%></span>
-							</a> <br> 
-						<label >수량:</label> <span style="margin: 8px; display: line"><%=p_amount%>개</span>
-							<br>
-							<label > 상품가격:</label><span id="item_price" 
-								style="font-weight:bold; margin-bottom: 15px; margin: 8px; display: line"><%=p_selling_price * p_amount%>원</span>
-						</div></li>
-				</ul>
-			</div>
-			<%
-			total_price += p_selling_price * p_amount;
-			}
-			%>
-			<div>
-			<div style="font-size: 30px; text-align: right;">
-			<label>총 결제 금액:</label>
-			<span><%=total_price%>원</span>
-			</div>
-			
-			<input type="hidden" name="total_price" id="total_price"
-				value="<%=total_price%>">
-			<h3 style="font-weight: bold; color: green;">&emsp;배송지 선택</h3>
-			<a type="submit" class="btn btn-success" id="selectAdd"
-				style="float: right;"
-				href="javascript:selectAllAddress(<%=mdto.getUserid()%>)">다른배송지</a><br>
-			<hr id="orderHr">
-			<%
-			List<AddressDTO> add_list = (List<AddressDTO>) request.getAttribute("add_list");
-
-			for (int i = 0; i < add_list.size(); i++) {
-				if (add_list.get(i).getDefault_chk() == 1) {
-
-					AddressDTO add_dto = add_list.get(i);
-			%>
-
-			<div class="addressContent">
-				<ul class="orderAddress_list">
-					<li id="addLi"><input type="hidden" name="AddressName"
-						id="AddressName" value="<%=add_dto.getAddress_name()%>">
-						<br> <input type="hidden" name="delivery_address"
-						id="delivery_address"
-						value="<%=add_dto.getAddr1() + " " + add_dto.getAddr2()%>"> <br>
-						<%=add_dto.getAddress_name()%><br>
-						<label> 받으시는 분 :</label> <%=add_dto.getReceiver_name()%><br>
-
-						<label>배송지:</label> <%=add_dto.getPost_num()%><br> <%=add_dto.getAddr1()%>&nbsp;<%=add_dto.getAddr2()%><br>
-
-					</li>
-
-				</ul>
-			</div>
-
-
-			<%
-			}
-
-			}
-			%>
-			<hr id="orderHr">
-			<h3 style="font-weight: bold; color: green;">&emsp;배송 요청</h3>
-			<div class="addressContent">
-				<ul class="orderAddress_list">
-					<li id="addLi"><input type="hidden" name="orderdate"
-						id="orderdate"
-						value="<%=(new java.util.Date()).toLocaleString()%>"> <input
-						type="hidden" name="order_state" id="order_state" value="주문완료">
-
-						<label>받으실 장소 :</label>&emsp; &nbsp; <select id="delivery_loc"
-						name="delivery_loc">
-							<option value="frontDoor">문앞</option>
-							<option value="directly_or_frontDoor">직접받고 부재 시 문앞</option>
-							<option value="security">경비실</option>
-							<option value="delievery_box">택배함</option>
-					</select> <br>
-					<br>
-					<label> 배송 요청사항 :</label>&emsp;
-					<input id="delivery_req" name="delivery_req"> <br>
-					<br></li>
-				</ul>
-			</div>
-			<br>
+<div class="container">
+	<div class="row">
+		<div class="imagediv" style="text-align: center;">
+				<img class="image" src="images/ordering.png" width="900">
 		</div>
+		<%
+			HashMap<String, Integer> map = (HashMap<String, Integer>) request.getAttribute("map");
+			int sum_money = map.get("sum_money");
+			int fee = map.get("fee");
+			int total = map.get("total");
+			%>
+		<form>
+			 <table style=" border-collapse: collapse;" class="table">
+					<h4 style="font-weight: bold; display:inline-block;">주문상품 정보</h4><span style="float : right; font-weight: bold; "><span style="color: red;"><%=total %></span>원</span>
+					<tr style="border-top-width: 5px; border-color: black;">
+						<th scope="col">상품정보</th>
+						<th scope="col"></th>
+						<th scope="col" >수량</th>
+						<th scope="col">상품가격</th>
+					</tr>
+				<%
+				MemberDTO mdto = (MemberDTO) session.getAttribute("login");
+				List<CartDTO> list = (List<CartDTO>) request.getAttribute("list");
+				System.out.println(">>orderServet " + list);
+				int total_price = 0;
+				for (int i = 0; i < list.size(); i++) {
+					String userid = list.get(i).getUserid();
+					int p_id = list.get(i).getP_id();
+					String p_name = list.get(i).getP_name();
+					int p_selling_price = list.get(i).getP_selling_price();
+					String p_image = list.get(i).getP_image();
+					int p_amount = list.get(i).getP_amount();
+				%>
 
-			<div style="text-align: center">
-			<button type="submit" class="btn btn-success" id="AddOrder">주문하기</button>
-			<button type="submit" class="btn btn-success" id="cancel">돌아가기</button>
-			</div>
+					<tr class="order_content">
+						<!-- 이미지사진  -->
+						<td >
+						<img src="images/p_image/<%=p_image%>" width="100" styl	="border: 10px;" height="100"></td>
+							<!-- 상품명  -->
+							<td style="line-height: 100px;">
+							<span name="p_name" style="font-weight: bold; margin: 8px; display: line " ><%=p_name%></span></td>
+							<!-- 수량  -->
+							<td style="line-height: 100px;">
+							<span id="cartAmount"  name="p_amount"
+							 style=" font-weight: bold; font-size: 20px; vertical-align: middele; "><%=p_amount%>개</span></td>
+							<!-- 개별 총 가격 -->
+						<td style="line-height: 100px;"><span id="item_price"
+							name="item_price" style="font-weight: bold; font-size: 20px; "
+							class="item_price"><%=p_selling_price * p_amount%>원</span></td>	
+					</tr>
+				</table>
+						<%
+				}
+				
+				List<AddressDTO> add_list = (List<AddressDTO>) request.getAttribute("add_list");
+
+				for (int i = 0; i < add_list.size(); i++) {
+					if (add_list.get(i).getDefault_chk() == 1) {
+
+						AddressDTO add_dto = add_list.get(i);
+					}
+				%>	
+				<table style=" border-collapse: collapse; border-bottom: #ffffff" class="table" >
+					<tr class="delivery" style="border-bottom-width: 5px; border-color: black;">
+					<th colspan="4" style="font-size:20px; font-weight: bold;">배송 정보</th>
+					</tr>
+				
+					<tr >
+					   <td>받는 분</td>
+					   <td><input type="text" class="form-control" name="username" id="username" 
+								  readonly="readonly" value=""  placeholder="이름을 입력하세요" /></td>
+					    <td></td>
+					    <td></td>
+					</tr>
+					<tr>
+					   <td>이메일</td>
+					   <td> <input type="text" name="email1" id="email1" readonly="readonly" value="" class="form-control"></td>
+					   <td colspan="2">@<input type="text" name="email2"  placeholder="직접입력"  id="email2" class="form-control"><td>
+					    
+					</tr>
+					<tr>
+					   <td >휴대전화</td>
+					   <td><input type="text" class="form-control" name="phone" id="phone" placeholder="- 없이 입력하세요" /></td>
+					    <td></td>
+					</tr>
+					<tr>
+					   <td rowspan="2">주소</td>
+					   <td> <div class="input-group">
+                                 <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
+                                 <input type="text" name="post_num" id="sample4_postcode" placeholder="우편번호" class="form-control">
+								 <input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기" class="btn btn-outline-success"><br>
+                            </div></td>
+					    <td></td>
+					</tr>
+					<tr>
+					 <td><div>
+                      	<input type="text" name="addr1" id="sample4_roadAddress" placeholder="도로명주소" class="form-control"></div></td>
+                      <td><div><input type="text" name="addr2" id="sample4_jibunAddress" placeholder="지번주소" class="form-control">
+								<span id="guide" style="color:#999"></span></div></td>
+					</tr>
+					<tr>
+					   <td>배송시요청사항</td>
+					   <td><select id="delivery_loc" name="delivery_loc">
+											<option value="frontDoor">문앞</option>
+											<option value="directly_or_frontDoor">직접받고 부재 시 문앞</option>
+											<option value="security">경비실</option>
+											<option value="delievery_box">택배함</option>
+									</select> </td>
+					    <td></td>
+					</tr>
+					<!-- 결제정보  -->
+					<tr style="border-bottom-width: 5px; border-color: black;">
+					<th style="font-size:20px; font-weight: bold;">결제 정보</th>
+					</tr>
+					<tr>
+					   <td>카드결제</td>
+					   <td></td>
+					    <td></td>
+					</tr>
+					<tr>
+					   <td>가상계좌</td>
+					   <td></td>
+					    <td></td>
+					</tr>
+					<tr>
+					   <td>계좌이체</td>
+					   <td></td>
+					    <td></td>
+					</tr>
+						
+					<!-- 총 주문금액 -->
+					<tr style="border-bottom-width: 3px; border-color: black;"></tr>
+					<tr>
+					   <th style="font-size:20px; font-weight: bold;">총 주문금액</th>	
+					</tr>
+					
+				
+				</tbody>
+				<%} %>
+			</table>
 		</form>
+		 </div> 
 	</div>
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script>
+    //본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
+    function sample4_execDaumPostcode() {
+        new daum.Postcode({
+            oncomplete: function(data) {
+                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
 
-</body>
-</html>
+                // 도로명 주소의 노출 규칙에 따라 주소를 조합한다.
+                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                var fullRoadAddr = data.roadAddress; // 도로명 주소 변수
+                var extraRoadAddr = ''; // 도로명 조합형 주소 변수
+
+                // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                    extraRoadAddr += data.bname;
+                }
+                // 건물명이 있고, 공동주택일 경우 추가한다.
+                if(data.buildingName !== '' && data.apartment === 'Y'){
+                   extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                }
+                // 도로명, 지번 조합형 주소가 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                if(extraRoadAddr !== ''){
+                    extraRoadAddr = ' (' + extraRoadAddr + ')';
+                }
+                // 도로명, 지번 주소의 유무에 따라 해당 조합형 주소를 추가한다.
+                if(fullRoadAddr !== ''){
+                    fullRoadAddr += extraRoadAddr;
+                }
+
+                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                document.getElementById('sample4_postcode').value = data.zonecode; //5자리 새우편번호 사용
+                document.getElementById('sample4_roadAddress').value = fullRoadAddr;
+                document.getElementById('sample4_jibunAddress').value = data.jibunAddress;
+
+                // 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
+                if(data.autoRoadAddress) {
+                    //예상되는 도로명 주소에 조합형 주소를 추가한다.
+                    var expRoadAddr = data.autoRoadAddress + extraRoadAddr;
+                    document.getElementById('guide').innerHTML = '(예상 도로명 주소 : ' + expRoadAddr + ')';
+
+                } else if(data.autoJibunAddress) {
+                    var expJibunAddr = data.autoJibunAddress;
+                    document.getElementById('guide').innerHTML = '(예상 지번 주소 : ' + expJibunAddr + ')';
+
+                } else {
+                    document.getElementById('guide').innerHTML = '';
+                }
+            }
+        }).open();
+    }
+</script>

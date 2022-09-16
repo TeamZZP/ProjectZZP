@@ -30,6 +30,10 @@
 		color: green; 
 		font-weight: bold;
 	}
+	.tableTop {
+    	border-bottom-color: #24855B;
+    	border-bottom-width: 2.5px;
+    }
 </style>
 
     <%
@@ -143,7 +147,7 @@
 <br>
 <form id="myOrderForm" method="post">
 <table id="addTable" class="table table-hover" style="text-align: center; vertical-align: middle;">
-	<tr class="table-success">
+	<tr class="tableTop">
 		<th width="25%">상품명</th>
 		<th width="10%">가격</th>
 		<th width="10%">주문날짜</th>

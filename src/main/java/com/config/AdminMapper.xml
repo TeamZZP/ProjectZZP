@@ -29,4 +29,10 @@
 	</where>
 </select>
 
+<update id="updateOrder">
+	update orders
+	set order_state=#{order_state}
+	where concat(order_id, p_id)=#{id}
+</update>
+
 </mapper>

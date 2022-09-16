@@ -106,9 +106,7 @@ function productChoice(n) {
  	
  	<% if(request.getAttribute("c_id").equals("6")){%>
  	        		<img id="banner" alt="" src="images/main/banner_sale.png">	 
- 	         <% }else{
- 	         
- 	         }%>
+ 	         <% } %>
      </div> 
 		<div class="row">
 		  <div class="col">
@@ -285,7 +283,7 @@ function productChoice(n) {
 <script>
 	$(function() {
 
-		/* ||"".equals($("#c_id").val()) */
+	
 		if($("#c_id").val()!=6){
 			$("#banner").css("display", "none");
 		}
