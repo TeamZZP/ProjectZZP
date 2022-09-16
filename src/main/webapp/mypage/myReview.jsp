@@ -45,6 +45,10 @@
 		color: green; 
 		font-weight: bold;
 	}
+	.tableTop {
+    	border-bottom-color: #24855B;
+    	border-bottom-width: 2.5px;
+    }
 </style>
 
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -128,7 +132,7 @@
 <div id="addTableDiv">
 <form method="post" id="reviewForm">
 <table id="reviewTable" class="table table-hover">
-	<tr class="table-success text-center">
+	<tr class="tableTop text-center">
 		<th width="25%">상품정보</th>
 		<th width="40%" colspan="2">내용</th>
 		<th width="20%">등록일</th>
