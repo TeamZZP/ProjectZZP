@@ -58,7 +58,7 @@ public class MemberAddServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 			String nextPage = "";
 			if (num>0) {
-				session.setAttribute("mesg", userid+"님 회원가입 회원가입을 축하합니다 :)");
+				session.setAttribute("mesg", userid+"님 회원가입을 축하합니다 :)");
 				nextPage = "LoginUIServlet";
 				session.setMaxInactiveInterval(60*30);
 				
