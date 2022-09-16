@@ -103,14 +103,14 @@ public class ProfileChangeServlet extends HttpServlet {
 							
 							try {
 								String old_file = map.get("old_file");
-								
-								if (old_file==null || old_file.length()==0) {
+/*								if (old_file==null || old_file.length()==0) {
 									item.write(new File(dir, saveName));
 									map.put("profile_img", saveName);
-								} else {
-									map.put("profile_img", old_file);
-									System.out.println("올드파일저장");
-								}
+								} else {	*/
+//									map.put("profile_img", old_file);
+									map.put("profile_img", saveName);//??? if else 필요없이 무조건 saveName으로? null인 경우가 없음
+/*									System.out.println("올드파일저장");
+								}	*/
 								
 								System.out.println(map);
 								
@@ -123,35 +123,16 @@ public class ProfileChangeServlet extends HttpServlet {
 				} catch (FileUploadException e) {
 					e.printStackTrace();
 				}
-			}			
-			
-			String userid=dto.getUserid();
-			//회원 프로필
-			MemberService service=new MemberService();
-			HashMap<String, String> map=new HashMap<String, String>();
-			
-			String profile_img=request.getParameter("profile_img");
-			String profile_txt=request.getParameter("profile_txt");
-			map.put("userid", userid);
-			
-			String data=null;
-			if (profile_img != null) {//이미지가 변경됐을 때
-				map.put("profile_img", profile_img);
-				System.out.println("이미지 변경-----"+map);
-				int num=service.changeProfile(map);
-				System.out.println("프로필 이미지 수정 : "+num);
-				ProfileDTO profile=service.selectProfile(userid);
-				data=profile.getProfile_img();
-			}
-			if (profile_txt != null) {//텍스트가 변경됐을 때
-				map.put("profile_txt", profile_txt);
-				System.out.println("메세지 변경-----"+map);
+				
+				String userid=dto.getUserid();
+				MemberService service=new MemberService();
 				int num=service.changeProfile(map);
 				System.out.println("프로필 메세지 수정 : "+num);
 				ProfileDTO profile=service.selectProfile(userid);
-				data=profile.getProfile_txt();
-			}
-			out.print(data);
+				System.out.println(profile);
+				
+				response.sendRedirect("MypageServlet");
+			}			
 			
 		} else {
 			//alert로 로그인 후 이용하세요 출력

@@ -59,7 +59,7 @@
 	div {/* 무슨 효과 */
 		box-sizing: border-box;
 	}
-	.circle {/* alert badge */
+/*	.circle { alert badge
 		display: inline-block;
 		width: 5px;
 		height: 5px;
@@ -68,7 +68,7 @@
 		position: absolute;
 		top: -5px;
 		left: 110%;
-	}
+	} */
 	.green {/* 녹색 텍스트 */
 		color: #24855b;
 	}
@@ -83,10 +83,14 @@
 		align-items: flex-end;
 		padding: 16px;
 	}
+	.greenContainer .grade {
+		margin-left: 12px;
+	}
 	.greenContainer .name {
 		font-size: 20px;
 		font-weight: bold;
 		color: #ffffff;
+		margin-left: 12px;
 	}
 	.greenContainer .modify {
 		margin-left: auto;
@@ -126,12 +130,15 @@
 		font-size: 16px;
 		font-weight: bold;
 		margin-bottom: 15px;
+		margin-left: 12px;
 	}
 	/* ==================== 장바구니 결제완료 배송중 구매확정 [로우] ==================== */
 	.shippingStatusContainer .status {
 		display: flex;
 		justify-content: space-between;/* div 안 item 사이에 간격 추가 */
 		margin-bottom: 21px;
+		margin-left: 12px;
+		margin-right: 12px;
 	}
 	/* ==================== 장바구니 결제완료 배송중 구매확정 [아이템] ==================== */
 	.shippingStatusContainer .item {
@@ -169,6 +176,8 @@
 		text-decoration: none;
 		height: 56px;
 		box-sizing: border-box;
+		margin-left: 12px;
+		margin-right: 17px;
 	}
 	.listContainer .icon {
 		margin-right: 14px;
@@ -182,7 +191,7 @@
 	}
 </style>
 <div class="container col-md-10">
-<form method="post" enctype="multipart/form-data">
+<form action="ProfileChangeServlet" method="post" enctype="multipart/form-data">
 <input type="hidden" name="userid" id="userid" value="<%= userid %>">
 <input type="hidden" name="old_file" id="old_file" value="<%= profile_img %>">
 
@@ -193,7 +202,7 @@
 	  <div class="img" style="padding: 30px 30px 30px 30px;">
 	  	<a>
 	  		<figure>
-	  			<img src="images/<%= profile_img %>" class="card-img-top">
+	  			<img src="/eclipse/upload/<%= profile_img %>" class="card-img-top">
 	  			<figcaption id="changeImg">사진 변경</figcaption>
 	  		</figure>
 	  	</a>
@@ -247,7 +256,7 @@
 							<input type="text" id="profile_txt" name="profile_txt" value="<%= profile_txt %>" style="width: 100%; height: 100px;"/>
 						</div>
 						<div class="modal-footer">
-							<button type="button" id="submitTxt" class="btn btn-success">수정</button>
+							<button id="submitTxt" class="btn btn-success">수정</button>
 					        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
 						</div>
 					</div>
@@ -295,29 +304,36 @@
 		<div class="status">
 			<div class="item">
 				<div>
+					<div class="green number">77</div>
+					<div class="text">주문 완료</div>
+				</div>
+				<div class="icon">></div>
+			</div>
+			<div class="item">
+				<div>
 					<div class="green number">6</div>
-					<div class="text">결제완료</div>
+					<div class="text">결제 완료</div>
 				</div>
 				<div class="icon">></div>
 			</div>
 			<div class="item">
 				<div>
 					<div class="number">0</div>
-					<div class="text">배송중</div>
+					<div class="text">배송 중</div>
 				</div>
 				<div class="icon">></div>
 			</div>
 			<div class="item">
 				<div>
-					<div class="green number">1</div>
-					<div class="text">배송완료</div>
+					<div class="green number">109</div>
+					<div class="text">배송 완료</div>
 				</div>
 				<div class="icon">></div>
 			</div>
 			<div class="item">
 				<div>
 					<div class="green number">3</div>
-					<div class="text">구매확정</div>
+					<div class="text">구매 확정</div>
 				</div>
 			</div>
 		</div>
@@ -333,26 +349,6 @@
 			<div class="text">반품/취소/교환 목록</div>
 			<div class="right">></div>
 		</a>
-<!--		<a href="ProfileCategoryServlet?category=myreview&userid=<%=userid%>" class="item">
-			<div class="icon">3.</div>
-			<div class="text">내 구매후기</div>
-			<div class="right">></div>
-		</a>
-		<a href="MyCouponServlet" class="item">
-			<div class="icon">4.</div>
-			<div class="text">내 쿠폰함</div>
-			<div class="right">></div>
-		</a>
-		<a href="ProfileCategoryServlet?category=mychallenge&userid=<%=userid%>" class="item">
-			<div class="icon">5.</div>
-			<div class="text">내 챌린지</div>
-			<div class="right">></div>
-		</a>
-		<a href="ProfileCategoryServlet?category=mystamp&userid=<%=userid%>" class="item">
-			<div class="icon">6.</div>
-			<div class="text">내 도장</div>
-			<div class="right">></div>
-		</a>	-->
 		<a href="MyQuestionServlet" class="item">
 			<div class="icon">3.</div>
 			<div class="text">내 문의 내역</div>
@@ -395,79 +391,48 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		$("#changeImg").on("click", function() {
-			console.log("clickkkkkkkkk");
 			$("#openImgModal").trigger("click");
 		});//end fn
 		$("#changeTxt").on("click", function() {
-			console.log("click=============");
 			$("#openTxtModal").trigger("click");
 		});//end fn
 		$("#profile_txt").on("click", function() {
 			$(this).val("");
 		});//end fn
+		
+		//프로필 텍스트 수정 클릭
 		$("#submitTxt").on("click", function() {
 			var profile_txt=$("#profile_txt").val();
 			if (profile_txt.length == 0) {
+				event.preventDefault();
 				$("#modalBtn").trigger("click");
 				$("#mesg").text("변경할 프로필 메세지를 입력하세요.");
-			} else {
-				//ajax
-				$.ajax({
-					type : "post",
-					url : "ProfileChangeServlet",
-					dataType : "text",
-					data : {
-						profile_txt : profile_txt
-					},
-					success : function(data, status, xhr) {
-						console.log("success");
-						console.log(data);
-						$("#writeTxt").modal("hide");
-						$(".modal-backdrop").hide();//모달창 닫고 백드롭 hide
-						$("#changeTxt").text(data);
-					},
-					error: function(xhr, status, error) {
-						alert(error);
-					}
-				});//end ajax
 			}
-		});//end submitTxt
+		});//end txt
+		
+		//프로필 이미지 수정 클릭
 		$("#submitImg").on("click", function() {
-			if (false) {
-				//$("#modalBtn").trigger("click");
-				//$("#mesg").text("변경할 프로필 메세지를 입력하세요.");
+			if ($("#imgFile").val() == "null" || $("#imgFile").val().length == 0) {//이미지 파일이 없을 때
+				event.preventDefault();
+				alert("사진을 업로드해 주세요.");
+			} else if ($("#imgFile").val() != 0 && !checkFileExtension()) {
+				console.log("이미지 확장자 검사");
 			} else {
-				let fileValue = $("#imgFile").val();
-				//이미지 확장자 검사
-				let reg = /(.*?)\.(jpg|jpeg|png|gif)$/;
-				
-				if (fileValue.match(reg)) {
-					console.log("이미지 수정 클릭");
-					console.log(fileValue);
-					//ajax
-	 				$.ajax({
-						type : "post",
-						url : "ProfileChangeServlet",
-						dataType : "text",
-						data : {
-							profile_img : fileValue
-						},
-						success : function(data, status, xhr) {
-							console.log("success");
-							//console.log(data);
-							$("#selectImg").modal("hide");
-							$(".modal-backdrop").hide();//모달창 닫고 백드롭 hide
-						},
-						error: function(xhr, status, error) {
-							alert(error);
-						}
-					});//end ajax
-					//return true;
-				} else {
-					alert("jpg, jpeg, png, gif 파일만 업로드 가능합니다.");
-					return false;
-				}
+				console.log($("#imgFile").val());
+				$("form").submit();
 			}
-		});//end submitImg
+		});//end img
 	});//end ready
+	
+	//이미지 확장자 검사
+	function checkFileExtension(){ 
+		let imgFile = $("#imgFile").val(); 
+		let reg = /(.*?)\.(jpg|jpeg|png|gif)$/;
+		if (imgFile.match(reg)) {
+			return true;
+		} else {
+			alert("jpg, jpeg, png, gif 파일만 업로드 가능합니다.");
+			return false;
+		}
+	}
 </script>
