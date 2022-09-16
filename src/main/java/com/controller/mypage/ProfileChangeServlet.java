@@ -103,14 +103,15 @@ public class ProfileChangeServlet extends HttpServlet {
 							
 							try {
 								String old_file = map.get("old_file");
-/*								if (old_file==null || old_file.length()==0) {
-									item.write(new File(dir, saveName));
+								if (old_file==null || old_file.length()==0) {
+									item.write(new File(dir, saveName));//로컬 폴더에 업로드한 이미지가 추가되는 코드
 									map.put("profile_img", saveName);
-								} else {	*/
+								} else {
 //									map.put("profile_img", old_file);
+									item.write(new File(dir, saveName));
 									map.put("profile_img", saveName);//??? if else 필요없이 무조건 saveName으로? null인 경우가 없음
-/*									System.out.println("올드파일저장");
-								}	*/
+									System.out.println("올드파일저장");
+								}
 								
 								System.out.println(map);
 								
