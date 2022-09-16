@@ -23,4 +23,16 @@ public class AdminService {
 		return pDTO;
 	}
 
+	public int updateOrder(HashMap<String, String> map) {
+		int n = 0; 
+		SqlSession session = MySqlSessionFactory.getSqlSession();
+		try {
+			n = dao.updateOrder(session, map);
+			session.commit();
+		} finally {
+			session.close();
+		}
+		return n;
+	}
+
 }

@@ -30,6 +30,10 @@ public class AdminDAO {
 		return session.selectOne("AdminMapper.countTotalOrders", map);
 	}
 
+	public int updateOrder(SqlSession session, HashMap<String, String> map) {
+		return session.update("AdminMapper.updateOrder", map);
+	}
+
 	
 
 }

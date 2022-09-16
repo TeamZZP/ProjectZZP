@@ -30,7 +30,7 @@
 		cursor: pointer;
 	}
 	.statusChange {
-		width: 110px;
+		width: 120px;
 	}
 
 	#modalBtn{
@@ -58,7 +58,7 @@ $(document).ready(function () {
 		let id = $(this).attr('data-id')
 		$('#statusChangeId').val(id)
 		$('#statusChange').val($('#status'+id).val())
-		$('#reportForm').attr('action', 'ReportUpdateServlet').submit()
+		$('#orderForm').attr('action', 'AdminOrderServlet').submit()
 	})
 	
 	
@@ -194,15 +194,15 @@ $(document).ready(function () {
 		<td class="oneOrder" data-id="<%= order_id %>"><%= total_price %></td>
 		<td class="oneOrder" data-id="<%= order_id %>"><%= order_date %></td>
 		<td>
-			<select id="status<%= order_id %>" class="statusChange form-select form-select-sm" data-id="<%= order_id %>">
-			  <option value="0" <% if("주문완료".equals(order_state)) {%> selected <%} %>>주문완료</option>
-			  <option value="1" <% if("결제완료".equals(order_state)) {%> selected <%} %>>결제완료</option>
-			  <option value="1" <% if("배송준비중".equals(order_state)) {%> selected <%} %>>배송준비중</option>
-			  <option value="1" <% if("배송중".equals(order_state)) {%> selected <%} %>>배송중</option>
-			  <option value="1" <% if("배송완료".equals(order_state)) {%> selected <%} %>>배송완료</option>
-			  <option value="1" <% if("구매확정".equals(order_state)) {%> selected <%} %>>구매확정</option>
-			  <option value="1" <% if("교환/반품".equals(order_state)) {%> selected <%} %>>교환/반품</option>
-			  <option value="1" <% if("주문취소".equals(order_state)) {%> selected <%} %>>주문취소</option>
+			<select id="status<%= order_id %><%= p_id %>" class="statusChange form-select form-select-sm" data-id="<%= order_id %><%= p_id %>">
+			  <option value="주문완료" <% if("주문완료".equals(order_state)) {%> selected <%} %>>주문완료</option>
+			  <option value="결제완료" <% if("결제완료".equals(order_state)) {%> selected <%} %>>결제완료</option>
+			  <option value="배송준비중" <% if("배송준비중".equals(order_state)) {%> selected <%} %>>배송준비중</option>
+			  <option value="배송중" <% if("배송중".equals(order_state)) {%> selected <%} %>>배송중</option>
+			  <option value="배송완료" <% if("배송완료".equals(order_state)) {%> selected <%} %>>배송완료</option>
+			  <option value="구매확정" <% if("구매확정".equals(order_state)) {%> selected <%} %>>구매확정</option>
+			  <option value="교환/반품" <% if("교환/반품".equals(order_state)) {%> selected <%} %>>교환/반품</option>
+			  <option value="주문취소" <% if("주문취소".equals(order_state)) {%> selected <%} %>>주문취소</option>
 			</select>
 		</td>
 		<td>
