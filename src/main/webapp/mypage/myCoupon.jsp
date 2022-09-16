@@ -21,6 +21,10 @@
 		color: green; 
 		font-weight: bold;
 	}
+	.tableTop {
+    	border-bottom-color: #24855B;
+    	border-bottom-width: 2.5px;
+    }
 </style>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
@@ -88,7 +92,7 @@
 	</form>		
 </div>
 <table id="addTable" class="table table-hover" style="text-align: center; vertical-align: middle;">
-	<tr class="table-success">
+	<tr class="tableTop">
 		<th>쿠폰번호</th>
 		<th>쿠폰이미지</th>
 		<th>쿠폰명</th>

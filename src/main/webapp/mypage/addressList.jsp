@@ -28,6 +28,10 @@
 	.modal {
 		overflow: auto;
 	}
+	.tableTop {
+    	border-bottom-color: #24855B;
+    	border-bottom-width: 2.5px;
+    }
 </style>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <div id="addContainer">
@@ -61,7 +65,7 @@
 <div class="col-lg-10">
 <div id="addTableDiv">
 <table id="addTable" class="table table-hover" style="table-layout: fixed">
-	<tr class="table-success">
+	<tr class="tableTop">
 		<th width="20%">배송지</th>
 		<th width="55%">주소</th>
 		<th width="20%">연락처</th>

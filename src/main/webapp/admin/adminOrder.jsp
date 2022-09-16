@@ -53,6 +53,17 @@ $(document).ready(function () {
 	$("#status").on("change", function () {
 		$("#sortForm").submit();
 	});
+	//주문 상태 변경
+	$('.statusChange').on('change', function () {
+		let id = $(this).attr('data-id')
+		$('#statusChangeId').val(id)
+		$('#statusChange').val($('#status'+id).val())
+		$('#reportForm').attr('action', 'ReportUpdateServlet').submit()
+	})
+	
+	
+	
+	
 	//해당 신고글로 이동
 	$('.oneReport').on('click', function () {
 		let id = $(this).attr('data-id')
@@ -93,13 +104,7 @@ $(document).ready(function () {
 			$("#mesg").html("선택한 신고 기록을 삭제하시겠습니까? <br>(게시글은 삭제되지 않습니다.)");
 		}
 	})
-	//신고 상태 변경
-	$('.statusChange').on('change', function () {
-		let id = $(this).attr('data-id')
-		$('#statusChangeId').val(id)
-		$('#statusChange').val($('#status'+id).val())
-		$('#reportForm').attr('action', 'ReportUpdateServlet').submit()
-	})
+	
 	
 });
 </script>
@@ -212,12 +217,6 @@ $(document).ready(function () {
 </table>
 </form>
 
-	<div>
-	  <div class="float-end me-3" style="margin-top: -8px;">
-		<button type="button" class="delCheckBtn btn btn-outline-dark btn-sm" style="width: 80px;"
-						data-bs-target="#deleteModal" data-bs-id="">선택삭제</button>
-	  </div>
-	</div>
 </div>
 </div>
 

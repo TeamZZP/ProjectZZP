@@ -60,7 +60,7 @@ public class NoticeOneSelectServlet extends HttpServlet {
 				NoticeDTO nextDTO = service.noticeOneSelect(nextID);
 				System.out.println("nextDTO " + nextDTO); //다음 게시물
 				
-				session.setAttribute("nextDTO", nextDTO);  //다음 게시물
+				session.setAttribute("nextDTO", nextDTO);  
 			} else {
 				NoticeDTO nextDTO = null;
 				session.setAttribute("nextDTO", nextDTO);

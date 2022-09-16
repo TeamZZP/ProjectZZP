@@ -50,6 +50,10 @@
       -ms-transform: scale(1.05);
       transform: scale(1.05);
     } 
+    .tableTop {
+    	border-bottom-color: #24855B;
+    	border-bottom-width: 2.5px;
+    }
 </style>
 
 
@@ -87,8 +91,8 @@
 	</div>
 <div class="col-lg-10">
 
-<table class="table table-hover text-center">
-	<tr class="table-success">
+<table class="table text-center">
+	<tr class="tableTop">
 		<th>내 도장 <span class="text-success fw-bold"><%= totalCount %></span></th>
 	</tr>
 </table>
