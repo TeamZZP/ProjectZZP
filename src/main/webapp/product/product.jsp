@@ -111,6 +111,10 @@ List<CategoryProductDTO> product_list=(List<CategoryProductDTO>) request.getAttr
 	
 <div id="categoryProductContainer" class="container ">
 	<div class="row " align="center">
+		<!-- 세일베너 -->	
+ 	<div style="text-align: center;	">
+        		<img id="banner" alt="" src="images/main/banner_sale.png">	 
+     </div> 
 		<div class="row">
 		  <div class="col">
       	  		<div class="float-end">
@@ -288,6 +292,10 @@ List<CategoryProductDTO> product_list=(List<CategoryProductDTO>) request.getAttr
 
 <script>
 	$(function() {
+		/* ||"".equals($("#c_id").val()) */
+		if($("#c_id").val()!=6 || $("#c_id").val()==null){
+			$("#banner").css("display", "none");
+		}
 		//정렬 기준 선택시 form 제출
 		$("#sortBy").on("change", function () {
 			$("#prodForm").submit();
