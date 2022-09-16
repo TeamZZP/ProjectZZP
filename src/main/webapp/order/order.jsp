@@ -1,4 +1,4 @@
-c_id<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="com.dto.MemberDTO"%>
 <%@ page import="com.dto.CategoryProductDTO"%>
@@ -6,6 +6,9 @@ c_id<%@ page language="java" contentType="text/html; charset=UTF-8"
 <%@ page import="java.util.List"%>
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="java.util.HashMap"%>
+
+<!DOCTYPE html>
+<html>
 <style>
 .heading {
 	flex: 1;
@@ -41,24 +44,6 @@ label{
 	color: gray;
 }
 </style>
-<script type="text/javascript"
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script type="text/javascript">
-	$(function() {
-
-		$("#AddOrder").on("click", function() {
-			$("form").attr("action", "AddOrderServlet");
-		});
-
-		$("#delivery_loc").on("change", function() {
-			console.log($("#delivery_loc").val());
-		});
-
-	});
-</script>
-
-<!DOCTYPE html>
-<html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
