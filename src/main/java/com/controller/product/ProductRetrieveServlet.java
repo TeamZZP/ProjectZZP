@@ -48,10 +48,6 @@ public class ProductRetrieveServlet extends HttpServlet {
 		List<QuestionDTO> prodQuestionList = Qservice.prodQuestion(P_ID);
 		System.out.println("prodQuestionList--- " + prodQuestionList); //Question
 		
-		AnswerService Aservice = new AnswerService();
-		AnswerDTO aDTO = Aservice.selectAnswer(P_ID);
-		System.out.println("대답  " + aDTO); //Answer
-		
 		ReviewService Rservice = new ReviewService();  
 		List<ReviewProfileDTO> ReviewList = Rservice.review(P_ID);
 		System.out.println("리뷰 " + ReviewList); //리뷰
@@ -69,7 +65,6 @@ public class ProductRetrieveServlet extends HttpServlet {
 		request.setAttribute("ProductRetrieveDTO", pdto);
 	    request.setAttribute("ImagesRetrieveList", ilist);
 	    
-		session.setAttribute("aDTO", aDTO);
 		session.setAttribute("prodQuestionList", prodQuestionList);
 		
 		session.setAttribute("ReviewList", ReviewList);
