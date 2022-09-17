@@ -37,7 +37,6 @@ public class ProductRetrieveServlet extends HttpServlet {
     
       HttpSession session = request.getSession();  
       MemberDTO member = (MemberDTO)session.getAttribute("login");
-		/* System.out.println(member); */
       
       ProductService service = new ProductService();
       ProductDTO pdto = service.productRetrieve(p_id); //prodDetail
@@ -67,7 +66,6 @@ public class ProductRetrieveServlet extends HttpServlet {
 			System.out.println(likecheck);
 			request.setAttribute("likecheck", likecheck);
 		}
-			
 		request.setAttribute("ProductRetrieveDTO", pdto);
 	    request.setAttribute("ImagesRetrieveList", ilist);
 	    
@@ -78,7 +76,6 @@ public class ProductRetrieveServlet extends HttpServlet {
 		 
 	 RequestDispatcher dis = request.getRequestDispatcher("productRetrieve.jsp");
 	 dis.forward(request, response);
-      
    }
 
    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

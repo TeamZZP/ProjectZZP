@@ -60,7 +60,7 @@
 			<td><%=rDTO.getREVIEW_ID()%></td>
 			<td>
 				<a style="text-decoration: none; color: black;" href="ProfileMainServlet?userid=<%=rDTO.getUSERID()%>"> 
-				<img alt="프로필" src="images/<%=rDTO.getPROFILE_IMG() %>" width="40px" height="40px">
+				<img alt="프로필" src="/eclipse/upload/<%=rDTO.getPROFILE_IMG() %>" width="40px" height="40px">
 				&nbsp;&nbsp; <%=rDTO.getUSERID()%> </a>
 			</td>
 			<td><%=rDTO.getREVIEW_TITLE()%></td>
