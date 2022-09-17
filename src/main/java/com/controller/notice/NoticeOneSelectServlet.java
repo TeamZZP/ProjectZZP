@@ -48,7 +48,6 @@ public class NoticeOneSelectServlet extends HttpServlet {
 			map.put("noticeID", noticeID);
 			map.put("category", category);
 			
-			
 			int nextID = 0;
 			try {
 				nextID = service.nextNoticeID(map);

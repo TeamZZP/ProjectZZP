@@ -14,9 +14,6 @@ import com.dto.NoticeDTO;
 import com.dto.PageDTO;
 import com.service.NoticeService;
 
-/**
- * Servlet implementation class communityController
- */
 @WebServlet("/NoticeListServlet")
 public class NoticeListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;

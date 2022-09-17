@@ -76,9 +76,14 @@
 					<div class="input-group col-mb-3">
 						 <button class="btn btn-outline-success col-md-2" onclick="NoticeList()">목록</button>
 						  <% if(nextDTO != null) { %>
-							  <button class="btn btn-outline-success col-md-2" type="button" onclick="location.href=href='NoticeOneSelectServlet?NOTICE_ID=<%=nextDTO.getNotice_id()%>'">다음글</button>
-							  <a class="col-md-8" href="NoticeOneSelectServlet?NOTICE_ID=<%=nextDTO.getNotice_id()%>" style="text-decoration: none;">
-								 <input style="text-align: center;" type="url" class="form-control shadow-none" value="<%= nextDTO.getNotice_tittle() %>" readonly="readonly">
+							  <button class="btn btn-outline-success col-md-2" type="button" 
+							  	onclick="location.href=href='NoticeOneSelectServlet?NOTICE_ID=<%=nextDTO.getNotice_id()%>'">
+							  	다음글
+							  </button>
+							  <a class="col-md-8" href="NoticeOneSelectServlet?NOTICE_ID=<%=nextDTO.getNotice_id()%>" 
+							  	style="text-decoration: none;">
+								 <input style="text-align: center;" type="url" class="form-control shadow-none" 
+								 	value="<%= nextDTO.getNotice_tittle() %>" readonly="readonly">
 							  </a>
 						  <% } %>
 					</div>

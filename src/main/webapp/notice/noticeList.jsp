@@ -6,10 +6,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <style>
-a{
-	text-decoration: none;
-	color: black;
-}
+	a{
+		text-decoration: none;
+		color: black;
+	}
 </style>
 	<%
 	String mesg = (String)session.getAttribute("mesg");
@@ -62,7 +62,11 @@ a{
 			%>
     	<tr style="background: #DCDCDC">
     		<td> <b> <%= nDTO.getNotice_id() %> </b> </td>
-    		<td> <a href="NoticeOneSelectServlet?NOTICE_ID=<%= nDTO.getNotice_id() %>"> <b> <%= nDTO.getNotice_tittle() %> </b> </a> </td>
+    		<td> 
+    			<a href="NoticeOneSelectServlet?NOTICE_ID=<%= nDTO.getNotice_id() %>"> 
+    				<b> <%= nDTO.getNotice_tittle() %> </b> 
+    			</a> 
+    		</td>
     		<td> <b>  <%= day %> </b> </td>
     		<td> <b>  <%= nDTO.getNotice_hits() %> </b> </td>
     	</tr>

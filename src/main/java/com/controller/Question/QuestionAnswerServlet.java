@@ -53,7 +53,6 @@ public class QuestionAnswerServlet extends HttpServlet {
 				session.setAttribute("mesg", "권한이 없습니다");
 				response.sendRedirect("QuestionListServlet");
 			}
-			
 		} else {//달린 댓글이 없으면 추가
 			if (mDTO.getUserid().equals("admin1")) {
 				AnswerDTO aDTO = new AnswerDTO();
@@ -74,7 +73,6 @@ public class QuestionAnswerServlet extends HttpServlet {
 		}
 		int num = service.questionStatus(Q_ID);
 		System.out.println("답변 상태 변경 갯수 " + num);
-		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

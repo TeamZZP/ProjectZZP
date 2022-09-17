@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<div id="back" style="text-align: center;">
+<div style="text-align: center;">
 	<img alt="소개" src="images/introduction/int.png" width="130px" height="50px"><br>
 	<br>
 	<hr>
