@@ -32,12 +32,12 @@
 	
 	  position: relative; /* absolute의 기본기준은 body로 처리 - 현재 요소로 기준변경 - 이 코드 추가하니까 바깥 영역으로 침범 안 하고 잘림 */
 	}
-	.img figure{
-	  width: 100%; height: 100%;/* a태그의 영역을 상속받도록 처리 */
+ 	.img figure{
+	  width: 100%; height: 100%; /* a태그의 영역을 상속받도록 처리 */
 	}
 	.img figcaption{
 	  width: 100%; height: 100%;/* 역시 부모 전체 영역을 상속 받도록  width: 100%; height: 100%; 를 줬고, */
-	  background-color: rgba(0,0,0,0.3);/* 검정색 배경색에 투명도를 주기 위해  background-color: rgba(0,0,0,0.7); 로  rgba( ) 함수를 사용 */
+	  background-color: rgba(0,0,0,0.5);/* 검정색 배경색에 투명도를 주기 위해  background-color: rgba(0,0,0,0.7); 로  rgba( ) 함수를 사용 */
 	
 	  position: absolute; /* 이미지와 겹치게 처리 */
 	  top: 0; left: 0;/* 이미지 위에 올라가야 하므로  position: absolute; top: 0; left: 0; 를 줘서 겹치도록 */
@@ -48,9 +48,11 @@
 	  opacity: 0; /* 위에 올라가는 bg기 때문에 처음엔 안 보이게 처리 */
 	
 	  transition: 0.3s; /* 자연스럽게 나타나야하기 때문에 CSS변화에 시간차를 주기 위해 */
+	  border-radius: 9px;/* 모서리 둥글게 */
 	}
 	.img a:hover figcaption, .img a:focus figcaption{
 	  opacity: 1;/* 마우스를 올렸을 때와 초점받았을 때 보이게 하도록 */
+	  cursor: pointer;/* 커서 모양 손가락으로 */
 	}
 	body {/* 무슨 효과 */
 		padding: 0;
@@ -189,6 +191,26 @@
 	.listContainer .right {
 		margin-left: auto;
 	}
+	#changeTxt {
+		cursor: pointer;/* 커서 모양 손가락으로 */
+	}
+	.profileTxt {
+		border: 1px solid #E0E0E0;
+		border-radius: 0.4em;
+		padding: 7px;
+	}
+	.card-body {
+		/* 텍스트를 드래그 하지 못하도록 설정 */
+		-ms-user-select: none;
+		-moz-user-select: -moz-none;
+		-khtml-user-select: none;
+		-webkit-user-select: none;
+		user-select: none;
+	}
+	div.img, img.card-img-top {
+		padding: 10px 10px 5px 10px;
+		border-radius: 19px;
+	}
 </style>
 <div class="container col-md-10">
 <form action="ProfileChangeServlet" method="post" enctype="multipart/form-data">
@@ -199,17 +221,18 @@
 <div class="row">
 <div class="col-md-3">
 	<div class="card">
-	  <div class="img" style="padding: 30px 30px 30px 30px;">
+	  <div class="img">
 	  	<a>
 	  		<figure>
 	  			<img src="/eclipse/upload/<%= profile_img %>" class="card-img-top">
-	  			<figcaption id="changeImg">사진 변경</figcaption>
+	  			<figcaption id="changeImg"><b>프로필 이미지 변경</b></figcaption>
 	  		</figure>
 	  	</a>
 	  </div>
 	  <div class="card-body">
-	    <h5 class="card-title"><b><%= username %>님</b></h5>
-	    <p class="card-text" id="changeTxt"><%= profile_txt %></p>
+	    <div class="card-title" style="padding-top: 10px;"><b><%= username %>님</b></div>
+	    <div class="profileTxt"><%= profile_txt %></div>
+	    <img id="changeTxt" src="images/edit.png" width="20;" style="margin-top: 10px; padding-bottom: 5px; float: right;">
 	  </div>
 	</div>
 	<div class="col-md-6">
@@ -252,12 +275,12 @@
 							<h5 class="modal-title" id="staticBackdropLabel">프로필 메세지 변경</h5>
 							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 						</div>
-						<div class="modal-body">
-							<input type="text" id="profile_txt" name="profile_txt" value="<%= profile_txt %>" style="width: 100%; height: 100px;"/>
+						<div class="modal-body" style="text-align: center;">
+							<textarea class="profileTxt" id="profile_txt" name="profile_txt" style="resize: none" cols="55" rows="4"><%= profile_txt %></textarea>
 						</div>
 						<div class="modal-footer">
 							<button id="submitTxt" class="btn btn-success">수정</button>
-					        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+					        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="cancleChangTxt">취소</button>
 						</div>
 					</div>
 				</div>
@@ -397,13 +420,16 @@
 			$("#openTxtModal").trigger("click");
 		});//end fn
 		$("#profile_txt").on("click", function() {
-			$(this).val("");
+			$(this).text("");
+		});//end fn
+		$("#cancleChangTxt").on("click", function() {
+			$("#profile_txt").text("<%= profile_txt %>");
 		});//end fn
 		
 		//프로필 텍스트 수정 클릭
 		$("#submitTxt").on("click", function() {
-			var profile_txt=$("#profile_txt").val();
-			if (profile_txt.length == 0) {
+			var profile_txt=$("#profile_txt").val();//왜 text()는 안 넘어올까
+ 			if (profile_txt.length == 0) {
 				event.preventDefault();
 				$("#modalBtn").trigger("click");
 				$("#mesg").text("변경할 프로필 메세지를 입력하세요.");
