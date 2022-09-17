@@ -37,7 +37,6 @@ public class ProductRetrieveServlet extends HttpServlet {
     
       HttpSession session = request.getSession();  
       MemberDTO member = (MemberDTO)session.getAttribute("login");
-		/* System.out.println(member); */
       
       ProductService service = new ProductService();
       ProductDTO pdto = service.productRetrieve(p_id); //prodDetail
@@ -48,10 +47,6 @@ public class ProductRetrieveServlet extends HttpServlet {
 		QuestionService Qservice = new QuestionService();
 		List<QuestionDTO> prodQuestionList = Qservice.prodQuestion(P_ID);
 		System.out.println("prodQuestionList--- " + prodQuestionList); //Question
-		
-		AnswerService Aservice = new AnswerService();
-		AnswerDTO aDTO = Aservice.selectAnswer(P_ID);
-		System.out.println("대답  " + aDTO); //Answer
 		
 		ReviewService Rservice = new ReviewService();  
 		List<ReviewProfileDTO> ReviewList = Rservice.review(P_ID);
@@ -67,18 +62,15 @@ public class ProductRetrieveServlet extends HttpServlet {
 			System.out.println(likecheck);
 			request.setAttribute("likecheck", likecheck);
 		}
-			
 		request.setAttribute("ProductRetrieveDTO", pdto);
 	    request.setAttribute("ImagesRetrieveList", ilist);
 	    
-		session.setAttribute("aDTO", aDTO);
 		session.setAttribute("prodQuestionList", prodQuestionList);
 		
 		session.setAttribute("ReviewList", ReviewList);
 		 
 	 RequestDispatcher dis = request.getRequestDispatcher("productRetrieve.jsp");
 	 dis.forward(request, response);
-      
    }
 
    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

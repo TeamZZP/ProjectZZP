@@ -2,6 +2,8 @@ package com.controller.admin;
 
 import java.io.IOException;
 import java.text.DecimalFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 
@@ -13,12 +15,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.dto.AddressDTO;
 import com.dto.MemberDTO;
-import com.dto.PageDTO;
-import com.service.AddressService;
+import com.dto.ProductOrderDTO;
+import com.dto.QuestionDTO;
+import com.service.AdminService;
 import com.service.ChallengeService;
-import com.service.MemberService;
 import com.service.UtilService;
 
 @WebServlet("/AdminMainServlet")
@@ -64,6 +65,21 @@ public class AdminMainServlet extends HttpServlet {
 			= ( (increaseV >= 0)? "+" : "" ) + String.format("%.2f%%", increaseV);
 			
 			
+			
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yy/MM/dd");
+			String date = LocalDate.now().format(formatter); //오늘 날짜
+			HashMap<String, String> map = new HashMap<String, String>();
+			map.put("date", date);
+			AdminService aService = new AdminService();
+			
+			//신규 주문
+			List<ProductOrderDTO> orderList = aService.selectNewOrders(map);
+			//신규 회원
+			List<MemberDTO> memberList = aService.selectNewMembers(map);
+			//답변대기 문의
+			List<QuestionDTO> questionList = aService.selectNewQuestion();
+			
+			
 			request.setAttribute("sales", df.format(sales));
 			request.setAttribute("salesIncrease", salesIncrease);
 			
@@ -72,6 +88,10 @@ public class AdminMainServlet extends HttpServlet {
 			
 			request.setAttribute("todayVisit", todayVisit);
 			request.setAttribute("visitIncrease", visitIncrease);
+			
+			request.setAttribute("orderList", orderList);
+			request.setAttribute("memberList", memberList);
+			request.setAttribute("questionList", questionList);
 			
 			RequestDispatcher dis = request.getRequestDispatcher("adminMain.jsp");
 			dis.forward(request, response);

@@ -167,7 +167,6 @@ $(document).ready(function () {
 		<th>가격</th>
 		<th>주문일</th>
 		<th>상태</th>
-		<th>관리</th>
 	</tr>
 <%
 	for (ProductOrderDTO dto : list) {
@@ -204,10 +203,6 @@ $(document).ready(function () {
 			  <option value="교환/반품" <% if("교환/반품".equals(order_state)) {%> selected <%} %>>교환/반품</option>
 			  <option value="주문취소" <% if("주문취소".equals(order_state)) {%> selected <%} %>>주문취소</option>
 			</select>
-		</td>
-		<td>
-			<button type="button" class="btn btn-outline-dark btn-sm" 
-					data-bs-toggle="modal" data-bs-target="#deleteModal" data-bs-id="<%= order_id %>">삭제</button>
 		</td>
 	</tr>
 <%

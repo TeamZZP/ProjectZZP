@@ -39,8 +39,8 @@
 			</otherwise> 
 		</choose>
 	</select>
-	<select id="count" parameterType="map" resultType="int">
-		select count(*) from PRODUCT 
+	<select id="totalCount2" resultType="int" parameterType="map">
+		select count(*) from PRODUCT
 		<choose> 
 			<when test="category == 'P_NAME'"> 
 				where p_name like '%${searchValue}%' or p_content like '%${searchValue}%'
@@ -52,8 +52,8 @@
 			</otherwise> 
 		</choose>
 	</select>
-	<select id="totalCount2" resultType="int" parameterType="map">
-		select count(*) from PRODUCT
+	<select id="count" parameterType="map" resultType="int">
+		select count(*) from PRODUCT 
 		<choose> 
 			<when test="category == 'P_NAME'"> 
 				where p_name like '%${searchValue}%' or p_content like '%${searchValue}%'
