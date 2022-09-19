@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="CartMapper">
+	<mapper namespace="CartMapper">
 	<!-- 장바구니에 동일한 상품있는지 확인  -->
  	<select id="checkCart" parameterType="hashmap" resultType="int" >
  		select count(*) from cart where userid = #{userid} and p_id = #{p_id}
@@ -11,12 +11,13 @@
  	<update id="updateCart" parameterType="CartDTO">
  		update cart set p_amount = p_amount +#{p_amount}  where userid = #{userid} and p_id = #{p_id}
  	</update>
+ 	<!-- 장바구니 저장  -->
     <insert id="cartAdd" parameterType="CartDTO">
 		insert into cart 
 		values
 		(cart_cart_id_seq.nextval,#{userid},#{p_id},sysdate,#{p_amount})	
 	</insert>
-
+	<!-- 장바구니 정보 -->
 	<select id="cartList" parameterType="string" resultType="CartDTO">
 		select c.cart_id,p.p_name,c.p_amount,p.p_selling_price,p.p_id,c.userid, p_selling_price*p_amount money,
 		(select IMAGE_ROUTE from images where p_id = c.p_id and IMAGE_RNK = 1) as p_image 
@@ -24,6 +25,13 @@
       	on c.p_id = p.p_id
 		where c.userid = #{userid} 
 		order by cart_id desc
+	</select>
+	
+	<select id="selectCart" parameterType="hashMap" resultType="CartDTO">
+		select c.cart_id,p.p_name,c.p_amount,p.p_selling_price,p.p_id,c.userid, p_selling_price*p_amount money,
+		(select IMAGE_ROUTE from images where p_id = c.p_id and IMAGE_RNK = 1) as p_image 
+      	from cart c join product p 
+      	on c.p_id = p.p_id where c.p_id = #{p_id} and c.userid= #{userid}
 	</select>
 	
 	<delete id="cartDel" parameterType="int">
@@ -46,6 +54,7 @@
 	<select id="cartCount" parameterType="String" resultType="int">
 		select count(*) from cart where userid = #{userid}
 	</select>
+	
 	<!-- 총금액 구하기 null인 경우 0 -->
 	<select id="sum_money" resultType="int">
 		select nvl(sum(p.p_selling_price*c.p_amount),0) money
@@ -53,8 +62,6 @@
 		where c.p_id = p.p_id and c.userid = #{userid}
 	</select>  
 	
-	<select id="selectCart" parameterType="hashMap" resultType="CartDTO">
-		select * from cart where p_id = #{p_id} and userid= #{userid}
-	</select>
+	
 	
 </mapper>

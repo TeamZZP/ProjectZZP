@@ -18,20 +18,18 @@ import com.dto.ProductDTO;
 import com.service.OrderService;
 import com.service.ProductService;
 
-/**
- * Servlet implementation class AddOrderServlet
- */
+
 @WebServlet("/AddOrderServlet")
 public class AddOrderServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		System.out.println(">>>AddOrderServlet");
 		HttpSession session = request.getSession();
 		MemberDTO mdto = (MemberDTO)session.getAttribute("login");
 		
 		String AddressName = (String)request.getAttribute("AddressName");
 		
-		
+		/*
 		String[] pIdListString = request.getParameterValues("p_id");
 		System.out.println("사이즈 1: " + pIdListString.length);
 		String[] pAmountListString = request.getParameterValues("p_amount");
@@ -77,7 +75,7 @@ public class AddOrderServlet extends HttpServlet {
 		request.setAttribute("orderList", orderList);
 		request.setAttribute("productList", productList);
 		RequestDispatcher dis = request.getRequestDispatcher("orderSheet.jsp");
-		dis.forward(request, response);
+		dis.forward(request, response);*/
 		
 	}
 
