@@ -25,7 +25,8 @@
 					if (data != null) {
 						$("#answer"+qID).attr("display","none");
 						$("#answer"+qID).slideToggle("slow").html(data + 
-						" &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <i class='fa-solid fa-a' style='font-size: 50px';></i>").css({'font-weight':'bold','border-bottom': '1px solid #8FBC8F'});
+						" &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <i class='fa-solid fa-a' style='font-size: 50px';></i>")
+						.css({'font-weight':'bold','border-bottom': '1px solid #8FBC8F'});
 					} else {
 						alert("권한이 없습니다.");
 					}

@@ -48,7 +48,6 @@ public class orderIdCheckServlet extends HttpServlet {
 			} else {
 				out.print(0);
 			}
-			
 		} else {
 			session.setAttribute("mesg", "로그인이 필요합니다");
 			response.sendRedirect("LoginUIServlet");
