@@ -72,12 +72,9 @@ public class QuestionProdSelectServlet extends HttpServlet {
 			
 			request.setAttribute("iDTO", iDTO);
 		}
-		
-		//List<ProductDTO> list = service.prodSelect(map);
-		//System.out.println("검색한내용 " + list);
+
 		int num = service.count(map);
 		System.out.println("검색된 갯수 " + num);
-		
 
 		request.setAttribute("category", category);
 		request.setAttribute("searchValue", searchValue);

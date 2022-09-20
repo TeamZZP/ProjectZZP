@@ -54,8 +54,6 @@
 			var REVIEW_ID = $(this).attr("data-reviewID");
 			var P_NAME = $(this).attr("data-pNAME");
 			var P_ID = $(this).attr("data-pID");
-			console.log(ORDER_ID);
-			console.log(P_ID);
 		 	$.ajax({
 				type:"post",
 				url:"orderIdCheckServlet",

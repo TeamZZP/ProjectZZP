@@ -37,16 +37,19 @@ public class OrderServlet_uj extends HttpServlet {
 		
 		String productid = request.getParameter("p_id");
 		System.out.println(productid);
+		//배열에 , 기준으로 잘라서 넣음
 		String [] pId = productid.split(",");
 		
 		System.out.println(Arrays.toString(pId)); //주소 대신 배열
 		
+		//p_id 리스트
 		List<String> p_idList = Arrays.asList(pId);
 		CartService cService = new CartService();
 		
 		List<CartDTO> clist = new ArrayList<CartDTO>();
 		CartDTO c1 = null;
 		
+		//p_id, userid에 맞는 장바구니 제품 정보
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("userid", userid);
 		for (int i = 0; i < p_idList.size(); i++) {

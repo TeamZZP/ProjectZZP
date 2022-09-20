@@ -6,8 +6,10 @@ import java.util.List;
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 
+import com.dto.MemberDTO;
 import com.dto.PageDTO;
 import com.dto.ProductOrderDTO;
+import com.dto.QuestionDTO;
 
 public class AdminDAO {
 
@@ -32,6 +34,18 @@ public class AdminDAO {
 
 	public int updateOrder(SqlSession session, HashMap<String, String> map) {
 		return session.update("AdminMapper.updateOrder", map);
+	}
+
+	public List<ProductOrderDTO> selectNewOrders(SqlSession session, HashMap<String, String> map) {
+		return session.selectList("AdminMapper.selectNewOrders", map);
+	}
+
+	public List<MemberDTO> selectNewMembers(SqlSession session, HashMap<String, String> map) {
+		return session.selectList("AdminMapper.selectNewMembers", map);
+	}
+
+	public List<QuestionDTO> selectNewQuestion(SqlSession session) {
+		return session.selectList("AdminMapper.selectNewQuestion");
 	}
 
 	

@@ -134,7 +134,7 @@ function productChoice(n) {
 	})//cart 
 	
 	$("#order").on("click", function() {
-		
+		location.href="OrderServlet=";
 		$("form").attr("action", "OrderServlet");
 	})//order
  
@@ -163,6 +163,8 @@ int p_id = pdto.getP_id();
 String p_name = pdto.getP_name();
 int p_selling_price = pdto.getP_selling_price();
 int p_stock = pdto.getP_stock();
+
+ 
 %>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"

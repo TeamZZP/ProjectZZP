@@ -39,12 +39,10 @@ public class ProdOneSelectServlet extends HttpServlet {
 			QuestionService service = new QuestionService();
 			QuestionProductDTO qDTO = service.questionOneSelect(Q_ID);
 			String writer = qDTO.getUserid();
-			
 			if (userid.equals(writer)) {
 				AnswerService Aservice = new AnswerService();
 				AnswerDTO aDTO = Aservice.selectAnswer(Q_ID);
 				System.out.println("aDTO " + aDTO);
-				
 				if (aDTO != null) {
 					String Acontent = aDTO.getAnswer_content();
 					
@@ -72,7 +70,6 @@ public class ProdOneSelectServlet extends HttpServlet {
 			PrintWriter out = response.getWriter();
 			out.print(Acontent);
 		}
-		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

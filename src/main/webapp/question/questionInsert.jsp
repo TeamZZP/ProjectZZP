@@ -108,7 +108,7 @@
 			<tr>
 				<td colspan="2"> 
 					<div class="input-group">
-					  <label class="input-group-text" for="inputGroupSelect01">질문 카테고리</label>
+					  <label class="input-group-text" for="inputGroupSelect01">문의 카테고리</label>
 					  <select name="Q_CATEGORY" class="form-select">
 					    <option>상품</option>
 					    <option>배송</option>

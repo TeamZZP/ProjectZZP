@@ -43,7 +43,6 @@ public class MyOrderServlet extends HttpServlet {
 			map.put("search", search); 
 			map.put("searchCategory", searchCategory);
 			map.put("userid", userid);
-			
 			if (search != null) {
 				OrderService service = new OrderService();
 				pDTO = service.MyOrderSearchList(Integer.parseInt(curPage), map);
@@ -64,7 +63,6 @@ public class MyOrderServlet extends HttpServlet {
 				
 				response.sendRedirect("myOrder.jsp");
 			}
-			
 		} else {
 			session.setAttribute("mesg", "로그인이 필요합니다");
 			response.sendRedirect("LoginUIServlet");

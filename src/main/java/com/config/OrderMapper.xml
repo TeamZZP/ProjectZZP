@@ -3,12 +3,19 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="OrderMapper">
+
 	<select id="selectOrders" parameterType="String" resultType="OrderDTO">
-		select * from orders
-		where userid = #{userid}
+		select o.order_id, o.userid, o.p_id, o.total_price, o.delivery_address, o.delivery_loc, o.delivery_req, o.order_date,
+			   (select IMAGE_ROUTE from images where p_id = o.p_id and IMAGE_RNK = 1) as p_image,p.p_name, p.p_selling_price,
+				c.p_amount,p.p_selling_price*c.p_amount money
+		 from orders o,  product p , cart c 
+		 where o.p_id = p.p_id and o.p_id = c.p_id
+		and o.userid = #{userid}
+		
 	</select>
 	
-
+	
+		
 	<select id="getProductList" parameterType="List" resultType="CategoryProductDTO">
 	select p.P_ID
 ,(select 
@@ -46,6 +53,7 @@ select orders_order_id_seq.NEXTVAL from dual
 insert into orders (order_id, userid, p_id, total_price, delivery_address, delivery_loc, delivery_req, order_date,order_state,p_amount)
 values(#{order_id}, #{userid}, #{p_id}, #{total_price}, #{delivery_address}, #{delivery_loc}, #{delivery_req},sysdate,'주문완료', #{order_quantity})
 </insert>	
+
 <select id="MyOrderList" parameterType="string" resultType="ProductOrderReviewImagesDTO">
    	select * from orders o full outer join product using(p_id) full outer join review using(p_id) full outer join images using(p_id)
 	    where o.userid = #{userid} and IMAGE_RNK = 1
@@ -62,7 +70,7 @@ values(#{order_id}, #{userid}, #{p_id}, #{total_price}, #{delivery_address}, #{d
 				 where IMAGE_RNK = 1  and o.userid = #{userid} and p.p_name like '%${search}%'
 			</when>
 			<when test="searchCategory == 'ORDER_DATE' and search != null"> 
-				 where IMAGE_RNK = 1  and o.userid = #{userid} and o.order_date like '%${search}%'
+				 where IMAGE_RNK = 1  and o.userid = #{userid} and o.order_d	ate like '%${search}%'
 			</when>
 			<otherwise>
 			</otherwise> 
@@ -82,4 +90,6 @@ values(#{order_id}, #{userid}, #{p_id}, #{total_price}, #{delivery_address}, #{d
 			</otherwise> 
 		</choose>
 </select>
+
+
 </mapper>
