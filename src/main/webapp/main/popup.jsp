@@ -82,7 +82,7 @@ font-family: SF Pro KR, SF Pro Display, SF Pro Icons, AOS Icons, Apple Gothic, H
         <h4 class="title">ZZP 공지사항</h4>
         <div class="cont">
             <p>
-			 <img src="images/main/mainpopup.png" width=350 height=500 usemap="#popup" alt="event page">
+			 <img src="images/main/main_popup.png" width=350 height=500 usemap="#popup" alt="event page">
             </p>
         </div>
           <form name="pop_form">
