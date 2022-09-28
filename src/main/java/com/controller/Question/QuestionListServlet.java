@@ -38,7 +38,7 @@ public class QuestionListServlet extends HttpServlet {
 		}
 		QuestionService service = new QuestionService(); 
 		pDTO = service.page(Integer.parseInt(curPage));
-		System.out.println("pDTO " + pDTO);//나머지
+		System.out.println("pDTO " + pDTO);
 		
 		HttpSession session = request.getSession(); 
 		session.setAttribute("pDTO", pDTO);

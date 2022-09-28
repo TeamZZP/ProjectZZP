@@ -39,7 +39,6 @@ public class NoticeOneSelectServlet extends HttpServlet {
 		System.out.println("nDTO " + nDTO);//상세정보 내용
 		
 		HttpSession session = request.getSession();
-		
 		if (nDTO != null) {
 			String category = nDTO.getNotice_category();
 			System.out.println("카테고리 " + category);
